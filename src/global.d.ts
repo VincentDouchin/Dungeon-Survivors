@@ -3,3 +3,7 @@ interface GameState {
 	render: Function
 }
 type Constructor<T> = new (...args: any[]) => T;
+
+interface InputController {
+	eventBus: EventBus
+}

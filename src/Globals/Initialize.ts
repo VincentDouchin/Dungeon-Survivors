@@ -1,4 +1,7 @@
 import { Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
+import KeyboardController from "../InputControllers/KeyboardController"
+import InputManager from "./InputManager"
 
 
 //! Camera
@@ -34,5 +37,7 @@ window.addEventListener('resize', () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 })
 
+const inputManager = new InputManager(MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT)
+inputManager.registerControllers(KeyboardController)
 
-export { render, scene }
+export { render, scene, inputManager }
