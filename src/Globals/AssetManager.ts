@@ -15,12 +15,12 @@ interface Tile {
 	height: number
 	frames: number
 }
-const tiles: Map<string, Tile> = new Map()
-tilesList
+// const tiles: Record<string, Tile> = new Map()
+const tiles = tilesList
 	.split('\n')
 	.map((tile: string) => tile.split(' '))
 	.filter((tileList) => tileList.every(item => item))
-	.forEach(([tileName, top, left, width, height, frames = 1]) => {
+	.reduce((acc, [tileName, top, left, width, height, frames = 1]) => {
 		const buffer = getBuffer(parseInt(width), parseInt(height))
 		buffer.drawImage(img, parseInt(top), parseInt(left), parseInt(width), parseInt(height), 0, 0, parseInt(width), parseInt(height))
 		const tile: Tile = {
@@ -31,13 +31,12 @@ tilesList
 			height: Number(height),
 			frames: Number(frames)
 		}
-		tiles.set(tileName, tile)
+		return { ...acc, [tileName]: tile }
 
-	})
+	}, {})
 
 const AssetManager = new class {
 	image = img
-	tiles = tiles
-
+	tiles = tiles as Record<tileName, Tile>
 }
 export default AssetManager
