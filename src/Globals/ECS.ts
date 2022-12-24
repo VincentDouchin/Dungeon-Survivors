@@ -26,9 +26,10 @@ interface System {
 }
 class System {
 	target
-
+	static register() {
+		ECS.registerSystem(this)
+	}
 	constructor(target: Constructor<Component>) {
-
 		this.target = target
 	}
 
