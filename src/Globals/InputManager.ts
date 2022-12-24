@@ -29,6 +29,9 @@ class InputManager {
 	registerControllers(...inputControllers: Constructor<InputController>[]) {
 		this.controllers = inputControllers.map(controller => new controller(this.eventBus))
 	}
+	getInput(inputName: string) {
+		return this.inputs.get(inputName)
+	}
 
 }
 export default InputManager
