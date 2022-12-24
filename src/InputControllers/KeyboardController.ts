@@ -9,7 +9,6 @@ class KeyboardController implements InputController {
 		'KeyA': MOVELEFT,
 		'KeyD': MOVERIGHT,
 		'KeyE': INTERACT,
-
 	}
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
