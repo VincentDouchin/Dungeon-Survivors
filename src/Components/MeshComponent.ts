@@ -3,7 +3,7 @@ import { Component } from "../Globals/ECS";
 
 class MeshComponent extends Component {
 	mesh: Mesh
-	constructor(ctx: CanvasRenderingContext2D, width: number, height: number) {
+	constructor(ctx: CanvasRenderingContext2D, width?: number, height?: number) {
 		super()
 		const canvasTexture = new CanvasTexture(ctx.canvas)
 		canvasTexture.minFilter = NearestFilter
