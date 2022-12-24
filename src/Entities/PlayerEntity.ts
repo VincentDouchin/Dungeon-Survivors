@@ -1,0 +1,18 @@
+import BodyComponent from "../Components/BodyComponent"
+import MeshComponent from "../Components/MeshComponent"
+import PlayerControllerComponent from "../Components/PlayerControllerComponent"
+import PositionComponent from "../Components/PositionComponent"
+import AssetManager from "../Globals/AssetManager"
+import { Entity } from "../Globals/ECS"
+
+const PlayerEntity = () => {
+	const player = new Entity()
+	const elf = AssetManager.tiles.elf_f_idle_anim
+	player.addComponent(new MeshComponent(elf.buffer, elf.width, elf.height))
+	player.addComponent(new BodyComponent({ moveForce: 100 }))
+	player.addComponent(new PositionComponent(0, 0))
+	player.addComponent(new PlayerControllerComponent())
+	return player
+}
+
+export default PlayerEntity
