@@ -1,14 +1,36 @@
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
-	systems: Map<string, System> = new Map()
+	systems: System[] = []
 	entities: Map<string, Entity> = new Map()
 	registerEntity(entity: Entity) {
 		this.entities.set(entity.id, entity)
 	}
+	getEntityById(id: string) {
+		return this.entities.get(id)!
+	}
+	registerSystem(system: Constructor<System>) {
+		this.systems.push(new system)
+	}
+	updateSystems() {
+		this.systems.forEach((system) => {
+			const entitiesID: string[] = [... this.components.get(system.target.name)!.keys()]
+			const entities: Entity[] = entitiesID.map(id => this.getEntityById(id))
+			system.update(entities)
+		})
+	}
+
 }
-// @ts-ignore
-window.ECS = ECS
+
+interface System {
+	update(entities: Entity[]): void
+}
 class System {
+	target
+
+	constructor(target: Constructor<Component>) {
+
+		this.target = target
+	}
 
 }
 interface Component {
@@ -37,6 +59,7 @@ class Entity {
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
+
 }
 
 export { ECS, System, Component, Entity }
