@@ -3,6 +3,8 @@ import PositionComponent from '../Components/PositionComponent'
 import PlayerControllerComponent from '../Components/PlayerControllerComponent'
 import { inputManager } from "../Globals/Initialize";
 import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
+import BodyComponent from "../Components/BodyComponent";
+import { Vector2 } from "@dimforge/rapier2d-compat";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -11,21 +13,31 @@ class MovementSystem extends System {
 		entities.forEach(entity => {
 			const position = entity.getComponent(PositionComponent)
 			const playerController = entity.getComponent(PlayerControllerComponent)
+			const body = entity.getComponent(BodyComponent)
 
-			if (playerController?.enabled) {
+			if (playerController?.enabled && body) {
+				const impulse = new Vector2(0, 0)
 				if (inputManager.getInput(MOVEUP)?.active) {
-					position.y += 10
-					console.log(position)
+					impulse.y = body.moveForce
 				}
 				if (inputManager.getInput(MOVEDOWN)?.active) {
-					position.y -= 10
+					impulse.y = -body.moveForce
+
 				}
 				if (inputManager.getInput(MOVELEFT)?.active) {
-					position.x -= 10
+					impulse.x = -body.moveForce
 				}
 				if (inputManager.getInput(MOVERIGHT)?.active) {
-					position.x += 10
+					impulse.x = body.moveForce
 				}
+
+				body.body.setLinvel(impulse, true)
+
+
+			}
+			if (body) {
+				position.x = body.body.translation().x
+				position.y = body.body.translation().y
 			}
 		})
 	}
