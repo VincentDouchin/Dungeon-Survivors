@@ -17,8 +17,8 @@ const PlayerEntity = () => {
 		hit: AssetManager.tiles.elf_f_hit_anim,
 		run: AssetManager.tiles.elf_f_run_anim,
 	}))
-	player.addComponent(new HealthComponent(10))
-	player.addComponent(new BodyComponent({ moveForce: 100 }))
+	player.addComponent(new HealthComponent(1000))
+	player.addComponent(new BodyComponent({ moveForce: 100 }, true))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	return player
