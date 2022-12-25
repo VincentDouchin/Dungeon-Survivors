@@ -1,7 +1,11 @@
+import ECSEVENTS from "../Constants/ECSEvents"
+import EventBus from "../Utils/EventBus"
+
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
 	systems: System[] = []
 	entities: Map<string, Entity> = new Map()
+	eventBus = new EventBus()
 	registerEntity(entity: Entity) {
 		this.entities.set(entity.id, entity)
 	}
@@ -36,6 +40,7 @@ class System {
 }
 interface Component {
 	destroy(): void
+	bind(id: string): void
 }
 class Component {
 	static register() {
@@ -44,6 +49,10 @@ class Component {
 	save() {
 		return JSON.stringify(this)
 	}
+	destroy() {
+
+	}
+
 }
 
 class Entity {
@@ -54,11 +63,20 @@ class Entity {
 	}
 	addComponent(...components: Component[]) {
 		components.forEach(component => {
+			if (component.bind) component.bind(this.id)
 			ECS.components.get(component.constructor.name)?.set(this.id, component)
 		})
 	}
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
+	}
+	destroy() {
+		ECS.components.forEach(componentMap => {
+			if (!componentMap.has(this.id)) return
+			componentMap.get(this.id)?.destroy()
+			componentMap.delete(this.id)
+		})
+		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this.id)
 	}
 
 }
