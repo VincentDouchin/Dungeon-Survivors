@@ -7,22 +7,15 @@ img.src = imageSource
 await new Promise(resolve => {
 	img.onload = resolve
 })
-interface Tile {
-	buffer: CanvasRenderingContext2D
-	x: number
-	y: number
-	width: number
-	height: number
-	frames: number
-}
 // const tiles: Record<string, Tile> = new Map()
 const tiles = tilesList
 	.split('\n')
 	.map((tile: string) => tile.split(' '))
 	.filter((tileList) => tileList.every(item => item))
-	.reduce((acc, [tileName, top, left, width, height, frames = 1]) => {
-		const buffer = getBuffer(parseInt(width), parseInt(height))
-		buffer.drawImage(img, parseInt(top), parseInt(left), parseInt(width), parseInt(height), 0, 0, parseInt(width), parseInt(height))
+	.reduce((acc, [tileName, top, left, width, height, frames = '1']) => {
+		const totalWidth = parseInt(width) * parseInt(frames)
+		const buffer = getBuffer(totalWidth, parseInt(height))
+		buffer.drawImage(img, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
 		const tile: Tile = {
 			buffer,
 			x: Number(top),
