@@ -1,5 +1,5 @@
-import { ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
-import { Component } from "../Globals/ECS";
+import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
+import { Component, ECS } from "../Globals/ECS";
 import { world } from "../Globals/Initialize";
 
 interface bodyOptions {
@@ -9,21 +9,38 @@ interface bodyOptions {
 
 class BodyComponent extends Component {
 	body: RigidBody
+	collider: Collider
 	moveForce: number
-	constructor(bodyOptions: bodyOptions) {
+	constructor(bodyOptions: bodyOptions, contact: boolean) {
 		super()
 		this.moveForce = bodyOptions.moveForce ?? 10
 		//!Body
-
-		const bodyDescription = RigidBodyDesc[bodyOptions.type ?? 'dynamic']();
+		const bodyDescription = RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
 		bodyDescription
 			.setAdditionalMass(1)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		this.body = world.createRigidBody(bodyDescription)
 		//!Collider
-		const colliderDescription = ColliderDesc.cuboid(1, 1).setDensity(1)
-		world.createCollider(colliderDescription, this.body)
+		const colliderDescription =
+			ColliderDesc
+				.cuboid(8, 8)
+				.setDensity(1)
+		if (contact) {
+			colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
+		}
+		// .setActiveCollisionTypes(ActiveCollisionTypes.DEFAULT | ActiveCollisionTypes.KINEMATIC_FIXED)
+		this.collider = world.createCollider(colliderDescription, this.body)
+	}
+	contacts(fn: Function) {
+		world.contactsWith(this.collider, (otherCollider) => {
+			const entityId = otherCollider?.parent()?.userData as string
+			const entity = ECS.getEntityById(entityId)
+			fn(entity)
+		})
+	}
+	bind(id: string) {
+		this.body.userData = id
 	}
 }
 BodyComponent.register()
