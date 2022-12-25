@@ -3,13 +3,18 @@ import { Component } from "../Globals/ECS";
 
 class MeshComponent extends Component {
 	mesh: Mesh
+	texture: CanvasTexture
+	width: number
+	height: number
 	constructor(ctx: CanvasRenderingContext2D, width?: number, height?: number) {
 		super()
-		const canvasTexture = new CanvasTexture(ctx.canvas)
-		canvasTexture.minFilter = NearestFilter
-		canvasTexture.magFilter = NearestFilter
-		const geometry = new PlaneGeometry(width ?? ctx.canvas.width, height ?? ctx.canvas.height)
-		const meshMaterial = new MeshBasicMaterial({ map: canvasTexture, transparent: true, })
+		this.width = width ?? ctx.canvas.width
+		this.height = height ?? ctx.canvas.height
+		this.texture = new CanvasTexture(ctx.canvas)
+		this.texture.minFilter = NearestFilter
+		this.texture.magFilter = NearestFilter
+		const geometry = new PlaneGeometry(this.width, this.height)
+		const meshMaterial = new MeshBasicMaterial({ map: this.texture, transparent: true, })
 		const mesh = new Mesh(geometry, meshMaterial)
 		this.mesh = mesh
 
