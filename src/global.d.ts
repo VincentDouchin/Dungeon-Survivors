@@ -17,3 +17,4 @@ interface Tile {
 	height: number
 	frames: number
 }
+type DamageType = string

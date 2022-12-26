@@ -6,13 +6,15 @@ const empty = AssetManager.UI['Health-empty']
 class HealthComponent extends MeshComponent {
 	health: number
 	maxHealth: number
-	constructor(health: number) {
+	type: DamageType
+	constructor(health: number, type: DamageType) {
 		const buffer = getBuffer(full.canvas.width, full.canvas.height)
 		buffer.drawImage(full.canvas, 0, 0)
 		super(buffer)
 		this.updateHealth(0)
 		this.health = health
 		this.maxHealth = health
+		this.type = type
 	}
 	updateHealth(amount: number) {
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth))
