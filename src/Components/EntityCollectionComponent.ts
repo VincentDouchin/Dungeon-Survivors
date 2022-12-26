@@ -18,6 +18,9 @@ class EntityCollectionComponent extends Component {
 	get entities() {
 		return this.entitiesId.map(ECS.getEntityById)
 	}
+	destroy() {
+		this.entitiesId.forEach(entityId => ECS.getEntityById(entityId).destroy())
+	}
 }
 EntityCollectionComponent.register()
 export default EntityCollectionComponent
