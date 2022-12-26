@@ -19,7 +19,7 @@ const EnemyEntity = () => {
 	enemy.addComponent(new DamageComponent(1))
 	enemy.addComponent(new PositionComponent(100, 2000))
 	enemy.addComponent(new AIControllerComponent())
-	enemy.addComponent(new BodyComponent({ moveForce: 40 }, false))
+	enemy.addComponent(new BodyComponent({ moveForce: 40 }, { width: orc.width, height: orc.height, contact: false }))
 	return enemy
 }
 export default EnemyEntity

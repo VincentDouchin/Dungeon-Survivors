@@ -18,7 +18,7 @@ const PlayerEntity = () => {
 		run: AssetManager.tiles.elf_f_run_anim,
 	}))
 	player.addComponent(new HealthComponent(1000))
-	player.addComponent(new BodyComponent({ moveForce: 100 }, true))
+	player.addComponent(new BodyComponent({ moveForce: 100 }, { width: elf.width, height: elf.height, contact: true }))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	return player
