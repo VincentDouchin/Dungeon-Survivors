@@ -42,7 +42,9 @@ class MovementSystem extends System {
 						impulse.x = body.moveForce
 					}
 				}
-				animation.flipped = impulse.x < 0
+				if (animation) {
+					animation.flipped = impulse.x < 0
+				}
 
 				body.body.setLinvel(impulse, true)
 
