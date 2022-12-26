@@ -71,12 +71,12 @@ class Entity {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
 	destroy() {
+		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this.id)
 		ECS.components.forEach(componentMap => {
 			if (!componentMap.has(this.id)) return
 			componentMap.get(this.id)?.destroy()
 			componentMap.delete(this.id)
 		})
-		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this.id)
 	}
 
 }
