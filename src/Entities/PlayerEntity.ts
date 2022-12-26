@@ -1,11 +1,13 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
+import EntityCollectionComponent from "../Components/EntityCollectionComponent"
 import HealthComponent from "../Components/HealthComponent"
 import MeshComponent from "../Components/MeshComponent"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
+import WeaponEntity from "./WeaponEntity"
 
 const PlayerEntity = () => {
 	const player = new Entity()
@@ -21,6 +23,9 @@ const PlayerEntity = () => {
 	player.addComponent(new BodyComponent({ moveForce: 100 }, { width: elf.width, height: elf.height, contact: true }))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
+	const inventory = new EntityCollectionComponent()
+	inventory.addEntity(WeaponEntity(player))
+	player.addComponent(inventory)
 	return player
 }
 
