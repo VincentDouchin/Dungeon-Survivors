@@ -1,5 +1,5 @@
-import { render, world } from "../Globals/Initialize"
-import { ECS, Entity } from "../Globals/ECS"
+import { camera, render, world } from "../Globals/Initialize"
+import { ECS } from "../Globals/ECS"
 import RenderingSystem from "../Systems/RenderingSystem"
 import MovementSystem from "../Systems/MovementSystem"
 import PlayerEntity from "../Entities/PlayerEntity"
@@ -7,9 +7,12 @@ import AnimationSystem from "../Systems/AnimationSystem"
 
 import HealthSystem from "../Systems/HealthSystem"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
-import EnemyEntity from "../Entities/EnemyEntity"
-import AIControllerComponent from "../Components/AIControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
+import BackgroundEntity from "../Entities/BackgroundEntity"
+import { Vector3 } from "three"
+import startWave from "../Game/Wave"
+import Enemies from "../Constants/Enemies"
+import BrasierEntity from "../Entities/BrasierEntity"
 const Run = (): GameState => {
 
 	RenderingSystem.register()
@@ -18,26 +21,17 @@ const Run = (): GameState => {
 	HealthSystem.register()
 	BodyCreationSystem.register()
 	const player = PlayerEntity()
-	const spawnEnemies = (player: Entity, nb: number) => {
-		for (let i = 0; i < nb; i++) {
-			const distance = Math.random() * 200 + 100
-			const angle = Math.random() * Math.PI * 2
-			const x = Math.cos(angle) * distance
-			const y = Math.sin(angle) * distance
-			const enemy = EnemyEntity()
-			enemy.addComponent(new PositionComponent(x, y))
-			enemy.addComponent(new AIControllerComponent(player))
-		}
-	}
 
-	spawnEnemies(player, 10)
-
+	BackgroundEntity()
+	startWave(player)([Enemies.orc, 10, 20], [Enemies.orcShaman, 10, 10])
+	BrasierEntity({ x: 0, y: 0 })
 	return {
 		update() {
 			world.step()
 			ECS.updateSystems()
 		},
 		render() {
+
 			render()
 		}
 	}
