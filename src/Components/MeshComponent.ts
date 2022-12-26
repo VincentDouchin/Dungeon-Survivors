@@ -21,7 +21,7 @@ class MeshComponent extends Component {
 	}
 	destroy(): void {
 		this.mesh.geometry.dispose()
-
+		this.mesh.removeFromParent()
 	}
 }
 MeshComponent.register()
