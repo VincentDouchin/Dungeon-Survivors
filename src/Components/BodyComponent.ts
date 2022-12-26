@@ -42,6 +42,7 @@ class BodyComponent extends Component {
 				.cuboid(colliderOptions.width / 2, colliderOptions.height / 2)
 				.setDensity(bodyOptions.mass ?? 1000)
 				.setSensor(this.sensor)
+
 		if (colliderOptions.contact) {
 			this.colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
 		}
@@ -60,6 +61,10 @@ class BodyComponent extends Component {
 	}
 	bind(id: string) {
 		this.bodyDescription.setUserData(id)
+	}
+	destroy() {
+		if (!this.body) return
+		world.removeRigidBody(this.body)
 	}
 }
 BodyComponent.register()
