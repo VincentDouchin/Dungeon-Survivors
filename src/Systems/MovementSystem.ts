@@ -7,6 +7,7 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent'
 import BodyComponent from "../Components/BodyComponent";
 import AIControllerComponent from "../Components/AIControllerComponent";
 import AnimationComponent from "../Components/AnimationComponent";
+import WeaponControllerComponent from "../Components/WeaponControllerComponent";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -18,6 +19,7 @@ class MovementSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const aiController = entity.getComponent(AIControllerComponent)
 			const animation = entity.getComponent(AnimationComponent)
+			const weaponController = entity.getComponent(WeaponControllerComponent)
 			if (body) {
 				const impulse = new Vector2(0, 0)
 				if (aiController?.enabled && aiController.target) {
@@ -46,10 +48,17 @@ class MovementSystem extends System {
 					animation.flipped = impulse.x < 0
 				}
 
-				body.body.setLinvel(impulse, true)
+				if (body.body) {
+					body.body.setLinvel(impulse, true)
 
-				position.x = body.body.translation().x
-				position.y = body.body.translation().y
+					position.x = body.body.translation().x
+					position.y = body.body.translation().y
+					if (weaponController?.joint) {
+						body.body.setAngvel(1, true)
+
+
+					}
+				}
 			}
 
 		})
