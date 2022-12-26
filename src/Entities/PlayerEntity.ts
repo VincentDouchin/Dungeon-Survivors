@@ -5,6 +5,7 @@ import HealthComponent from "../Components/HealthComponent"
 import MeshComponent from "../Components/MeshComponent"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
+import DAMAGETYPES from "../Constants/DamageTypes"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import WeaponEntity from "./WeaponEntity"
@@ -19,8 +20,11 @@ const PlayerEntity = () => {
 		hit: AssetManager.tiles.elf_f_hit_anim,
 		run: AssetManager.tiles.elf_f_run_anim,
 	}))
-	player.addComponent(new HealthComponent(1000))
-	player.addComponent(new BodyComponent({ moveForce: 100 }, { width: elf.width, height: elf.height, contact: true }))
+	player.addComponent(new HealthComponent(1000, DAMAGETYPES.PLAYER))
+	player.addComponent(new BodyComponent(
+		{ moveForce: 100 },
+		{ width: elf.width, height: elf.height, contact: true }
+	))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	const inventory = new EntityCollectionComponent()

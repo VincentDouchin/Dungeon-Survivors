@@ -21,10 +21,13 @@ class HealthSystem extends System {
 			if (body) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
-					if (damage) {
+					if (damage.target != health.type) {
 						health.updateHealth(-damage.amount)
 					}
 				})
+			}
+			if (health.health == 0) {
+				entity.destroy()
 			}
 		})
 	}
