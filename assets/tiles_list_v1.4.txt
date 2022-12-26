@@ -188,3 +188,8 @@ lizard_f_hit_anim 256 196 16 28 1
 lizard_m_idle_anim 128 228 16 28 4
 lizard_m_run_anim 192 228 16 28 4
 lizard_m_hit_anim 256 228 16 28 1
+
+flame 512 16 16 16 8
+flame_wall 512 32 16 32 8
+flame_background 512 64 16 16 8
+flame_brasier 512 80 16 32 8
