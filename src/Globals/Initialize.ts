@@ -1,10 +1,11 @@
 
 import { World } from "@dimforge/rapier2d-compat"
-import { Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { OrthographicCamera, Scene, WebGLRenderer } from "three"
 import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
 import InputManager from "./InputManager"
 import RAPIER from "@dimforge/rapier2d-compat"
+
 await RAPIER.init()
 
 //! Camera
@@ -24,7 +25,6 @@ camera.position.set(0, 0, 200)
 
 //! Scene
 const scene = new Scene()
-scene.background = new Color(0x000000)
 
 //! Renderer
 const renderer = new WebGLRenderer({ alpha: true, })
@@ -43,4 +43,4 @@ window.addEventListener('resize', () => {
 const inputManager = new InputManager(MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT)
 inputManager.registerControllers(KeyboardController)
 const world = new World({ x: 0, y: 0 })
-export { render, scene, inputManager, world }
+export { render, scene, inputManager, world, camera }
