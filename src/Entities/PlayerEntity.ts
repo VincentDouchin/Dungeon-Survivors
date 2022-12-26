@@ -1,5 +1,6 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
+import CameraTargetComponent from "../Components/CameraTargetComponent"
 import EntityCollectionComponent from "../Components/EntityCollectionComponent"
 import HealthComponent from "../Components/HealthComponent"
 import MeshComponent from "../Components/MeshComponent"
@@ -28,6 +29,7 @@ const PlayerEntity = () => {
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	const inventory = new EntityCollectionComponent()
+	player.addComponent(new CameraTargetComponent)
 	inventory.addEntity(WeaponEntity(player))
 	player.addComponent(inventory)
 	return player
