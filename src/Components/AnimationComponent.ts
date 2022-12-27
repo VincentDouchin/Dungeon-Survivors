@@ -1,4 +1,5 @@
 import { Component } from "../Globals/ECS";
+import Tile from "../Utils/Tile";
 
 class AnimationComponent extends Component {
 	tiles: { [key: string]: Tile }
