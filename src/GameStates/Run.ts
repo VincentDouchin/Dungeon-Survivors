@@ -13,6 +13,8 @@ import startWave from "../Game/Wave"
 import Enemies from "../Constants/Enemies"
 import XPEntity from "../Entities/XPEntity"
 import PositionComponent from "../Components/PositionComponent"
+import XPPickupSystem from "../Systems/XPPickupSystem"
+import RunUIEntity from "../Entities/RunUIEntity"
 const Run = (): GameState => {
 
 	RenderingSystem.register()
@@ -20,14 +22,16 @@ const Run = (): GameState => {
 	AnimationSystem.register()
 	HealthSystem.register()
 	BodyCreationSystem.register()
+	XPPickupSystem.register()
+	BackgroundEntity()
+	RunUIEntity()
 	const player = PlayerEntity()
 
-	BackgroundEntity()
 	startWave(player)([Enemies.orc, 10, 20], [Enemies.orcShaman, 10, 10])
 	BrasierEntity({ x: 0, y: 0 })
 	BrasierEntity({ x: 100, y: 0 })
 	const xp = XPEntity()
-	xp.addComponent(new PositionComponent(5, 5))
+	xp.addComponent(new PositionComponent(50, 50))
 	return {
 		update() {
 			world.step()
