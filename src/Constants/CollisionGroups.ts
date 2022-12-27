@@ -1,8 +1,9 @@
 const COLLISIONGROUPS = {
-	SENSOR: 5,
-	PLAYER: 1,
+	PLAYER: 64,
 	ENEMY: 2,
-	XP: 3,
-	WEAPON: 4
+	XP: 4,
+	WEAPON: 8,
+	SENSOR: 16,
+	TRAP: 32
 }
 export default COLLISIONGROUPS
