@@ -1,30 +1,35 @@
+
 import AssetManager from "../Globals/AssetManager";
+import { Component, ECS } from "../Globals/ECS";
+import updateBar from "../UIEntities.ts/UpdateBar";
 import MeshComponent from "./MeshComponent";
 const full = AssetManager.UI['healthFull']
 const empty = AssetManager.UI['healthBar']
-class HealthComponent extends MeshComponent {
+class HealthComponent extends Component {
 	health: number
 	maxHealth: number
 	type: number
+	healthBarId: string | null = null
 	constructor(health: number, type: number) {
-		const tile = empty.clone()
-		super(tile, { renderOrder: 11 })
+		super()
 		this.health = health
 		this.maxHealth = health
-		this.updateHealth(0)
 		this.type = type
 	}
 	updateHealth(amount: number) {
+
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth))
-		const healthPercent = this.health / this.maxHealth
-		const fullWidth = Math.ceil(healthPercent * this.width)
-		const image: HTMLCanvasElement = this.texture.image
-		const ctx = image.getContext('2d')
-		// ctx?.clearRect()
-		ctx?.drawImage(empty.buffer.canvas, 0, 0)
-		ctx?.drawImage(full.buffer.canvas, 0, 0, fullWidth, this.height, 0, 0, fullWidth, this.height)
-		this.uniforms.uTexture.value.needsUpdate = true
+		if (this.healthBarId) {
+			updateBar(
+				ECS.getEntityById(this.healthBarId).getComponent(MeshComponent),
+				empty,
+				full,
+				this.health / this.maxHealth)
+
+		}
+
 	}
+
 }
 HealthComponent.register()
 export default HealthComponent
