@@ -46,7 +46,6 @@ class BodyComponent extends Component {
 		if (colliderOptions.contact) {
 			this.colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
 		}
-		// .setActiveCollisionTypes(ActiveCollisionTypes.DEFAULT | ActiveCollisionTypes.KINEMATIC_FIXED)
 	}
 	contacts(fn: Function) {
 		if (this.collider) {
