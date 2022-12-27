@@ -13,8 +13,11 @@ class MeshComponent extends Component {
 	uniforms: Record<string, IUniform>
 	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number }) {
 		super()
-		this.width = tile.width
-		this.height = tile.height
+		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
+		this.renderOrder = newOptions.renderOrder * 10
+		this.scale = newOptions.scale
+		this.width = tile.width * this.scale
+		this.height = tile.height * this.scale
 		this.texture = new CanvasTexture(tile.buffer.canvas)
 		this.texture.minFilter = NearestFilter
 		this.texture.magFilter = NearestFilter
@@ -27,9 +30,8 @@ class MeshComponent extends Component {
 			outline_color: new Uniform(new Color(0xff0000)),
 
 		}, UniformsLib['lights']])
-		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
-		this.renderOrder = newOptions.renderOrder * 10
-		this.scale = newOptions.scale
+
+
 		const meshMaterial = new ShaderMaterial({
 			uniforms: this.uniforms,
 			lights: true,
