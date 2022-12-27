@@ -2,9 +2,10 @@ import BodyComponent from "../Components/BodyComponent";
 import LightComponent from "../Components/LightComponent";
 import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
+import UIPosition from "../Components/UIPosition";
 import WeaponControllerComponent from "../Components/WeaponControllerComponent";
 import { Entity, System } from "../Globals/ECS";
-import { scene } from "../Globals/Initialize";
+import { scene, UICamera, UIScene } from "../Globals/Initialize";
 
 class RenderingSystem extends System {
 	constructor() {
@@ -17,6 +18,17 @@ class RenderingSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const weaponController = entity.getComponent(WeaponControllerComponent)
 			const light = entity.getComponent(LightComponent)
+			const uiPosition = entity.getComponent(UIPosition)
+			if (mesh && !mesh?.mesh.parent && uiPosition) {
+
+				UIScene.add(mesh.mesh)
+				mesh.mesh.position.set(
+					uiPosition.relativePosition.x * UICamera.right - mesh.width / 2 * uiPosition.center.x,
+					uiPosition.relativePosition.y * UICamera.bottom + mesh.height / 2 * uiPosition.center.y,
+					0
+				)
+
+			}
 			if (mesh && position) {
 
 				if (!mesh.mesh.parent) {
@@ -38,8 +50,9 @@ class RenderingSystem extends System {
 				light.light.target = mesh.mesh
 
 			}
+
 			mesh.mesh.renderOrder = mesh.renderOrder
-			mesh.mesh.scale.set(mesh.scale, mesh.scale, 1)
+			// mesh.mesh.scale.set(mesh.scale, mesh.scale, 1)
 		})
 	}
 }
