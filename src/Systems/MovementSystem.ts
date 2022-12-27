@@ -1,4 +1,4 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
 import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { Vector2 } from "@dimforge/rapier2d-compat";
 import { camera, inputManager } from "../Globals/Initialize";
@@ -25,8 +25,10 @@ class MovementSystem extends System {
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			if (body) {
 				const impulse = new Vector2(0, 0)
-				if (aiController?.enabled && aiController.target) {
-					const targetPosition = aiController.target.getComponent(PositionComponent)
+				if (aiController?.enabled && aiController.targetId) {
+					const targetPosition = ECS
+						.getEntityById(aiController.targetId)
+						.getComponent(PositionComponent)
 
 					impulse.x = ((targetPosition.x - position.x) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.x - position.x))
 					impulse.y = ((targetPosition.y - position.y) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.y - position.y))
