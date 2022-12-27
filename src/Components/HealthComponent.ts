@@ -1,7 +1,7 @@
 
 import AssetManager from "../Globals/AssetManager";
 import { Component, ECS } from "../Globals/ECS";
-import updateBar from "../UIEntities.ts/UpdateBar";
+import updateBar from "../Utils/UpdateBar";
 import MeshComponent from "./MeshComponent";
 const full = AssetManager.UI['healthFull']
 const empty = AssetManager.UI['healthBar']
@@ -10,6 +10,7 @@ class HealthComponent extends Component {
 	maxHealth: number
 	type: number
 	healthBarId: string | null = null
+	canTakeDamage: boolean = true
 	constructor(health: number, type: number) {
 		super()
 		this.health = health

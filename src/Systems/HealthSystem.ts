@@ -30,19 +30,18 @@ class HealthSystem extends System {
 				healthMesh.mesh.position.y = mesh.height / 2
 				health.updateHealth(0)
 			}
-			if (body) {
+			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target != health.type) {
 						health.updateHealth(-damage.amount)
-						if (mesh) {
-							mesh.uniforms.uColor.value.x = 0.7
-							Coroutines.add(function* () {
-								yield* waitFor(10)
-								mesh.uniforms.uColor.value.x = 0
-
-							})
-						}
+						if (mesh) mesh.uniforms.uColor.value.x = 0.7
+						health.canTakeDamage = false
+						Coroutines.add(function* () {
+							yield* waitFor(20)
+							health.canTakeDamage = true
+							if (mesh) mesh.uniforms.uColor.value.x = 0
+						})
 
 					}
 				}, health.type)
