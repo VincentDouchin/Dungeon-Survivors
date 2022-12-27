@@ -1,0 +1,8 @@
+const COLLISIONGROUPS = {
+	SENSOR: 5,
+	PLAYER: 1,
+	ENEMY: 2,
+	XP: 3,
+	WEAPON: 4
+}
+export default COLLISIONGROUPS
