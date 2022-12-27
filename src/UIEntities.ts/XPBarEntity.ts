@@ -4,7 +4,7 @@ import ECSEVENTS from "../Constants/ECSEvents"
 import AssetManager from "../Globals/AssetManager"
 import { ECS, Entity } from "../Globals/ECS"
 import State from "../Globals/State"
-import updateBar from "./UpdateBar"
+import updateBar from "../Utils/UpdateBar"
 
 const bar = AssetManager.UI.XPBar
 const full = AssetManager.UI.XPFull
@@ -22,7 +22,6 @@ const XPBarEntity = () => {
 			}
 
 		}
-		console.log(levelUp, State.xp, State.level, State.nextLevel)
 		updateBar(mesh, bar, full, State.xp / State.nextLevel)
 
 	})
