@@ -1,5 +1,5 @@
 import AssetManager from "../Globals/AssetManager";
-import getBuffer from "../Utils/Buffer";
+
 import MeshComponent from "./MeshComponent";
 const full = AssetManager.UI['Health-full']
 const empty = AssetManager.UI['Health-empty']
@@ -8,9 +8,8 @@ class HealthComponent extends MeshComponent {
 	maxHealth: number
 	type: DamageType
 	constructor(health: number, type: DamageType) {
-		const buffer = getBuffer(full.canvas.width, full.canvas.height)
-		buffer.drawImage(full.canvas, 0, 0)
-		super(buffer)
+
+		super(full.clone(), { renderOrder: 11 })
 		this.updateHealth(0)
 		this.health = health
 		this.maxHealth = health
@@ -23,8 +22,8 @@ class HealthComponent extends MeshComponent {
 		const emptyWidth = Math.floor(this.width - fullWidth)
 		const image: HTMLCanvasElement = this.texture.image
 		const ctx = image.getContext('2d')
-		ctx?.drawImage(empty.canvas, fullWidth, 0, emptyWidth, this.height, fullWidth, 0, emptyWidth, this.height)
-		ctx?.drawImage(full.canvas, 0, 0, fullWidth, this.height, 0, 0, fullWidth, this.height)
+		ctx?.drawImage(empty.buffer.canvas, fullWidth, 0, emptyWidth, this.height, fullWidth, 0, emptyWidth, this.height)
+		ctx?.drawImage(full.buffer.canvas, 0, 0, fullWidth, this.height, 0, 0, fullWidth, this.height)
 		this.texture.needsUpdate = true
 
 	}
