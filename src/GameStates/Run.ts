@@ -15,6 +15,7 @@ import XPEntity from "../Entities/XPEntity"
 import PositionComponent from "../Components/PositionComponent"
 import XPPickupSystem from "../Systems/XPPickupSystem"
 import RunUIEntity from "../Entities/RunUIEntity"
+import SpikeEntity from "../Entities/SpikeEntity"
 const Run = (): GameState => {
 
 	RenderingSystem.register()
@@ -27,9 +28,16 @@ const Run = (): GameState => {
 	RunUIEntity()
 	const player = PlayerEntity()
 
-	startWave(player)([Enemies.orc, 10, 20], [Enemies.orcShaman, 10, 10])
+	startWave(player)(
+		[Enemies.goblin, 10, 5],
+		[Enemies.orc, 15, 5],
+		[Enemies.orcShaman, 10, 4],
+		[Enemies.orcMasked, 10, 3],
+		[Enemies.zombieBig, 1, 1]
+	)
 	BrasierEntity({ x: 0, y: 0 })
 	BrasierEntity({ x: 100, y: 0 })
+	SpikeEntity({ x: 10, y: 10 })
 	const xp = XPEntity()
 	xp.addComponent(new PositionComponent(50, 50))
 	return {
