@@ -1,5 +1,5 @@
 import MeshComponent from '../Components/MeshComponent'
-import Tile from '../Utils/Tile'
+import Tile from './Tile'
 const updateBar = (mesh: MeshComponent, from: Tile, to: Tile, percent: number) => {
 	const fullWidth = Math.ceil(percent * mesh.width)
 	const image: HTMLCanvasElement = mesh.texture.image
