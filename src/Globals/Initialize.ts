@@ -1,6 +1,6 @@
 
 import { World } from "@dimforge/rapier2d-compat"
-import { OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { AmbientLight, OrthographicCamera, Scene, WebGLRenderer } from "three"
 import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
 import InputManager from "./InputManager"
@@ -25,6 +25,9 @@ camera.position.set(0, 0, 200)
 
 //! Scene
 const scene = new Scene()
+//! Light
+const light = new AmbientLight(0xaaaaaa)
+scene.add(light)
 
 //! Renderer
 const renderer = new WebGLRenderer({ alpha: true, })
@@ -34,6 +37,7 @@ renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
 const render = () => renderer.render(scene, camera)
+
 
 //! Resize
 window.addEventListener('resize', () => {
