@@ -3,7 +3,8 @@ import PositionComponent from "../Components/PositionComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import { Entity, System } from "../Globals/ECS";
+import ECSEVENTS from "../Constants/ECSEvents";
+import { ECS, Entity, System } from "../Globals/ECS";
 
 class XPPickupSystem extends System {
 	constructor() {
@@ -17,7 +18,6 @@ class XPPickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 
 				if (xp) {
-					console.log('test')
 					const otherBody = otherEntity.getComponent(BodyComponent)
 					const otherPosition = otherEntity.getComponent(PositionComponent)
 					const x = position.x - otherPosition.x
@@ -32,6 +32,7 @@ class XPPickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 				if (xp) {
 					otherEntity.destroy()
+					ECS.eventBus.publish(ECSEVENTS.XP, xp.amount)
 
 				}
 			}, COLLISIONGROUPS.PLAYER)

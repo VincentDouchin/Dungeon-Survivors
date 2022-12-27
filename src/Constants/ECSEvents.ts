@@ -1,4 +1,5 @@
 const ECSEVENTS = {
-	DELETEENTITY: 'deleteEntity'
+	DELETEENTITY: 'deleteEntity',
+	XP: 'xp'
 }
 export default ECSEVENTS
