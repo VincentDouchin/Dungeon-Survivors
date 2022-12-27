@@ -193,3 +193,5 @@ flame 512 16 16 16 8
 flame_wall 512 32 16 32 8
 flame_background 512 64 16 16 8
 flame_brasier 512 80 16 32 8
+
+xp 288 336 16 16 1
