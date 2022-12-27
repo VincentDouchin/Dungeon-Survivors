@@ -6,10 +6,9 @@ class DroppableComponent extends Component {
 	parentId?: string
 	constructor(entityContructor: () => Entity, amount: number = 1) {
 		super()
-		const callback = (id: string) => {
-			if (this.parentId != id) return
+		const callback = (entity: Entity) => {
+			if (this.parentId != entity.id) return
 			ECS.eventBus.unsubscribe(ECSEVENTS.DELETEENTITY, callback)
-			const entity = ECS.getEntityById(id)
 			const position = entity.getComponent(PositionComponent)
 			for (let i = 0; i < amount; i++) {
 				const newEntity = entityContructor()

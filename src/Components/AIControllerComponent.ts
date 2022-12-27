@@ -3,14 +3,13 @@ import { Component, ECS, Entity } from "../Globals/ECS";
 
 class AIControllerComponent extends Component {
 	enabled = true
-	target: Entity | null = null
+	targetId: string | null = null
 	constructor(target: Entity) {
 		super()
-		this.target = target
-		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entityId: string) => {
-
-			if (entityId == this.target?.id) {
-				this.target = null
+		this.targetId = target.id
+		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+			if (entity.id == this.targetId) {
+				this.targetId = null
 			}
 		})
 	}
