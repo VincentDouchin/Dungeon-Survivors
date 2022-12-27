@@ -28,7 +28,6 @@ class BodyComponent extends Component {
 				.setDensity(colliderOption.mass ?? 1000)
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
-			console.log(name, (colliderOption.group).toString(2), (colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0).toString(2)))
 
 			if (colliderOption.contact) {
 				colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
