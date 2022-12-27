@@ -39,6 +39,7 @@ class RenderingSystem extends System {
 
 			}
 			mesh.mesh.renderOrder = mesh.renderOrder
+			mesh.mesh.scale.set(mesh.scale, mesh.scale, 1)
 		})
 	}
 }

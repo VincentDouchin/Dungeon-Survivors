@@ -9,8 +9,9 @@ class MeshComponent extends Component {
 	width: number
 	height: number
 	renderOrder: number
+	scale: number
 	uniforms: Record<string, IUniform>
-	constructor(tile: Tile, options: { renderOrder: number } = { renderOrder: 10 }) {
+	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number }) {
 		super()
 		this.width = tile.width
 		this.height = tile.height
@@ -26,7 +27,9 @@ class MeshComponent extends Component {
 			outline_color: new Uniform(new Color(0xff0000)),
 
 		}, UniformsLib['lights']])
-		this.renderOrder = options.renderOrder * 10
+		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
+		this.renderOrder = newOptions.renderOrder * 10
+		this.scale = newOptions.scale
 		const meshMaterial = new ShaderMaterial({
 			uniforms: this.uniforms,
 			lights: true,
