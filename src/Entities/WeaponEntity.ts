@@ -14,7 +14,7 @@ const WeaponEntity = (owner: Entity) => {
 		[{ width: sword.width, height: sword.height, contact: true, sensor: true, mass: 1, group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY] }]
 	))
 	weapon.addComponent(new MeshComponent(sword))
-	weapon.addComponent(new DamageComponent(2, COLLISIONGROUPS.PLAYER))
+	weapon.addComponent(new DamageComponent(5, COLLISIONGROUPS.PLAYER))
 	weapon.addComponent(new WeaponControllerComponent(owner))
 	return weapon
 }
