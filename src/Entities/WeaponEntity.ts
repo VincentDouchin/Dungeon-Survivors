@@ -13,7 +13,7 @@ const WeaponEntity = (owner: Entity) => {
 		{ moveForce: 10, mass: 1 },
 		{ width: sword.width, height: sword.height, contact: true, sensor: true }
 	))
-	weapon.addComponent(new MeshComponent(sword.buffer))
+	weapon.addComponent(new MeshComponent(sword))
 	weapon.addComponent(new DamageComponent(2, DAMAGETYPES.player))
 	weapon.addComponent(new WeaponControllerComponent(owner))
 	return weapon

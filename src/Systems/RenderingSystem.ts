@@ -1,4 +1,5 @@
 import BodyComponent from "../Components/BodyComponent";
+import LightComponent from "../Components/LightComponent";
 import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import WeaponControllerComponent from "../Components/WeaponControllerComponent";
@@ -15,6 +16,7 @@ class RenderingSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			const body = entity.getComponent(BodyComponent)
 			const weaponController = entity.getComponent(WeaponControllerComponent)
+			const light = entity.getComponent(LightComponent)
 			if (mesh && position) {
 
 				if (!mesh.mesh.parent) {
@@ -26,6 +28,17 @@ class RenderingSystem extends System {
 				mesh.mesh.rotation.z = body.body.rotation() + Math.PI / 2
 
 			}
+			if (light) {
+
+				if (!light?.light.parent && position) {
+					scene.add(light.light)
+				}
+				light.light.position.x = position.x
+				light.light.position.y = position.y
+				light.light.target = mesh.mesh
+
+			}
+			mesh.mesh.renderOrder = mesh.renderOrder
 		})
 	}
 }

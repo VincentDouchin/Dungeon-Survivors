@@ -3,6 +3,7 @@ import BodyComponent from "../Components/BodyComponent"
 import CameraTargetComponent from "../Components/CameraTargetComponent"
 import EntityCollectionComponent from "../Components/EntityCollectionComponent"
 import HealthComponent from "../Components/HealthComponent"
+import LightComponent from "../Components/LightComponent"
 import MeshComponent from "../Components/MeshComponent"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
@@ -14,8 +15,8 @@ import WeaponEntity from "./WeaponEntity"
 const PlayerEntity = () => {
 	const player = new Entity()
 	const elf = AssetManager.tiles.elf_f_idle_anim
-	player.addComponent(new MeshComponent(elf.buffer, elf.width, elf.height))
-
+	player.addComponent(new MeshComponent(elf))
+	player.addComponent(new LightComponent())
 	player.addComponent(new AnimationComponent({
 		idle: AssetManager.tiles.elf_f_idle_anim,
 		hit: AssetManager.tiles.elf_f_hit_anim,

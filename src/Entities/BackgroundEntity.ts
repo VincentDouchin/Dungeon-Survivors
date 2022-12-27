@@ -5,13 +5,13 @@ import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import { camera } from "../Globals/Initialize"
 import getBuffer from "../Utils/Buffer"
+import Tile from "../Utils/Tile"
 
 const BackgroundEntity = () => {
 	const background = new Entity()
 	background.addComponent(new PositionComponent(0, 0))
 	const width = camera.right * 4
 	const height = camera.top * 4
-	console.log(width, height)
 	const buffer = getBuffer(width, height)
 	const floorTiles: Array<[Tile, number]> = [
 		[AssetManager.tiles.floor_1, 10],
@@ -32,9 +32,8 @@ const BackgroundEntity = () => {
 			buffer.drawImage(randomTile.buffer.canvas, x, y)
 		}
 	}
-	// document.body.appendChild(buffer.canvas)
-	const mesh = new MeshComponent(buffer)
-	mesh.mesh.renderOrder = -1
+
+	const mesh = new MeshComponent(new Tile({ buffer }), { renderOrder: 0 })
 	background.addComponent(mesh)
 	return background
 }
