@@ -1,4 +1,4 @@
-import { Clock } from "three";
+
 import AIControllerComponent from "../Components/AIControllerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import EnemyEntity from "../Entities/EnemyEntity";
@@ -15,14 +15,22 @@ const spawnEnemies = (player: Entity, enemyType: EnemyType, nb: number) => {
 		enemy.addComponent(new AIControllerComponent(player))
 	}
 }
-const runWave = (player: Entity) => function* ([enemyType, duration, enemies]: WaveDefinition) {
+const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDefinition) {
 
-	const clock = new Clock()
 
+
+	let counter = 0
 	let timer = 0
-	spawnEnemies(player, enemyType, enemies)
-	while (timer < duration) {
-		timer = clock.getElapsedTime()
+
+	while (counter < nb) {
+
+		if (timer === 0) {
+			spawnEnemies(player, enemyType, enemies)
+			counter++
+		}
+		console.log(timer)
+
+		timer = (timer + 1) % 300
 		yield
 
 	}
