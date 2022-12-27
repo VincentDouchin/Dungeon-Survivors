@@ -35,7 +35,7 @@ class HealthSystem extends System {
 						}
 
 					}
-				})
+				}, health.type)
 			}
 			if (health.health == 0) {
 				entity.destroy()
