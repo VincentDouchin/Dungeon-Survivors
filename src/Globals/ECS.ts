@@ -57,6 +57,26 @@ class Component {
 
 class Entity {
 	id: string
+	childrenIds: string[] = []
+	get children() {
+		return this.childrenIds.map(ECS.getEntityById)
+	}
+	addChildren(...children: Entity[]) {
+		children.forEach(child => {
+			this.childrenIds.push(child.id)
+			ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+				this.removeChildren(entity)
+			})
+		})
+	}
+	removeChildren(...children: Entity[]) {
+		children.forEach((child) => {
+			if (this.childrenIds.includes(child.id)) {
+				this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
+			}
+		})
+	}
+
 	constructor() {
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
@@ -71,7 +91,8 @@ class Entity {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
 	destroy() {
-		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this.id)
+		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this)
+		this.childrenIds.forEach(childId => ECS.getEntityById(childId).destroy())
 		ECS.components.forEach(componentMap => {
 			if (!componentMap.has(this.id)) return
 			componentMap.get(this.id)?.destroy()
