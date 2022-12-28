@@ -27,4 +27,8 @@ interface EnemyType {
 	tiles: Record<string, Tile>
 	health: number
 }
+interface WeaponDefinition {
+	tile: Tile
+	damage: number
+}
 type WaveDefinition = Array<EnemyType, number, number>
