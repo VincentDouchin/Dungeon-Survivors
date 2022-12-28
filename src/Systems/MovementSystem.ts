@@ -29,7 +29,7 @@ class MovementSystem extends System {
 					const targetPosition = ECS
 						.getEntityById(aiController.targetId)
 						.getComponent(PositionComponent)
-
+					if (!targetPosition) return
 					impulse.x = ((targetPosition.x - position.x) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.x - position.x))
 					impulse.y = ((targetPosition.y - position.y) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.y - position.y))
 
@@ -50,7 +50,7 @@ class MovementSystem extends System {
 					}
 				}
 				if (animation) {
-					animation.flipped = impulse.x < 0
+					if (impulse.x != 0) animation.flipped = impulse.x < 0
 					animation.state = impulse.x + impulse.y > body.moveForce ? 'run' : 'idle'
 				}
 
