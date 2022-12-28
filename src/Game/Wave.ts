@@ -28,8 +28,6 @@ const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDef
 			spawnEnemies(player, enemyType, enemies)
 			counter++
 		}
-		console.log(timer)
-
 		timer = (timer + 1) % 300
 		yield
 
