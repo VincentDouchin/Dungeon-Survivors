@@ -16,7 +16,7 @@ const SpikeEntity = ({ x, y }: { x: number, y: number }) => {
 		{ width: tile.width, height: tile.height, sensor: true, contact: true, group: COLLISIONGROUPS.TRAP, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY] }
 	]))
 	spike.addComponent(new PositionComponent(x, y))
-	spike.addComponent(new DamageComponent(5, COLLISIONGROUPS.TRAP))
+	spike.addComponent(new DamageComponent(20, COLLISIONGROUPS.TRAP))
 
 }
 export default SpikeEntity
