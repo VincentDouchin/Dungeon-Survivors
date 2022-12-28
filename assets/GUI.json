@@ -15,8 +15,8 @@
   "size": { "w": 192, "h": 304 },
   "scale": "1",
   "slices": [
-   { "name": "XPBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 16, "w": 64, "h": 16 } }] },
-   { "name": "XPFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 16, "w": 64, "h": 16 } }] },
+   { "name": "XPBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 135, "y": 20, "w": 52, "h": 7 } }] },
+   { "name": "XPFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 20, "w": 53, "h": 7 } }] },
    { "name": "healthBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 129, "w": 16, "h": 3 } }] },
    { "name": "healthFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 133, "w": 16, "h": 3 } }] }
   ]
