@@ -1,7 +1,7 @@
 import BodyComponent from "../Components/BodyComponent"
 import DamageComponent from "../Components/DamageComponent"
 import MeshComponent from "../Components/MeshComponent"
-import WeaponControllerComponent from "../Components/WeaponControllerComponent"
+import OrbiterComponent from "../Components/OrbiterComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
 
@@ -14,7 +14,7 @@ const WeaponEntity = (owner: Entity) => (weaponDefinition: WeaponDefinition) => 
 	))
 	weapon.addComponent(new MeshComponent(tile))
 	weapon.addComponent(new DamageComponent(weaponDefinition.damage, [COLLISIONGROUPS.ENEMY]))
-	weapon.addComponent(new WeaponControllerComponent(owner))
+	weapon.addComponent(new OrbiterComponent(owner))
 	return weapon
 }
 export default WeaponEntity
