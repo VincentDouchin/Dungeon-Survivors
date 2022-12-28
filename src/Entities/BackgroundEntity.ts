@@ -36,7 +36,6 @@ const BackgroundEntity = () => {
 	}
 	const mesh = new MeshComponent(new Tile({ buffer }), { renderOrder: 0 })
 	ECS.eventBus.subscribe(ECSEVENTS.CAMERAMOVE, ({ x, y }: { x: number, y: number }) => {
-		console.log(x, y)
 		mesh.uniforms.uOffsetX.value = x / mesh.width
 		mesh.uniforms.uOffsetY.value = y / mesh.height
 		position.x = x
