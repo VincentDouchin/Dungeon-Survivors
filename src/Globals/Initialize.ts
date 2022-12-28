@@ -1,10 +1,14 @@
 
 import { World } from "@dimforge/rapier2d-compat"
-import { AmbientLight, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { Color, OrthographicCamera, Scene, WebGLRenderer, } from "three"
 import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
 import InputManager from "./InputManager"
 import RAPIER from "@dimforge/rapier2d-compat"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import LightShader from "../Shaders/LigthShader"
 
 await RAPIER.init()
 
@@ -25,35 +29,63 @@ const createCamera = () => {
 	camera.position.set(0, 0, 200)
 	return camera
 }
-const camera = createCamera()
-const UICamera = createCamera()
-
-//! Scene
-const scene = new Scene()
-const UIScene = new Scene()
-//! Light
-const light = new AmbientLight(0xaaaaaa)
-scene.add(light)
 
 //! Renderer
-const renderer = new WebGLRenderer({ alpha: true, })
-renderer.setPixelRatio(window.devicePixelRatio)
-renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.autoClear = false
+const createRenderer = () => {
+	const renderer = new WebGLRenderer({ alpha: true })
+
+	renderer.setPixelRatio(window.devicePixelRatio)
+	renderer.setSize(window.innerWidth, window.innerHeight)
+	window.addEventListener('resize', () => {
+		renderer.setSize(window.innerWidth, window.innerHeight);
+	})
+	renderer.autoClear = false
+	return renderer
+}
+const renderer = createRenderer()
+
 document.body.appendChild(renderer.domElement)
 
+
+//! UI
+
+const UICamera = createCamera()
+const UIScene = new Scene()
+const UIcomposer = new EffectComposer(renderer)
+const UIPass = new RenderPass(UIScene, UICamera)
+UIPass.clear = false
+UIcomposer.addPass(UIPass)
+
+
+//! Light
+const lightScene = new Scene()
+const camera = createCamera()
+lightScene.background = new Color(0xFFFFFF)
+const lightComposer = new EffectComposer(renderer)
+lightComposer.addPass(new RenderPass(lightScene, camera))
+lightComposer.renderToScreen = false
+
+//! Main
+const scene = new Scene()
+const composer = new EffectComposer(renderer)
+composer.addPass(new RenderPass(scene, camera))
+const lightPass = new ShaderPass(LightShader(composer, lightComposer))
+composer.addPass(lightPass)
+
+
+
+//! Render
 const render = () => {
-	renderer.render(scene, camera)
-	renderer.render(UIScene, UICamera)
+	lightComposer.render()
+	composer.render()
+	UIcomposer.render()
 }
 
 
 //! Resize
-window.addEventListener('resize', () => {
-	renderer.setSize(window.innerWidth, window.innerHeight);
-})
+
 
 const inputManager = new InputManager(MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT)
 inputManager.registerControllers(KeyboardController)
 const world = new World({ x: 0, y: 0 })
-export { render, scene, inputManager, world, camera, UIScene, UICamera }
+export { render, scene, inputManager, world, camera, UIScene, UICamera, lightScene, renderer }
