@@ -56,6 +56,7 @@ class Component {
 }
 
 class Entity {
+	parentId: string | null = null
 	id: string
 	childrenIds: string[] = []
 	get children() {
@@ -63,6 +64,7 @@ class Entity {
 	}
 	addChildren(...children: Entity[]) {
 		children.forEach(child => {
+			child.parentId = this.id
 			this.childrenIds.push(child.id)
 			ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
 				this.removeChildren(entity)
@@ -87,6 +89,10 @@ class Entity {
 			ECS.components.get(component.constructor.name)?.set(this.id, component)
 		})
 	}
+	get parent(): null | Entity {
+		if (!this.parentId) return null
+		return ECS.getEntityById(this.parentId)
+	}
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
@@ -98,6 +104,7 @@ class Entity {
 			componentMap.get(this.id)?.destroy()
 			componentMap.delete(this.id)
 		})
+		ECS.entities.delete(this.id)
 	}
 
 }
