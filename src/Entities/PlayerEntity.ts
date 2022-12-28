@@ -9,6 +9,7 @@ import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
 import XPPickerComponent from "../Components/XPPickerComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import WEAPONS from "../Constants/Weapons"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import WeaponEntity from "./WeaponEntity"
@@ -32,11 +33,11 @@ const PlayerEntity = () => {
 		]
 
 	))
-	player.addComponent(new DamageComponent(1, COLLISIONGROUPS.POTION))
+	player.addComponent(new DamageComponent(1, [COLLISIONGROUPS.POTION]))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	player.addComponent(new CameraTargetComponent())
-	player.addChildren(WeaponEntity(player))
+	player.addChildren(WeaponEntity(player)(WEAPONS.hammerLong))
 	player.addComponent(new XPPickerComponent())
 	return player
 }

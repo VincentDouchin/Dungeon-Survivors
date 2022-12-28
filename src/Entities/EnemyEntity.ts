@@ -15,7 +15,7 @@ const EnemyEntity = (type: EnemyType) => {
 	const orc = Object.values(type.tiles)[0]
 	enemy.addComponent(new MeshComponent(orc))
 	enemy.addComponent(new AnimationComponent(type.tiles))
-	enemy.addComponent(new DamageComponent(1, COLLISIONGROUPS.PLAYER))
+	enemy.addComponent(new DamageComponent(1, [COLLISIONGROUPS.PLAYER]))
 	enemy.addComponent(new HealthComponent(10, COLLISIONGROUPS.ENEMY))
 	enemy.addComponent(new DroppableComponent(XPEntity))
 	enemy.addComponent(new BodyComponent(

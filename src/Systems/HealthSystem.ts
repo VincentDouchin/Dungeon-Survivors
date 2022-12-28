@@ -33,7 +33,7 @@ class HealthSystem extends System {
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
-					if (damage.target === health.type) {
+					if (damage.target.includes(health.type)) {
 						health.updateHealth(-damage.amount)
 						if (mesh && damage.amount > 0) mesh.uniforms.uColor.value.x = 0.7
 						health.canTakeDamage = false
