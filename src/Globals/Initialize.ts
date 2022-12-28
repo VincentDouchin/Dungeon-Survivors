@@ -1,14 +1,14 @@
 
-import { World } from "@dimforge/rapier2d-compat"
-import { Color, OrthographicCamera, Scene, WebGLRenderer, } from "three"
+import RAPIER, { World } from "@dimforge/rapier2d-compat"
+import { Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
-import InputManager from "./InputManager"
-import RAPIER from "@dimforge/rapier2d-compat"
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import CombineShader from "../Shaders/CombineShader"
 import LightShader from "../Shaders/LigthShader"
+import InputManager from "./InputManager"
 
 await RAPIER.init()
 
@@ -33,7 +33,6 @@ const createCamera = () => {
 //! Renderer
 const createRenderer = () => {
 	const renderer = new WebGLRenderer({ alpha: true })
-
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
@@ -44,41 +43,48 @@ const createRenderer = () => {
 }
 const renderer = createRenderer()
 
+
 document.body.appendChild(renderer.domElement)
-
-
-//! UI
-
-const UICamera = createCamera()
+//! Scenes
 const UIScene = new Scene()
+const scene = new Scene()
+const lightScene = new Scene()
+lightScene.background = new Color(0xFFFFFF)
+
+//! Cameras
+const UICamera = createCamera()
+const camera = createCamera()
+
+//! Composers
 const UIcomposer = new EffectComposer(renderer)
+UIcomposer.renderToScreen = false
+const lightComposer = new EffectComposer(renderer)
+lightComposer.renderToScreen = false
+const mainComposer = new EffectComposer(renderer)
+mainComposer.renderToScreen = false
+const finalComposer = new EffectComposer(renderer)
+
+//! Passes
+const mainPass = new RenderPass(scene, camera)
+
 const UIPass = new RenderPass(UIScene, UICamera)
 UIPass.clear = false
+const lightPass = new RenderPass(lightScene, camera)
+const mainLightPass = new ShaderPass(LightShader(mainComposer, lightComposer))
+const combinePass = new ShaderPass(CombineShader(UIcomposer.renderTarget2.texture, finalComposer.renderTarget1.texture))
 UIcomposer.addPass(UIPass)
-
-
-//! Light
-const lightScene = new Scene()
-const camera = createCamera()
-lightScene.background = new Color(0xFFFFFF)
-const lightComposer = new EffectComposer(renderer)
-lightComposer.addPass(new RenderPass(lightScene, camera))
-lightComposer.renderToScreen = false
-
-//! Main
-const scene = new Scene()
-const composer = new EffectComposer(renderer)
-composer.addPass(new RenderPass(scene, camera))
-const lightPass = new ShaderPass(LightShader(composer, lightComposer))
-composer.addPass(lightPass)
-
-
+mainComposer.addPass(mainPass)
+lightComposer.addPass(lightPass)
+finalComposer.addPass(mainLightPass)
+finalComposer.addPass(combinePass)
 
 //! Render
 const render = () => {
+	mainComposer.render()
 	lightComposer.render()
-	composer.render()
 	UIcomposer.render()
+	finalComposer.render()
+
 }
 
 
