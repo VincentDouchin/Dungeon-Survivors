@@ -10,25 +10,20 @@ import PositionComponent from "../Components/PositionComponent"
 import XPPickerComponent from "../Components/XPPickerComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import WEAPONS from "../Constants/Weapons"
-import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import WeaponEntity from "./WeaponEntity"
 
-const PlayerEntity = () => {
+const PlayerEntity = (hero: HeroDefinition) => {
 	const player = new Entity()
-	const elf = AssetManager.tiles.elf_f_idle_anim
-	player.addComponent(new MeshComponent(elf))
+
+	player.addComponent(new MeshComponent(hero.tiles.idle))
 	player.addComponent(new LightComponent())
-	player.addComponent(new AnimationComponent({
-		idle: AssetManager.tiles.elf_f_idle_anim,
-		hit: AssetManager.tiles.elf_f_hit_anim,
-		run: AssetManager.tiles.elf_f_run_anim,
-	}))
+	player.addComponent(new AnimationComponent(hero.tiles))
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 100 },
 		[
-			{ width: elf.width, height: elf.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION] },
+			{ width: hero.tiles.idle.width, height: hero.tiles.idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION] },
 			{ width: 100, height: 100, contact: true, sensor: true, group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.XP] }
 		]
 

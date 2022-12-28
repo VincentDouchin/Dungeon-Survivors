@@ -31,4 +31,7 @@ interface WeaponDefinition {
 	tile: Tile
 	damage: number
 }
+interface HeroDefinition {
+	tiles: Record<string, Tile>
+}
 type WaveDefinition = Array<EnemyType, number, number>
