@@ -18,6 +18,7 @@ import SpikeEntity from "../Entities/SpikeEntity"
 import PotionEntity from "../Entities/PotionEntity"
 import LightingSystem from "../Systems/LightingSystem"
 import BrasierEntity from "../Entities/BrasierEntity"
+import HEROS from "../Constants/Heros"
 const Run = (): GameState => {
 
 	RenderingSystem.register()
@@ -29,7 +30,7 @@ const Run = (): GameState => {
 	LightingSystem.register()
 	BackgroundEntity()
 	RunUIEntity()
-	const player = PlayerEntity()
+	const player = PlayerEntity(HEROS.knightMale)
 
 	startWave(player)(
 		[Enemies.goblin, 10, 5],
@@ -41,7 +42,7 @@ const Run = (): GameState => {
 	BrasierEntity({ x: 0, y: 0 })
 	BrasierEntity({ x: 100, y: 0 })
 	PotionEntity({ x: 100, y: 100 })
-	SpikeEntity({ x: 10, y: 10 })
+	SpikeEntity({ x: 30, y: 19 })
 	const xp = XPEntity()
 	xp.addComponent(new PositionComponent(50, 50))
 	return {
