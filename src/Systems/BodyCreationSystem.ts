@@ -1,7 +1,7 @@
 import { JointData } from "@dimforge/rapier2d-compat";
 import BodyComponent from "../Components/BodyComponent";
 import PositionComponent from "../Components/PositionComponent";
-import WeaponControllerComponent from "../Components/WeaponControllerComponent";
+import OrbiterComponent from "../Components/OrbiterComponent";
 import { System, Entity } from "../Globals/ECS";
 import { world } from "../Globals/Initialize";
 
@@ -13,7 +13,7 @@ class BodyCreationSystem extends System {
 		entities.forEach(entity => {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
-			const weaponController = entity.getComponent(WeaponControllerComponent)
+			const orbiter = entity.getComponent(OrbiterComponent)
 			if (!body.body && position) {
 				body.bodyDescription.setTranslation(position.x, position.y)
 				body.body = world.createRigidBody(body.bodyDescription)
@@ -21,15 +21,15 @@ class BodyCreationSystem extends System {
 			if (!body.colliders.length && body.body) {
 				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, body.body!))
 			}
-			if (weaponController?.owner && !body.body) {
-				const ownerPosition = weaponController.owner.getComponent(PositionComponent)
+			if (orbiter?.owner && !body.body) {
+				const ownerPosition = orbiter.owner.getComponent(PositionComponent)
 				entity.addComponent(new PositionComponent(ownerPosition.x, ownerPosition.y))
 			}
-			if (!weaponController?.joint && body.body && weaponController?.owner) {
-				const ownerBody = weaponController.owner.getComponent(BodyComponent)
+			if (!orbiter?.joint && body.body && entity.parent) {
+				const ownerBody = entity.parent.getComponent(BodyComponent)
 				if (!ownerBody.body) return
-				const params = JointData.revolute({ x: 0.0, y: 0.0 }, { x: weaponController.distance, y: 0 })
-				weaponController.joint = world.createImpulseJoint(params, ownerBody.body, body.body, true)
+				const params = JointData.revolute({ x: 0.0, y: 0.0 }, { x: orbiter.distance, y: 0 })
+				orbiter.joint = world.createImpulseJoint(params, ownerBody.body, body.body, true)
 
 			}
 

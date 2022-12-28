@@ -7,7 +7,7 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent'
 import BodyComponent from "../Components/BodyComponent";
 import AIControllerComponent from "../Components/AIControllerComponent";
 import AnimationComponent from "../Components/AnimationComponent";
-import WeaponControllerComponent from "../Components/WeaponControllerComponent";
+import OrbiterComponent from "../Components/OrbiterComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import { Vector3 } from "three";
 import ECSEVENTS from "../Constants/ECSEvents";
@@ -22,7 +22,7 @@ class MovementSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const aiController = entity.getComponent(AIControllerComponent)
 			const animation = entity.getComponent(AnimationComponent)
-			const weaponController = entity.getComponent(WeaponControllerComponent)
+			const weaponController = entity.getComponent(OrbiterComponent)
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			if (body) {
 				const impulse = new Vector2(0, 0)
@@ -52,7 +52,7 @@ class MovementSystem extends System {
 				}
 				if (animation) {
 					if (impulse.x != 0) animation.flipped = impulse.x < 0
-					animation.state = impulse.x + impulse.y > body.moveForce ? 'run' : 'idle'
+					animation.state = impulse.x + impulse.y > (body.moveForce * 0.5) ? 'run' : 'idle'
 				}
 
 				if (body.body) {
