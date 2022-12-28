@@ -35,7 +35,7 @@ class HealthSystem extends System {
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target != health.type) {
 						health.updateHealth(-damage.amount)
-						if (mesh) mesh.uniforms.uColor.value.x = 0.7
+						if (mesh && damage.amount > 0) mesh.uniforms.uColor.value.x = 0.7
 						health.canTakeDamage = false
 						Coroutines.add(function* () {
 							yield* waitFor(20)
@@ -44,7 +44,7 @@ class HealthSystem extends System {
 						})
 
 					}
-				}, health.type)
+				})
 			}
 			if (health.health == 0) {
 				entity.destroy()
