@@ -1,4 +1,4 @@
-import { CanvasTexture, IUniform, Mesh, NearestFilter, PlaneGeometry, ShaderMaterial, Uniform, UniformsLib, UniformsUtils, Vector4 } from "three";
+import { CanvasTexture, IUniform, Mesh, NearestFilter, PlaneGeometry, RepeatWrapping, ShaderMaterial, Uniform, UniformsLib, UniformsUtils, Vector4 } from "three";
 import { Component } from "../Globals/ECS";
 import mainVert from './../Shaders/vert/main.vert?raw'
 import mainFrag from './../Shaders/frag/main.frag?raw'
@@ -21,10 +21,14 @@ class MeshComponent extends Component {
 		this.texture = new CanvasTexture(tile.buffer.canvas)
 		this.texture.minFilter = NearestFilter
 		this.texture.magFilter = NearestFilter
+		this.texture.wrapS = RepeatWrapping
+		this.texture.wrapT = RepeatWrapping
 		this.uniforms = UniformsUtils.merge([{
 			uTexture: new Uniform(this.texture),
 			uRepeatX: new Uniform(1),
+			uRepeatY: new Uniform(1),
 			uOffsetX: new Uniform(0),
+			uOffsetY: new Uniform(0),
 			uColor: new Uniform(new Vector4()),
 		}, UniformsLib['lights']])
 

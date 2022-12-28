@@ -1,5 +1,6 @@
 const ECSEVENTS = {
 	DELETEENTITY: 'deleteEntity',
-	XP: 'xp'
+	XP: 'xp',
+	CAMERAMOVE: 'cemaraMove'
 }
 export default ECSEVENTS

@@ -10,6 +10,7 @@ import AnimationComponent from "../Components/AnimationComponent";
 import WeaponControllerComponent from "../Components/WeaponControllerComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import { Vector3 } from "three";
+import ECSEVENTS from "../Constants/ECSEvents";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -66,6 +67,7 @@ class MovementSystem extends System {
 					}
 				}
 				if (cameraTarget) {
+					ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
 					camera.position.x = position.x
 					camera.position.y = position.y
 					camera.lookAt(new Vector3(position.x, position.y, 200))
