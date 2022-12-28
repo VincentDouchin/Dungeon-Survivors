@@ -1,7 +1,7 @@
-import { CanvasTexture, Color, IUniform, Mesh, NearestFilter, PlaneGeometry, ShaderMaterial, Uniform, UniformsLib, UniformsUtils, Vector2, Vector4 } from "three";
+import { CanvasTexture, IUniform, Mesh, NearestFilter, PlaneGeometry, ShaderMaterial, Uniform, UniformsLib, UniformsUtils, Vector4 } from "three";
 import { Component } from "../Globals/ECS";
-import mainVert from './../Shaders/main.vert?raw'
-import mainFrag from './../Shaders/main.frag?raw'
+import mainVert from './../Shaders/vert/main.vert?raw'
+import mainFrag from './../Shaders/frag/main.frag?raw'
 import Tile from "../Utils/Tile";
 class MeshComponent extends Component {
 	mesh: Mesh
@@ -26,9 +26,6 @@ class MeshComponent extends Component {
 			uRepeatX: new Uniform(1),
 			uOffsetX: new Uniform(0),
 			uColor: new Uniform(new Vector4()),
-			sprite_size: new Uniform(new Vector2(this.width, this.height)),
-			outline_color: new Uniform(new Color(0xff0000)),
-
 		}, UniformsLib['lights']])
 
 
