@@ -1,22 +1,55 @@
-import { CanvasTexture, Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry } from "three";
+import { CanvasTexture, IUniform, Mesh, NearestFilter, PlaneGeometry, RepeatWrapping, ShaderMaterial, Uniform, UniformsLib, UniformsUtils, Vector4 } from "three";
 import { Component } from "../Globals/ECS";
-
+import mainVert from './../Shaders/vert/main.vert?raw'
+import mainFrag from './../Shaders/frag/main.frag?raw'
+import Tile from "../Utils/Tile";
 class MeshComponent extends Component {
 	mesh: Mesh
-	constructor(ctx: CanvasRenderingContext2D, width?: number, height?: number) {
+	texture: CanvasTexture
+	width: number
+	height: number
+	renderOrder: number
+	scale: number
+	uniforms: Record<string, IUniform>
+	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number }) {
 		super()
-		const canvasTexture = new CanvasTexture(ctx.canvas)
-		canvasTexture.minFilter = NearestFilter
-		canvasTexture.magFilter = NearestFilter
-		const geometry = new PlaneGeometry(width ?? ctx.canvas.width, height ?? ctx.canvas.height)
-		const meshMaterial = new MeshBasicMaterial({ map: canvasTexture, transparent: true, })
+		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
+		this.renderOrder = newOptions.renderOrder * 10
+		this.scale = newOptions.scale
+		this.width = tile.width * this.scale
+		this.height = tile.height * this.scale
+		this.texture = new CanvasTexture(tile.buffer.canvas)
+		this.texture.minFilter = NearestFilter
+		this.texture.magFilter = NearestFilter
+		this.texture.wrapS = RepeatWrapping
+		this.texture.wrapT = RepeatWrapping
+		this.uniforms = UniformsUtils.merge([{
+			uTexture: new Uniform(this.texture),
+			uRepeatX: new Uniform(1),
+			uRepeatY: new Uniform(1),
+			uOffsetX: new Uniform(0),
+			uOffsetY: new Uniform(0),
+			uColor: new Uniform(new Vector4()),
+		}, UniformsLib['lights']])
+
+
+		const meshMaterial = new ShaderMaterial({
+			uniforms: this.uniforms,
+			lights: true,
+			transparent: true,
+			vertexShader: mainVert,
+			fragmentShader: mainFrag
+		})
+		const geometry = new PlaneGeometry(this.width, this.height)
+
+
 		const mesh = new Mesh(geometry, meshMaterial)
 		this.mesh = mesh
 
 	}
 	destroy(): void {
 		this.mesh.geometry.dispose()
-
+		this.mesh.removeFromParent()
 	}
 }
 MeshComponent.register()

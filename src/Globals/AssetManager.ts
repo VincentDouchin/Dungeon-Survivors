@@ -1,43 +1,56 @@
 import getBuffer from '../Utils/Buffer'
-import imageSource from '/0x72_DungeonTilesetII_v1.4.png'
-import tilesList from '/tiles_list_v1.4.txt?raw'
+import imageSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
+import normalsSource from './../../assets/0x72_DungeonTilesetII_v1.4-normals.png'
+import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
+import Tile from '../Utils/Tile'
+import GUISource from './../../assets/GUI.png'
+import GUIData from './../../assets/GUI.json'
 
-const img = new Image()
-img.src = imageSource
-await new Promise(resolve => {
-	img.onload = resolve
-})
-interface Tile {
-	buffer: CanvasRenderingContext2D
-	x: number
-	y: number
-	width: number
-	height: number
-	frames: number
+const loadImage = async (source: string) => {
+	const img = new Image()
+	img.src = source
+	await new Promise(resolve => {
+		img.onload = resolve
+	})
+	return img
+
 }
-const tiles: Map<string, Tile> = new Map()
-tilesList
+const img = await loadImage(imageSource)
+const normals = await loadImage(normalsSource)
+const UI = await loadImage(GUISource)
+const UIImages = GUIData.meta.slices.reduce((acc, slice) => {
+
+	const { w, h, x, y }: Record<string, number> = slice.keys[0].bounds
+	const buffer = getBuffer(w, h)
+	buffer.drawImage(UI, x, y, w, h, 0, 0, w, h)
+	return { ...acc, [slice.name]: new Tile({ buffer }) }
+}, {})
+
+const tiles = tilesList
 	.split('\n')
 	.map((tile: string) => tile.split(' '))
 	.filter((tileList) => tileList.every(item => item))
-	.forEach(([tileName, top, left, width, height, frames = 1]) => {
-		const buffer = getBuffer(parseInt(width), parseInt(height))
-		buffer.drawImage(img, parseInt(top), parseInt(left), parseInt(width), parseInt(height), 0, 0, parseInt(width), parseInt(height))
-		const tile: Tile = {
+	.reduce((acc, [tileName, top, left, width, height, frames = '1']) => {
+		const totalWidth = parseInt(width) * parseInt(frames)
+		const buffer = getBuffer(totalWidth, parseInt(height))
+		const normalMap = getBuffer(totalWidth, parseInt(height))
+		buffer.drawImage(img, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
+		normalMap.drawImage(normals, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
+
+		const tile: Tile = new Tile({
 			buffer,
-			x: Number(top),
-			y: Number(left),
+			normalMap,
 			width: Number(width),
 			height: Number(height),
 			frames: Number(frames)
-		}
-		tiles.set(tileName, tile)
+		})
+		return { ...acc, [tileName]: tile }
 
-	})
+	}, {})
 
 const AssetManager = new class {
 	image = img
-	tiles = tiles
-
+	tiles = tiles as Record<tileName, Tile>
+	UI = UIImages as Record<string, Tile>
 }
 export default AssetManager

@@ -1,30 +1,58 @@
-import { render } from "../Globals/Initialize"
-import PositionComponent from "../Components/PositionComponent"
-import { ECS, Entity } from "../Globals/ECS"
-import MeshComponent from "../Components/MeshComponent"
-import AssetManager from "../Globals/AssetManager"
+import { render, world } from "../Globals/Initialize"
+import { ECS } from "../Globals/ECS"
 import RenderingSystem from "../Systems/RenderingSystem"
 import MovementSystem from "../Systems/MovementSystem"
-import PlayerControllerComponent from "../Components/PlayerControllerComponent"
-const Run = new class implements GameState {
-	constructor() {
-		ECS.registerSystem(RenderingSystem)
-		ECS.registerSystem(MovementSystem)
-		const player = new Entity()
-		player.addComponent(new PositionComponent(0, 0))
-		player.addComponent(new PlayerControllerComponent())
-		const elf = AssetManager.tiles.get('elf_m_idle_anim')!
-		const knight = AssetManager.tiles.get('knight_f_idle_anim')!
-		player.addComponent(new MeshComponent(elf.buffer, elf.width, elf.height))
-		const npc = new Entity()
-		npc.addComponent(new PositionComponent(10, 10))
-		npc.addComponent(new MeshComponent(knight.buffer))
-	}
-	update() {
-		ECS.updateSystems()
-	}
-	render() {
-		render()
+import AnimationSystem from "../Systems/AnimationSystem"
+import HealthSystem from "../Systems/HealthSystem"
+import BodyCreationSystem from "../Systems/BodyCreationSystem"
+
+import PlayerEntity from "../Entities/PlayerEntity"
+import BackgroundEntity from "../Entities/BackgroundEntity"
+import startWave from "../Game/Wave"
+import Enemies from "../Constants/Enemies"
+import XPEntity from "../Entities/XPEntity"
+import PositionComponent from "../Components/PositionComponent"
+import XPPickupSystem from "../Systems/XPPickupSystem"
+import RunUIEntity from "../Entities/RunUIEntity"
+import SpikeEntity from "../Entities/SpikeEntity"
+import PotionEntity from "../Entities/PotionEntity"
+import LightingSystem from "../Systems/LightingSystem"
+import BrasierEntity from "../Entities/BrasierEntity"
+const Run = (): GameState => {
+
+	RenderingSystem.register()
+	MovementSystem.register()
+	AnimationSystem.register()
+	HealthSystem.register()
+	BodyCreationSystem.register()
+	XPPickupSystem.register()
+	LightingSystem.register()
+	BackgroundEntity()
+	RunUIEntity()
+	const player = PlayerEntity()
+
+	startWave(player)(
+		[Enemies.goblin, 10, 5],
+		[Enemies.orc, 15, 5],
+		[Enemies.orcShaman, 10, 4],
+		[Enemies.orcMasked, 10, 3],
+		[Enemies.zombieBig, 1, 1]
+	)
+	BrasierEntity({ x: 0, y: 0 })
+	BrasierEntity({ x: 100, y: 0 })
+	PotionEntity({ x: 100, y: 100 })
+	SpikeEntity({ x: 10, y: 10 })
+	const xp = XPEntity()
+	xp.addComponent(new PositionComponent(50, 50))
+	return {
+		update() {
+			world.step()
+			ECS.updateSystems()
+		},
+		render() {
+
+			render()
+		}
 	}
 }
 export default Run

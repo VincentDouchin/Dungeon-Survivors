@@ -1,3 +1,4 @@
+import Coroutines from "./Coroutines"
 
 const Engine = new class {
 	rafHandle = 0
@@ -20,6 +21,7 @@ const Engine = new class {
 		if (this.accumulatedTime > 60) this.accumulatedTime = this.timeStep
 
 		while (this.accumulatedTime >= this.timeStep) {
+			Coroutines.run()
 			this.state.update()
 			updated = true
 			this.accumulatedTime -= this.timeStep
