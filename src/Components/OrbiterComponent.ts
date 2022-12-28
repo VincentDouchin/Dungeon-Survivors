@@ -1,7 +1,7 @@
 import { ImpulseJoint } from "@dimforge/rapier2d-compat";
 import { Component, ECS, Entity } from "../Globals/ECS";
 
-class WeaponControllerComponent extends Component {
+class OrbiterComponent extends Component {
 	ownerId: null | string = null
 	joint: ImpulseJoint | null = null
 	distance: number
@@ -14,5 +14,5 @@ class WeaponControllerComponent extends Component {
 		return this.ownerId ? ECS.getEntityById(this.ownerId) : undefined
 	}
 }
-WeaponControllerComponent.register()
-export default WeaponControllerComponent
+OrbiterComponent.register()
+export default OrbiterComponent
