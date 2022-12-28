@@ -32,7 +32,7 @@ const PlayerEntity = () => {
 		]
 
 	))
-	player.addComponent(new DamageComponent(1, COLLISIONGROUPS.PLAYER))
+	player.addComponent(new DamageComponent(1, COLLISIONGROUPS.POTION))
 	player.addComponent(new PositionComponent(0, 0))
 	player.addComponent(new PlayerControllerComponent())
 	player.addComponent(new CameraTargetComponent())

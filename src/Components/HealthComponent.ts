@@ -11,11 +11,13 @@ class HealthComponent extends Component {
 	type: number
 	healthBarId: string | null = null
 	canTakeDamage: boolean = true
-	constructor(health: number, type: number) {
+	show: boolean
+	constructor(health: number, type: number, show = true) {
 		super()
 		this.health = health
 		this.maxHealth = health
 		this.type = type
+		this.show = show
 	}
 	updateHealth(amount: number) {
 

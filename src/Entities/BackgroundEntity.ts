@@ -1,5 +1,4 @@
 
-import { RepeatWrapping } from "three"
 import MeshComponent from "../Components/MeshComponent"
 import PositionComponent from "../Components/PositionComponent"
 import ECSEVENTS from "../Constants/ECSEvents"
