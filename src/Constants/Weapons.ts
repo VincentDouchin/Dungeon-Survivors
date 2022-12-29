@@ -97,7 +97,9 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		tile: AssetManager.tiles.weapon_red_magic_staff,
 		damage: 15,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.fireBall
+		projectile: PROJECTILES.fireBall,
+		spread: 0.5,
+		projectilesNb: 3
 	},
 	staffGem: {
 		tile: AssetManager.tiles.weapon_green_magic_staff,

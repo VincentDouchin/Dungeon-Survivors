@@ -12,6 +12,7 @@ interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased'
 	moveForce?: number
 	mass?: number
+	lock?: boolean
 }
 interface colliderOptions {
 	contact: boolean
@@ -32,7 +33,11 @@ interface WeaponDefinition {
 	damage: number
 	behaviors: string[],
 	projectile?: ProjectileDefinition
+	spread?: number
+	projectilesNb?: number
+	range?: number
 }
+
 interface ProjectileDefinition {
 	tile: Tile
 	speed: number

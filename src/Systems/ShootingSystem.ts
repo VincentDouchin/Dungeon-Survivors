@@ -1,5 +1,7 @@
 import { Vector2 } from "@dimforge/rapier2d-compat";
+import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
+import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
@@ -15,10 +17,22 @@ class ShootingSystem extends System {
 			const shooter = entity.getComponent(ShooterComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			shooter.timer++
+			const nb = shooter.projectilesNb
 			if (shooter.delay <= shooter.timer) {
-				const position = entity.getComponent(PositionComponent)
-				const projectile = ProjectileEntity(shooter.projectile, { x: position.x, y: position.y }, rotation.rotation)
-				entity.addChildren(projectile)
+				for (let i = 0; i < nb; i++) {
+					const position = entity.getComponent(PositionComponent)
+					const projectile = ProjectileEntity(
+						shooter.projectile,
+						{ x: position.x, y: position.y },
+						rotation.rotation - shooter.spread / 2 + (rotation.rotation * i / shooter.projectilesNb / 2),
+						shooter.range
+					)
+					const animation = projectile.getComponent(AnimationComponent)
+					if (animation) {
+						animation.selectedFrame = Math.floor(Math.random() * animation.frames)
+					}
+					entity.addChildren(projectile)
+				}
 				shooter.timer = 0
 			}
 			for (let projectile of entity.children) {
