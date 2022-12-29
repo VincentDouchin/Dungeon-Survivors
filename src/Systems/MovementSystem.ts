@@ -44,7 +44,8 @@ class MovementSystem extends System {
 
 				if (body.body) {
 					body.body.setLinvel(body.velociy, true)
-
+					body.velociy.x = 0
+					body.velociy.y = 0
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
 					if (rotation) {
