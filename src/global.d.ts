@@ -30,6 +30,13 @@ interface EnemyType {
 interface WeaponDefinition {
 	tile: Tile
 	damage: number
+	behaviors: string[],
+	projectile?: ProjectileDefinition
+}
+interface ProjectileDefinition {
+	tile: Tile
+	speed: number
+	damage: number
 }
 interface HeroDefinition {
 	tiles: Record<string, Tile>
