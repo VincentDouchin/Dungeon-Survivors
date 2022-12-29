@@ -18,7 +18,7 @@ class BodyComponent extends Component {
 				.setAdditionalMass(1)
 				.setCanSleep(false)
 				.setCcdEnabled(true)
-				.lockRotations()
+		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
 
 		//!Collider
 		this.colliderDescriptions = colliderOptions.map(colliderOption => {
