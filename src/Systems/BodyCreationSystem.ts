@@ -1,11 +1,10 @@
 import { JointData } from "@dimforge/rapier2d-compat";
 import BodyComponent from "../Components/BodyComponent";
 import PositionComponent from "../Components/PositionComponent";
-import OrbiterComponent from "../Components/OrbiterComponent";
-import { System, Entity } from "../Globals/ECS";
+import { System, Entity, ECS } from "../Globals/ECS";
 import { world } from "../Globals/Initialize";
 import RotationComponent from "../Components/RotationComponent";
-import TargeterComponent from "../Components/TargeterComponent";
+import JointComponent from "../Components/JointComponent";
 
 class BodyCreationSystem extends System {
 	constructor() {
@@ -15,9 +14,8 @@ class BodyCreationSystem extends System {
 		entities.forEach(entity => {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
-			const orbiter = entity.getComponent(OrbiterComponent)
+			const joint = entity.getComponent(JointComponent)
 			const rotation = entity.getComponent(RotationComponent)
-			const targeter = entity.getComponent(TargeterComponent)
 			if (!body.body && position) {
 				body.bodyDescription.setTranslation(position.x, position.y)
 				body.body = world.createRigidBody(body.bodyDescription)
@@ -26,18 +24,31 @@ class BodyCreationSystem extends System {
 			if (!body.colliders.length && body.body) {
 				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, body.body!))
 			}
-			if (!body.body && orbiter && entity.parent && !position) {
-				const ownerPosition = entity.parent.getComponent(PositionComponent)
-				entity.addComponent(new PositionComponent(ownerPosition.x, ownerPosition.y))
-			}
-			if (orbiter && !orbiter?.joint && body.body && entity.parent) {
-				const ownerBody = entity.parent.getComponent(BodyComponent)
+
+			if (joint && !joint?.jointed && body.body && joint.parentId) {
+				const ownerBody = ECS.getEntityById(joint.parentId).getComponent(BodyComponent)
 
 				if (!ownerBody.body) return
+				const getParams = () => {
+					switch (joint.type) {
+						case 'revolute': {
+							return JointData.revolute({ x: 0.0, y: 0.0 }, { x: joint.distance, y: 0 })
+						}; break
+						case 'prismatic': {
+							const params = JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: 0.0 }, { x: 1.0, y: 1.0 })
+							params.limitsEnabled = true
+							params.limits = [30, 60]
+							return params
+						}
+					}
+				}
 
-				const params = JointData.revolute({ x: 0.0, y: 0.0 }, { x: orbiter.distance, y: 0 })
-				orbiter.joint = world.createImpulseJoint(params, ownerBody.body, body.body, true)
-				entity.addComponent(new RotationComponent(0, targeter ? 0 : 1))
+				// // return joint
+				// const params = joint.type == 'revolute' 
+				// 	?JointData.revolute({ x: 0.0, y: 0.0 }, { x: 0, y: 0 })
+				// 	:JointData.fixed
+				world.createImpulseJoint(getParams(), ownerBody.body, body.body, true)
+				joint.jointed = true
 			}
 
 
