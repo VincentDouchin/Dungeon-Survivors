@@ -1,3 +1,4 @@
+import { Color } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
 import LightComponent from "../Components/LightComponent"
 import MeshComponent from "../Components/MeshComponent"
@@ -11,7 +12,7 @@ const BrasierEntity = (position: { x: number, y: number }) => {
 	const tile = AssetManager.tiles.flame_brasier
 	brasier.addComponent(new MeshComponent(tile))
 	brasier.addComponent(new AnimationComponent({ default: tile }))
-	brasier.addComponent(new LightComponent())
+	brasier.addComponent(new LightComponent(new Color("hsl(20, 20%, 15%)"), 500))
 	return brasier
 }
 export default BrasierEntity
