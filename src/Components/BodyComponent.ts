@@ -8,6 +8,7 @@ class BodyComponent extends Component {
 	colliders: Collider[] = []
 	colliderDescriptions: ColliderDesc[]
 	moveForce: number
+	velociy: { x: number, y: number } = { x: 0, y: 0 }
 	constructor(bodyOptions: bodyOptions, colliderOptions: colliderOptions[]) {
 		super()
 
