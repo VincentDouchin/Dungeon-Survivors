@@ -1,16 +1,16 @@
-import { ECS, Entity, System } from "../Globals/ECS";
-import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { Vector2 } from "@dimforge/rapier2d-compat";
-import { camera, inputManager } from "../Globals/Initialize";
-import PositionComponent from '../Components/PositionComponent'
-import PlayerControllerComponent from '../Components/PlayerControllerComponent'
-import BodyComponent from "../Components/BodyComponent";
+import { Vector3 } from "three";
 import AIControllerComponent from "../Components/AIControllerComponent";
 import AnimationComponent from "../Components/AnimationComponent";
-import OrbiterComponent from "../Components/OrbiterComponent";
+import BodyComponent from "../Components/BodyComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
-import { Vector3 } from "three";
+import PlayerControllerComponent from '../Components/PlayerControllerComponent';
+import PositionComponent from '../Components/PositionComponent';
+import RotationComponent from "../Components/RotationComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
+import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
+import { ECS, Entity, System } from "../Globals/ECS";
+import { camera, inputManager } from "../Globals/Initialize";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -22,8 +22,8 @@ class MovementSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const aiController = entity.getComponent(AIControllerComponent)
 			const animation = entity.getComponent(AnimationComponent)
-			const weaponController = entity.getComponent(OrbiterComponent)
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
+			const rotation = entity.getComponent(RotationComponent)
 			if (body) {
 				const impulse = new Vector2(0, 0)
 				if (aiController?.enabled && aiController.targetId) {
@@ -60,10 +60,11 @@ class MovementSystem extends System {
 
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
-					if (weaponController?.joint) {
-						body.body.setAngvel(1, true)
-
-
+					if (rotation) {
+						if (rotation.angVel) {
+							body.body.setAngvel(rotation.angVel, true)
+						}
+						rotation.rotation = body.body.rotation()
 					}
 				}
 				if (cameraTarget) {

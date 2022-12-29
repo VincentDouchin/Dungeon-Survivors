@@ -1,8 +1,7 @@
-import BodyComponent from "../Components/BodyComponent";
 import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
+import RotationComponent from "../Components/RotationComponent";
 import UIPosition from "../Components/UIPosition";
-import OrbiterComponent from "../Components/OrbiterComponent";
 import { Entity, System } from "../Globals/ECS";
 import { scene, UICamera, UIScene } from "../Globals/Initialize";
 
@@ -14,8 +13,7 @@ class RenderingSystem extends System {
 		entities.forEach(entity => {
 			const mesh = entity.getComponent(MeshComponent)
 			const position = entity.getComponent(PositionComponent)
-			const body = entity.getComponent(BodyComponent)
-			const orbiter = entity.getComponent(OrbiterComponent)
+			const rotation = entity.getComponent(RotationComponent)
 
 			const uiPosition = entity.getComponent(UIPosition)
 			if (mesh && !mesh?.mesh.parent && uiPosition) {
@@ -35,9 +33,8 @@ class RenderingSystem extends System {
 				}
 				mesh.mesh.position.set(position.x, position.y, 0)
 			}
-			if (orbiter?.owner && body.body) {
-				mesh.mesh.rotation.z = body.body.rotation() + Math.PI / 2
-
+			if (rotation) {
+				mesh.mesh.rotation.z = rotation.rotation + Math.PI / 2
 			}
 
 
