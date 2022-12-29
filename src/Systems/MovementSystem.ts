@@ -1,6 +1,5 @@
 import { Vector2 } from "@dimforge/rapier2d-compat";
 import { Vector3 } from "three";
-import AIControllerComponent from "../Components/AIControllerComponent";
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
@@ -20,22 +19,12 @@ class MovementSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			const playerController = entity.getComponent(PlayerControllerComponent)
 			const body = entity.getComponent(BodyComponent)
-			const aiController = entity.getComponent(AIControllerComponent)
 			const animation = entity.getComponent(AnimationComponent)
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			if (body) {
 				const impulse = new Vector2(0, 0)
-				if (aiController?.enabled && aiController.targetId) {
-					const targetPosition = ECS
-						.getEntityById(aiController.targetId)
-						.getComponent(PositionComponent)
-					if (!targetPosition) return
-					impulse.x = ((targetPosition.x - position.x) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.x - position.x))
-					impulse.y = ((targetPosition.y - position.y) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.y - position.y))
 
-
-				}
 				if (playerController?.enabled) {
 					if (inputManager.getInput(MOVEUP)?.active) {
 						impulse.y = body.moveForce
