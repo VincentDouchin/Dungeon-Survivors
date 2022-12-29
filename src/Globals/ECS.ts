@@ -1,6 +1,5 @@
 import ECSEVENTS from "../Constants/ECSEvents"
 import EventBus from "../Utils/EventBus"
-
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
 	systems: System[] = []
@@ -11,6 +10,11 @@ const ECS = new class {
 	}
 	getEntityById(id: string) {
 		return this.entities.get(id)!
+	}
+	getEntitiesAndComponents<T>(componentType: Constructor<T>): Array<[string, T]> {
+		const components = this.components.get(componentType.name)
+		if (!components) return []
+		return Array.from(components.entries()) as Array<[string, T]>
 	}
 	registerSystem(system: Constructor<System>) {
 		this.systems.push(new system)
@@ -60,7 +64,7 @@ class Entity {
 	id: string
 	childrenIds: string[] = []
 	get children() {
-		return this.childrenIds.map(ECS.getEntityById)
+		return this.childrenIds.map(childId => ECS.getEntityById(childId))
 	}
 	addChildren(...children: Entity[]) {
 		children.forEach(child => {
