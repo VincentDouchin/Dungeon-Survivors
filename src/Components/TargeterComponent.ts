@@ -2,11 +2,17 @@ import ECSEVENTS from "../Constants/ECSEvents";
 import { Component, ECS, Entity } from "../Globals/ECS";
 
 class TargeterComponent extends Component {
-	target: number
+	target: number | null = null
 	targetedEnemy: string | null = null
-	constructor(target: number) {
+	distanceToTarget: number
+	constructor(target: number | string, distanceToTarget?: number) {
 		super()
-		this.target = target
+		this.distanceToTarget = distanceToTarget ?? 0
+		if (typeof target == 'string') {
+			this.targetedEnemy = target
+		} else {
+			this.target = target
+		}
 		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
 			if (entity.id == this.targetedEnemy) {
 				this.targetedEnemy = null
