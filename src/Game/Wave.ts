@@ -10,9 +10,8 @@ const spawnEnemies = (player: Entity, enemyType: EnemyType, nb: number) => {
 		const angle = Math.random() * Math.PI * 2
 		const x = Math.cos(angle) * distance
 		const y = Math.sin(angle) * distance
-		const enemy = EnemyEntity(enemyType)
-		enemy.addComponent(new PositionComponent(x, y))
-		enemy.addComponent(new AIControllerComponent(player))
+		EnemyEntity(enemyType, { x, y }, player)
+
 	}
 }
 const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDefinition) {

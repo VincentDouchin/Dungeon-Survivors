@@ -1,16 +1,18 @@
 
 
+import AIControllerComponent from "../Components/AIControllerComponent"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import DamageComponent from "../Components/DamageComponent"
 import DroppableComponent from "../Components/DroppableComponent"
 import HealthComponent from "../Components/HealthComponent"
 import MeshComponent from "../Components/MeshComponent"
+import PositionComponent from "../Components/PositionComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
 import XPEntity from "./XPEntity"
 
-const EnemyEntity = (type: EnemyType) => {
+const EnemyEntity = (type: EnemyType, position: { x: number, y: number }, player: Entity) => {
 	const enemy = new Entity()
 	const orc = Object.values(type.tiles)[0]
 	enemy.addComponent(new MeshComponent(orc))
@@ -18,6 +20,9 @@ const EnemyEntity = (type: EnemyType) => {
 	enemy.addComponent(new DamageComponent(1, [COLLISIONGROUPS.PLAYER]))
 	enemy.addComponent(new HealthComponent(10, COLLISIONGROUPS.ENEMY))
 	enemy.addComponent(new DroppableComponent(XPEntity))
+	enemy.addComponent(new PositionComponent(position.x, position.y))
+	// enemy.addComponent(new DroppableComponent(() => EnemyEntity(type, { x: position.x, y: position.y }, player)))
+	enemy.addComponent(new AIControllerComponent(player))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 40 },
 		[
