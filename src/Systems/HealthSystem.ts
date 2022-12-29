@@ -1,3 +1,4 @@
+import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
 import DamageComponent from "../Components/DamageComponent";
 import HealthComponent from "../Components/HealthComponent";
@@ -18,7 +19,7 @@ class HealthSystem extends System {
 			const health = entity.getComponent(HealthComponent)
 			const mesh = entity.getComponent(MeshComponent)
 			const body = entity.getComponent(BodyComponent)
-
+			const animation = entity.getComponent(AnimationComponent)
 
 			if (health.show && !health.healthBarId && mesh) {
 				const healthBarEntity = new Entity()
@@ -37,12 +38,18 @@ class HealthSystem extends System {
 						health.updateHealth(-damage.amount)
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
-						if (mesh && damage.amount > 0) mesh.uniforms.uColor.value.x = 0.7
+						if (animation && damage.amount > 0) {
+							animation.modifier = 'hurt'
+							mesh.texture.needsUpdate = true
+						}
 						health.canTakeDamage = false
 						Coroutines.add(function* () {
 							yield* waitFor(20)
 							health.canTakeDamage = true
-							if (mesh) mesh.uniforms.uColor.value.x = 0
+							if (animation) {
+								animation.modifier = 'buffer'
+								mesh.texture.needsUpdate = true
+							}
 						})
 
 					}

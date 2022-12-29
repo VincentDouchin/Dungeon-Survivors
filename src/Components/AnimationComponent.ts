@@ -9,6 +9,7 @@ class AnimationComponent extends Component {
 	frameRate = 10
 	frameCounter = 0
 	maxFrames: number
+	modifier: 'buffer' | 'outline' | 'hurt' = 'buffer'
 	flipped = false
 	constructor(tiles: { [key: string]: Tile }) {
 		super()
