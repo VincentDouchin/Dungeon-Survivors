@@ -52,7 +52,8 @@ class TargetingSystem extends System {
 						rotation.angVel = Math.sin(angleDiff) * 4
 					}
 				} else {
-					body.body?.setLinvel({ x: -Math.cos(angle) * body.moveForce, y: -Math.sin(angle) * body.moveForce }, true)
+					body.velociy.x = -Math.cos(angle) * body.moveForce
+					body.velociy.y = -Math.sin(angle) * body.moveForce
 				}
 
 			} else {

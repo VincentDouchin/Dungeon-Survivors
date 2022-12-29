@@ -1,4 +1,3 @@
-import { Vector2 } from "@dimforge/rapier2d-compat";
 import { Vector3 } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
@@ -23,29 +22,28 @@ class MovementSystem extends System {
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			if (body) {
-				const impulse = new Vector2(0, 0)
 
 				if (playerController?.enabled) {
 					if (inputManager.getInput(MOVEUP)?.active) {
-						impulse.y = body.moveForce
+						body.velociy.y = body.moveForce
 					}
 					if (inputManager.getInput(MOVEDOWN)?.active) {
-						impulse.y = -body.moveForce
+						body.velociy.y = -body.moveForce
 					}
 					if (inputManager.getInput(MOVELEFT)?.active) {
-						impulse.x = -body.moveForce
+						body.velociy.x = -body.moveForce
 					}
 					if (inputManager.getInput(MOVERIGHT)?.active) {
-						impulse.x = body.moveForce
+						body.velociy.x = body.moveForce
 					}
 				}
 				if (animation) {
-					if (impulse.x != 0) animation.flipped = impulse.x < 0
-					animation.state = impulse.x + impulse.y > (body.moveForce * 0.5) ? 'run' : 'idle'
+					if (body.velociy.x != 0) animation.flipped = body.velociy.x < 0
+					animation.state = body.velociy.x + body.velociy.y > (body.moveForce * 0.5) ? 'run' : 'idle'
 				}
 
 				if (body.body) {
-					body.body.setLinvel(impulse, true)
+					body.body.setLinvel(body.velociy, true)
 
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
@@ -60,7 +58,7 @@ class MovementSystem extends System {
 					ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
 					camera.position.x = position.x
 					camera.position.y = position.y
-					camera.lookAt(new Vector3(position.x, position.y, 200))
+					camera.lookAt(new Vector3(position.x, position.y, 0))
 				}
 			}
 
