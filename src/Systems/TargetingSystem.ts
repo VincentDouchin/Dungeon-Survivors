@@ -38,6 +38,8 @@ class TargetingSystem extends System {
 				const enemyPosition = enemy.getComponent(PositionComponent)
 				const x = position.x - enemyPosition.x
 				const y = position.y - enemyPosition.y
+				const distance = Math.sqrt(x ** 2 + y ** 2)
+				if (distance < targeter.distanceToTarget) return
 				const angle = Math.atan2(y, x)
 				if (joint?.type == 'revolute') {
 					const r = rotation.rotation
