@@ -1,6 +1,8 @@
 interface GameState {
 	update: Function
 	render: Function
+	set: Function
+	unset: Function
 }
 type Constructor<T> = new (...args: any[]) => T;
 
