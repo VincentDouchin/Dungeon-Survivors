@@ -18,12 +18,12 @@ class RenderingSystem extends System {
 			const text = entity.getComponent(TextComponent)
 			const uiPosition = entity.getComponent(UIPosition)
 
-			if (mesh && !mesh?.mesh.parent && uiPosition) {
+			if (uiPosition) {
 				const parentMesh = entity.parent?.getComponent(MeshComponent)
-				const destination = parentMesh?.mesh ?? UIScene
+
 				const parentWidth = parentMesh ? parentMesh?.width / 2 : UICamera.right
 				const parentHeight = parentMesh ? parentMesh?.height / 2 : UICamera.bottom
-				destination.add(mesh.mesh)
+
 				mesh.mesh.position.set(
 					uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x,
 					uiPosition.relativePosition.y * parentHeight + mesh.height / 2 * uiPosition.center.y,
@@ -31,7 +31,12 @@ class RenderingSystem extends System {
 				)
 				mesh.renderOrder = 1
 
-				if (text) {
+
+				if (mesh && !mesh?.mesh.parent) {
+					const destination = parentMesh?.mesh ?? UIScene
+					destination.add(mesh.mesh)
+				}
+				if (text && mesh) {
 					mesh.mesh.add(text.mesh)
 					text.mesh.renderOrder = mesh.renderOrder + 1
 				}
