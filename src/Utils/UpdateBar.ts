@@ -1,5 +1,4 @@
 import MeshComponent from '../Components/MeshComponent'
-import getBuffer from './Buffer'
 import Tile from './Tile'
 const updateBar = (mesh: MeshComponent, from: Tile, to: Tile, percent: number) => {
 	const image: HTMLCanvasElement = mesh.texture.image
