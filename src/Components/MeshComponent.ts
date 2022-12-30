@@ -1,6 +1,5 @@
 import { CanvasTexture, Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping } from "three";
 import { Component } from "../Globals/ECS";
-import { scene } from "../Globals/Initialize";
 import Tile from "../Utils/Tile";
 class MeshComponent extends Component {
 	mesh: Mesh
@@ -10,6 +9,8 @@ class MeshComponent extends Component {
 	height: number
 	renderOrder: number
 	scale: number
+	lastModifer: 'buffer' | 'outline' | 'hurt' = 'buffer'
+	modifier: 'buffer' | 'outline' | 'hurt' = 'buffer'
 	material: MeshLambertMaterial | MeshBasicMaterial | MeshStandardMaterial
 	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, material?: 'lambert' | 'basic', }) {
 		super()
@@ -38,6 +39,7 @@ class MeshComponent extends Component {
 		this.mesh = mesh
 
 	}
+
 	destroy(): void {
 		this.mesh.geometry.dispose()
 		this.mesh.removeFromParent()
