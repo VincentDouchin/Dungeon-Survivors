@@ -52,8 +52,8 @@ class TargetingSystem extends System {
 						rotation.angVel = Math.sin(angleDiff) * 4
 					}
 				} else {
-					body.velociy.x = -Math.cos(angle) * body.moveForce
-					body.velociy.y = -Math.sin(angle) * body.moveForce
+					body.velocity.x = -Math.cos(angle)
+					body.velocity.y = -Math.sin(angle)
 				}
 
 			} else {

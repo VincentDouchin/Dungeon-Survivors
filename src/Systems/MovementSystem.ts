@@ -25,27 +25,27 @@ class MovementSystem extends System {
 
 				if (playerController?.enabled) {
 					if (inputManager.getInput(MOVEUP)?.active) {
-						body.velociy.y = body.moveForce
+						body.velocity.y = 1
 					}
 					if (inputManager.getInput(MOVEDOWN)?.active) {
-						body.velociy.y = -body.moveForce
+						body.velocity.y = -1
 					}
 					if (inputManager.getInput(MOVELEFT)?.active) {
-						body.velociy.x = -body.moveForce
+						body.velocity.x = -1
 					}
 					if (inputManager.getInput(MOVERIGHT)?.active) {
-						body.velociy.x = body.moveForce
+						body.velocity.x = 1
 					}
 				}
 				if (animation) {
-					if (body.velociy.x != 0) animation.flipped = body.velociy.x < 0
-					animation.state = body.velociy.x + body.velociy.y > (body.moveForce * 0.5) ? 'run' : 'idle'
+					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
+					animation.state = body.velocity.x + body.velocity.y > (body.moveForce * 0.5) ? 'run' : 'idle'
 				}
 
 				if (body.body) {
-					body.body.setLinvel(body.velociy, true)
-					body.velociy.x = 0
-					body.velociy.y = 0
+					body.body.setLinvel({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
+					body.velocity.x = 0
+					body.velocity.y = 0
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
 					if (rotation) {
