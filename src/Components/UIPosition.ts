@@ -7,10 +7,10 @@ interface position {
 class UIPosition extends Component {
 	relativePosition: position
 	center: position
-	constructor(relativePosition: position, center: position) {
+	constructor(relativePosition?: position, center?: position) {
 		super()
-		this.relativePosition = relativePosition
-		this.center = center
+		this.relativePosition = relativePosition ?? { x: 0, y: 0 }
+		this.center = center ?? { x: 0, y: 0 }
 
 	}
 
