@@ -39,16 +39,15 @@ class HealthSystem extends System {
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (animation && damage.amount > 0) {
-							animation.modifier = 'hurt'
-							mesh.texture.needsUpdate = true
+							mesh.modifier = 'hurt'
 						}
 						health.canTakeDamage = false
 						Coroutines.add(function* () {
 							yield* waitFor(20)
 							health.canTakeDamage = true
 							if (animation) {
-								animation.modifier = 'buffer'
-								mesh.texture.needsUpdate = true
+								mesh.modifier = 'buffer'
+
 							}
 						})
 
