@@ -1,12 +1,12 @@
 import EnemyEntity from "../Entities/EnemyEntity";
 import Coroutines from "../Globals/Coroutines";
+import { camera } from "../Globals/Initialize";
 const spawnEnemies = (enemyType: EnemyType, nb: number) => {
 
 	for (let i = 0; i < nb; i++) {
-		const distance = Math.random() * 200 + 100
 		const angle = Math.random() * Math.PI * 2
-		const x = Math.cos(angle) * distance
-		const y = Math.sin(angle) * distance
+		const x = (Math.cos(angle) * camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+		const y = Math.sin(angle) * camera.top + camera.position.y * ((Math.random() * 1.2) + 1)
 		EnemyEntity(enemyType, { x, y })
 
 	}
