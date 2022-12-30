@@ -1,7 +1,6 @@
 import { Vector2 } from "@dimforge/rapier2d-compat";
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
-import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
