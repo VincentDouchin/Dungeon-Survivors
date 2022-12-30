@@ -1,10 +1,10 @@
 { "frames": {
-   "GUI.ase": {
-    "frame": { "x": 0, "y": 0, "w": 192, "h": 304 },
+   "GUI.png": {
+    "frame": { "x": 0, "y": 0, "w": 401, "h": 304 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 192, "h": 304 },
-    "sourceSize": { "w": 192, "h": 304 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 401, "h": 304 },
+    "sourceSize": { "w": 401, "h": 304 },
     "duration": 100
    }
  },
@@ -12,7 +12,7 @@
   "app": "https://www.aseprite.org/",
   "version": "1.2.35-x64",
   "format": "I8",
-  "size": { "w": 192, "h": 304 },
+  "size": { "w": 401, "h": 304 },
   "scale": "1",
   "slices": [
    { "name": "XPBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 135, "y": 20, "w": 51, "h": 7 } }] },
@@ -20,7 +20,9 @@
    { "name": "healthBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 129, "w": 16, "h": 3 } }] },
    { "name": "healthFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 133, "w": 16, "h": 3 } }] },
    { "name": "box", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 36, "w": 26, "h": 24 } }] },
-   { "name": "frame1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 34, "w": 44, "h": 44 } }] }
+   { "name": "frame1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 34, "w": 44, "h": 44 } }] },
+   { "name": "touchdpad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 0, "w": 64, "h": 64 } }] },
+   { "name": "touchdpadcenter", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 0, "w": 16, "h": 16 } }] }
   ]
  }
 }
