@@ -4,7 +4,6 @@ import UIPosition from "../Components/UIPosition"
 import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
-import { camera, inputManager } from "../Globals/Initialize"
 import EventBus from "../Utils/EventBus"
 interface TouchInput {
 
@@ -16,14 +15,14 @@ class dpadTouchInput implements TouchInput {
 	constructor(eventBus: EventBus) {
 		this.dpad = new Entity()
 		const dpadMesh = this.dpad.addComponent(new MeshComponent(AssetManager.UI.touchdpad, { scale: 2 }))
-		const dpadPosition = this.dpad.addComponent(new UIPosition({ x: -0.95, y: 0.95 }, { x: -1, y: 1 }))
+		this.dpad.addComponent(new UIPosition({ x: -0.95, y: 0.95 }, { x: -1, y: 1 }))
 		const center = new Entity()
-		const centerMesh = center.addComponent(new MeshComponent(AssetManager.UI.touchdpadcenter, { scale: 2 }))
+		center.addComponent(new MeshComponent(AssetManager.UI.touchdpadcenter, { scale: 2 }))
 		const centerPosition = center.addComponent(new UIPosition())
 		this.dpad.addChildren(center)
 		let enbled = false
 		let mouse: { x: null | number, y: null | number } = { x: null, y: null }
-		eventBus.subscribe('pointerdown', ({ x, y, intersects }: { x: number, y: number, intersects: number[] }) => {
+		eventBus.subscribe('down', ({ x, y, intersects }: { x: number, y: number, intersects: number[] }) => {
 			if (intersects.includes(dpadMesh.mesh.id)) {
 				enbled = true
 				mouse.x = x
@@ -31,7 +30,11 @@ class dpadTouchInput implements TouchInput {
 
 			}
 		})
-		eventBus.subscribe('pointermove', ({ x, y }: { x: number, y: number, intersects: number[] }) => {
+		// window.addEventListener('touchstart', () => console.log('start'))
+		// window.addEventListener('touchend', () => console.log('end'))
+		// window.addEventListener('touchmove', () => console.log('move'))
+
+		eventBus.subscribe('move', ({ x, y }: { x: number, y: number, intersects: number[] }) => {
 			if (enbled && mouse.x && mouse.y) {
 				centerPosition.relativePosition.x = (- mouse.x + x)
 				centerPosition.relativePosition.y = (-mouse.y + y)
@@ -47,10 +50,14 @@ class dpadTouchInput implements TouchInput {
 				eventBus.publish(MOVEDOWN, false)
 			}
 		})
-		eventBus.subscribe('pointerup', () => {
+		eventBus.subscribe('up', () => {
 			enbled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
+			eventBus.publish(MOVERIGHT, false)
+			eventBus.publish(MOVELEFT, false)
+			eventBus.publish(MOVEUP, false)
+			eventBus.publish(MOVEDOWN, false)
 		})
 
 
