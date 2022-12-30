@@ -18,16 +18,11 @@ class AnimationSystem extends System {
 			}
 			mesh.texture.repeat.x = (animation.flipped ? -1 : 1) / animation.maxFrames
 			mesh.texture.offset.x = ((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames
-			if (mesh.normalMap) {
-				mesh.normalMap.repeat.x = (animation.flipped ? -1 : 1) / animation.maxFrames
-				mesh.normalMap.offset.x = ((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames
-			}
+
 			if (animation.currentState != animation.lastState || mesh.modifier != mesh.lastModifer) {
 
 				mesh.texture.image = animation.tile[mesh.modifier]!.canvas
-				if (mesh.normalMap) {
-					mesh.normalMap.image = animation.tile.normalMap?.canvas
-				}
+
 				mesh.lastModifer = mesh.modifier
 				mesh.texture.needsUpdate = true
 				animation.selectedFrame = 0

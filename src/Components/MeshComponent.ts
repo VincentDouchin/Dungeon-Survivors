@@ -12,7 +12,7 @@ class MeshComponent extends Component {
 	lastModifer: 'buffer' | 'outline' | 'hurt' = 'buffer'
 	modifier: 'buffer' | 'outline' | 'hurt' = 'buffer'
 	material: MeshLambertMaterial | MeshBasicMaterial | MeshStandardMaterial
-	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, material?: 'lambert' | 'basic', }) {
+	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, }) {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
 		this.renderOrder = newOptions.renderOrder * 10
@@ -25,16 +25,11 @@ class MeshComponent extends Component {
 		this.texture.magFilter = NearestFilter
 		this.texture.wrapS = RepeatWrapping
 		this.texture.wrapT = RepeatWrapping
-		const matOptions = {
+		this.material = new MeshLambertMaterial({
 			map: this.texture,
 			transparent: true,
-		}
-		this.material = (options?.material == 'basic')
-			? new MeshBasicMaterial(matOptions)
-			: new MeshLambertMaterial(matOptions)
+		})
 		const geometry = new PlaneGeometry(this.width, this.height)
-
-
 		const mesh = new Mesh(geometry, this.material)
 		this.mesh = mesh
 
