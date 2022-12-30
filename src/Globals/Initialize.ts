@@ -69,7 +69,10 @@ const render = () => {
 //! Inputs
 const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT])
 inputManager.registerControllers(KeyboardController)
-inputManager.registerControllers(TouchController)
+//@ts-ignore
+if (navigator.userAgentData.mobile) {
+	inputManager.registerControllers(TouchController)
+}
 
 export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer }
 
