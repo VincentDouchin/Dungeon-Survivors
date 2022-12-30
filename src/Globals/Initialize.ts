@@ -3,6 +3,7 @@ import RAPIER, { World } from "@dimforge/rapier2d-compat"
 import { AmbientLight, Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
 import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
+import TouchController from "../InputControllers/TouchController"
 import InputManager from "./InputManager"
 
 //! World 
@@ -66,8 +67,9 @@ const render = () => {
 }
 
 //! Inputs
-const inputManager = new InputManager(MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT)
+const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT])
 inputManager.registerControllers(KeyboardController)
+inputManager.registerControllers(TouchController)
 
 export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer }
 
