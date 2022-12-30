@@ -57,6 +57,7 @@ class Run implements GameState {
 		render()
 	}
 	set() {
+		inputManager.enable('dpad')
 		RenderingSystem.register()
 		MovementSystem.register()
 		AnimationSystem.register()
@@ -69,6 +70,7 @@ class Run implements GameState {
 		Coroutines.resume()
 	}
 	unset() {
+		inputManager.disable('dpad')
 		Coroutines.stop()
 		ECS.unRegisterSystems()
 
