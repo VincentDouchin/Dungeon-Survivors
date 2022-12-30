@@ -39,8 +39,12 @@ const Engine = new class {
 	addState(stateName: string, state: GameState) {
 		this.states.set(stateName, state)
 	}
-	setState(stateName: string) {
+	setState(stateName: string, options?: any) {
+		if (this.state) {
+			this.state.unset()
+		}
 		this.state = this.states.get(stateName)
+		this.state?.set(options)
 	}
 }
 export default Engine

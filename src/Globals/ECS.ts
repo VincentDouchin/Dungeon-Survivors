@@ -26,6 +26,9 @@ const ECS = new class {
 			system.update(entities)
 		})
 	}
+	unRegisterSystems() {
+		this.systems = []
+	}
 
 }
 
@@ -66,32 +69,30 @@ class Entity {
 	get children() {
 		return this.childrenIds.map(childId => ECS.getEntityById(childId))
 	}
-	addChildren(...children: Entity[]) {
-		children.forEach(child => {
-			child.parentId = this.id
-			this.childrenIds.push(child.id)
-			ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
-				this.removeChildren(entity)
-			})
+	addChildren(child: Entity) {
+		child.parentId = this.id
+		this.childrenIds.push(child.id)
+		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+			this.removeChildren(entity)
 		})
+		return child
 	}
-	removeChildren(...children: Entity[]) {
-		children.forEach((child) => {
-			if (this.childrenIds.includes(child.id)) {
-				this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
-			}
-		})
+	removeChildren(child: Entity) {
+
+		if (this.childrenIds.includes(child.id)) {
+			this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
+		}
+
 	}
 
 	constructor() {
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
 	}
-	addComponent(...components: Component[]) {
-		components.forEach(component => {
-			if (component.bind) component.bind(this.id)
-			ECS.components.get(component.constructor.name)?.set(this.id, component)
-		})
+	addComponent<T extends Component>(component: T) {
+		if (component.bind) component.bind(this.id)
+		ECS.components.get(component.constructor.name)?.set(this.id, component)
+		return component as T
 	}
 	get parent(): null | Entity {
 		if (!this.parentId) return null
