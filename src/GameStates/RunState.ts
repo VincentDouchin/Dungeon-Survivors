@@ -1,4 +1,4 @@
-import { ECS } from "../Globals/ECS"
+import { ECS, Entity } from "../Globals/ECS"
 import { inputManager, render, world } from "../Globals/Initialize"
 import AnimationSystem from "../Systems/AnimationSystem"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
@@ -8,28 +8,30 @@ import RenderingSystem from "../Systems/RenderingSystem"
 
 import Enemies from "../Constants/Enemies"
 import HEROS from "../Constants/Heros"
-import { INTERACT } from "../Constants/InputsNames"
 import WEAPONS from "../Constants/Weapons"
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import PlayerEntity from "../Entities/PlayerEntity"
 import PotionEntity from "../Entities/PotionEntity"
 import SpikeEntity from "../Entities/SpikeEntity"
 import startWave from "../Game/Wave"
-import Engine from "../Globals/Engine"
+import Coroutines from "../Globals/Coroutines"
 import LightingSystem from "../Systems/LightingSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import XPPickupSystem from "../Systems/XPPickupSystem"
 import RunUIEntity from "../UIEntities/UIRunEntity"
-import Coroutines from "../Globals/Coroutines"
+import { PAUSE } from "../Constants/InputsNames"
+import Engine from "../Globals/Engine"
+import XPStoreComponent from "../Components/XPStoreComponent"
 
 class Run implements GameState {
 	constructor() {
-		const knight = PlayerEntity(HEROS.knightFemale, false, WEAPONS.swordKnight)
+		const knight = PlayerEntity(HEROS.wizardMale, false, WEAPONS.staff)
 		PlayerEntity(HEROS.elfMale, knight, WEAPONS.bow)
 		BackgroundEntity()
 		RunUIEntity()
-
+		const saveEntity = new Entity()
+		saveEntity.addComponent(new XPStoreComponent())
 
 		startWave(
 			[Enemies.goblin, 20, 5],
@@ -45,12 +47,11 @@ class Run implements GameState {
 
 
 	update() {
-
-		if (inputManager.getInput(INTERACT)?.once) {
-			Engine.setState('levelUp')
-		}
 		world.step()
 		ECS.updateSystems()
+		if (inputManager.getInput(PAUSE)?.once) {
+			Engine.setState('pause')
+		}
 	}
 	render() {
 
