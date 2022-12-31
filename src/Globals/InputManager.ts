@@ -36,7 +36,9 @@ class InputManager {
 					const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
 					const mouse = {
 						x: ((clientX - bounds.left) / target.clientWidth) * 2 - 1,
-						y: - ((clientY - bounds.top) / target.clientHeight) * 2 + 1
+						y: - ((clientY - bounds.top) / target.clientHeight) * 2 + 1,
+						clientX,
+						clientY
 					}
 					const raycaster = new Raycaster()
 					raycaster.setFromCamera(mouse, UICamera);
