@@ -1,5 +1,6 @@
 import { Color } from "three";
 import { Component } from "../Globals/ECS";
+import { scene } from "../Globals/Initialize";
 class LightComponent extends Component {
 	// light: SpotLight
 	lightId: number | null = null
@@ -15,9 +16,11 @@ class LightComponent extends Component {
 		// this.light.position.z = distance
 
 	}
-	// destroy() {
-	// 	this.light.removeFromParent()
-	// }
+	destroy() {
+		if (this.lightId) {
+			scene.getObjectById(this.lightId)?.removeFromParent()
+		}
+	}
 }
 LightComponent.register()
 export default LightComponent
