@@ -18,26 +18,25 @@ class dpadTouchInput implements TouchInput {
 		this.dpad.addComponent(new UIPosition({ x: -0.95, y: 0.95 }, { x: -1, y: 1 }))
 		const center = new Entity()
 		center.addComponent(new MeshComponent(AssetManager.UI.touchdpadcenter, { scale: 2 }))
-		const centerPosition = center.addComponent(new UIPosition())
+		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }))
 		this.dpad.addChildren(center)
 		let enbled = false
-		let mouse: { x: null | number, y: null | number } = { x: null, y: null }
-		eventBus.subscribe('down', ({ x, y, intersects }: { x: number, y: number, intersects: number[] }) => {
+		let mouse: { x: null | number, y: null | number, clientX: null | number, clientY: null | number } = { x: null, y: null, clientX: null, clientY: null }
+		eventBus.subscribe('down', ({ x, y, clientX, clientY, intersects }: { x: number, y: number, clientX: number, clientY: number, intersects: number[] }) => {
 			if (intersects.includes(dpadMesh.mesh.id)) {
 				enbled = true
 				mouse.x = x
 				mouse.y = y
-
+				mouse.clientX = clientX
+				mouse.clientY = clientY
 			}
 		})
-		// window.addEventListener('touchstart', () => console.log('start'))
-		// window.addEventListener('touchend', () => console.log('end'))
-		// window.addEventListener('touchmove', () => console.log('move'))
+
 
 		eventBus.subscribe('move', ({ x, y }: { x: number, y: number, intersects: number[] }) => {
 			if (enbled && mouse.x && mouse.y) {
-				centerPosition.relativePosition.x = (- mouse.x + x)
-				centerPosition.relativePosition.y = (-mouse.y + y)
+				centerPosition.relativePosition.x = -(mouse.x - x)
+				centerPosition.relativePosition.y = -(mouse.y - y)
 				const delta = 0.1
 				eventBus.publish(MOVERIGHT, mouse.x < x - delta)
 				eventBus.publish(MOVELEFT, mouse.x > x + delta)
