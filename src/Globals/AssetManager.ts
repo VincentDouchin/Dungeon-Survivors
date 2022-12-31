@@ -7,7 +7,8 @@ import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import Tile from '../Utils/Tile'
 import GUISource from './../../assets/GUI.png'
 import GUIData from './../../assets/GUI.json'
-
+import iconsSource from './../../assets/icons.png'
+import iconsData from './../../assets/icons.json'
 const loadImage = async (source: string) => {
 	const img = new Image()
 	img.src = source
@@ -22,14 +23,16 @@ const normalsImage = await loadImage(normalsSource)
 const UI = await loadImage(GUISource)
 const hurtImage = await loadImage(hurtSource)
 const outlineImage = await loadImage(outlineSource)
-const UIImages = GUIData.meta.slices.reduce((acc, slice) => {
+const iconsImage = await loadImage(iconsSource)
+const sliceTileset = (data: any, img: HTMLImageElement) => data.meta.slices.reduce((acc: any, slice: any) => {
 
 	const { w, h, x, y }: Record<string, number> = slice.keys[0].bounds
 	const buffer = getBuffer(w, h)
-	buffer.drawImage(UI, x, y, w, h, 0, 0, w, h)
+	buffer.drawImage(img, x, y, w, h, 0, 0, w, h)
 	return { ...acc, [slice.name]: new Tile({ buffer }) }
 }, {})
-
+const UIImages = sliceTileset(GUIData, UI)
+const icons = sliceTileset(iconsData, iconsImage)
 const tiles = tilesList
 	.split('\n')
 	.map((tile: string) => tile.split(' '))
@@ -61,5 +64,6 @@ const tiles = tilesList
 const AssetManager = new class {
 	tiles = tiles as Record<tileName, Tile>
 	UI = UIImages as Record<string, Tile>
+	icons = icons as Record<string, Tile>
 }
 export default AssetManager
