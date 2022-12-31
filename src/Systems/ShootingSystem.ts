@@ -37,12 +37,9 @@ class ShootingSystem extends System {
 			for (let projectile of entity.children) {
 				const projectileBody = projectile.getComponent(BodyComponent)
 				const projectileRotation = projectile.getComponent(RotationComponent)
-				// debugger
 				const x = -Math.cos(projectileRotation.rotation) * projectileBody.moveForce
 				const y = -Math.sin(projectileRotation.rotation) * projectileBody.moveForce
-				// if (y == 0) debugger
 				projectileBody.body?.applyImpulse(new Vector2(x, y), true)
-
 			}
 		})
 	}
