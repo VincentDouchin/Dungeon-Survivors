@@ -27,7 +27,6 @@ class BodyCreationSystem extends System {
 
 			if (joint && !joint?.jointed && body.body && joint.parentId) {
 				const ownerBody = ECS.getEntityById(joint.parentId).getComponent(BodyComponent)
-
 				if (!ownerBody.body) return
 				const getParams = () => {
 					switch (joint.type) {
@@ -42,16 +41,9 @@ class BodyCreationSystem extends System {
 						}
 					}
 				}
-
-				// // return joint
-				// const params = joint.type == 'revolute' 
-				// 	?JointData.revolute({ x: 0.0, y: 0.0 }, { x: 0, y: 0 })
-				// 	:JointData.fixed
 				world.createImpulseJoint(getParams(), ownerBody.body, body.body, true)
 				joint.jointed = true
 			}
-
-
 		})
 	}
 }
