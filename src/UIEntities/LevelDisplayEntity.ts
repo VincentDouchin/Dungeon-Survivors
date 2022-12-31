@@ -12,8 +12,8 @@ const LevelDisplayEntity = () => {
 	level.addComponent(new UIPosition({ x: -1, y: -1 }, { x: -1, y: -1 }))
 	level.addComponent(new MeshComponent(AssetManager.UI.box, { scale: 1.5 }))
 	const text = level.addComponent(new TextComponent(String(State.level), { size: 32 }))
-	ECS.eventBus.subscribe(ECSEVENTS.XP, () => {
-		text.setText(String(State.level))
+	ECS.eventBus.subscribe(ECSEVENTS.LEVELUP, (level: number) => {
+		text.setText(String(level))
 	})
 	return level
 }
