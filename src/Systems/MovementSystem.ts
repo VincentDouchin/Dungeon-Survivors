@@ -5,6 +5,7 @@ import CameraTargetComponent from "../Components/CameraTargetComponent";
 import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
+import SkillsComponent from "../Components/SkillsComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
 import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { ECS, Entity, System } from "../Globals/ECS";
@@ -21,6 +22,7 @@ class MovementSystem extends System {
 			const animation = entity.getComponent(AnimationComponent)
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			const rotation = entity.getComponent(RotationComponent)
+			const skills = entity.getComponent(SkillsComponent)
 			if (body) {
 
 				if (playerController?.enabled) {
@@ -50,7 +52,7 @@ class MovementSystem extends System {
 					position.y = body.body.translation().y
 					if (rotation) {
 						if (rotation.angVel) {
-							body.body.setAngvel(rotation.angVel, true)
+							body.body.setAngvel(rotation.angVel + (skills?.angVel ?? 0), true)
 						}
 						rotation.rotation = body.body.rotation()
 					}

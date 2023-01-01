@@ -4,5 +4,6 @@ const ECSEVENTS = {
 	CAMERAMOVE: 'cemaraMove',
 	XPPERCENT: 'xpPercent',
 	LEVELUP: 'levelUP',
+	SKILL: 'skill'
 }
 export default ECSEVENTS

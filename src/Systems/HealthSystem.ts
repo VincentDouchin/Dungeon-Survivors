@@ -3,6 +3,9 @@ import BodyComponent from "../Components/BodyComponent";
 import DamageComponent from "../Components/DamageComponent";
 import HealthComponent from "../Components/HealthComponent";
 import MeshComponent from "../Components/MeshComponent";
+import PositionComponent from "../Components/PositionComponent";
+import SkillsComponent from "../Components/SkillsComponent";
+import TextComponent from "../Components/TextComponent";
 import AssetManager from "../Globals/AssetManager";
 import Coroutines from "../Globals/Coroutines";
 import { Entity, System } from "../Globals/ECS";
@@ -33,9 +36,20 @@ class HealthSystem extends System {
 			}
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
+
 					const damage = otherEntity.getComponent(DamageComponent)
+					const position = entity.getComponent(PositionComponent)
 					if (damage.target.includes(health.type)) {
-						health.updateHealth(-damage.amount)
+						const getSkill = (entity: Entity): SkillsComponent => entity.getComponent(SkillsComponent) ?? (entity.parent ? getSkill(entity.parent) : null)
+						const skill = getSkill(otherEntity)
+
+						const damageAmount = skill ? skill.calculateDamage(damage.amount) : damage.amount
+						health.updateHealth(-damageAmount)
+						const damageText = new Entity()
+
+						damageText.addComponent(new PositionComponent(position.x, position.y))
+						damageText.addComponent(new MeshComponent(AssetManager.UI.empty))
+						damageText.addComponent(new TextComponent(String(damageAmount * -1), { size: 8, color: skill?.crit ? 0xff0000 : 0xffffff }))
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (animation && damage.amount > 0) {
@@ -45,6 +59,7 @@ class HealthSystem extends System {
 						Coroutines.add(function* () {
 							yield* waitFor(20)
 							health.canTakeDamage = true
+							damageText.destroy()
 							if (animation) {
 								mesh.modifier = 'buffer'
 

@@ -49,3 +49,8 @@ interface HeroDefinition {
 	tiles: Record<string, Tile>
 }
 type WaveDefinition = Array<EnemyType, number, number>
+interface Skill {
+	icon: Tile
+	name: string
+	modifier: (skill: SkillsComponent) => void
+}
