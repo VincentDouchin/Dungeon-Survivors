@@ -13,7 +13,7 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
 import WeaponEntity from "./WeaponEntity"
 
-const PlayerEntity = (hero: HeroDefinition, main: Entity | false, weapon: WeaponDefinition) => {
+const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Entity,) => {
 	const player = new Entity()
 
 	player.addComponent(new MeshComponent(hero.tiles.idle))
@@ -22,7 +22,9 @@ const PlayerEntity = (hero: HeroDefinition, main: Entity | false, weapon: Weapon
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (main) {
 		player.addComponent(new TargeterComponent(main.id, 50))
-
+	} else {
+		player.addComponent(new PlayerControllerComponent())
+		player.addComponent(new CameraTargetComponent())
 	}
 	player.addComponent(new BodyComponent(
 		{ moveForce: 100 },
@@ -34,10 +36,7 @@ const PlayerEntity = (hero: HeroDefinition, main: Entity | false, weapon: Weapon
 	))
 	player.addComponent(new PositionComponent(0, 0))
 
-	if (!main) {
-		player.addComponent(new PlayerControllerComponent())
-		player.addComponent(new CameraTargetComponent())
-	}
+
 	player.addComponent(new XPPickerComponent())
 	player.addChildren(WeaponEntity(weapon, player))
 	return player

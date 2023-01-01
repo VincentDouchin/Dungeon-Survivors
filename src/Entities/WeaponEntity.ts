@@ -15,7 +15,6 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 	const weapon = new Entity()
 	const parentPosition = parent.getComponent(PositionComponent)
 	const parentMesh = parent.getComponent(MeshComponent)
-
 	const tile = weaponDefinition.tile
 	for (let behavior of weaponDefinition.behaviors) {
 		const component = {
