@@ -22,16 +22,22 @@ import XPPickupSystem from "../Systems/XPPickupSystem"
 import RunUIEntity from "../UIEntities/UIRunEntity"
 import { PAUSE } from "../Constants/InputsNames"
 import Engine from "../Globals/Engine"
-import XPStoreComponent from "../Components/XPStoreComponent"
+import StoreComponent from "../Components/StoreComponent"
+import SkillsComponent from "../Components/SkillsComponent"
 
 class Run implements GameState {
 	constructor() {
-		const knight = PlayerEntity(HEROS.wizardMale, false, WEAPONS.staff)
-		PlayerEntity(HEROS.elfMale, knight, WEAPONS.bow)
+		const player = new Entity()
+		player.addComponent(new SkillsComponent())
+		const knight = player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
+		player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
+
 		BackgroundEntity()
 		RunUIEntity()
 		const saveEntity = new Entity()
-		saveEntity.addComponent(new XPStoreComponent())
+		saveEntity.addComponent(new StoreComponent())
+
+
 
 		startWave(
 			[Enemies.goblin, 20, 5],
