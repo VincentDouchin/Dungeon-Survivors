@@ -5,9 +5,9 @@ class TextComponent extends Component {
 	previousText: string = ''
 	text: string
 	mesh: Text
-	constructor(text: string, options?: { size?: number }) {
+	constructor(text: string, options?: { size?: number, color?: number }) {
 		super()
-		const newOptions = Object.assign({ size: 16 }, options)
+		const newOptions = Object.assign({ size: 16, color: 0xffffff }, options)
 		this.text = text
 		this.previousText = text
 		this.mesh = new Text()
@@ -16,7 +16,8 @@ class TextComponent extends Component {
 		this.mesh.font = '../../assets/fonts/m5x7.ttf'
 		this.mesh.anchorY = 'middle'
 		this.mesh.anchorX = 'center'
-		this.mesh.color = 0xffffff
+		this.mesh.color = newOptions.color
+		this.mesh.renderOrder = 10
 
 
 	}
