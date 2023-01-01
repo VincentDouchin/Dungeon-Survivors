@@ -23,12 +23,9 @@ class RenderingSystem extends System {
 
 				const parentWidth = parentMesh ? parentMesh?.width / 2 : UICamera.right
 				const parentHeight = parentMesh ? parentMesh?.height / 2 : UICamera.bottom
-
-				mesh.mesh.position.set(
-					uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x,
-					uiPosition.relativePosition.y * parentHeight + mesh.height / 2 * uiPosition.center.y,
-					0
-				)
+				const x = uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x
+				const y = uiPosition.relativePosition.y * parentHeight + mesh.height / 2 * uiPosition.center.y
+				mesh.mesh.position.set(x, y, 0)
 				mesh.renderOrder = 1
 
 
@@ -36,13 +33,8 @@ class RenderingSystem extends System {
 					const destination = parentMesh?.mesh ?? UIScene
 					destination.add(mesh.mesh)
 				}
-				if (text && mesh) {
-					mesh.mesh.add(text.mesh)
-					text.mesh.renderOrder = mesh.renderOrder + 1
-				}
 
 			}
-
 			if (mesh && position) {
 
 				if (!mesh.mesh.parent) {
@@ -50,13 +42,15 @@ class RenderingSystem extends System {
 				}
 				mesh.mesh.position.set(position.x, position.y, 0)
 			}
+			if (mesh && mesh.mesh.parent && text) {
+				mesh.mesh.add(text.mesh)
+				text.mesh.renderOrder = mesh.renderOrder + 1
+
+			}
 			if (rotation) {
 				mesh.mesh.rotation.z = rotation.rotation + Math.PI / 2
 			}
-
-
 			mesh.mesh.renderOrder = mesh.renderOrder
-			// mesh.mesh.scale.set(mesh.scale, mesh.scale, 1)
 		})
 	}
 }
