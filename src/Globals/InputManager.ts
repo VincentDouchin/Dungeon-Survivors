@@ -1,7 +1,7 @@
 
 import { Raycaster } from "three";
 import EventBus from "../Utils/EventBus";
-import { UICamera, UIScene } from "./Initialize";
+// import { UICamera, UIScene } from "./Initialize";
 
 class Input {
 	active = false
@@ -27,34 +27,34 @@ class InputManager {
 				this.inputs.get(inputName)!.active = state
 			})
 		})
-		const detectPointerEvent = (eventNames: Array<'mousedown' | 'mouseup' | 'mousemove' | 'touchstart' | 'touchend' | 'touchmove'>, state: 'down' | 'up' | 'move') => {
-			eventNames.forEach(eventName => {
-				domElement.addEventListener(eventName, (event: MouseEvent | TouchEvent) => {
-					const target = event.target as HTMLCanvasElement
-					const bounds = domElement.getBoundingClientRect()
-					const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
-					const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
-					const mouse = {
-						x: ((clientX - bounds.left) / target.clientWidth) * 2 - 1,
-						y: - ((clientY - bounds.top) / target.clientHeight) * 2 + 1,
-						clientX,
-						clientY
-					}
-					const raycaster = new Raycaster()
-					raycaster.setFromCamera(mouse, UICamera);
-					const intersects = raycaster.intersectObjects(UIScene.children, true);
-					this.eventBus.publish(state, { intersects: intersects.map(intersect => intersect.object.id), ...mouse })
-				})
+		// const detectPointerEvent = (eventNames: Array<'mousedown' | 'mouseup' | 'mousemove' | 'touchstart' | 'touchend' | 'touchmove'>, state: 'down' | 'up' | 'move') => {
+		// 	eventNames.forEach(eventName => {
+		// 		domElement.addEventListener(eventName, (event: MouseEvent | TouchEvent) => {
+		// 			const target = event.target as HTMLCanvasElement
+		// 			const bounds = domElement.getBoundingClientRect()
+		// 			const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
+		// 			const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
+		// 			const mouse = {
+		// 				x: ((clientX - bounds.left) / target.clientWidth) * 2 - 1,
+		// 				y: - ((clientY - bounds.top) / target.clientHeight) * 2 + 1,
+		// 				clientX,
+		// 				clientY
+		// 			}
+		// 			const raycaster = new Raycaster()
+		// 			raycaster.setFromCamera(mouse, UICamera);
+		// 			const intersects = raycaster.intersectObjects(UIScene.children, true);
+		// 			this.eventBus.publish(state, { intersects: intersects.map(intersect => intersect.object.id), ...mouse })
+		// 		})
 
-			}, false)
-		}
-
-
+		// 	}, false)
+		// }
 
 
-		detectPointerEvent(['mousedown', 'touchstart'], 'down')
-		detectPointerEvent(['mouseup', 'touchend'], 'up')
-		detectPointerEvent(['mousemove', 'touchmove'], 'move')
+
+
+		// detectPointerEvent(['mousedown', 'touchstart'], 'down')
+		// detectPointerEvent(['mouseup', 'touchend'], 'up')
+		// detectPointerEvent(['mousemove', 'touchmove'], 'move')
 
 
 	}

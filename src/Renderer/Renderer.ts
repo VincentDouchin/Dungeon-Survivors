@@ -51,33 +51,29 @@ class Renderer {
 
 		return [fbo!, texture!]
 	}
-	texture(image: HTMLImageElement | HTMLCanvasElement) {
-		const texture = this.gl.createTexture()!
-		this.gl.bindTexture(this.gl.TEXTURE_2D, texture)
-		this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image)
-		this.setupTextureParameters()
-		this.lastTextureIndex++
-		return this.lastTextureIndex - 1
-	}
+
 	getShader(shader: Shader): CompiledShader {
-		if (shader?.uuid) {
-			// console.log('shader exists')
-			return this.shaders.get(shader.uuid)!
-		}
+		const existingShader = this.shaders.get(shader?.uuid)
+		if (existingShader) return existingShader
+		// if (shader?.uuid) {
+		// 	console.log('shader exists')
+		// 	return this.shaders.get(shader.uuid)!
+		// }
 		this.shaders.forEach((compiledShader, uuid) => {
 			if (compiledShader.vert == shader.vert && compiledShader.frag == shader.frag) {
 				shader.uuid = uuid
-				// console.log('shader exists not assigned')
+				console.log('shader exists not assigned')
 				return compiledShader
 			}
 		})
-		// console.log('shader doesn\'t exist')
+		console.log('shader doesn\'t exist')
 		const vert = this.loadShader(shader.vert, this.gl.VERTEX_SHADER)
 		const frag = this.loadShader(shader.frag, this.gl.FRAGMENT_SHADER)
 		const program = this.createProgram([vert, frag])!
 		this.gl.useProgram(program)
 		this.gl.uniform2f(this.gl.getUniformLocation(program, 'resolution'), this.width, this.height)
-		const uuid = window.crypto.randomUUID()
+		// const uuid = window.crypto.randomUUID()
+		const uuid = shader.uuid
 		const compiledProgram = {
 			...shader,
 			program
@@ -99,12 +95,28 @@ class Renderer {
 					this.gl.uniformMatrix3fv(location, false, value)
 				}; break
 				case 'sampler2D': {
-					const textureIndex = this.textureIndex.get(value) ?? this.texture(value)
-					this.gl.uniform1i(location, textureIndex)
+					this.gl.uniform1i(location, value)
 
-				}
+				}; break
 			}
 		})
+	}
+	texture(image: HTMLImageElement | HTMLCanvasElement) {
+		const existingTextureIndex = this.textureIndex.get(image)
+		if (existingTextureIndex) return existingTextureIndex
+		console.log('new ')
+		const texture = this.gl.createTexture()!
+		this.gl.bindTexture(this.gl.TEXTURE_2D, texture)
+		this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image)
+		this.setupTextureParameters()
+
+		this.lastTextureIndex++
+		this.gl.activeTexture(this.gl.TEXTURE0 + this.lastTextureIndex)
+		this.gl.bindTexture(this.gl.TEXTURE_2D, texture)
+		this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, true)
+		this.textureIndex.set(image, this.lastTextureIndex)
+
+		return this.lastTextureIndex
 	}
 	loadShader(shaderSource: string, shaderType: number) {
 		const shader = this.gl.createShader(shaderType)!
@@ -167,11 +179,16 @@ class Renderer {
 		scene.sprites.forEach(sprite => {
 			sprite.shaderPasses.forEach(shaderPass => {
 
-				const shader = shaderPass(sprite)
+				const shader = shaderPass(this, sprite)
 				const compiledShader = this.getShader(shader)
 				this.gl.useProgram(compiledShader.program)
 				this.setUniforms(compiledShader)
-				this.gl.viewport(sprite.position.x + this.width / 2 - sprite.width / 2, sprite.position.y + this.height / 2 - sprite.height / 2, sprite.width, sprite.height)
+				this.gl.viewport(
+					sprite.position.x + this.width / 2 - sprite.width / 2,
+					sprite.position.y + this.height / 2 - sprite.height / 2,
+					sprite.width * 10,
+					sprite.height * 10
+				)
 				this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 6)
 			})
 		})

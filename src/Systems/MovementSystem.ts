@@ -9,7 +9,7 @@ import SkillsComponent from "../Components/SkillsComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
 import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { ECS, Entity, System } from "../Globals/ECS";
-import { camera, inputManager } from "../Globals/Initialize";
+import { inputManager } from "../Globals/Initialize";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -39,17 +39,21 @@ class MovementSystem extends System {
 						body.velocity.x = 1
 					}
 				}
-				if (animation) {
-					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
-					animation.state = body.velocity.x + body.velocity.y > (body.moveForce * 0.5) ? 'run' : 'idle'
-				}
+				// if (animation) {
+				// 	if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
+				// 	animation.state = body.velocity.x + body.velocity.y > (body.moveForce * 0.5) ? 'run' : 'idle'
+				// }
 
 				if (body.body) {
+					// debugger
 					body.body.setLinvel({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
+					// body.body.setLinvel({ x: 0, y: 0 }, true)
 					body.velocity.x = 0
 					body.velocity.y = 0
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
+					position.x += body.velocity.x
+					position.y += body.velocity.y
 					if (rotation) {
 						if (rotation.angVel) {
 							body.body.setAngvel(rotation.angVel + (skills?.angVel ?? 0), true)
@@ -59,9 +63,9 @@ class MovementSystem extends System {
 				}
 				if (cameraTarget) {
 					ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
-					camera.position.x = position.x
-					camera.position.y = position.y
-					camera.lookAt(new Vector3(position.x, position.y, 0))
+					// camera.position.x = position.x
+					// camera.position.y = position.y
+					// camera.lookAt(new Vector3(position.x, position.y, 0))
 				}
 			}
 

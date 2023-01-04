@@ -8,7 +8,7 @@ interface Shader {
 	vert: string
 	frag: string
 	uniforms?: Record<string, Uniform>
-	uuid?: string
+	uuid: string
 }
 interface CompiledShader extends Shader {
 

@@ -21,29 +21,29 @@ class BodyCreationSystem extends System {
 				body.body = world.createRigidBody(body.bodyDescription)
 				if (rotation) body.body.setRotation(rotation.rotation, true)
 			}
-			if (!body.colliders.length && body.body) {
-				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, body.body!))
-			}
+			// if (!body.colliders.length && body.body) {
+			// 	body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, body.body!))
+			// }
 
-			if (joint && !joint?.jointed && body.body && joint.parentId) {
-				const ownerBody = ECS.getEntityById(joint.parentId).getComponent(BodyComponent)
-				if (!ownerBody.body) return
-				const getParams = () => {
-					switch (joint.type) {
-						case 'revolute': {
-							return JointData.revolute({ x: 0.0, y: 0.0 }, { x: joint.distance, y: 0 })
-						}; break
-						case 'prismatic': {
-							const params = JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: 0.0 }, { x: 1.0, y: 1.0 })
-							params.limitsEnabled = true
-							params.limits = [30, 60]
-							return params
-						}
-					}
-				}
-				world.createImpulseJoint(getParams(), ownerBody.body, body.body, true)
-				joint.jointed = true
-			}
+			// if (joint && !joint?.jointed && body.body && joint.parentId) {
+			// 	const ownerBody = ECS.getEntityById(joint.parentId).getComponent(BodyComponent)
+			// 	if (!ownerBody.body) return
+			// 	const getParams = () => {
+			// 		switch (joint.type) {
+			// 			case 'revolute': {
+			// 				return JointData.revolute({ x: 0.0, y: 0.0 }, { x: joint.distance, y: 0 })
+			// 			}; break
+			// 			case 'prismatic': {
+			// 				const params = JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: 0.0 }, { x: 1.0, y: 1.0 })
+			// 				params.limitsEnabled = true
+			// 				params.limits = [30, 60]
+			// 				return params
+			// 			}
+			// 		}
+			// 	}
+			// 	world.createImpulseJoint(getParams(), ownerBody.body, body.body, true)
+			// 	joint.jointed = true
+			// }
 		})
 	}
 }

@@ -30,24 +30,24 @@ class Run implements GameState {
 		const player = new Entity()
 		player.addComponent(new SkillsComponent())
 		const knight = player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
-		player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
+		// player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
 
-		BackgroundEntity()
-		RunUIEntity()
+		// BackgroundEntity()
+		// RunUIEntity()
 		const saveEntity = new Entity()
 		saveEntity.addComponent(new StoreComponent())
 
 
 
-		startWave(
-			[Enemies.goblin, 20, 5],
-			[Enemies.orc, 15, 5],
-			[Enemies.orcShaman, 10, 4],
-			[Enemies.orcMasked, 10, 3],
-			[Enemies.zombieBig, 1, 1]
-		)
-		PotionEntity({ x: 100, y: 100 })
-		SpikeEntity({ x: 30, y: 19 })
+		// startWave(
+		// 	[Enemies.goblin, 20, 5],
+		// 	[Enemies.orc, 15, 5],
+		// 	[Enemies.orcShaman, 10, 4],
+		// 	[Enemies.orcMasked, 10, 3],
+		// 	[Enemies.zombieBig, 1, 1]
+		// )
+		// PotionEntity({ x: 100, y: 100 })
+		// SpikeEntity({ x: 30, y: 19 })
 	}
 
 
@@ -67,14 +67,14 @@ class Run implements GameState {
 		inputManager.enable('dpad')
 		RenderingSystem.register()
 		MovementSystem.register()
-		AnimationSystem.register()
-		HealthSystem.register()
+		// AnimationSystem.register()
+		// HealthSystem.register()
 		BodyCreationSystem.register()
-		XPPickupSystem.register()
-		LightingSystem.register()
-		ShootingSystem.register()
-		TargetingSystem.register()
-		Coroutines.resume()
+		// XPPickupSystem.register()
+		// LightingSystem.register()
+		// ShootingSystem.register()
+		// TargetingSystem.register()
+		// Coroutines.resume()
 	}
 	unset() {
 		inputManager.disable('dpad')
