@@ -22,7 +22,7 @@ class AnimationComponent extends Component {
 		this.currentState = state
 	}
 	get frames() {
-		return this.tiles[this.currentState].frames
+		return this.tile.frames
 	}
 
 	get tile() {

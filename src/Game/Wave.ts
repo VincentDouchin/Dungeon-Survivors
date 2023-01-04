@@ -1,21 +1,17 @@
-
-import AIControllerComponent from "../Components/AIControllerComponent";
-import PositionComponent from "../Components/PositionComponent";
 import EnemyEntity from "../Entities/EnemyEntity";
 import Coroutines from "../Globals/Coroutines";
-import { Entity } from "../Globals/ECS";
-const spawnEnemies = (player: Entity, enemyType: EnemyType, nb: number) => {
+import { camera } from "../Globals/Initialize";
+const spawnEnemies = (enemyType: EnemyType, nb: number) => {
+
 	for (let i = 0; i < nb; i++) {
-		const distance = Math.random() * 200 + 100
 		const angle = Math.random() * Math.PI * 2
-		const x = Math.cos(angle) * distance
-		const y = Math.sin(angle) * distance
-		const enemy = EnemyEntity(enemyType)
-		enemy.addComponent(new PositionComponent(x, y))
-		enemy.addComponent(new AIControllerComponent(player))
+		const x = (Math.cos(angle) * camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+		const y = Math.sin(angle) * camera.top + camera.position.y * ((Math.random() * 1.2) + 1)
+		EnemyEntity(enemyType, { x, y })
+
 	}
 }
-const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDefinition) {
+const runWave = function* ([enemyType, enemies, nb]: WaveDefinition) {
 
 
 
@@ -25,7 +21,7 @@ const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDef
 	while (counter < nb) {
 
 		if (timer === 0) {
-			spawnEnemies(player, enemyType, enemies)
+			spawnEnemies(enemyType, enemies)
 			counter++
 		}
 		timer = (timer + 1) % 300
@@ -34,10 +30,10 @@ const runWave = (player: Entity) => function* ([enemyType, enemies, nb]: WaveDef
 	}
 	yield
 }
-const startWave = (player: Entity) => (...waves: WaveDefinition[]) => {
+const startWave = (...waves: WaveDefinition[]) => {
 	Coroutines.add(function* () {
 		for (let wave of waves) {
-			yield* runWave(player)(wave)
+			yield* runWave(wave)
 		}
 
 

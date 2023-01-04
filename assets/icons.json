@@ -1,0 +1,32 @@
+{ "frames": {
+   "icons.ase": {
+    "frame": { "x": 0, "y": 0, "w": 256, "h": 1024 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 1024 },
+    "sourceSize": { "w": 256, "h": 1024 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 256, "h": 1024 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "turnSpeed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 176, "w": 16, "h": 16 } }] },
+   { "name": "damage", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 176, "w": 16, "h": 16 } }] },
+   { "name": "critdamage", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 176, "w": 16, "h": 16 } }] },
+   { "name": "poison", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 207, "w": 16, "h": 17 } }] },
+   { "name": "slow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 224, "w": 16, "h": 16 } }] },
+   { "name": "curse", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 224, "w": 16, "h": 16 } }] },
+   { "name": "bleed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] }
+  ]
+ }
+}

@@ -1,22 +1,20 @@
 
-import { World } from "@dimforge/rapier2d-compat"
-import { Color, OrthographicCamera, Scene, WebGLRenderer, } from "three"
-import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
+import RAPIER, { World } from "@dimforge/rapier2d-compat"
+import { AmbientLight, Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE } from "../Constants/InputsNames"
 import KeyboardController from "../InputControllers/KeyboardController"
+import TouchController from "../InputControllers/TouchController"
 import InputManager from "./InputManager"
-import RAPIER from "@dimforge/rapier2d-compat"
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
-import LightShader from "../Shaders/LigthShader"
 
+//! World 
 await RAPIER.init()
+const world = new World({ x: 0, y: 0 })
 
 //! Camera
 const createCamera = () => {
 	const aspect = window.innerWidth / window.innerHeight
 	const frustumSize = 300
-	const camera = new OrthographicCamera(frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000)
+	const camera = new OrthographicCamera(frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000000)
 	window.addEventListener('resize', () => {
 		const aspect = window.innerWidth / window.innerHeight;
 		camera.left = - frustumSize * aspect / 2
@@ -33,7 +31,6 @@ const createCamera = () => {
 //! Renderer
 const createRenderer = () => {
 	const renderer = new WebGLRenderer({ alpha: true })
-
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
@@ -44,48 +41,38 @@ const createRenderer = () => {
 }
 const renderer = createRenderer()
 
+
 document.body.appendChild(renderer.domElement)
-
-
-//! UI
-
-const UICamera = createCamera()
+//! Scenes
 const UIScene = new Scene()
-const UIcomposer = new EffectComposer(renderer)
-const UIPass = new RenderPass(UIScene, UICamera)
-UIPass.clear = false
-UIcomposer.addPass(UIPass)
-
-
-//! Light
-const lightScene = new Scene()
-const camera = createCamera()
-lightScene.background = new Color(0xFFFFFF)
-const lightComposer = new EffectComposer(renderer)
-lightComposer.addPass(new RenderPass(lightScene, camera))
-lightComposer.renderToScreen = false
-
-//! Main
 const scene = new Scene()
-const composer = new EffectComposer(renderer)
-composer.addPass(new RenderPass(scene, camera))
-const lightPass = new ShaderPass(LightShader(composer, lightComposer))
-composer.addPass(lightPass)
+scene.background = new Color(0x444444)
+const backgroundScene = new Scene()
 
+//! Cameras
+const UICamera = createCamera()
+const camera = createCamera()
 
+//! Lights
+const UILight = new AmbientLight(0xffffff)
+UIScene.add(UILight)
+const light = new AmbientLight(new Color('hsl(0,0%,4%)'))
+
+scene.add(light)
 
 //! Render
 const render = () => {
-	lightComposer.render()
-	composer.render()
-	UIcomposer.render()
+	renderer.render(scene, camera)
+	renderer.render(UIScene, UICamera)
 }
 
-
-//! Resize
-
-
-const inputManager = new InputManager(MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT)
+//! Inputs
+const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, INTERACT, PAUSE])
 inputManager.registerControllers(KeyboardController)
-const world = new World({ x: 0, y: 0 })
-export { render, scene, inputManager, world, camera, UIScene, UICamera, lightScene, renderer }
+//@ts-ignore
+if (navigator.userAgentData.mobile) {
+	inputManager.registerControllers(TouchController)
+}
+
+export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer }
+

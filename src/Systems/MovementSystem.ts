@@ -1,16 +1,15 @@
-import { ECS, Entity, System } from "../Globals/ECS";
-import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
-import { Vector2 } from "@dimforge/rapier2d-compat";
-import { camera, inputManager } from "../Globals/Initialize";
-import PositionComponent from '../Components/PositionComponent'
-import PlayerControllerComponent from '../Components/PlayerControllerComponent'
-import BodyComponent from "../Components/BodyComponent";
-import AIControllerComponent from "../Components/AIControllerComponent";
-import AnimationComponent from "../Components/AnimationComponent";
-import WeaponControllerComponent from "../Components/WeaponControllerComponent";
-import CameraTargetComponent from "../Components/CameraTargetComponent";
 import { Vector3 } from "three";
+import AnimationComponent from "../Components/AnimationComponent";
+import BodyComponent from "../Components/BodyComponent";
+import CameraTargetComponent from "../Components/CameraTargetComponent";
+import PlayerControllerComponent from '../Components/PlayerControllerComponent';
+import PositionComponent from '../Components/PositionComponent';
+import RotationComponent from "../Components/RotationComponent";
+import SkillsComponent from "../Components/SkillsComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
+import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
+import { ECS, Entity, System } from "../Globals/ECS";
+import { camera, inputManager } from "../Globals/Initialize";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -20,57 +19,49 @@ class MovementSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			const playerController = entity.getComponent(PlayerControllerComponent)
 			const body = entity.getComponent(BodyComponent)
-			const aiController = entity.getComponent(AIControllerComponent)
 			const animation = entity.getComponent(AnimationComponent)
-			const weaponController = entity.getComponent(WeaponControllerComponent)
 			const cameraTarget = entity.getComponent(CameraTargetComponent)
+			const rotation = entity.getComponent(RotationComponent)
+			const skills = entity.getComponent(SkillsComponent)
 			if (body) {
-				const impulse = new Vector2(0, 0)
-				if (aiController?.enabled && aiController.targetId) {
-					const targetPosition = ECS
-						.getEntityById(aiController.targetId)
-						.getComponent(PositionComponent)
-					if (!targetPosition) return
-					impulse.x = ((targetPosition.x - position.x) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.x - position.x))
-					impulse.y = ((targetPosition.y - position.y) > 0 ? 1 : -1) * Math.min(body.moveForce, Math.abs(targetPosition.y - position.y))
 
-
-				}
 				if (playerController?.enabled) {
 					if (inputManager.getInput(MOVEUP)?.active) {
-						impulse.y = body.moveForce
+						body.velocity.y = 1
 					}
 					if (inputManager.getInput(MOVEDOWN)?.active) {
-						impulse.y = -body.moveForce
+						body.velocity.y = -1
 					}
 					if (inputManager.getInput(MOVELEFT)?.active) {
-						impulse.x = -body.moveForce
+						body.velocity.x = -1
 					}
 					if (inputManager.getInput(MOVERIGHT)?.active) {
-						impulse.x = body.moveForce
+						body.velocity.x = 1
 					}
 				}
 				if (animation) {
-					if (impulse.x != 0) animation.flipped = impulse.x < 0
-					animation.state = impulse.x + impulse.y > body.moveForce ? 'run' : 'idle'
+					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
+					animation.state = body.velocity.x + body.velocity.y > (body.moveForce * 0.5) ? 'run' : 'idle'
 				}
 
 				if (body.body) {
-					body.body.setLinvel(impulse, true)
-
+					body.body.setLinvel({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
+					body.velocity.x = 0
+					body.velocity.y = 0
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
-					if (weaponController?.joint) {
-						body.body.setAngvel(1, true)
-
-
+					if (rotation) {
+						if (rotation.angVel) {
+							body.body.setAngvel(rotation.angVel + (skills?.angVel ?? 0), true)
+						}
+						rotation.rotation = body.body.rotation()
 					}
 				}
 				if (cameraTarget) {
 					ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
 					camera.position.x = position.x
 					camera.position.y = position.y
-					camera.lookAt(new Vector3(position.x, position.y, 200))
+					camera.lookAt(new Vector3(position.x, position.y, 0))
 				}
 			}
 

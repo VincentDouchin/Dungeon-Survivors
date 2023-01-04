@@ -1,6 +1,8 @@
 interface GameState {
 	update: Function
 	render: Function
+	set: Function
+	unset: Function
 }
 type Constructor<T> = new (...args: any[]) => T;
 
@@ -12,6 +14,7 @@ interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased'
 	moveForce?: number
 	mass?: number
+	lock?: boolean
 }
 interface colliderOptions {
 	contact: boolean
@@ -27,4 +30,27 @@ interface EnemyType {
 	tiles: Record<string, Tile>
 	health: number
 }
+interface WeaponDefinition {
+	tile: Tile
+	damage: number
+	behaviors: string[],
+	projectile?: ProjectileDefinition
+	spread?: number
+	projectilesNb?: number
+	range?: number
+}
+
+interface ProjectileDefinition {
+	tile: Tile
+	speed: number
+	damage: number
+}
+interface HeroDefinition {
+	tiles: Record<string, Tile>
+}
 type WaveDefinition = Array<EnemyType, number, number>
+interface Skill {
+	icon: Tile
+	name: string
+	modifier: (skill: SkillsComponent) => void
+}

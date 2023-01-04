@@ -8,6 +8,7 @@ class BodyComponent extends Component {
 	colliders: Collider[] = []
 	colliderDescriptions: ColliderDesc[]
 	moveForce: number
+	velocity: { x: number, y: number } = { x: 0, y: 0 }
 	constructor(bodyOptions: bodyOptions, colliderOptions: colliderOptions[]) {
 		super()
 
@@ -18,7 +19,7 @@ class BodyComponent extends Component {
 				.setAdditionalMass(1)
 				.setCanSleep(false)
 				.setCcdEnabled(true)
-				.lockRotations()
+		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
 
 		//!Collider
 		this.colliderDescriptions = colliderOptions.map(colliderOption => {

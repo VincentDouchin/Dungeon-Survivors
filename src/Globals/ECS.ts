@@ -1,6 +1,5 @@
 import ECSEVENTS from "../Constants/ECSEvents"
 import EventBus from "../Utils/EventBus"
-
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
 	systems: System[] = []
@@ -12,6 +11,11 @@ const ECS = new class {
 	getEntityById(id: string) {
 		return this.entities.get(id)!
 	}
+	getEntitiesAndComponents<T>(componentType: Constructor<T>): Array<[string, T]> {
+		const components = this.components.get(componentType.name)
+		if (!components) return []
+		return Array.from(components.entries()) as Array<[string, T]>
+	}
 	registerSystem(system: Constructor<System>) {
 		this.systems.push(new system)
 	}
@@ -21,6 +25,9 @@ const ECS = new class {
 			const entities: Entity[] = entitiesID.map(id => this.getEntityById(id))
 			system.update(entities)
 		})
+	}
+	unRegisterSystems() {
+		this.systems = []
 	}
 
 }
@@ -56,36 +63,40 @@ class Component {
 }
 
 class Entity {
+	parentId: string | null = null
 	id: string
 	childrenIds: string[] = []
 	get children() {
-		return this.childrenIds.map(ECS.getEntityById)
+		return this.childrenIds.map(childId => ECS.getEntityById(childId))
 	}
-	addChildren(...children: Entity[]) {
-		children.forEach(child => {
-			this.childrenIds.push(child.id)
-			ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
-				this.removeChildren(entity)
-			})
+	addChildren(child: Entity) {
+		child.parentId = this.id
+		this.childrenIds.push(child.id)
+		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+			this.removeChildren(entity)
 		})
+		return child
 	}
-	removeChildren(...children: Entity[]) {
-		children.forEach((child) => {
-			if (this.childrenIds.includes(child.id)) {
-				this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
-			}
-		})
+	removeChildren(child: Entity) {
+
+		if (this.childrenIds.includes(child.id)) {
+			this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
+		}
+
 	}
 
 	constructor() {
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
 	}
-	addComponent(...components: Component[]) {
-		components.forEach(component => {
-			if (component.bind) component.bind(this.id)
-			ECS.components.get(component.constructor.name)?.set(this.id, component)
-		})
+	addComponent<T extends Component>(component: T) {
+		if (component.bind) component.bind(this.id)
+		ECS.components.get(component.constructor.name)?.set(this.id, component)
+		return component as T
+	}
+	get parent(): null | Entity {
+		if (!this.parentId) return null
+		return ECS.getEntityById(this.parentId)
 	}
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
@@ -98,6 +109,7 @@ class Entity {
 			componentMap.get(this.id)?.destroy()
 			componentMap.delete(this.id)
 		})
+		ECS.entities.delete(this.id)
 	}
 
 }

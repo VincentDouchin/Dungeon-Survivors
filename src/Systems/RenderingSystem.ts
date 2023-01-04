@@ -1,8 +1,8 @@
-import BodyComponent from "../Components/BodyComponent";
 import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
+import RotationComponent from "../Components/RotationComponent";
+import TextComponent from "../Components/TextComponent";
 import UIPosition from "../Components/UIPosition";
-import WeaponControllerComponent from "../Components/WeaponControllerComponent";
 import { Entity, System } from "../Globals/ECS";
 import { scene, UICamera, UIScene } from "../Globals/Initialize";
 
@@ -14,18 +14,25 @@ class RenderingSystem extends System {
 		entities.forEach(entity => {
 			const mesh = entity.getComponent(MeshComponent)
 			const position = entity.getComponent(PositionComponent)
-			const body = entity.getComponent(BodyComponent)
-			const weaponController = entity.getComponent(WeaponControllerComponent)
-
+			const rotation = entity.getComponent(RotationComponent)
+			const text = entity.getComponent(TextComponent)
 			const uiPosition = entity.getComponent(UIPosition)
-			if (mesh && !mesh?.mesh.parent && uiPosition) {
 
-				UIScene.add(mesh.mesh)
-				mesh.mesh.position.set(
-					uiPosition.relativePosition.x * UICamera.right - mesh.width / 2 * uiPosition.center.x,
-					uiPosition.relativePosition.y * UICamera.bottom + mesh.height / 2 * uiPosition.center.y,
-					0
-				)
+			if (uiPosition) {
+				const parentMesh = entity.parent?.getComponent(MeshComponent)
+
+				const parentWidth = parentMesh ? parentMesh?.width / 2 : UICamera.right
+				const parentHeight = parentMesh ? parentMesh?.height / 2 : UICamera.bottom
+				const x = uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x
+				const y = uiPosition.relativePosition.y * parentHeight + mesh.height / 2 * uiPosition.center.y
+				mesh.mesh.position.set(x, y, 0)
+				mesh.renderOrder = 1
+
+
+				if (mesh && !mesh?.mesh.parent) {
+					const destination = parentMesh?.mesh ?? UIScene
+					destination.add(mesh.mesh)
+				}
 
 			}
 			if (mesh && position) {
@@ -35,14 +42,14 @@ class RenderingSystem extends System {
 				}
 				mesh.mesh.position.set(position.x, position.y, 0)
 			}
-			if (weaponController?.owner && body.body) {
-				mesh.mesh.rotation.z = body.body.rotation() + Math.PI / 2
-
+			if (mesh && mesh.mesh.parent && text) {
+				mesh.mesh.add(text.mesh)
+				text.mesh.renderOrder = (mesh.renderOrder ?? 0) + 1
 			}
-
-
+			if (rotation) {
+				mesh.mesh.rotation.z = rotation.rotation + Math.PI / 2
+			}
 			mesh.mesh.renderOrder = mesh.renderOrder
-			// mesh.mesh.scale.set(mesh.scale, mesh.scale, 1)
 		})
 	}
 }

@@ -16,18 +16,17 @@ class AnimationSystem extends System {
 				animation.frameCounter = 0
 				animation.selectedFrame = (animation.selectedFrame + 1) % animation.frames
 			}
+			mesh.texture.repeat.x = (animation.flipped ? -1 : 1) / animation.maxFrames
+			mesh.texture.offset.x = ((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames
 
-			// mesh.texture.repeat.set(1 / animation.maxFrames, 1)
-			// mesh.texture.repeat.set((animation.flipped ? -1 : 1) / animation.maxFrames, 1)
-			mesh.uniforms.uRepeatX.value = (animation.flipped ? -1 : 1) / animation.maxFrames
-			mesh.uniforms.uOffsetX.value = ((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames
-			// mesh.texture.offset.set(((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames, 0)
-			if (animation.currentState != animation.lastState) {
-				mesh.texture.image = animation.tile.buffer.canvas
+			if (animation.currentState != animation.lastState || mesh.modifier != mesh.lastModifer) {
+
+				mesh.texture.image = animation.tile[mesh.modifier]!.canvas
+
+				mesh.lastModifer = mesh.modifier
 				mesh.texture.needsUpdate = true
 				animation.selectedFrame = 0
 			}
-			mesh.uniforms.uTexture.value.needsUpdate = true
 		})
 	}
 }
