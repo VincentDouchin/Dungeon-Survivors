@@ -44,8 +44,7 @@ class RenderingSystem extends System {
 			}
 			if (mesh && mesh.mesh.parent && text) {
 				mesh.mesh.add(text.mesh)
-				text.mesh.renderOrder = mesh.renderOrder + 1
-
+				text.mesh.renderOrder = (mesh.renderOrder ?? 0) + 1
 			}
 			if (rotation) {
 				mesh.mesh.rotation.z = rotation.rotation + Math.PI / 2
