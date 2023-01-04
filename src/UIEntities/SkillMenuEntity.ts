@@ -1,4 +1,5 @@
 import MeshComponent from "../Components/MeshComponent"
+import TextComponent from "../Components/TextComponent"
 import UIPosition from "../Components/UIPosition"
 import ECSEVENTS from "../Constants/ECSEvents"
 import SKILLS from "../Constants/Skills"
@@ -25,6 +26,11 @@ const SkillMenuEntity = () => {
 
 		icon.addComponent(new MeshComponent(skill.icon, { scale: 2 }))
 		icon.addComponent(new UIPosition())
+		const text = new Entity()
+		text.addComponent(new TextComponent(skill.name))
+		text.addComponent(new UIPosition({ x: 0, y: 1 }, { x: 0, y: -1 }))
+		text.addComponent(new MeshComponent(AssetManager.UI.empty))
+		icon.addChildren(text)
 		button.addChildren(icon)
 		skillMenu.addChildren(button)
 		inputManager.eventBus.subscribe('down', ({ intersects }: { intersects: number[] }) => {
