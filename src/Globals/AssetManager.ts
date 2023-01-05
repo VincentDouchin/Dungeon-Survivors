@@ -9,6 +9,8 @@ import GUISource from './../../assets/GUI.png'
 import GUIData from './../../assets/GUI.json'
 import iconsSource from './../../assets/icons.png'
 import iconsData from './../../assets/icons.json'
+import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 const loadImage = async (source: string) => {
 	const img = new Image()
 	img.src = source
@@ -24,25 +26,25 @@ const UI = await loadImage(GUISource)
 const hurtImage = await loadImage(hurtSource)
 const outlineImage = await loadImage(outlineSource)
 const iconsImage = await loadImage(iconsSource)
-const sliceTileset = (data: any, img: HTMLImageElement) => data.meta.slices.reduce((acc: any, slice: any) => {
+const magicImage = await loadImage(MagicSpellsAllSpritesSource)
+const sliceTileset = (data: any, img: HTMLImageElement, fn: (args: any) => any = x => x) => data.meta.slices.reduce((acc: any, slice: any) => {
 
 	const { w, h, x, y }: Record<string, number> = slice.keys[0].bounds
 	const buffer = getBuffer(w, h)
 	buffer.drawImage(img, x, y, w, h, 0, 0, w, h)
-	return { ...acc, [slice.name]: new Tile({ buffer }) }
+	return { ...acc, [slice.name]: new Tile(fn({ buffer })) }
 }, {})
 const UIImages = sliceTileset(GUIData, UI)
 const icons = sliceTileset(iconsData, iconsImage)
+const magic = sliceTileset(MagicSpellsAllSpritesData, magicImage,
+	({ buffer }) => ({ buffer, frames: buffer.canvas.width / 24, width: 24 })
+)
 const tiles = tilesList
 	.split('\n')
 	.map((tile: string) => tile.split(' '))
 	.filter((tileList) => tileList.every(item => item))
 	.reduce((acc, [tileName, top, left, width, height, frames = '1']) => {
 		const totalWidth = parseInt(width) * parseInt(frames)
-		// const buffer = getBuffer(totalWidth, parseInt(height))
-		// const normalMap = getBuffer(totalWidth, parseInt(height))
-		// buffer.drawImage(img, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
-		// normalMap.drawImage(normals, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
 		const [buffer, normalMap, hurt, outline] = [mainImage, normalsImage, hurtImage, outlineImage].map((img) => {
 			const buffer = getBuffer(totalWidth, parseInt(height))
 			buffer.drawImage(img, parseInt(top), parseInt(left), totalWidth, parseInt(height), 0, 0, totalWidth, parseInt(height))
@@ -65,5 +67,6 @@ const AssetManager = new class {
 	tiles = tiles as Record<tileName, Tile>
 	UI = UIImages as Record<string, Tile>
 	icons = icons as Record<string, Tile>
+	magic = magic as Record<string, Tile>
 }
 export default AssetManager
