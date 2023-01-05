@@ -23,6 +23,7 @@ wall_banner_yellow 32 48 16 16
 column_top 80 80 16 16
 column_mid 80 96 16 16
 coulmn_base 80 112 16 16
+column 80 80 16 48
 wall_column_top 96 80 16 16
 wall_column_mid 96 96 16 16
 wall_coulmn_base 96 112 16 16

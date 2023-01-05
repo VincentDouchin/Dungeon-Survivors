@@ -7,7 +7,7 @@ import { ECS, Entity } from "../Globals/ECS"
 import { camera } from "../Globals/Initialize"
 import getBuffer from "../Utils/Buffer"
 import Tile from "../Utils/Tile"
-import BrasierEntity from "./BrasierEntity"
+import ColumnEntity from "./ColumnEntity"
 
 const BackgroundEntity = () => {
 	const background = new Entity()
@@ -40,7 +40,7 @@ const BackgroundEntity = () => {
 	}
 	for (let x = 0; x < width; x += 256) {
 		for (let y = 0; y < height; y += 256) {
-			background.addChildren(BrasierEntity({ x: x - width / 2, y: y - height / 2 }))
+			background.addChildren(ColumnEntity(x - width / 2, y - height / 2))
 		}
 	}
 	const mesh = new MeshComponent(new Tile({ buffer }), { renderOrder: 0 })
