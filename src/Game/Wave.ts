@@ -1,5 +1,5 @@
 import EnemyEntity from "../Entities/EnemyEntity";
-import Coroutines from "../Globals/Coroutines";
+import ParticleEntity from "../Entities/ParticleEntitty";
 import { camera } from "../Globals/Initialize";
 const spawnEnemies = (enemyType: EnemyType, nb: number) => {
 
@@ -7,37 +7,31 @@ const spawnEnemies = (enemyType: EnemyType, nb: number) => {
 		const angle = Math.random() * Math.PI * 2
 		const x = (Math.cos(angle) * camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
 		const y = Math.sin(angle) * camera.top + camera.position.y * ((Math.random() * 1.2) + 1)
-		EnemyEntity(enemyType, { x, y })
+		ParticleEntity(x, y).then(() => {
+			EnemyEntity(enemyType, { x, y })
+		})
 
 	}
 }
-const runWave = function* ([enemyType, enemies, nb]: WaveDefinition) {
+const wave = function* (enemyType: EnemyType, enemiesNb: number, waves: number, delay?: number) {
 
 
 
 	let counter = 0
 	let timer = 0
 
-	while (counter < nb) {
+	while (counter < waves) {
 
 		if (timer === 0) {
-			spawnEnemies(enemyType, enemies)
+			spawnEnemies(enemyType, enemiesNb)
 			counter++
 		}
-		timer = (timer + 1) % 300
+		timer = (timer + 1) % (delay ?? 300)
 		yield
 
 	}
 	yield
 }
-const startWave = (...waves: WaveDefinition[]) => {
-	Coroutines.add(function* () {
-		for (let wave of waves) {
-			yield* runWave(wave)
-		}
 
 
-	})
-}
-
-export default startWave
+export { wave }
