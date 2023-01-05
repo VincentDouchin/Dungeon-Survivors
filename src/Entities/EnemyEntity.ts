@@ -25,7 +25,7 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 40 },
 		[
-			{ width: orc.width, height: orc.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON] }
+			{ width: orc.width, height: orc.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
 		]
 	))
 	return enemy
