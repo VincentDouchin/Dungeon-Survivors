@@ -18,7 +18,7 @@ class TextComponent extends Component {
 		this.mesh.anchorX = newOptions.anchorX
 		this.mesh.color = newOptions.color
 		this.mesh.renderOrder = 10
-		this.mesh.maxWidth = 10
+		if (newOptions.maxWidth) this.mesh.maxWidth = newOptions.maxWidth
 
 	}
 	setText(newText: string) {
