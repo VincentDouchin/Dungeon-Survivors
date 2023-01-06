@@ -41,10 +41,8 @@ class AnimationComponent extends Component {
 		return new Promise<void>(resolve => {
 			Coroutines.add(function* () {
 				while (self.selectedFrame < self.tiles[animation].frames - 1) {
-					console.log(self.selectedFrame, self.tiles[animation].frames)
 					yield
 				}
-				console.log('done')
 				resolve()
 				return
 			})
