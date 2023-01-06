@@ -1,14 +1,14 @@
 
-import { Raycaster } from "three";
+import { Raycaster, Vector3 } from "three";
 import EventBus from "../Utils/EventBus";
-import { UICamera, UIScene } from "./Initialize";
+import { camera, UICamera, UIScene } from "./Initialize";
 
 class Input {
-	active = false
+	active = 0
 	down = false
 	get once() {
-		if (this.active) {
-			this.active = false
+		if (this.active != 0) {
+			this.active = 0
 			return true
 		}
 		return false
@@ -22,8 +22,8 @@ class InputManager {
 	constructor(domElement: HTMLCanvasElement, inputNames: string[]) {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
-			this.eventBus.subscribe(inputName, (state: boolean) => {
-				this.inputs.get(inputName)!.down = state
+			this.eventBus.subscribe(inputName, (state: number) => {
+				this.inputs.get(inputName)!.down = (state == 0)
 				this.inputs.get(inputName)!.active = state
 			})
 		})
@@ -34,12 +34,29 @@ class InputManager {
 					const bounds = domElement.getBoundingClientRect()
 					const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
 					const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
+					const x = ((clientX - bounds.left) / target.clientWidth) * 2 - 1
+					const y = 1 - ((clientY - bounds.top) / target.clientHeight) * 2
 					const mouse = {
-						x: ((clientX - bounds.left) / target.clientWidth) * 2 - 1,
-						y: - ((clientY - bounds.top) / target.clientHeight) * 2 + 1,
-						clientX,
-						clientY
+
+						x,
+						y,
+						clientX: (UICamera.right * x),
+						clientY: (UICamera.top * y),
 					}
+					var vec = new Vector3(); // create once and reuse
+					var pos = new Vector3(); // create once and reuse
+
+					vec.set(
+						(clientX / window.innerWidth) * 2 - 1,
+						- (clientY / window.innerHeight) * 2 + 1,
+						200);
+
+					vec.unproject(camera);
+
+					vec.sub(camera.position).normalize();
+
+					var distance = - camera.position.z / vec.z;
+					pos.copy(camera.position).add(vec.multiplyScalar(distance));
 					const raycaster = new Raycaster()
 					raycaster.setFromCamera(mouse, UICamera);
 					const intersects = raycaster.intersectObjects(UIScene.children, true);

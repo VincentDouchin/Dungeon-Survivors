@@ -7,7 +7,7 @@ import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
 import SkillsComponent from "../Components/SkillsComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
-import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
+import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { ECS, Entity, System } from "../Globals/ECS";
 import { camera, inputManager } from "../Globals/Initialize";
 class MovementSystem extends System {
@@ -26,18 +26,37 @@ class MovementSystem extends System {
 			if (body) {
 
 				if (playerController?.enabled) {
-					if (inputManager.getInput(MOVEUP)?.active) {
-						body.velocity.y = 1
+					const axisX = inputManager.getInput(AXISX)?.active
+					const axisY = inputManager.getInput(AXISY)?.active
+					if (axisX || axisY) {
+						if (axisX && axisX != 0) {
+							body.velocity.x = axisX
+						}
+						if (axisY && axisY != 0) {
+							body.velocity.y = axisY
+						}
+					} else {
+						const vel = { x: 0, y: 0 }
+						if (inputManager.getInput(MOVEUP)?.active) {
+							vel.y = 1
+						} else if (inputManager.getInput(MOVEDOWN)?.active) {
+							vel.y = -1
+						}
+						if (inputManager.getInput(MOVELEFT)?.active) {
+							vel.x = -1
+						} else if (inputManager.getInput(MOVERIGHT)?.active) {
+							vel.x = 1
+						}
+						const max = Math.sqrt(vel.x ** 2 + vel.y ** 2)
+						if (vel.x != 0 || vel.y != 0) {
+							body.velocity.x = vel.x / max
+							body.velocity.y = vel.y / max
+						}
 					}
-					if (inputManager.getInput(MOVEDOWN)?.active) {
-						body.velocity.y = -1
-					}
-					if (inputManager.getInput(MOVELEFT)?.active) {
-						body.velocity.x = -1
-					}
-					if (inputManager.getInput(MOVERIGHT)?.active) {
-						body.velocity.x = 1
-					}
+
+
+
+					console.log(axisX, axisY)
 				}
 				if (animation) {
 					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0

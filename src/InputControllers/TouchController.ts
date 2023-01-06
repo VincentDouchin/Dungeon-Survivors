@@ -1,7 +1,7 @@
 
 import MeshComponent from "../Components/MeshComponent"
 import UIPosition from "../Components/UIPosition"
-import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
+import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import EventBus from "../Utils/EventBus"
@@ -15,48 +15,45 @@ class dpadTouchInput implements TouchInput {
 	constructor(eventBus: EventBus) {
 		this.dpad = new Entity()
 		const dpadMesh = this.dpad.addComponent(new MeshComponent(AssetManager.UI.touchdpad, { scale: 2 }))
-		this.dpad.addComponent(new UIPosition({ x: -0.95, y: 0.95 }, { x: -1, y: 1 }))
+		this.dpad.addComponent(new UIPosition({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
 		const center = new Entity()
 		center.addComponent(new MeshComponent(AssetManager.UI.touchdpadcenter, { scale: 2 }))
-		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }))
+		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }, { x: 0, y: 0 }))
 		this.dpad.addChildren(center)
-		let enbled = false
-		let mouse: { x: null | number, y: null | number, clientX: null | number, clientY: null | number } = { x: null, y: null, clientX: null, clientY: null }
-		eventBus.subscribe('down', ({ x, y, clientX, clientY, intersects }: { x: number, y: number, clientX: number, clientY: number, intersects: number[] }) => {
+		let enabled = false
+		let mouse: { x: null | number, y: null | number, } = { x: null, y: null }
+		eventBus.subscribe('down', ({ x, y, intersects }: TouchCoord) => {
 			if (intersects.includes(dpadMesh.mesh.id)) {
-				enbled = true
+				enabled = true
 				mouse.x = x
 				mouse.y = y
-				mouse.clientX = clientX
-				mouse.clientY = clientY
+
 			}
 		})
 
 
-		eventBus.subscribe('move', ({ x, y }: { x: number, y: number, intersects: number[] }) => {
-			if (enbled && mouse.x && mouse.y) {
-				centerPosition.relativePosition.x = -(mouse.x - x)
-				centerPosition.relativePosition.y = -(mouse.y - y)
-				const delta = 0.1
-				eventBus.publish(MOVERIGHT, mouse.x < x - delta)
-				eventBus.publish(MOVELEFT, mouse.x > x + delta)
-				eventBus.publish(MOVEUP, mouse.y < y - delta)
-				eventBus.publish(MOVEDOWN, mouse.y > y + delta)
-			} else {
-				eventBus.publish(MOVERIGHT, false)
-				eventBus.publish(MOVELEFT, false)
-				eventBus.publish(MOVEUP, false)
-				eventBus.publish(MOVEDOWN, false)
+		eventBus.subscribe('move', ({ clientX, clientY }: TouchCoord) => {
+			if (enabled && mouse.x && mouse.y) {
+				const centerX = (clientX - dpadMesh.mesh.position.x) / (dpadMesh.width / 2)
+				const centerY = (clientY - dpadMesh.mesh.position.y) / (dpadMesh.height / 2)
+				const angle = Math.atan2(centerY, centerX)
+				const maxX = Math.abs(Math.cos(angle))
+				const maxY = Math.abs(Math.sin(angle))
+				const positionX = Math.max(-maxX, Math.min(maxX, centerX))
+				const positionY = Math.max(-maxY, Math.min(maxY, centerY))
+				centerPosition.relativePosition.x = positionX
+				centerPosition.relativePosition.y = positionY
+				eventBus.publish(AXISX, positionX)
+				eventBus.publish(AXISY, positionY)
 			}
 		})
 		eventBus.subscribe('up', () => {
-			enbled = false
+			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
-			eventBus.publish(MOVERIGHT, false)
-			eventBus.publish(MOVELEFT, false)
-			eventBus.publish(MOVEUP, false)
-			eventBus.publish(MOVEDOWN, false)
+			eventBus.publish(AXISX, 0)
+			eventBus.publish(AXISY, 0)
+
 		})
 
 

@@ -54,3 +54,10 @@ interface Skill {
 	name: string
 	modifier: (skill: SkillsComponent) => void
 }
+interface TouchCoord {
+	x: number
+	y: number
+	clientX: number
+	clientY: number
+	intersects: number[]
+}

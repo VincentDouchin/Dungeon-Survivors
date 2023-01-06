@@ -4,4 +4,5 @@ export const MOVEDOWN = 'MoveDown'
 export const MOVELEFT = 'MoveLeft'
 export const MOVERIGHT = 'MoveRight'
 export const PAUSE = 'Escape'
-
+export const AXISX = 'axisX'
+export const AXISY = 'axisY'
