@@ -5,7 +5,7 @@ class SkillsComponent extends Component {
 	angVel = 0
 	damage = 0
 	critDamage = 0.5
-	critChance = 0.5
+	critChance = 0.05
 	crit = false
 	constructor() {
 		super()
