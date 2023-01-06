@@ -17,7 +17,7 @@ const XPBarEntity = () => {
 		updateBar(mesh, bar, full, percent)
 	})
 	xpBar.addComponent(mesh)
-	xpBar.addComponent(new UIPosition({ x: 1, y: 1 }, { x: -1, y: -1 }))
+	xpBar.addComponent(new UIPosition({ x: 1, y: 1 }, { x: -1, y: 1 }))
 	return xpBar
 }
 export default XPBarEntity

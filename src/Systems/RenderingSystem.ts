@@ -22,9 +22,9 @@ class RenderingSystem extends System {
 				const parentMesh = entity.parent?.getComponent(MeshComponent)
 
 				const parentWidth = parentMesh ? parentMesh?.width / 2 : UICamera.right
-				const parentHeight = parentMesh ? parentMesh?.height / 2 : UICamera.bottom
+				const parentHeight = parentMesh ? parentMesh?.height / 2 : UICamera.top
 				const x = uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x
-				const y = uiPosition.relativePosition.y * parentHeight + mesh.height / 2 * uiPosition.center.y
+				const y = uiPosition.relativePosition.y * parentHeight - mesh.height / 2 * uiPosition.center.y
 				mesh.mesh.position.set(x, y, 0)
 				mesh.renderOrder = 1
 
