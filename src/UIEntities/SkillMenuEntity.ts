@@ -9,7 +9,7 @@ import { ECS, Entity } from "../Globals/ECS"
 import Engine from "../Globals/Engine"
 import { inputManager } from "../Globals/Initialize"
 import framedTile from "../Utils/FramedTile"
-import { easeInBounce, easeInOutQuad } from "../Utils/Tween"
+import { easeInOutQuad } from "../Utils/Tween"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity()
@@ -18,7 +18,7 @@ const SkillMenuEntity = () => {
 	Coroutines.add(function* () {
 		let t = 0
 		while (skillMenuPosition.relativePosition.y != 0) {
-			skillMenuPosition.relativePosition.y = easeInOutQuad(t, 2, 0, 30)
+			skillMenuPosition.relativePosition.y = easeInOutQuad(t, -2, 0, 30)
 			t++
 			yield
 
@@ -26,6 +26,10 @@ const SkillMenuEntity = () => {
 		return
 	})
 	const possibleSkills = [...SKILLS]
+	const selectedFrame = new Entity()
+	selectedFrame.addComponent(new MeshComponent(AssetManager.UI.selectedframe, { scale: 2 }))
+	selectedFrame.addComponent(new UIPosition({ x: -0.5, y: 0 }))
+	skillMenu.addChildren(selectedFrame)
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity()
 		const buttonMesh = button.addComponent(new MeshComponent(framedTile(AssetManager.UI.frame2, 4, 24, 24), { scale: 2 }))
@@ -34,6 +38,7 @@ const SkillMenuEntity = () => {
 		// const skill: string = Object.values(SKILLNAMES)[Math.floor(Math.random() * Object.keys(SKILLNAMES).length)]
 		// console.log(skill)
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
+
 
 
 		icon.addComponent(new MeshComponent(skill.icon, { scale: 2 }))
@@ -52,8 +57,8 @@ const SkillMenuEntity = () => {
 				ECS.eventBus.publish(ECSEVENTS.SKILL, skill)
 				Coroutines.add(function* () {
 					let t = 0
-					while (skillMenuPosition.relativePosition.y != 2) {
-						skillMenuPosition.relativePosition.y = easeInOutQuad(t, 0, 2, 30)
+					while (skillMenuPosition.relativePosition.y != -2) {
+						skillMenuPosition.relativePosition.y = easeInOutQuad(t, 0, -2, 30)
 						t++
 						yield
 

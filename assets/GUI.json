@@ -24,7 +24,8 @@
    { "name": "touchdpad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 0, "w": 64, "h": 64 } }] },
    { "name": "touchdpadcenter", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "frame2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 96, "w": 32, "h": 32 } }] },
-   { "name": "empty", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 64, "w": 16, "h": 16 } }] }
+   { "name": "empty", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 64, "w": 16, "h": 16 } }] },
+   { "name": "selectedframe", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 96, "w": 32, "h": 32 } }] }
   ]
  }
 }
