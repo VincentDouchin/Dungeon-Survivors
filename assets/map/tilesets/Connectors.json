@@ -1,0 +1,14 @@
+{ "columns":15,
+ "image":"..\/HAS Overworld 2.1\/Additional Materials\/HAS Overworld 1.1.2\/Universal\/Universal-Tile-Connectors.png",
+ "imageheight":224,
+ "imagewidth":240,
+ "margin":0,
+ "name":"Connectors",
+ "spacing":0,
+ "tilecount":210,
+ "tiledversion":"1.9.2",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.9"
+}

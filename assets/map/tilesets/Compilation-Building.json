@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"..\/HAS Buildings Pack\/CompilationBuilding\/Compilation-Building.png",
+ "imageheight":672,
+ "imagewidth":256,
+ "margin":0,
+ "name":"Compilation-Building",
+ "spacing":0,
+ "tilecount":672,
+ "tiledversion":"1.9.2",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.9"
+}
