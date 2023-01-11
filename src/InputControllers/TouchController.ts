@@ -22,8 +22,8 @@ class dpadTouchInput implements TouchInput {
 		this.dpad.addChildren(center)
 		let enabled = false
 		let mouse: { x: null | number, y: null | number, } = { x: null, y: null }
-		eventBus.subscribe('down', ({ x, y, intersects }: TouchCoord) => {
-			if (intersects.includes(dpadMesh.mesh.id)) {
+		eventBus.subscribe('down', ({ x, y, uiObjects }: TouchCoord) => {
+			if (uiObjects.includes(dpadMesh.mesh.id)) {
 				enabled = true
 				mouse.x = x
 				mouse.y = y
