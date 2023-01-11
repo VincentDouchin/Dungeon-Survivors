@@ -6,7 +6,7 @@ import RenderingSystem from "../Systems/RenderingSystem"
 import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
 import { render } from "../Globals/Initialize"
 
-class LevelUp implements GameState {
+class LevelUpState implements GameState {
 	ui: Entity | null = null
 	construtor() {
 
@@ -22,6 +22,7 @@ class LevelUp implements GameState {
 		render()
 	}
 	set() {
+		console.log('test')
 		this.ui = SkillMenuUIEntity()
 		RenderingSystem.register()
 	}
@@ -31,4 +32,4 @@ class LevelUp implements GameState {
 	}
 
 }
-export default LevelUp
+export default LevelUpState
