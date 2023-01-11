@@ -28,6 +28,7 @@ class MovementSystem extends System {
 				if (playerController?.enabled) {
 					const axisX = inputManager.getInput(AXISX)?.active
 					const axisY = inputManager.getInput(AXISY)?.active
+
 					if (axisX || axisY) {
 						if (axisX && axisX != 0) {
 							body.velocity.x = axisX
@@ -53,10 +54,6 @@ class MovementSystem extends System {
 							body.velocity.y = vel.y / max
 						}
 					}
-
-
-
-					console.log(axisX, axisY)
 				}
 				if (animation) {
 					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
@@ -76,12 +73,12 @@ class MovementSystem extends System {
 						rotation.rotation = body.body.rotation()
 					}
 				}
-				if (cameraTarget) {
-					ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
-					camera.position.x = position.x
-					camera.position.y = position.y
-					camera.lookAt(new Vector3(position.x, position.y, 0))
-				}
+			}
+			if (cameraTarget) {
+				ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
+				camera.position.x = position.x
+				camera.position.y = position.y
+				camera.lookAt(new Vector3(position.x, position.y, 0))
 			}
 
 		})
