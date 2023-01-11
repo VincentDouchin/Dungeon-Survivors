@@ -11,15 +11,11 @@ import iconsSource from './../../assets/icons.png'
 import iconsData from './../../assets/icons.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
-const loadImage = async (source: string) => {
-	const img = new Image()
-	img.src = source
-	await new Promise(resolve => {
-		img.onload = resolve
-	})
-	return img
+import loadImage from '../Utils/LoadImage'
+import TiledMap from '../Utils/TiledMap'
+import overWorldMap from './../../assets/map/overWorld.json?url'
 
-}
+
 const mainImage = await loadImage(imageSource)
 const normalsImage = await loadImage(normalsSource)
 const UI = await loadImage(GUISource)
@@ -27,6 +23,8 @@ const hurtImage = await loadImage(hurtSource)
 const outlineImage = await loadImage(outlineSource)
 const iconsImage = await loadImage(iconsSource)
 const magicImage = await loadImage(MagicSpellsAllSpritesSource)
+const overworld = await TiledMap.load(overWorldMap)
+
 const sliceTileset = (data: any, img: HTMLImageElement, fn: (args: any) => any = x => x) => data.meta.slices.reduce((acc: any, slice: any) => {
 
 	const { w, h, x, y }: Record<string, number> = slice.keys[0].bounds
@@ -68,5 +66,6 @@ const AssetManager = new class {
 	UI = UIImages as Record<string, Tile>
 	icons = icons as Record<string, Tile>
 	magic = magic as Record<string, Tile>
+	overworld = overworld
 }
 export default AssetManager
