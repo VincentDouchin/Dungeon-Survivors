@@ -1,7 +1,7 @@
 
 import { Raycaster, Vector3 } from "three";
 import EventBus from "../Utils/EventBus";
-import { camera, UICamera, UIScene } from "./Initialize";
+import { camera, scene, UICamera, UIScene } from "./Initialize";
 
 class Input {
 	active = 0
@@ -59,8 +59,13 @@ class InputManager {
 					pos.copy(camera.position).add(vec.multiplyScalar(distance));
 					const raycaster = new Raycaster()
 					raycaster.setFromCamera(mouse, UICamera);
-					const intersects = raycaster.intersectObjects(UIScene.children, true);
-					this.eventBus.publish(state, { intersects: intersects.map(intersect => intersect.object.id), ...mouse })
+					const uiObjects = raycaster.intersectObjects(UIScene.children, true).map(intersect => intersect.object.id)
+
+					const raycasterScene = new Raycaster()
+					raycasterScene.setFromCamera(mouse, camera);
+					const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
+
+					this.eventBus.publish(state, { uiObjects, objects, ...mouse })
 				})
 
 			}, false)
