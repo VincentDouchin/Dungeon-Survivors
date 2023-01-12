@@ -1,14 +1,19 @@
 import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import SelectableComponent from "../Components/SelectableComponent";
 import TextComponent from "../Components/TextComponent";
 import UIPosition from "../Components/UIPosition";
 import { Entity, System } from "../Globals/ECS";
-import { scene, UICamera, UIScene } from "../Globals/Initialize";
+import { inputManager, scene, UICamera, UIScene } from "../Globals/Initialize";
 
 class RenderingSystem extends System {
+	objects: number[] = []
 	constructor() {
 		super(MeshComponent)
+		inputManager.eventBus.subscribe('move', ({ objects }: TouchCoord) => {
+			this.objects = objects
+		})
 	}
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
@@ -17,7 +22,15 @@ class RenderingSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			const text = entity.getComponent(TextComponent)
 			const uiPosition = entity.getComponent(UIPosition)
-
+			const selectable = entity.getComponent(SelectableComponent)
+			if (selectable && mesh.mesh) {
+				if (this.objects.includes(mesh.mesh.id)) {
+					mesh.texture.image = selectable.selectedTile.buffer.canvas
+				} else {
+					mesh.texture.image = selectable.unSelectedTile.buffer.canvas
+				}
+				mesh.texture.needsUpdate = true
+			}
 			if (uiPosition) {
 				const parentMesh = entity.parent?.getComponent(MeshComponent)
 
@@ -30,17 +43,21 @@ class RenderingSystem extends System {
 
 
 				if (mesh && !mesh?.mesh.parent) {
+
 					const destination = parentMesh?.mesh ?? UIScene
 					destination.add(mesh.mesh)
 				}
 
 			}
 			if (mesh && position) {
-
 				if (!mesh.mesh.parent) {
 					scene.add(mesh.mesh)
 				}
 				mesh.mesh.position.set(position.x, position.y, 0)
+
+			}
+			if (mesh.mesh.parent && !position && !uiPosition) {
+				mesh.mesh.removeFromParent()
 			}
 			if (mesh && mesh.mesh.parent && text) {
 				mesh.mesh.add(text.mesh)
