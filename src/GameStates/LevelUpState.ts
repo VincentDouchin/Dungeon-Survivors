@@ -22,7 +22,6 @@ class LevelUpState implements GameState {
 		render()
 	}
 	set() {
-		console.log('test')
 		this.ui = SkillMenuUIEntity()
 		RenderingSystem.register()
 	}
