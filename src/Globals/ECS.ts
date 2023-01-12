@@ -66,6 +66,15 @@ class Entity {
 	parentId: string | null = null
 	id: string
 	childrenIds: string[] = []
+	constructor() {
+		this.id = window.crypto.randomUUID()
+		ECS.registerEntity(this)
+		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+			if (entity.id == this.parentId) {
+				this.destroy()
+			}
+		})
+	}
 	get children() {
 		return this.childrenIds.map(childId => ECS.getEntityById(childId))
 	}
@@ -84,15 +93,18 @@ class Entity {
 		}
 
 	}
-
-	constructor() {
-		this.id = window.crypto.randomUUID()
-		ECS.registerEntity(this)
+	removeComponent<T extends Component>(component: Constructor<T>) {
+		const componentMap = ECS.components.get(component.constructor.name)
+		componentMap?.delete(this.id)
 	}
+
 	addComponent<T extends Component>(component: T) {
 		if (component.bind) component.bind(this.id)
 		ECS.components.get(component.constructor.name)?.set(this.id, component)
 		return component as T
+	}
+	getRecursiveComponent<T extends Component>(component: Constructor<T>): T | null {
+		return this.getComponent(component) ?? (this.parent ? this.parent.getRecursiveComponent(component) : null)
 	}
 	get parent(): null | Entity {
 		if (!this.parentId) return null
@@ -103,7 +115,6 @@ class Entity {
 	}
 	destroy() {
 		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this)
-		this.childrenIds.forEach(childId => ECS.getEntityById(childId).destroy())
 		ECS.components.forEach(componentMap => {
 			if (!componentMap.has(this.id)) return
 			componentMap.get(this.id)?.destroy()
