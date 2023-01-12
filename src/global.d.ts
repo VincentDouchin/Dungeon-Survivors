@@ -128,5 +128,6 @@ interface node {
 	right: number
 	start: boolean
 	end: boolean
+	encounter: boolean
 }
 type nodeDirection = 'left' | 'right' | 'top'
