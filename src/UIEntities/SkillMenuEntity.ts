@@ -35,8 +35,6 @@ const SkillMenuEntity = () => {
 		const buttonMesh = button.addComponent(new MeshComponent(framedTile(AssetManager.UI.frame2, 4, 24, 24), { scale: 2 }))
 		button.addComponent(new UIPosition({ x: [-0.5, 0, 0.5][i], y: 0 }))
 		const icon = new Entity()
-		// const skill: string = Object.values(SKILLNAMES)[Math.floor(Math.random() * Object.keys(SKILLNAMES).length)]
-		// console.log(skill)
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
 
@@ -52,8 +50,8 @@ const SkillMenuEntity = () => {
 		button.addChildren(text)
 		button.addChildren(icon)
 		skillMenu.addChildren(button)
-		inputManager.eventBus.subscribe('down', ({ intersects }: { intersects: number[] }) => {
-			if (intersects.includes(buttonMesh.mesh.id)) {
+		inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
+			if (uiObjects.includes(buttonMesh.mesh.id)) {
 				ECS.eventBus.publish(ECSEVENTS.SKILL, skill)
 				Coroutines.add(function* () {
 					let t = 0
