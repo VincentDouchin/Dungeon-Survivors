@@ -1,14 +1,6 @@
 { "frames": {
-   "GUI 0.ase": {
+   "GUI.ase": {
     "frame": { "x": 0, "y": 0, "w": 401, "h": 304 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 401, "h": 304 },
-    "sourceSize": { "w": 401, "h": 304 },
-    "duration": 100
-   },
-   "GUI 1.ase": {
-    "frame": { "x": 401, "y": 0, "w": 401, "h": 304 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 401, "h": 304 },
@@ -20,7 +12,7 @@
   "app": "https://www.aseprite.org/",
   "version": "1.2.35-x64",
   "format": "I8",
-  "size": { "w": 802, "h": 304 },
+  "size": { "w": 401, "h": 304 },
   "scale": "1",
   "frameTags": [
   ],
@@ -39,7 +31,8 @@
    { "name": "frame2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 96, "w": 32, "h": 32 } }] },
    { "name": "empty", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 64, "w": 16, "h": 16 } }] },
    { "name": "selectedframe", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 96, "w": 32, "h": 32 } }] },
-   { "name": "arrow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 32, "w": 16, "h": 16 } }] }
+   { "name": "arrow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 32, "w": 16, "h": 16 } }] },
+   { "name": "arrowselected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 32, "w": 16, "h": 16 } }] }
   ]
  }
 }

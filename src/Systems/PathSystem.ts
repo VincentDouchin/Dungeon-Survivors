@@ -2,9 +2,11 @@ import MeshComponent from "../Components/MeshComponent";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import SelectableComponent from "../Components/SelectableComponent";
+import ECSEVENTS from "../Constants/ECSEvents";
 import AssetManager from "../Globals/AssetManager";
-import Coroutines from "../Globals/Coroutines";
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
+import Engine from "../Globals/Engine";
 import { inputManager } from "../Globals/Initialize";
 
 class PathSystem extends System {
@@ -18,10 +20,16 @@ class PathSystem extends System {
 
 			const walkerPosition = node.walker.getComponent(PositionComponent)
 			const position = entity.getComponent(PositionComponent)
+			if (node.selected) {
+				ECS.eventBus.publish(ECSEVENTS.PATHPOSITION, position)
+			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
 				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
 
+			} else if (node.selected && node.encounter) {
+				node.encounter = false
+				Engine.setState('run')
 			} else if (node.selected && !node.showingOptions) {
 				const possibleDirections = Object.entries(node.nodes)
 				if (possibleDirections.length == 1) {
@@ -34,6 +42,7 @@ class PathSystem extends System {
 						const arrow = new Entity()
 						entity.addChildren(arrow)
 						const arrowMesh = arrow.addComponent(new MeshComponent(AssetManager.UI.arrow))
+						arrow.addComponent(new SelectableComponent(AssetManager.UI.arrowselected, AssetManager.UI.arrow))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
 						switch (direction) {
 							case 'left': {
