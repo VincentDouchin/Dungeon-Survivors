@@ -37,14 +37,12 @@ class BodyComponent extends Component {
 		})
 	}
 	contacts(fn: Function, group?: number) {
-		if (Object.keys(this.colliders).length) {
+		if (this.colliders.length) {
 			this.colliders.forEach((collider) => {
 				if (group && Math.floor(collider.collisionGroups() / 0x10000) != group) return
-
 				const touchCollider = (otherCollider: Collider) => {
 					const entityId = otherCollider?.parent()?.userData as string
 					const entity = ECS.getEntityById(entityId)
-
 					fn(entity)
 				}
 				world.contactsWith(collider, touchCollider)
@@ -62,6 +60,7 @@ class BodyComponent extends Component {
 		this.colliders.forEach(collider => {
 			world.removeCollider(collider, false)
 		})
+		this.colliders.length = 0
 	}
 }
 BodyComponent.register()
