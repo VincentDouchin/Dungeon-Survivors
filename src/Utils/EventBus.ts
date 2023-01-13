@@ -6,6 +6,7 @@ class EventBus {
 			this.subscribers[event] = [];
 		}
 		this.subscribers[event].push(callback);
+		return callback
 	}
 
 	unsubscribe(event: string, callback: Function) {
