@@ -11,8 +11,8 @@ class RenderingSystem extends System {
 	objects: number[] = []
 	constructor() {
 		super(MeshComponent)
-		inputManager.eventBus.subscribe('move', ({ objects }: TouchCoord) => {
-			this.objects = objects
+		inputManager.eventBus.subscribe('move', ({ uiObjects, objects }: TouchCoord) => {
+			this.objects = [...objects, ...uiObjects]
 		})
 	}
 	update(entities: Entity[]) {
@@ -26,6 +26,7 @@ class RenderingSystem extends System {
 			if (selectable && mesh.mesh) {
 				if (this.objects.includes(mesh.mesh.id)) {
 					mesh.texture.image = selectable.selectedTile.buffer.canvas
+
 				} else {
 					mesh.texture.image = selectable.unSelectedTile.buffer.canvas
 				}
@@ -39,7 +40,7 @@ class RenderingSystem extends System {
 				const x = uiPosition.relativePosition.x * parentWidth - mesh.width / 2 * uiPosition.center.x
 				const y = uiPosition.relativePosition.y * parentHeight - mesh.height / 2 * uiPosition.center.y
 				mesh.mesh.position.set(x, y, 0)
-				mesh.renderOrder = 1
+				mesh.renderOrder = (parentMesh?.renderOrder ?? 1) + 1
 
 
 				if (mesh && !mesh?.mesh.parent) {
@@ -56,9 +57,7 @@ class RenderingSystem extends System {
 				mesh.mesh.position.set(position.x, position.y, 0)
 
 			}
-			if (mesh.mesh.parent && !position && !uiPosition) {
-				mesh.mesh.removeFromParent()
-			}
+
 			if (mesh && mesh.mesh.parent && text) {
 				mesh.mesh.add(text.mesh)
 				text.mesh.renderOrder = (mesh.renderOrder ?? 0) + 1
