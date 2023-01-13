@@ -23,7 +23,7 @@ const ECS = new class {
 		this.systems.forEach((system) => {
 			const entitiesID: string[] = [... this.components.get(system.target.name)!.keys()]
 			const entities: Entity[] = entitiesID.map(id => this.getEntityById(id))
-			system.update(entities)
+			system.update(entities.filter(entity => entity))
 		})
 	}
 	unRegisterSystems() {
@@ -69,11 +69,6 @@ class Entity {
 	constructor() {
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
-		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
-			if (entity.id == this.parentId) {
-				this.destroy()
-			}
-		})
 	}
 	get children() {
 		return this.childrenIds.map(childId => ECS.getEntityById(childId))
@@ -115,6 +110,9 @@ class Entity {
 	}
 	destroy() {
 		ECS.eventBus.publish(ECSEVENTS.DELETEENTITY, this)
+		for (let children of this.children) {
+			children.destroy()
+		}
 		ECS.components.forEach(componentMap => {
 			if (!componentMap.has(this.id)) return
 			componentMap.get(this.id)?.destroy()
