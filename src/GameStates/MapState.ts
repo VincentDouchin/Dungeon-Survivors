@@ -2,6 +2,7 @@ import { AmbientLight } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import MeshComponent from "../Components/MeshComponent";
+import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
 import HEROS from "../Constants/Heros";
@@ -16,14 +17,14 @@ import RenderingSystem from "../Systems/RenderingSystem";
 
 class MapState implements GameState {
 	map?: Entity
-	player: Entity
+	player?: Entity
 	light: AmbientLight
 	path?: Entity
 	lastPosition: { x?: number, y?: number } = { x: undefined, y: undefined }
 	constructor() {
-
 		this.light = new AmbientLight(0xffffff)
-		this.player = new Entity()
+
+
 
 	}
 	render() {
@@ -38,13 +39,14 @@ class MapState implements GameState {
 		const map = AssetManager.overworld
 		const tile = map.tile
 		this.map = new Entity()
-
+		this.player = new Entity()
 		this.map.addComponent(new MeshComponent(tile))
 		this.map.addComponent(new PositionComponent(0, 0))
 		const knight = HEROS.knightMale
 		this.player.addComponent(new MeshComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
 		this.player.addComponent(new AnimationComponent(knight.tiles))
 		this.player.addComponent(new CameraTargetComponent())
+		this.player.addComponent(new PathWalkerComponent())
 		ECS.eventBus.subscribe(ECSEVENTS.PATHPOSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
 			this.lastPosition.y = position.y
@@ -52,7 +54,7 @@ class MapState implements GameState {
 
 
 		if (!this.lastPosition.x && !this.lastPosition.y) {
-			PathEntity(map.objects.get('path'), this.player)!
+			PathEntity(map.objects.get('path'))!
 		}
 		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
 
