@@ -1,8 +1,8 @@
 interface GameState {
 	update: Function
 	render: Function
-	set: Function
-	unset: Function
+	set: (state?: State, options?: any) => void
+	unset: (state?: State) => void
 }
 type Constructor<T> = new (...args: any[]) => T;
 
