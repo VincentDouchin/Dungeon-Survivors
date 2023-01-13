@@ -1,38 +1,33 @@
 import MeshComponent from "../Components/MeshComponent"
+import SelectableComponent from "../Components/SelectableComponent"
 import TextComponent from "../Components/TextComponent"
 import UIPosition from "../Components/UIPosition"
 import ECSEVENTS from "../Constants/ECSEvents"
+import { State } from "../Constants/GameStates"
 import SKILLS from "../Constants/Skills"
 import AssetManager from "../Globals/AssetManager"
-import Coroutines from "../Globals/Coroutines"
 import { ECS, Entity } from "../Globals/ECS"
 import Engine from "../Globals/Engine"
 import { inputManager } from "../Globals/Initialize"
 import framedTile from "../Utils/FramedTile"
-import { easeInOutQuad } from "../Utils/Tween"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity()
 	skillMenu.addComponent(new MeshComponent(framedTile(AssetManager.UI.frame1, 16, 100, 50), { scale: 2 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPosition({ x: 0, y: 2 }))
-	Coroutines.add(function* () {
-		let t = 0
-		while (skillMenuPosition.relativePosition.y != 0) {
-			skillMenuPosition.relativePosition.y = easeInOutQuad(t, -2, 0, 30)
-			t++
-			yield
 
-		}
-		return
-	})
+	skillMenuPosition.moveTo(-2, 0, 30)
 	const possibleSkills = [...SKILLS]
-	const selectedFrame = new Entity()
-	selectedFrame.addComponent(new MeshComponent(AssetManager.UI.selectedframe, { scale: 2 }))
-	selectedFrame.addComponent(new UIPosition({ x: -0.5, y: 0 }))
-	skillMenu.addChildren(selectedFrame)
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity()
-		const buttonMesh = button.addComponent(new MeshComponent(framedTile(AssetManager.UI.frame2, 4, 24, 24), { scale: 2 }))
+		const buttonTile = framedTile(AssetManager.UI.frame2, 4, 24, 24)
+		const buttonMesh = button.addComponent(new MeshComponent(buttonTile, { scale: 2 }))
+		const selectableEntity = new Entity()
+		const emptyTile32 = framedTile(AssetManager.UI.empty, 0, 32, 32)
+		selectableEntity.addComponent(new MeshComponent(emptyTile32, { scale: 2 }))
+		selectableEntity.addComponent(new SelectableComponent(AssetManager.UI.selectedframe, emptyTile32))
+		selectableEntity.addComponent(new UIPosition())
+		button.addChildren(selectableEntity)
 		button.addComponent(new UIPosition({ x: [-0.5, 0, 0.5][i], y: 0 }))
 		const icon = new Entity()
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
@@ -44,26 +39,17 @@ const SkillMenuEntity = () => {
 
 		const text = new Entity()
 		text.addComponent(new UIPosition({ x: 0, y: -1 }, { x: 0, y: 0 }))
-		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top' }))
+		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: '50%' }))
 		text.addComponent(new MeshComponent(AssetManager.UI.empty))
 
 		button.addChildren(text)
 		button.addChildren(icon)
 		skillMenu.addChildren(button)
-		inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
+		const sub = inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
 			if (uiObjects.includes(buttonMesh.mesh.id)) {
+				inputManager.eventBus.unsubscribe('down', sub)
 				ECS.eventBus.publish(ECSEVENTS.SKILL, skill)
-				Coroutines.add(function* () {
-					let t = 0
-					while (skillMenuPosition.relativePosition.y != -2) {
-						skillMenuPosition.relativePosition.y = easeInOutQuad(t, 0, -2, 30)
-						t++
-						yield
-
-					}
-					Engine.setState('run')
-					return
-				})
+				skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(State.run))
 			}
 		})
 	}

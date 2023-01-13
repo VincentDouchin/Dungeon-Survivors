@@ -1,4 +1,6 @@
+import Coroutines from "../Globals/Coroutines";
 import { Component } from "../Globals/ECS";
+import { easeInOutQuad } from "../Utils/Tween";
 
 interface position {
 	x: number
@@ -12,6 +14,21 @@ class UIPosition extends Component {
 		this.relativePosition = relativePosition ?? { x: 0, y: 0 }
 		this.center = center ?? { x: 0, y: 0 }
 
+	}
+	moveTo(startPosition: number, endPosition: number, delay: number) {
+		const self = this
+		return new Promise<void>(resolve => {
+			Coroutines.add(function* () {
+				let t = 0
+				while (self.relativePosition.y != endPosition) {
+					self.relativePosition.y = easeInOutQuad(t, startPosition, endPosition, delay)
+					t++
+					yield
+
+				}
+				resolve()
+			})
+		})
 	}
 
 }
