@@ -27,7 +27,7 @@ class HealthSystem extends System {
 			if (health.show && !health.healthBarId && mesh) {
 				const healthBarEntity = new Entity()
 				const healthMesh = new MeshComponent(empty.clone(), { renderOrder: 20 })
-
+				entity.addChildren(healthBarEntity)
 				healthBarEntity.addComponent(healthMesh)
 				health.healthBarId = healthBarEntity.id
 				mesh.mesh.add(healthMesh.mesh)
