@@ -7,7 +7,7 @@ const indexToCoord = (index: number, columns: number, width: number, height?: nu
 }
 
 
-
+const sources = import.meta.glob(['/assets/**/*.png', '/assets/**/*.json'], { eager: true })
 
 class TiledMap {
 	tile: Tile
@@ -20,16 +20,17 @@ class TiledMap {
 		this.tilesets = tilesets
 		this.objects = objects
 	}
-	static async load(course: string) {
+	static async load(source: string) {
 		const tilesets: TiledMapTileset[] = []
-		const base = import.meta.env.BASE_URL
-		const url = course.replace(base, '/')
-		const folder = course.split('/').slice(0, -1).join('/') + '/'
-		const map = await import(url) as TiledMapData
+		const folder = source.split('/').slice(0, -1).join('/') + '/'
+		const map = await import(source) as TiledMapData
 		if (map?.tilesets.length) {
 			for (let tileset of map.tilesets) {
-				const loadedTileset = await import(folder + tileset.source)
-				const img = await loadImage(loadedTileset.image.replace('../', folder))
+				const base = import.meta.env.BASE_URL
+				const path = folder + tileset.source
+				const loadedTileset = sources[path.replace(base, '/')] as TiledMapTileset
+
+				const img = await loadImage(sources[loadedTileset.image.replace('../', folder).replace(base, '/')] as string)
 				tilesets.push({ ...loadedTileset, firstgid: tileset.firstgid, img })
 			}
 		}
