@@ -1,11 +1,12 @@
 import ECSEVENTS from "../Constants/ECSEvents";
+import { State } from "../Constants/GameStates";
 import { Component, ECS } from "../Globals/ECS";
 import Engine from "../Globals/Engine";
 
 class StoreComponent extends Component {
 	xp = 0
 	level = 0
-	nextLevel = 100
+	nextLevel = 20
 	constructor() {
 		super()
 		ECS.eventBus.subscribe(ECSEVENTS.XP, (amount: number) => this.updateXP(amount))
@@ -22,7 +23,7 @@ class StoreComponent extends Component {
 				this.level++
 				ECS.eventBus.publish(ECSEVENTS.LEVELUP, this.level)
 			}
-			Engine.setState('levelUp')
+			Engine.setState(State.levelUp)
 		}
 	}
 }
