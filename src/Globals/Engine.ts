@@ -1,3 +1,4 @@
+import { State } from "../Constants/GameStates"
 import Coroutines from "./Coroutines"
 
 const Engine = new class {
@@ -5,9 +6,11 @@ const Engine = new class {
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	state?: GameState
-	states: Map<string, GameState> = new Map()
-
+	stateName?: State
+	states: Map<State, GameState> = new Map()
+	get state() {
+		return this.stateName ? this.states.get(this.stateName) : null
+	}
 	cycle = (timeStamp: number) => {
 
 		if (!this.state) return
@@ -36,15 +39,16 @@ const Engine = new class {
 	stop() {
 		window.cancelAnimationFrame(this.rafHandle)
 	}
-	addState(stateName: string, state: GameState) {
+	addState(stateName: State, state: GameState) {
 		this.states.set(stateName, state)
 	}
-	setState(stateName: string, options?: any) {
+	setState(stateName: State, options?: any) {
+		const oldState = this.stateName
 		if (this.state) {
-			this.state.unset()
+			this.state.unset(stateName)
 		}
-		this.state = this.states.get(stateName)
-		this.state?.set(options)
+		this.stateName = stateName
+		this.state?.set(oldState, options)
 	}
 }
 export default Engine
