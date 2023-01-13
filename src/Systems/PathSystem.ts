@@ -1,9 +1,11 @@
 import MeshComponent from "../Components/MeshComponent";
 import PathNodeComponent from "../Components/PathNodeComponent";
+import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
+import { State } from "../Constants/GameStates";
 import AssetManager from "../Globals/AssetManager";
 import { ECS, Entity, System } from "../Globals/ECS";
 import Engine from "../Globals/Engine";
@@ -18,7 +20,8 @@ class PathSystem extends System {
 
 			const node = entity.getComponent(PathNodeComponent)
 
-			const walkerPosition = node.walker.getComponent(PositionComponent)
+			const [[walkerId]] = ECS.getEntitiesAndComponents(PathWalkerComponent)
+			const walkerPosition = ECS.getEntityById(walkerId).getComponent(PositionComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
 				ECS.eventBus.publish(ECSEVENTS.PATHPOSITION, position)
@@ -29,7 +32,7 @@ class PathSystem extends System {
 
 			} else if (node.selected && node.encounter) {
 				node.encounter = false
-				Engine.setState('run')
+				Engine.setState(State.run)
 			} else if (node.selected && !node.showingOptions) {
 				const possibleDirections = Object.entries(node.nodes)
 				if (possibleDirections.length == 1) {
