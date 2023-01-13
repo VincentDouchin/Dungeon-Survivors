@@ -5,6 +5,7 @@ import { inputManager } from "../Globals/Initialize"
 import RenderingSystem from "../Systems/RenderingSystem"
 import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
 import { render } from "../Globals/Initialize"
+import { State } from "../Constants/GameStates"
 
 class LevelUpState implements GameState {
 	ui: Entity | null = null
@@ -15,7 +16,7 @@ class LevelUpState implements GameState {
 	update() {
 		ECS.updateSystems()
 		if (inputManager.getInput(INTERACT)?.once) {
-			Engine.setState('run')
+			Engine.setState(State.run)
 		}
 	}
 	render() {

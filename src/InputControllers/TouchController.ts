@@ -1,7 +1,7 @@
 
 import MeshComponent from "../Components/MeshComponent"
 import UIPosition from "../Components/UIPosition"
-import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
+import { AXISX, AXISY } from "../Constants/InputsNames"
 import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
 import EventBus from "../Utils/EventBus"
