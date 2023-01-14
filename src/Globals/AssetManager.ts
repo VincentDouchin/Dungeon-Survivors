@@ -1,19 +1,18 @@
 import getBuffer from '../Utils/Buffer'
-import loadImage from '../Utils/LoadImage'
-import Tile from '../Utils/Tile'
-import TiledMap from '../Utils/TiledMap'
-import normalsSource from './../../assets/0x72_DungeonTilesetII_v1.4-normals.png'
-import outlineSource from './../../assets/0x72_DungeonTilesetII_v1.4-outline.png'
-import hurtSource from './../../assets/0x72_DungeonTilesetII_v1.4-red.png'
 import imageSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
-import GUIData from './../../assets/GUI.json'
-import GUISource from './../../assets/GUI.png'
-import iconsData from './../../assets/icons.json'
-import iconsSource from './../../assets/icons.png'
-import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
-import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
-import overWorldMap from './../../assets/map/overWorld.json?url'
+import normalsSource from './../../assets/0x72_DungeonTilesetII_v1.4-normals.png'
+import hurtSource from './../../assets/0x72_DungeonTilesetII_v1.4-red.png'
+import outlineSource from './../../assets/0x72_DungeonTilesetII_v1.4-outline.png'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
+import Tile from '../Utils/Tile'
+import GUISource from './../../assets/GUI.png'
+import GUIData from './../../assets/GUI.json'
+import iconsSource from './../../assets/icons.png'
+import iconsData from './../../assets/icons.json'
+import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
+import loadImage from '../Utils/LoadImage'
+import TiledMap from '../Utils/TiledMap'
 
 
 const mainImage = await loadImage(imageSource)
@@ -23,7 +22,7 @@ const hurtImage = await loadImage(hurtSource)
 const outlineImage = await loadImage(outlineSource)
 const iconsImage = await loadImage(iconsSource)
 const magicImage = await loadImage(MagicSpellsAllSpritesSource)
-const overworld = await TiledMap.load(overWorldMap)
+const overworld = await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json')
 
 const sliceTileset = (data: any, img: HTMLImageElement, fn: (args: any) => any = x => x) => data.meta.slices.reduce((acc: any, slice: any) => {
 
