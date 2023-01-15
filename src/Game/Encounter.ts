@@ -31,7 +31,6 @@ class Encounter {
 		let timer = 0
 
 		while (counter < waves) {
-			console.log(this.enemies.length)
 			if (timer === 0) {
 				this.spawnEnemies(enemyType, enemiesNb)
 				counter++
