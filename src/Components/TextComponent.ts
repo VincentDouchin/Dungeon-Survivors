@@ -1,6 +1,8 @@
 import { Component } from "../Globals/ECS";
 // @ts-ignore
 import { Text } from 'troika-three-text'
+
+import m5x7 from '../../assets/fonts/m5x7.ttf?url'
 class TextComponent extends Component {
 	previousText: string = ''
 	text: string
@@ -13,7 +15,7 @@ class TextComponent extends Component {
 		this.mesh = new Text()
 		this.mesh.text = text
 		this.mesh.fontSize = newOptions.size
-		this.mesh.font = '../../assets/fonts/m5x7.ttf'
+		this.mesh.font = m5x7
 		this.mesh.anchorY = newOptions.anchorY
 		this.mesh.anchorX = newOptions.anchorX
 		this.mesh.color = newOptions.color
