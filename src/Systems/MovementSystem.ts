@@ -1,4 +1,3 @@
-import { Vector3 } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
@@ -6,10 +5,9 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
 import SkillsComponent from "../Components/SkillsComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
 import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
-import { ECS, Entity, System } from "../Globals/ECS";
-import { camera, inputManager } from "../Globals/Initialize";
+import { Entity, System } from "../Globals/ECS";
+import { inputManager } from "../Globals/Initialize";
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -74,13 +72,6 @@ class MovementSystem extends System {
 					}
 				}
 			}
-			if (cameraTarget) {
-				ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
-				camera.position.x = position.x
-				camera.position.y = position.y
-				camera.lookAt(new Vector3(position.x, position.y, 0))
-			}
-
 		})
 	}
 }

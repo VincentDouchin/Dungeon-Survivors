@@ -23,6 +23,7 @@ import ShootingSystem from "../Systems/ShootingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import XPPickupSystem from "../Systems/XPPickupSystem"
 import UIRunEntity from "../UIEntities/UIRunEntity"
+import CameraSystem from "../Systems/CameraSystem"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -57,6 +58,7 @@ class RunState implements GameState {
 		LightingSystem.register()
 		ShootingSystem.register()
 		TargetingSystem.register()
+		CameraSystem.register()
 		Coroutines.resume()
 
 		switch (oldState) {

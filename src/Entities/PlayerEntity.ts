@@ -24,7 +24,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 		player.addComponent(new TargeterComponent(main.id, 50))
 	} else {
 		player.addComponent(new PlayerControllerComponent())
-		player.addComponent(new CameraTargetComponent())
+		player.addComponent(new CameraTargetComponent({}))
 	}
 	player.addComponent(new BodyComponent(
 		{ moveForce: 100 },
