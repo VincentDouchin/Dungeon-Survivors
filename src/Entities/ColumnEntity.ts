@@ -10,7 +10,7 @@ import { Entity } from "../Globals/ECS"
 
 const ColumnEntity = (x: number, y: number) => {
 	const column = new Entity()
-	column.addComponent(new MeshComponent(AssetManager.tiles.column, { renderOrder: 10 }))
+	column.addComponent(new MeshComponent(AssetManager.tiles.column, { renderOrder: 20 }))
 	column.addComponent(new BodyComponent(
 		{ type: "fixed" },
 		[
@@ -20,7 +20,7 @@ const ColumnEntity = (x: number, y: number) => {
 	column.addComponent(new PositionComponent(x, y))
 	const torch = new Entity()
 	const torchTile = AssetManager.tiles.flame_wall
-	torch.addComponent(new MeshComponent(torchTile, { renderOrder: 11 }))
+	torch.addComponent(new MeshComponent(torchTile, { renderOrder: 21 }))
 	torch.addComponent(new AnimationComponent({ default: torchTile }))
 	torch.addComponent(new PositionComponent(x, y))
 
