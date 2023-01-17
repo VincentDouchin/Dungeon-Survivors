@@ -14,7 +14,13 @@ import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json
 import loadImage from '../Utils/LoadImage'
 import TiledMap from '../Utils/TiledMap'
 
-
+const importFromGlob = async (glob: Record<string, { default: string }>) => {
+	const images = await Promise.all(Object.values(glob).map(async module => Tile.fromImage(await loadImage(module.default!))))
+	return Object.keys(glob).reduce((acc, v, index) => {
+		return { ...acc, [v.split(/[.\/]/).at(-2) as string]: images[index] }
+	}, {})
+}
+const skills = await importFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true }))
 const mainImage = await loadImage(imageSource)
 const normalsImage = await loadImage(normalsSource)
 const UI = await loadImage(GUISource)
@@ -65,6 +71,7 @@ const AssetManager = new class {
 	UI = UIImages as Record<string, Tile>
 	icons = icons as Record<string, Tile>
 	magic = magic as Record<string, Tile>
+	skills = skills as Record<skillName, Tile>
 	overworld = overworld
 }
 export default AssetManager
