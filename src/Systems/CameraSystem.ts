@@ -50,9 +50,6 @@ class CameraSystem extends System {
             } else {
                 camera.position.x = position.x
             }
-
-
-            console.log(camera.position.y, position.y)
             camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
         })
     }
