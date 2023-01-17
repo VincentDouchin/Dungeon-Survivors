@@ -18,7 +18,6 @@ class MovementSystem extends System {
 			const playerController = entity.getComponent(PlayerControllerComponent)
 			const body = entity.getComponent(BodyComponent)
 			const animation = entity.getComponent(AnimationComponent)
-			const cameraTarget = entity.getComponent(CameraTargetComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			const skills = entity.getComponent(SkillsComponent)
 			if (body) {
