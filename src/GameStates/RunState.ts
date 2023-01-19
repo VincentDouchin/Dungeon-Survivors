@@ -65,7 +65,10 @@ class RunState implements GameState {
 			case State.pause: {
 
 			}; break
-			case State.map: {
+			case State.levelUp: {
+
+			}; break
+			default: {
 				this.ui = UIRunEntity()
 				this.background = BackgroundEntity()
 				this.player = new Entity()
@@ -101,7 +104,6 @@ class RunState implements GameState {
 				this.player?.destroy()
 			}; break
 		}
-
 	}
 }
 
