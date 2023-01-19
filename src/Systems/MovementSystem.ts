@@ -57,7 +57,7 @@ class MovementSystem extends System {
 				}
 
 				if (body.body) {
-					body.body.setLinvel({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
+					body.body.applyImpulse({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
 					body.velocity.x = 0
 					body.velocity.y = 0
 					position.x = body.body.translation().x
