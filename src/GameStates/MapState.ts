@@ -11,6 +11,7 @@ import AssetManager from "../Globals/AssetManager";
 import { ECS, Entity } from "../Globals/ECS";
 import { render, scene, world } from "../Globals/Initialize";
 import AnimationSystem from "../Systems/AnimationSystem";
+import CameraSystem from "../Systems/CameraSystem";
 import MovementSystem from "../Systems/MovementSystem";
 import PathSystem from "../Systems/PathSystem";
 import RenderingSystem from "../Systems/RenderingSystem";
@@ -45,7 +46,7 @@ class MapState implements GameState {
 		const knight = HEROS.knightMale
 		this.player.addComponent(new MeshComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
 		this.player.addComponent(new AnimationComponent(knight.tiles))
-		this.player.addComponent(new CameraTargetComponent())
+		this.player.addComponent(new CameraTargetComponent({ bottom: -tile.height / 2, top: tile.height / 2, right: tile.width / 2, left: -tile.width / 2 }))
 		this.player.addComponent(new PathWalkerComponent())
 		ECS.eventBus.subscribe(ECSEVENTS.PATHPOSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
@@ -58,8 +59,8 @@ class MapState implements GameState {
 		}
 		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
 
+		CameraSystem.register()
 		AnimationSystem.register()
-		MovementSystem.register()
 		RenderingSystem.register()
 		MovementSystem.register()
 		PathSystem.register()

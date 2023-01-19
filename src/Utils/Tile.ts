@@ -26,6 +26,11 @@ class Tile {
 		this.hurt = hurt
 		this.outline = outline
 	}
+	static fromImage(image: HTMLImageElement) {
+		const buffer = getBuffer(image.width, image.height)
+		buffer.drawImage(image, 0, 0)
+		return new Tile({ buffer })
+	}
 	clone() {
 		const options: tileOptions = {
 			buffer: getBuffer(this.buffer.canvas.width, this.buffer.canvas.height),

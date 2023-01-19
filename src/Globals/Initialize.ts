@@ -35,14 +35,14 @@ const createCamera = () => {
 	const aspect = window.innerWidth / window.innerHeight
 	const frustumSize = 300
 	const camera = new OrthographicCamera(frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000000)
-	window.addEventListener('resize', () => {
-		const aspect = window.innerWidth / window.innerHeight;
-		camera.left = - frustumSize * aspect / 2
-		camera.right = frustumSize * aspect / 2
-		camera.top = frustumSize / 2
-		camera.bottom = - frustumSize / 2
-		camera.updateProjectionMatrix()
-	})
+	// window.addEventListener('resize', () => {
+	// 	const aspect = window.innerWidth / window.innerHeight;
+	// 	camera.left = - frustumSize * aspect / 2
+	// 	camera.right = frustumSize * aspect / 2
+	// 	camera.top = frustumSize / 2
+	// 	camera.bottom = - frustumSize / 2
+	// 	camera.updateProjectionMatrix()
+	// })
 
 	camera.position.set(0, 0, 200)
 	return camera

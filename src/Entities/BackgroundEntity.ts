@@ -4,7 +4,6 @@ import PositionComponent from "../Components/PositionComponent"
 import ECSEVENTS from "../Constants/ECSEvents"
 import { assets } from "../Globals/Initialize"
 import { ECS, Entity } from "../Globals/ECS"
-import { camera } from "../Globals/Initialize"
 import getBuffer from "../Utils/Buffer"
 import Tile from "../Utils/Tile"
 import ColumnEntity from "./ColumnEntity"
@@ -13,8 +12,8 @@ const BackgroundEntity = () => {
 	const background = new Entity()
 	const position = new PositionComponent(0, 0)
 	background.addComponent(position)
-	const width = Math.floor(camera.right * 2.5 / 16) * 16
-	const height = Math.floor(camera.top * 2.5 / 16) * 16
+	const width = Math.floor(window.innerWidth * 1.5 / 16) * 16
+	const height = Math.floor(window.innerHeight * 1.5 / 16) * 16
 
 	const buffer = getBuffer(width, height)
 	const floorTiles: Array<[Tile, number]> = [

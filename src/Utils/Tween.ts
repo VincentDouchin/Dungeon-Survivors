@@ -1,4 +1,4 @@
-type tweenFunction = (t: number, b: number, _c: number, d: number, s?: number) => number
+type tweenFunction = (time: number, start: number, end: number, delay: number, s?: number) => number
 export const linear: tweenFunction = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * t / d + b;
