@@ -39,15 +39,28 @@ class HealthSystem extends System {
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target.includes(health.type)) {
 						const position = entity.getComponent(PositionComponent)
+						const otherPosition = otherEntity.getComponent(PositionComponent)
 						const skill = otherEntity.getRecursiveComponent(SkillsComponent)
 
+						// ! Take damage
 						const damageAmount = skill ? skill.calculateDamage(damage.amount) : damage.amount
 						health.updateHealth(-damageAmount)
-						const damageText = new Entity()
+						health.canTakeDamage = false
 
+						// ! Knockback
+						if (body.body) {
+							const knockbackForce = damage.knockback * (skill?.knockback ?? 1) * 1000
+							const angle = Math.atan2(otherPosition.y - position.y, otherPosition.x - position.x)
+							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
+						}
+
+
+						// ! Damage number display
+						const damageText = new Entity()
 						damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new MeshComponent(assets.UI.empty))
 						damageText.addComponent(new TextComponent(String(damageAmount * -1), { size: 8, color: skill?.crit ? 0xff0000 : 0xffffff }))
+
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						// if (animation && damage.amount > 0) {
@@ -55,7 +68,7 @@ class HealthSystem extends System {
 						// 	mesh.material.emissiveIntensity = 0.5
 						// 	mesh.material.combine = MixOperation
 						// }
-						health.canTakeDamage = false
+
 						Coroutines.add(function* () {
 							yield* waitFor(20)
 							health.canTakeDamage = true
