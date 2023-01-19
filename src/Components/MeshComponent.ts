@@ -1,4 +1,4 @@
-import { CanvasTexture, Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping } from "three";
+import { CanvasTexture, Mesh, MeshLambertMaterial, NearestFilter, PlaneGeometry, RepeatWrapping } from "three";
 import { Component } from "../Globals/ECS";
 import Tile from "../Utils/Tile";
 class MeshComponent extends Component {
@@ -11,7 +11,7 @@ class MeshComponent extends Component {
 	scale: number
 	lastModifer: 'buffer' | 'outline' | 'hurt' = 'buffer'
 	modifier: 'buffer' | 'outline' | 'hurt' = 'buffer'
-	material: MeshLambertMaterial | MeshBasicMaterial | MeshStandardMaterial
+	material: MeshLambertMaterial
 	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, }) {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1 }, options)
