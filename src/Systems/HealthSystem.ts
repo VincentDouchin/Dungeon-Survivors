@@ -38,10 +38,9 @@ class HealthSystem extends System {
 				body.contacts((otherEntity: Entity) => {
 
 					const damage = otherEntity.getComponent(DamageComponent)
-					const position = entity.getComponent(PositionComponent)
 					if (damage.target.includes(health.type)) {
-						const getSkill = (entity: Entity): SkillsComponent => entity.getComponent(SkillsComponent) ?? (entity.parent ? getSkill(entity.parent) : null)
-						const skill = getSkill(otherEntity)
+						const position = entity.getComponent(PositionComponent)
+						const skill = otherEntity.getRecursiveComponent(SkillsComponent)
 
 						const damageAmount = skill ? skill.calculateDamage(damage.amount) : damage.amount
 						health.updateHealth(-damageAmount)
