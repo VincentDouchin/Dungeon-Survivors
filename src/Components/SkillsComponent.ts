@@ -16,7 +16,7 @@ class SkillsComponent extends Component {
 		})
 	}
 	calculateDamage(damageAmount: number) {
-		this.crit = this.critChance < Math.random()
+		this.crit = this.critChance > Math.random()
 		let damage = damageAmount + this.damage
 
 		if (this.crit) {
