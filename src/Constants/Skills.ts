@@ -30,7 +30,7 @@ const SKILLS: Skill[] = [
 	{
 		icon: AssetManager.skills.knockback_boost,
 		name: 'Knockback',
-		modifier: (skill: SkillsComponent) => skill.critDamage *= 1.5
+		modifier: (skill: SkillsComponent) => skill.knockback *= 1.2
 	},
 
 ]

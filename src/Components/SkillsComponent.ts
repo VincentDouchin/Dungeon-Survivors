@@ -7,6 +7,8 @@ class SkillsComponent extends Component {
 	critDamage = 0.5
 	critChance = 0.05
 	crit = false
+	knockback = 1
+	xp = 1
 	constructor() {
 		super()
 		ECS.eventBus.subscribe(ECSEVENTS.SKILL, (skill: Skill) => {
