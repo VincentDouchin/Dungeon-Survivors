@@ -35,7 +35,7 @@ class Encounter {
 				this.spawnEnemies(enemyType, enemiesNb)
 				counter++
 			}
-			timer = (timer + 1) % (delay ?? 300)
+			timer = (timer + 1) % (delay ?? 600)
 			yield
 
 		}
