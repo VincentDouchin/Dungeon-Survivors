@@ -16,9 +16,11 @@ class BodyComponent extends Component {
 		//!Body
 		this.bodyDescription =
 			RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
-				.setAdditionalMass(1)
+				// .setAdditionalMass(1)
 				.setCanSleep(false)
 				.setCcdEnabled(true)
+				.setLinearDamping(5)
+
 		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
 
 		//!Collider
@@ -26,7 +28,7 @@ class BodyComponent extends Component {
 			const colliderDescription = ColliderDesc
 
 				.cuboid(colliderOption.width / 2, colliderOption.height / 2)
-				.setDensity(colliderOption.mass ?? 1000)
+				.setDensity(colliderOption.mass ?? 0.1)
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
 
