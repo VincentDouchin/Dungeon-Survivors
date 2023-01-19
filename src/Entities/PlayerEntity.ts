@@ -27,7 +27,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 		player.addComponent(new CameraTargetComponent({}))
 	}
 	player.addComponent(new BodyComponent(
-		{ moveForce: 100 },
+		{ moveForce: 5000 },
 		[
 			{ width: hero.tiles.idle.width, height: hero.tiles.idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL] },
 			{ width: 100, height: 100, contact: true, sensor: true, group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.XP] }
