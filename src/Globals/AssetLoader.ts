@@ -39,5 +39,11 @@ class AssetLoader {
 			return { ...acc, [slice.name]: new Tile(fn({ buffer })) }
 		}, {})
 	}
+	async loadFromGlob(glob: Record<string, { default: string }>) {
+		const images = await Promise.all(Object.values(glob).map(async module => Tile.fromImage(await this.loadImage(module.default!))))
+		return Object.keys(glob).reduce((acc, v, index) => {
+			return { ...acc, [v.split(/[.\/]/).at(-2) as string]: images[index] }
+		}, {})
+	}
 }
 export default AssetLoader

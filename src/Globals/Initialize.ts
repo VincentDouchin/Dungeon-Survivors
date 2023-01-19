@@ -24,7 +24,8 @@ const assets = {
 		({ buffer }) => ({ buffer, frames: buffer.canvas.width / 24, width: 24 })
 	),
 	tiles: await assetLoader.loadFromTileList(tilesList, tilesSource),
-	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json')
+	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json'),
+	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true }))
 }
 //! World 
 await RAPIER.init()
