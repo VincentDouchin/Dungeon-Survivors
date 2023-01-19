@@ -34,7 +34,7 @@ const SkillMenuEntity = () => {
 
 
 
-		icon.addComponent(new MeshComponent(skill.icon, { scale: 2 }))
+		icon.addComponent(new MeshComponent(skill.icon, { scale: 3 }))
 		icon.addComponent(new UIPosition())
 
 		const text = new Entity()
