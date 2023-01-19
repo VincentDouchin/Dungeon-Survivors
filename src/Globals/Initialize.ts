@@ -15,9 +15,17 @@ import iconsData from './../../assets/icons.json'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
 import TiledMap from "../Utils/TiledMap"
+import Tile from "../Utils/Tile"
 //! Assets
 const assetLoader = new AssetLoader()
-const assets = {
+const assets: {
+	UI: Record<string, Tile>
+	icons: Record<string, Tile>
+	magic: Record<string, Tile>
+	tiles: Record<tileName, Tile>
+	overWorld: TiledMap
+	skills: Record<skillName, Tile>
+} = {
 	UI: await assetLoader.loadFromSlices(GUIData, GUISource),
 	icons: await assetLoader.loadFromSlices(iconsData, iconsSource),
 	magic: await assetLoader.loadFromSlices(MagicSpellsAllSpritesData, MagicSpellsAllSpritesSource,
@@ -25,7 +33,7 @@ const assets = {
 	),
 	tiles: await assetLoader.loadFromTileList(tilesList, tilesSource),
 	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json'),
-	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true }))
+	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true })) as Record<skillName, Tile>
 }
 //! World 
 await RAPIER.init()

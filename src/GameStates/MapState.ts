@@ -7,9 +7,8 @@ import PositionComponent from "../Components/PositionComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
 import HEROS from "../Constants/Heros";
 import PathEntity from "../Entities/PathEntity";
-import AssetManager from "../Globals/AssetManager";
 import { ECS, Entity } from "../Globals/ECS";
-import { render, scene, world } from "../Globals/Initialize";
+import { render, scene, world, assets } from "../Globals/Initialize";
 import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
 import MovementSystem from "../Systems/MovementSystem";
@@ -37,7 +36,7 @@ class MapState implements GameState {
 	}
 	set() {
 		scene.add(this.light)
-		const map = AssetManager.overworld
+		const map = assets.overWorld
 		const tile = map.tile
 		this.map = new Entity()
 		this.player = new Entity()

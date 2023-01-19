@@ -1,34 +1,34 @@
 import SkillsComponent from "../Components/SkillsComponent"
-import AssetManager from "../Globals/AssetManager"
+import { assets } from "../Globals/Initialize"
 
 const SKILLS: Skill[] = [
 	{
-		icon: AssetManager.skills.attack_speed_boost,
+		icon: assets.skills.attack_speed_boost,
 		name: 'Rotation speed',
 		modifier: (skill: SkillsComponent) => skill.angVel *= 1.2
 	},
 	{
-		icon: AssetManager.skills.attack_boost,
+		icon: assets.skills.attack_boost,
 		name: 'Damage',
 		modifier: (skill: SkillsComponent) => skill.damage *= 1.2
 	},
 	{
-		icon: AssetManager.skills.critical_boost,
+		icon: assets.skills.critical_boost,
 		name: 'Critical damage',
 		modifier: (skill: SkillsComponent) => skill.critDamage *= 1.5
 	},
 	{
-		icon: AssetManager.skills.defense_boost,
+		icon: assets.skills.defense_boost,
 		name: 'Defense',
 		modifier: (skill: SkillsComponent) => skill.critDamage *= 1.5
 	},
 	{
-		icon: AssetManager.skills.exp_boost,
+		icon: assets.skills.exp_boost,
 		name: 'Experience up',
 		modifier: (skill: SkillsComponent) => skill.critDamage *= 1.5
 	},
 	{
-		icon: AssetManager.skills.knockback_boost,
+		icon: assets.skills.knockback_boost,
 		name: 'Knockback',
 		modifier: (skill: SkillsComponent) => skill.knockback *= 1.2
 	},
