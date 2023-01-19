@@ -6,6 +6,9 @@ import { ECS, Entity, System } from "../Globals/ECS";
 import { camera } from "../Globals/Initialize";
 
 class CameraSystem extends System {
+    frustumSize: number = 600
+    newFrustrumSize?: number
+    aspect: number = window.innerWidth / window.innerHeight
     constructor() {
         super(CameraTargetComponent)
     }
@@ -17,24 +20,21 @@ class CameraSystem extends System {
             if (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom) {
                 const width = cameraTarget.right - cameraTarget.left
                 const height = cameraTarget.top - cameraTarget.bottom
-                const aspect = width < height ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
-                const frustumSize = Math.min(width, height)
-                camera.left = -frustumSize / 2
-                camera.right = frustumSize / 2
-                camera.top = frustumSize / aspect / 2
-                camera.bottom = -frustumSize / aspect / 2
-                camera.updateProjectionMatrix()
+                this.newFrustrumSize = Math.min(width, height)
+                this.aspect = width < height ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
+
             } else {
-                const aspect = window.innerWidth / window.innerHeight;
-                const frustumSize = 300
-                camera.left = - frustumSize * aspect / 2
-                camera.right = frustumSize * aspect / 2
-                camera.top = frustumSize / 2
-                camera.bottom = - frustumSize / 2
+                this.newFrustrumSize = 700
+                this.aspect = window.innerWidth / window.innerHeight
+            }
+            if (this.frustumSize != this.newFrustrumSize) {
+                this.frustumSize = this.newFrustrumSize
+                camera.left = -this.frustumSize / 2
+                camera.right = this.frustumSize / 2
+                camera.top = this.frustumSize / this.aspect / 2
+                camera.bottom = -this.frustumSize / this.aspect / 2
                 camera.updateProjectionMatrix()
             }
-
-            camera.position.x = position.x
 
             if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
                 camera.position.y = cameraTarget.bottom - camera.bottom
