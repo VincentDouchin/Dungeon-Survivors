@@ -3,12 +3,12 @@ import { assets } from "../Globals/Initialize"
 const PROJECTILES: Record<string, ProjectileDefinition> = {
 	arrow: {
 		tile: assets.tiles.weapon_arrow,
-		speed: 5000,
+		speed: 500,
 		damage: 10
 	},
 	fireBall: {
 		tile: assets.tiles.flame,
-		speed: 3000,
+		speed: 300,
 		damage: 20
 	}
 
