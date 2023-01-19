@@ -4,12 +4,12 @@ import DamageComponent from "../Components/DamageComponent"
 import MeshComponent from "../Components/MeshComponent"
 import PositionComponent from "../Components/PositionComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import AssetManager from "../Globals/AssetManager"
 import { Entity } from "../Globals/ECS"
+import { assets } from "../Globals/Initialize"
 
 const SpikeEntity = ({ x, y }: { x: number, y: number }) => {
 	const spike = new Entity()
-	const tile = AssetManager.tiles.floor_spikes_anim
+	const tile = assets.tiles.floor_spikes_anim
 	spike.addComponent(new MeshComponent(tile, { renderOrder: 1 }))
 	spike.addComponent(new AnimationComponent({ idle: tile }))
 	spike.addComponent(new BodyComponent({ type: "fixed" }, [

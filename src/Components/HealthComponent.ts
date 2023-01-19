@@ -1,10 +1,10 @@
 
-import AssetManager from "../Globals/AssetManager";
 import { Component, ECS } from "../Globals/ECS";
+import { assets } from "../Globals/Initialize";
 import updateBar from "../Utils/UpdateBar";
 import MeshComponent from "./MeshComponent";
-const full = AssetManager.UI['healthFull']
-const empty = AssetManager.UI['healthBar']
+const full = assets.UI['healthFull']
+const empty = assets.UI['healthBar']
 class HealthComponent extends Component {
 	health: number
 	maxHealth: number

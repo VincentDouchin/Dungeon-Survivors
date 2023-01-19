@@ -2,7 +2,7 @@
 import MeshComponent from "../Components/MeshComponent"
 import PositionComponent from "../Components/PositionComponent"
 import ECSEVENTS from "../Constants/ECSEvents"
-import AssetManager from "../Globals/AssetManager"
+import { assets } from "../Globals/Initialize"
 import { ECS, Entity } from "../Globals/ECS"
 import { camera } from "../Globals/Initialize"
 import getBuffer from "../Utils/Buffer"
@@ -18,14 +18,14 @@ const BackgroundEntity = () => {
 
 	const buffer = getBuffer(width, height)
 	const floorTiles: Array<[Tile, number]> = [
-		[AssetManager.tiles.floor_1, 10],
-		[AssetManager.tiles.floor_2, 1],
-		[AssetManager.tiles.floor_3, 1],
-		[AssetManager.tiles.floor_4, 1],
-		[AssetManager.tiles.floor_5, 1],
-		[AssetManager.tiles.floor_6, 1],
-		[AssetManager.tiles.floor_7, 1],
-		[AssetManager.tiles.floor_8, 1],
+		[assets.tiles.floor_1, 10],
+		[assets.tiles.floor_2, 1],
+		[assets.tiles.floor_3, 1],
+		[assets.tiles.floor_4, 1],
+		[assets.tiles.floor_5, 1],
+		[assets.tiles.floor_6, 1],
+		[assets.tiles.floor_7, 1],
+		[assets.tiles.floor_8, 1],
 	]
 	const totalWeight = floorTiles.reduce((acc, v) => acc + v[1], 0)
 	const allTiles = floorTiles.flatMap(([tile, weight]) => new Array(weight).fill(tile))

@@ -6,10 +6,9 @@ import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import ECSEVENTS from "../Constants/ECSEvents";
 import { State } from "../Constants/GameStates";
-import AssetManager from "../Globals/AssetManager";
 import { ECS, Entity, System } from "../Globals/ECS";
 import Engine from "../Globals/Engine";
-import { inputManager } from "../Globals/Initialize";
+import { assets, inputManager } from "../Globals/Initialize";
 
 class PathSystem extends System {
 	constructor() {
@@ -44,8 +43,8 @@ class PathSystem extends System {
 
 						const arrow = new Entity()
 						entity.addChildren(arrow)
-						const arrowMesh = arrow.addComponent(new MeshComponent(AssetManager.UI.arrow))
-						arrow.addComponent(new SelectableComponent(AssetManager.UI.arrowselected, AssetManager.UI.arrow))
+						const arrowMesh = arrow.addComponent(new MeshComponent(assets.UI.arrow))
+						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
 						switch (direction) {
 							case 'left': {

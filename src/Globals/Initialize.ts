@@ -5,7 +5,27 @@ import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE } 
 import KeyboardController from "../InputControllers/KeyboardController"
 import TouchController from "../InputControllers/TouchController"
 import InputManager from "./InputManager"
-
+import AssetLoader from "./AssetLoader"
+import GUISource from './../../assets/GUI.png'
+import GUIData from './../../assets/GUI.json'
+import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
+import iconsSource from './../../assets/icons.png'
+import iconsData from './../../assets/icons.json'
+import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
+import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
+import TiledMap from "../Utils/TiledMap"
+//! Assets
+const assetLoader = new AssetLoader()
+const assets = {
+	UI: await assetLoader.loadFromSlices(GUIData, GUISource),
+	icons: await assetLoader.loadFromSlices(iconsData, iconsSource),
+	magic: await assetLoader.loadFromSlices(MagicSpellsAllSpritesData, MagicSpellsAllSpritesSource,
+		({ buffer }) => ({ buffer, frames: buffer.canvas.width / 24, width: 24 })
+	),
+	tiles: await assetLoader.loadFromTileList(tilesList, tilesSource),
+	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json')
+}
 //! World 
 await RAPIER.init()
 const world = new World({ x: 0, y: 0 })
@@ -30,7 +50,7 @@ const createCamera = () => {
 
 //! Renderer
 const createRenderer = () => {
-	const renderer = new WebGLRenderer({ alpha: true })
+	const renderer = new WebGLRenderer({ alpha: true, })
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
@@ -74,5 +94,5 @@ if (navigator.userAgentData.mobile) {
 	inputManager.registerControllers(TouchController)
 }
 
-export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer }
+export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer, assets }
 

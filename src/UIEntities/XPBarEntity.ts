@@ -1,15 +1,15 @@
 import MeshComponent from "../Components/MeshComponent"
 import UIPosition from "../Components/UIPosition"
 import ECSEVENTS from "../Constants/ECSEvents"
-import AssetManager from "../Globals/AssetManager"
 import { ECS, Entity } from "../Globals/ECS"
+import { assets } from "../Globals/Initialize"
 import framedTile from "../Utils/FramedTile"
 import updateBar from "../Utils/UpdateBar"
 const scalingOptions = { x: { left: 2, right: 4 }, y: { top: 0, bottom: 0 } }
 const w = 100
 const h = 7
-const bar = framedTile(AssetManager.UI.XPBar, scalingOptions, w, h)
-const full = framedTile(AssetManager.UI.XPFull, scalingOptions, w, h)
+const bar = framedTile(assets.UI.XPBar, scalingOptions, w, h)
+const full = framedTile(assets.UI.XPFull, scalingOptions, w, h)
 const XPBarEntity = () => {
 	const xpBar = new Entity()
 	const mesh = new MeshComponent(bar.clone(), { renderOrder: 100, scale: 3 })

@@ -1,13 +1,13 @@
-import AssetManager from "../Globals/AssetManager";
+import { assets } from "../Globals/Initialize"
 
 const PROJECTILES: Record<string, ProjectileDefinition> = {
 	arrow: {
-		tile: AssetManager.tiles.weapon_arrow,
+		tile: assets.tiles.weapon_arrow,
 		speed: 5000,
 		damage: 10
 	},
 	fireBall: {
-		tile: AssetManager.tiles.flame,
+		tile: assets.tiles.flame,
 		speed: 3000,
 		damage: 20
 	}
