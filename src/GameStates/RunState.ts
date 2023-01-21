@@ -4,7 +4,6 @@ import AnimationSystem from "../Systems/AnimationSystem"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import HealthSystem from "../Systems/HealthSystem"
 import MovementSystem from "../Systems/MovementSystem"
-import RenderingSystem from "../Systems/RenderingSystem"
 
 import SkillsComponent from "../Components/SkillsComponent"
 import StoreComponent from "../Components/StoreComponent"
@@ -24,6 +23,8 @@ import TargetingSystem from "../Systems/TargetingSystem"
 import XPPickupSystem from "../Systems/XPPickupSystem"
 import UIRunEntity from "../UIEntities/UIRunEntity"
 import CameraSystem from "../Systems/CameraSystem"
+import RenderSystem from "../Systems/RenderSystem"
+import RenderingSystem from "../Systems/RenderingSystem"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -49,17 +50,18 @@ class RunState implements GameState {
 	}
 	set(oldState?: State) {
 		inputManager.enable('dpad')
-		RenderingSystem.register()
 		MovementSystem.register()
 		AnimationSystem.register()
 		HealthSystem.register()
 		BodyCreationSystem.register()
+		RenderingSystem.register()
 		XPPickupSystem.register()
 		LightingSystem.register()
 		ShootingSystem.register()
 		TargetingSystem.register()
 		CameraSystem.register()
 		Coroutines.resume()
+		RenderSystem.register()
 
 		switch (oldState) {
 			case State.pause: {
@@ -75,7 +77,7 @@ class RunState implements GameState {
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
-				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
+				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
 				const encounter = new Encounter()
 				Coroutines.add(function* () {
 					yield* encounter.wave(Enemies.goblin, 20, 10)

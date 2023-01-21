@@ -1,11 +1,10 @@
+import { State } from "../Constants/GameStates"
 import { INTERACT } from "../Constants/InputsNames"
 import { ECS, Entity } from "../Globals/ECS"
 import Engine from "../Globals/Engine"
-import { inputManager } from "../Globals/Initialize"
-import RenderingSystem from "../Systems/RenderingSystem"
+import { inputManager, render } from "../Globals/Initialize"
+import RenderSystem from "../Systems/RenderSystem"
 import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
-import { render } from "../Globals/Initialize"
-import { State } from "../Constants/GameStates"
 
 class LevelUpState implements GameState {
 	ui: Entity | null = null
@@ -24,7 +23,7 @@ class LevelUpState implements GameState {
 	}
 	set() {
 		this.ui = SkillMenuUIEntity()
-		RenderingSystem.register()
+		RenderSystem.register()
 	}
 	unset() {
 		this.ui?.destroy()
