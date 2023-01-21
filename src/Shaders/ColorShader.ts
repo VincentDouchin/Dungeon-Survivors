@@ -1,15 +1,14 @@
-import { ShaderMaterial, Uniform } from "three"
-import frag from './frag/colors.frag?raw'
-import vert from './vert/main.vert?raw'
-const ColorShader = (x: number, y: number, z: number, w: number) => {
-	return new ShaderMaterial({
-		vertexShader: vert,
-		fragmentShader: frag,
-		uniforms: {
-			color: new Uniform([x, y, z, w])
-		},
-		transparent: true,
+import frag from './glsl/colors.frag?raw'
+import Shader from "./Shader"
+import vert from './glsl/main.vert?raw'
 
-	})
+class ColorShader extends Shader {
+	vert = vert
+	frag = frag
+	constructor(x: number, y: number, z: number, w: number) {
+		super(() => ({
+			color: [x, y, z, w]
+		}))
+	}
 }
 export default ColorShader
