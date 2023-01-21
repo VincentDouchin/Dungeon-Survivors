@@ -1,4 +1,4 @@
-import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE } from "../Constants/InputsNames"
+import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
 import { AmbientLight, Clock, Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
@@ -100,7 +100,7 @@ const render = () => {
 }
 
 //! Inputs
-const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, AXISX, AXISY, INTERACT, PAUSE])
+const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, AXISX, AXISY, INTERACT, PAUSE, SWITCH])
 inputManager.registerControllers(KeyboardController)
 //@ts-ignore
 if (navigator.userAgentData.mobile) {

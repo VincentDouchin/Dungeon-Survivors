@@ -1,4 +1,5 @@
-import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE } from "../Constants/InputsNames"
+import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
+
 import EventBus from "../Utils/EventBus"
 
 class KeyboardController implements InputController {
@@ -9,7 +10,9 @@ class KeyboardController implements InputController {
 		'KeyA': MOVELEFT,
 		'KeyD': MOVERIGHT,
 		'KeyE': INTERACT,
-		'Escape': PAUSE
+		'Escape': PAUSE,
+		'ShiftLeft': SWITCH
+
 	}
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
