@@ -1,5 +1,7 @@
 import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
 import { Component, ECS } from "../Globals/ECS";
+
+import { Vector2 } from "three";
 import { world } from "../Globals/Initialize";
 
 class BodyComponent extends Component {
@@ -8,7 +10,7 @@ class BodyComponent extends Component {
 	colliders: Collider[] = []
 	colliderDescriptions: ColliderDesc[]
 	moveForce: number
-	velocity: { x: number, y: number } = { x: 0, y: 0 }
+	velocity = new Vector2()
 	constructor(bodyOptions: bodyOptions, colliderOptions: colliderOptions[]) {
 		super()
 
