@@ -1,10 +1,12 @@
+import { ECS, Entity, System } from "../Globals/ECS";
+
 import BodyComponent from "../Components/BodyComponent";
-import HealthComponent from "../Components/HealthComponent"; import JointComponent from "../Components/JointComponent";
-;
+import HealthComponent from "../Components/HealthComponent";
+import JointComponent from "../Components/JointComponent";
 import PositionComponent from "../Components/PositionComponent";
+import RangedComponent from "../Components/RangedComponent";
 import RotationComponent from "../Components/RotationComponent";
 import TargeterComponent from "../Components/TargeterComponent";
-import { ECS, Entity, System } from "../Globals/ECS";
 
 class TargetingSystem extends System {
 	constructor() {
@@ -16,22 +18,22 @@ class TargetingSystem extends System {
 			const targeter = entity.getComponent(TargeterComponent)
 			const joint = entity.getComponent(JointComponent)
 			const body = entity.getComponent(BodyComponent)
-			if (!targeter.targetedEnemy) {
-				const enemyId = ECS.getEntitiesAndComponents(HealthComponent)
-					.reduce<[string, number]>(([target, distance], [entityId, health]) => {
-						if (health.type == targeter.target) {
-							const enemyPosition = ECS.getEntityById(entityId).getComponent(PositionComponent)
-							const distanceToEnemy = Math.pow(enemyPosition.x - position.x, 2) + Math.pow(enemyPosition.y - position.y, 2)
-
-							if (distanceToEnemy < distance) return [entityId, distanceToEnemy]
-							if (distance == 0) return [entityId, distanceToEnemy]
-						}
-						return [target, distance]
-					}, ['', 0])[0]
-				if (enemyId) {
-					targeter.targetedEnemy = enemyId
-				}
+			const ranged = entity.getComponent(RangedComponent)
+			// if (!targeter.targetedEnemy) {
+			const enemyId = ECS.getEntitiesAndComponents(HealthComponent)
+				.reduce<[string, number]>(([target, distance], [entityId, health]) => {
+					if (health.type == targeter.target) {
+						const enemyPosition = ECS.getEntityById(entityId).getComponent(PositionComponent)
+						const distanceToEnemy = enemyPosition.distanceTo(position)
+						if (distanceToEnemy < distance) return [entityId, distanceToEnemy]
+						if (distance == 0) return [entityId, distanceToEnemy]
+					}
+					return [target, distance]
+				}, ['', 0])[0]
+			if (enemyId) {
+				targeter.targetedEnemy = enemyId
 			}
+			// }
 			const rotation = entity.getComponent(RotationComponent)
 			if (targeter.targetedEnemy) {
 				const enemy = ECS.getEntityById(targeter.targetedEnemy)
@@ -39,7 +41,7 @@ class TargetingSystem extends System {
 				const x = position.x - enemyPosition.x
 				const y = position.y - enemyPosition.y
 				const distance = Math.sqrt(x ** 2 + y ** 2)
-				if (distance < targeter.distanceToTarget) return
+				if (ranged ? distance > targeter.distanceToTarget : distance < targeter.distanceToTarget) return
 				const angle = Math.atan2(y, x)
 				if (joint?.type == 'revolute') {
 					const r = rotation.rotation
@@ -52,8 +54,9 @@ class TargetingSystem extends System {
 						rotation.angVel = Math.sin(angleDiff) * 4
 					}
 				} else {
-					body.velocity.x = -Math.cos(angle)
-					body.velocity.y = -Math.sin(angle)
+					const direction = ranged ? -1 : 1
+					body.velocity.x -= Math.cos(angle) * direction
+					body.velocity.y -= Math.sin(angle) * direction
 				}
 
 			} else {

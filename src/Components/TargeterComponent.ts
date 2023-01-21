@@ -1,10 +1,12 @@
-import ECSEVENTS from "../Constants/ECSEvents";
 import { Component, ECS, Entity } from "../Globals/ECS";
+
+import ECSEVENTS from "../Constants/ECSEvents";
 
 class TargeterComponent extends Component {
 	target: number | null = null
 	targetedEnemy: string | null = null
 	distanceToTarget: number
+
 	constructor(target: number | string, distanceToTarget?: number) {
 		super()
 		this.distanceToTarget = distanceToTarget ?? 0
