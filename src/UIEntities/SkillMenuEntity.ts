@@ -1,4 +1,4 @@
-import MeshComponent from "../Components/MeshComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import SelectableComponent from "../Components/SelectableComponent"
 import TextComponent from "../Components/TextComponent"
 import UIPosition from "../Components/UIPosition"
@@ -12,7 +12,7 @@ import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity()
-	skillMenu.addComponent(new MeshComponent(framedTile(assets.UI.frame1, 16, 100, 50), { scale: 2 }))
+	skillMenu.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 100, 50), { scale: 2 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPosition({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(-2, 0, 30)
@@ -20,10 +20,10 @@ const SkillMenuEntity = () => {
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity()
 		const buttonTile = framedTile(assets.UI.frame2, 4, 24, 24)
-		const buttonMesh = button.addComponent(new MeshComponent(buttonTile, { scale: 2 }))
+		const buttonMesh = button.addComponent(new SpriteComponent(buttonTile, { scale: 2 }))
 		const selectableEntity = new Entity()
 		const emptyTile32 = framedTile(assets.UI.empty, 0, 32, 32)
-		selectableEntity.addComponent(new MeshComponent(emptyTile32, { scale: 2 }))
+		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32))
 		selectableEntity.addComponent(new UIPosition())
 		button.addChildren(selectableEntity)
@@ -33,13 +33,13 @@ const SkillMenuEntity = () => {
 
 
 
-		icon.addComponent(new MeshComponent(skill.icon, { scale: 3 }))
+		icon.addComponent(new SpriteComponent(skill.icon, { scale: 3 }))
 		icon.addComponent(new UIPosition())
 
 		const text = new Entity()
 		text.addComponent(new UIPosition({ x: 0, y: -1 }, { x: 0, y: 0 }))
 		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: '50%' }))
-		text.addComponent(new MeshComponent(assets.UI.empty))
+		text.addComponent(new SpriteComponent(assets.UI.empty))
 
 		button.addChildren(text)
 		button.addChildren(icon)
