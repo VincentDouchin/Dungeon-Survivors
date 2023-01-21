@@ -3,7 +3,7 @@ import { Component } from "../Globals/ECS";
 class ShooterComponent extends Component {
 	projectile: ProjectileDefinition
 	timer: number = 0
-	delay: number = 20
+	delay: number = 40
 	spread: number
 	range: number
 	projectilesNb: number
