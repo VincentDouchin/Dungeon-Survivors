@@ -1,8 +1,7 @@
-import { CanvasTexture } from "three";
-import AnimationComponent from "../Components/AnimationComponent";
-
-import SpriteComponent from "../Components/SpriteComponent";
 import { Entity, System } from "../Globals/ECS";
+
+import AnimationComponent from "../Components/AnimationComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 
 class AnimationSystem extends System {
 	constructor() {
@@ -21,12 +20,13 @@ class AnimationSystem extends System {
 
 
 				if (animation.currentState != animation.lastState) {
-					// sprite.uniforms.uTexture = new CanvasTexture(animation.tile[sprite.state]!.canvas)
 					animation.selectedFrame = 0
 				}
 			}
-			sprite.texture.repeat.x = (animation.flipped ? -1 : 1) / animation.maxFrames
-			sprite.texture.offset.x = ((animation.flipped ? 1 : 0) + animation.selectedFrame) / animation.frames
+
+			sprite.texture.repeat.x = (animation.flipped ? -1 : 1)
+			sprite.uniforms.uTexture = animation.tile.textures[animation.selectedFrame]
+			sprite.baseTexture.value = animation.tile.textures[animation.selectedFrame]
 		})
 	}
 }
