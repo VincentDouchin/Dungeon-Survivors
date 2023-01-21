@@ -1,7 +1,8 @@
-import { State } from "../Constants/GameStates";
-import { PAUSE } from "../Constants/InputsNames";
+import { inputManager, render } from "../Globals/Initialize";
+
 import Engine from "../Globals/Engine";
-import { inputManager } from "../Globals/Initialize";
+import { PAUSE } from "../Constants/InputsNames";
+import { State } from "../Constants/GameStates";
 
 class PauseState implements GameState {
 	constructor() {
@@ -13,7 +14,7 @@ class PauseState implements GameState {
 		}
 	}
 	render() {
-
+		render()
 	}
 	set() {
 
