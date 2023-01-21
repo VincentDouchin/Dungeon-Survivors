@@ -10,7 +10,7 @@ const SKILLS: Skill[] = [
 	{
 		icon: assets.skills.attack_boost,
 		name: 'Damage',
-		modifier: (skill: SkillsComponent) => skill.damage *= 1.2
+		modifier: (skill: SkillsComponent) => skill.damage *= 1.1
 	},
 	{
 		icon: assets.skills.critical_boost,
