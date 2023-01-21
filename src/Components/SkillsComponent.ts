@@ -1,9 +1,10 @@
-import ECSEVENTS from "../Constants/ECSEvents";
 import { Component, ECS } from "../Globals/ECS";
+
+import ECSEVENTS from "../Constants/ECSEvents";
 
 class SkillsComponent extends Component {
 	angVel = 0
-	damage = 0
+	damage = 1
 	critDamage = 0.5
 	critChance = 0.05
 	crit = false
@@ -17,7 +18,7 @@ class SkillsComponent extends Component {
 	}
 	calculateDamage(damageAmount: number) {
 		this.crit = this.critChance > Math.random()
-		let damage = damageAmount + this.damage
+		let damage = damageAmount * this.damage
 
 		if (this.crit) {
 			damage *= (1 + this.critDamage)
