@@ -7,7 +7,7 @@ class OutlineShader extends Shader {
 	frag = frag
 	constructor(color?: [number, number, number, number]) {
 		super((sprite) => ({
-			size: [sprite.realWidth, sprite.height],
+			size: [sprite.width, sprite.height],
 			color: color ?? [1, 1, 1, 1]
 		}))
 
