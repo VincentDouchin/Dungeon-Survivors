@@ -1,5 +1,5 @@
 
-import MeshComponent from "../Components/MeshComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import UIPosition from "../Components/UIPosition"
 import { AXISX, AXISY } from "../Constants/InputsNames"
 import { Entity } from "../Globals/ECS"
@@ -14,10 +14,10 @@ class dpadTouchInput implements TouchInput {
 	dpad: Entity
 	constructor(eventBus: EventBus) {
 		this.dpad = new Entity()
-		const dpadMesh = this.dpad.addComponent(new MeshComponent(assets.UI.touchdpad, { scale: 2 }))
+		const dpadMesh = this.dpad.addComponent(new SpriteComponent(assets.UI.touchdpad, { scale: 2 }))
 		this.dpad.addComponent(new UIPosition({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
 		const center = new Entity()
-		center.addComponent(new MeshComponent(assets.UI.touchdpadcenter, { scale: 2 }))
+		center.addComponent(new SpriteComponent(assets.UI.touchdpadcenter, { scale: 2 }))
 		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }, { x: 0, y: 0 }))
 		this.dpad.addChildren(center)
 		let enabled = false
