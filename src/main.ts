@@ -1,12 +1,12 @@
 import Engine from "./Globals/Engine"
-import RunState from "./GameStates/RunState"
 import LevelUpState from "./GameStates/LevelUpState"
-import m5x7 from '../assets/fonts/m5x7.ttf?url'
-//@ts-ignore
-import { preloadFont } from 'troika-three-text'
-import PauseState from "./GameStates/PauseState"
 import MapState from "./GameStates/MapState"
+import PauseState from "./GameStates/PauseState"
+import RunState from "./GameStates/RunState"
 import { State } from "./Constants/GameStates"
+import m5x7 from '../assets/fonts/m5x7.ttf?url'
+import { preloadFont } from 'troika-three-text'
+
 await new Promise<void>((resolve) => preloadFont(
 	{ font: m5x7, }, () => resolve()
 ))
