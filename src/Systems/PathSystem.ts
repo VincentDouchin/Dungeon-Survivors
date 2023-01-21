@@ -1,14 +1,17 @@
-import SpriteComponent from "../Components/SpriteComponent";
+import { ECS, Entity, System } from "../Globals/ECS";
+import { assets, inputManager } from "../Globals/Initialize";
+
+import Coroutines from "../Globals/Coroutines";
+import ECSEVENTS from "../Constants/ECSEvents";
+import Engine from "../Globals/Engine";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
+import SpriteComponent from "../Components/SpriteComponent";
 import { State } from "../Constants/GameStates";
-import { ECS, Entity, System } from "../Globals/ECS";
-import Engine from "../Globals/Engine";
-import { assets, inputManager } from "../Globals/Initialize";
+import { easeInCubic } from './../Utils/Tween'
 
 class PathSystem extends System {
 	constructor() {
@@ -43,9 +46,24 @@ class PathSystem extends System {
 
 						const arrow = new Entity()
 						entity.addChildren(arrow)
-						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow))
-						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow))
+						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
+						Coroutines.add(function* () {
+							let t = 0
+							let sign = 1
+							const delay = 30
+							while (arrow) {
+								while (t < delay) {
+									arrowPosition.y += easeInCubic(t, -0.1, 0.1, delay) * sign
+									t++
+									yield
+								}
+								t = 0
+								sign *= -1
+							}
+						})
+
+						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow))
 						switch (direction) {
 							case 'left': {
 								arrowPosition.x -= 16
