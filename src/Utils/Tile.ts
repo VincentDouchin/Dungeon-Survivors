@@ -1,3 +1,4 @@
+import { CanvasTexture, NearestFilter } from "three"
 import getBuffer from "./Buffer"
 
 interface tileOptions {
@@ -17,14 +18,15 @@ class Tile {
 	width: number
 	height: number
 	frames: number
-	constructor({ buffer, width, height, frames = 1, normalMap, hurt, outline }: tileOptions) {
+	texture: CanvasTexture
+	constructor({ buffer, width, height, frames = 1 }: tileOptions) {
 		this.buffer = buffer
-		this.normalMap = normalMap
+		this.texture = new CanvasTexture(buffer.canvas)
+		this.texture.minFilter = NearestFilter
+		this.texture.magFilter = NearestFilter
 		this.width = width ?? buffer.canvas.width
 		this.height = height ?? buffer.canvas.height
 		this.frames = frames
-		this.hurt = hurt
-		this.outline = outline
 	}
 	static fromImage(image: HTMLImageElement) {
 		const buffer = getBuffer(image.width, image.height)
