@@ -1,16 +1,19 @@
 import BodyComponent from "../Components/BodyComponent";
 import DamageComponent from "../Components/DamageComponent";
 import HealthComponent from "../Components/HealthComponent";
-import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import SkillsComponent from "../Components/SkillsComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
 import Coroutines from "../Globals/Coroutines";
 import { Entity, System } from "../Globals/ECS";
 import { assets } from "../Globals/Initialize";
+import BarShader from "../Shaders/BarShader";
+import ColorShader from "../Shaders/ColorShader";
 import waitFor from "../Utils/WaitFor";
 
 const empty = assets.UI['healthBar']
+const full = assets.UI['healthFull']
 
 class HealthSystem extends System {
 	constructor() {
@@ -19,18 +22,18 @@ class HealthSystem extends System {
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
 			const health = entity.getComponent(HealthComponent)
-			const mesh = entity.getComponent(MeshComponent)
+			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
 			// const animation = entity.getComponent(AnimationComponent)
 
-			if (health.show && !health.healthBarId && mesh) {
+			if (health.show && !health.healthBarId && sprite) {
 				const healthBarEntity = new Entity()
-				const healthMesh = new MeshComponent(empty.clone(), { renderOrder: 20 })
+				const healthMesh = new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture)] })
 				entity.addChildren(healthBarEntity)
 				healthBarEntity.addComponent(healthMesh)
 				health.healthBarId = healthBarEntity.id
-				mesh.mesh.add(healthMesh.mesh)
-				healthMesh.mesh.position.y = mesh.height / 2
+				sprite.mesh.add(healthMesh.mesh)
+				healthMesh.mesh.position.y = sprite.height / 2
 				health.updateHealth(0)
 			}
 			if (body && health.canTakeDamage) {
@@ -58,25 +61,22 @@ class HealthSystem extends System {
 						// ! Damage number display
 						const damageText = new Entity()
 						damageText.addComponent(new PositionComponent(position.x, position.y))
-						damageText.addComponent(new MeshComponent(assets.UI.empty))
+						damageText.addComponent(new SpriteComponent(assets.UI.empty))
 						damageText.addComponent(new TextComponent(String(damageAmount * -1), { size: 8, color: skill?.crit ? 0xff0000 : 0xffffff }))
 
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
-						// if (animation && damage.amount > 0) {
-						// 	mesh.material.emissive = new Color(0xff0000)
-						// 	mesh.material.emissiveIntensity = 0.5
-						// 	mesh.material.combine = MixOperation
-						// }
+						if (sprite && damage.amount > 0) {
+							sprite.addShader(new ColorShader(1, 0, 0, 1))
+						}
 
 						Coroutines.add(function* () {
 							yield* waitFor(20)
+							if (sprite) {
+								sprite.removeShader(ColorShader)
+							}
 							health.canTakeDamage = true
 							damageText.destroy()
-							// if (animation) {
-							// 	mesh.modifier = 'buffer'
-
-							// }
 						})
 
 					}

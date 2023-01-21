@@ -1,10 +1,6 @@
 
 import { Component, ECS } from "../Globals/ECS";
-import { assets } from "../Globals/Initialize";
-import updateBar from "../Utils/UpdateBar";
-import MeshComponent from "./MeshComponent";
-const full = assets.UI['healthFull']
-const empty = assets.UI['healthBar']
+import SpriteComponent from "./SpriteComponent";
 class HealthComponent extends Component {
 	health: number
 	maxHealth: number
@@ -22,15 +18,10 @@ class HealthComponent extends Component {
 	updateHealth(amount: number) {
 
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth))
+
 		if (this.healthBarId) {
-			updateBar(
-				ECS.getEntityById(this.healthBarId).getComponent(MeshComponent),
-				empty,
-				full,
-				this.health / this.maxHealth)
-
+			ECS.getEntityById(this.healthBarId).getComponent(SpriteComponent).uniforms.percent = this.health / this.maxHealth
 		}
-
 	}
 
 }
