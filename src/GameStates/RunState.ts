@@ -1,30 +1,32 @@
 import { ECS, Entity } from "../Globals/ECS"
 import { inputManager, render, world } from "../Globals/Initialize"
-import AnimationSystem from "../Systems/AnimationSystem"
-import BodyCreationSystem from "../Systems/BodyCreationSystem"
-import HealthSystem from "../Systems/HealthSystem"
-import MovementSystem from "../Systems/MovementSystem"
 
-import SkillsComponent from "../Components/SkillsComponent"
-import StoreComponent from "../Components/StoreComponent"
-import Enemies from "../Constants/Enemies"
-import { State } from "../Constants/GameStates"
-import HEROS from "../Constants/Heros"
-import { PAUSE } from "../Constants/InputsNames"
-import WEAPONS from "../Constants/Weapons"
+import AnimationSystem from "../Systems/AnimationSystem"
 import BackgroundEntity from "../Entities/BackgroundEntity"
-import PlayerEntity from "../Entities/PlayerEntity"
-import Encounter from "../Game/Encounter"
-import Coroutines from "../Globals/Coroutines"
-import Engine from "../Globals/Engine"
-import LightingSystem from "../Systems/LightingSystem"
-import ShootingSystem from "../Systems/ShootingSystem"
-import TargetingSystem from "../Systems/TargetingSystem"
-import XPPickupSystem from "../Systems/XPPickupSystem"
-import UIRunEntity from "../UIEntities/UIRunEntity"
+import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
+import Coroutines from "../Globals/Coroutines"
+import Encounter from "../Game/Encounter"
+import Enemies from "../Constants/Enemies"
+import Engine from "../Globals/Engine"
+import FlockingSystem from "../Systems/FlockingSystem"
+import HEROS from "../Constants/Heros"
+import HealthSystem from "../Systems/HealthSystem"
+import LightingSystem from "../Systems/LightingSystem"
+import MovementSystem from "../Systems/MovementSystem"
+import { PAUSE } from "../Constants/InputsNames"
+import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import RenderingSystem from "../Systems/RenderingSystem"
+import ShootingSystem from "../Systems/ShootingSystem"
+import SkillsComponent from "../Components/SkillsComponent"
+import { State } from "../Constants/GameStates"
+import StoreComponent from "../Components/StoreComponent"
+import SwitchingSystem from "../Systems/SwitchingSystem"
+import TargetingSystem from "../Systems/TargetingSystem"
+import UIRunEntity from "../UIEntities/UIRunEntity"
+import WEAPONS from "../Constants/Weapons"
+import XPPickupSystem from "../Systems/XPPickupSystem"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -62,6 +64,8 @@ class RunState implements GameState {
 		CameraSystem.register()
 		Coroutines.resume()
 		RenderSystem.register()
+		SwitchingSystem.register()
+		FlockingSystem.register()
 
 		switch (oldState) {
 			case State.pause: {
@@ -77,7 +81,7 @@ class RunState implements GameState {
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
-				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
+				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
 				const encounter = new Encounter()
 				Coroutines.add(function* () {
 					yield* encounter.wave(Enemies.goblin, 20, 10)
