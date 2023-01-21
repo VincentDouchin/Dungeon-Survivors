@@ -1,18 +1,20 @@
-import { AmbientLight } from "three";
-import CameraTargetComponent from "../Components/CameraTargetComponent";
-import PathWalkerComponent from "../Components/PathWalkerComponent";
-import PositionComponent from "../Components/PositionComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
-import HEROS from "../Constants/Heros";
-import PathEntity from "../Entities/PathEntity";
 import { ECS, Entity } from "../Globals/ECS";
 import { assets, render, scene, world } from "../Globals/Initialize";
+
+import { AmbientLight } from "three";
+import AnimationComponent from "../Components/AnimationComponent";
 import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
+import CameraTargetComponent from "../Components/CameraTargetComponent";
+import ECSEVENTS from "../Constants/ECSEvents";
+import HEROS from "../Constants/Heros";
 import MovementSystem from "../Systems/MovementSystem";
+import PathEntity from "../Entities/PathEntity";
 import PathSystem from "../Systems/PathSystem";
+import PathWalkerComponent from "../Components/PathWalkerComponent";
+import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
+import SpriteComponent from "../Components/SpriteComponent";
 
 class MapState implements GameState {
 	map?: Entity
@@ -44,7 +46,7 @@ class MapState implements GameState {
 		this.map.addComponent(new PositionComponent(0, 0))
 		const knight = HEROS.knightMale
 		this.player.addComponent(new SpriteComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
-		// this.player.addComponent(new AnimationComponent(knight.tiles))
+		this.player.addComponent(new AnimationComponent(knight.tiles))
 		this.player.addComponent(new CameraTargetComponent({
 			left: -mapTile.width / 2,
 			right: mapTile.width / 2,
