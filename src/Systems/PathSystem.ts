@@ -1,4 +1,4 @@
-import MeshComponent from "../Components/MeshComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
@@ -43,7 +43,7 @@ class PathSystem extends System {
 
 						const arrow = new Entity()
 						entity.addChildren(arrow)
-						const arrowMesh = arrow.addComponent(new MeshComponent(assets.UI.arrow))
+						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow))
 						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
 						switch (direction) {
