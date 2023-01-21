@@ -1,21 +1,22 @@
-
-import RAPIER, { World } from "@dimforge/rapier2d-compat"
-import { AmbientLight, Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
 import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE } from "../Constants/InputsNames"
-import KeyboardController from "../InputControllers/KeyboardController"
-import TouchController from "../InputControllers/TouchController"
-import InputManager from "./InputManager"
+import { AmbientLight, Clock, Color, OrthographicCamera, Scene, WebGLRenderer } from "three"
+import RAPIER, { World } from "@dimforge/rapier2d-compat"
+
 import AssetLoader from "./AssetLoader"
-import GUISource from './../../assets/GUI.png'
 import GUIData from './../../assets/GUI.json'
-import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import GUISource from './../../assets/GUI.png'
+import InputManager from "./InputManager"
+import KeyboardController from "../InputControllers/KeyboardController"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
-import iconsSource from './../../assets/icons.png'
+import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import Tile from "../Utils/Tile"
+import TiledMap from "../Utils/TiledMap"
+import TouchController from "../InputControllers/TouchController"
 import iconsData from './../../assets/icons.json'
+import iconsSource from './../../assets/icons.png'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
-import TiledMap from "../Utils/TiledMap"
-import Tile from "../Utils/Tile"
+
 //! Assets
 const assetLoader = new AssetLoader()
 const assets: {
@@ -35,6 +36,9 @@ const assets: {
 	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json'),
 	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true })) as Record<skillName, Tile>
 }
+// ! Clock
+const clock = new Clock()
+
 //! World 
 await RAPIER.init()
 const world = new World({ x: 0, y: 0 })
@@ -103,5 +107,5 @@ if (navigator.userAgentData.mobile) {
 	inputManager.registerControllers(TouchController)
 }
 
-export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer, assets }
+export { render, scene, inputManager, world, camera, UIScene, UICamera, backgroundScene, renderer, assets, clock }
 
