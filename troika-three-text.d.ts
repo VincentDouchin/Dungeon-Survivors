@@ -18,7 +18,7 @@ export class GlyphsGeometry {
 }
 export type anchorY = 'middle' | 'top'
 export type anchorX = 'center'
-export class Text extends Mesh {
+export class Text extends THREE.Object3D {
     text: string
     fontSize: number
     font: string
@@ -28,9 +28,9 @@ export class Text extends Mesh {
     maxWidth: number
     constructor(...args: any[]);
 
-    clone(...args: any[]): void;
+    clone(...args: any[]): Text;
 
-    copy(...args: any[]): void;
+    copy(...args: any[]): Text;
 
     dispose(...args: any[]): void;
 
