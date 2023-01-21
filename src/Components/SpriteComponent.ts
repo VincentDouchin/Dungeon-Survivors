@@ -1,4 +1,4 @@
-import { Material, Mesh, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Sprite, Texture, Uniform, WebGLRenderTarget } from "three";
+import { Material, Mesh, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from "three";
 
 import { Component } from "../Globals/ECS";
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
@@ -13,7 +13,6 @@ class SpriteComponent extends Component {
 	renderTarget: WebGLRenderTarget
 	material: Material
 	width: number
-	// realWidth: number
 	height: number
 	renderOrder: number
 	scale: number
@@ -37,8 +36,8 @@ class SpriteComponent extends Component {
 	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[] }) {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [] }, options)
-		this.width = tile.width * newOptions.scale
-		this.height = tile.height * newOptions.scale
+		this.width = tile.width
+		this.height = tile.height
 		this.renderOrder = newOptions.renderOrder * 10
 		this.scale = newOptions.scale
 
@@ -60,7 +59,7 @@ class SpriteComponent extends Component {
 		this.material = new MeshStandardMaterial({ map: this.renderTarget.texture, transparent: true })
 
 		this.mesh = new Mesh(
-			new PlaneGeometry(this.width, this.height),
+			new PlaneGeometry(this.scaledWidth, this.scaledHeight),
 			this.material
 		)
 		this.mesh.renderOrder = this.renderOrder
@@ -83,12 +82,16 @@ class SpriteComponent extends Component {
 	removeShader(shaderConstructor: Constructor<Shader>) {
 		const pass = this.shaderPasses.get(shaderConstructor.name)
 		if (pass) {
-			// const index = this.effectComposer.passes.indexOf(pass)
-			// this.effectComposer.passes.splice(index, 1)
 			this.effectComposer.removePass(pass)
 			this.shaderPasses.delete(shaderConstructor.name)
 			this.render()
 		}
+	}
+	get scaledWidth() {
+		return this.scale * this.width
+	}
+	get scaledHeight() {
+		return this.scale * this.height
 	}
 	destroy(): void {
 		this.mesh.geometry.dispose()
@@ -101,12 +104,6 @@ class SpriteComponent extends Component {
 		renderer.clear()
 
 	}
-	// static fromTile(tile: Tile, options?: { renderOrder?: number, scale?: number }) {
-	// 	return new SpriteComponent(
-	// 		{ width: tile.width, height: tile.height, ...options },
-	// 		[new RenderShader(tile.texture)]
-	// 	)
-	// }
 }
 SpriteComponent.register()
 

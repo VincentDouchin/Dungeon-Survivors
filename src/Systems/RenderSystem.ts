@@ -1,10 +1,11 @@
+import { Entity, System } from "../Globals/ECS";
+import { UICamera, UIScene, scene } from "../Globals/Initialize";
+
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
 import UIPosition from "../Components/UIPosition";
-import { Entity, System } from "../Globals/ECS";
-import { scene, UICamera, UIScene } from "../Globals/Initialize";
 
 class RenderSystem extends System {
 	constructor() {
@@ -25,11 +26,10 @@ class RenderSystem extends System {
 			}
 			if (uiPosition) {
 				const parentSprite = entity.parent?.getComponent(SpriteComponent)
-
-				const parentWidth = parentSprite ? parentSprite?.width / 2 : UICamera.right
-				const parentHeight = parentSprite ? parentSprite?.height / 2 : UICamera.top
-				const x = uiPosition.relativePosition.x * parentWidth - sprite.width / 2 * uiPosition.center.x
-				const y = uiPosition.relativePosition.y * parentHeight - sprite.height / 2 * uiPosition.center.y
+				const parentWidth = parentSprite ? (parentSprite?.scaledWidth) / 2 : UICamera.right
+				const parentHeight = parentSprite ? parentSprite?.scaledHeight / 2 : UICamera.top
+				const x = uiPosition.relativePosition.x * parentWidth - sprite.scaledWidth / 2 * uiPosition.center.x
+				const y = uiPosition.relativePosition.y * parentHeight - sprite.scaledHeight / 2 * uiPosition.center.y
 				sprite.mesh.position.set(x, y, 0)
 				sprite.renderOrder = (parentSprite?.renderOrder ?? 1) + 1
 
