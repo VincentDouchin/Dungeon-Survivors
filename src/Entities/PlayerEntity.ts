@@ -4,13 +4,16 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import CameraTargetComponent from "../Components/CameraTargetComponent"
 import { Color } from "three"
 import { Entity } from "../Globals/ECS"
+import FlockingComponent from "../Components/FlockingComponent"
 import HealthComponent from "../Components/HealthComponent"
 import LightComponent from "../Components/LightComponent"
 import OutlineShader from "../Shaders/OutlineShader"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
+import RangedComponent from "../Components/RangedComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
+import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
@@ -21,13 +24,15 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,5%)'), 1000))
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new AnimationComponent(hero.tiles))
-	if (main) {
-		player.addComponent(new TargeterComponent(main.id, 50))
-	} else {
-		sprite.addShader(new OutlineShader())
-		player.addComponent(new PlayerControllerComponent())
+	if (!weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
+	if (!main) {
+		sprite.addShader(new OutlineShader([1, 1, 1, 0.8]))
 		player.addComponent(new CameraTargetComponent({}))
+	} else {
+		player.addComponent(new TargeterComponent(COLLISIONGROUPS.ENEMY, 100))
 	}
+	player.addComponent(new FlockingComponent(!main, 50))
+	player.addComponent(new PlayerControllerComponent(!main))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 5000 },
 		[
