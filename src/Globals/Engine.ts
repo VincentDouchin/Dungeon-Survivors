@@ -21,7 +21,10 @@ const Engine = new class {
 
 		let updated = false
 
-		if (this.accumulatedTime > 60) this.accumulatedTime = this.timeStep
+		if (this.accumulatedTime > 60) {
+			this.accumulatedTime = this.timeStep
+			console.log('frame skipped')
+		}
 
 		while (this.accumulatedTime >= this.timeStep) {
 			Coroutines.run()
