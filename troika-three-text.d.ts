@@ -16,7 +16,7 @@ export class GlyphsGeometry {
     updateGlyphs(...args: any[]): void;
 
 }
-export type anchorY = 'middle'
+export type anchorY = 'middle' | 'top'
 export type anchorX = 'center'
 export class Text extends Mesh {
     text: string
