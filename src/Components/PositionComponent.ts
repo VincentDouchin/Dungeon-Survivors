@@ -1,4 +1,5 @@
 import { Component } from "../Globals/ECS";
+import { Vector2 } from "three";
 
 class PositionComponent extends Component {
 	x: number
@@ -7,6 +8,12 @@ class PositionComponent extends Component {
 		super()
 		this.x = x
 		this.y = y
+	}
+	get position() {
+		return new Vector2(this.x, this.y)
+	}
+	distanceTo(position: PositionComponent) {
+		return this.position.distanceTo(position.position)
 	}
 }
 PositionComponent.register()
