@@ -1,13 +1,16 @@
-import SpriteComponent from "../Components/SpriteComponent"
+import { ECS, Entity } from "../Globals/ECS"
+import { assets, clock, inputManager } from "../Globals/Initialize"
+
+import Coroutines from "../Globals/Coroutines"
+import ECSEVENTS from "../Constants/ECSEvents"
+import Engine from "../Globals/Engine"
+import SKILLS from "../Constants/Skills"
 import SelectableComponent from "../Components/SelectableComponent"
+import ShimmerShader from "../Shaders/ShimmerShader"
+import SpriteComponent from "../Components/SpriteComponent"
+import { State } from "../Constants/GameStates"
 import TextComponent from "../Components/TextComponent"
 import UIPosition from "../Components/UIPosition"
-import ECSEVENTS from "../Constants/ECSEvents"
-import { State } from "../Constants/GameStates"
-import SKILLS from "../Constants/Skills"
-import { ECS, Entity } from "../Globals/ECS"
-import Engine from "../Globals/Engine"
-import { assets, inputManager } from "../Globals/Initialize"
 import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
@@ -33,12 +36,18 @@ const SkillMenuEntity = () => {
 
 
 
-		icon.addComponent(new SpriteComponent(skill.icon, { scale: 3 }))
+		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
+		Coroutines.add(function* () {
+			while (sprite) {
+				yield
+				sprite.uniforms.time = clock.getElapsedTime()
+			}
+		})
 		icon.addComponent(new UIPosition())
 
 		const text = new Entity()
 		text.addComponent(new UIPosition({ x: 0, y: -1 }, { x: 0, y: 0 }))
-		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: '50%' }))
+		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: 'center' }))
 		text.addComponent(new SpriteComponent(assets.UI.empty))
 
 		button.addChildren(text)
