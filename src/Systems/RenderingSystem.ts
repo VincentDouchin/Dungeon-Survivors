@@ -1,4 +1,3 @@
-import MeshComponent from "../Components/MeshComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
@@ -6,6 +5,7 @@ import TextComponent from "../Components/TextComponent";
 import UIPosition from "../Components/UIPosition";
 import { Entity, System } from "../Globals/ECS";
 import { inputManager, scene, UICamera, UIScene } from "../Globals/Initialize";
+import MeshComponent from "../Components/MeshComponent";
 
 class RenderingSystem extends System {
 	objects: number[] = []
