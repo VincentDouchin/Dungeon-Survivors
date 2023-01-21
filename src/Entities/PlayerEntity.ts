@@ -1,28 +1,30 @@
-import { Color } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
+import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import CameraTargetComponent from "../Components/CameraTargetComponent"
+import { Color } from "three"
+import { Entity } from "../Globals/ECS"
 import HealthComponent from "../Components/HealthComponent"
 import LightComponent from "../Components/LightComponent"
+import OutlineShader from "../Shaders/OutlineShader"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
-import XPPickerComponent from "../Components/XPPickerComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import { Entity } from "../Globals/ECS"
 import WeaponEntity from "./WeaponEntity"
+import XPPickerComponent from "../Components/XPPickerComponent"
 
 const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Entity,) => {
 	const player = new Entity()
 
-	player.addComponent(new SpriteComponent(hero.tiles.idle,))
+	const sprite = player.addComponent(new SpriteComponent(hero.tiles.idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,5%)'), 1000))
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (main) {
 		player.addComponent(new TargeterComponent(main.id, 50))
 	} else {
+		sprite.addShader(new OutlineShader())
 		player.addComponent(new PlayerControllerComponent())
 		player.addComponent(new CameraTargetComponent({}))
 	}
