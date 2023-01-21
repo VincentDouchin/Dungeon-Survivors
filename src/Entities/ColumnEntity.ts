@@ -2,7 +2,7 @@ import { Color } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import LightComponent from "../Components/LightComponent"
-import MeshComponent from "../Components/MeshComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import PositionComponent from "../Components/PositionComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
@@ -10,7 +10,7 @@ import { assets } from "../Globals/Initialize"
 
 const ColumnEntity = (x: number, y: number) => {
 	const column = new Entity()
-	column.addComponent(new MeshComponent(assets.tiles.column, { renderOrder: 20 }))
+	column.addComponent(new SpriteComponent(assets.tiles.column, { renderOrder: 20 }))
 	column.addComponent(new BodyComponent(
 		{ type: "fixed" },
 		[
@@ -20,7 +20,7 @@ const ColumnEntity = (x: number, y: number) => {
 	column.addComponent(new PositionComponent(x, y))
 	const torch = new Entity()
 	const torchTile = assets.tiles.flame_wall
-	torch.addComponent(new MeshComponent(torchTile, { renderOrder: 21 }))
+	torch.addComponent(new SpriteComponent(torchTile, { renderOrder: 21 }))
 	torch.addComponent(new AnimationComponent({ default: torchTile }))
 	torch.addComponent(new PositionComponent(x, y))
 

@@ -4,9 +4,9 @@ import BodyComponent from "../Components/BodyComponent"
 import CameraTargetComponent from "../Components/CameraTargetComponent"
 import HealthComponent from "../Components/HealthComponent"
 import LightComponent from "../Components/LightComponent"
-import MeshComponent from "../Components/MeshComponent"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import XPPickerComponent from "../Components/XPPickerComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
@@ -16,7 +16,7 @@ import WeaponEntity from "./WeaponEntity"
 const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Entity,) => {
 	const player = new Entity()
 
-	player.addComponent(new MeshComponent(hero.tiles.idle))
+	player.addComponent(new SpriteComponent(hero.tiles.idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,5%)'), 1000))
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new AnimationComponent(hero.tiles))

@@ -1,7 +1,7 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import DamageComponent from "../Components/DamageComponent"
-import MeshComponent from "../Components/MeshComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
@@ -11,7 +11,7 @@ import waitFor from "../Utils/WaitFor"
 
 const ProjectileEntity = (projectileDefinition: ProjectileDefinition, position: { x: number, y: number }, rotation: number, range: number) => {
 	const projectile = new Entity()
-	projectile.addComponent(new MeshComponent(projectileDefinition.tile))
+	projectile.addComponent(new SpriteComponent(projectileDefinition.tile))
 	if (projectileDefinition.tile.frames > 1) {
 		projectile.addComponent(new AnimationComponent({ idle: projectileDefinition.tile }))
 	}

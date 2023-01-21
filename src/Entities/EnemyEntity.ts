@@ -5,7 +5,7 @@ import BodyComponent from "../Components/BodyComponent"
 import DamageComponent from "../Components/DamageComponent"
 import DroppableComponent from "../Components/DroppableComponent"
 import HealthComponent from "../Components/HealthComponent"
-import MeshComponent from "../Components/MeshComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import PositionComponent from "../Components/PositionComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
@@ -15,7 +15,7 @@ import XPEntity from "./XPEntity"
 const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 	const enemy = new Entity()
 	const orc = Object.values(type.tiles)[0]
-	enemy.addComponent(new MeshComponent(orc))
+	enemy.addComponent(new SpriteComponent(orc))
 	enemy.addComponent(new AnimationComponent(type.tiles))
 	enemy.addComponent(new DamageComponent(1, [COLLISIONGROUPS.PLAYER], -1, 2))
 	enemy.addComponent(new HealthComponent(type.health, COLLISIONGROUPS.ENEMY))
