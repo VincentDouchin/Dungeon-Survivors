@@ -1,5 +1,6 @@
 import ECSEVENTS from "../Constants/ECSEvents"
 import EventBus from "../Utils/EventBus"
+
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
 	systems: System[] = []
@@ -89,7 +90,7 @@ class Entity {
 
 	}
 	removeComponent<T extends Component>(component: Constructor<T>) {
-		const componentMap = ECS.components.get(component.constructor.name)
+		const componentMap = ECS.components.get(component.name)
 		componentMap?.delete(this.id)
 	}
 
