@@ -1,13 +1,13 @@
-import { Component } from "../Globals/ECS";
-// @ts-ignore
-import { Text } from 'troika-three-text'
+import { Text, anchorX, anchorY } from 'troika-three-text'
 
+import { Component } from "../Globals/ECS";
 import m5x7 from '../../assets/fonts/m5x7.ttf?url'
+
 class TextComponent extends Component {
 	previousText: string = ''
 	text: string
 	mesh: Text
-	constructor(text: string, options?: { size?: number, color?: number, maxWidth?: number, anchorY?: string, anchorX?: string }) {
+	constructor(text: string, options?: { size?: number, color?: number, maxWidth?: number, anchorY?: anchorY, anchorX?: anchorX }) {
 		super()
 		const newOptions = Object.assign({ size: 16, color: 0xffffff, anchorX: 'center', anchorY: 'middle' }, options)
 		this.text = text
