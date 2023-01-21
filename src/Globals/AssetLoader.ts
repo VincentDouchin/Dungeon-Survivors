@@ -1,5 +1,6 @@
-import getBuffer from '../Utils/Buffer'
 import Tile from '../Utils/Tile'
+import getBuffer from '../Utils/Buffer'
+
 class AssetLoader {
 	async loadImage(source: string) {
 		const img = new Image()
@@ -12,7 +13,7 @@ class AssetLoader {
 	async loadFromTileList(tileList: string, imageSource: string): Promise<Record<string, Tile>> {
 		const image = await this.loadImage(imageSource)
 		return tileList
-			.split('\n')
+			.split('\r\n')
 			.map((tile: string) => tile.split(' '))
 			.filter((tileList) => tileList.every(item => item))
 			.reduce((acc, [tileName, top, left, width, height, frames = '1']) => {
@@ -24,7 +25,8 @@ class AssetLoader {
 					buffer,
 					width: Number(width),
 					height: Number(height),
-					frames: Number(frames)
+					frames: Number(frames),
+					padding: tileName.includes('anim')
 				})
 				return { ...acc, [tileName]: tile }
 			}, {})

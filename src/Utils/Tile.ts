@@ -1,32 +1,46 @@
 import { CanvasTexture, NearestFilter } from "three"
+
 import getBuffer from "./Buffer"
 
 interface tileOptions {
 	buffer: CanvasRenderingContext2D
-	normalMap?: CanvasRenderingContext2D
-	hurt?: CanvasRenderingContext2D
-	outline?: CanvasRenderingContext2D
 	width?: number
 	height?: number
 	frames?: number
+	padding?: boolean
 }
 class Tile {
 	buffer: CanvasRenderingContext2D
-	normalMap?: CanvasRenderingContext2D
-	hurt?: CanvasRenderingContext2D
-	outline?: CanvasRenderingContext2D
 	width: number
 	height: number
 	frames: number
 	texture: CanvasTexture
-	constructor({ buffer, width, height, frames = 1 }: tileOptions) {
+	textures: CanvasTexture[] = []
+	constructor({ buffer, width, height, frames = 1, padding = false }: tileOptions) {
 		this.buffer = buffer
 		this.texture = new CanvasTexture(buffer.canvas)
 		this.texture.minFilter = NearestFilter
 		this.texture.magFilter = NearestFilter
-		this.width = width ?? buffer.canvas.width
-		this.height = height ?? buffer.canvas.height
+		const realWidth = width ?? buffer.canvas.width
+		const realHeight = height ?? buffer.canvas.height
+		this.width = padding ? realWidth + 2 : realWidth
+		this.height = padding ? realHeight + 2 : realHeight
 		this.frames = frames
+		for (let i = 0; i <= frames - 1; i++) {
+			const frameBuffer = getBuffer(this.width, this.height)
+			const offset = padding ? 1 : 0
+			frameBuffer.drawImage(
+				buffer.canvas,
+				i * (realWidth), 0, realWidth, realHeight,
+				offset, offset, realWidth, realHeight,
+			)
+			const texture = new CanvasTexture(frameBuffer.canvas)
+			texture.minFilter = NearestFilter
+			texture.magFilter = NearestFilter
+
+			this.textures.push(texture)
+
+		}
 	}
 	static fromImage(image: HTMLImageElement) {
 		const buffer = getBuffer(image.width, image.height)
@@ -41,10 +55,6 @@ class Tile {
 			frames: this.frames
 		}
 		options.buffer.drawImage(this.buffer.canvas, 0, 0)
-		if (this.normalMap) {
-			options.normalMap = getBuffer(this.normalMap.canvas.width, this.normalMap.canvas.height)
-			options.normalMap.drawImage(this.normalMap.canvas, 0, 0)
-		}
 		return new Tile(options)
 	}
 

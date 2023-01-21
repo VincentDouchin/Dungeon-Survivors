@@ -1,17 +1,19 @@
-import { Material, Mesh, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from "three";
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
+import { Material, Mesh, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Sprite, Texture, Uniform, WebGLRenderTarget } from "three";
+
 import { Component } from "../Globals/ECS";
-import { renderer } from "../Globals/Initialize";
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import RenderShader from "../Shaders/RenderShader";
 import Shader from "../Shaders/Shader";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import Tile from "../Utils/Tile";
+import { renderer } from "../Globals/Initialize";
+
 class SpriteComponent extends Component {
 	renderTarget: WebGLRenderTarget
 	material: Material
 	width: number
-	realWidth: number
+	// realWidth: number
 	height: number
 	renderOrder: number
 	scale: number
@@ -36,11 +38,11 @@ class SpriteComponent extends Component {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [] }, options)
 		this.width = tile.width * newOptions.scale
-		this.realWidth = tile.width * tile.frames * newOptions.scale
 		this.height = tile.height * newOptions.scale
 		this.renderOrder = newOptions.renderOrder * 10
 		this.scale = newOptions.scale
-		this.renderTarget = new WebGLRenderTarget(this.realWidth, this.height)
+
+		this.renderTarget = new WebGLRenderTarget(this.width, this.height)
 		this.effectComposer = new EffectComposer(renderer, this.renderTarget)
 		this.effectComposer.renderToScreen = false
 		this.renderTarget.texture.minFilter = NearestFilter
@@ -49,8 +51,8 @@ class SpriteComponent extends Component {
 		this.renderTarget.texture.wrapT = RepeatWrapping
 
 		this.texture = this.renderTarget.texture
-		this.baseTexture = new Uniform(tile.texture.clone())
-		this.addShader(new RenderShader(tile.texture), false)
+		this.baseTexture = new Uniform(tile.textures[0])
+		this.addShader(new RenderShader(tile.textures[0]), false)
 		newOptions.shaders.forEach(shaderConstructor => {
 			this.addShader(shaderConstructor, false)
 		})
