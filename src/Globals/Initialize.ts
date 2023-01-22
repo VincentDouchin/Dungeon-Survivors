@@ -95,9 +95,6 @@ const camera = createCamera()
 //! Lights
 const UILight = new AmbientLight(0xffffff)
 UIScene.add(UILight)
-const light = new AmbientLight(new Color('hsl(0,0%,4%)'))
-
-scene.add(light)
 
 //! Render
 const render = () => {

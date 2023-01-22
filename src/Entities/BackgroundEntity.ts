@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 
+import { AmbientLight } from "three"
 import { Background } from "../Constants/BackGrounds"
-import ColumnEntity from "./ColumnEntity"
 import ECSEVENTS from "../Constants/ECSEvents"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -30,6 +30,11 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	}
 	backgroundDefinition.childrenHook && backgroundDefinition.childrenHook(background)
 	const mesh = new SpriteComponent(new Tile({ buffer }), { renderOrder: 0 })
+	mesh.mesh.receiveShadow = true
+	if (backgroundDefinition.lightColor) {
+		mesh.mesh.add(new AmbientLight(backgroundDefinition.lightColor))
+	}
+
 	ECS.eventBus.subscribe(ECSEVENTS.CAMERAMOVE, ({ x, y }: { x: number, y: number }) => {
 		mesh.texture.offset.x = x / mesh.width
 		mesh.texture.offset.y = y / mesh.height

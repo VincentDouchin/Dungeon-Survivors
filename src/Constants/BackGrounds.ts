@@ -1,3 +1,4 @@
+import { Color } from "three"
 import ColumnEntity from "../Entities/ColumnEntity"
 import { Entity } from "../Globals/ECS"
 import Tile from "../Utils/Tile"
@@ -7,6 +8,7 @@ export interface Background {
 	tiles: [Tile, number][]
 	detailHook?: (buffer: CanvasRenderingContext2D) => (x: number, y: number) => void
 	childrenHook?: (background: Entity) => void
+	lightColor?: Color
 }
 const BACKGROUNDS: Record<string, Background> = {
 	DUNGEON: {
@@ -28,7 +30,8 @@ const BACKGROUNDS: Record<string, Background> = {
 					background.addChildren(ColumnEntity(x - width / 2, y - height / 2))
 				}
 			}
-		}
+		},
+		lightColor: new Color('hsl(0,0%,4%)')
 	},
 	FOREST: {
 		tiles: [
@@ -51,7 +54,8 @@ const BACKGROUNDS: Record<string, Background> = {
 			]
 			if (Math.random() < 0.05) buffer.drawImage(details[Math.floor(details.length * Math.random())].buffer.canvas, x, y)
 
-		}
+		},
+		lightColor: new Color('hsl(0,0%,60%)')
 	}
 
 }
