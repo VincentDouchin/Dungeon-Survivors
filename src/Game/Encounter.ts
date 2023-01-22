@@ -1,8 +1,10 @@
+import { ECS, Entity } from "../Globals/ECS";
+import { assets, camera } from "../Globals/Initialize";
+
 import ECSEVENTS from "../Constants/ECSEvents";
 import EnemyEntity from "../Entities/EnemyEntity";
 import ParticleEntity from "../Entities/ParticleEntitty";
-import { ECS, Entity } from "../Globals/ECS";
-import { camera } from "../Globals/Initialize";
+
 class Encounter {
 	enemies: string[] = []
 	constructor() {
@@ -18,7 +20,7 @@ class Encounter {
 			const angle = Math.random() * Math.PI * 2
 			const x = (Math.cos(angle) * camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
 			const y = Math.sin(angle) * camera.top + camera.position.y * ((Math.random() * 1.2) + 1)
-			ParticleEntity(x, y).then(() => {
+			ParticleEntity(x, y, assets.magic['smoke']).then(() => {
 				this.enemies.push(EnemyEntity(enemyType, { x, y }).id)
 
 			})
