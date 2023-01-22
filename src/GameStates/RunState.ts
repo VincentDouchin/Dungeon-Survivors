@@ -2,6 +2,7 @@ import { ECS, Entity } from "../Globals/ECS"
 import { inputManager, render, world } from "../Globals/Initialize"
 
 import AnimationSystem from "../Systems/AnimationSystem"
+import BACKGROUNDS from "../Constants/BackGrounds"
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
@@ -76,7 +77,7 @@ class RunState implements GameState {
 			}; break
 			default: {
 				this.ui = UIRunEntity()
-				this.background = BackgroundEntity()
+				this.background = BackgroundEntity(BACKGROUNDS.FOREST)
 				this.player = new Entity()
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
