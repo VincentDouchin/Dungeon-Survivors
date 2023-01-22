@@ -12,7 +12,7 @@ class AssetLoader {
 	}
 	async loadFromTileList(tileList: string, imageSource: string): Promise<Record<string, Tile>> {
 		const image = await this.loadImage(imageSource)
-		return tileList
+		const tiles = tileList
 			.split('\r\n')
 			.map((tile: string) => tile.split(' '))
 			.filter((tileList) => tileList.every(item => item))
@@ -30,6 +30,8 @@ class AssetLoader {
 				})
 				return { ...acc, [tileName]: tile }
 			}, {})
+		// JSON.stringify(Object.keys(tiles)).replaceAll(',','|').replace(/['\[\]]/g,'')
+		return tiles
 	}
 	async loadFromSlices(data: any, source: string, fn: (args: any) => any = x => x): Promise<Record<string, Tile>> {
 		const img = await this.loadImage(source)
@@ -41,8 +43,8 @@ class AssetLoader {
 			return { ...acc, [slice.name]: new Tile(fn({ buffer })) }
 		}, {})
 	}
-	async loadFromGlob(glob: Record<string, { default: string }>) {
-		const images = await Promise.all(Object.values(glob).map(async module => Tile.fromImage(await this.loadImage(module.default!))))
+	async loadFromGlob(glob: Record<string, { default: string }>, fn?: (tile: tileOptions) => tileOptions) {
+		const images = await Promise.all(Object.values(glob).map(async module => Tile.fromImage(await this.loadImage(module.default!), fn)))
 		return Object.keys(glob).reduce((acc, v, index) => {
 			return { ...acc, [v.split(/[.\/]/).at(-2) as string]: images[index] }
 		}, {})

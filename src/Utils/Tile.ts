@@ -2,13 +2,6 @@ import { CanvasTexture, NearestFilter } from "three"
 
 import getBuffer from "./Buffer"
 
-interface tileOptions {
-	buffer: CanvasRenderingContext2D
-	width?: number
-	height?: number
-	frames?: number
-	padding?: boolean
-}
 class Tile {
 	buffer: CanvasRenderingContext2D
 	width: number
@@ -42,10 +35,10 @@ class Tile {
 
 		}
 	}
-	static fromImage(image: HTMLImageElement) {
+	static fromImage(image: HTMLImageElement, fn = (tileOptions: tileOptions) => tileOptions) {
 		const buffer = getBuffer(image.width, image.height)
 		buffer.drawImage(image, 0, 0)
-		return new Tile({ buffer })
+		return new Tile(fn({ buffer }))
 	}
 	clone() {
 		const options: tileOptions = {
