@@ -196,3 +196,85 @@ flame_background 512 64 16 16 8
 flame_brasier 512 80 16 32 8
 
 xp 288 336 16 16 1
+
+bandit_idle_anim 640 0 32 32 4 
+bandit_run_anim 768 0 32 32 4
+
+centaur_f_idle_anim 640 32 32 32 4
+centaur_f_run_anim 768 32 32 32 4
+centaur_m_idle_anim 640 64 32 32 4
+centaur_m_run_anim 768 64 32 32 4
+
+wood_elf_m_idle_anim 640 96 32 32 4
+wood_elf_m_run_anim 768 96 32 32 4
+wood_elf_f_idle_anim 640 128 32 32 4
+wood_elf_f_run_anim 768 128 32 32 4
+
+elf_queen_m_idle_anim 640 160 32 32 4
+elf_queen_m_run_anim 768 160 32 32 4
+elf_king_f_idle_anim 640 192 32 32 4
+
+fairy_idle_anim 768 192 32 32 4
+
+ent_idle_anim 640 224 32 32 4
+ent_run_anim 768 224 32 32 4
+
+mushroom_small_idle_anim 640 256 32 32 4
+mushroom_small_run_anim 768 256 32 32 4
+mushroom_medium_idle_anim 640 288 32 32 4
+mushroom_medium_run_anim 768 288 32 32 4
+mushroom_big_idle_anim 640 320 32 32 4
+mushroom_big_run_anim 768 320 32 32 4
+
+bear_idle_anim 640 352 32 32 4
+bear_run_anim 768 352 32 32 4
+
+golem_idle_anim 640 384 64 64 6
+golem_run_anim 640 448 64 64 6
+
+gnoll_idle_anim 896 0 32 32 4
+gnoll_run_anim 1024 0 32 32 4
+gnoll_masked_idle_anim 896 32 32 32 4
+gnoll_masked_run_anim 1024 32 32 32 4
+gnoll_grunt_idle_anim 896 64 32 32 4
+gnoll_grunt_run_anim 1024 64 32 32 4
+gnoll_brute_idle_anim 896 96 32 32 4
+gnoll_brute_run_anim 1024 96 32 32 4
+knight_elite_idle_anim 896 128 32 32 4
+knight_elite_run_anim 1024 128 32 32 4
+
+orc_boss_idle_anim 896 160 32 32 4
+orc_boss_run_anim 1024 160 32 32 4
+
+cleric_1_idle_anim 896 192 32 32 4
+cleric_2_idle_anim 1024 192 32 32 4
+cleric_3_idle_anim 896 224 32 32 4
+
+wise_wizard_idle_anim 1024 224 32 32 4
+
+ranger_idle_anim 896 256 32 32 4
+ranger_run_anim 1024 256 32 32 4
+
+elf_knight_idle_anim 896 288 32 32 4
+elf_knight_run_anim 1024 288 32 32 4
+
+elf_knight_idle_anim 896 288 32 32 4
+elf_knight_run_anim 1024 288 32 32 4
+
+direwolf_idle_anim 896 320 32 32 4
+direwolf_run_anim 1024 320 32 32 4
+
+grass_1 512 112 16 16
+grass_2 528 112 16 16
+grass_3 544 112 16 16
+grass_4 560 112 16 16
+grass_5 576 112 16 16
+
+grass_detail_1 512 128 16 16
+grass_detail_2 528 128 16 16
+grass_detail_3 544 128 16 16
+grass_detail_4 560 128 16 16
+grass_detail_5 576 128 16 16
+grass_detail_6 592 128 16 16
+grass_detail_7 608 128 16 16
+grass_detail_8 624 128 16 16
