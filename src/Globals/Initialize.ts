@@ -25,7 +25,8 @@ const assets: {
 	magic: Record<string, Tile>
 	tiles: Record<tileName, Tile>
 	overWorld: TiledMap
-	skills: Record<skillName, Tile>
+	skills: Record<skillName, Tile>,
+	blood: Record<string, Tile>
 } = {
 	UI: await assetLoader.loadFromSlices(GUIData, GUISource),
 	icons: await assetLoader.loadFromSlices(iconsData, iconsSource),
@@ -34,7 +35,12 @@ const assets: {
 	),
 	tiles: await assetLoader.loadFromTileList(tilesList, tilesSource),
 	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json'),
-	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true })) as Record<skillName, Tile>
+	skills: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true })) as Record<skillName, Tile>,
+	blood: await assetLoader.loadFromGlob(import.meta.glob('./../../assets/blood/*.png', { eager: true }), ({ buffer }) => {
+		const frames = buffer.canvas.width / buffer.canvas.height
+		return { buffer, frames, width: buffer.canvas.height }
+	})
+
 }
 // ! Clock
 const clock = new Clock()
