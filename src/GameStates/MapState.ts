@@ -1,5 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS";
-import { assets, render, scene, world } from "../Globals/Initialize";
+import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
+import { assets, lightScene, render, world } from "../Globals/Initialize";
 
 import { AmbientLight } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
@@ -36,10 +37,10 @@ class MapState implements GameState {
 		world.step()
 	}
 	set() {
-		RenderSystem.register()
-		scene.add(this.light)
-		const map = assets.overWorld
-		const mapTile = map.tile
+		lightScene.add(this.light)
+		if (!assets.map || !assets.map.levels[0]) return
+		const level = assets.map.levels[0]
+		const mapTile = LDTKMap.tiles[level.identifier]
 		this.map = new Entity()
 		this.player = new Entity()
 		this.map.addComponent(new SpriteComponent(mapTile))
@@ -61,14 +62,20 @@ class MapState implements GameState {
 
 
 		if (!this.lastPosition.x && !this.lastPosition.y) {
-			PathEntity(map.objects.get('path'))!
+			const pathEntities = level
+				.layerInstances?.find(layer => layer.__identifier == 'Path')
+				?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)!) as ldtkNode[]
+			PathEntity(pathEntities)
 		}
+
+
 		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
 
 		CameraSystem.register()
 		AnimationSystem.register()
 		MovementSystem.register()
 		PathSystem.register()
+		RenderSystem.register()
 	}
 	unset() {
 		ECS.unRegisterSystems()
