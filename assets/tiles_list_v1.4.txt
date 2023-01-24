@@ -278,3 +278,6 @@ grass_detail_5 576 128 16 16
 grass_detail_6 592 128 16 16
 grass_detail_7 608 128 16 16
 grass_detail_8 624 128 16 16
+
+bunny_idle_anim 896 352 32 32 4
+bunny_run_anim 1024 352 32 32 4
