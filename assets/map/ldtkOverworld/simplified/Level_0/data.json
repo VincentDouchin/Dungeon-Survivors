@@ -39,13 +39,14 @@
 						"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": true
 				}
 			},
 			{
@@ -62,18 +63,19 @@
 						"entityIid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": {
 						"entityIid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -90,13 +92,14 @@
 						"entityIid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -113,13 +116,14 @@
 						"entityIid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": "FOREST",
-					"ENEMIES": "ORCS"
+					"encounter": true,
+					"BACKGROUND": "FOREST",
+					"ENEMIES": "ORCS",
+					"start": false
 				}
 			},
 			{
@@ -138,11 +142,12 @@
 						"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -161,11 +166,12 @@
 						"entityIid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -182,13 +188,14 @@
 						"entityIid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -206,12 +213,13 @@
 						"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -228,13 +236,14 @@
 						"entityIid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": "FOREST",
-					"ENEMIES": "ANIMALS"
+					"encounter": true,
+					"BACKGROUND": "FOREST",
+					"ENEMIES": "ANIMALS",
+					"start": false
 				}
 			},
 			{
@@ -251,13 +260,14 @@
 						"entityIid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -274,13 +284,14 @@
 						"entityIid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -298,12 +309,13 @@
 						"entityIid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -320,13 +332,14 @@
 						"entityIid": "b18f0bf0-7820-11ed-a6ad-f9ade3cbd7ff",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -345,11 +358,12 @@
 						"entityIid": "b2be6430-7820-11ed-a6ad-39028f436956",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -366,13 +380,14 @@
 						"entityIid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -389,18 +404,19 @@
 						"entityIid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": {
 						"entityIid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -419,11 +435,12 @@
 						"entityIid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -440,13 +457,14 @@
 						"entityIid": "d457ec60-7820-11ed-a6ad-bba7e4102b5b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -463,13 +481,14 @@
 						"entityIid": "cdb52990-7820-11ed-a6ad-73fbc082051b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -486,13 +505,14 @@
 						"entityIid": "cefc76a0-7820-11ed-a6ad-15f4837ab135",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -510,12 +530,13 @@
 						"entityIid": "d071d890-7820-11ed-a6ad-031dee1a276c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -532,13 +553,14 @@
 						"entityIid": "d19d8750-7820-11ed-a6ad-e5313430ec61",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -555,13 +577,14 @@
 						"entityIid": "03a12db0-7820-11ed-a6ad-f944d48dacd5",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -578,13 +601,14 @@
 						"entityIid": "daba98f0-7820-11ed-a6ad-7dab7da05d50",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -601,13 +625,14 @@
 						"entityIid": "dbe50f30-7820-11ed-a6ad-c3f455d861de",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -624,13 +649,14 @@
 						"entityIid": "e746e0b0-7820-11ed-a6ad-f1fbb9d4d43e",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -647,13 +673,14 @@
 						"entityIid": "e8748b40-7820-11ed-a6ad-4791d7469a0f",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -670,13 +697,14 @@
 						"entityIid": "dd5b5b80-7820-11ed-a6ad-c70481e1975b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -693,13 +721,14 @@
 						"entityIid": "e1785dd0-7820-11ed-a6ad-95adaacf43f4",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -718,11 +747,12 @@
 						"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -739,13 +769,14 @@
 						"entityIid": "2e17d850-7820-11ed-a6ad-2d97e47cb379",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -763,12 +794,13 @@
 						"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -785,13 +817,14 @@
 						"entityIid": "e4a7cbd0-7820-11ed-a6ad-912a523300fe",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -809,12 +842,13 @@
 						"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"right": null,
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -833,11 +867,12 @@
 						"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -854,18 +889,19 @@
 						"entityIid": "e04c12d0-7820-11ed-a6ad-77ac1882fbfd",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
 					"left": null,
 					"right": {
 						"entityIid": "deb54630-7820-11ed-a6ad-974c8605b4ed",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 					},
-					"Encounter": false,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": false,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			},
 			{
@@ -881,9 +917,10 @@
 					"top": null,
 					"left": null,
 					"right": null,
-					"Encounter": true,
-					"Background": null,
-					"ENEMIES": null
+					"encounter": true,
+					"BACKGROUND": null,
+					"ENEMIES": null,
+					"start": false
 				}
 			}
 		]

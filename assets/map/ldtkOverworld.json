@@ -11,7 +11,7 @@
 	"iid": "d32995d0-7820-11ed-a5bd-77fd42b7a0e1",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 370,
+	"nextUid": 372,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -2528,8 +2528,8 @@
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
-			"pivotX": 0,
-			"pivotY": 0,
+			"pivotX": 0.5,
+			"pivotY": 0.5,
 			"fieldDefs": [
 				{
 					"identifier": "top",
@@ -2628,7 +2628,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "Encounter",
+					"identifier": "encounter",
 					"doc": null,
 					"__type": "Bool",
 					"uid": 364,
@@ -2660,7 +2660,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "Background",
+					"identifier": "BACKGROUND",
 					"doc": null,
 					"__type": "LocalEnum.Background",
 					"uid": 368,
@@ -2699,6 +2699,38 @@
 					"type": "F_Enum(367)",
 					"isArray": false,
 					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "start",
+					"doc": null,
+					"__type": "Bool",
+					"uid": 370,
+					"type": "F_Bool",
+					"isArray": false,
+					"canBeNull": false,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "Hidden",
@@ -3043,7 +3075,7 @@
 						{
 							"__identifier": "PathNode",
 							"__grid": [22,134],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3057,22 +3089,26 @@
 									"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["6055be00-7820-11ed-a6ad-454a1bb6b69f"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": true, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [22,130],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3086,7 +3122,7 @@
 									"entityIid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["6e822130-7820-11ed-a6ad-23c6813ecdba"]
@@ -3095,21 +3131,22 @@
 									"entityIid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["62156f60-7820-11ed-a6ad-81c289c9aab3"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,130],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3123,22 +3160,23 @@
 									"entityIid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["638022f0-7820-11ed-a6ad-f97cb5f3e7da"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,122],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3152,31 +3190,32 @@
 									"entityIid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["64eafd90-7820-11ed-a6ad-ef3cd1b4f38c"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": "FOREST", "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [{
+								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["FOREST"]
 								}] },
 								{ "__identifier": "ENEMIES", "__value": "ORCS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["ORCS"]
-								}] }
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,114],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3192,20 +3231,21 @@
 									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [22,126],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3221,20 +3261,21 @@
 									"entityIid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["73b17de0-7820-11ed-a6ad-7b3e13e52acf"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [30,126],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3248,22 +3289,23 @@
 									"entityIid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["7fa09b40-7820-11ed-a6ad-b317f3f29f5e"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [30,114],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3278,21 +3320,22 @@
 									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [30,118],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3306,31 +3349,32 @@
 									"entityIid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["759ab040-7820-11ed-a6ad-33f17e8fa625"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": "FOREST", "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [{
+								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["FOREST"]
 								}] },
 								{ "__identifier": "ENEMIES", "__value": "ANIMALS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["ANIMALS"]
-								}] }
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [23,114],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3344,22 +3388,23 @@
 									"entityIid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [23,111],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3373,25 +3418,26 @@
 									"entityIid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["a9339ca0-7820-11ed-a6ad-a717216c6e5d"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [23,108],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3406,21 +3452,22 @@
 									"entityIid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["ad51fe80-7820-11ed-a6ad-61560ecd38da"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [24,108],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3434,22 +3481,23 @@
 									"entityIid": "b18f0bf0-7820-11ed-a6ad-f9ade3cbd7ff",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["b18f0bf0-7820-11ed-a6ad-f9ade3cbd7ff"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [24,106],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3465,20 +3513,21 @@
 									"entityIid": "b2be6430-7820-11ed-a6ad-39028f436956",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["b2be6430-7820-11ed-a6ad-39028f436956"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [28,106],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3492,22 +3541,23 @@
 									"entityIid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["c51425c0-7820-11ed-a6ad-87ee43340f4b"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [28,94],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3521,7 +3571,7 @@
 									"entityIid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["c68c94f0-7820-11ed-a6ad-ab8cdcae72ba"]
@@ -3530,21 +3580,22 @@
 									"entityIid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["c8e48eb0-7820-11ed-a6ad-af4f88441cc7"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [28,92],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3560,20 +3611,21 @@
 									"entityIid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["c7d71650-7820-11ed-a6ad-231d173e24d4"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [32,92],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3587,22 +3639,23 @@
 									"entityIid": "d457ec60-7820-11ed-a6ad-bba7e4102b5b",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["d457ec60-7820-11ed-a6ad-bba7e4102b5b"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [16,94],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3616,22 +3669,23 @@
 									"entityIid": "cdb52990-7820-11ed-a6ad-73fbc082051b",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["cdb52990-7820-11ed-a6ad-73fbc082051b"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [16,80],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3645,25 +3699,26 @@
 									"entityIid": "cefc76a0-7820-11ed-a6ad-15f4837ab135",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["cefc76a0-7820-11ed-a6ad-15f4837ab135"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [16,74],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3678,21 +3733,22 @@
 									"entityIid": "d071d890-7820-11ed-a6ad-031dee1a276c",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["d071d890-7820-11ed-a6ad-031dee1a276c"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,74],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3706,22 +3762,23 @@
 									"entityIid": "d19d8750-7820-11ed-a6ad-e5313430ec61",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["d19d8750-7820-11ed-a6ad-e5313430ec61"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,60],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3735,25 +3792,26 @@
 									"entityIid": "03a12db0-7820-11ed-a6ad-f944d48dacd5",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["03a12db0-7820-11ed-a6ad-f944d48dacd5"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [32,71],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3767,25 +3825,26 @@
 									"entityIid": "daba98f0-7820-11ed-a6ad-7dab7da05d50",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["daba98f0-7820-11ed-a6ad-7dab7da05d50"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [32,52],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3799,25 +3858,26 @@
 									"entityIid": "dbe50f30-7820-11ed-a6ad-c3f455d861de",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["dbe50f30-7820-11ed-a6ad-c3f455d861de"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [32,40],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3831,25 +3891,26 @@
 									"entityIid": "e746e0b0-7820-11ed-a6ad-f1fbb9d4d43e",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e746e0b0-7820-11ed-a6ad-f1fbb9d4d43e"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [24,44],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3863,25 +3924,26 @@
 									"entityIid": "e8748b40-7820-11ed-a6ad-4791d7469a0f",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e8748b40-7820-11ed-a6ad-4791d7469a0f"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [24,56],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3895,22 +3957,23 @@
 									"entityIid": "dd5b5b80-7820-11ed-a6ad-c70481e1975b",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["dd5b5b80-7820-11ed-a6ad-c70481e1975b"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,40],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3924,25 +3987,26 @@
 									"entityIid": "e1785dd0-7820-11ed-a6ad-95adaacf43f4",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e1785dd0-7820-11ed-a6ad-95adaacf43f4"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,32],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3958,20 +4022,21 @@
 									"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e3143380-7820-11ed-a6ad-05b81fc33b6d"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [21,32],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3985,22 +4050,23 @@
 									"entityIid": "2e17d850-7820-11ed-a6ad-2d97e47cb379",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["2e17d850-7820-11ed-a6ad-2d97e47cb379"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [28,32],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4015,21 +4081,22 @@
 									"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e3143380-7820-11ed-a6ad-05b81fc33b6d"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [28,38],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4043,22 +4110,23 @@
 									"entityIid": "e4a7cbd0-7820-11ed-a6ad-912a523300fe",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e4a7cbd0-7820-11ed-a6ad-912a523300fe"]
 								}] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [32,38],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4073,21 +4141,22 @@
 									"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e61e6640-7820-11ed-a6ad-c55e432d73db"]
 								}] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [24,38],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4103,20 +4172,21 @@
 									"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e61e6640-7820-11ed-a6ad-c55e432d73db"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [12,56],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4130,7 +4200,7 @@
 									"entityIid": "e04c12d0-7820-11ed-a6ad-77ac1882fbfd",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["e04c12d0-7820-11ed-a6ad-77ac1882fbfd"]
@@ -4140,20 +4210,21 @@
 									"entityIid": "deb54630-7820-11ed-a6ad-974c8605b4ed",
 									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "0d200800-7820-11ed-a6ad-8bc12e2d0914"
+									"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
 								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["deb54630-7820-11ed-a6ad-974c8605b4ed"]
 								}] },
-								{ "__identifier": "Encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "PathNode",
 							"__grid": [21,8],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -4166,12 +4237,13 @@
 								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
 								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
 								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "Encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
 									"id": "V_Bool",
 									"params": [ true ]
 								}] },
-								{ "__identifier": "Background", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] }
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.Background", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] }
 							]
 						}
 					]
@@ -5826,7 +5898,7 @@
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-						1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,
+						1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,
 						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 						1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,
 						1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,
@@ -5870,8 +5942,6 @@
 						{ "px": [80,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1247] },
 						{ "px": [96,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1248] },
 						{ "px": [112,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1249] },
-						{ "px": [224,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1256] },
-						{ "px": [240,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1257] },
 						{ "px": [256,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1258] },
 						{ "px": [272,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1259] },
 						{ "px": [288,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1260] },
@@ -5879,6 +5949,9 @@
 						{ "px": [320,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1262] },
 						{ "px": [336,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1263] },
 						{ "px": [352,864], "src": [48,64], "f": 0, "t": 211, "d": [229,1264] },
+						{ "px": [0,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1265] },
+						{ "px": [16,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1266] },
+						{ "px": [32,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1267] },
 						{ "px": [48,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1268] },
 						{ "px": [64,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1269] },
 						{ "px": [80,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1270] },
@@ -5886,7 +5959,6 @@
 						{ "px": [112,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1272] },
 						{ "px": [128,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1273] },
 						{ "px": [144,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1274] },
-						{ "px": [224,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1279] },
 						{ "px": [240,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1280] },
 						{ "px": [256,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1281] },
 						{ "px": [272,880], "src": [48,64], "f": 0, "t": 211, "d": [229,1282] },
@@ -6060,8 +6132,10 @@
 						{ "px": [336,240], "src": [96,48], "f": 0, "t": 162, "d": [227,366] },
 						{ "px": [48,848], "src": [96,48], "f": 1, "t": 162, "d": [227,1222] },
 						{ "px": [80,848], "src": [96,48], "f": 0, "t": 162, "d": [227,1224] },
+						{ "px": [32,864], "src": [96,48], "f": 1, "t": 162, "d": [227,1244] },
 						{ "px": [128,864], "src": [96,48], "f": 0, "t": 162, "d": [227,1250] },
-						{ "px": [32,880], "src": [96,48], "f": 1, "t": 162, "d": [227,1267] },
+						{ "px": [240,864], "src": [96,48], "f": 1, "t": 162, "d": [227,1257] },
+						{ "px": [224,880], "src": [96,48], "f": 1, "t": 162, "d": [227,1279] },
 						{ "px": [64,992], "src": [96,48], "f": 0, "t": 162, "d": [227,1430] },
 						{ "px": [128,992], "src": [96,48], "f": 1, "t": 162, "d": [227,1434] },
 						{ "px": [256,1024], "src": [96,48], "f": 1, "t": 162, "d": [227,1488] },
@@ -6093,10 +6167,7 @@
 						{ "px": [256,256], "src": [64,64], "f": 1, "t": 212, "d": [225,384] },
 						{ "px": [272,288], "src": [64,64], "f": 1, "t": 212, "d": [225,431] },
 						{ "px": [272,304], "src": [64,64], "f": 1, "t": 212, "d": [225,454] },
-						{ "px": [32,864], "src": [64,64], "f": 1, "t": 212, "d": [225,1244] },
-						{ "px": [208,864], "src": [64,64], "f": 1, "t": 212, "d": [225,1255] },
 						{ "px": [160,880], "src": [64,64], "f": 0, "t": 212, "d": [225,1275] },
-						{ "px": [208,880], "src": [64,64], "f": 1, "t": 212, "d": [225,1278] },
 						{ "px": [80,912], "src": [64,64], "f": 0, "t": 212, "d": [225,1316] },
 						{ "px": [256,912], "src": [64,64], "f": 1, "t": 212, "d": [225,1327] },
 						{ "px": [80,928], "src": [64,64], "f": 0, "t": 212, "d": [225,1339] },
@@ -6128,8 +6199,6 @@
 						{ "px": [64,832], "src": [48,48], "f": 0, "t": 159, "d": [224,1200] },
 						{ "px": [96,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1225] },
 						{ "px": [112,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1226] },
-						{ "px": [224,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1233] },
-						{ "px": [240,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1234] },
 						{ "px": [256,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1235] },
 						{ "px": [272,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1236] },
 						{ "px": [288,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1237] },
@@ -6137,9 +6206,9 @@
 						{ "px": [320,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1239] },
 						{ "px": [336,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1240] },
 						{ "px": [352,848], "src": [48,48], "f": 0, "t": 159, "d": [224,1241] },
+						{ "px": [0,864], "src": [48,48], "f": 0, "t": 159, "d": [224,1242] },
+						{ "px": [16,864], "src": [48,48], "f": 0, "t": 159, "d": [224,1243] },
 						{ "px": [144,864], "src": [48,48], "f": 0, "t": 159, "d": [224,1251] },
-						{ "px": [0,880], "src": [48,48], "f": 0, "t": 159, "d": [224,1265] },
-						{ "px": [16,880], "src": [48,48], "f": 0, "t": 159, "d": [224,1266] },
 						{ "px": [128,928], "src": [48,48], "f": 0, "t": 159, "d": [224,1342] },
 						{ "px": [144,928], "src": [48,48], "f": 0, "t": 159, "d": [224,1343] },
 						{ "px": [160,928], "src": [48,48], "f": 0, "t": 159, "d": [224,1344] },
@@ -6172,8 +6241,10 @@
 						{ "px": [80,832], "src": [64,48], "f": 0, "t": 160, "d": [222,1201] },
 						{ "px": [32,848], "src": [64,48], "f": 1, "t": 160, "d": [222,1221] },
 						{ "px": [128,848], "src": [64,48], "f": 0, "t": 160, "d": [222,1227] },
-						{ "px": [208,848], "src": [64,48], "f": 1, "t": 160, "d": [222,1232] },
+						{ "px": [240,848], "src": [64,48], "f": 1, "t": 160, "d": [222,1234] },
 						{ "px": [160,864], "src": [64,48], "f": 0, "t": 160, "d": [222,1252] },
+						{ "px": [224,864], "src": [64,48], "f": 1, "t": 160, "d": [222,1256] },
+						{ "px": [208,880], "src": [64,48], "f": 1, "t": 160, "d": [222,1278] },
 						{ "px": [112,928], "src": [64,48], "f": 1, "t": 160, "d": [222,1341] },
 						{ "px": [224,928], "src": [64,48], "f": 0, "t": 160, "d": [222,1348] },
 						{ "px": [80,992], "src": [64,48], "f": 0, "t": 160, "d": [222,1431] },
