@@ -4,6 +4,22 @@ import { Component, ECS } from "../Globals/ECS";
 import { Vector2 } from "three";
 import { world } from "../Globals/Initialize";
 
+export interface bodyOptions {
+	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased' | 'kinematicPositionBased'
+	moveForce?: number
+	mass?: number
+	lock?: boolean
+}
+export interface colliderOptions {
+	contact: boolean
+	width: number
+	height: number
+	offset?: number
+	sensor?: boolean
+	mass?: number
+	group: number
+	canCollideWith: number[]
+}
 class BodyComponent extends Component {
 	body: RigidBody | null = null
 	bodyDescription: RigidBodyDesc
@@ -18,7 +34,6 @@ class BodyComponent extends Component {
 		//!Body
 		this.bodyDescription =
 			RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
-				// .setAdditionalMass(1)
 				.setCanSleep(false)
 				.setCcdEnabled(true)
 				.setLinearDamping(5)
@@ -28,11 +43,11 @@ class BodyComponent extends Component {
 		//!Collider
 		this.colliderDescriptions = colliderOptions.map(colliderOption => {
 			const colliderDescription = ColliderDesc
-
 				.cuboid(colliderOption.width / 2, colliderOption.height / 2)
 				.setDensity(colliderOption.mass ?? 0.1)
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
+				.setTranslation(0, colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0)
 
 			if (colliderOption.contact) {
 				colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
