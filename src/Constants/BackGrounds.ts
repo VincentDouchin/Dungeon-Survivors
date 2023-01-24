@@ -4,13 +4,15 @@ import { Entity } from "../Globals/ECS"
 import Tile from "../Utils/Tile"
 import { assets } from "../Globals/Initialize"
 
+export type backgroundName = 'FOREST' | 'DUNGEON'
+
 export interface Background {
 	tiles: [Tile, number][]
 	detailHook?: (buffer: CanvasRenderingContext2D) => (x: number, y: number) => void
 	childrenHook?: (background: Entity) => void
 	lightColor?: Color
 }
-const BACKGROUNDS: Record<string, Background> = {
+const BACKGROUNDS: Record<backgroundName, Background> = {
 	DUNGEON: {
 		tiles: [
 			[assets.tiles.floor_1, 10],
@@ -55,7 +57,7 @@ const BACKGROUNDS: Record<string, Background> = {
 			if (Math.random() < 0.05) buffer.drawImage(details[Math.floor(details.length * Math.random())].buffer.canvas, x, y)
 
 		},
-		lightColor: new Color('hsl(0,0%,60%)')
+		lightColor: new Color('hsl(0,0%,100%)')
 	}
 
 }
