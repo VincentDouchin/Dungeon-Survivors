@@ -1,8 +1,9 @@
-import { Color, PointLight } from "three";
+import { AmbientLight, Color, PointLight } from "three";
+import { Entity, System } from "../Globals/ECS";
+
 import LightComponent from "../Components/LightComponent";
 import PositionComponent from "../Components/PositionComponent";
-import { Entity, System } from "../Globals/ECS";
-import { scene } from "../Globals/Initialize";
+import { lightScene } from "../Globals/Initialize";
 
 class LightingSystem extends System {
 	constructor() {
@@ -14,14 +15,14 @@ class LightingSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			if (!light.lightId && position) {
 				const color = new Color(light.color)
-				const lightObject = new PointLight(color, 12, light.distance)
-				lightObject.position.set(0, 0, 15)
-				scene.add(lightObject)
-
+				const lightObject = light.type == PointLight
+					? new PointLight(color, 1, light.distance, 1)
+					: new AmbientLight(color)
+				lightScene.add(lightObject)
 				light.lightId = lightObject.id
 			}
 			if (light.lightId && position) {
-				scene.getObjectById(light.lightId)?.position.set(position.x, position.y, 15)
+				lightScene.getObjectById(light.lightId)?.position.set(position.x, position.y, 15)
 			}
 
 		})
