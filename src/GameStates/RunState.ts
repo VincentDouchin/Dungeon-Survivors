@@ -1,6 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
-import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyWave"
+import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
 import AnimationSystem from "../Systems/AnimationSystem"
@@ -83,7 +83,7 @@ class RunState implements GameState {
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
-				ENEMYWAVES[options!.enemies]!()
+				ENEMYWAVES[options!.enemies]?.start()
 			}; break
 		}
 
