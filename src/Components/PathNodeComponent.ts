@@ -1,7 +1,7 @@
 import { Component, Entity } from "../Globals/ECS";
 
 import { backgroundName } from "../Constants/BackGrounds";
-import { enemyWaveName } from "../Constants/EnemyWave";
+import { enemyWaveName } from "../Constants/EnemyEncounters";
 
 export interface node {
 	id: number
