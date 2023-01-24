@@ -1,11 +1,11 @@
-import { Color } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
-import LightComponent from "../Components/LightComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import PositionComponent from "../Components/PositionComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import { Color } from "three"
 import { Entity } from "../Globals/ECS"
+import LightComponent from "../Components/LightComponent"
+import PositionComponent from "../Components/PositionComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import { assets } from "../Globals/Initialize"
 
 const ColumnEntity = (x: number, y: number) => {
@@ -24,7 +24,7 @@ const ColumnEntity = (x: number, y: number) => {
 	torch.addComponent(new AnimationComponent({ default: torchTile }))
 	torch.addComponent(new PositionComponent(x, y))
 
-	torch.addComponent(new LightComponent(new Color("hsl(20, 20%, 15%)"), 500))
+	torch.addComponent(new LightComponent(new Color("hsl(0, 0%, 100%)"), 1000))
 	column.addChildren(torch)
 	return column
 }

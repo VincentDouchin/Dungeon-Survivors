@@ -11,6 +11,7 @@ import OutlineShader from "../Shaders/OutlineShader"
 import PlayerControllerComponent from "../Components/PlayerControllerComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RangedComponent from "../Components/RangedComponent"
+import ShadowComponent from "../Components/ShadowComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
@@ -21,7 +22,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 	const player = new Entity()
 
 	const sprite = player.addComponent(new SpriteComponent(hero.tiles.idle,))
-	player.addComponent(new LightComponent(new Color('hsl(0,0%,5%)'), 1000))
+	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (!weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
@@ -43,7 +44,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 	))
 	player.addComponent(new PositionComponent(0, 0))
 
-
+	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
 	player.addChildren(WeaponEntity(weapon, player))
 	return player

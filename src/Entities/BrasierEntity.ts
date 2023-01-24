@@ -1,9 +1,9 @@
-import { Color } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
-import LightComponent from "../Components/LightComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import PositionComponent from "../Components/PositionComponent"
+import { Color } from "three"
 import { Entity } from "../Globals/ECS"
+import LightComponent from "../Components/LightComponent"
+import PositionComponent from "../Components/PositionComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import { assets } from "../Globals/Initialize"
 
 const BrasierEntity = (position: { x: number, y: number }) => {
