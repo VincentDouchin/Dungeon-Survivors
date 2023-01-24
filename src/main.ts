@@ -14,6 +14,6 @@ Engine.addState(State.run, new RunState())
 Engine.addState(State.levelUp, new LevelUpState())
 Engine.addState(State.pause, new PauseState())
 Engine.addState(State.map, new MapState())
-Engine.setState(State.run)
+Engine.setState(State.map)
 Engine.start()
 
