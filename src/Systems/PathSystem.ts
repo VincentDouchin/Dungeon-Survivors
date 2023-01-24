@@ -34,7 +34,7 @@ class PathSystem extends System {
 
 			} else if (node.selected && node.encounter) {
 				node.encounter = false
-				Engine.setState(State.run)
+				Engine.setState(State.run, node)
 			} else if (node.selected && !node.showingOptions) {
 				const possibleDirections = Object.entries(node.nodes)
 				if (possibleDirections.length == 1) {
