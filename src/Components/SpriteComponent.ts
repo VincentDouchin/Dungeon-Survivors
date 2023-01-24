@@ -1,4 +1,4 @@
-import { Material, Mesh, MeshStandardMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from "three";
+import { Material, Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from "three";
 
 import { Component } from "../Globals/ECS";
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
@@ -21,6 +21,7 @@ class SpriteComponent extends Component {
 	baseTexture: Uniform
 	shaderPasses: Map<string, ShaderPass> = new Map()
 	mesh: Mesh
+	opacity: number
 	uniformsKeys: Record<string, string> = {}
 	uniforms = new Proxy<any>(this, {
 		get(target, prop) {
@@ -33,13 +34,14 @@ class SpriteComponent extends Component {
 			return true
 		}
 	})
-	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[] }) {
+	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[], opacity?: number }) {
 		super()
-		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [] }, options)
+		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1 }, options)
 		this.width = tile.width
 		this.height = tile.height
 		this.renderOrder = newOptions.renderOrder * 10
 		this.scale = newOptions.scale
+		this.opacity = newOptions.opacity
 
 		this.renderTarget = new WebGLRenderTarget(this.width, this.height)
 		this.effectComposer = new EffectComposer(renderer, this.renderTarget)
@@ -56,7 +58,7 @@ class SpriteComponent extends Component {
 			this.addShader(shaderConstructor, false)
 		})
 		this.effectComposer.render()
-		this.material = new MeshStandardMaterial({ map: this.renderTarget.texture, transparent: true })
+		this.material = new MeshBasicMaterial({ map: this.renderTarget.texture, transparent: true })
 
 		this.mesh = new Mesh(
 			new PlaneGeometry(this.scaledWidth, this.scaledHeight),
@@ -100,8 +102,6 @@ class SpriteComponent extends Component {
 
 	render() {
 		this.effectComposer.render()
-		this.material.needsUpdate = true
-		renderer.clear()
 
 	}
 }
