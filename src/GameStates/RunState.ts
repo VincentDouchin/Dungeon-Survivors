@@ -1,14 +1,13 @@
+import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
+import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyWave"
 import { inputManager, render, world } from "../Globals/Initialize"
 
 import AnimationSystem from "../Systems/AnimationSystem"
-import BACKGROUNDS from "../Constants/BackGrounds"
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
 import Coroutines from "../Globals/Coroutines"
-import Encounter from "../Game/Encounter"
-import Enemies from "../Constants/Enemies"
 import Engine from "../Globals/Engine"
 import FlockingSystem from "../Systems/FlockingSystem"
 import HEROS from "../Constants/Heros"
@@ -51,7 +50,8 @@ class RunState implements GameState {
 
 		render()
 	}
-	set(oldState?: State) {
+	set(oldState: State, options?: { background: backgroundName, enemies: enemyWaveName }) {
+		debugger
 		inputManager.enable('dpad')
 		MovementSystem.register()
 		AnimationSystem.register()
@@ -77,22 +77,13 @@ class RunState implements GameState {
 			}; break
 			default: {
 				this.ui = UIRunEntity()
-				this.background = BackgroundEntity(BACKGROUNDS.FOREST)
+				this.background = BackgroundEntity(BACKGROUNDS[options!.background]!)
 				this.player = new Entity()
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
-				const encounter = new Encounter()
-				Coroutines.add(function* () {
-					yield* encounter.wave(Enemies.goblin, 20, 10)
-					yield* encounter.wave(Enemies.orc, 15, 5)
-					yield* encounter.wave(Enemies.orcShaman, 10, 4)
-					yield* encounter.wave(Enemies.orcMasked, 10, 3)
-					yield* encounter.wave(Enemies.zombieBig, 1, 1)
-					yield* encounter.waitForEnemiesCleared()
-					yield Engine.setState(State.map)
-				})
+				ENEMYWAVES[options!.enemies]!()
 			}; break
 		}
 
