@@ -1,14 +1,14 @@
 import BodyComponent from "../Components/BodyComponent"
+import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
+import { Entity } from "../Globals/ECS"
 import JointComponent from "../Components/JointComponent"
-import SpriteComponent from "../Components/SpriteComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
-import { Entity } from "../Globals/ECS"
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 
@@ -27,7 +27,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 	}
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
-		[{ width: tile.width, height: tile.height, contact: true, sensor: true, mass: 0.001, group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY] }]
+		[{ width: tile.width, height: tile.height, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY] }]
 	))
 	weapon.addComponent(new SpriteComponent(tile))
 	const angVel = weaponDefinition.behaviors.includes(WEAPONBEHAVIORS.targeter) ? 0 : 1
