@@ -3,7 +3,9 @@ import { assets, camera } from "../Globals/Initialize";
 
 import ECSEVENTS from "../Constants/ECSEvents";
 import EnemyEntity from "../Entities/EnemyEntity";
+import Engine from "../Globals/Engine";
 import ParticleEntity from "../Entities/ParticleEntitty";
+import { State } from "../Constants/GameStates";
 
 class Encounter {
 	enemies: string[] = []
@@ -49,6 +51,9 @@ class Encounter {
 			yield
 		}
 		return
+	}
+	stop() {
+		Engine.setState(State.map)
 	}
 
 
