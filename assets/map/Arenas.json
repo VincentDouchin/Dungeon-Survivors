@@ -11,7 +11,7 @@
 	"iid": "80607210-7820-11ed-b89a-13249aa1d22b",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 148,
+	"nextUid": 149,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -27,7 +27,7 @@
 	"minifyJson": false,
 	"externalLevels": false,
 	"exportTiled": false,
-	"simplifiedExport": true,
+	"simplifiedExport": false,
 	"imageExportMode": "None",
 	"exportLevelBg": true,
 	"pngFilePattern": null,
@@ -1588,14 +1588,14 @@
 			"resizableY": true,
 			"keepAspectRatio": false,
 			"tileOpacity": 1,
-			"fillOpacity": 0.64,
+			"fillOpacity": 1,
 			"lineOpacity": 1,
 			"hollow": false,
 			"color": "#FFFFFF",
 			"renderMode": "Rectangle",
 			"showName": true,
 			"tilesetId": null,
-			"tileRenderMode": "FitInside",
+			"tileRenderMode": "Cover",
 			"tileRect": null,
 			"nineSliceBorders": [],
 			"maxCount": 0,
@@ -1770,6 +1770,38 @@
 			"allowedRefs": "OnlySame",
 			"allowedRefTags": [],
 			"tilesetUid": null
+		},
+		{
+			"identifier": "entity",
+			"doc": null,
+			"__type": "Bool",
+			"uid": 148,
+			"type": "F_Bool",
+			"isArray": false,
+			"canBeNull": false,
+			"arrayMinLength": null,
+			"arrayMaxLength": null,
+			"editorDisplayMode": "Hidden",
+			"editorDisplayPos": "Above",
+			"editorLinkStyle": "StraightArrow",
+			"editorAlwaysShow": false,
+			"editorShowInWorld": true,
+			"editorCutLongValues": true,
+			"editorTextSuffix": null,
+			"editorTextPrefix": null,
+			"useForSmartColor": false,
+			"min": null,
+			"max": null,
+			"regex": null,
+			"acceptFileTypes": null,
+			"defaultOverride": null,
+			"textLanguageMode": null,
+			"symmetricalRef": false,
+			"autoChainRef": true,
+			"allowOutOfLevelRef": true,
+			"allowedRefs": "OnlySame",
+			"allowedRefTags": [],
+			"tilesetUid": null
 		}
 	] },
 	"levels": [
@@ -1792,10 +1824,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": true, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": true, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "entity", "__value": false, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
@@ -3312,10 +3347,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": true, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": true, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "entity", "__value": false, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
@@ -4827,7 +4865,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] },
+				{ "__identifier": "entity", "__value": false, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
@@ -6794,7 +6835,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] },
+				{ "__identifier": "entity", "__value": true, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
@@ -7087,7 +7134,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] },
+				{ "__identifier": "entity", "__value": true, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
@@ -7367,7 +7420,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "infinite", "__value": false, "__type": "Bool", "__tile": null, "defUid": 16, "realEditorValues": [] },
+				{ "__identifier": "entity", "__value": true, "__type": "Bool", "__tile": null, "defUid": 148, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Hole",
