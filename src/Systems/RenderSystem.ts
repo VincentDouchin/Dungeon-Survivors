@@ -3,9 +3,11 @@ import { UICamera, UIScene, scene } from "../Globals/Initialize";
 
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import ShadowComponent from "../Components/ShadowComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
 import UIPosition from "../Components/UIPosition";
+import getBuffer from "../Utils/Buffer";
 
 class RenderSystem extends System {
 	constructor() {
@@ -18,6 +20,7 @@ class RenderSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			const text = entity.getComponent(TextComponent)
 			const uiPosition = entity.getComponent(UIPosition)
+			const shadow = entity.getComponent(ShadowComponent)
 			if (position) {
 				if (!sprite.mesh.parent) {
 					scene.add(sprite.mesh)
@@ -48,6 +51,13 @@ class RenderSystem extends System {
 				sprite.mesh.add(text.mesh)
 				text.mesh.renderOrder = (sprite.renderOrder ?? 0) + 1
 			}
+			if (shadow && !shadow.entityId) {
+				const shadowEntity = new Entity()
+				const shadowSprite = shadowEntity.addComponent(new SpriteComponent(shadow.tile, { opacity: 0.3, renderOrder: 0 }))
+				shadowEntity.addComponent(new PositionComponent(position.x, position.y - shadow.offset))
+				shadow.entityId = shadowEntity.id
+			}
+			sprite.material.opacity = sprite.opacity
 			sprite.mesh.renderOrder = sprite.renderOrder
 		})
 	}

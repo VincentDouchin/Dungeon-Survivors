@@ -1,12 +1,15 @@
+import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
+import { ECS, Entity, System } from "../Globals/ECS";
+
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
 import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
+import ShadowComponent from "../Components/ShadowComponent";
 import SkillsComponent from "../Components/SkillsComponent";
-import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
-import { Entity, System } from "../Globals/ECS";
 import { inputManager } from "../Globals/Initialize";
+
 class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
@@ -19,6 +22,7 @@ class MovementSystem extends System {
 			const animation = entity.getComponent(AnimationComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			const skills = entity.getComponent(SkillsComponent)
+			const shadow = entity.getComponent(ShadowComponent)
 			if (body) {
 
 				if (playerController?.enabled) {
@@ -69,6 +73,11 @@ class MovementSystem extends System {
 						rotation.rotation = body.body.rotation()
 					}
 				}
+			}
+			if (shadow && shadow.entityId) {
+				const shadowPosition = ECS.getEntityById(shadow.entityId).getComponent(PositionComponent)
+				shadowPosition.x = position.x
+				shadowPosition.y = position.y - shadow.offset
 			}
 		})
 	}

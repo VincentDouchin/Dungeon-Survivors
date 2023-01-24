@@ -1,15 +1,14 @@
-
-
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
+import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
 import DroppableComponent from "../Components/DroppableComponent"
-import HealthComponent from "../Components/HealthComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import PositionComponent from "../Components/PositionComponent"
-import TargeterComponent from "../Components/TargeterComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
+import HealthComponent from "../Components/HealthComponent"
+import PositionComponent from "../Components/PositionComponent"
+import ShadowComponent from "../Components/ShadowComponent"
+import SpriteComponent from "../Components/SpriteComponent"
+import TargeterComponent from "../Components/TargeterComponent"
 import XPEntity from "./XPEntity"
 
 const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
@@ -22,6 +21,7 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 	enemy.addComponent(new DroppableComponent(XPEntity))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
 	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER))
+	enemy.addComponent(new ShadowComponent(orc.width, 6, orc.height / 2))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 100 },
 		[
