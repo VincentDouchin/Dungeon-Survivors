@@ -1,7 +1,8 @@
-import PathNodeComponent from "../Components/PathNodeComponent"
-import PositionComponent from "../Components/PositionComponent"
-import ECSEVENTS from "../Constants/ECSEvents"
 import { ECS, Entity } from "../Globals/ECS"
+import PathNodeComponent, { node } from "../Components/PathNodeComponent"
+
+import ECSEVENTS from "../Constants/ECSEvents"
+import PositionComponent from "../Components/PositionComponent"
 
 const PathEntity = (nodes: node[]) => {
 	const nodeEntities: Map<number, Entity> = new Map()
@@ -22,7 +23,7 @@ const PathEntity = (nodes: node[]) => {
 				directions[direction] = createPath(otherNode, false)
 			}
 		}
-		nodeEntity.addComponent(new PathNodeComponent(directions, selected, node.encounter))
+		nodeEntity.addComponent(new PathNodeComponent(directions, selected, node))
 
 		return nodeEntity
 	}

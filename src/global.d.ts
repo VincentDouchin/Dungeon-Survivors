@@ -120,17 +120,7 @@ interface TiledProperty {
 	type: string
 	value: any
 }
-interface node {
-	id: number
-	x: number
-	y: number
-	top: number
-	left: number
-	right: number
-	start: boolean
-	end: boolean
-	encounter: boolean
-}
+
 type nodeDirection = 'left' | 'right' | 'top'
 interface tileOptions {
 	buffer: CanvasRenderingContext2D
