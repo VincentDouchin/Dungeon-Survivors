@@ -1,6 +1,6 @@
 import { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
 
-import AssetLoader from "../Globals/AssetLoader"
+import AssetLoader from "./AssetLoader"
 import Tile from "./Tile"
 import { node } from '../Components/PathNodeComponent'
 
@@ -24,6 +24,7 @@ class LDTKMap implements LDTKMapDefinition {
 	static sources: Record<string, { default: string }> = import.meta.glob('/assets/**/_composite.png', { eager: true })
 	static async load(path: string) {
 		const data = await import(path)
+
 		for (let level of data.levels) {
 			const source = Object.entries(LDTKMap.sources).reduce<string>((acc, [path, source]) => {
 				if (path.split('/').at(-2) == level.identifier) return source.default
@@ -44,8 +45,8 @@ class LDTKMap implements LDTKMapDefinition {
 				}
 				return { ...props, [fieldInstance.__identifier]: getValue() }
 			}, {
-				x: entityInstance.px[0] - level.pxWid / 2 + entityInstance.height / 2,
-				y: -entityInstance.px[1] + level.pxHei / 2 - entityInstance.width / 2,
+				x: entityInstance.px[0] - level.pxWid / 2,
+				y: -entityInstance.px[1] + level.pxHei / 2,
 				width: entityInstance.width,
 				height: entityInstance.height,
 				id: entityInstance.iid
