@@ -25,7 +25,7 @@ class LDTKMap implements LDTKMapDefinition {
 	static async load(data: any) {
 		for (let level of data.levels) {
 			const source = Object.entries(LDTKMap.sources).reduce<string>((acc, [path, source]) => {
-				if (path.split('/').at(-2) == level.identifier) return source.default
+				if (path.split('/').at(-2) == level.identifier || path.split('/').at(-1) == level.identifier) return source.default
 				return acc
 			}, '')
 			this.tiles[level.identifier] = Tile.fromImage(await AssetLoader.loadImage(source))
