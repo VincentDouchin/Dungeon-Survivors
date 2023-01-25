@@ -15,16 +15,17 @@ interface entityInstanceFormatted {
 	height: number
 }
 export type ldtkNode = entityInstanceFormatted & node
+const sources: Record<string, { default: string }> = import.meta.glob('/assets/**/_composite.png', { eager: true })
 class LDTKMap implements LDTKMapDefinition {
 	static tiles: Record<string, Tile> = {}
 	constructor(data: LDTKMap) {
 		Object.assign(this, data)
 
 	}
-	static sources: Record<string, { default: string }> = import.meta.glob('/assets/**/_composite.png', { eager: true })
+
 	static async load(data: any) {
 		for (let level of data.levels) {
-			const source = Object.entries(LDTKMap.sources).reduce<string>((acc, [path, source]) => {
+			const source = Object.entries(sources).reduce<string>((acc, [path, source]) => {
 				if (path.split('/').at(-2) == level.identifier) return source.default
 				return acc
 			}, '')
