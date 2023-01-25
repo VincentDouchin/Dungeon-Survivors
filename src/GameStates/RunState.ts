@@ -17,7 +17,6 @@ import MovementSystem from "../Systems/MovementSystem"
 import { PAUSE } from "../Constants/InputsNames"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
-import RenderingSystem from "../Systems/RenderingSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import SkillsComponent from "../Components/SkillsComponent"
 import { State } from "../Constants/GameStates"
@@ -57,7 +56,6 @@ class RunState implements GameState {
 		AnimationSystem.register()
 		HealthSystem.register()
 		BodyCreationSystem.register()
-		RenderingSystem.register()
 		XPPickupSystem.register()
 		LightingSystem.register()
 		ShootingSystem.register()

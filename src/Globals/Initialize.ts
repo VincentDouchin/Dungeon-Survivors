@@ -12,7 +12,6 @@ import LDTKMap from "../Utils/LDTKMap"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import Tile from "../Utils/Tile"
-import TiledMap from "../Utils/TiledMap"
 import TouchController from "../InputControllers/TouchController"
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
@@ -26,7 +25,6 @@ const assets: {
 	icons: Record<string, Tile>
 	magic: Record<string, Tile>
 	tiles: Record<tileName, Tile>
-	overWorld: TiledMap
 	skills: Record<skillName, Tile>,
 	blood: Record<string, Tile>
 	map: LDTKMap
@@ -37,7 +35,6 @@ const assets: {
 		({ buffer }) => ({ buffer, frames: buffer.canvas.width / 24, width: 24 })
 	),
 	tiles: await AssetLoader.loadFromTileList(tilesList, tilesSource),
-	overWorld: await TiledMap.load('/Dungeon-Survivor/assets/map/overWorld.json'),
 	skills: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/icons/*.png', { eager: true })) as Record<skillName, Tile>,
 	blood: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/blood/*.png', { eager: true }), ({ buffer }) => {
 		const frames = buffer.canvas.width / buffer.canvas.height
