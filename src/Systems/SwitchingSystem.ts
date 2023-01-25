@@ -26,7 +26,7 @@ class SwitchingSystem extends System {
 					entity.addComponent(new PlayerControllerComponent())
 					entity.removeComponent(TargeterComponent)
 					entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))
-					entity.addComponent(new CameraTargetComponent({}))
+					entity.addComponent(new CameraTargetComponent())
 				} else {
 					entity.getComponent(SpriteComponent).removeShader(OutlineShader)
 					entity.removeComponent(CameraTargetComponent)
