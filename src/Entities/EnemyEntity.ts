@@ -24,9 +24,9 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER))
 	enemy.addComponent(new ShadowComponent(type.size.width, 6, tile.height / 2))
 	enemy.addComponent(new BodyComponent(
-		{ moveForce: 30 },
+		{ moveForce: 300 * type.speed },
 		[
-			{ width: type.size.width, height: type.size.height, offset: tile.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
+			{ width: type.size.width, height: type.size.height, mass: 1, offset: tile.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
 		]
 	))
 	return enemy
