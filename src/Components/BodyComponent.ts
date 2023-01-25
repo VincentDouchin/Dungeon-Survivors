@@ -9,6 +9,7 @@ export interface bodyOptions {
 	moveForce?: number
 	mass?: number
 	lock?: boolean
+	dominanceGroups?: number
 }
 export interface colliderOptions {
 	contact: boolean
@@ -37,6 +38,8 @@ class BodyComponent extends Component {
 				.setCanSleep(false)
 				.setCcdEnabled(true)
 				.setLinearDamping(5)
+				.setAngularDamping(10)
+				.setDominanceGroup(bodyOptions.dominanceGroups ?? 10)
 
 		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
 
@@ -44,7 +47,7 @@ class BodyComponent extends Component {
 		this.colliderDescriptions = colliderOptions.map(colliderOption => {
 			const colliderDescription = ColliderDesc
 				.cuboid(colliderOption.width / 2, colliderOption.height / 2)
-				.setDensity(colliderOption.mass ?? 0.1)
+				.setDensity(colliderOption.mass ?? 0.00000001)
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
 				.setTranslation(0, colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0)
@@ -73,13 +76,14 @@ class BodyComponent extends Component {
 		this.bodyDescription.setUserData(id)
 	}
 	destroy() {
-		if (!this.body) return
-		world.removeRigidBody(this.body)
-		if (this.colliders.length) return
 		this.colliders.forEach(collider => {
 			world.removeCollider(collider, false)
 		})
 		this.colliders.length = 0
+		if (this.body) {
+			world.removeRigidBody(this.body)
+			this.body = null
+		}
 	}
 }
 BodyComponent.register()
