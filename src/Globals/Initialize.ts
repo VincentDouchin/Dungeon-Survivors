@@ -13,10 +13,10 @@ import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import Tile from "../Utils/Tile"
 import TouchController from "../InputControllers/TouchController"
-import arenasSource from './../../assets/map/Arenas.json?url'
+import arenasSource from './../../assets/map/Arenas.json'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
-import ldtkmapSource from './../../assets/map/ldtkOverworld.json?url'
+import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
 

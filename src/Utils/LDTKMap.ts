@@ -22,9 +22,7 @@ class LDTKMap implements LDTKMapDefinition {
 
 	}
 	static sources: Record<string, { default: string }> = import.meta.glob('/assets/**/_composite.png', { eager: true })
-	static async load(path: string) {
-		const data = await import(path)
-
+	static async load(data: any) {
 		for (let level of data.levels) {
 			const source = Object.entries(LDTKMap.sources).reduce<string>((acc, [path, source]) => {
 				if (path.split('/').at(-2) == level.identifier) return source.default
