@@ -9,7 +9,6 @@ export interface bodyOptions {
 	moveForce?: number
 	mass?: number
 	lock?: boolean
-	dominanceGroups?: number
 }
 export interface colliderOptions {
 	contact: boolean
@@ -39,7 +38,6 @@ class BodyComponent extends Component {
 				.setCcdEnabled(true)
 				.setLinearDamping(5)
 				.setAngularDamping(10)
-				.setDominanceGroup(bodyOptions.dominanceGroups ?? 10)
 
 		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
 
