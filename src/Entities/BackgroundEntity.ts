@@ -2,47 +2,66 @@ import { ECS, Entity } from "../Globals/ECS"
 
 import { AmbientLight } from "three"
 import { Background } from "../Constants/BackGrounds"
+import BodyComponent from "../Components/BodyComponent"
+import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import ECSEVENTS from "../Constants/ECSEvents"
+import LDTKMap from "../Utils/LDTKMap"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
-import getBuffer from "../Utils/Buffer"
+import State from "../Globals/State"
+import { assets } from "../Globals/Initialize"
 
 const BackgroundEntity = (backgroundDefinition: Background) => {
 	const background = new Entity()
-	const position = new PositionComponent(0, 0)
-	background.addComponent(position)
-	const width = Math.floor(window.innerWidth / 16) * 16
-	const height = Math.floor(window.innerHeight / 16) * 16
+	const position = background.addComponent(new PositionComponent(0, 0))
+	const tile = LDTKMap.tiles[backgroundDefinition.level]
+	const width = tile.width
+	const height = tile.height
+	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
+	const isInfinite = level?.fieldInstances.find(field => field.__identifier == 'infinite')?.__value
+	if (isInfinite) {
 
-	const buffer = getBuffer(width, height)
-	const floorTiles = backgroundDefinition.tiles
-
-	const totalWeight = floorTiles.reduce((acc, v) => acc + v[1], 0)
-	const allTiles = floorTiles.flatMap(([tile, weight]) => new Array(weight).fill(tile))
-
-	for (let x = 0; x < Math.ceil(width / 16) * 16; x += 16) {
-		for (let y = 0; y < Math.ceil(height / 16) * 16; y += 16) {
-			const randomTile = allTiles[Math.floor(totalWeight * Math.random())]
-			buffer.drawImage(randomTile.buffer.canvas, x, y)
-			backgroundDefinition.detailHook && backgroundDefinition.detailHook(buffer)(x, y)
+		const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
+		ECS.eventBus.subscribe(ECSEVENTS.CAMERAMOVE, ({ x, y }: { x: number, y: number }) => {
+			sprite.texture.offset.x = x / width
+			sprite.texture.offset.y = y / height
+			position.x = x
+			position.y = y
+		})
+		State.cameraBounds = {
+			left: undefined,
+			right: undefined,
+			top: undefined,
+			bottom: undefined,
 		}
+	} else {
+		State.cameraBounds = {
+			left: -width / 2,
+			right: width / 2,
+			bottom: -height / 2,
+			top: height / 2,
+		}
+		background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
+
 	}
-	backgroundDefinition.childrenHook && backgroundDefinition.childrenHook(background)
-	const mesh = new SpriteComponent(new Tile({ buffer }), { renderOrder: 0 })
-	mesh.mesh.receiveShadow = true
+
+	level?.layerInstances?.find(layer => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
+		const wallEntity = new Entity()
+		wallEntity.addComponent(new BodyComponent(
+			{ type: 'fixed' },
+			[
+				{ width: wall.width, height: wall.height, contact: false, group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY] }]
+		))
+		wallEntity.addComponent(new PositionComponent(-wall.px[0] + level.pxWid / 2 - wall.width / 2, level.pxHei / 2 - wall.px[1] - wall.height / 2))
+		background.addChildren(wallEntity)
+	})
 	if (backgroundDefinition.lightColor) {
 		background.addComponent(new LightComponent(backgroundDefinition.lightColor, 1, AmbientLight))
 	}
 
-	ECS.eventBus.subscribe(ECSEVENTS.CAMERAMOVE, ({ x, y }: { x: number, y: number }) => {
-		mesh.texture.offset.x = x / mesh.width
-		mesh.texture.offset.y = y / mesh.height
-		position.x = x
-		position.y = y
-	})
-	background.addComponent(mesh)
+
+
 	return background
 }
 export default BackgroundEntity
