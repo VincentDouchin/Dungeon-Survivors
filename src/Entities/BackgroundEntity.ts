@@ -1,4 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
+import { FieldInstance, LayerInstance } from "../../ldtk"
 
 import { AmbientLight } from "three"
 import { Background } from "../Constants/BackGrounds"
@@ -6,7 +7,6 @@ import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import ECSEVENTS from "../Constants/ECSEvents"
 import LDTKMap from "../Utils/LDTKMap"
-import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -20,7 +20,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const width = tile.width
 	const height = tile.height
 	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
-	const isInfinite = level?.fieldInstances.find(field => field.__identifier == 'infinite')?.__value
+	const isInfinite = level?.fieldInstances.find((field: FieldInstance) => field.__identifier == 'infinite')?.__value
 	if (isInfinite) {
 
 		const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
