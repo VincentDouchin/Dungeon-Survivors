@@ -7,6 +7,7 @@ export interface EnemyType {
 	tiles: Record<string, Tile>
 	health: number,
 	size: bodySize,
+	speed: number
 }
 const Enemies: Record<string, EnemyType> = {
 	goblin: {
@@ -15,39 +16,44 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.goblin_run_anim
 		},
 		health: 10,
-		size: BODYSIZES.small
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	orc: {
 		tiles: {
 			idle: assets.tiles.orc_warrior_idle_anim,
 			run: assets.tiles.orc_warrior_run_anim
 		},
-		health: 30,
-		size: BODYSIZES.normal
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	orcShaman: {
 		tiles: {
 			idle: assets.tiles.orc_shaman_idle_anim,
 			run: assets.tiles.orc_shaman_run_anim
 		},
-		health: 50,
-		size: BODYSIZES.normal
+		health: 20,
+		size: BODYSIZES.normal,
+		speed: 1.5
 	},
 	orcMasked: {
 		tiles: {
 			idle: assets.tiles.masked_orc_idle_anim,
 			run: assets.tiles.masked_orc_run_anim,
 		},
-		health: 80,
-		size: BODYSIZES.normal
+		health: 40,
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	orcBig: {
 		tiles: {
 			idle: assets.tiles.big_zombie_idle_anim,
 			run: assets.tiles.big_zombie_run_anim,
 		},
-		health: 300,
-		size: BODYSIZES.big
+		health: 200,
+		size: BODYSIZES.big,
+		speed: 10
 	},
 
 	ogre: {
@@ -56,7 +62,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.big_zombie_run_anim,
 		},
 		health: 300,
-		size: BODYSIZES.big
+		size: BODYSIZES.big,
+		speed: 10
 	},
 	gnoll: {
 		tiles: {
@@ -64,7 +71,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.gnoll_grunt_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	wogol: {
 		tiles: {
@@ -72,7 +80,9 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.wogol_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
+
 	},
 	chort: {
 		tiles: {
@@ -80,7 +90,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.chort_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	necromancer: {
 		tiles: {
@@ -88,7 +99,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.necromancer_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 1.5
 	},
 	demonBig: {
 		tiles: {
@@ -96,7 +108,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.big_demon_run_anim
 		},
 		health: 300,
-		size: BODYSIZES.big
+		size: BODYSIZES.big,
+		speed: 10
 	},
 	imp: {
 		tiles: {
@@ -104,7 +117,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.imp_run_anim
 		},
 		health: 10,
-		size: BODYSIZES.small
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	zombieSmall: {
 		tiles: {
@@ -112,7 +126,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.tiny_zombie_run_anim
 		},
 		health: 10,
-		size: BODYSIZES.small
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	skeleton: {
 		tiles: {
@@ -120,7 +135,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.skelet_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	muddy: {
 		tiles: {
@@ -128,7 +144,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.muddy_run_anim
 		},
 		health: 30,
-		size: BODYSIZES.square
+		size: BODYSIZES.square,
+		speed: 2
 	},
 	swampy: {
 		tiles: {
@@ -136,7 +153,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.swampy_run_anim
 		},
 		health: 30,
-		size: BODYSIZES.square
+		size: BODYSIZES.square,
+		speed: 2
 	},
 	zombie: {
 		tiles: {
@@ -144,7 +162,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.zombie_run_anim
 		},
 		health: 40,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	iceZombie: {
 		tiles: {
@@ -152,7 +171,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.ice_zombie_run_anim
 		},
 		health: 40,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	bandit: {
 		tiles: {
@@ -160,7 +180,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.bandit_run_anim
 		},
 		health: 40,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	centaurFemale: {
 		tiles: {
@@ -168,7 +189,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.centaur_f_run_anim
 		},
 		health: 40,
-		size: BODYSIZES.centaur
+		size: BODYSIZES.centaur,
+		speed: 4
 	},
 	centaurMale: {
 		tiles: {
@@ -176,7 +198,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.centaur_m_run_anim
 		},
 		health: 40,
-		size: BODYSIZES.centaur
+		size: BODYSIZES.centaur,
+		speed: 4
 	},
 	mushroomSmall: {
 		tiles: {
@@ -184,7 +207,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.mushroom_small_run_anim
 		},
 		health: 10,
-		size: BODYSIZES.small
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	mushroomMedium: {
 		tiles: {
@@ -192,7 +216,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.mushroom_medium_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.normal
+		size: BODYSIZES.normal,
+		speed: 2
 	},
 	mushroomBig: {
 		tiles: {
@@ -200,15 +225,17 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.mushroom_big_run_anim
 		},
 		health: 20,
-		size: BODYSIZES.big
+		size: BODYSIZES.big,
+		speed: 10
 	},
 	bear: {
 		tiles: {
 			idle: assets.tiles.bear_idle_anim,
 			run: assets.tiles.bear_run_anim
 		},
-		health: 200,
-		size: BODYSIZES.massive
+		health: 100,
+		size: BODYSIZES.massive,
+		speed: 7
 	},
 	golem: {
 		tiles: {
@@ -216,7 +243,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.golem_run_anim
 		},
 		health: 500,
-		size: BODYSIZES.giant
+		size: BODYSIZES.giant,
+		speed: 100
 	},
 	direwolf: {
 		tiles: {
@@ -224,7 +252,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.direwolf_run_anim
 		},
 		health: 30,
-		size: BODYSIZES.wide
+		size: BODYSIZES.wide,
+		speed: 3
 	},
 	bunny: {
 		tiles: {
@@ -232,7 +261,8 @@ const Enemies: Record<string, EnemyType> = {
 			run: assets.tiles.bunny_run_anim
 		},
 		health: 10,
-		size: BODYSIZES.small
+		size: BODYSIZES.small,
+		speed: 1
 
 	}
 

@@ -13,12 +13,18 @@ import waitFor from "../Utils/WaitFor";
 class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
+	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
+	index = 0
 	constructor() {
 		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
 		})
+	}
+	setBoundary(x: number, y: number) {
+		this.boundary = { x: x / 2, y: y / 2 }
+		return this
 	}
 	addWave(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], enemiesNb: number, waves: number, delay?: number) {
 		const self = this
@@ -33,7 +39,6 @@ class Encounter {
 				}
 				timer = (timer + 1) % (delay ?? 600)
 				yield
-
 			}
 			yield
 		})
@@ -53,15 +58,19 @@ class Encounter {
 		}
 	}
 	* spawnEnemies(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], nb: number) {
+		console.log('ok')
 		const self = this
 		for (let i = 0; i < nb; i++) {
 			const angle = Math.random() * Math.PI * 2
-			const x = (Math.cos(angle) * camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
-			const y = Math.sin(angle) * camera.top + camera.position.y * ((Math.random() * 1.2) + 1)
-			yield* waitFor(Math.random() * 10)
-			yield ParticleEntity(x, y, assets.magic['smoke']).then(() => {
+
+			const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+			const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
+			const x = this.boundary.x ? Math.max(-this.boundary.x, Math.min(this.boundary.x, distanceX)) : distanceX
+			const y = this.boundary.y ? Math.max(-this.boundary.y, Math.min(this.boundary.y, distanceY)) : distanceY
+			ParticleEntity(x, y, assets.magic['smoke']).then(() => {
 				this.enemies.push(EnemyEntity(self.getType(enemyType), { x, y }).id)
 			})
+			yield* waitFor(Math.random() * 10)
 
 		}
 	}
@@ -69,14 +78,18 @@ class Encounter {
 		const self = this
 		this.waves.push(function* () {
 			while (self.enemies.length) {
-				yield
+				yield* waitFor(1)
 			}
 			return
 		})
 		return this
 	}
 	stop() {
-		Engine.setState(State.map)
+		this.waves.push(function* () {
+			yield
+			Engine.setState(State.map)
+
+		})
 		return this
 	}
 	start() {
