@@ -51,7 +51,7 @@ class RunState implements GameState {
 		render()
 	}
 	set(oldState: State, options?: { background: backgroundName, enemies: enemyWaveName }) {
-		debugger
+
 		inputManager.enable('dpad')
 		MovementSystem.register()
 		AnimationSystem.register()
