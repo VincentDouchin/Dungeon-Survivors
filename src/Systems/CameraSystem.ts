@@ -1,38 +1,49 @@
-import { Vector3 } from "three";
-import CameraTargetComponent from "../Components/CameraTargetComponent";
-import PositionComponent from "../Components/PositionComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
 import { ECS, Entity, System } from "../Globals/ECS";
+
+import CameraTargetComponent from "../Components/CameraTargetComponent";
+import ECSEVENTS from "../Constants/ECSEvents";
+import PositionComponent from "../Components/PositionComponent";
+import State from "../Globals/State";
+import { Vector3 } from "three";
 import { camera } from "../Globals/Initialize";
 
 class CameraSystem extends System {
     frustumSize: number = 600
     newFrustrumSize?: number
     aspect: number = window.innerWidth / window.innerHeight
+    defaultFrustrumSize = 700
+    defaultAspect = window.innerHeight / window.innerWidth
     constructor() {
         super(CameraTargetComponent)
     }
     update(entities: Entity[]): void {
         entities.forEach(entity => {
             const position = entity.getComponent(PositionComponent)
-            const cameraTarget = entity.getComponent(CameraTargetComponent)
+            const cameraTarget = State.cameraBounds
             ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
-            if (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom) {
+            if (
+                (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
+                && (
+                    ((cameraTarget.right - cameraTarget.left) < this.defaultFrustrumSize)
+                    || ((cameraTarget.top - cameraTarget.bottom) < (this.defaultFrustrumSize * this.defaultAspect))
+                )
+
+            ) {
                 const width = cameraTarget.right - cameraTarget.left
                 const height = cameraTarget.top - cameraTarget.bottom
                 this.newFrustrumSize = Math.min(width, height)
-                this.aspect = width < height ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
+                this.aspect = height < width ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
 
             } else {
-                this.newFrustrumSize = 700
-                this.aspect = window.innerWidth / window.innerHeight
+                this.newFrustrumSize = this.defaultFrustrumSize
+                this.aspect = this.defaultAspect
             }
             if (this.frustumSize != this.newFrustrumSize) {
                 this.frustumSize = this.newFrustrumSize
                 camera.left = -this.frustumSize / 2
                 camera.right = this.frustumSize / 2
-                camera.top = this.frustumSize / this.aspect / 2
-                camera.bottom = -this.frustumSize / this.aspect / 2
+                camera.top = this.frustumSize * this.aspect / 2
+                camera.bottom = -this.frustumSize * this.aspect / 2
                 camera.updateProjectionMatrix()
             }
 

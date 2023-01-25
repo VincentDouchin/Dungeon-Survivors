@@ -16,6 +16,7 @@ import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
 import SpriteComponent from "../Components/SpriteComponent";
+import State from "../Globals/State";
 
 class MapState implements GameState {
 	map?: Entity
@@ -48,12 +49,13 @@ class MapState implements GameState {
 		const knight = HEROS.knightMale
 		this.player.addComponent(new SpriteComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
 		this.player.addComponent(new AnimationComponent(knight.tiles))
-		this.player.addComponent(new CameraTargetComponent({
+		this.player.addComponent(new CameraTargetComponent())
+		State.cameraBounds = {
 			left: -mapTile.width / 2,
 			right: mapTile.width / 2,
 			bottom: -mapTile.height / 2,
 			top: mapTile.height / 2,
-		}))
+		}
 		this.player.addComponent(new PathWalkerComponent())
 		ECS.eventBus.subscribe(ECSEVENTS.PATHPOSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
