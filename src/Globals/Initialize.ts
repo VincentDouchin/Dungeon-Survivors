@@ -1,9 +1,8 @@
 import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
-import { AddEquation, AddOperation, BufferGeometry, Clock, Color, CustomBlending, Float32BufferAttribute, LinearFilter, LinearMipMapLinearFilter, LinearMipMapNearestFilter, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapLinearFilter, NearestMipMapNearestFilter, NearestMipmapNearestFilter, OneFactor, OneMinusSrcAlphaFactor, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer, ZeroFactor } from "three"
+import { Clock, Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, WebGLRenderTarget, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
-import AssetLoader from "./AssetLoader"
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import AssetLoader from "./../Utils/AssetLoader"
 import { FullScreenQuad } from "three/examples/jsm/postprocessing/Pass"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
@@ -12,9 +11,6 @@ import KeyboardController from "../InputControllers/KeyboardController"
 import LDTKMap from "../Utils/LDTKMap"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import { TexturePass } from "three/examples/jsm/postprocessing/TexturePass"
 import Tile from "../Utils/Tile"
 import TiledMap from "../Utils/TiledMap"
 import TouchController from "../InputControllers/TouchController"
@@ -23,7 +19,6 @@ import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json?url'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
-import vert from './../Shaders/glsl/main.vert?raw'
 
 //! Assets
 const assets: {

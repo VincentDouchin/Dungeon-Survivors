@@ -1,5 +1,5 @@
-import Tile from '../Utils/Tile'
-import getBuffer from '../Utils/Buffer'
+import Tile from './Tile'
+import getBuffer from './Buffer'
 
 class AssetLoader {
 	static async loadImage(source: string) {
