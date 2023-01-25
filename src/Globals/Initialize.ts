@@ -13,6 +13,7 @@ import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import Tile from "../Utils/Tile"
 import TouchController from "../InputControllers/TouchController"
+import arenasSource from './../../assets/map/Arenas.jon?url'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json?url'
@@ -28,6 +29,7 @@ const assets: {
 	skills: Record<skillName, Tile>,
 	blood: Record<string, Tile>
 	map: LDTKMap
+	arenas: LDTKMap
 } = {
 	UI: await AssetLoader.loadFromSlices(GUIData, GUISource),
 	icons: await AssetLoader.loadFromSlices(iconsData, iconsSource),
@@ -40,8 +42,8 @@ const assets: {
 		const frames = buffer.canvas.width / buffer.canvas.height
 		return { buffer, frames, width: buffer.canvas.height }
 	}),
-	map: await LDTKMap.load(ldtkmapSource) as LDTKMap
-
+	map: await LDTKMap.load(ldtkmapSource),
+	arenas: await LDTKMap.load(arenasSource)
 }
 // ! Clock
 const clock = new Clock()
