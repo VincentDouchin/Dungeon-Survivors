@@ -6,6 +6,7 @@ import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import ECSEVENTS from "../Constants/ECSEvents"
 import LDTKMap from "../Utils/LDTKMap"
+import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -46,7 +47,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 
 	}
 
-	level?.layerInstances?.find(layer => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
+	level?.layerInstances?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
 		const wallEntity = new Entity()
 		wallEntity.addComponent(new BodyComponent(
 			{ type: 'fixed' },
