@@ -29,8 +29,8 @@
 				"id": "PathNode",
 				"iid": "5ee16d80-7820-11ed-a6ad-67416ad4dd60",
 				"layer": "Path",
-				"x": 176,
-				"y": 1072,
+				"x": 184,
+				"y": 1080,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -39,7 +39,7 @@
 						"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -53,8 +53,8 @@
 				"id": "PathNode",
 				"iid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
 				"layer": "Path",
-				"x": 176,
-				"y": 1040,
+				"x": 184,
+				"y": 1048,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -63,13 +63,13 @@
 						"entityIid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": {
 						"entityIid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -82,8 +82,8 @@
 				"id": "PathNode",
 				"iid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
 				"layer": "Path",
-				"x": 96,
-				"y": 1040,
+				"x": 104,
+				"y": 1048,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -92,7 +92,7 @@
 						"entityIid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -106,7 +106,7 @@
 				"id": "PathNode",
 				"iid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
 				"layer": "Path",
-				"x": 96,
+				"x": 104,
 				"y": 976,
 				"width": 16,
 				"height": 16,
@@ -116,12 +116,12 @@
 						"entityIid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": "FOREST",
+					"BACKGROUND": "CAMP",
 					"ENEMIES": "ORCS",
 					"start": false
 				}
@@ -130,8 +130,8 @@
 				"id": "PathNode",
 				"iid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
 				"layer": "Path",
-				"x": 96,
-				"y": 912,
+				"x": 104,
+				"y": 920,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -142,7 +142,7 @@
 						"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -154,8 +154,8 @@
 				"id": "PathNode",
 				"iid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
 				"layer": "Path",
-				"x": 176,
-				"y": 1008,
+				"x": 184,
+				"y": 1016,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -166,7 +166,7 @@
 						"entityIid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -178,8 +178,8 @@
 				"id": "PathNode",
 				"iid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
 				"layer": "Path",
-				"x": 240,
-				"y": 1008,
+				"x": 248,
+				"y": 1016,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -188,7 +188,7 @@
 						"entityIid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -202,8 +202,8 @@
 				"id": "PathNode",
 				"iid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
 				"layer": "Path",
-				"x": 240,
-				"y": 912,
+				"x": 248,
+				"y": 920,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -213,7 +213,7 @@
 						"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -226,8 +226,8 @@
 				"id": "PathNode",
 				"iid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
 				"layer": "Path",
-				"x": 240,
-				"y": 944,
+				"x": 248,
+				"y": 952,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -236,7 +236,7 @@
 						"entityIid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -250,7 +250,7 @@
 				"id": "PathNode",
 				"iid": "97740090-7820-11ed-a6ad-fddf369300a9",
 				"layer": "Path",
-				"x": 184,
+				"x": 192,
 				"y": 912,
 				"width": 16,
 				"height": 16,
@@ -260,7 +260,7 @@
 						"entityIid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -274,7 +274,7 @@
 				"id": "PathNode",
 				"iid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
 				"layer": "Path",
-				"x": 184,
+				"x": 192,
 				"y": 888,
 				"width": 16,
 				"height": 16,
@@ -284,7 +284,7 @@
 						"entityIid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -298,8 +298,8 @@
 				"id": "PathNode",
 				"iid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
 				"layer": "Path",
-				"x": 184,
-				"y": 864,
+				"x": 192,
+				"y": 872,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -309,7 +309,7 @@
 						"entityIid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -322,8 +322,8 @@
 				"id": "PathNode",
 				"iid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
 				"layer": "Path",
-				"x": 192,
-				"y": 864,
+				"x": 200,
+				"y": 872,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -332,7 +332,7 @@
 						"entityIid": "b18f0bf0-7820-11ed-a6ad-f9ade3cbd7ff",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -346,8 +346,8 @@
 				"id": "PathNode",
 				"iid": "b18f0bf0-7820-11ed-a6ad-f9ade3cbd7ff",
 				"layer": "Path",
-				"x": 192,
-				"y": 848,
+				"x": 200,
+				"y": 856,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -358,7 +358,7 @@
 						"entityIid": "b2be6430-7820-11ed-a6ad-39028f436956",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -370,8 +370,8 @@
 				"id": "PathNode",
 				"iid": "b2be6430-7820-11ed-a6ad-39028f436956",
 				"layer": "Path",
-				"x": 224,
-				"y": 848,
+				"x": 232,
+				"y": 856,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -380,7 +380,7 @@
 						"entityIid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -394,8 +394,8 @@
 				"id": "PathNode",
 				"iid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
 				"layer": "Path",
-				"x": 224,
-				"y": 752,
+				"x": 232,
+				"y": 760,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -404,13 +404,13 @@
 						"entityIid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": {
 						"entityIid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -423,8 +423,8 @@
 				"id": "PathNode",
 				"iid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
 				"layer": "Path",
-				"x": 224,
-				"y": 736,
+				"x": 232,
+				"y": 744,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -435,7 +435,7 @@
 						"entityIid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -447,8 +447,8 @@
 				"id": "PathNode",
 				"iid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
 				"layer": "Path",
-				"x": 256,
-				"y": 736,
+				"x": 264,
+				"y": 744,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -457,7 +457,7 @@
 						"entityIid": "d457ec60-7820-11ed-a6ad-bba7e4102b5b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -471,8 +471,8 @@
 				"id": "PathNode",
 				"iid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
 				"layer": "Path",
-				"x": 128,
-				"y": 752,
+				"x": 136,
+				"y": 760,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -481,7 +481,7 @@
 						"entityIid": "cdb52990-7820-11ed-a6ad-73fbc082051b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -495,8 +495,8 @@
 				"id": "PathNode",
 				"iid": "cdb52990-7820-11ed-a6ad-73fbc082051b",
 				"layer": "Path",
-				"x": 128,
-				"y": 640,
+				"x": 136,
+				"y": 648,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -505,7 +505,7 @@
 						"entityIid": "cefc76a0-7820-11ed-a6ad-15f4837ab135",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -519,8 +519,8 @@
 				"id": "PathNode",
 				"iid": "cefc76a0-7820-11ed-a6ad-15f4837ab135",
 				"layer": "Path",
-				"x": 128,
-				"y": 592,
+				"x": 136,
+				"y": 600,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -530,7 +530,7 @@
 						"entityIid": "d071d890-7820-11ed-a6ad-031dee1a276c",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -543,8 +543,8 @@
 				"id": "PathNode",
 				"iid": "d071d890-7820-11ed-a6ad-031dee1a276c",
 				"layer": "Path",
-				"x": 96,
-				"y": 592,
+				"x": 104,
+				"y": 600,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -553,7 +553,7 @@
 						"entityIid": "d19d8750-7820-11ed-a6ad-e5313430ec61",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -567,8 +567,8 @@
 				"id": "PathNode",
 				"iid": "d19d8750-7820-11ed-a6ad-e5313430ec61",
 				"layer": "Path",
-				"x": 96,
-				"y": 480,
+				"x": 104,
+				"y": 488,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -577,7 +577,7 @@
 						"entityIid": "03a12db0-7820-11ed-a6ad-f944d48dacd5",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -591,8 +591,8 @@
 				"id": "PathNode",
 				"iid": "d457ec60-7820-11ed-a6ad-bba7e4102b5b",
 				"layer": "Path",
-				"x": 256,
-				"y": 568,
+				"x": 264,
+				"y": 584,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -601,7 +601,7 @@
 						"entityIid": "daba98f0-7820-11ed-a6ad-7dab7da05d50",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -615,8 +615,8 @@
 				"id": "PathNode",
 				"iid": "daba98f0-7820-11ed-a6ad-7dab7da05d50",
 				"layer": "Path",
-				"x": 256,
-				"y": 416,
+				"x": 264,
+				"y": 424,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -625,7 +625,7 @@
 						"entityIid": "dbe50f30-7820-11ed-a6ad-c3f455d861de",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -639,8 +639,8 @@
 				"id": "PathNode",
 				"iid": "dbe50f30-7820-11ed-a6ad-c3f455d861de",
 				"layer": "Path",
-				"x": 256,
-				"y": 320,
+				"x": 264,
+				"y": 328,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -649,7 +649,7 @@
 						"entityIid": "e746e0b0-7820-11ed-a6ad-f1fbb9d4d43e",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -663,8 +663,8 @@
 				"id": "PathNode",
 				"iid": "dd5b5b80-7820-11ed-a6ad-c70481e1975b",
 				"layer": "Path",
-				"x": 192,
-				"y": 352,
+				"x": 200,
+				"y": 360,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -673,7 +673,7 @@
 						"entityIid": "e8748b40-7820-11ed-a6ad-4791d7469a0f",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -687,8 +687,8 @@
 				"id": "PathNode",
 				"iid": "deb54630-7820-11ed-a6ad-974c8605b4ed",
 				"layer": "Path",
-				"x": 192,
-				"y": 448,
+				"x": 200,
+				"y": 456,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -697,7 +697,7 @@
 						"entityIid": "dd5b5b80-7820-11ed-a6ad-c70481e1975b",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -711,8 +711,8 @@
 				"id": "PathNode",
 				"iid": "e04c12d0-7820-11ed-a6ad-77ac1882fbfd",
 				"layer": "Path",
-				"x": 96,
-				"y": 320,
+				"x": 104,
+				"y": 328,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -721,7 +721,7 @@
 						"entityIid": "e1785dd0-7820-11ed-a6ad-95adaacf43f4",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -735,8 +735,8 @@
 				"id": "PathNode",
 				"iid": "e1785dd0-7820-11ed-a6ad-95adaacf43f4",
 				"layer": "Path",
-				"x": 96,
-				"y": 256,
+				"x": 104,
+				"y": 264,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -747,7 +747,7 @@
 						"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -759,8 +759,8 @@
 				"id": "PathNode",
 				"iid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 				"layer": "Path",
-				"x": 168,
-				"y": 256,
+				"x": 176,
+				"y": 264,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -769,7 +769,7 @@
 						"entityIid": "2e17d850-7820-11ed-a6ad-2d97e47cb379",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -783,8 +783,8 @@
 				"id": "PathNode",
 				"iid": "e4a7cbd0-7820-11ed-a6ad-912a523300fe",
 				"layer": "Path",
-				"x": 224,
-				"y": 256,
+				"x": 232,
+				"y": 264,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -794,7 +794,7 @@
 						"entityIid": "e3143380-7820-11ed-a6ad-05b81fc33b6d",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -807,8 +807,8 @@
 				"id": "PathNode",
 				"iid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 				"layer": "Path",
-				"x": 224,
-				"y": 304,
+				"x": 232,
+				"y": 312,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -817,7 +817,7 @@
 						"entityIid": "e4a7cbd0-7820-11ed-a6ad-912a523300fe",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": null,
@@ -831,8 +831,8 @@
 				"id": "PathNode",
 				"iid": "e746e0b0-7820-11ed-a6ad-f1fbb9d4d43e",
 				"layer": "Path",
-				"x": 256,
-				"y": 304,
+				"x": 264,
+				"y": 312,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -842,7 +842,7 @@
 						"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"right": null,
 					"encounter": false,
@@ -855,8 +855,8 @@
 				"id": "PathNode",
 				"iid": "e8748b40-7820-11ed-a6ad-4791d7469a0f",
 				"layer": "Path",
-				"x": 192,
-				"y": 304,
+				"x": 200,
+				"y": 312,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -867,7 +867,7 @@
 						"entityIid": "e61e6640-7820-11ed-a6ad-c55e432d73db",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -879,8 +879,8 @@
 				"id": "PathNode",
 				"iid": "03a12db0-7820-11ed-a6ad-f944d48dacd5",
 				"layer": "Path",
-				"x": 96,
-				"y": 448,
+				"x": 104,
+				"y": 456,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -889,14 +889,14 @@
 						"entityIid": "e04c12d0-7820-11ed-a6ad-77ac1882fbfd",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"left": null,
 					"right": {
 						"entityIid": "deb54630-7820-11ed-a6ad-974c8605b4ed",
 						"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
 						"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-						"worldIid": "3b724370-7820-11ed-b89a-9ba7b9f52de8"
+						"worldIid": "f46a7790-7820-11ed-a4f2-2d5436986f9a"
 					},
 					"encounter": false,
 					"BACKGROUND": null,
@@ -908,8 +908,8 @@
 				"id": "PathNode",
 				"iid": "2e17d850-7820-11ed-a6ad-2d97e47cb379",
 				"layer": "Path",
-				"x": 168,
-				"y": 64,
+				"x": 176,
+				"y": 72,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
