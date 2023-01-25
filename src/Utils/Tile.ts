@@ -50,6 +50,10 @@ class Tile {
 		options.buffer.drawImage(this.buffer.canvas, 0, 0)
 		return new Tile(options)
 	}
+	overwrite(props: { height?: number, width?: number, frames?: number }) {
+		Object.assign(this, props)
+		return this
+	}
 
 }
 export default Tile
