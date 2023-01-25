@@ -22,8 +22,9 @@ class PathSystem extends System {
 
 			const node = entity.getComponent(PathNodeComponent)
 
-			const [[walkerId]] = ECS.getEntitiesAndComponents(PathWalkerComponent)
-			const walkerPosition = ECS.getEntityById(walkerId).getComponent(PositionComponent)
+			const [walkerId] = ECS.getEntitiesAndComponents(PathWalkerComponent)
+			if (!walkerId) return
+			const walkerPosition = ECS.getEntityById(walkerId[0]).getComponent(PositionComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
 				ECS.eventBus.publish(ECSEVENTS.PATHPOSITION, position)
@@ -35,6 +36,7 @@ class PathSystem extends System {
 			} else if (node.selected && node.encounter) {
 				node.encounter = false
 				Engine.setState(State.run, node)
+				return
 			} else if (node.selected && !node.showingOptions) {
 				const possibleDirections = Object.entries(node.nodes)
 				if (possibleDirections.length == 1) {
