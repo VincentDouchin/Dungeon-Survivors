@@ -1,8 +1,8 @@
 import { ECS, Entity } from "../Globals/ECS";
+import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents";
 import { assets, camera } from "../Globals/Initialize";
 
 import Coroutines from "../Globals/Coroutines";
-import ECSEVENTS from "../Constants/ECSEvents";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
@@ -16,7 +16,7 @@ class Encounter {
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
 	index = 0
 	constructor() {
-		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+		ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
@@ -57,22 +57,43 @@ class Encounter {
 			return enemyType[Math.floor(Math.random() * enemyType.length)]
 		}
 	}
-	* spawnEnemies(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], nb: number) {
-		console.log('ok')
-		const self = this
-		for (let i = 0; i < nb; i++) {
-			const angle = Math.random() * Math.PI * 2
+	getDistance(offset: number = 0) {
+		const angle = Math.random() * Math.PI * 2
 
-			const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
-			const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
-			const x = this.boundary.x ? Math.max(-this.boundary.x, Math.min(this.boundary.x, distanceX)) : distanceX
-			const y = this.boundary.y ? Math.max(-this.boundary.y, Math.min(this.boundary.y, distanceY)) : distanceY
-			ParticleEntity(x, y, assets.magic['smoke']).then(() => {
-				this.enemies.push(EnemyEntity(self.getType(enemyType), { x, y }).id)
-			})
+		const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+		const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
+		const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
+		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
+		return { x, y }
+	}
+	* spawnEnemies(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], nb: number) {
+		for (let i = 0; i < nb; i++) {
+			const { x, y } = this.getDistance()
+			this.spawnEnemy(this.getType(enemyType), x, y)
 			yield* waitFor(Math.random() * 10)
 
 		}
+	}
+	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
+		ParticleEntity(x, y, assets.magic['smoke']).then(() => {
+			this.enemies.push(EnemyEntity(this.getType(enemyType), { x, y }).id)
+		})
+	}
+	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards: number = 8, distance: number) {
+		const self = this
+		this.waves.push(function* () {
+			const { x, y } = self.getDistance(distance)
+			self.spawnEnemy(mainEnemy, x, y)
+			yield* waitFor(Math.random() * 10)
+			for (let i = 0; i < nbOfGuards; i++) {
+				const angle = Math.PI * 2 * i / nbOfGuards
+				const guardX = x + Math.cos(angle) * distance
+				const guardY = y + Math.sin(angle) * distance
+				self.spawnEnemy(guard, guardX, guardY)
+				yield* waitFor(Math.random() * 10)
+			}
+		})
+		return this
 	}
 	waitForEnemiesCleared() {
 		const self = this

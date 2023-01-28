@@ -1,4 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS";
+import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
 import { assets, lightScene, render, world } from "../Globals/Initialize";
 
@@ -7,7 +8,6 @@ import AnimationComponent from "../Components/AnimationComponent";
 import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
 import HEROS from "../Constants/Heros";
 import MovementSystem from "../Systems/MovementSystem";
 import PathEntity from "../Entities/PathEntity";
@@ -57,7 +57,7 @@ class MapState implements GameState {
 			top: mapTile.height / 2,
 		}
 		this.player.addComponent(new PathWalkerComponent())
-		ECS.eventBus.subscribe(ECSEVENTS.PATHPOSITION, (position: PositionComponent) => {
+		ECS.eventBus.subscribe<PATH_POSITION>(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
 			this.lastPosition.y = position.y
 		})

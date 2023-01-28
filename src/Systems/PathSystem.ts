@@ -1,8 +1,8 @@
 import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import { assets, inputManager } from "../Globals/Initialize";
 
 import Coroutines from "../Globals/Coroutines";
-import ECSEVENTS from "../Constants/ECSEvents";
 import Engine from "../Globals/Engine";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
@@ -27,7 +27,7 @@ class PathSystem extends System {
 			const walkerPosition = ECS.getEntityById(walkerId[0]).getComponent(PositionComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
-				ECS.eventBus.publish(ECSEVENTS.PATHPOSITION, position)
+				ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, position)
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)

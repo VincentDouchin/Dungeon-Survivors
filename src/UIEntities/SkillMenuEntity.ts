@@ -1,8 +1,8 @@
 import { ECS, Entity } from "../Globals/ECS"
+import ECSEVENTS, { SKILL } from "../Constants/ECSEvents"
 import { assets, clock, inputManager } from "../Globals/Initialize"
 
 import Coroutines from "../Globals/Coroutines"
-import ECSEVENTS from "../Constants/ECSEvents"
 import Engine from "../Globals/Engine"
 import SKILLS from "../Constants/Skills"
 import SelectableComponent from "../Components/SelectableComponent"
@@ -56,7 +56,7 @@ const SkillMenuEntity = () => {
 		const sub = inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
 			if (uiObjects.includes(buttonMesh.mesh.id)) {
 				inputManager.eventBus.unsubscribe('down', sub)
-				ECS.eventBus.publish(ECSEVENTS.SKILL, skill)
+				ECS.eventBus.publish<SKILL>(ECSEVENTS.SKILL, skill)
 				skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(State.run))
 			}
 		})

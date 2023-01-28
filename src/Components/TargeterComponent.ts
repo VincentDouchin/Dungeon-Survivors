@@ -1,6 +1,5 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
-
-import ECSEVENTS from "../Constants/ECSEvents";
+import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents";
 
 class TargeterComponent extends Component {
 	target: number | null = null
@@ -15,7 +14,7 @@ class TargeterComponent extends Component {
 		} else {
 			this.target = target
 		}
-		ECS.eventBus.subscribe(ECSEVENTS.DELETEENTITY, (entity: Entity) => {
+		ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (entity.id == this.targetedEnemy) {
 				this.targetedEnemy = null
 			}

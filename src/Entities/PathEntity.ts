@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
+import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents"
 import PathNodeComponent, { node } from "../Components/PathNodeComponent"
 
-import ECSEVENTS from "../Constants/ECSEvents"
 import PositionComponent from "../Components/PositionComponent"
 
 const PathEntity = (nodes: node[]) => {
@@ -12,7 +12,7 @@ const PathEntity = (nodes: node[]) => {
 		const nodeEntity = new Entity()
 		const nodePosition = nodeEntity.addComponent(new PositionComponent(node.x, node.y))
 		if (selected) {
-			ECS.eventBus.publish(ECSEVENTS.PATHPOSITION, nodePosition)
+			ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, nodePosition)
 		}
 		const directions: Partial<Record<nodeDirection, Entity>> = {}
 		for (let direction of ['left', 'right', 'top'] as nodeDirection[]) {

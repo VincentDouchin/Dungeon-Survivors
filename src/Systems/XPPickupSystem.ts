@@ -1,11 +1,12 @@
+import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { XP } from "../Constants/ECSEvents";
+
 import BodyComponent from "../Components/BodyComponent";
+import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import PositionComponent from "../Components/PositionComponent";
 import SkillsComponent from "../Components/SkillsComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import ECSEVENTS from "../Constants/ECSEvents";
-import { ECS, Entity, System } from "../Globals/ECS";
 
 class XPPickupSystem extends System {
 	constructor() {
@@ -35,7 +36,7 @@ class XPPickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 				if (xp) {
 					otherEntity.destroy()
-					ECS.eventBus.publish(ECSEVENTS.XP, xp.amount * (skill?.xp ?? 1))
+					ECS.eventBus.publish<XP>(ECSEVENTS.XP, xp.amount * (skill?.xp ?? 1))
 
 				}
 			}, COLLISIONGROUPS.PLAYER)

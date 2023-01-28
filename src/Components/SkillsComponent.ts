@@ -1,6 +1,5 @@
 import { Component, ECS } from "../Globals/ECS";
-
-import ECSEVENTS from "../Constants/ECSEvents";
+import ECSEVENTS, { SKILL } from "../Constants/ECSEvents";
 
 class SkillsComponent extends Component {
 	angVel = 0
@@ -13,7 +12,7 @@ class SkillsComponent extends Component {
 	defense = 1
 	constructor() {
 		super()
-		ECS.eventBus.subscribe(ECSEVENTS.SKILL, (skill: Skill) => {
+		ECS.eventBus.subscribe<SKILL>(ECSEVENTS.SKILL, (skill: Skill) => {
 			skill.modifier(this)
 		})
 	}

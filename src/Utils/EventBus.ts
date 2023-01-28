@@ -1,7 +1,10 @@
+import { Event } from "../Constants/ECSEvents";
+
+type EventCallBack<T> = (args: T) => void
 class EventBus {
 	private subscribers: { [event: string]: Function[] } = {};
 
-	subscribe(event: string, callback: Function) {
+	subscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
 		if (!this.subscribers[event]) {
 			this.subscribers[event] = [];
 		}
@@ -9,7 +12,7 @@ class EventBus {
 		return callback
 	}
 
-	unsubscribe(event: string, callback: Function) {
+	unsubscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
 		if (this.subscribers[event]) {
 			const index = this.subscribers[event].indexOf(callback);
 			if (index !== -1) {
@@ -18,7 +21,7 @@ class EventBus {
 		}
 	}
 
-	publish(event: string, data: any) {
+	publish<T extends Event>(event: T['type'], data: T['data']) {
 		if (this.subscribers[event]) {
 			this.subscribers[event].forEach((callback) => callback(data));
 		}

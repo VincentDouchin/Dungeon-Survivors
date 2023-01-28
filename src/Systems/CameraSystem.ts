@@ -1,7 +1,7 @@
 import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { CAMERA_MOVE } from "../Constants/ECSEvents";
 
 import CameraTargetComponent from "../Components/CameraTargetComponent";
-import ECSEVENTS from "../Constants/ECSEvents";
 import PositionComponent from "../Components/PositionComponent";
 import State from "../Globals/State";
 import { Vector3 } from "three";
@@ -20,7 +20,7 @@ class CameraSystem extends System {
         entities.forEach(entity => {
             const position = entity.getComponent(PositionComponent)
             const cameraTarget = State.cameraBounds
-            ECS.eventBus.publish(ECSEVENTS.CAMERAMOVE, { x: position.x, y: position.y })
+            ECS.eventBus.publish<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
             if (
                 (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
                 && (
