@@ -10,6 +10,7 @@ export interface EnemyType {
 	speed: number
 }
 const Enemies: Record<string, EnemyType> = {
+	// ! ORCS
 	goblin: {
 		tiles: {
 			idle: assets.tiles.goblin_idle_anim,
@@ -48,31 +49,24 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orcBig: {
 		tiles: {
-			idle: assets.tiles.big_zombie_idle_anim,
-			run: assets.tiles.big_zombie_run_anim,
+			idle: assets.tiles.orc_boss_idle_anim,
+			run: assets.tiles.orc_boss_run_anim,
 		},
 		health: 200,
 		size: BODYSIZES.big,
 		speed: 10
 	},
 
-	ogre: {
+
+	// ! DEMONS
+	imp: {
 		tiles: {
-			idle: assets.tiles.big_zombie_idle_anim,
-			run: assets.tiles.big_zombie_run_anim,
+			idle: assets.tiles.imp_idle_anim,
+			run: assets.tiles.imp_run_anim
 		},
-		health: 300,
-		size: BODYSIZES.big,
-		speed: 10
-	},
-	gnoll: {
-		tiles: {
-			idle: assets.tiles.gnoll_grunt_idle_anim,
-			run: assets.tiles.gnoll_grunt_run_anim
-		},
-		health: 20,
-		size: BODYSIZES.normal,
-		speed: 2
+		health: 10,
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	wogol: {
 		tiles: {
@@ -93,15 +87,6 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2
 	},
-	necromancer: {
-		tiles: {
-			idle: assets.tiles.necromancer_idle_anim,
-			run: assets.tiles.necromancer_run_anim
-		},
-		health: 20,
-		size: BODYSIZES.normal,
-		speed: 1.5
-	},
 	demonBig: {
 		tiles: {
 			idle: assets.tiles.big_demon_idle_anim,
@@ -111,15 +96,7 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.big,
 		speed: 10
 	},
-	imp: {
-		tiles: {
-			idle: assets.tiles.imp_idle_anim,
-			run: assets.tiles.imp_run_anim
-		},
-		health: 10,
-		size: BODYSIZES.small,
-		speed: 1
-	},
+	// !UNDEAD 
 	zombieSmall: {
 		tiles: {
 			idle: assets.tiles.tiny_zombie_idle_anim,
@@ -156,6 +133,15 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.square,
 		speed: 2
 	},
+	necromancer: {
+		tiles: {
+			idle: assets.tiles.necromancer_idle_anim,
+			run: assets.tiles.necromancer_run_anim
+		},
+		health: 20,
+		size: BODYSIZES.normal,
+		speed: 1.5
+	},
 	zombie: {
 		tiles: {
 			idle: assets.tiles.zombie_idle_anim,
@@ -174,6 +160,16 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2
 	},
+	ogre: {
+		tiles: {
+			idle: assets.tiles.big_zombie_idle_anim,
+			run: assets.tiles.big_zombie_run_anim,
+		},
+		health: 300,
+		size: BODYSIZES.big,
+		speed: 10
+	},
+	// ! HUMANS
 	bandit: {
 		tiles: {
 			idle: assets.tiles.bandit_idle_anim,
@@ -182,6 +178,53 @@ const Enemies: Record<string, EnemyType> = {
 		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2
+	},
+	// ! GNOLL
+	puppy: {
+		tiles: {
+			idle: assets.tiles.puppy_idle_anim,
+			run: assets.tiles.puppy_run_anim
+		},
+		health: 10,
+		size: BODYSIZES.small,
+		speed: 1
+	},
+	gnoll: {
+		tiles: {
+			idle: assets.tiles.gnoll_grunt_idle_anim,
+			run: assets.tiles.gnoll_grunt_run_anim
+		},
+		health: 20,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	gnollBrute: {
+		tiles: {
+			idle: assets.tiles.gnoll_brute_idle_anim,
+			run: assets.tiles.gnoll_brute_run_anim
+		},
+		health: 20,
+		size: BODYSIZES.normal,
+		speed: 1.5
+	},
+	gnollMasked: {
+		tiles: {
+			idle: assets.tiles.gnoll_masked_idle_anim,
+			run: assets.tiles.gnoll_brute_run_anim,
+		},
+		health: 40,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	// ! FOREST
+	bunny: {
+		tiles: {
+			idle: assets.tiles.bunny_idle_anim,
+			run: assets.tiles.bunny_run_anim
+		},
+		health: 10,
+		size: BODYSIZES.small,
+		speed: 1
 	},
 	centaurFemale: {
 		tiles: {
@@ -237,15 +280,6 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.massive,
 		speed: 7
 	},
-	golem: {
-		tiles: {
-			idle: assets.tiles.golem_idle_anim,
-			run: assets.tiles.golem_run_anim
-		},
-		health: 500,
-		size: BODYSIZES.giant,
-		speed: 100
-	},
 	direwolf: {
 		tiles: {
 			idle: assets.tiles.direwolf_idle_anim,
@@ -255,16 +289,306 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.wide,
 		speed: 3
 	},
-	bunny: {
+	golem: {
 		tiles: {
-			idle: assets.tiles.bunny_idle_anim,
-			run: assets.tiles.bunny_run_anim
+			idle: assets.tiles.golem_idle_anim,
+			run: assets.tiles.golem_run_anim
+		},
+		health: 500,
+		size: BODYSIZES.giant,
+		speed: 100
+	},
+	//! ELVES
+	woodElfMale: {
+		tiles: {
+			idle: assets.tiles.wood_elf_m_idle_anim,
+			run: assets.tiles.wood_elf_m_run_anim
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	woodElfFemale: {
+		tiles: {
+			idle: assets.tiles.wood_elf_f_idle_anim,
+			run: assets.tiles.wood_elf_f_run_anim
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	elfQueen: {
+		tiles: {
+			idle: assets.tiles.elf_queen_m_idle_anim,
+			run: assets.tiles.elf_queen_m_run_anim
+		},
+		health: 30,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	elfKing: {
+		tiles: {
+			idle: assets.tiles.elf_king_f_idle_anim,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	leprechaun: {
+		tiles: {
+			idle: assets.tiles.leprechaun_idle_anim,
+			run: assets.tiles.leprechaun_run_anim
 		},
 		health: 10,
 		size: BODYSIZES.small,
 		speed: 1
-
+	},
+	elfRanger: {
+		tiles: {
+			idle: assets.tiles.ranger_idle_anim,
+			run: assets.tiles.ranger_run_anim
+		},
+		health: 30,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	elfKnight: {
+		tiles: {
+			idle: assets.tiles.elf_knight_idle_anim,
+			run: assets.tiles.elf_knight_run_anim
+		},
+		health: 30,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	// ! VILLAGERS
+	villagerMale: {
+		tiles: {
+			idle: assets.npc.Townsfolk_M_Idle,
+			run: assets.npc.Townsfolk_M_Walk
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	villagerFemale: {
+		tiles: {
+			idle: assets.npc.Townsfolk_F_Idle,
+			run: assets.npc.Townsfolk_F_Walk
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	butcher: {
+		tiles: {
+			idle: assets.npc.Butcher_Idle,
+			run: assets.npc.Butcher_Walk
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	blacksmith: {
+		tiles: {
+			idle: assets.npc.Blacksmith_Idle,
+			run: assets.npc.Blacksmith_Walk
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	alchemist: {
+		tiles: {
+			idle: assets.npc.Alchemist_Idle,
+			run: assets.npc.Archer_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	shopKeeper: {
+		tiles: {
+			idle: assets.npc["MagicShopKeeper_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	herald: {
+		tiles: {
+			idle: assets.npc.Herald_Idle,
+			run: assets.npc.Herald_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	thief: {
+		tiles: {
+			idle: assets.npc.Thief_Idle,
+			run: assets.npc.Thief_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	mage: {
+		tiles: {
+			idle: assets.npc.Mage_Idle,
+			run: assets.npc.Mage_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	archer: {
+		tiles: {
+			idle: assets.npc.Archer_Idle,
+			run: assets.npc.Archer_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	executioner: {
+		tiles: {
+			idle: assets.npc.Executioner_Idle,
+			run: assets.npc.Executioner_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	knight: {
+		tiles: {
+			idle: assets.npc.Knight_Idle,
+			run: assets.npc.Knight_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	knightFat: {
+		tiles: {
+			idle: assets.npc.HeavyKnight_Idle,
+			run: assets.npc.HeavyKnight_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	knightElite: {
+		tiles: {
+			idle: assets.npc.EliteKnight_Idle,
+			run: assets.npc.EliteKnight_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	knightEliteLarge: {
+		tiles: {
+			idle: assets.npc.LargeEliteKnight_Idle,
+			run: assets.npc.LargeEliteKnight_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.big,
+		speed: 5
+	},
+	king: {
+		tiles: {
+			idle: assets.npc.King_Idle,
+			run: assets.npc.King_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	queen: {
+		tiles: {
+			idle: assets.npc.Queen_Idle,
+			run: assets.npc.Queen_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	kingOld: {
+		tiles: {
+			idle: assets.npc["MountainKing_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	princess: {
+		tiles: {
+			idle: assets.npc.Princess_Idle,
+			run: assets.npc.Princess_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	// ! PRIESTS
+	clericFat: {
+		tiles: {
+			idle: assets.tiles.cleric_1_idle_anim,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	clericNormal: {
+		tiles: {
+			idle: assets.tiles.cleric_2_idle_anim,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	clericSkinny: {
+		tiles: {
+			idle: assets.tiles.cleric_3_idle_anim,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	nunFat: {
+		tiles: {
+			idle: assets.npc["FatNun_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	nunNormal: {
+		tiles: {
+			idle: assets.npc["NormalNun_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	nunSkinny: {
+		tiles: {
+			idle: assets.npc["SkinnyNun_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
+	},
+	bishop: {
+		tiles: {
+			idle: assets.npc["Bishop_Idle + Walk"],
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2
 	}
+
 
 
 }
