@@ -240,6 +240,10 @@ gnoll_grunt_idle_anim 896 64 32 32 4
 gnoll_grunt_run_anim 1024 64 32 32 4
 gnoll_brute_idle_anim 896 96 32 32 4
 gnoll_brute_run_anim 1024 96 32 32 4
+
+puppy_idle_anim 1152 16 16 16 4
+puppy_run_anim 1216 16 16 16 4
+
 knight_elite_idle_anim 896 128 32 32 4
 knight_elite_run_anim 1024 128 32 32 4
 
@@ -254,9 +258,6 @@ wise_wizard_idle_anim 1024 224 32 32 4
 
 ranger_idle_anim 896 256 32 32 4
 ranger_run_anim 1024 256 32 32 4
-
-elf_knight_idle_anim 896 288 32 32 4
-elf_knight_run_anim 1024 288 32 32 4
 
 elf_knight_idle_anim 896 288 32 32 4
 elf_knight_run_anim 1024 288 32 32 4
@@ -281,3 +282,6 @@ grass_detail_8 624 128 16 16
 
 bunny_idle_anim 896 352 32 32 4
 bunny_run_anim 1024 352 32 32 4
+
+leprechaun_idle_anim 368 384 16 32 4
+leprechaun_run_anim 432 384 16 32 4
