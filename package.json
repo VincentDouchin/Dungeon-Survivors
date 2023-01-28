@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@dimforge/rapier2d-compat": "^0.10.0",
+    "open-simplex-noise": "^2.5.0",
     "three": "^0.148.0",
     "troika-three-text": "^0.47.1"
   }
