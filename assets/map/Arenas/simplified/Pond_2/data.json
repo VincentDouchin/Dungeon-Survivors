@@ -14,10 +14,6 @@
 		{
 			"levelIid": "a75592e0-7820-11ed-b89a-d70eb8591387",
 			"dir": "w"
-		},
-		{
-			"levelIid": "f7c45d80-7820-11ed-b89a-1fed30e04742",
-			"dir": "e"
 		}
 	],
 	"customFields": {
@@ -30,13 +26,12 @@
 		"Details2.png",
 		"Floor_tiles.png",
 		"Walls.png",
-		"Water.png",
-		"Hole.png"
+		"Water.png"
 	],
 	"entities": {
-		"Entity": [
+		"Wall": [
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "f849d6a0-7820-11ed-b89a-c5864b32fa23",
 				"layer": "Wall_entities",
 				"x": 24,

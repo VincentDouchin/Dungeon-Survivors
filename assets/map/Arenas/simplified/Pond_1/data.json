@@ -26,13 +26,12 @@
 		"Details2.png",
 		"Floor_tiles.png",
 		"Walls.png",
-		"Water.png",
-		"Hole.png"
+		"Water.png"
 	],
 	"entities": {
-		"Entity": [
+		"Wall": [
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "f79ebf00-7820-11ed-b89a-431e85f0a512",
 				"layer": "Wall_entities",
 				"x": 24,
@@ -43,7 +42,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "5e5b67c0-7820-11ed-b89a-09a6add3c6c1",
 				"layer": "Wall_entities",
 				"x": 72,

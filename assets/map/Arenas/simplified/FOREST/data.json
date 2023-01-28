@@ -18,10 +18,6 @@
 		{
 			"levelIid": "e23d9cc0-7820-11ed-b89a-f794f315e8fd",
 			"dir": "s"
-		},
-		{
-			"levelIid": "f7c45d80-7820-11ed-b89a-1fed30e04742",
-			"dir": "s"
 		}
 	],
 	"customFields": {
@@ -34,8 +30,7 @@
 		"Details2.png",
 		"Floor_tiles.png",
 		"Walls.png",
-		"Water.png",
-		"Hole.png"
+		"Water.png"
 	],
 	"entities" : {}
 }

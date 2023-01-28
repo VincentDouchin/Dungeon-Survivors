@@ -10,6 +10,10 @@
 		{
 			"levelIid": "e9c4d050-7820-11ed-b89a-092285a2f890",
 			"dir": "w"
+		},
+		{
+			"levelIid": "d7754f20-7820-11ed-b63a-9b5fe5e35653",
+			"dir": "e"
 		}
 	],
 	"customFields": {
@@ -22,13 +26,12 @@
 		"Details2.png",
 		"Floor_tiles.png",
 		"Walls.png",
-		"Water.png",
-		"Hole.png"
+		"Water.png"
 	],
 	"entities": {
-		"Entity": [
+		"Wall": [
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "00d92730-7820-11ed-b89a-1b11a6220eb0",
 				"layer": "Wall_entities",
 				"x": 32,
@@ -39,7 +42,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "05b5a8f0-7820-11ed-b89a-91ab897bea2a",
 				"layer": "Wall_entities",
 				"x": 32,
@@ -50,7 +53,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "06fccef0-7820-11ed-b89a-37f80f1532f8",
 				"layer": "Wall_entities",
 				"x": 40,
@@ -61,7 +64,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "0a166b00-7820-11ed-b89a-b3a806ca077d",
 				"layer": "Wall_entities",
 				"x": 24,
@@ -72,7 +75,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "187094f0-7820-11ed-b89a-bf43d0c95340",
 				"layer": "Wall_entities",
 				"x": 24,
@@ -83,7 +86,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "1a9067b0-7820-11ed-b89a-418cb36e4b34",
 				"layer": "Wall_entities",
 				"x": 32,
@@ -94,7 +97,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "266df8e0-7820-11ed-b89a-ed32bd5a86ff",
 				"layer": "Wall_entities",
 				"x": 984,
@@ -105,7 +108,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "275a2da0-7820-11ed-b89a-13f411621b5c",
 				"layer": "Wall_entities",
 				"x": 992,
@@ -116,7 +119,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "36f49fc0-7820-11ed-b89a-ef9e1443cb8d",
 				"layer": "Wall_entities",
 				"x": 984,
@@ -127,7 +130,7 @@
 				"customFields" : {}
 			},
 			{
-				"id": "Entity",
+				"id": "Wall",
 				"iid": "37c31350-7820-11ed-b89a-79bc65039538",
 				"layer": "Wall_entities",
 				"x": 976,

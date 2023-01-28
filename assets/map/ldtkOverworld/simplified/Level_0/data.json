@@ -9,7 +9,6 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"Background.png",
 		"Grass.png",
 		"ForestGrid.png",
 		"Grass2.png",
@@ -242,7 +241,7 @@
 					"right": null,
 					"encounter": true,
 					"BACKGROUND": "FOREST",
-					"ENEMIES": "ANIMALS",
+					"ENEMIES": "ELVES",
 					"start": false
 				}
 			},
@@ -251,7 +250,7 @@
 				"iid": "97740090-7820-11ed-a6ad-fddf369300a9",
 				"layer": "Path",
 				"x": 192,
-				"y": 912,
+				"y": 920,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -275,7 +274,7 @@
 				"iid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
 				"layer": "Path",
 				"x": 192,
-				"y": 888,
+				"y": 896,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
@@ -289,8 +288,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "FOREST",
+					"ENEMIES": "ELVES",
 					"start": false
 				}
 			},
@@ -510,8 +509,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "TOWN",
+					"ENEMIES": "VILLAGERS",
 					"start": false
 				}
 			},
@@ -582,8 +581,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "FIELD",
+					"ENEMIES": "SKELETONS",
 					"start": false
 				}
 			},
@@ -606,8 +605,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "CEMETARY",
+					"ENEMIES": "SKELETONS",
 					"start": false
 				}
 			},
@@ -630,8 +629,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "CASTLE",
+					"ENEMIES": "PRIESTS",
 					"start": false
 				}
 			},
@@ -654,8 +653,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "FOREST",
+					"ENEMIES": "ORCS",
 					"start": false
 				}
 			},
@@ -678,8 +677,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "FIELD",
+					"ENEMIES": "ORCS",
 					"start": false
 				}
 			},
@@ -726,8 +725,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "CASTLE",
+					"ENEMIES": "KINGSGUARD",
 					"start": false
 				}
 			},
@@ -918,8 +917,8 @@
 					"left": null,
 					"right": null,
 					"encounter": true,
-					"BACKGROUND": null,
-					"ENEMIES": null,
+					"BACKGROUND": "DUNGEON",
+					"ENEMIES": "DEMONS",
 					"start": false
 				}
 			}

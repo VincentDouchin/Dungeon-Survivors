@@ -1,23 +1,19 @@
 {
-	"identifier": "Dungeon",
-	"uniqueIdentifer": "e9c4d050-7820-11ed-b89a-092285a2f890",
-	"x": 512,
+	"identifier": "GRAVEYARD",
+	"uniqueIdentifer": "d7754f20-7820-11ed-b63a-9b5fe5e35653",
+	"x": 2576,
 	"y": -512,
-	"width": 1040,
+	"width": 1024,
 	"height": 1024,
-	"bgColor": "#696A79",
+	"bgColor": "#FFFFFF",
 	"neighbourLevels": [
 		{
-			"levelIid": "80609920-7820-11ed-b89a-57853b60308e",
-			"dir": "w"
-		},
-		{
 			"levelIid": "1842dcf0-7820-11ed-b89a-e3931c54dda0",
-			"dir": "e"
+			"dir": "w"
 		}
 	],
 	"customFields": {
-		"infinite": true,
+		"infinite": false,
 		"entity": false
 	},
 	"layers": [
