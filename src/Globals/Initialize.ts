@@ -28,6 +28,7 @@ const assets: {
 	tiles: Record<tileName, Tile>
 	skills: Record<skillName, Tile>,
 	blood: Record<string, Tile>
+	npc: Record<npcTileName, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
 } = {
@@ -42,6 +43,7 @@ const assets: {
 		const frames = buffer.canvas.width / buffer.canvas.height
 		return { buffer, frames, width: buffer.canvas.height }
 	}),
+	npc: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/npc/*.png', { eager: true }), ({ buffer }) => ({ buffer, frames: 4, width: 32 })) as Record<npcTileName, Tile>,
 	map: await LDTKMap.load(ldtkmapSource),
 	arenas: await LDTKMap.load(arenasSource)
 }
