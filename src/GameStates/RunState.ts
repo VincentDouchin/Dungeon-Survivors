@@ -4,6 +4,7 @@ import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
 import AnimationSystem from "../Systems/AnimationSystem"
+import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerSystem"
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
@@ -49,7 +50,7 @@ class RunState implements GameState {
 
 		render()
 	}
-	set(oldState: State, options?: { background: backgroundName, enemies: enemyWaveName }) {
+	set(oldState: State, options: { background?: backgroundName, enemies?: enemyWaveName }) {
 
 		inputManager.enable('dpad')
 		MovementSystem.register()
@@ -65,6 +66,7 @@ class RunState implements GameState {
 		RenderSystem.register()
 		SwitchingSystem.register()
 		FlockingSystem.register()
+		BackgroundElementSpawnerSystem.register()
 
 		switch (oldState) {
 			case State.pause: {
@@ -75,13 +77,13 @@ class RunState implements GameState {
 			}; break
 			default: {
 				this.ui = UIRunEntity()
-				this.background = BackgroundEntity(BACKGROUNDS[options!.background]!)
+				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'CASTLE']!)
 				this.player = new Entity()
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
-				ENEMYWAVES[options!.enemies]?.start()
+				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
 		}
 
