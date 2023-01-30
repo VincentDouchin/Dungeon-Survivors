@@ -285,3 +285,6 @@ bunny_run_anim 1024 352 32 32 4
 
 leprechaun_idle_anim 368 384 16 32 4
 leprechaun_run_anim 432 384 16 32 4
+
+angel_idle_anim 368 368 16 16 4
+angel_run_anim 432 368 16 16 4

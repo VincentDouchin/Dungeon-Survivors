@@ -12,11 +12,7 @@
 			"dir": "e"
 		},
 		{
-			"levelIid": "a75592e0-7820-11ed-b89a-d70eb8591387",
-			"dir": "s"
-		},
-		{
-			"levelIid": "e23d9cc0-7820-11ed-b89a-f794f315e8fd",
+			"levelIid": "b9dcc170-7820-11ed-b63a-f1cb640eec61",
 			"dir": "s"
 		}
 	],
@@ -26,11 +22,14 @@
 	},
 	"layers": [
 		"Grass.png",
+		"Walls.png",
 		"FloorDungeon.png",
 		"Details2.png",
 		"Floor_tiles.png",
-		"Walls.png",
-		"Water.png"
+		"Water.png",
+		"Tiles.png",
+		"FLOOR_DETAILS.png",
+		"CASTLEROAD.png"
 	],
 	"entities" : {}
 }

@@ -22,11 +22,14 @@
 	},
 	"layers": [
 		"Grass.png",
+		"Walls.png",
 		"FloorDungeon.png",
 		"Details2.png",
 		"Floor_tiles.png",
-		"Walls.png",
-		"Water.png"
+		"Water.png",
+		"Tiles.png",
+		"FLOOR_DETAILS.png",
+		"CASTLEROAD.png"
 	],
 	"entities" : {}
 }

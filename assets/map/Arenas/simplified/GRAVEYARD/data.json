@@ -10,6 +10,10 @@
 		{
 			"levelIid": "1842dcf0-7820-11ed-b89a-e3931c54dda0",
 			"dir": "w"
+		},
+		{
+			"levelIid": "bb6133f0-9f30-11ed-83b4-5555487a9e28",
+			"dir": "e"
 		}
 	],
 	"customFields": {
@@ -18,11 +22,14 @@
 	},
 	"layers": [
 		"Grass.png",
+		"Walls.png",
 		"FloorDungeon.png",
 		"Details2.png",
 		"Floor_tiles.png",
-		"Walls.png",
-		"Water.png"
+		"Water.png",
+		"Tiles.png",
+		"FLOOR_DETAILS.png",
+		"CASTLEROAD.png"
 	],
 	"entities" : {}
 }
