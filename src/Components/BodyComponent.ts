@@ -49,7 +49,6 @@ class BodyComponent extends Component {
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
 				.setTranslation(0, colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0)
-
 			if (colliderOption.contact) {
 				colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
 			}
