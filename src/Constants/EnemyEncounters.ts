@@ -1,7 +1,7 @@
 import Encounter from "../Game/Encounter"
 import Enemies from "./Enemies"
 
-export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS'
+export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS' | 'UNDEAD' | 'KINGSGUARD'
 
 
 
@@ -41,6 +41,40 @@ const ENENMYENCOUNTERS: Partial<Record<enemyWaveName, Encounter>> = {
 		.addWave([[Enemies.shopKeeper, 1], [Enemies.mage, 1], [Enemies.villagerFemale, 1], [Enemies.villagerMale, 1]], 20, 5)
 		.addWave([[Enemies.alchemist, 1], [Enemies.blacksmith, 1], [Enemies.butcher, 2]], 20, 5)
 		.addWave(Enemies.executioner, 1, 1)
+		.waitForEnemiesCleared()
+		.stop(),
+	PRIESTS: new Encounter()
+		.addWave([[Enemies.angel, 5], [Enemies.clericFat, 1], [Enemies.clericNormal, 1], [Enemies.clericSkinny, 1]], 20, 5)
+		.addWave([Enemies.clericFat, Enemies.clericNormal, Enemies.clericSkinny], 20, 5)
+		.addWave([Enemies.nunFat, Enemies.nunNormal, Enemies.nunSkinny], 20, 5)
+		.addGroup(Enemies.bishop, Enemies.angel, 8, 50)
+		.waitForEnemiesCleared()
+		.stop(),
+	UNDEAD: new Encounter()
+		.addWave(Enemies.zombieSmall, 20, 5)
+		.addWave([[Enemies.muddy, 1], [Enemies.swampy, 1], [Enemies.zombieSmall, 5]], 20, 5)
+		.addWave([[Enemies.muddy, 1], [Enemies.swampy, 1], [Enemies.zombie, 5]], 20, 5)
+		.addWave([[Enemies.skeleton, 1], [Enemies.iceZombie, 1], [Enemies.zombie, 5]], 20, 5)
+		.addWave([[Enemies.skeleton, 4], [Enemies.zombie, 5]], 20, 5)
+		.addWave(Enemies.ogre, 1, 1)
+		.waitForEnemiesCleared()
+		.stop(),
+	KINGSGUARD: new Encounter()
+		.addWave(Enemies.knight, 10, 3)
+		.addWave([[Enemies.knightFat, 1], [Enemies.knight, 3]], 12, 4)
+		.addWave([Enemies.knight, Enemies.knightFat, Enemies.knightElite], 12, 4)
+		.addWave(Enemies.knightEliteLarge, 2, 1, 0)
+		.addWave(Enemies.knightElite, 10, 2)
+		.addGroup(Enemies.king, Enemies.knightElite, 8, 50)
+		.addGroup(Enemies.queen, Enemies.knightElite, 8, 50)
+		.waitForEnemiesCleared()
+		.stop(),
+	DEMONS: new Encounter()
+		.addWave(Enemies.imp, 20, 5)
+		.addWave([[Enemies.imp, 4], [Enemies.wogol, 1]], 20, 5)
+		.addWave([Enemies.chort, Enemies.wogol], 15, 5)
+		.waitForEnemiesCleared()
+		.addGroup(Enemies.demonBig, Enemies.chort, 12, 100)
 		.waitForEnemiesCleared()
 		.stop()
 

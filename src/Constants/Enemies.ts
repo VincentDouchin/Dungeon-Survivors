@@ -460,6 +460,7 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2
 	},
+	// ! KINGSGUARD
 	knight: {
 		tiles: {
 			idle: assets.npc.Knight_Idle,
@@ -587,7 +588,16 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2
-	}
+	},
+	angel: {
+		tiles: {
+			idle: assets.tiles.angel_idle_anim,
+			run: assets.tiles.angel_run_anim
+		},
+		health: 10,
+		size: BODYSIZES.small,
+		speed: 1
+	},
 
 
 
