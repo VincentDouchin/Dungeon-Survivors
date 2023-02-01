@@ -67,8 +67,10 @@ class Component {
 class Entity {
 	parentId: string | null = null
 	id: string
+	name: string
 	childrenIds: string[] = []
-	constructor() {
+	constructor(name: string) {
+		this.name = name ?? ''
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
 	}

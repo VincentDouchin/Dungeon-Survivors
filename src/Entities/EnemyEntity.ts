@@ -13,7 +13,7 @@ import TargeterComponent from "../Components/TargeterComponent"
 import XPEntity from "./XPEntity"
 
 const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
-	const enemy = new Entity()
+	const enemy = new Entity('enemy')
 	const tile = Object.values(type.tiles)[0]
 	enemy.addComponent(new SpriteComponent(tile))
 	enemy.addComponent(new AnimationComponent(type.tiles))
