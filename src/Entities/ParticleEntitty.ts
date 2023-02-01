@@ -4,11 +4,11 @@ import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import Tile from "../Utils/Tile"
 
-const ParticleEntity = async (x: number, y: number, tile: Tile, frameRate?: number) => {
-	const particle = new Entity()
-	particle.addComponent(new SpriteComponent(tile))
+const ParticleEntity = async (x: number, y: number, tile: Tile, options?: { frameRate?: number, scale?: number }) => {
+	const particle = new Entity('particle')
+	particle.addComponent(new SpriteComponent(tile, { scale: options?.scale ?? 1 }))
 	particle.addComponent(new PositionComponent(x, y))
-	const testAnimation = particle.addComponent(new AnimationComponent({ default: tile }, { start: false, frameRate: frameRate ?? 5 }))
+	const testAnimation = particle.addComponent(new AnimationComponent({ default: tile }, { start: false, frameRate: options?.frameRate ?? 5 }))
 	return testAnimation.playAnimation().then(() => particle.destroy())
 }
 export default ParticleEntity

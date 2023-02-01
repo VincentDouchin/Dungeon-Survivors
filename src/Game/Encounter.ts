@@ -75,7 +75,7 @@ class Encounter {
 		}
 	}
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
-		ParticleEntity(x, y, assets.magic['smoke']).then(() => {
+		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 			this.enemies.push(EnemyEntity(this.getType(enemyType), { x, y }).id)
 		})
 	}

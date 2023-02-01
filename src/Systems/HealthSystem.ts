@@ -30,7 +30,7 @@ class HealthSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 
 			if (health.show && !health.healthBarId && sprite) {
-				const healthBarEntity = new Entity()
+				const healthBarEntity = new Entity('healthBar')
 				const healthMesh = new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture)] })
 				entity.addChildren(healthBarEntity)
 				healthBarEntity.addComponent(healthMesh)
@@ -61,7 +61,7 @@ class HealthSystem extends System {
 
 
 						// ! Damage number display
-						const damageText = new Entity()
+						const damageText = new Entity('damageText')
 						damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
 						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: otherSkill?.crit ? 0xff0000 : 0xffffff }))
@@ -86,7 +86,7 @@ class HealthSystem extends System {
 			}
 			if (health.health == 0) {
 				const blood = Object.values(assets.blood)
-				ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], 1)
+				ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], { frameRate: 1 })
 				entity.destroy()
 			}
 		})
