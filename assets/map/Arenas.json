@@ -7613,7 +7613,7 @@
 			"__neighbours": [ { "levelIid": "e9c4d050-7820-11ed-b89a-092285a2f890", "dir": "e" }, { "levelIid": "b9dcc170-7820-11ed-b63a-f1cb640eec61", "dir": "s" } ]
 		},
 		{
-			"identifier": "DUNGEON",
+			"identifier": "DUNGEON0",
 			"iid": "e9c4d050-7820-11ed-b89a-092285a2f890",
 			"uid": 17,
 			"worldX": 512,
@@ -7661,7 +7661,7 @@
 					"autoLayerTiles": [],
 					"seed": 566170,
 					"overrideTilesetUid": null,
-					"gridTiles": [],
+					"gridTiles": [{ "px": [256,480], "src": [0,0], "f": 0, "t": 0, "d": [1966] }],
 					"entityInstances": []
 				},
 				{
