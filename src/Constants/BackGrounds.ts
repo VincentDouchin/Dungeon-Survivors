@@ -1,5 +1,4 @@
 import { Color } from "three"
-import { Level } from "../../ldtk"
 import Tile from "../Utils/Tile"
 import { assets } from "../Globals/Initialize"
 
