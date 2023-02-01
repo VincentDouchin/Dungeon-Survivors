@@ -5,8 +5,11 @@ import HealthComponent from "../Components/HealthComponent";
 import JointComponent from "../Components/JointComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RangedComponent from "../Components/RangedComponent";
+import { Ray } from "@dimforge/rapier2d-compat";
 import RotationComponent from "../Components/RotationComponent";
 import TargeterComponent from "../Components/TargeterComponent";
+import { Vector2 } from "three";
+import { world } from "../Globals/Initialize";
 
 class TargetingSystem extends System {
 	constructor() {
@@ -36,14 +39,10 @@ class TargetingSystem extends System {
 			if (targeter.targetedEnemy) {
 				const enemy = ECS.getEntityById(targeter.targetedEnemy)
 				const enemyPosition = enemy.getComponent(PositionComponent)
-				const x = position.x - enemyPosition.x
-				const y = position.y - enemyPosition.y
-				const distance = Math.sqrt(x ** 2 + y ** 2)
-				if (ranged ? distance > targeter.distanceToTarget : distance < targeter.distanceToTarget) return
-				const angle = Math.atan2(y, x)
+				const direction = enemyPosition.position.clone().sub(position.position).normalize()
 				if (joint?.type == 'revolute') {
 					const r = rotation.rotation
-					const angleDiff = angle - r
+					const angleDiff = -direction.angle() + r
 					if (!rotation) return
 					const delta = 0.01
 					if (Math.abs(angleDiff) <= delta) {
@@ -52,10 +51,66 @@ class TargetingSystem extends System {
 						rotation.angVel = Math.sin(angleDiff) * 4
 					}
 				} else {
-					const direction = ranged ? -1 : 1
-					body.velocity.x -= Math.cos(angle) * direction
-					body.velocity.y -= Math.sin(angle) * direction
+					let increments = 0
+					let sign = 1
+
+					const avoidObstacles = () => {
+						const newDirection = direction.clone().rotateAround(new Vector2(0, 0), Math.PI / 8 * increments * sign)
+						const lastDirection = ranged ? new Vector2(0, 0).sub(newDirection) : newDirection
+						const ray = new Ray(position.position, lastDirection)
+						let collisions = false
+						world.intersectionsWithRay(ray, 100, true, (hit) => {
+							if (hit?.collider?.parent()?.bodyType() === 1) {
+								collisions = true
+								return false
+							}
+							return true
+						})
+						if (!collisions) {
+							body.velocity.add(lastDirection)
+						} else {
+							sign *= -1
+							if (sign > 0) increments++
+							avoidObstacles()
+						}
+					}
+					avoidObstacles()
 				}
+
+				// const x = position.x - enemyPosition.x
+				// const y = position.y - enemyPosition.y
+
+				// const distance = Math.sqrt(x ** 2 + y ** 2)
+				// if (ranged ? distance > targeter.distanceToTarget : distance < targeter.distanceToTarget) return
+				// const angle = Math.atan2(y, x)
+
+				// let newAngle = angle
+				// let increments = 0
+				// let incrementSign = 1
+				// let collisions = true
+				// while (collisions) {
+				// 	let iniCollisions = false
+				// 	const ray = new Ray(position.position, new Vector2(Math.cos(newAngle) + position.x, Math.sin(newAngle) + position.y))
+				// 	world.intersectionsWithRay(ray, 50, true, (hit) => {
+				// 		if (hit?.collider?.parent()?.bodyType() === 1) {
+				// 			iniCollisions = true
+				// 		}
+				// 		return false
+				// 	})
+				// 	if (iniCollisions) {
+				// 		increments++
+				// 		incrementSign *= -1
+				// 		newAngle = newAngle + ((increments * 0.05) * incrementSign)
+
+				// 	}
+				// 	console.log(newAngle * 180)
+				// 	collisions = iniCollisions
+
+				// }
+				// const direction = ranged ? -1 : 1
+				// body.velocity.x -= Math.cos(newAngle) * direction
+				// body.velocity.y -= Math.sin(newAngle) * direction
+
 
 			} else {
 				rotation && (rotation.angVel = 0)
