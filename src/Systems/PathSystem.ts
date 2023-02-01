@@ -2,6 +2,7 @@ import { ECS, Entity, System } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import { assets, inputManager } from "../Globals/Initialize";
 
+import AnimationComponent from "../Components/AnimationComponent";
 import Coroutines from "../Globals/Coroutines";
 import Engine from "../Globals/Engine";
 import PathNodeComponent from "../Components/PathNodeComponent";
@@ -24,12 +25,16 @@ class PathSystem extends System {
 
 			const [walkerId] = ECS.getEntitiesAndComponents(PathWalkerComponent)
 			if (!walkerId) return
-			const walkerPosition = ECS.getEntityById(walkerId[0]).getComponent(PositionComponent)
+			const walker = ECS.getEntityById(walkerId[0])
+			const walkerPosition = walker.getComponent(PositionComponent)
+			const walkerAnimation = walker.getComponent(AnimationComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
 				ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, position)
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
+				walkerAnimation.flipped = walkerPosition.x - position.x > 0
+				walkerAnimation.state = 'run'
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
 				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
 
@@ -38,6 +43,7 @@ class PathSystem extends System {
 				Engine.setState(State.run, node)
 				return
 			} else if (node.selected && !node.showingOptions) {
+
 				const possibleDirections = Object.entries(node.nodes)
 				if (possibleDirections.length == 1) {
 					node.nodes[possibleDirections[0][0] as nodeDirection]!.getComponent(PathNodeComponent).selected = true
@@ -46,7 +52,7 @@ class PathSystem extends System {
 				} else {
 					for (let [direction, otherNodeode] of possibleDirections) {
 
-						const arrow = new Entity()
+						const arrow = new Entity('arrow')
 						entity.addChildren(arrow)
 						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
@@ -93,6 +99,8 @@ class PathSystem extends System {
 				}
 
 				node.showingOptions = true
+			} else if (node.selected) {
+				walkerAnimation.state = 'idle'
 			}
 		})
 	}
