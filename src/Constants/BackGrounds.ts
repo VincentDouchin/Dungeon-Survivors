@@ -8,7 +8,6 @@ export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAMP' | 'GRAVEYARD' | 'TOWN
 export interface Background {
 	level: string
 	lightColor?: Color
-	subLevels?: Level[]
 	obstacles?: Tile[]
 	obstaclesDensity?: number
 	leafs?: boolean
@@ -25,7 +24,6 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 	FOREST: {
 		level: 'FOREST',
 		lightColor: new Color('hsl(0,0%,100%)'),
-		subLevels: assets.arenas.levels.filter(level => level.identifier.includes('FOREST_')),
 		obstacles: [...new Array(3).fill(assets.nature.tree1), assets.nature.stumpbig, assets.nature.stumpsmall1, assets.nature.trunksmall],
 		obstaclesDensity: 0.3,
 		leafs: true
