@@ -17,7 +17,7 @@ import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
 const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Entity,) => {
-	const player = new Entity()
+	const player = new Entity('player')
 
 	player.addComponent(new SpriteComponent(hero.tiles.idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))

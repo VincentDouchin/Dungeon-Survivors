@@ -42,8 +42,8 @@ class MapState implements GameState {
 		if (!assets.map || !assets.map.levels[0]) return
 		const level = assets.map.levels[0]
 		const mapTile = LDTKMap.tiles[level.identifier]
-		this.map = new Entity()
-		this.player = new Entity()
+		this.map = new Entity('map')
+		this.player = new Entity('player')
 		this.map.addComponent(new SpriteComponent(mapTile))
 		this.map.addComponent(new PositionComponent(0, 0))
 		const knight = HEROS.knightMale
