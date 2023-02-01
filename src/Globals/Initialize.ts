@@ -17,10 +17,15 @@ import arenasSource from './../../assets/map/Arenas.json'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
+import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
+import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
+import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
 import tilesetElementData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.json'
 import tilesetElementSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.png'
+import tilesetHoleData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.json'
+import tilesetHoleSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.png'
 import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
 import tilesetNatureSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.png'
 
@@ -35,6 +40,8 @@ const assets: {
 	npc: Record<npcTileName, Tile>
 	nature: Record<string, Tile>
 	elements: Record<string, Tile>
+	effects: Record<string, Tile>
+	hole: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
 } = {
@@ -53,7 +60,13 @@ const assets: {
 	map: await LDTKMap.load(ldtkmapSource),
 	arenas: await LDTKMap.load(arenasSource),
 	nature: await AssetLoader.loadFromSlices(tilesetNatureData, tilesetNatureSource),
-	elements: await AssetLoader.loadFromSlices(tilesetElementData, tilesetElementSource)
+	elements: await AssetLoader.loadFromSlices(tilesetElementData, tilesetElementSource),
+	effects: {
+		Leaf: Tile.fromImage(await AssetLoader.loadImage(leafSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
+		Spark: Tile.fromImage(await AssetLoader.loadImage(sparkSource), ({ buffer }) => ({ buffer, width: 10, frames: 7 })),
+		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 }))
+	},
+	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource)
 }
 // ! Clock
 const clock = new Clock()
