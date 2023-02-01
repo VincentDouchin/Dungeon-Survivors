@@ -12,7 +12,7 @@ import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 
-	const weapon = new Entity()
+	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
 	const parentSprite = parent.getComponent(SpriteComponent)
 	const tile = weaponDefinition.tile
