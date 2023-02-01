@@ -19,6 +19,10 @@ import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
+import tilesetElementData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.json'
+import tilesetElementSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.png'
+import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
+import tilesetNatureSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.png'
 
 //! Assets
 const assets: {
@@ -29,6 +33,8 @@ const assets: {
 	skills: Record<skillName, Tile>,
 	blood: Record<string, Tile>
 	npc: Record<npcTileName, Tile>
+	nature: Record<string, Tile>
+	elements: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
 } = {
@@ -45,7 +51,9 @@ const assets: {
 	}),
 	npc: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/npc/*.png', { eager: true }), ({ buffer }) => ({ buffer, frames: 4, width: 32 })) as Record<npcTileName, Tile>,
 	map: await LDTKMap.load(ldtkmapSource),
-	arenas: await LDTKMap.load(arenasSource)
+	arenas: await LDTKMap.load(arenasSource),
+	nature: await AssetLoader.loadFromSlices(tilesetNatureData, tilesetNatureSource),
+	elements: await AssetLoader.loadFromSlices(tilesetElementData, tilesetElementSource)
 }
 // ! Clock
 const clock = new Clock()
