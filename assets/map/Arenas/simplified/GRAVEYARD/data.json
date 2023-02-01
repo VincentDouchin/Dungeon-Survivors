@@ -17,7 +17,7 @@
 		}
 	],
 	"customFields": {
-		"infinite": false,
+		"infinite": true,
 		"entity": false
 	},
 	"layers": [
