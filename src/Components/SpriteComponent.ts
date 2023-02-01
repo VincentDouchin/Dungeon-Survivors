@@ -39,7 +39,7 @@ class SpriteComponent extends Component {
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1 }, options)
 		this.width = tile.width
 		this.height = tile.height
-		this.renderOrder = newOptions.renderOrder * 10
+		this.renderOrder = newOptions.renderOrder
 		this.scale = newOptions.scale
 		this.opacity = newOptions.opacity
 
