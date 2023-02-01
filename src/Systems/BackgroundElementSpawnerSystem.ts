@@ -17,7 +17,6 @@ class BackgroundElementSpawnerSystem extends System {
 					const noiseValue = noise(chunkX, chunkY)
 					if (Math.abs(noiseValue) > (1 - obstaclesDensity)) {
 						const newNoise = noise(chunkX + noiseValue, chunkY + noiseValue)
-						console.log(Math.floor((newNoise + 1) / 2 * elements.length), elements.length)
 						const element = elements[Math.floor((newNoise + 1) / 2 * elements.length)]
 						if (!entities[`${chunkX}|${chunkY}`]) {
 							entities[`${chunkX}|${chunkY}`] = element(chunkX * size, chunkY * size)

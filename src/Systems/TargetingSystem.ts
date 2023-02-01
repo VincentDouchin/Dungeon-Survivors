@@ -77,40 +77,6 @@ class TargetingSystem extends System {
 					avoidObstacles()
 				}
 
-				// const x = position.x - enemyPosition.x
-				// const y = position.y - enemyPosition.y
-
-				// const distance = Math.sqrt(x ** 2 + y ** 2)
-				// if (ranged ? distance > targeter.distanceToTarget : distance < targeter.distanceToTarget) return
-				// const angle = Math.atan2(y, x)
-
-				// let newAngle = angle
-				// let increments = 0
-				// let incrementSign = 1
-				// let collisions = true
-				// while (collisions) {
-				// 	let iniCollisions = false
-				// 	const ray = new Ray(position.position, new Vector2(Math.cos(newAngle) + position.x, Math.sin(newAngle) + position.y))
-				// 	world.intersectionsWithRay(ray, 50, true, (hit) => {
-				// 		if (hit?.collider?.parent()?.bodyType() === 1) {
-				// 			iniCollisions = true
-				// 		}
-				// 		return false
-				// 	})
-				// 	if (iniCollisions) {
-				// 		increments++
-				// 		incrementSign *= -1
-				// 		newAngle = newAngle + ((increments * 0.05) * incrementSign)
-
-				// 	}
-				// 	console.log(newAngle * 180)
-				// 	collisions = iniCollisions
-
-				// }
-				// const direction = ranged ? -1 : 1
-				// body.velocity.x -= Math.cos(newAngle) * direction
-				// body.velocity.y -= Math.sin(newAngle) * direction
-
 
 			} else {
 				rotation && (rotation.angVel = 0)
