@@ -1,14 +1,15 @@
+import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
-import ShimmerShader from "../Shaders/ShimmerShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import XPComponent from "../Components/XPComponent"
 import { assets } from "../Globals/Initialize"
 
 const XPEntity = () => {
-	const xp = new Entity()
-	xp.addComponent(new SpriteComponent(assets.tiles.xp, { renderOrder: 1, shaders: [new ShimmerShader()], scale: 0.8 }))
+	const xp = new Entity('xp')
+	xp.addComponent(new SpriteComponent(assets.effects.Spark, { renderOrder: 1, scale: 0.8 }))
+	xp.addComponent(new AnimationComponent({ idle: assets.effects.Spark }))
 	xp.addComponent(new BodyComponent(
 		{ moveForce: 1000 },
 		[
