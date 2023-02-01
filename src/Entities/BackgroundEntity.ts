@@ -1,22 +1,25 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { CAMERA_MOVE } from "../Constants/ECSEvents"
 import { FieldInstance, LayerInstance } from "../../ldtk"
+import { assets, camera } from "../Globals/Initialize"
 
 import { AmbientLight } from "three"
+import AnimationComponent from "../Components/AnimationComponent"
 import { Background } from "../Constants/BackGrounds"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import Coroutines from "../Globals/Coroutines"
 import LDTKMap from "../Utils/LDTKMap"
 import LightComponent from "../Components/LightComponent"
 import ObstableEntity from "./ObstacleEntity"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
-import { assets } from "../Globals/Initialize"
+import { linear } from "../Utils/Tween"
+import waitFor from "../Utils/WaitFor"
 
 const BackgroundEntity = (backgroundDefinition: Background) => {
-
 	const background = new Entity('background')
 	const position = background.addComponent(new PositionComponent(0, 0))
 	const tile = LDTKMap.tiles[backgroundDefinition.level]
@@ -55,7 +58,37 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 		}, 0)
 		background.addComponent(new BackgroundElementsComponent(maxSize, backgroundDefinition?.obstaclesDensity ?? 0.5, backgroundDefinition.obstacles.map(ObstableEntity)))
 	}
+	// ! LEAFS
+	if (backgroundDefinition.leafs) {
+		const leafEntity = () => {
+			const leaf = new Entity('leaf')
+			const sprite = leaf.addComponent(new SpriteComponent(assets.effects.Leaf, { renderOrder: 10, scale: 1.5 }))
+			leaf.addComponent(new AnimationComponent({ default: assets.effects.Leaf }))
+			const position = leaf.addComponent(new PositionComponent(((Math.random() - 0.5) * 2) * camera.right + camera.position.x, ((Math.random() - 0.5) * 2) * camera.top + camera.position.y))
+			Coroutines.add(function* () {
+				let counter = 0
+				while (counter < 100) {
+					position.y += linear(counter, 0, -2, 100)
+					sprite.opacity = linear(counter, 1, 0, 100)
+					counter++
+					yield
 
+				}
+				leaf.destroy()
+			})
+
+
+		}
+		Coroutines.add(function* () {
+			while (background) {
+				yield* waitFor(Math.random() * 10 + 50)
+				for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
+					leafEntity()
+				}
+
+			}
+		})
+	}
 	// ! WALLS
 	level?.layerInstances?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
 		const wallEntity = new Entity('wall')
