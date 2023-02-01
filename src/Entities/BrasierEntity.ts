@@ -7,7 +7,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import { assets } from "../Globals/Initialize"
 
 const BrasierEntity = (position: { x: number, y: number }) => {
-	const brasier = new Entity()
+	const brasier = new Entity('brasier')
 	brasier.addComponent(new PositionComponent(position.x, position.y))
 	const tile = assets.tiles.flame_brasier
 	brasier.addComponent(new SpriteComponent(tile))

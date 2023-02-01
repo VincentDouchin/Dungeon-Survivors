@@ -1,10 +1,11 @@
+import { AXISX, AXISY } from "../Constants/InputsNames"
 
+import { Entity } from "../Globals/ECS"
+import EventBus from "../Utils/EventBus"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPosition from "../Components/UIPosition"
-import { AXISX, AXISY } from "../Constants/InputsNames"
-import { Entity } from "../Globals/ECS"
 import { assets } from "../Globals/Initialize"
-import EventBus from "../Utils/EventBus"
+
 interface TouchInput {
 
 	destroy: () => void
@@ -13,10 +14,10 @@ interface TouchInput {
 class dpadTouchInput implements TouchInput {
 	dpad: Entity
 	constructor(eventBus: EventBus) {
-		this.dpad = new Entity()
+		this.dpad = new Entity('dpad')
 		const dpadMesh = this.dpad.addComponent(new SpriteComponent(assets.UI.touchdpad, { scale: 2 }))
 		this.dpad.addComponent(new UIPosition({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
-		const center = new Entity()
+		const center = new Entity('dpadCenter')
 		center.addComponent(new SpriteComponent(assets.UI.touchdpadcenter, { scale: 2 }))
 		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }, { x: 0, y: 0 }))
 		this.dpad.addChildren(center)

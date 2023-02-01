@@ -9,7 +9,7 @@ const PathEntity = (nodes: node[]) => {
 	const startNode = nodes.find(node => node.start)!
 	const createPath = (node: node, selected = false) => {
 		if (nodeEntities.has(node.id)) return nodeEntities.get(node.id)
-		const nodeEntity = new Entity()
+		const nodeEntity = new Entity('node')
 		const nodePosition = nodeEntity.addComponent(new PositionComponent(node.x, node.y))
 		if (selected) {
 			ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, nodePosition)

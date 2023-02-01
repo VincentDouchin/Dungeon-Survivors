@@ -1,13 +1,13 @@
 import BodyComponent from "../Components/BodyComponent"
-import DamageComponent from "../Components/DamageComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import PositionComponent from "../Components/PositionComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
+import PositionComponent from "../Components/PositionComponent"
+import SpriteComponent from "../Components/SpriteComponent"
 import { assets } from "../Globals/Initialize"
 
 const PotionEntity = ({ x, y }: { x: number, y: number }) => {
-	const potion = new Entity()
+	const potion = new Entity('potion')
 	const tile = assets.tiles.flask_big_green
 	potion.addComponent(new SpriteComponent(tile))
 	potion.addComponent(new BodyComponent({ type: 'fixed' }, [

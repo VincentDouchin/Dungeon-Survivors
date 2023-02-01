@@ -14,24 +14,24 @@ import UIPosition from "../Components/UIPosition"
 import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
-	const skillMenu = new Entity()
+	const skillMenu = new Entity('skillmenu')
 	skillMenu.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 100, 50), { scale: 2 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPosition({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(-2, 0, 30)
 	const possibleSkills = [...SKILLS]
 	for (let i = 0; i < 3; i++) {
-		const button = new Entity()
+		const button = new Entity('button')
 		const buttonTile = framedTile(assets.UI.frame2, 4, 24, 24)
 		const buttonMesh = button.addComponent(new SpriteComponent(buttonTile, { scale: 2 }))
-		const selectableEntity = new Entity()
+		const selectableEntity = new Entity('selectableEntity')
 		const emptyTile32 = framedTile(assets.UI.empty, 0, 32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32))
 		selectableEntity.addComponent(new UIPosition())
 		button.addChildren(selectableEntity)
 		button.addComponent(new UIPosition({ x: [-0.5, 0, 0.5][i], y: 0 }))
-		const icon = new Entity()
+		const icon = new Entity('icon')
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
 
@@ -45,7 +45,7 @@ const SkillMenuEntity = () => {
 		})
 		icon.addComponent(new UIPosition())
 
-		const text = new Entity()
+		const text = new Entity('text')
 		text.addComponent(new UIPosition({ x: 0, y: -1 }, { x: 0, y: 0 }))
 		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: 'center' }))
 		text.addComponent(new SpriteComponent(assets.UI.empty))

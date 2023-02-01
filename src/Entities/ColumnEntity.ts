@@ -9,7 +9,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import { assets } from "../Globals/Initialize"
 
 const ColumnEntity = (x: number, y: number) => {
-	const column = new Entity()
+	const column = new Entity('column')
 	column.addComponent(new SpriteComponent(assets.tiles.column, { renderOrder: 20 }))
 	column.addComponent(new BodyComponent(
 		{ type: "fixed" },
@@ -18,7 +18,7 @@ const ColumnEntity = (x: number, y: number) => {
 		]
 	))
 	column.addComponent(new PositionComponent(x, y))
-	const torch = new Entity()
+	const torch = new Entity('torch')
 	const torchTile = assets.tiles.flame_wall
 	torch.addComponent(new SpriteComponent(torchTile, { renderOrder: 21 }))
 	torch.addComponent(new AnimationComponent({ default: torchTile }))
