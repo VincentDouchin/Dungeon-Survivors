@@ -77,8 +77,8 @@ class RunState implements GameState {
 			}; break
 			default: {
 				this.ui = UIRunEntity()
-				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'CASTLE']!)
-				this.player = new Entity()
+				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
+				this.player = new Entity('player')
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
