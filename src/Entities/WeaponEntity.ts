@@ -9,6 +9,7 @@ import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
+import { WeaponDefinition } from "../Constants/Weapons"
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 
@@ -19,7 +20,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 	for (let behavior of weaponDefinition.behaviors) {
 		const component = {
 			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentSprite?.height) / 2, parent),
-			[WEAPONBEHAVIORS.targeter]: new TargeterComponent(COLLISIONGROUPS.ENEMY),
+			[WEAPONBEHAVIORS.targeter]: new TargeterComponent(weaponDefinition.target),
 			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
 			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, [COLLISIONGROUPS.ENEMY], -1, 5)
 		}[behavior]
