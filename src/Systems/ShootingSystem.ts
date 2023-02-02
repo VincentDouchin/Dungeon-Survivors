@@ -1,11 +1,12 @@
-import { Vector2 } from "@dimforge/rapier2d-compat";
+import { Entity, System } from "../Globals/ECS";
+
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
 import PositionComponent from "../Components/PositionComponent";
+import ProjectileEntity from "../Entities/ProjectileEntity";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
-import ProjectileEntity from "../Entities/ProjectileEntity";
-import { Entity, System } from "../Globals/ECS";
+import { Vector2 } from "@dimforge/rapier2d-compat";
 
 class ShootingSystem extends System {
 	constructor() {
@@ -24,7 +25,9 @@ class ShootingSystem extends System {
 						shooter.projectile,
 						{ x: position.x, y: position.y },
 						rotation.rotation - shooter.spread / 2 + (rotation.rotation * i / shooter.projectilesNb / 2),
-						shooter.range
+						shooter.range,
+						shooter.target,
+						shooter.group
 					)
 					const animation = projectile.getComponent(AnimationComponent)
 					if (animation) {
