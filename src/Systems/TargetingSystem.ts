@@ -66,7 +66,7 @@ class TargetingSystem extends System {
 							}
 							return true
 						})
-						if (!collisions) {
+						if (!collisions || increments === 8) {
 							body.velocity.add(lastDirection)
 						} else {
 							sign *= -1
