@@ -8,7 +8,7 @@ const bersek = (enemyType: EnemyType): EnemyType => ({ ...enemyType, berserk: tr
 
 const ENENMYENCOUNTERS: Partial<Record<enemyWaveName, Encounter>> = {
 	ORCS: new Encounter()
-		.setBoundary(864, 864)
+		.setBoundary(850, 850)
 		.addWave([[Enemies.goblin, 40]], 5)
 		.addWave([[Enemies.orc, 10], [Enemies.goblin, 30]], 5)
 		.addWave([[Enemies.orc, 20], [Enemies.goblin, 20]], 5)

@@ -89,8 +89,9 @@ class Encounter {
 	waitForEnemiesCleared() {
 		const self = this
 		this.waves.push(function* () {
+			yield
 			while (self.enemies.length) {
-				yield* waitFor(1)
+				yield
 			}
 			return
 		})
