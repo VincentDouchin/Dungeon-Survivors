@@ -19,7 +19,9 @@ class BackgroundElementSpawnerSystem extends System {
 						const newNoise = noise(chunkX + noiseValue, chunkY + noiseValue)
 						const element = elements[Math.floor((newNoise + 1) / 2 * elements.length)]
 						if (!entities[`${chunkX}|${chunkY}`]) {
-							entities[`${chunkX}|${chunkY}`] = element(chunkX * size, chunkY * size)
+							const obstacle = element(chunkX * size, chunkY * size)
+							entities[`${chunkX}|${chunkY}`] = obstacle
+							entity.addChildren(obstacle)
 						}
 					}
 				}
