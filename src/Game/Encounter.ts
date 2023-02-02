@@ -6,6 +6,7 @@ import Coroutines from "../Globals/Coroutines";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
+import { EventCallBack } from "../Utils/EventBus";
 import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import waitFor from "../Utils/WaitFor";
@@ -15,8 +16,9 @@ class Encounter {
 	enemies: string[] = []
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
 	index = 0
+	subscriber: EventCallBack<Entity>
 	constructor() {
-		ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
+		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
@@ -26,7 +28,7 @@ class Encounter {
 		this.boundary = { x: x / 2, y: y / 2 }
 		return this
 	}
-	addWave(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], enemiesNb: number, waves: number, delay?: number) {
+	addWave(enemies: Array<[EnemyType, number]>, waves: number, delay?: number) {
 		const self = this
 		this.waves.push(function* () {
 			let counter = 0
@@ -34,7 +36,7 @@ class Encounter {
 
 			while (counter < waves) {
 				if (timer === 0) {
-					yield* self.spawnEnemies(enemyType, enemiesNb)
+					yield* self.spawnEnemies(enemies)
 					counter++
 				}
 				timer = (timer + 1) % (delay ?? 600)
@@ -43,19 +45,6 @@ class Encounter {
 			yield
 		})
 		return this
-	}
-	getType(enemyType: EnemyType | EnemyType[] | [EnemyType, number][]) {
-		const isWeightedArray = (arg: any) => (arg instanceof Array) && arg.every(type => (type instanceof Array))
-
-		if (!Array.isArray(enemyType)) {
-			return enemyType
-		} else if (isWeightedArray(enemyType)) {
-			const all = enemyType as [EnemyType, number][]
-			const allEnenmies = all.flatMap(([enemy, weight]) => new Array(weight).fill(enemy))
-			return allEnenmies[Math.floor(Math.random() * allEnenmies.length)]
-		} else {
-			return enemyType[Math.floor(Math.random() * enemyType.length)]
-		}
 	}
 	getDistance(offset: number = 0) {
 		const angle = Math.random() * Math.PI * 2
@@ -66,10 +55,12 @@ class Encounter {
 		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
 		return { x, y }
 	}
-	* spawnEnemies(enemyType: EnemyType | EnemyType[] | [EnemyType, number][], nb: number) {
-		for (let i = 0; i < nb; i++) {
+	* spawnEnemies(enemyTypes: Array<[EnemyType, number]>) {
+		const enemies: EnemyType[] = enemyTypes.map(([enemyType, nb]) => new Array(nb).fill(enemyType)).flat()
+		for (let i = 0; i < enemies.length; i++) {
 			const { x, y } = this.getDistance()
-			this.spawnEnemy(this.getType(enemyType), x, y)
+			const enemy = enemies.splice(Math.floor(Math.random() * enemies.length), 1)
+			this.spawnEnemy(enemy[0], x, y)
 			yield* waitFor(Math.random() * 10)
 
 		}
@@ -106,6 +97,7 @@ class Encounter {
 		return this
 	}
 	stop() {
+		ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this.subscriber)
 		this.waves.push(function* () {
 			yield
 			Engine.setState(GameStates.map)
