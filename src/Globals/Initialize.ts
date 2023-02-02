@@ -24,6 +24,8 @@ import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
 import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
 import tilesetElementData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.json'
 import tilesetElementSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.png'
+import tilesetFloorDetailData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetFloorDetail.json'
+import tilesetFloorDetailSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetFloorDetail.png'
 import tilesetHoleData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.json'
 import tilesetHoleSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.png'
 import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
@@ -42,6 +44,7 @@ const assets: {
 	elements: Record<string, Tile>
 	effects: Record<string, Tile>
 	hole: Record<string, Tile>
+	details: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
 } = {
@@ -66,7 +69,8 @@ const assets: {
 		Spark: Tile.fromImage(await AssetLoader.loadImage(sparkSource), ({ buffer }) => ({ buffer, width: 10, frames: 7 })),
 		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 }))
 	},
-	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource)
+	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
+	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource)
 }
 // ! Clock
 const clock = new Clock()
