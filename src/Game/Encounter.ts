@@ -97,9 +97,12 @@ class Encounter {
 		return this
 	}
 	stop() {
-		ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this.subscriber)
+		const self = this
 		this.waves.push(function* () {
+
 			yield
+			yield
+			ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, self.subscriber)
 			Engine.setState(GameStates.map)
 
 		})
