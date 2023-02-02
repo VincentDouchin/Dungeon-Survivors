@@ -38,8 +38,7 @@ class BodyComponent extends Component {
 				.setCcdEnabled(true)
 				.setLinearDamping(5)
 				.setAngularDamping(10)
-
-		if (bodyOptions?.lock) this.bodyDescription.lockRotations()
+				.lockRotations()
 
 		//!Collider
 		this.colliderDescriptions = colliderOptions.map(colliderOption => {
