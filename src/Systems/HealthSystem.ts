@@ -54,7 +54,7 @@ class HealthSystem extends System {
 
 						// ! Knockback
 						if (body.body) {
-							const knockbackForce = damage.knockback * (otherSkill?.knockback ?? 1) * 1000
+							const knockbackForce = damage.knockback * (otherSkill?.knockback ?? 1) * 5000
 							const angle = Math.atan2(otherPosition.y - position.y, otherPosition.x - position.x)
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}
