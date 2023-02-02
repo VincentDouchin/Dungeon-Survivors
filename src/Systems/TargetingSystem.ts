@@ -53,23 +53,24 @@ class TargetingSystem extends System {
 				} else {
 					let increments = 0
 					let sign = 1
-
+					let rayDistance = 100
 					const avoidObstacles = () => {
 						const newDirection = direction.clone().rotateAround(new Vector2(0, 0), Math.PI / 8 * increments * sign)
 						const lastDirection = ranged ? new Vector2(0, 0).sub(newDirection) : newDirection
 						const ray = new Ray(position.position, lastDirection)
 						let collisions = false
-						world.intersectionsWithRay(ray, 100, true, (hit) => {
+						world.intersectionsWithRay(ray, rayDistance, true, (hit) => {
 							if (hit?.collider?.parent()?.bodyType() === 1) {
 								collisions = true
 								return false
 							}
 							return true
 						})
-						if (!collisions || increments === 8) {
+						if (!collisions || rayDistance === 0) {
 							body.velocity.add(lastDirection)
 						} else {
 							sign *= -1
+							rayDistance -=10
 							if (sign > 0) increments++
 							avoidObstacles()
 						}
