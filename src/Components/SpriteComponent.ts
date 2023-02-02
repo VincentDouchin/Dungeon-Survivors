@@ -97,6 +97,12 @@ class SpriteComponent extends Component {
 	}
 	destroy(): void {
 		this.mesh.geometry.dispose()
+		this.material.dispose()
+		this.effectComposer.dispose()
+		this.shaderPasses.forEach(shaderPass => {
+			shaderPass.dispose()
+		})
+		this.renderTarget.dispose()
 		this.mesh.removeFromParent()
 	}
 
