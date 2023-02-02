@@ -14,21 +14,9 @@ type skillName = "attack_boost" | "attack_down" | "attack_speed_boost" | "bleedi
 type npcTileName = "Alchemist_Idle" | "Alchemist_Walk" | "Archer_Idle" | "Archer_Walk" | "Bishop_Idle + Walk" | "Blacksmith_Idle" | "Blacksmith_Walk" | "Butcher_Idle" | "Butcher_Walk" | "EliteKnight_Idle" | "EliteKnight_Walk" | "Executioner_Idle" | "Executioner_Walk" | "FatNun_Idle + Walk" | "HeavyKnight_Idle" | "HeavyKnight_Walk" | "Herald_Idle" | "Herald_Walk" | "King_Idle" | "King_Walk" | "Knight_Idle" | "Knight_Walk" | "LargeEliteKnight_Idle" | "LargeEliteKnight_Walk" | "LargeKnight_Idle" | "LargeKnight_Walk" | "Mage_Idle" | "Mage_Walk" | "MagicShopKeeper_Idle + Walk" | "Merchant_Idle" | "Merchant_Walk" | "MountainKing_Idle + Walk" | "NormalNun_Idle + Walk" | "Princess_Idle" | "Princess_Walk" | "Queen_Idle" | "Queen_Walk" | "SkinnyNun_Idle + Walk" | "Thief_Idle" | "Thief_Walk" | "Townsfolk_F_Idle" | "Townsfolk_F_Walk" | "Townsfolk_M_Idle" | "Townsfolk_M_Walk"
 type DamageType = string
 
-interface WeaponDefinition {
-	tile: Tile
-	damage: number
-	behaviors: string[],
-	projectile?: ProjectileDefinition
-	spread?: number
-	projectilesNb?: number
-	range?: number
-}
 
-interface ProjectileDefinition {
-	tile: Tile
-	speed: number
-	damage: number
-}
+
+
 interface HeroDefinition {
 	tiles: Record<string, Tile>
 }
