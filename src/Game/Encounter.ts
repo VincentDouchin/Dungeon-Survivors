@@ -67,7 +67,7 @@ class Encounter {
 	}
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
-			this.enemies.push(EnemyEntity(this.getType(enemyType), { x, y }).id)
+			this.enemies.push(EnemyEntity(enemyType, { x, y }).id)
 		})
 	}
 	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards: number = 8, distance: number) {
