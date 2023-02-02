@@ -82,7 +82,7 @@ class RunState implements GameState {
 				this.player = new Entity('player')
 				this.player.addComponent(this.skills)
 				this.player.addComponent(this.store)
-				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.sword))
+				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
 				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
