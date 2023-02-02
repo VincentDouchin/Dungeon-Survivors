@@ -1,13 +1,13 @@
-import { State } from "../Constants/GameStates"
 import Coroutines from "./Coroutines"
+import { GameStates } from "../Constants/GameStates"
 
 const Engine = new class {
 	rafHandle = 0
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName?: State
-	states: Map<State, GameState> = new Map()
+	stateName?: GameStates
+	states: Map<GameStates, GameState> = new Map()
 	get state() {
 		return this.stateName ? this.states.get(this.stateName) : null
 	}
@@ -42,10 +42,10 @@ const Engine = new class {
 	stop() {
 		window.cancelAnimationFrame(this.rafHandle)
 	}
-	addState(stateName: State, state: GameState) {
+	addState(stateName: GameStates, state: GameState) {
 		this.states.set(stateName, state)
 	}
-	setState(stateName: State, options?: any) {
+	setState(stateName: GameStates, options?: any) {
 		const oldState = this.stateName
 		if (this.state) {
 			this.state.unset(stateName)

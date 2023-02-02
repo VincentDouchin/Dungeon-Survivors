@@ -2,7 +2,7 @@ import { Component, ECS } from "../Globals/ECS";
 import ECSEVENTS, { LEVEL_UP, XP, XP_PERCENT } from "../Constants/ECSEvents";
 
 import Engine from "../Globals/Engine";
-import { State } from "../Constants/GameStates";
+import { GameStates } from "../Constants/GameStates";
 
 class StoreComponent extends Component {
 	xp = 0
@@ -24,7 +24,7 @@ class StoreComponent extends Component {
 				this.level++
 				ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
 			}
-			Engine.setState(State.levelUp)
+			Engine.setState(GameStates.levelUp)
 		}
 	}
 }

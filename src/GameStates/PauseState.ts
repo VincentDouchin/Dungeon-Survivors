@@ -1,8 +1,8 @@
 import { inputManager, render } from "../Globals/Initialize";
 
 import Engine from "../Globals/Engine";
+import { GameStates } from "../Constants/GameStates";
 import { PAUSE } from "../Constants/InputsNames";
-import { State } from "../Constants/GameStates";
 
 class PauseState implements GameState {
 	constructor() {
@@ -10,7 +10,7 @@ class PauseState implements GameState {
 	}
 	update() {
 		if (inputManager.getInput(PAUSE)?.once) {
-			Engine.setState(State.run)
+			Engine.setState(GameStates.run)
 		}
 	}
 	render() {

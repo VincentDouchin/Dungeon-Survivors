@@ -1,5 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
+import ECSEVENTS, { LEVEL_UP, XP_PERCENT } from "../Constants/ECSEvents"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
@@ -11,6 +12,7 @@ import CameraSystem from "../Systems/CameraSystem"
 import Coroutines from "../Globals/Coroutines"
 import Engine from "../Globals/Engine"
 import FlockingSystem from "../Systems/FlockingSystem"
+import { GameStates } from "../Constants/GameStates"
 import HEROS from "../Constants/Heros"
 import HealthSystem from "../Systems/HealthSystem"
 import LightingSystem from "../Systems/LightingSystem"
@@ -20,7 +22,6 @@ import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import SkillsComponent from "../Components/SkillsComponent"
-import { State } from "../Constants/GameStates"
 import StoreComponent from "../Components/StoreComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
@@ -43,14 +44,14 @@ class RunState implements GameState {
 		world.step()
 		ECS.updateSystems()
 		if (inputManager.getInput(PAUSE)?.once) {
-			Engine.setState(State.pause)
+			Engine.setState(GameStates.pause)
 		}
 	}
 	render() {
 
 		render()
 	}
-	set(oldState: State, options: { background?: backgroundName, enemies?: enemyWaveName }) {
+	set(oldState: GameStates, options: { background?: backgroundName, enemies?: enemyWaveName }) {
 
 		inputManager.enable('dpad')
 		MovementSystem.register()
@@ -67,16 +68,16 @@ class RunState implements GameState {
 		SwitchingSystem.register()
 		FlockingSystem.register()
 		BackgroundElementSpawnerSystem.register()
-
+		this.ui = UIRunEntity()
 		switch (oldState) {
-			case State.pause: {
+			case GameStates.pause: {
 
 			}; break
-			case State.levelUp: {
+			case GameStates.levelUp: {
 
 			}; break
 			default: {
-				this.ui = UIRunEntity()
+
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addComponent(this.skills)
@@ -86,17 +87,22 @@ class RunState implements GameState {
 				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
 		}
-
+		const store = this.player?.getComponent(StoreComponent)
+		if (store) {
+			ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, store.level)
+			ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, store.xp / store.nextLevel)
+		}
 
 
 
 	}
-	unset(newState?: State) {
+	unset(newState?: GameStates) {
 		ECS.unRegisterSystems()
 		inputManager.disable('dpad')
 		Coroutines.stop()
+		this.ui?.destroy()
 		switch (newState) {
-			case State.map: {
+			case GameStates.map: {
 				this.background?.destroy()
 				this.ui?.destroy()
 				this.player?.destroy()

@@ -5,13 +5,13 @@ import { assets, inputManager } from "../Globals/Initialize";
 import AnimationComponent from "../Components/AnimationComponent";
 import Coroutines from "../Globals/Coroutines";
 import Engine from "../Globals/Engine";
+import { GameStates } from "../Constants/GameStates";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import { State } from "../Constants/GameStates";
 import { easeInCubic } from './../Utils/Tween'
 
 class PathSystem extends System {
@@ -40,7 +40,7 @@ class PathSystem extends System {
 
 			} else if (node.selected && node.encounter) {
 				node.encounter = false
-				Engine.setState(State.run, node)
+				Engine.setState(GameStates.run, node)
 				return
 			} else if (node.selected && !node.showingOptions) {
 

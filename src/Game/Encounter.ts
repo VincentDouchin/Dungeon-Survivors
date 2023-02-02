@@ -6,8 +6,8 @@ import Coroutines from "../Globals/Coroutines";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
+import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
-import { State } from "../Constants/GameStates";
 import waitFor from "../Utils/WaitFor";
 
 class Encounter {
@@ -108,7 +108,7 @@ class Encounter {
 	stop() {
 		this.waves.push(function* () {
 			yield
-			Engine.setState(State.map)
+			Engine.setState(GameStates.map)
 
 		})
 		return this

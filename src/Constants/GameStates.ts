@@ -1,4 +1,4 @@
-export enum State {
+export enum GameStates {
 	run = 'run',
 	map = 'map',
 	levelUp = 'levelUp',
