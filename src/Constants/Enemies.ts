@@ -1,4 +1,5 @@
 import BODYSIZES, { bodySize } from "./BodySizes"
+import WEAPONS, { WeaponDefinition } from "./Weapons"
 
 import Tile from "../Utils/Tile"
 import { assets } from "../Globals/Initialize"
@@ -7,7 +8,11 @@ export interface EnemyType {
 	tiles: Record<string, Tile>
 	health: number,
 	size: bodySize,
-	speed: number
+	speed: number,
+	berserk?: boolean
+	damage: number,
+	weapon?: WeaponDefinition
+
 }
 const Enemies: Record<string, EnemyType> = {
 	// ! ORCS
@@ -18,7 +23,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1,
 	},
 	orc: {
 		tiles: {
@@ -27,7 +33,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	orcShaman: {
 		tiles: {
@@ -36,7 +43,9 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 1.5
+		speed: 1.5,
+		damage: 3,
+		weapon: WEAPONS.bone
 	},
 	orcMasked: {
 		tiles: {
@@ -45,7 +54,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	orcBig: {
 		tiles: {
@@ -54,7 +64,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 200,
 		size: BODYSIZES.big,
-		speed: 10
+		speed: 10,
+		damage: 5
 	},
 
 
@@ -66,7 +77,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	wogol: {
 		tiles: {
@@ -75,7 +87,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 
 	},
 	chort: {
@@ -85,7 +98,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	demonBig: {
 		tiles: {
@@ -94,7 +108,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 300,
 		size: BODYSIZES.big,
-		speed: 10
+		speed: 10,
+		damage: 5
 	},
 	// !UNDEAD 
 	zombieSmall: {
@@ -104,7 +119,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	skeleton: {
 		tiles: {
@@ -113,7 +129,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	muddy: {
 		tiles: {
@@ -122,7 +139,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.square,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	swampy: {
 		tiles: {
@@ -131,7 +149,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.square,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	necromancer: {
 		tiles: {
@@ -140,7 +159,10 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 1.5
+		speed: 1.5,
+		damage: 3,
+		weapon: WEAPONS.fireball
+
 	},
 	zombie: {
 		tiles: {
@@ -149,7 +171,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	iceZombie: {
 		tiles: {
@@ -158,7 +181,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	ogre: {
 		tiles: {
@@ -167,7 +191,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 300,
 		size: BODYSIZES.big,
-		speed: 10
+		speed: 10,
+		damage: 5
 	},
 	// ! HUMANS
 	bandit: {
@@ -177,7 +202,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	// ! GNOLL
 	puppy: {
@@ -187,7 +213,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	gnoll: {
 		tiles: {
@@ -196,7 +223,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	gnollBrute: {
 		tiles: {
@@ -205,7 +233,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 1.5
+		speed: 1.5,
+		damage: 3
 	},
 	gnollMasked: {
 		tiles: {
@@ -214,7 +243,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	// ! FOREST
 	bunny: {
@@ -224,7 +254,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	centaurFemale: {
 		tiles: {
@@ -233,7 +264,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.centaur,
-		speed: 4
+		speed: 4,
+		damage: 2
 	},
 	centaurMale: {
 		tiles: {
@@ -242,7 +274,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 40,
 		size: BODYSIZES.centaur,
-		speed: 4
+		speed: 4,
+		damage: 2
 	},
 	mushroomSmall: {
 		tiles: {
@@ -251,7 +284,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	mushroomMedium: {
 		tiles: {
@@ -260,7 +294,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	mushroomBig: {
 		tiles: {
@@ -269,7 +304,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 20,
 		size: BODYSIZES.big,
-		speed: 10
+		speed: 10,
+		damage: 5
 	},
 	bear: {
 		tiles: {
@@ -278,7 +314,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 100,
 		size: BODYSIZES.massive,
-		speed: 7
+		speed: 7,
+		damage: 4
 	},
 	direwolf: {
 		tiles: {
@@ -287,7 +324,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.wide,
-		speed: 3
+		speed: 3,
+		damage: 2
 	},
 	golem: {
 		tiles: {
@@ -296,7 +334,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 500,
 		size: BODYSIZES.giant,
-		speed: 100
+		speed: 100,
+		damage: 8
 	},
 	//! ELVES
 	woodElfMale: {
@@ -306,7 +345,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	woodElfFemale: {
 		tiles: {
@@ -315,7 +355,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	elfQueen: {
 		tiles: {
@@ -324,7 +365,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 5
 	},
 	elfKing: {
 		tiles: {
@@ -332,7 +374,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 5
 	},
 	leprechaun: {
 		tiles: {
@@ -341,7 +384,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 	elfRanger: {
 		tiles: {
@@ -350,7 +394,9 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2,
+		weapon: WEAPONS.enemyBow
 	},
 	elfKnight: {
 		tiles: {
@@ -359,7 +405,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 30,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	// ! VILLAGERS
 	villagerMale: {
@@ -369,7 +416,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 1
 	},
 	villagerFemale: {
 		tiles: {
@@ -378,7 +426,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 1
 	},
 	butcher: {
 		tiles: {
@@ -387,7 +436,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	blacksmith: {
 		tiles: {
@@ -396,7 +446,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	alchemist: {
 		tiles: {
@@ -405,7 +456,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	shopKeeper: {
 		tiles: {
@@ -413,7 +465,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	herald: {
 		tiles: {
@@ -422,7 +475,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	thief: {
 		tiles: {
@@ -431,7 +485,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	mage: {
 		tiles: {
@@ -440,7 +495,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	archer: {
 		tiles: {
@@ -449,7 +505,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	executioner: {
 		tiles: {
@@ -458,7 +515,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 5
 	},
 	// ! KINGSGUARD
 	knight: {
@@ -468,7 +526,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	knightFat: {
 		tiles: {
@@ -477,7 +536,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 3
 	},
 	knightElite: {
 		tiles: {
@@ -486,7 +546,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	knightEliteLarge: {
 		tiles: {
@@ -495,7 +556,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.big,
-		speed: 5
+		speed: 5,
+		damage: 5
 	},
 	king: {
 		tiles: {
@@ -504,7 +566,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 5
 	},
 	queen: {
 		tiles: {
@@ -513,7 +576,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	kingOld: {
 		tiles: {
@@ -521,7 +585,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	princess: {
 		tiles: {
@@ -530,7 +595,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	// ! PRIESTS
 	clericFat: {
@@ -539,7 +605,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	clericNormal: {
 		tiles: {
@@ -547,7 +614,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	clericSkinny: {
 		tiles: {
@@ -555,7 +623,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	nunFat: {
 		tiles: {
@@ -563,7 +632,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	nunNormal: {
 		tiles: {
@@ -571,7 +641,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	nunSkinny: {
 		tiles: {
@@ -579,7 +650,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 2
 	},
 	bishop: {
 		tiles: {
@@ -587,7 +659,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2
+		speed: 2,
+		damage: 4
 	},
 	angel: {
 		tiles: {
@@ -596,7 +669,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 10,
 		size: BODYSIZES.small,
-		speed: 1
+		speed: 1,
+		damage: 1
 	},
 
 
