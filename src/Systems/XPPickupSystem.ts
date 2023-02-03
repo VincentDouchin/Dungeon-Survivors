@@ -4,7 +4,7 @@ import ECSEVENTS, { XP } from "../Constants/ECSEvents";
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import PositionComponent from "../Components/PositionComponent";
-import StatsComponent from "../Components/SkillsComponent";
+import StatsComponent from "../Components/StatsComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
 

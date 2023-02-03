@@ -1,4 +1,4 @@
-import StatsComponent from "../Components/SkillsComponent"
+import StatsComponent from "../Components/StatsComponent"
 import { assets } from "../Globals/Initialize"
 
 const SKILLS: Skill[] = [
@@ -25,7 +25,7 @@ const SKILLS: Skill[] = [
 	{
 		icon: assets.skills.exp_boost,
 		name: 'Experience up',
-		modifier: (skill: StatsComponent) => skill.xp += 1.2
+		modifier: (skill: StatsComponent) => skill.xpModifier += 1.2
 	},
 	{
 		icon: assets.skills.knockback_boost,

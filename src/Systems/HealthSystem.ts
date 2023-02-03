@@ -9,7 +9,7 @@ import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import StatsComponent from "../Components/SkillsComponent";
+import StatsComponent from "../Components/StatsComponent";
 import TextComponent from "../Components/TextComponent";
 import { assets } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";

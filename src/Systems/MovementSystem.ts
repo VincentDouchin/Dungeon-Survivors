@@ -7,7 +7,7 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
 import ShadowComponent from "../Components/ShadowComponent";
-import StatsComponent from "../Components/SkillsComponent";
+import StatsComponent from "../Components/StatsComponent";
 import { inputManager } from "../Globals/Initialize";
 
 class MovementSystem extends System {
