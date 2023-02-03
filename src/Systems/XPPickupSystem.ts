@@ -1,5 +1,4 @@
-import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { XP } from "../Constants/ECSEvents";
+import { Entity, System } from "../Globals/ECS";
 
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
@@ -36,7 +35,7 @@ class XPPickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 				if (xp) {
 					otherEntity.destroy()
-					ECS.eventBus.publish<XP>(ECSEVENTS.XP, xp.amount * (stats?.xp ?? 1))
+					stats?.updateXP(xp.amount)
 
 				}
 			}, COLLISIONGROUPS.PLAYER)
