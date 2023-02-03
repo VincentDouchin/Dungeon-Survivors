@@ -27,7 +27,6 @@ class StatsComponent extends Component {
 	}
 
 	updateXP(amount: number) {
-		console.log(amount)
 		this.xp += amount
 		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.xp / this.nextLevel)
 		const levelUp = Math.floor(this.xp / this.nextLevel)
