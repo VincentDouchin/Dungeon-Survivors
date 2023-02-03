@@ -262,7 +262,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.centaur_f_idle_anim,
 			run: assets.tiles.centaur_f_run_anim
 		},
-		health: 40,
+		health: 25,
 		size: BODYSIZES.centaur,
 		speed: 4,
 		damage: 2
@@ -272,7 +272,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.centaur_m_idle_anim,
 			run: assets.tiles.centaur_m_run_anim
 		},
-		health: 40,
+		health: 25,
 		size: BODYSIZES.centaur,
 		speed: 4,
 		damage: 2
