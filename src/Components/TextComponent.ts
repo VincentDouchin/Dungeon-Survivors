@@ -7,9 +7,9 @@ class TextComponent extends Component {
 	previousText: string = ''
 	text: string
 	mesh: Text
-	constructor(text: string, options?: { size?: number, color?: number, maxWidth?: number, anchorY?: anchorY, anchorX?: anchorX }) {
+	constructor(text: string, options?: { size?: number, color?: number, maxWidth?: number, anchorY?: anchorY, anchorX?: anchorX, outlineWidth?: number }) {
 		super()
-		const newOptions = Object.assign({ size: 16, color: 0xffffff, anchorX: 'center', anchorY: 'middle' }, options)
+		const newOptions = Object.assign({ size: 16, color: 0xffffff, anchorX: 'center', anchorY: 'middle', outlineWidth: 0 }, options)
 		this.text = text
 		this.previousText = text
 		this.mesh = new Text()
@@ -20,6 +20,8 @@ class TextComponent extends Component {
 		this.mesh.anchorX = newOptions.anchorX
 		this.mesh.color = newOptions.color
 		this.mesh.renderOrder = 10
+		this.mesh.outlineWidth = newOptions.outlineWidth
+		// this.mesh.strokeColor = 'black'
 		if (newOptions.maxWidth) this.mesh.maxWidth = newOptions.maxWidth
 
 	}

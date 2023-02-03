@@ -26,6 +26,7 @@ export class Text extends THREE.Object3D {
     anchorX: anchorX
     color: string | number
     maxWidth: number
+    outlineWidth: number
     constructor(...args: any[]);
 
     clone(...args: any[]): Text;

@@ -61,7 +61,7 @@ class HealthSystem extends System {
 						const damageText = new Entity('damageText')
 						damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
-						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff }))
+						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
 
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
