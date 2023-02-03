@@ -36,7 +36,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: bool
 		]
 
 	))
-	player.addComponent(new PositionComponent(0, 0))
+	player.addComponent(new PositionComponent(Math.random() * 40 - 20, Math.random() * 40 - 20))
 	player.addComponent(stats)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
