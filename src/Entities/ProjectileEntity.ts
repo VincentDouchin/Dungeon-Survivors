@@ -4,30 +4,31 @@ import Coroutines from "../Globals/Coroutines"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import PositionComponent from "../Components/PositionComponent"
-import { ProjectileDefinition } from "../Constants/Projectiles"
 import RotationComponent from "../Components/RotationComponent"
+import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import waitFor from "../Utils/WaitFor"
 
-const ProjectileEntity = (projectileDefinition: ProjectileDefinition, position: { x: number, y: number }, rotation: number, range: number, target: number, group: number) => {
+const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 	const projectile = new Entity('projectile')
-	projectile.addComponent(new SpriteComponent(projectileDefinition.tile))
-	if (projectileDefinition.tile.frames > 1) {
-		projectile.addComponent(new AnimationComponent({ idle: projectileDefinition.tile }))
+	const tile = projectileDefinition.projectile
+	projectile.addComponent(new SpriteComponent(tile))
+	if (tile.frames > 1) {
+		projectile.addComponent(new AnimationComponent({ idle: tile }))
 	}
 	projectile.addComponent(new BodyComponent(
 		{ moveForce: projectileDefinition.speed },
 		[
-			{ mass: 0.1, group: group, contact: true, sensor: true, canCollideWith: [target], width: projectileDefinition.tile.width, height: projectileDefinition.tile.height }
+			{ mass: 0.1, group: projectileDefinition.group, contact: true, sensor: true, canCollideWith: [projectileDefinition.target], width: tile.width, height: tile.height }
 		]
 	))
-	projectile.addComponent(new DamageComponent(projectileDefinition.damage, [target], 1))
+	projectile.addComponent(new DamageComponent(projectileDefinition.damage.value, [projectileDefinition.target], 1))
 	projectile.addComponent(new PositionComponent(position.x, position.y))
 	const rotationComponent = projectile.addComponent(new RotationComponent(rotation, 0))
 	if (projectileDefinition.rotationSpeed) {
 		Coroutines.add(function* () {
 			let timer = 0
-			while (timer < range) {
+			while (timer < projectileDefinition.range) {
 				timer++
 				rotationComponent.centerRotation += (projectileDefinition?.rotationSpeed ?? 0) / 5
 				yield
@@ -35,7 +36,7 @@ const ProjectileEntity = (projectileDefinition: ProjectileDefinition, position: 
 		})
 	}
 	Coroutines.add(function* () {
-		yield* waitFor(range)
+		yield* waitFor(projectileDefinition.range)
 		projectile.destroy()
 	})
 	return projectile

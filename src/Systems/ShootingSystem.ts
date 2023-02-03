@@ -18,16 +18,13 @@ class ShootingSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			shooter.timer++
 			const nb = shooter.projectilesNb
-			if (shooter.delay <= shooter.timer) {
+			if (shooter.delay.value <= shooter.timer) {
 				for (let i = 0; i < nb; i++) {
 					const position = entity.getComponent(PositionComponent)
 					const projectile = ProjectileEntity(
-						shooter.projectile,
+						shooter,
 						{ x: position.x, y: position.y },
 						rotation.rotation - shooter.spread / 2 + (rotation.rotation * i / shooter.projectilesNb / 2),
-						shooter.range,
-						shooter.target,
-						shooter.group
 					)
 					const animation = projectile.getComponent(AnimationComponent)
 					if (animation) {
@@ -40,8 +37,8 @@ class ShootingSystem extends System {
 			for (let projectile of entity.children) {
 				const projectileBody = projectile.getComponent(BodyComponent)
 				const projectileRotation = projectile.getComponent(RotationComponent)
-				const x = -Math.cos(projectileRotation.rotation) * projectileBody.moveForce
-				const y = -Math.sin(projectileRotation.rotation) * projectileBody.moveForce
+				const x = -Math.cos(projectileRotation.rotation) * projectileBody.moveForce.value
+				const y = -Math.sin(projectileRotation.rotation) * projectileBody.moveForce.value
 				projectileBody.body?.applyImpulse(new Vector2(x, y), true)
 			}
 		})

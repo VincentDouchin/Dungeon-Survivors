@@ -1,5 +1,3 @@
-import PROJECTILES, { ProjectileDefinition } from "./Projectiles"
-
 import COLLISIONGROUPS from "./CollisionGroups"
 import Tile from "../Utils/Tile"
 import WEAPONBEHAVIORS from "./WeaponBehaviros"
@@ -9,13 +7,15 @@ export interface WeaponDefinition {
 	tile: Tile
 	damage: number
 	behaviors: string[],
-	projectile?: ProjectileDefinition
+	projectile?: Tile
+	speed?: number
 	spread?: number
 	projectilesNb?: number
 	delay?: number
 	range?: number
 	group: number
-	target: number
+	target: number,
+	rotationSpeed?: number
 }
 const WEAPONS: Record<string, WeaponDefinition> = {
 	knife: {
@@ -148,9 +148,10 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		tile: assets.tiles.weapon_red_magic_staff,
 		damage: 15,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.fireBall,
+		projectile: assets.tiles.flame,
 		spread: 0.5,
 		projectilesNb: 3,
+		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
 		target: COLLISIONGROUPS.ENEMY
 	},
@@ -158,47 +159,53 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		tile: assets.tiles.weapon_green_magic_staff,
 		damage: 15,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.fireBall,
+		projectile: assets.tiles.flame,
+		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
 		target: COLLISIONGROUPS.ENEMY
 	},
 	bow: {
 		tile: assets.tiles.weapon_bow,
-		damage: 15,
+		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.arrow,
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY
+		target: COLLISIONGROUPS.ENEMY,
+		projectile: assets.tiles.weapon_arrow,
+		speed: 500,
 	},
 	enemyBow: {
 		tile: assets.tiles.weapon_bow,
-		damage: 15,
+		damage: 3,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.arrow,
+		projectile: assets.tiles.weapon_arrow,
 		group: COLLISIONGROUPS.ENEMY,
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
-		range: 200
+		range: 200,
+		speed: 100
 	},
 	fireball: {
 		tile: assets.UI.empty,
-		damage: 0,
+		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.enemyFire,
+		projectile: assets.tiles.weapon_arrow,
 		group: COLLISIONGROUPS.ENEMY,
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
-		range: 200
+		range: 200,
+		speed: 300
 	},
 	bone: {
 		tile: assets.UI.empty,
-		damage: 0,
+		damage: 2,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: PROJECTILES.bone,
+		projectile: assets.details.bone,
 		group: COLLISIONGROUPS.ENEMY,
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
-		range: 200
+		range: 200,
+		rotationSpeed: 1,
+		speed: 200
 	}
 }
 export default WEAPONS
