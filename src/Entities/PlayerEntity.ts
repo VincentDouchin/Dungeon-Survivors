@@ -26,8 +26,8 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: bool
 	player.addComponent(new HealthComponent(200, COLLISIONGROUPS.PLAYER))
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (!weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
-	player.addComponent(new SwitchingComponent(!main))
-	player.addComponent(new FlockingComponent(main, 50))
+	player.addComponent(new SwitchingComponent(main))
+	player.addComponent(new FlockingComponent(!main, 50))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 15000 },
 		[
