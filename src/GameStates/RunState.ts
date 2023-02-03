@@ -21,8 +21,7 @@ import { PAUSE } from "../Constants/InputsNames"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
-import StatsComponent from "../Components/SkillsComponent"
-import StoreComponent from "../Components/StoreComponent"
+import StatsComponent from "../Components/StatsComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import UIRunEntity from "../UIEntities/UIRunEntity"
@@ -34,7 +33,6 @@ class RunState implements GameState {
 	background?: Entity
 	player?: Entity
 	stats = new StatsComponent()
-	store = new StoreComponent()
 	constructor() {
 	}
 
@@ -81,17 +79,14 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addComponent(this.stats)
-				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
 				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
 		}
-		const store = this.player?.getComponent(StoreComponent)
-		if (store) {
-			ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, store.level)
-			ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, store.xp / store.nextLevel)
-		}
+		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
+		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.stats.xp / this.stats.nextLevel)
+
 
 
 
