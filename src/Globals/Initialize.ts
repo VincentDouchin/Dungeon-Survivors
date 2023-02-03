@@ -148,7 +148,6 @@ const quad2 = new FullScreenQuad(UIMaterial)
 //! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
-	renderer.clear()
 	renderer.setRenderTarget(lightsTarget)
 	renderer.clear()
 	renderer.render(lightScene, camera)
