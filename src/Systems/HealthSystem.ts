@@ -48,13 +48,13 @@ class HealthSystem extends System {
 						const otherStats = otherEntity.getRecursiveComponent(StatsComponent)
 
 						// ! Take damage
-						const damageAmount = otherStats ? otherStats.calculateDamage(damage.amount, stats?.defense) : damage.amount
+						const damageAmount = otherStats ? otherStats.calculateDamage(damage.amount, stats?.defense.value) : damage.amount
 						health.updateHealth(-damageAmount)
 						health.canTakeDamage = false
 
 						// ! Knockback
 						if (body.body) {
-							const knockbackForce = damage.knockback * (otherStats?.knockback ?? 1) * 5000
+							const knockbackForce = damage.knockback * (otherStats?.knockback.value ?? 1) * 5000
 							const angle = Math.atan2(otherPosition.y - position.y, otherPosition.x - position.x)
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}

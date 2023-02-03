@@ -68,7 +68,7 @@ class MovementSystem extends System {
 					position.y = body.body.translation().y
 					if (rotation) {
 						if (rotation.angVel) {
-							body.body.setAngvel(rotation.angVel + (stats?.angVel ?? 0), true)
+							body.body.setAngvel(rotation.angVel + (stats?.angVel.value ?? 0), true)
 						}
 						rotation.rotation = body.body.rotation()
 					}
