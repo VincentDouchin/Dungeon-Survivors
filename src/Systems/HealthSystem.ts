@@ -8,8 +8,8 @@ import DamageComponent from "../Components/DamageComponent";
 import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
-import SkillsComponent from "../Components/SkillsComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import StatsComponent from "../Components/SkillsComponent";
 import TextComponent from "../Components/TextComponent";
 import { assets } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
@@ -26,7 +26,7 @@ class HealthSystem extends System {
 			const health = entity.getComponent(HealthComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
-			const skill = entity.getComponent(SkillsComponent)
+			const stats = entity.getComponent(StatsComponent)
 			const position = entity.getComponent(PositionComponent)
 
 			if (health.show && !health.healthBarId && sprite) {
@@ -45,16 +45,16 @@ class HealthSystem extends System {
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target.includes(health.type)) {
 						const otherPosition = otherEntity.getComponent(PositionComponent)
-						const otherSkill = otherEntity.getRecursiveComponent(SkillsComponent)
+						const otherStats = otherEntity.getRecursiveComponent(StatsComponent)
 
 						// ! Take damage
-						const damageAmount = otherSkill ? otherSkill.calculateDamage(damage.amount, skill?.defense) : damage.amount
+						const damageAmount = otherStats ? otherStats.calculateDamage(damage.amount, stats?.defense) : damage.amount
 						health.updateHealth(-damageAmount)
 						health.canTakeDamage = false
 
 						// ! Knockback
 						if (body.body) {
-							const knockbackForce = damage.knockback * (otherSkill?.knockback ?? 1) * 5000
+							const knockbackForce = damage.knockback * (otherStats?.knockback ?? 1) * 5000
 							const angle = Math.atan2(otherPosition.y - position.y, otherPosition.x - position.x)
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}
@@ -64,7 +64,7 @@ class HealthSystem extends System {
 						const damageText = new Entity('damageText')
 						damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
-						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: otherSkill?.crit ? 0xff0000 : 0xffffff }))
+						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: otherStats?.crit ? 0xff0000 : 0xffffff }))
 
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()

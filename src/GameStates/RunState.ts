@@ -21,7 +21,7 @@ import { PAUSE } from "../Constants/InputsNames"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
-import SkillsComponent from "../Components/SkillsComponent"
+import StatsComponent from "../Components/SkillsComponent"
 import StoreComponent from "../Components/StoreComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
@@ -33,7 +33,7 @@ class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
 	player?: Entity
-	skills = new SkillsComponent()
+	stats = new StatsComponent()
 	store = new StoreComponent()
 	constructor() {
 	}
@@ -80,7 +80,7 @@ class RunState implements GameState {
 
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
-				this.player.addComponent(this.skills)
+				this.player.addComponent(this.stats)
 				this.player.addComponent(this.store)
 				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight))
 				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))

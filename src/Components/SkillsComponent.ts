@@ -1,7 +1,7 @@
 import { Component, ECS } from "../Globals/ECS";
 import ECSEVENTS, { SKILL } from "../Constants/ECSEvents";
 
-class SkillsComponent extends Component {
+class StatsComponent extends Component {
 	angVel = 0
 	damage = 1
 	critDamage = 0.5
@@ -26,5 +26,5 @@ class SkillsComponent extends Component {
 		return damage
 	}
 }
-SkillsComponent.register()
-export default SkillsComponent
+StatsComponent.register()
+export default StatsComponent

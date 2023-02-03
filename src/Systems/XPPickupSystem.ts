@@ -4,7 +4,7 @@ import ECSEVENTS, { XP } from "../Constants/ECSEvents";
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import PositionComponent from "../Components/PositionComponent";
-import SkillsComponent from "../Components/SkillsComponent";
+import StatsComponent from "../Components/SkillsComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
 
@@ -16,7 +16,7 @@ class XPPickupSystem extends System {
 		entities.forEach((entity) => {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
-			const skill = entity.getRecursiveComponent(SkillsComponent)
+			const stats = entity.getRecursiveComponent(StatsComponent)
 			body.contacts((otherEntity: Entity) => {
 				const xp = otherEntity.getComponent(XPComponent)
 
@@ -36,7 +36,7 @@ class XPPickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 				if (xp) {
 					otherEntity.destroy()
-					ECS.eventBus.publish<XP>(ECSEVENTS.XP, xp.amount * (skill?.xp ?? 1))
+					ECS.eventBus.publish<XP>(ECSEVENTS.XP, xp.amount * (stats?.xp ?? 1))
 
 				}
 			}, COLLISIONGROUPS.PLAYER)
