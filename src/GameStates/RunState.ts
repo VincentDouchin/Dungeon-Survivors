@@ -81,7 +81,8 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
-				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
+				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
+				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats))
 				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
 		}
