@@ -13,10 +13,6 @@ export interface DELETE_ENTITY extends Event {
 	type: 'DELETE_ENTITY'
 	data: Entity
 }
-export interface XP extends Event {
-	type: 'XP'
-	data: number
-}
 export interface XP_PERCENT extends Event {
 	type: 'XP_PERCENT'
 	data: number
@@ -36,7 +32,6 @@ export interface SKILL extends Event {
 enum ECSEVENTS {
 	CAMERA_MOVE = 'CAMERA_MOVE',
 	DELETE_ENTITY = 'DELETE_ENTITY',
-	XP = 'XP',
 	XP_PERCENT = 'XP_PERCENT',
 	LEVEL_UP = 'LEVEL_UP',
 	SKILL = 'SKILL',
