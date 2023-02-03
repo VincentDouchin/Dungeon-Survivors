@@ -1,6 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { CAMERA_MOVE } from "../Constants/ECSEvents"
-import { FieldInstance, LayerInstance } from "../../ldtk"
 import { assets, camera } from "../Globals/Initialize"
 
 import { AmbientLight } from "three"
@@ -11,6 +10,7 @@ import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import Coroutines from "../Globals/Coroutines"
 import LDTKMap from "../Utils/LDTKMap"
+import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
 import ObstableEntity from "./ObstacleEntity"
 import PositionComponent from "../Components/PositionComponent"
@@ -26,32 +26,27 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const width = tile.width
 	const height = tile.height
 	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
-	const isInfinite = level?.fieldInstances.find((field: FieldInstance) => field.__identifier == 'infinite')?.__value
-	if (isInfinite) {
+	// const isInfinite = level?.fieldInstances.find((field: FieldInstance) => field.__identifier == 'infinite')?.__value
 
-		const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-		ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+
+	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
+	ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+		if (backgroundDefinition.infinite.x) {
 			sprite.texture.offset.x = x / width
-			sprite.texture.offset.y = y / height
 			position.x = x
+		}
+		if (backgroundDefinition.infinite.y) {
+			sprite.texture.offset.y = y / height
 			position.y = y
-		})
-		State.cameraBounds = {
-			left: undefined,
-			right: undefined,
-			top: undefined,
-			bottom: undefined,
 		}
-	} else {
-		State.cameraBounds = {
-			left: -width / 2,
-			right: width / 2,
-			bottom: -height / 2,
-			top: height / 2,
-		}
-		background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-
+	})
+	State.cameraBounds = {
+		left: backgroundDefinition.infinite.x ? undefined : -width / 2,
+		right: backgroundDefinition.infinite.x ? undefined : width / 2,
+		bottom: backgroundDefinition.infinite.y ? undefined : -height / 2,
+		top: backgroundDefinition.infinite.y ? undefined : height / 2,
 	}
+
 	if (backgroundDefinition?.obstacles?.length) {
 		const maxSize = backgroundDefinition.obstacles.reduce((acc, v) => {
 			return Math.max(acc, v.width, v.height)

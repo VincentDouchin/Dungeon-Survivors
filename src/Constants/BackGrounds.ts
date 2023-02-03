@@ -10,6 +10,7 @@ export interface Background {
 	obstacles?: Tile[]
 	obstaclesDensity?: number
 	leafs?: boolean
+	infinite: { x: boolean, y: boolean }
 }
 
 const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
@@ -18,6 +19,7 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 		lightColor: new Color('hsl(0,0%,6%)'),
 		obstacles: [assets.hole.hole],
 		obstaclesDensity: 0.25,
+		infinite: { x: true, y: true }
 
 	},
 	FOREST: {
@@ -25,27 +27,32 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [...new Array(3).fill(assets.nature.tree1), assets.nature.stumpbig, assets.nature.stumpsmall1, assets.nature.trunksmall],
 		obstaclesDensity: 0.3,
-		leafs: true
+		leafs: true,
+		infinite: { x: true, y: true }
 	},
 	CAMP: {
 		level: 'CAMP',
-		lightColor: new Color('hsl(0,0%,100%)')
+		lightColor: new Color('hsl(0,0%,100%)'),
+		infinite: { x: false, y: false }
 	},
 	GRAVEYARD: {
 		level: 'GRAVEYARD',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.grave1, assets.elements.grave2, assets.elements.grave3, assets.elements.grave4],
 		obstaclesDensity: 0.3,
+		infinite: { x: true, y: true }
 	},
 	TOWN: {
 		level: 'TOWN',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.cart1, assets.elements.cart2, assets.elements.pile],
 		obstaclesDensity: 0.25,
+		infinite: { x: true, y: true }
 	},
 	CASTLE: {
 		level: 'CASTLE',
-		lightColor: new Color('hsl(0,0%,100%)')
+		lightColor: new Color('hsl(0,0%,100%)'),
+		infinite: { x: false, y: true }
 	}
 
 }
