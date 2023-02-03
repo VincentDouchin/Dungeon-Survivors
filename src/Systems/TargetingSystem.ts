@@ -58,7 +58,6 @@ class TargetingSystem extends System {
 						const lastDirection = ranged ? new Vector2(0, 0).sub(newDirection) : newDirection
 						let collisions = false
 						world.castShape(position.position, 0, lastDirection, body.body!.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
-							console.log(collider?.parent()?.bodyType())
 							if (collider?.parent()?.bodyType() === 1) {
 								collisions = true
 								return true
