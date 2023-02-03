@@ -125,7 +125,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 	},
 	swordKnight: {
 		tile: assets.tiles.weapon_knight_sword,
-		damage: 15,
+		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
 		group: COLLISIONGROUPS.PLAYER,
 		target: COLLISIONGROUPS.ENEMY
