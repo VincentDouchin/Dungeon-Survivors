@@ -5,7 +5,6 @@ import HealthComponent from "../Components/HealthComponent";
 import JointComponent from "../Components/JointComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RangedComponent from "../Components/RangedComponent";
-import { Ray } from "@dimforge/rapier2d-compat";
 import RotationComponent from "../Components/RotationComponent";
 import TargeterComponent from "../Components/TargeterComponent";
 import { Vector2 } from "three";
@@ -55,22 +54,22 @@ class TargetingSystem extends System {
 					let sign = 1
 					let rayDistance = 100
 					const avoidObstacles = () => {
-						const newDirection = direction.clone().rotateAround(new Vector2(0, 0), Math.PI / 8 * increments * sign)
+						const newDirection = direction.clone().rotateAround(new Vector2(0, 0), Math.PI / 4 * increments * sign)
 						const lastDirection = ranged ? new Vector2(0, 0).sub(newDirection) : newDirection
-						const ray = new Ray(position.position, lastDirection)
 						let collisions = false
-						world.intersectionsWithRay(ray, rayDistance, true, (hit) => {
-							if (hit?.collider?.parent()?.bodyType() === 1) {
+						world.castShape(position.position, 0, lastDirection, body.body!.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
+							console.log(collider?.parent()?.bodyType())
+							if (collider?.parent()?.bodyType() === 1) {
 								collisions = true
-								return false
+								return true
 							}
-							return true
+							return false
 						})
 						if (!collisions || rayDistance === 0) {
 							body.velocity.add(lastDirection)
 						} else {
 							sign *= -1
-							rayDistance -=10
+							rayDistance -= 10
 							if (sign > 0) increments++
 							avoidObstacles()
 						}
