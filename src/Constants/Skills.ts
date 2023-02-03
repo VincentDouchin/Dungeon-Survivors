@@ -4,8 +4,8 @@ import { assets } from "../Globals/Initialize"
 const SKILLS: Skill[] = [
 	{
 		icon: assets.skills.attack_speed_boost,
-		name: 'Rotation speed',
-		modifier: (skill: StatsComponent) => skill.angVel.addPercent(0.2)
+		name: 'Attack speed',
+		modifier: (skill: StatsComponent) => skill.attackSpeed.addPercent(0.2)
 	},
 	{
 		icon: assets.skills.attack_boost,
@@ -31,6 +31,11 @@ const SKILLS: Skill[] = [
 		icon: assets.skills.knockback_boost,
 		name: 'Knockback',
 		modifier: (skill: StatsComponent) => skill.knockback.addPercent(0.2)
+	},
+	{
+		icon: assets.skills.swiftness,
+		name: 'Movement speed',
+		modifier: (skill: StatsComponent) => skill.speed.addPercent(0.2)
 	},
 
 ]
