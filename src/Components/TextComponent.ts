@@ -21,7 +21,6 @@ class TextComponent extends Component {
 		this.mesh.color = newOptions.color
 		this.mesh.renderOrder = 10
 		this.mesh.outlineWidth = newOptions.outlineWidth
-		// this.mesh.strokeColor = 'black'
 		if (newOptions.maxWidth) this.mesh.maxWidth = newOptions.maxWidth
 
 	}
