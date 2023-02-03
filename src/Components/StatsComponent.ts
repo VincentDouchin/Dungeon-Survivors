@@ -3,33 +3,18 @@ import ECSEVENTS, { LEVEL_UP, SKILL, XP_PERCENT } from "../Constants/ECSEvents";
 
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
+import { StatModifier } from "../Game/Stat";
 
-class Stat {
-	base: number
-	flat: number = 0
-	percent: number = 1
-	constructor(base: number = 0) {
-		this.base = base
-	}
-	addPercent(amount: number) {
-		this.percent += amount
-	}
-	addFlat(amount: number) {
-		this.flat += amount
-	}
-	get value() {
-		return (this.base + this.flat) * this.percent
-	}
-}
 class StatsComponent extends Component {
-	angVel = new Stat(0)
-	damage = new Stat(1)
-	critDamage = new Stat(0.5)
-	critChance = new Stat(0.05)
-	crit = false
-	knockback = new Stat(1)
-	xpModifier = new Stat(0.5)
-	defense = new Stat(1)
+	attackSpeed = new StatModifier()
+	speed = new StatModifier()
+	damage = new StatModifier()
+	critDamage = new StatModifier()
+	critChance = new StatModifier()
+	knockback = new StatModifier()
+	xpModifier = new StatModifier()
+	defense = new StatModifier()
+	health = new StatModifier()
 	xp = 0
 	level = 0
 	nextLevel = 20
@@ -56,15 +41,7 @@ class StatsComponent extends Component {
 			Engine.setState(GameStates.levelUp)
 		}
 	}
-	calculateDamage(damageAmount: number, defense: number = 1) {
-		this.crit = this.critChance.value > Math.random()
-		let damage = (damageAmount * this.damage.value) * (1 / defense)
 
-		if (this.crit) {
-			damage *= (1 + this.critDamage.value)
-		}
-		return damage
-	}
 }
 StatsComponent.register()
 export default StatsComponent

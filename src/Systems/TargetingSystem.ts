@@ -45,9 +45,9 @@ class TargetingSystem extends System {
 					if (!rotation) return
 					const delta = 0.01
 					if (Math.abs(angleDiff) <= delta) {
-						rotation.angVel = 0
+						rotation.angVel.base = 0
 					} else {
-						rotation.angVel = Math.sin(angleDiff) * 4
+						rotation.angVel.base = Math.sin(angleDiff) * 4
 					}
 				} else {
 					let increments = 0
@@ -78,7 +78,7 @@ class TargetingSystem extends System {
 
 
 			} else {
-				rotation && (rotation.angVel = 0)
+				rotation && (rotation.angVel.base = 0)
 			}
 		})
 	}

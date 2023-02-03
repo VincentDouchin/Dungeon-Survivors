@@ -21,6 +21,7 @@ import { PAUSE } from "../Constants/InputsNames"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
+import StatUpdateSystem from "../Systems/StatUpdateSystem"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
@@ -65,6 +66,7 @@ class RunState implements GameState {
 		RenderSystem.register()
 		SwitchingSystem.register()
 		FlockingSystem.register()
+		StatUpdateSystem.register()
 		BackgroundElementSpawnerSystem.register()
 		this.ui = UIRunEntity()
 		switch (oldState) {
@@ -78,9 +80,8 @@ class RunState implements GameState {
 
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
-				this.player.addComponent(this.stats)
-				const knight = this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight))
-				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, knight))
+				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
+				this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
 				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
 			}; break
 		}

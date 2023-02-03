@@ -26,7 +26,7 @@ class XPPickupSystem extends System {
 					const y = position.y - otherPosition.y
 					const orientation = { x: x > 0 ? 1 : -1, y: y > 0 ? 1 : -1 }
 					const distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
-					const force = otherBody.moveForce * 1 / distance
+					const force = otherBody.moveForce.value * 1 / distance
 					otherBody.body!.applyImpulse({ x: force * orientation.x, y: force * orientation.y }, true)
 
 				}

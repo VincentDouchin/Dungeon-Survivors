@@ -7,7 +7,6 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
 import ShadowComponent from "../Components/ShadowComponent";
-import StatsComponent from "../Components/StatsComponent";
 import { inputManager } from "../Globals/Initialize";
 
 class MovementSystem extends System {
@@ -21,7 +20,6 @@ class MovementSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const animation = entity.getComponent(AnimationComponent)
 			const rotation = entity.getComponent(RotationComponent)
-			const stats = entity.getComponent(StatsComponent)
 			const shadow = entity.getComponent(ShadowComponent)
 			if (body) {
 
@@ -61,14 +59,15 @@ class MovementSystem extends System {
 				}
 
 				if (body.body) {
-					body.body.applyImpulse({ x: body.velocity.x * body.moveForce, y: body.velocity.y * body.moveForce }, true)
+					const force = body.moveForce.value
+					body.body.applyImpulse({ x: body.velocity.x * force, y: body.velocity.y * force }, true)
 					body.velocity.x = 0
 					body.velocity.y = 0
 					position.x = body.body.translation().x
 					position.y = body.body.translation().y
 					if (rotation) {
-						if (rotation.angVel) {
-							body.body.setAngvel(rotation.angVel + (stats?.angVel.value ?? 0), true)
+						if (rotation.angVel.value) {
+							body.body.setAngvel(rotation.angVel.value, true)
 						}
 						rotation.rotation = body.body.rotation()
 					}

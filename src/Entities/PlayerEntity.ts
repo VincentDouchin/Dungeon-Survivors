@@ -11,13 +11,14 @@ import PositionComponent from "../Components/PositionComponent"
 import RangedComponent from "../Components/RangedComponent"
 import ShadowComponent from "../Components/ShadowComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
-const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Entity,) => {
+const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: boolean, stats: StatsComponent) => {
 	const player = new Entity('player')
 
 	player.addComponent(new SpriteComponent(hero.tiles.idle,))
@@ -26,7 +27,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (!weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
 	player.addComponent(new SwitchingComponent(!main))
-	player.addComponent(new FlockingComponent(!!main, 50))
+	player.addComponent(new FlockingComponent(main, 50))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 15000 },
 		[
@@ -36,10 +37,10 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main?: Ent
 
 	))
 	player.addComponent(new PositionComponent(0, 0))
-
+	player.addComponent(stats)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
-	player.addChildren(WeaponEntity(weapon, player))
+	player.addChildren(WeaponEntity(weapon, player, stats))
 	return player
 }
 

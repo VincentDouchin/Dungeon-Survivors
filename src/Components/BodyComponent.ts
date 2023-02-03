@@ -1,6 +1,7 @@
 import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
 import { Component, ECS } from "../Globals/ECS";
 
+import { Stat } from "../Game/Stat";
 import { Vector2 } from "three";
 import { world } from "../Globals/Initialize";
 
@@ -25,12 +26,12 @@ class BodyComponent extends Component {
 	bodyDescription: RigidBodyDesc
 	colliders: Collider[] = []
 	colliderDescriptions: ColliderDesc[]
-	moveForce: number
+	moveForce: Stat
 	velocity = new Vector2()
 	constructor(bodyOptions: bodyOptions, colliderOptions: colliderOptions[]) {
 		super()
 
-		this.moveForce = bodyOptions.moveForce ?? 10
+		this.moveForce = new Stat(bodyOptions.moveForce ?? 10)
 		//!Body
 		this.bodyDescription =
 			RigidBodyDesc[bodyOptions.type ?? 'dynamic']()

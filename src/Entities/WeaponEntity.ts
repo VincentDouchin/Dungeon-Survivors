@@ -7,11 +7,12 @@ import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 
-const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
+const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?: StatsComponent) => {
 
 	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
@@ -34,6 +35,9 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity) => {
 	const angVel = weaponDefinition.behaviors.includes(WEAPONBEHAVIORS.targeter) ? 0 : 1
 	weapon.addComponent(new RotationComponent(0, angVel))
 	weapon.addComponent(new PositionComponent(parentPosition.x, parentPosition.y))
+	if (stats) {
+		weapon.addComponent(stats)
+	}
 	return weapon
 }
 export default WeaponEntity

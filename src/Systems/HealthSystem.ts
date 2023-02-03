@@ -9,7 +9,6 @@ import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import StatsComponent from "../Components/StatsComponent";
 import TextComponent from "../Components/TextComponent";
 import { assets } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
@@ -26,7 +25,6 @@ class HealthSystem extends System {
 			const health = entity.getComponent(HealthComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
-			const stats = entity.getComponent(StatsComponent)
 			const position = entity.getComponent(PositionComponent)
 
 			if (health.show && !health.healthBarId && sprite) {
@@ -45,16 +43,15 @@ class HealthSystem extends System {
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target.includes(health.type)) {
 						const otherPosition = otherEntity.getComponent(PositionComponent)
-						const otherStats = otherEntity.getRecursiveComponent(StatsComponent)
 
 						// ! Take damage
-						const damageAmount = otherStats ? otherStats.calculateDamage(damage.amount, stats?.defense.value) : damage.amount
+						const damageAmount = damage.calculateDamage(health.defense.value)
 						health.updateHealth(-damageAmount)
 						health.canTakeDamage = false
 
 						// ! Knockback
 						if (body.body) {
-							const knockbackForce = damage.knockback * (otherStats?.knockback.value ?? 1) * 5000
+							const knockbackForce = damage.knockback.value * 5000
 							const angle = Math.atan2(otherPosition.y - position.y, otherPosition.x - position.x)
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}
@@ -64,11 +61,11 @@ class HealthSystem extends System {
 						const damageText = new Entity('damageText')
 						damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
-						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: otherStats?.crit ? 0xff0000 : 0xffffff }))
+						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff }))
 
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
-						if (sprite && damage.amount > 0) {
+						if (sprite && damage.amount.value > 0) {
 							sprite.addShader(new ColorShader(1, 0, 0, 1))
 						}
 
