@@ -53,7 +53,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.masked_orc_idle_anim,
 			run: assets.tiles.masked_orc_run_anim,
 		},
-		health: 400,
+		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3,
