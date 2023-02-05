@@ -55,7 +55,6 @@ class MapState implements GameState {
 		MovementSystem.register()
 		PathSystem.register()
 		RenderSystem.register()
-
 		this.map = new Entity('map')
 		this.map.addComponent(new SpriteComponent(mapTile))
 		this.map.addComponent(new PositionComponent(0, 0))
@@ -63,22 +62,15 @@ class MapState implements GameState {
 		const title = new Entity('title text')
 		title.addComponent(new SpriteComponent(assets.title))
 		title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
-
-
 		await new Promise<void>((resolve) => {
 			switch (previousState) {
 				case GameStates.none: {
 					Coroutines.add(function* () {
 						yield
 						camera.position.x = 0
-
-						// yield* waitFor(60)
-
-
 						let counter = 1
 						while (counter < 600) {
 							yield camera.position.y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
-
 							counter++
 						}
 						title.destroy()
@@ -91,14 +83,11 @@ class MapState implements GameState {
 			}
 		})
 		if (!assets.map || !assets.map.levels[0]) return
-
-
 		this.player = new Entity('player')
 		const knight = HEROS.knightMale
 		this.player.addComponent(new SpriteComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
 		this.player.addComponent(new AnimationComponent(knight.tiles))
 		this.player.addComponent(new CameraTargetComponent())
-
 		this.player.addComponent(new PathWalkerComponent())
 		ECS.eventBus.subscribe<PATH_POSITION>(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
@@ -115,7 +104,6 @@ class MapState implements GameState {
 
 
 		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
-
 
 	}
 	unset() {
