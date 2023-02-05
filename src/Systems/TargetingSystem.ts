@@ -1,6 +1,7 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 
 import BodyComponent from "../Components/BodyComponent";
+import Coroutines from "../Globals/Coroutines";
 import HealthComponent from "../Components/HealthComponent";
 import JointComponent from "../Components/JointComponent";
 import PositionComponent from "../Components/PositionComponent";
@@ -8,6 +9,7 @@ import RangedComponent from "../Components/RangedComponent";
 import RotationComponent from "../Components/RotationComponent";
 import TargeterComponent from "../Components/TargeterComponent";
 import { Vector2 } from "three";
+import waitFor from "../Utils/WaitFor";
 import { world } from "../Globals/Initialize";
 
 class TargetingSystem extends System {
@@ -40,7 +42,49 @@ class TargetingSystem extends System {
 				const enemy = ECS.getEntityById(targeter.targetedEnemy)
 				const enemyPosition = enemy.getComponent(PositionComponent)
 				const direction = enemyPosition.position.clone().sub(position.position).normalize()
-				if (joint?.type == 'revolute') {
+				const distance = enemyPosition.position.distanceTo(position.position)
+				if (targeter.charging) {
+					body.contacts(() => {
+						targeter.charging = false
+					})
+				}
+				if (targeter.charger && distance <= targeter.distanceToTarget && !targeter.charging) {
+					const charge = function* () {
+						yield
+						console.log('ok')
+						let timer = 40
+						const magnitude = Math.sqrt((enemyPosition.x - position.x) ** 2 + (enemyPosition.y - position.y) ** 2)
+						targeter.chargingDirection.set((enemyPosition.x - position.x) / magnitude, (enemyPosition.y - position.y) / magnitude)
+
+						body.velocity.x = 0
+						body.velocity.y = 0
+						while (timer > 0) {
+							timer--
+							body.contacts(() => {
+								timer = 0
+							})
+
+							body.velocity.x = targeter.chargingDirection.x * 5
+							body.velocity.y = targeter.chargingDirection.y * 5
+							yield
+						}
+
+						body.velocity.x = 0
+						body.velocity.y = 0
+					}
+					Coroutines.add(function* () {
+						targeter.charger = false
+						yield* waitFor(180)
+						targeter.charger = true
+					})
+					Coroutines.add(function* () {
+						targeter.charging = true
+						yield* waitFor(40)
+						yield* charge()
+						targeter.charging = false
+					})
+
+				} else if (joint?.type == 'revolute') {
 					const r = rotation.rotation
 					const angleDiff = -direction.angle() + r
 					if (!rotation) return
@@ -50,7 +94,7 @@ class TargetingSystem extends System {
 					} else {
 						rotation.angVel.base = Math.sin(angleDiff) * 4
 					}
-				} else {
+				} else if (!targeter.charging) {
 					let increments = 0
 					let sign = 1
 					let rayDistance = 100
@@ -66,7 +110,8 @@ class TargetingSystem extends System {
 							return false
 						})
 						if (!collisions || rayDistance === 0) {
-							body.velocity.add(lastDirection)
+							console.log(lastDirection)
+							body.velocity.set(lastDirection.x, lastDirection.y)
 						} else {
 							sign *= -1
 							rayDistance -= 10
@@ -76,6 +121,7 @@ class TargetingSystem extends System {
 					}
 					avoidObstacles()
 				}
+
 
 
 			} else {

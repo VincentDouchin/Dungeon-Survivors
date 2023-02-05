@@ -11,7 +11,8 @@ export interface EnemyType {
 	speed: number,
 	berserk?: boolean
 	damage: number,
-	weapon?: WeaponDefinition
+	weapon?: WeaponDefinition,
+	charger?: boolean
 
 }
 const Enemies: Record<string, EnemyType> = {
@@ -52,10 +53,11 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.masked_orc_idle_anim,
 			run: assets.tiles.masked_orc_run_anim,
 		},
-		health: 40,
+		health: 400,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		charger: true
 	},
 	orcBig: {
 		tiles: {
@@ -65,7 +67,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 200,
 		size: BODYSIZES.big,
 		speed: 10,
-		damage: 5
+		damage: 10,
+		charger: true
 	},
 
 
@@ -99,7 +102,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		charger: true
 	},
 	demonBig: {
 		tiles: {
@@ -109,7 +113,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 300,
 		size: BODYSIZES.big,
 		speed: 10,
-		damage: 5
+		damage: 10,
+		charger: true
 	},
 	// !UNDEAD 
 	zombieSmall: {
@@ -172,7 +177,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 2
+		damage: 2,
+
 	},
 	iceZombie: {
 		tiles: {
@@ -192,7 +198,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 300,
 		size: BODYSIZES.big,
 		speed: 10,
-		damage: 5
+		damage: 10,
+		charger: true
 	},
 	// ! HUMANS
 	bandit: {
@@ -244,7 +251,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		charger: true
 	},
 	// ! FOREST
 	bunny: {
@@ -312,10 +320,11 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.bear_idle_anim,
 			run: assets.tiles.bear_run_anim
 		},
-		health: 100,
+		health: 60,
 		size: BODYSIZES.massive,
 		speed: 7,
-		damage: 4
+		damage: 4,
+		charger: true
 	},
 	direwolf: {
 		tiles: {

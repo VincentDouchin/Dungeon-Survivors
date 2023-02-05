@@ -23,11 +23,11 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 		sprite.addShader(new OutlineShader([1, 0, 0, 1]))
 	}
 	enemy.addComponent(new AnimationComponent(type.tiles))
-	enemy.addComponent(new DamageComponent((type.damage ?? 1), [COLLISIONGROUPS.PLAYER], -1, 2))
+	enemy.addComponent(new DamageComponent((type.damage ?? 1), [COLLISIONGROUPS.PLAYER], -1, 20))
 	enemy.addComponent(new HealthComponent(type.health * (berserk ? 1.5 : 1), COLLISIONGROUPS.ENEMY))
 	enemy.addComponent(new DroppableComponent(XPEntity))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
-	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER))
+	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER, type.charger ? 100 : 0, type.charger))
 	enemy.addComponent(new ShadowComponent(type.size.width, 6, tile.height / 2))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.5 : 1) },
