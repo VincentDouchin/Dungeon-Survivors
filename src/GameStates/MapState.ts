@@ -20,7 +20,6 @@ import RenderSystem from "../Systems/RenderSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
 import { easeInOutQuart } from "../Utils/Tween";
-import waitFor from "../Utils/WaitFor";
 
 class MapState implements GameState {
 	map?: Entity
