@@ -17,36 +17,36 @@ class CameraSystem extends System {
         super(CameraTargetComponent)
     }
     update(entities: Entity[]): void {
+        const cameraTarget = State.cameraBounds
+        if (
+            (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
+            && (
+                ((cameraTarget.right - cameraTarget.left) < this.defaultFrustrumSize)
+                || ((cameraTarget.top - cameraTarget.bottom) < (this.defaultFrustrumSize * this.defaultAspect))
+            )
+
+        ) {
+            const width = cameraTarget.right - cameraTarget.left
+            const height = cameraTarget.top - cameraTarget.bottom
+            this.newFrustrumSize = Math.min(width, height)
+            this.aspect = height < width ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
+
+        } else {
+            this.newFrustrumSize = this.defaultFrustrumSize
+            this.aspect = this.defaultAspect
+        }
+        if (this.frustumSize != this.newFrustrumSize) {
+            this.frustumSize = this.newFrustrumSize
+            camera.left = -this.frustumSize / 2
+            camera.right = this.frustumSize / 2
+            camera.top = this.frustumSize * this.aspect / 2
+            camera.bottom = -this.frustumSize * this.aspect / 2
+            camera.updateProjectionMatrix()
+        }
+
+
         entities.forEach(entity => {
             const position = entity.getComponent(PositionComponent)
-            const cameraTarget = State.cameraBounds
-            ECS.eventBus.publish<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
-            if (
-                (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
-                && (
-                    ((cameraTarget.right - cameraTarget.left) < this.defaultFrustrumSize)
-                    || ((cameraTarget.top - cameraTarget.bottom) < (this.defaultFrustrumSize * this.defaultAspect))
-                )
-
-            ) {
-                const width = cameraTarget.right - cameraTarget.left
-                const height = cameraTarget.top - cameraTarget.bottom
-                this.newFrustrumSize = Math.min(width, height)
-                this.aspect = height < width ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
-
-            } else {
-                this.newFrustrumSize = this.defaultFrustrumSize
-                this.aspect = this.defaultAspect
-            }
-            if (this.frustumSize != this.newFrustrumSize) {
-                this.frustumSize = this.newFrustrumSize
-                camera.left = -this.frustumSize / 2
-                camera.right = this.frustumSize / 2
-                camera.top = this.frustumSize * this.aspect / 2
-                camera.bottom = -this.frustumSize * this.aspect / 2
-                camera.updateProjectionMatrix()
-            }
-
             if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
                 camera.position.y = cameraTarget.bottom - camera.bottom
             } else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
@@ -61,6 +61,8 @@ class CameraSystem extends System {
             } else {
                 camera.position.x = position.x
             }
+            ECS.eventBus.publish<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
+
             camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
         })
     }

@@ -30,6 +30,7 @@ import tilesetHoleData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/
 import tilesetHoleSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.png'
 import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
 import tilesetNatureSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.png'
+import titleSource from './../../assets/title.png'
 
 //! Assets
 const assets: {
@@ -47,6 +48,7 @@ const assets: {
 	details: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
+	title: Tile
 } = {
 	UI: await AssetLoader.loadFromSlices(GUIData, GUISource),
 	icons: await AssetLoader.loadFromSlices(iconsData, iconsSource),
@@ -70,7 +72,8 @@ const assets: {
 		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 }))
 	},
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
-	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource)
+	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),
+	title: Tile.fromImage(await AssetLoader.loadImage(titleSource))
 }
 // ! Clock
 const clock = new Clock()
