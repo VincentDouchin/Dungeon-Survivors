@@ -51,7 +51,6 @@ class TargetingSystem extends System {
 				if (targeter.charger && distance <= targeter.distanceToTarget && !targeter.charging) {
 					const charge = function* () {
 						yield
-						console.log('ok')
 						let timer = 40
 						const magnitude = Math.sqrt((enemyPosition.x - position.x) ** 2 + (enemyPosition.y - position.y) ** 2)
 						targeter.chargingDirection.set((enemyPosition.x - position.x) / magnitude, (enemyPosition.y - position.y) / magnitude)
@@ -110,7 +109,6 @@ class TargetingSystem extends System {
 							return false
 						})
 						if (!collisions || rayDistance === 0) {
-							console.log(lastDirection)
 							body.velocity.set(lastDirection.x, lastDirection.y)
 						} else {
 							sign *= -1
