@@ -3,16 +3,16 @@ import Enemies, { EnemyType } from "./Enemies"
 import Encounter from "../Game/Encounter"
 
 export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS' | 'UNDEAD' | 'KINGSGUARD'
-const bersek = (enemyType: EnemyType): EnemyType => ({ ...enemyType, berserk: true })
+const berserk = (enemyType: EnemyType): EnemyType => ({ ...enemyType, berserk: true })
 
 
 const ENENMYENCOUNTERS: Partial<Record<enemyWaveName, Encounter>> = {
 	ORCS: new Encounter()
 		.setBoundary(800, 800)
-		.addWave([[Enemies.goblin, 40]], 5)
-		.addWave([[Enemies.orc, 10], [Enemies.goblin, 30]], 5)
-		.addWave([[Enemies.orc, 20], [Enemies.goblin, 20]], 5)
-		.addWave([[Enemies.orcShaman, 10], [Enemies.orc, 20]], 4)
+		.addWave([[Enemies.goblin, 30], [berserk(Enemies.goblin), 5]], 5)
+		.addWave([[berserk(Enemies.orc), 2], [Enemies.orc, 10], [Enemies.goblin, 20], [berserk(Enemies.goblin), 5]], 5)
+		.addWave([[Enemies.orc, 20], [berserk(Enemies.orc), 5], [Enemies.goblin, 10]], 5)
+		.addWave([[Enemies.orcShaman, 5], [Enemies.orc, 15]], 4)
 		.addWave([[Enemies.orcMasked, 10], [Enemies.orcShaman, 5], [Enemies.orc, 10]], 3)
 		.waitForEnemiesCleared()
 		.addWave([[Enemies.orcBig, 1], [Enemies.goblin, 20], [Enemies.orcMasked, 5], [Enemies.orcShaman, 5], [Enemies.orc, 10]], 1)
@@ -20,12 +20,12 @@ const ENENMYENCOUNTERS: Partial<Record<enemyWaveName, Encounter>> = {
 		.stop()
 	,
 	ANIMALS: new Encounter()
-		.addWave([[bersek(Enemies.bunny), 10], [Enemies.bunny, 10], [Enemies.mushroomSmall, 10], [Enemies.mushroomMedium, 10]], 10)
+		.addWave([[berserk(Enemies.bunny), 5], [Enemies.bunny, 10], [Enemies.mushroomSmall, 10], [Enemies.mushroomMedium, 10]], 5)
 		.addWave([[Enemies.direwolf, 10], [Enemies.bunny, 10]], 5)
-		.addWave([[Enemies.centaurFemale, 10], [Enemies.centaurMale, 10]], 4)
-		.addWave([[Enemies.bear, 5], [Enemies.direwolf, 10], [Enemies.centaurFemale, 5], [Enemies.centaurMale, 5]], 3)
+		.addWave([[Enemies.centaurFemale, 5], [Enemies.centaurMale, 5], [berserk(Enemies.centaurFemale), 1], [berserk(Enemies.centaurMale), 1]], 4)
+		.addWave([[berserk(Enemies.bear), 1], [Enemies.bear, 5], [Enemies.direwolf, 10], [Enemies.centaurFemale, 4], [Enemies.centaurMale, 4]], 3)
 		.waitForEnemiesCleared()
-		.addWave([[Enemies.mushroomBig, 1], [Enemies.mushroomSmall, 20], [Enemies.mushroomMedium, 10]], 1)
+		.addWave([[berserk(Enemies.mushroomBig), 1], [Enemies.mushroomSmall, 20], [Enemies.mushroomMedium, 10]], 1)
 		.waitForEnemiesCleared()
 		.stop()
 	,
