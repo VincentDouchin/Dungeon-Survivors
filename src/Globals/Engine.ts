@@ -6,7 +6,7 @@ const Engine = new class {
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName?: GameStates
+	stateName: GameStates = GameStates.none
 	states: Map<GameStates, GameState> = new Map()
 	get state() {
 		return this.stateName ? this.states.get(this.stateName) : null
