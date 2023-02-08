@@ -164,8 +164,14 @@ const finalQuad = new FullScreenQuad(new ShaderMaterial({
 	uniform sampler2D lightsTexture;
 	varying vec2 vUv;
 	void main() {
-		vec4 uiPixel = texture2D(uiTexture,vUv) ;
-		vec4 scenePixel = texture2D(sceneTexture,vUv)* texture2D(lightsTexture,vUv);
+		vec4 uiPixel = texture2D(uiTexture,vUv);
+		vec2 vignetteUV = vUv;
+		vignetteUV *=  1.0 - vUv.yx;   //vec2(1.0)- uv.yx; -> 1.-u.yx; Thanks FabriceNeyret !
+		float vig = vignetteUV.x*vignetteUV.y * 15.0; // multiply with sth for intensity
+		vig = pow(vig, 0.1); // change pow for modifying the extend of the  vignette
+		 
+		vec4 scenePixel = texture2D(sceneTexture,vUv) * texture2D(lightsTexture,vUv);
+		scenePixel.xyz *= vig;
 		gl_FragColor = uiPixel + (vec4(1. - uiPixel.w) * scenePixel);
 	}`
 
