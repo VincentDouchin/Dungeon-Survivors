@@ -8,6 +8,7 @@ import { Entity } from "../Globals/ECS"
 import HealthComponent from "../Components/HealthComponent"
 import OutlineShader from "../Shaders/OutlineShader"
 import PositionComponent from "../Components/PositionComponent"
+import PotionEntity from "./PotionEntity"
 import ShadowComponent from "../Components/ShadowComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
@@ -25,7 +26,7 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 	enemy.addComponent(new AnimationComponent(type.tiles))
 	enemy.addComponent(new DamageComponent((type.damage ?? 1), [COLLISIONGROUPS.PLAYER], -1, 20))
 	enemy.addComponent(new HealthComponent(type.health * (berserk ? 1.5 : 1), COLLISIONGROUPS.ENEMY))
-	enemy.addComponent(new DroppableComponent(XPEntity))
+	enemy.addComponent(new DroppableComponent(Math.random() < 0.01 ? PotionEntity : XPEntity))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
 	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER, type.charger ? 100 : 0, type.charger))
 	enemy.addComponent(new ShadowComponent(type.size.width, 6, tile.height / 2))

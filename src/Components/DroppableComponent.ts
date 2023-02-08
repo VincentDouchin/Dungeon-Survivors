@@ -1,5 +1,5 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents";
+import ECSEVENTS, { ADD_TO_BACKGROUND, DELETE_ENTITY } from "../Constants/ECSEvents";
 
 import { EventCallBack } from "../Utils/EventBus";
 import PositionComponent from "./PositionComponent";
@@ -15,6 +15,7 @@ class DroppableComponent extends Component {
 			const position = entity.getComponent(PositionComponent)
 			for (let i = 0; i < amount; i++) {
 				const newEntity = entityContructor()
+				ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, newEntity)
 				newEntity.addComponent(new PositionComponent(position.x, position.y))
 			}
 		})
