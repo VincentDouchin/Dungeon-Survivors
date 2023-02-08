@@ -57,7 +57,8 @@ class Encounter {
 	}
 	* spawnEnemies(enemyTypes: Array<[EnemyType, number]>) {
 		const enemies: EnemyType[] = enemyTypes.map(([enemyType, nb]) => new Array(nb).fill(enemyType)).flat()
-		for (let i = 0; i < enemies.length; i++) {
+		const nbOfEnemies = enemies.length
+		for (let i = 0; i < nbOfEnemies; i++) {
 			const { x, y } = this.getDistance()
 			const enemy = enemies.splice(Math.floor(Math.random() * enemies.length), 1)
 			this.spawnEnemy(enemy[0], x, y)
@@ -67,7 +68,9 @@ class Encounter {
 	}
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
-			this.enemies.push(EnemyEntity(enemyType, { x, y }).id)
+			const enemy = EnemyEntity(enemyType, { x, y })
+			// ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, enemy)
+			this.enemies.push(enemy.id)
 		})
 	}
 	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards: number = 8, distance: number) {
@@ -90,7 +93,7 @@ class Encounter {
 		const self = this
 		this.waves.push(function* () {
 			yield
-			while (self.enemies.length) {
+			while (self.enemies.length > 0) {
 				yield
 			}
 			return
