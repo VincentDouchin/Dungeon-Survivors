@@ -1,5 +1,5 @@
 import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
-import { Clock, Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, WebGLRenderTarget, WebGLRenderer } from "three"
+import { Clock, Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import AssetLoader from "./../Utils/AssetLoader"
@@ -128,7 +128,7 @@ scene.background = new Color(0x444444)
 //! Lights
 const lightScene = new Scene()
 const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth, window.innerHeight)
+	const target = new WebGLRenderTarget(window.innerWidth * 4, window.innerHeight * 4)
 	target.texture.minFilter = NearestMipMapNearestFilter
 	target.texture.magFilter = NearestFilter
 	target.texture.generateMipmaps = true
@@ -142,25 +142,51 @@ const background = new Mesh(
 )
 background.position.set(0, 0, 0)
 lightScene.add(background)
-const lightsMaterial = new MeshBasicMaterial({ map: lightsTarget.texture, blending: MultiplyBlending, transparent: true })
-const UIMaterial = new MeshBasicMaterial({ map: UITarget.texture, transparent: true })
-const quad = new FullScreenQuad(lightsMaterial)
-const quad2 = new FullScreenQuad(UIMaterial)
 
 
+const target = getTarget()
+const finalQuad = new FullScreenQuad(new ShaderMaterial({
+	uniforms: {
+		sceneTexture: new Uniform(target.texture),
+		uiTexture: new Uniform(UITarget.texture),
+		lightsTexture: new Uniform(lightsTarget.texture)
+	},
+	vertexShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vUv = uv;
+		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+		gl_Position = projectionMatrix * modelViewPosition;
+	}`,
+	fragmentShader:/*glsl*/`
+	uniform sampler2D sceneTexture;
+	uniform sampler2D uiTexture;
+	uniform sampler2D lightsTexture;
+	varying vec2 vUv;
+	void main() {
+		vec4 uiPixel = texture2D(uiTexture,vUv) ;
+		vec4 scenePixel = texture2D(sceneTexture,vUv)* texture2D(lightsTexture,vUv);
+		gl_FragColor = uiPixel + (vec4(1. - uiPixel.w) * scenePixel);
+	}`
+
+}))
 //! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
-	renderer.setRenderTarget(lightsTarget)
-	renderer.clear()
-	renderer.render(lightScene, camera)
+
+
 	renderer.setRenderTarget(UITarget)
 	renderer.clear()
 	renderer.render(UIScene, UICamera)
-	renderer.setRenderTarget(null)
+	renderer.setRenderTarget(lightsTarget)
+	renderer.clear()
+	renderer.render(lightScene, camera)
+	renderer.setRenderTarget(target)
+	renderer.clear()
 	renderer.render(scene, camera)
-	quad.render(renderer)
-	quad2.render(renderer)
+	renderer.setRenderTarget(null)
+	finalQuad.render(renderer)
+
 }
 
 //! Inputs
