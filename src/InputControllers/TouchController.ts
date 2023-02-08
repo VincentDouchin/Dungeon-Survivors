@@ -3,7 +3,7 @@ import { AXISX, AXISY } from "../Constants/InputsNames"
 import { Entity } from "../Globals/ECS"
 import EventBus from "../Utils/EventBus"
 import SpriteComponent from "../Components/SpriteComponent"
-import UIPosition from "../Components/UIPosition"
+import UIPositionComponent from "../Components/UIPositionComponent"
 import { assets } from "../Globals/Initialize"
 
 interface TouchInput {
@@ -16,10 +16,10 @@ class dpadTouchInput implements TouchInput {
 	constructor(eventBus: EventBus) {
 		this.dpad = new Entity('dpad')
 		const dpadMesh = this.dpad.addComponent(new SpriteComponent(assets.UI.touchdpad, { scale: 2 }))
-		this.dpad.addComponent(new UIPosition({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
+		this.dpad.addComponent(new UIPositionComponent({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
 		const center = new Entity('dpadCenter')
 		center.addComponent(new SpriteComponent(assets.UI.touchdpadcenter, { scale: 2 }))
-		const centerPosition = center.addComponent(new UIPosition({ x: 0, y: 0 }, { x: 0, y: 0 }))
+		const centerPosition = center.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
 		this.dpad.addChildren(center)
 		let enabled = false
 		let mouse: { x: null | number, y: null | number, } = { x: null, y: null }

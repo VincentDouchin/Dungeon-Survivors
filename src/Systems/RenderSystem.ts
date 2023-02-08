@@ -6,7 +6,7 @@ import RotationComponent from "../Components/RotationComponent";
 import ShadowComponent from "../Components/ShadowComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
-import UIPosition from "../Components/UIPosition";
+import UIPositionComponent from "../Components/UIPositionComponent";
 
 class RenderSystem extends System {
 	constructor() {
@@ -18,7 +18,7 @@ class RenderSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			const text = entity.getComponent(TextComponent)
-			const uiPosition = entity.getComponent(UIPosition)
+			const uiPosition = entity.getComponent(UIPositionComponent)
 			const shadow = entity.getComponent(ShadowComponent)
 			if (position) {
 				if (!sprite.mesh.parent) {

@@ -1,12 +1,12 @@
-import Coroutines from "../Globals/Coroutines";
 import { Component } from "../Globals/ECS";
+import Coroutines from "../Globals/Coroutines";
 import { easeInOutQuad } from "../Utils/Tween";
 
 interface position {
 	x: number
 	y: number
 }
-class UIPosition extends Component {
+class UIPositionComponent extends Component {
 	relativePosition: position
 	center: position
 	constructor(relativePosition?: position, center?: position) {
@@ -32,5 +32,5 @@ class UIPosition extends Component {
 	}
 
 }
-UIPosition.register()
-export default UIPosition
+UIPositionComponent.register()
+export default UIPositionComponent

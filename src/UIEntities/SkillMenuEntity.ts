@@ -10,13 +10,13 @@ import SelectableComponent from "../Components/SelectableComponent"
 import ShimmerShader from "../Shaders/ShimmerShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
-import UIPosition from "../Components/UIPosition"
+import UIPositionComponent from "../Components/UIPositionComponent"
 import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity('skillmenu')
-	skillMenu.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 100, 50), { scale: 2 }))
-	const skillMenuPosition = skillMenu.addComponent(new UIPosition({ x: 0, y: 2 }))
+	skillMenu.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 40, 15), { scale: 4 }))
+	const skillMenuPosition = skillMenu.addComponent(new UIPositionComponent({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(-2, 0, 30)
 	const possibleSkills = [...SKILLS]
@@ -28,9 +28,9 @@ const SkillMenuEntity = () => {
 		const emptyTile32 = framedTile(assets.UI.empty, 0, 32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32))
-		selectableEntity.addComponent(new UIPosition())
+		selectableEntity.addComponent(new UIPositionComponent())
 		button.addChildren(selectableEntity)
-		button.addComponent(new UIPosition({ x: [-0.5, 0, 0.5][i], y: 0 }))
+		button.addComponent(new UIPositionComponent({ x: [-0.5, 0, 0.5][i], y: 0 }))
 		const icon = new Entity('icon')
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
@@ -43,10 +43,10 @@ const SkillMenuEntity = () => {
 				sprite.uniforms.time = clock.getElapsedTime()
 			}
 		})
-		icon.addComponent(new UIPosition())
+		icon.addComponent(new UIPositionComponent())
 
 		const text = new Entity('text')
-		text.addComponent(new UIPosition({ x: 0, y: -1 }, { x: 0, y: 0 }))
+		text.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 0 }))
 		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: 'center' }))
 		text.addComponent(new SpriteComponent(assets.UI.empty))
 
