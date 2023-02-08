@@ -310,9 +310,9 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.mushroom_big_idle_anim,
 			run: assets.tiles.mushroom_big_run_anim
 		},
-		health: 20,
+		health: 200,
 		size: BODYSIZES.big,
-		speed: 10,
+		speed: 6,
 		damage: 5
 	},
 	bear: {
