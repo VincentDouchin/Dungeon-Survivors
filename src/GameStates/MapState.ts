@@ -26,7 +26,7 @@ class MapState implements GameState {
 	player?: Entity
 	light: AmbientLight
 	path?: Entity
-	lastPosition: { x?: number, y?: number } = { x: undefined, y: undefined }
+	lastPosition: { x?: number, y?: number } = { x: 0, y: undefined }
 	constructor() {
 		this.light = new AmbientLight(0xffffff)
 
@@ -58,12 +58,13 @@ class MapState implements GameState {
 		this.map.addComponent(new SpriteComponent(mapTile))
 		this.map.addComponent(new PositionComponent(0, 0))
 		lightScene.add(this.light)
-		const title = new Entity('title text')
-		title.addComponent(new SpriteComponent(assets.title))
-		title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
+
 		await new Promise<void>((resolve) => {
 			switch (previousState) {
 				case GameStates.none: {
+					const title = new Entity('title text')
+					title.addComponent(new SpriteComponent(assets.title))
+					title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
 					Coroutines.add(function* () {
 						yield
 						camera.position.x = 0
