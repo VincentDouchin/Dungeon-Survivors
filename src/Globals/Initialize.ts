@@ -1,5 +1,5 @@
 import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
-import { Clock, Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
+import { Clock, Color, Mesh, MeshStandardMaterial, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import AssetLoader from "./../Utils/AssetLoader"
