@@ -1,5 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { CAMERA_MOVE } from "../Constants/ECSEvents"
+import ECSEVENTS, { ADD_TO_BACKGROUND, CAMERA_MOVE } from "../Constants/ECSEvents"
 import { assets, camera } from "../Globals/Initialize"
 
 import { AmbientLight } from "three"
@@ -26,11 +26,8 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const width = tile.width
 	const height = tile.height
 	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
-	// const isInfinite = level?.fieldInstances.find((field: FieldInstance) => field.__identifier == 'infinite')?.__value
-
-
 	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-	ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+	const cameraSubscriber = ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
 		if (backgroundDefinition.infinite.x) {
 			sprite.texture.offset.x = x / width
 			position.x = x
@@ -39,6 +36,13 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			sprite.texture.offset.y = y / height
 			position.y = y
 		}
+	})
+	const addSubscriber = ECS.eventBus.subscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
+		background.addChildren(entity)
+	})
+	background.onDestroy(() => {
+		ECS.eventBus.unsubscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, cameraSubscriber)
+		ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
 	})
 	State.cameraBounds = {
 		left: backgroundDefinition.infinite.x ? undefined : -width / 2,

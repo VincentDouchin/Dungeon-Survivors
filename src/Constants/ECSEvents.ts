@@ -29,13 +29,18 @@ export interface SKILL extends Event {
 	type: 'SKILL'
 	data: Skill
 }
+export interface ADD_TO_BACKGROUND extends Event {
+	type: 'ADD_TO_BACKGROUND'
+	data: Entity
+}
 enum ECSEVENTS {
 	CAMERA_MOVE = 'CAMERA_MOVE',
 	DELETE_ENTITY = 'DELETE_ENTITY',
 	XP_PERCENT = 'XP_PERCENT',
 	LEVEL_UP = 'LEVEL_UP',
 	SKILL = 'SKILL',
-	PATH_POSITION = 'PATH_POSITION'
+	PATH_POSITION = 'PATH_POSITION',
+	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND'
 }
 
 export default ECSEVENTS
