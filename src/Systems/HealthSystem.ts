@@ -1,4 +1,6 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { ADD_TO_BACKGROUND } from "../Constants/ECSEvents";
+import { easeOutBack, easeOutExpo } from "../Utils/Tween";
 
 import BarShader from "../Shaders/BarShader";
 import BodyComponent from "../Components/BodyComponent";
@@ -59,10 +61,23 @@ class HealthSystem extends System {
 
 						// ! Damage number display
 						const damageText = new Entity('damageText')
-						damageText.addComponent(new PositionComponent(position.x, position.y))
+						ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
+						const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
-						damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
+						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
+						Coroutines.add(function* () {
+							let counter = 0
+							while (counter < 120) {
+								counter++
+								textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
+								textSprite.mesh.fillOpacity = easeOutExpo(counter, 1, 0, 120)
+								textSprite.mesh.outlineOpacity = easeOutExpo(counter, 1, 0, 120)
+								yield
+							}
+							damageText.destroy()
+							return
 
+						})
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (sprite && damage.amount.value > 0) {
@@ -75,7 +90,6 @@ class HealthSystem extends System {
 								sprite.removeShader(ColorShader)
 							}
 							health.canTakeDamage = true
-							damageText.destroy()
 						})
 
 					}
