@@ -3,15 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAvBJREFUeJztm7Fu2zAQhi+FgbxAiyBIunSoxwZdiiBDBg1dVQR+AAOdG7Qo0Gfw2j6A1wJGAGXM4MGDYaBTO8aziyDoE3Rqh8ACRZFH8kTyGFPfFFHy6fDrjjyeor2nR0f/IGMGAAA3H15x+8HC26+/HgQAAHh9+Snaje8Wq7D2f9rbHzSO9gs/Hvydo6cPz09JZm2FOzzB7YsCDeSTb54fO7rll/OXB0Htf/zyrnHcEiCGEymhFAAAYHp7H9OP4IyH6oeqFQAA4GxIy9XUWN7q544nEf1Ikl4Abge46QXgdoCb7AVAl0GZcXlR/z2trlpjKrbXUe9jgmJfxFqAcXkB7yef62OxRhDHZai1BGbTh/0t5BSo5jOv14X2Q4cxAlzCsQuh77NY3yv3OKgActiLPDt+2DUuJyv4s9m0xlXHpnAV7yXa1Nlzta/CaRLEKIuR8SlW8xmUxcjJpohv+wAeBaAQK70wmgJInZxpdQVnw9N6opHDT0a+Xv6NKlxtZ3ud/a5YRYBNeMvXA+BPuJrP4Prbd2ubKvs+YE0BEzoBuxY/IqwCYCmGpZvPRk0Se4GyGDmlQ/Q5IEVU6UFJjWQEcFlxdOcoqZFECoiUxYg8y1NSo46Au8WK/MbGF2JYLye012dbG7bpkEwKYPsO3b4AwFxomUhGABOqtDAVWjapxC6AbYWp6kb5gH0zZLMXkGf9nSuEXKHM9j82v5Xjj1IAn7QEyOnVOEACk6CIrrWGLYMurOFFaywpAQD0e32fPQCR5ATYLneqSjBECy2qAKZQtgl7bNmkpEr0CBBD2fREKWHP1hUOEZ4xusYNAaj/wIjt3bGwpLbEbO3bECUFTGHZdYbv8vvsK0HrCAjxUkImtH0VzikQqiCJZV8m+xToBeB2gJteAG4HuOkF4HaAm1oAlw+NdonsIwCtBLEvLXYFrQC6b2xMLNbqb410fXluvG+HdW113biqUxuTlgDyd3W7TrMjlOFKkP0qsJf75/P/ASB97aygzMUUAAAAAElFTkSuQmCC" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA81JREFUeJztm79PIkEUx78YkvsHJOQCNpJIJ6UxFhQUFtdsYqgJegUV1f0TXnHJeQ2NEDsTY8KVFBQUZjujdFwiFQkS/gIrr1hnnB1nZ/bHsLMrfKr9Mft25u17M2/f7stsFwqvWGOyALCczZy9lyEAYD6yAQD7p533c2F4k0f5UgvXjj8fgFypIR1flpy4//0LxxePAIBBu0IFHOwU0b9she6AG1tzOznWWcfZkIxvi2wcXzxi+XSFcbdFGzbLeUxT7CDTV2D5dAVAPD7gzQUI85GN+cNH7YuOpYX5yMbX6iHd5seSJScG7Qr2Tx2TGbQruB48ozdZYDcTc481sptx/HzchXB8AGcBxDeuB88Y/VsAAKp7edo4bVT38phOFnRfNL4Muww2y3kAQI+56DMhGl9mu1B4Xc5mONgp0glvN+NorzdZ4Kh8aKKv2rib2Bh3W7DOOq7xAc4kSV2ALHVkkkir2XvRv2y5xkZcYEt20TqwUYDpDphm7RWQVTdx07RO6Havf/vhmAjSLux9VISRTwikgKZ1gu/nP+g+u0Syx3nCLqUymTrkAxFdoD+80dpu1f0Q4csCgphjFOK6D4tSAbzZs+SKRQDA3bntSpyQ46J9lbmy9/JKxkSRzxN4EpRh1erKp9gf3sCq1QPJZNEtX6sCwmDC7FmUCuj1b3FUPqQTDW9+qvb8NSJz9Tvbe8mPAs0JqrBq9UA3JWYoe8L94Q3+/rn2LVMkPyrGXUCFlwKjBD8sxhUgczGZu+nKUziBkFe+PkasWj2QO+idA1KKyD2CukaiFBBkxfE6F9Q1Evk6bNXqoWf5oK6RKAsA3GZ9dx7ugwyR4ccdEqUA2XuH7COtKtCSkSgFqBC5hSrQUkWuviPBVeL3fUCUjYqKcQuQmT0L/yT1BkIpRFcglJhI0BSptQBdGJ8DeLxSa5H+VZKQOAUA3u/6unIALIlYBnnIcieKBHWn0GK3AJUp+zF72bIZ1FWMuABryqonGsbsjWWFV5HhXXXWWJsCZDG3zCzDpsT8ylcRmwuozDLqDB/2+k0gFKSxVatr/SghYtXyeUK5wCoCkjjls6y9C2wUYLoDptkowHQHTLNRgOkOmIbGAfzv5NW9vKk+rQTR7/IAVzCxnM2AlyFypUbc/YsF0fhowQQAYV3duKurZM4MrtpHwfi2yIn7n9+QKzWQKzUwf3ivrqK1dynEVTfoMT46B5C6uvnIxv5pB4N2BYN2BccXj6ktmxPVDbLjA7hVgK+r+wxlM8TcyXaousG0KkJL3SAA13baYJc8Zd3gOvIfe/bnEtiQufMAAAAASUVORK5CYII=" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport"
-    content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no; viewport-fit=cover">
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Dungeon Survivor</title>
   
-  <script type="module" crossorigin src="/Dungeon-Survivor/assets/index.634d4661.js"></script>
+  <script type="module" crossorigin src="/Dungeon-Survivor/assets/index.a494886d.js"></script>
   <link rel="stylesheet" href="/Dungeon-Survivor/assets/index-5383d9b8.css">
 <link rel="manifest" href="/Dungeon-Survivor/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/Dungeon-Survivor/registerSW.js"></script></head>
 
