@@ -69,7 +69,6 @@ class Encounter {
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, { x, y })
-			// ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, enemy)
 			this.enemies.push(enemy.id)
 		})
 	}
