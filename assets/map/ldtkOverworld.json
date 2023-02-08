@@ -3203,7 +3203,7 @@
 					"entityInstances": [
 						{
 							"__identifier": "PathNode",
-							"__grid": [23,135],
+							"__grid": [23,140],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3212,7 +3212,7 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 360,
-							"px": [184,1080],
+							"px": [184,1120],
 							"fieldInstances": [
 								{ "__identifier": "top", "__value": {
 									"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
