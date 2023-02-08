@@ -112,6 +112,15 @@ class Entity {
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
+	onDestroy(fn: () => void) {
+		const subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity) => {
+			if (entity.id === this.id) {
+				fn()
+				ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, subscriber)
+			}
+		})
+	}
+
 	destroy() {
 		ECS.eventBus.publish<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this)
 		for (let children of this.children) {
