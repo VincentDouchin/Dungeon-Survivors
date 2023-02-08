@@ -24,7 +24,7 @@
    { "name": "XPFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 20, "w": 52, "h": 7 } }] },
    { "name": "healthBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 129, "w": 16, "h": 3 } }] },
    { "name": "healthFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 133, "w": 16, "h": 3 } }] },
-   { "name": "box", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 36, "w": 26, "h": 24 } }] },
+   { "name": "box", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 98, "y": 36, "w": 24, "h": 24 } }] },
    { "name": "frame1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 34, "w": 44, "h": 44 } }] },
    { "name": "touchdpad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 0, "w": 64, "h": 64 } }] },
    { "name": "touchdpadcenter", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 0, "w": 16, "h": 16 } }] },
