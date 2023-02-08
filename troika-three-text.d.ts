@@ -21,6 +21,8 @@ export type anchorX = 'center'
 export class Text extends THREE.Object3D {
     text: string
     fontSize: number
+    fillOpacity: number
+    outlineOpacity: number
     font: string
     anchorY: anchorY
     anchorX: anchorX
