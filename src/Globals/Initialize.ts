@@ -128,7 +128,7 @@ scene.background = new Color(0x444444)
 //! Lights
 const lightScene = new Scene()
 const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth * 4, window.innerHeight * 4)
+	const target = new WebGLRenderTarget(window.innerWidth * 2, window.innerHeight * 2)
 	target.texture.minFilter = NearestMipMapNearestFilter
 	target.texture.magFilter = NearestFilter
 	target.texture.generateMipmaps = true
@@ -143,13 +143,38 @@ const background = new Mesh(
 background.position.set(0, 0, 0)
 lightScene.add(background)
 
+// !VIGNETTE
+const vignetteTarget = getTarget()
+const vignetteQuad = new FullScreenQuad(new ShaderMaterial({
+	vertexShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vUv = uv;
+		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+		gl_Position = projectionMatrix * modelViewPosition;
+	}`,
+	fragmentShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vec2 vignetteUV = vUv;
+		vignetteUV *=  1.0 - vUv.yx;   //vec2(1.0)- uv.yx; -> 1.-u.yx; Thanks FabriceNeyret !
+		float vig = vignetteUV.x*vignetteUV.y * 15.0; // multiply with sth for intensity
+		vig = pow(vig, 0.15); // change pow for modifying the extend of the  vignette
+		 
+		gl_FragColor = vec4(vig);
+	}`
 
+}))
+renderer.setRenderTarget(vignetteTarget)
+vignetteQuad.render(renderer)
 const target = getTarget()
+
 const finalQuad = new FullScreenQuad(new ShaderMaterial({
 	uniforms: {
 		sceneTexture: new Uniform(target.texture),
 		uiTexture: new Uniform(UITarget.texture),
-		lightsTexture: new Uniform(lightsTarget.texture)
+		lightsTexture: new Uniform(lightsTarget.texture),
+		vignetteTexture: new Uniform(vignetteTarget.texture)
 	},
 	vertexShader:/*glsl*/`
 	varying vec2 vUv;
@@ -162,16 +187,12 @@ const finalQuad = new FullScreenQuad(new ShaderMaterial({
 	uniform sampler2D sceneTexture;
 	uniform sampler2D uiTexture;
 	uniform sampler2D lightsTexture;
+	uniform sampler2D vignetteTexture;
 	varying vec2 vUv;
 	void main() {
 		vec4 uiPixel = texture2D(uiTexture,vUv);
-		vec2 vignetteUV = vUv;
-		vignetteUV *=  1.0 - vUv.yx;   //vec2(1.0)- uv.yx; -> 1.-u.yx; Thanks FabriceNeyret !
-		float vig = vignetteUV.x*vignetteUV.y * 15.0; // multiply with sth for intensity
-		vig = pow(vig, 0.1); // change pow for modifying the extend of the  vignette
-		 
 		vec4 scenePixel = texture2D(sceneTexture,vUv) * texture2D(lightsTexture,vUv);
-		scenePixel.xyz *= vig;
+		scenePixel.xyz *= texture2D(vignetteTexture,vUv).z;
 		gl_FragColor = uiPixel + (vec4(1. - uiPixel.w) * scenePixel);
 	}`
 
