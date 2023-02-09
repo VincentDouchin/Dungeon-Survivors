@@ -6,19 +6,18 @@ class Stat {
 	}
 	get value() {
 		if (!this.modifier) return this.base
-		return (this.base + this.modifier.flat) * this.modifier.percent
+		return this.modifier.calculateValue(this.base)
 	}
-
-
 }
 class StatModifier {
-	flat: number = 0
 	percent: number = 1
-	addPercent(amount: number) {
-		this.percent += amount
+	level: number = 0
+	increment: number
+	constructor(increment: number = 0) {
+		this.increment = increment
 	}
-	addFlat(amount: number) {
-		this.flat += amount
+	calculateValue(base: number) {
+		return (base + (base * this.increment * this.level)) * this.percent
 	}
 }
 export { Stat, StatModifier }

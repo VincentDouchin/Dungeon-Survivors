@@ -9,13 +9,16 @@ import Engine from "../Globals/Engine";
 import { EventCallBack } from "../Utils/EventBus";
 import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
+import State from "../Globals/State";
+import StatsComponent from "../Components/StatsComponent";
 import waitFor from "../Utils/WaitFor";
 
 class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	index = 0
+	stats: StatsComponent
+	started = false
 	subscriber: EventCallBack<Entity>
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
@@ -23,6 +26,13 @@ class Encounter {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
 		})
+		this.stats = new StatsComponent(State.timer % 120)
+
+	}
+	*updateLevel() {
+		while (this.started === true) {
+			yield this.stats.updateStats(State.timer % 120)
+		}
 	}
 	setBoundary(x: number, y: number) {
 		this.boundary = { x: x / 2, y: y / 2 }
@@ -68,7 +78,7 @@ class Encounter {
 	}
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
-			const enemy = EnemyEntity(enemyType, { x, y })
+			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
 			this.enemies.push(enemy.id)
 		})
 	}
@@ -101,6 +111,7 @@ class Encounter {
 	}
 	stop() {
 		const self = this
+		this.started = false
 		this.waves.push(function* () {
 
 			yield
@@ -112,12 +123,14 @@ class Encounter {
 		return this
 	}
 	start() {
+		this.started = true
 		const self = this
 		Coroutines.add(function* () {
 			for (let wave of self.waves) {
 				yield* wave()
 			}
 		})
+		Coroutines.add(this.updateLevel)
 	}
 }
 export default Encounter

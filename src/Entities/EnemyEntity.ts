@@ -11,11 +11,12 @@ import PositionComponent from "../Components/PositionComponent"
 import PotionEntity from "./PotionEntity"
 import ShadowComponent from "../Components/ShadowComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import WeaponEntity from "./WeaponEntity"
 import XPEntity from "./XPEntity"
 
-const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
+const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x: number, y: number }) => {
 	const enemy = new Entity('enemy')
 	const berserk = type.berserk
 	const tile = Object.values(type.tiles)[0]
@@ -36,6 +37,9 @@ const EnemyEntity = (type: EnemyType, position: { x: number, y: number }) => {
 			{ width: type.size.width, height: type.size.height, mass: 1, offset: tile.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
 		]
 	))
+	if (stats) {
+		enemy.addComponent(stats)
+	}
 	if (type.weapon) {
 		enemy.addChildren(WeaponEntity(type.weapon, enemy))
 	}
