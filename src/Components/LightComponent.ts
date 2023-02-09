@@ -17,7 +17,11 @@ class LightComponent extends Component {
 	}
 	destroy() {
 		if (this.lightId) {
-			lightScene.getObjectById(this.lightId)?.removeFromParent()
+			const lightObject = lightScene.getObjectById(this.lightId) as THREE.Light
+			if (lightObject) {
+				lightObject.removeFromParent()
+				lightObject.dispose()
+			}
 		}
 	}
 }

@@ -29,6 +29,10 @@ class TextComponent extends Component {
 		this.text = newText
 		this.mesh.text = newText
 	}
+	destroy(): void {
+		this.mesh.removeFromParent()
+		this.mesh.dispose()
+	}
 
 }
 TextComponent.register()
