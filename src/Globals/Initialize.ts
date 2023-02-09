@@ -3,6 +3,7 @@ import { Clock, Color, Mesh, MeshStandardMaterial, NearestFilter, NearestMipMapN
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import AssetLoader from "./../Utils/AssetLoader"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { FullScreenQuad } from "three/examples/jsm/postprocessing/Pass"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
@@ -11,6 +12,7 @@ import KeyboardController from "../InputControllers/KeyboardController"
 import LDTKMap from "../Utils/LDTKMap"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import Tile from "../Utils/Tile"
 import TouchController from "../InputControllers/TouchController"
 import arenasSource from './../../assets/map/Arenas.json'
@@ -128,7 +130,7 @@ scene.background = new Color(0x444444)
 //! Lights
 const lightScene = new Scene()
 const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth * 2, window.innerHeight * 2)
+	const target = new WebGLRenderTarget(window.innerWidth, window.innerHeight)
 	target.texture.minFilter = NearestMipMapNearestFilter
 	target.texture.magFilter = NearestFilter
 	target.texture.generateMipmaps = true
@@ -169,21 +171,25 @@ renderer.setRenderTarget(vignetteTarget)
 vignetteQuad.render(renderer)
 const target = getTarget()
 
-const finalQuad = new FullScreenQuad(new ShaderMaterial({
-	uniforms: {
-		sceneTexture: new Uniform(target.texture),
-		uiTexture: new Uniform(UITarget.texture),
-		lightsTexture: new Uniform(lightsTarget.texture),
-		vignetteTexture: new Uniform(vignetteTarget.texture)
-	},
-	vertexShader:/*glsl*/`
+
+const effectComposer = new EffectComposer(renderer)
+effectComposer.addPass(new ShaderPass(
+
+	new ShaderMaterial({
+		uniforms: {
+			sceneTexture: new Uniform(target.texture),
+			uiTexture: new Uniform(UITarget.texture),
+			lightsTexture: new Uniform(lightsTarget.texture),
+			vignetteTexture: new Uniform(vignetteTarget.texture)
+		},
+		vertexShader:/*glsl*/`
 	varying vec2 vUv;
 	void main() {
 		vUv = uv;
 		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
 		gl_Position = projectionMatrix * modelViewPosition;
 	}`,
-	fragmentShader:/*glsl*/`
+		fragmentShader:/*glsl*/`
 	uniform sampler2D sceneTexture;
 	uniform sampler2D uiTexture;
 	uniform sampler2D lightsTexture;
@@ -196,7 +202,8 @@ const finalQuad = new FullScreenQuad(new ShaderMaterial({
 		gl_FragColor = uiPixel + (vec4(1. - uiPixel.w) * scenePixel);
 	}`
 
-}))
+	})
+))
 //! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
@@ -212,7 +219,7 @@ const render = () => {
 	renderer.clear()
 	renderer.render(scene, camera)
 	renderer.setRenderTarget(null)
-	finalQuad.render(renderer)
+	effectComposer.render()
 
 }
 
