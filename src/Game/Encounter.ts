@@ -1,5 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents";
+import ECSEVENTS, { DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 import { assets, camera } from "../Globals/Initialize";
 
 import Coroutines from "../Globals/Coroutines";
@@ -20,19 +20,18 @@ class Encounter {
 	stats: StatsComponent
 	started = false
 	subscriber: EventCallBack<Entity>
+	levelSubscriber: EventCallBack<number>
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
 		})
+		this.levelSubscriber = ECS.eventBus.subscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, (level) => {
+			this.stats.updateStats(level)
+		})
 		this.stats = new StatsComponent(State.timer % 120)
 
-	}
-	*updateLevel() {
-		while (this.started === true) {
-			yield this.stats.updateStats(State.timer % 120)
-		}
 	}
 	setBoundary(x: number, y: number) {
 		this.boundary = { x: x / 2, y: y / 2 }
@@ -117,6 +116,7 @@ class Encounter {
 			yield
 			yield
 			ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, self.subscriber)
+			ECS.eventBus.unsubscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, self.levelSubscriber)
 			Engine.setState(GameStates.map)
 
 		})
@@ -130,7 +130,6 @@ class Encounter {
 				yield* wave()
 			}
 		})
-		Coroutines.add(this.updateLevel)
 	}
 }
 export default Encounter

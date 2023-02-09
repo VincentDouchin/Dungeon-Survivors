@@ -33,6 +33,11 @@ export interface ADD_TO_BACKGROUND extends Event {
 	type: 'ADD_TO_BACKGROUND'
 	data: Entity
 }
+export interface ENENMY_LEVEL_UP extends Event {
+	type: 'ENENMY_LEVEL_UP'
+	data: number
+}
+
 enum ECSEVENTS {
 	CAMERA_MOVE = 'CAMERA_MOVE',
 	DELETE_ENTITY = 'DELETE_ENTITY',
@@ -40,7 +45,8 @@ enum ECSEVENTS {
 	LEVEL_UP = 'LEVEL_UP',
 	SKILL = 'SKILL',
 	PATH_POSITION = 'PATH_POSITION',
-	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND'
+	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
+	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP'
 }
 
 export default ECSEVENTS
