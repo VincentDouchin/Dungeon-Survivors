@@ -130,7 +130,7 @@ scene.background = new Color(0x444444)
 //! Lights
 const lightScene = new Scene()
 const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth, window.innerHeight)
+	const target = new WebGLRenderTarget(window.innerWidth * 2, window.innerHeight * 2)
 	target.texture.minFilter = NearestMipMapNearestFilter
 	target.texture.magFilter = NearestFilter
 	target.texture.generateMipmaps = true
