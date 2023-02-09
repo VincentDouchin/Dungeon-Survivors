@@ -33,7 +33,7 @@ class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
 	player?: Entity
-	stats = new StatsComponent()
+	stats = new StatsComponent(0, true)
 	constructor() {
 	}
 
