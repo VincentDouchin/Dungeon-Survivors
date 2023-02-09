@@ -1,6 +1,7 @@
 import Coroutines from "../Globals/Coroutines"
 import { Entity } from "../Globals/ECS"
 import SpriteComponent from "../Components/SpriteComponent"
+import State from "../Globals/State"
 import TextComponent from "../Components/TextComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import { assets } from "../Globals/Initialize"
@@ -13,12 +14,14 @@ const TimeCounterEntity = () => {
 	timer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
 	const timerText = timer.addComponent(new TextComponent(String(0)))
 	Coroutines.add(function* () {
-		let timer = 0
-		while (true) {
+		let startCounter = true
+		timer.onDestroy(() => startCounter = false)
+		while (startCounter) {
 			yield* waitFor(60)
-			timer++
-			timerText.setText(String(timer))
+			State.timer++
+			timerText.setText(String(State.timer))
 		}
+		console.log('stop timer')
 	})
 	return timer
 }

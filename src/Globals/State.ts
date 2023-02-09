@@ -7,7 +7,7 @@ const State: {
 		top?: number
 		bottom?: number
 	},
-	level: number
+	timer: number
 } = {
 	cameraBounds: {
 		left: undefined,
@@ -15,6 +15,6 @@ const State: {
 		top: undefined,
 		bottom: undefined,
 	},
-	level: 0
+	timer: 0
 }
 export default State
