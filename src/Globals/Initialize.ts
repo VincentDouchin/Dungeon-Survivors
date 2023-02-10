@@ -105,8 +105,8 @@ const createCamera = () => {
 //! Renderer
 const createRenderer = () => {
 	const renderer = new WebGLRenderer({ alpha: true, })
-	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
+	renderer.setPixelRatio(window.devicePixelRatio)
 	window.addEventListener('resize', () => {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	})
@@ -130,7 +130,8 @@ scene.background = new Color(0x444444)
 //! Lights
 const lightScene = new Scene()
 const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth * 2, window.innerHeight * 2)
+	const target = new WebGLRenderTarget(window.innerWidth * 1.2, window.innerHeight * 1.2)
+
 	target.texture.minFilter = NearestMipMapNearestFilter
 	target.texture.magFilter = NearestFilter
 	target.texture.generateMipmaps = true
