@@ -14,7 +14,7 @@ const formatTimer = () => `${Math.floor(State.timer / 60)}:${String(State.timer 
 
 const TimeCounterEntity = () => {
 	const timer = new Entity('timer')
-	timer.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 0, 0), { scale: 1 }))
+	timer.addComponent(new SpriteComponent(framedTile(assets.UI.frame2, 8, 24, 0), { scale: 1 }))
 	timer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
 	const timerText = timer.addComponent(new TextComponent(formatTimer()))
 	Coroutines.add(function* () {
