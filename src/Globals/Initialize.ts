@@ -1,9 +1,9 @@
 import { AXISX, AXISY, INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH } from "../Constants/InputsNames"
-import { Clock, Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, MultiplyBlending, NearestFilter, NearestMipMapNearestFilter, OrthographicCamera, PlaneGeometry, Scene, WebGLRenderTarget, WebGLRenderer } from "three"
+import { Clock, Mesh, MeshStandardMaterial, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import AssetLoader from "./../Utils/AssetLoader"
-import { FullScreenQuad } from "three/examples/jsm/postprocessing/Pass"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
 import InputManager from "./InputManager"
@@ -11,6 +11,7 @@ import KeyboardController from "../InputControllers/KeyboardController"
 import LDTKMap from "../Utils/LDTKMap"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import Tile from "../Utils/Tile"
 import TouchController from "../InputControllers/TouchController"
 import arenasSource from './../../assets/map/Arenas.json'
@@ -108,6 +109,7 @@ const createRenderer = () => {
 	window.addEventListener('resize', () => {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	})
+	renderer.setClearColor(0xffffff, 0)
 	renderer.autoClear = false
 	return renderer
 }
@@ -123,44 +125,47 @@ const camera = createCamera()
 //! Scenes
 const UIScene = new Scene()
 const scene = new Scene()
-scene.background = new Color(0x444444)
+// scene.background = new Color(0x444444)
 
 //! Lights
 const lightScene = new Scene()
-const getTarget = () => {
-	const target = new WebGLRenderTarget(window.innerWidth, window.innerHeight)
-	target.texture.minFilter = NearestMipMapNearestFilter
-	target.texture.magFilter = NearestFilter
-	target.texture.generateMipmaps = true
-	return target
-}
-const lightsTarget = getTarget()
-const UITarget = getTarget()
 const background = new Mesh(
 	new PlaneGeometry(window.innerWidth, window.innerHeight),
 	new MeshStandardMaterial({ color: 0xffffff })
 )
 background.position.set(0, 0, 0)
 lightScene.add(background)
-const lightsMaterial = new MeshBasicMaterial({ map: lightsTarget.texture, blending: MultiplyBlending, transparent: true })
-const UIMaterial = new MeshBasicMaterial({ map: UITarget.texture, transparent: true })
-const quad = new FullScreenQuad(lightsMaterial)
-const quad2 = new FullScreenQuad(UIMaterial)
 
+const composer = new EffectComposer(renderer)
+const vignette = new ShaderMaterial({
+	transparent: true,
+	vertexShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vUv = uv;
+		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+		gl_Position = projectionMatrix * modelViewPosition;
+	}`,
+	fragmentShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vec2 vignetteUV = vUv;
+		vignetteUV *=  1.0 - vUv.yx;   //vec2(1.0)- uv.yx; -> 1.-u.yx; Thanks FabriceNeyret !
+		float vig = vignetteUV.x*vignetteUV.y * 15.0; // multiply with sth for intensity
+		vig = pow(vig, 0.15); // change pow for modifying the extend of the  vignette
+		gl_FragColor = vec4(0,0,0,1.-vig);
+	}`
+
+})
+composer.addPass(new ShaderPass(vignette))
 
 //! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
-	renderer.setRenderTarget(lightsTarget)
-	renderer.clear()
-	renderer.render(lightScene, camera)
-	renderer.setRenderTarget(UITarget)
-	renderer.clear()
-	renderer.render(UIScene, UICamera)
-	renderer.setRenderTarget(null)
 	renderer.render(scene, camera)
-	quad.render(renderer)
-	quad2.render(renderer)
+	composer.render()
+	renderer.clearDepth()
+	renderer.render(UIScene, UICamera)
 }
 
 //! Inputs
