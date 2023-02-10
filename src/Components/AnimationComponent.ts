@@ -23,6 +23,7 @@ class AnimationComponent extends Component {
 		this.lastState = this.currentState
 	}
 	set state(state: string) {
+		if (!this.tiles[state]) return
 		this.lastState = this.currentState
 		this.currentState = state
 	}
