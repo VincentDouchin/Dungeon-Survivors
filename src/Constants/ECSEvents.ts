@@ -37,6 +37,12 @@ export interface ENENMY_LEVEL_UP extends Event {
 	type: 'ENENMY_LEVEL_UP'
 	data: number
 }
+export interface SELECTED extends Event {
+	type: 'SELECTED'
+	data: Entity
+}
+
+
 
 enum ECSEVENTS {
 	CAMERA_MOVE = 'CAMERA_MOVE',
@@ -46,7 +52,8 @@ enum ECSEVENTS {
 	SKILL = 'SKILL',
 	PATH_POSITION = 'PATH_POSITION',
 	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
-	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP'
+	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
+	SELECTED = 'SELECTED',
 }
 
 export default ECSEVENTS
