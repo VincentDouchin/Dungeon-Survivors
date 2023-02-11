@@ -2,7 +2,7 @@ import BODYSIZES, { bodySize } from "./BodySizes"
 import WEAPONS, { WeaponDefinition } from "./Weapons"
 
 import Tile from "../Utils/Tile"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 export interface EnemyType {
 	tiles: Record<string, Tile>

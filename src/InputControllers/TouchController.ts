@@ -5,7 +5,7 @@ import EventBus from "../Utils/EventBus"
 import { InputController } from "../Globals/InputManager"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 interface TouchInput {
 

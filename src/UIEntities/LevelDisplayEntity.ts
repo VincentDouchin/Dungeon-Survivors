@@ -4,7 +4,7 @@ import ECSEVENTS, { LEVEL_UP } from "../Constants/ECSEvents"
 import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets";
 
 const LevelDisplayEntity = () => {
 	const level = new Entity('level display')

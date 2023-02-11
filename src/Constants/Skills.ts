@@ -1,5 +1,5 @@
 import StatsComponent from "../Components/StatsComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const SKILLS: Skill[] = [
 	{

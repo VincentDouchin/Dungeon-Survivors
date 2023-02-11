@@ -1,6 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
-import { assets, camera } from "../Globals/Initialize";
 
 import Coroutines from "../Globals/Coroutines";
 import EnemyEntity from "../Entities/EnemyEntity";
@@ -11,6 +10,8 @@ import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import State from "../Globals/State";
 import StatsComponent from "../Components/StatsComponent";
+import assets from "../Globals/Assets"
+import { camera } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
 
 class Encounter {

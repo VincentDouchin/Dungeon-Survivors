@@ -1,9 +1,9 @@
-import { assets, inputManager } from "../Globals/Initialize"
-
 import { Entity } from "../Globals/ECS"
 import { PAUSE } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
+import assets from "../Globals/Assets"
+import { inputManager } from "../Globals/Initialize"
 
 const PauseButtonEntity = () => {
 	const pause = new Entity('pause Button')

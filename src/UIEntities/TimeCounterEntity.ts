@@ -6,7 +6,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import TextComponent from "../Components/TextComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets";
 import framedTile from "../Utils/FramedTile"
 import waitFor from "../Utils/WaitFor"
 

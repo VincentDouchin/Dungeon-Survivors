@@ -3,7 +3,7 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import SpriteComponent from "../Components/SpriteComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const PotionEntity = () => {
 	const potion = new Entity('potion')

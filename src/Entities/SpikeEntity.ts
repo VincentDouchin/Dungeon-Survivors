@@ -5,7 +5,7 @@ import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const SpikeEntity = ({ x, y }: { x: number, y: number }) => {
 	const spike = new Entity('spike')

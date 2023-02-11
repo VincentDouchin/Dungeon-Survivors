@@ -1,6 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { ADD_TO_BACKGROUND, CAMERA_MOVE } from "../Constants/ECSEvents"
-import { assets, camera } from "../Globals/Initialize"
 
 import { AmbientLight } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
@@ -16,6 +15,8 @@ import ObstableEntity from "./ObstacleEntity"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
+import assets from "../Globals/Assets"
+import { camera } from "../Globals/Initialize"
 import { linear } from "../Utils/Tween"
 import waitFor from "../Utils/WaitFor"
 

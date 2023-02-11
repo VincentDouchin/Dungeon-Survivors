@@ -1,6 +1,6 @@
 import { Color } from "three"
 import Tile from "../Utils/Tile"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAMP' | 'GRAVEYARD' | 'TOWN' | 'CASTLE'
 

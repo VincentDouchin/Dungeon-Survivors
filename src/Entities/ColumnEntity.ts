@@ -6,7 +6,7 @@ import { Entity } from "../Globals/ECS"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const ColumnEntity = (x: number, y: number) => {
 	const column = new Entity('column')

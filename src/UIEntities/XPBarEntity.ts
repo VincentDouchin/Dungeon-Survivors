@@ -4,7 +4,7 @@ import ECSEVENTS, { XP_PERCENT } from "../Constants/ECSEvents"
 import BarShader from "../Shaders/BarShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets";
 import framedTile from "../Utils/FramedTile"
 
 const scalingOptions = { x: { left: 2, right: 4 }, y: { top: 0, bottom: 0 } }

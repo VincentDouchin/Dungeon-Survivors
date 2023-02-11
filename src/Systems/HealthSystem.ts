@@ -12,8 +12,11 @@ import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
-import { assets } from "../Globals/Initialize";
+import assets from "../Globals/Assets";
 import waitFor from "../Utils/WaitFor";
+
+;
+
 
 const empty = assets.UI['healthBar']
 const full = assets.UI['healthFull']

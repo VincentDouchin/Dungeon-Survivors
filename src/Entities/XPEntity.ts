@@ -4,7 +4,7 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Entity } from "../Globals/ECS"
 import SpriteComponent from "../Components/SpriteComponent"
 import XPComponent from "../Components/XPComponent"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const XPEntity = () => {
 	const xp = new Entity('xp')

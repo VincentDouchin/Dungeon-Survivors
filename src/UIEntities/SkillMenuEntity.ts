@@ -1,6 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { SKILL } from "../Constants/ECSEvents"
-import { assets, clock, inputManager } from "../Globals/Initialize"
+import { clock, inputManager } from "../Globals/Initialize"
 
 import Coroutines from "../Globals/Coroutines"
 import Engine from "../Globals/Engine"
@@ -11,6 +11,7 @@ import ShimmerShader from "../Shaders/ShimmerShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
+import assets from "../Globals/Assets"
 import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {

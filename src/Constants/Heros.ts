@@ -1,4 +1,4 @@
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 const HEROS: Record<string, HeroDefinition> = {
 	elfFemale: {

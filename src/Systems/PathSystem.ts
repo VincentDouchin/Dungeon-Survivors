@@ -1,6 +1,5 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
-import { assets, inputManager } from "../Globals/Initialize";
 
 import AnimationComponent from "../Components/AnimationComponent";
 import Coroutines from "../Globals/Coroutines";
@@ -12,7 +11,9 @@ import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import assets from "../Globals/Assets";
 import { easeInCubic } from './../Utils/Tween'
+import { inputManager } from "../Globals/Initialize";
 
 class PathSystem extends System {
 	constructor() {
@@ -50,9 +51,13 @@ class PathSystem extends System {
 
 					entity.destroy()
 				} else {
+					const arrows = []
 					for (let [direction, otherNodeode] of possibleDirections) {
 
 						const arrow = new Entity('arrow')
+						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow, arrows.length === 0))
+
+						arrows.push(arrow)
 						entity.addChildren(arrow)
 						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
@@ -71,7 +76,7 @@ class PathSystem extends System {
 							}
 						})
 
-						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow))
+
 						switch (direction) {
 							case 'left': {
 								arrowPosition.x -= 16

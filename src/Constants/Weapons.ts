@@ -1,7 +1,7 @@
 import COLLISIONGROUPS from "./CollisionGroups"
 import Tile from "../Utils/Tile"
 import WEAPONBEHAVIORS from "./WeaponBehaviros"
-import { assets } from "../Globals/Initialize"
+import assets from "../Globals/Assets"
 
 export interface WeaponDefinition {
 	tile: Tile

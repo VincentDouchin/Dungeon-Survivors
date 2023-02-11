@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
-import { assets, camera, lightScene, render, world } from "../Globals/Initialize";
+import { camera, lightScene, render, world } from "../Globals/Initialize";
 
 import { AmbientLight } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
@@ -19,6 +19,7 @@ import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
+import assets from "../Globals/Assets"
 import { easeInOutQuart } from "../Utils/Tween";
 
 class MapState implements GameState {
