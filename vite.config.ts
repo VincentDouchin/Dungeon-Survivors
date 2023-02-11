@@ -2,26 +2,69 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from "vite";
 
 export default defineConfig({
+	define: {
+		__DATE__: `'${new Date().toISOString()}'`,
+	},
 	plugins: [
+		// VitePWA({
+		// 	injectRegister: 'auto',
+		// 	registerType: 'autoUpdate',
+		// 	includeAssets: ['./assets/icon.png'],
+		// 	manifest: {
+		// 		orientation: 'landscape',
+		// 		name: 'Dungeon Survivor',
+		// 		short_name: 'Dungeon Survivor',
+		// 		description: 'Dungeon Survivor',
+		// 		theme_color: '#000000',
+		// 		icons: [
+		// 			{
+		// 				src: './assets/icon.png',
+		// 				sizes: '64x64',
+		// 				type: 'image/png'
+		// 			}
+		// 		]
+		// 	},
+		// })
 		VitePWA({
-			injectRegister: 'auto',
+			mode: 'development',
+			base: '/',
+			/* buildBase: '/test-build-base/', */
+			strategies: 'injectManifest',
 			registerType: 'autoUpdate',
-			includeAssets: ['./assets/icon.png'],
+			includeAssets: ['favicon.svg'],
+			filename: 'custom-sw.ts',
+			srcDir: 'src',
 			manifest: {
-				orientation: 'landscape',
-				name: 'Dungeon Survivor',
-				short_name: 'Dungeon Survivor',
-				description: 'Dungeon Survivor',
-				theme_color: '#000000',
+				name: 'PWA Router',
+				short_name: 'PWA Router',
+				theme_color: '#ffffff',
 				icons: [
 					{
-						src: './assets/icon.png',
-						sizes: '64x64',
-						type: 'image/png'
-					}
-				]
+						src: 'pwa-192x192.png', // <== don't add slash, for testing
+						sizes: '192x192',
+						type: 'image/png',
+					},
+					{
+						src: '/pwa-512x512.png', // <== don't remove slash, for testing
+						sizes: '512x512',
+						type: 'image/png',
+					},
+					{
+						src: 'pwa-512x512.png', // <== don't add slash, for testing
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'any maskable',
+					},
+				],
 			},
-		})
+			injectManifest: {
+				injectionPoint: undefined,
+			},
+			devOptions: {
+				enabled: process.env.SW_DEV === 'true',
+				type: 'module',
+			},
+		}),
 	],
 	base: "/Dungeon-Survivor/",
 	server: {
