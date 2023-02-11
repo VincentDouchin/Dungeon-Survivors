@@ -12,8 +12,7 @@ import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import assets from "../Globals/Assets";
-import { easeInCubic } from './../Utils/Tween'
-import { inputManager } from "../Globals/Initialize";
+import { easeInCubic } from './../Utils/Tween';
 
 class PathSystem extends System {
 	constructor() {
@@ -51,15 +50,25 @@ class PathSystem extends System {
 
 					entity.destroy()
 				} else {
-					const arrows = []
+					const arrows: Entity[] = []
 					for (let [direction, otherNodeode] of possibleDirections) {
 
 						const arrow = new Entity('arrow')
-						arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow, arrows.length === 0))
+						arrow.addComponent(new SelectableComponent(
+							assets.UI.arrowselected,
+							assets.UI.arrow,
+							() => {
+								otherNodeode.getComponent(PathNodeComponent).selected = true
+								node.selected = false
+								arrow.destroy()
+								entity.destroy()
+							})
+						)
+
 
 						arrows.push(arrow)
 						entity.addChildren(arrow)
-						const arrowMesh = arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
+						arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
 						Coroutines.add(function* () {
 							let t = 0
@@ -91,16 +100,8 @@ class PathSystem extends System {
 							}; break
 
 						}
-						inputManager.eventBus.subscribe('down', ({ objects }: TouchCoord) => {
-							if (objects.includes(arrowMesh.mesh.id)) {
-								otherNodeode.getComponent(PathNodeComponent).selected = true
-								node.selected = false
-								arrow.destroy()
-								entity.destroy()
-							}
-						})
-
 					}
+					SelectableComponent.setFromArray(arrows)
 				}
 
 				node.showingOptions = true

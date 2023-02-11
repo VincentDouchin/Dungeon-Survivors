@@ -1,6 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { SKILL } from "../Constants/ECSEvents"
-import { clock, inputManager } from "../Globals/Initialize"
 
 import Coroutines from "../Globals/Coroutines"
 import Engine from "../Globals/Engine"
@@ -12,6 +11,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
+import { clock } from "../Globals/Initialize"
 import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
@@ -21,6 +21,7 @@ const SkillMenuEntity = () => {
 
 	skillMenuPosition.moveTo(-2, 0, 30)
 	const possibleSkills = [...SKILLS]
+	const selectors: Entity[] = []
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity('button')
 		const buttonTile = framedTile(assets.UI.frame2, 4, 24, 24)
@@ -28,7 +29,12 @@ const SkillMenuEntity = () => {
 		const selectableEntity = new Entity('selectableEntity')
 		const emptyTile32 = framedTile(assets.UI.empty, 0, 32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
-		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32))
+		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
+			ECS.eventBus.publish<SKILL>(ECSEVENTS.SKILL, skill)
+			skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(GameStates.run))
+		}))
+		selectors.push(selectableEntity)
+
 		selectableEntity.addComponent(new UIPositionComponent())
 		button.addChildren(selectableEntity)
 		button.addComponent(new UIPositionComponent({ x: [-0.5, 0, 0.5][i], y: 0 }))
@@ -54,14 +60,14 @@ const SkillMenuEntity = () => {
 		button.addChildren(text)
 		button.addChildren(icon)
 		skillMenu.addChildren(button)
-		const sub = inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
-			if (uiObjects.includes(buttonMesh.mesh.id)) {
-				inputManager.eventBus.unsubscribe('down', sub)
-				ECS.eventBus.publish<SKILL>(ECSEVENTS.SKILL, skill)
-				skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(GameStates.run))
-			}
-		})
+		// const sub = inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
+		// 	if (uiObjects.includes(buttonMesh.mesh.id)) {
+		// 		inputManager.eventBus.unsubscribe('down', sub)
+
+		// 	}
+		// })
 	}
+	SelectableComponent.setFromArray(selectors)
 
 	return skillMenu
 }
