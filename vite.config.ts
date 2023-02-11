@@ -4,9 +4,22 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	plugins: [
 		VitePWA({
+			injectRegister: 'auto',
 			registerType: 'autoUpdate',
+			includeAssets: ['./assets/icon.png'],
 			manifest: {
-				orientation: 'landscape'
+				orientation: 'landscape',
+				name: 'Dungeon Survivor',
+				short_name: 'Dungeon Survivor',
+				description: 'Dungeon Survivor',
+				theme_color: '#000000',
+				icons: [
+					{
+						src: 'p./assets/icon.png',
+						sizes: '64x64',
+						type: 'image/png'
+					}
+				]
 			}
 		})
 	],
