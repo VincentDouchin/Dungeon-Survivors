@@ -26,9 +26,8 @@ export default defineConfig({
 		// 	},
 		// })
 		VitePWA({
-			mode: 'development',
-			base: '/',
-			/* buildBase: '/test-build-base/', */
+			base: '/Dungeon-Survivor/',
+			// buildBase: '/Dungeon-Survivor/',
 			strategies: 'injectManifest',
 			registerType: 'autoUpdate',
 			includeAssets: ['favicon.svg'],
@@ -59,10 +58,6 @@ export default defineConfig({
 			},
 			injectManifest: {
 				injectionPoint: undefined,
-			},
-			devOptions: {
-				enabled: process.env.SW_DEV === 'true',
-				type: 'module',
 			},
 		}),
 	],
