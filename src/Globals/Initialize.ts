@@ -6,6 +6,7 @@ import AssetLoader from "./../Utils/AssetLoader"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
+import GamepadController from "../InputControllers/GamepadController"
 import InputManager from "./InputManager"
 import KeyboardController from "../InputControllers/KeyboardController"
 import LDTKMap from "../Utils/LDTKMap"
@@ -171,10 +172,8 @@ const render = () => {
 //! Inputs
 const inputManager = new InputManager(renderer.domElement, [MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, AXISX, AXISY, INTERACT, PAUSE, SWITCH])
 inputManager.registerControllers(KeyboardController)
-//@ts-ignore
-if (navigator.userAgentData.mobile) {
-	inputManager.registerControllers(TouchController)
-}
+inputManager.registerControllers(GamepadController)
+inputManager.registerControllers(TouchController)
 
 export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, assets, clock, lightScene }
 
