@@ -28,7 +28,6 @@ const TimeCounterEntity = () => {
 				ECS.eventBus.publish<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, State.timer % 120)
 			}
 		}
-		console.log('stop timer')
 	})
 	return timer
 }

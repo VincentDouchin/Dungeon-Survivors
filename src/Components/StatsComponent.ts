@@ -35,7 +35,6 @@ class StatsComponent extends Component {
 	}
 	updateStats(level: number) {
 		this.stats.forEach(stat => stat.level = level)
-		console.log(level)
 	}
 
 	updateXP(amount: number) {
