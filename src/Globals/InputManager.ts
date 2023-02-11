@@ -1,7 +1,7 @@
-
 import { Raycaster, Vector3 } from "three";
+import { UICamera, UIScene, camera, scene } from "./Initialize";
+
 import EventBus from "../Utils/EventBus";
-import { camera, scene, UICamera, UIScene } from "./Initialize";
 
 class Input {
 	active = 0
@@ -14,7 +14,9 @@ class Input {
 		return false
 	}
 }
-
+export interface InputController {
+	eventBus: EventBus
+}
 class InputManager {
 	eventBus = new EventBus()
 	controllers: InputController[] = []
