@@ -9,7 +9,6 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
-import Coroutines from "../Globals/Coroutines"
 import Engine from "../Globals/Engine"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
@@ -62,7 +61,6 @@ class RunState implements GameState {
 		ShootingSystem.register()
 		TargetingSystem.register()
 		CameraSystem.register()
-		Coroutines.resume()
 		RenderSystem.register()
 		SwitchingSystem.register()
 		FlockingSystem.register()
@@ -96,7 +94,6 @@ class RunState implements GameState {
 	unset(newState?: GameStates) {
 		ECS.unRegisterSystems()
 		inputManager.disable('dpad')
-		Coroutines.stop()
 		this.ui?.destroy()
 		switch (newState) {
 			case GameStates.map: {
