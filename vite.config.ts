@@ -15,12 +15,12 @@ export default defineConfig({
 				theme_color: '#000000',
 				icons: [
 					{
-						src: 'p./assets/icon.png',
+						src: './assets/icon.png',
 						sizes: '64x64',
 						type: 'image/png'
 					}
 				]
-			}
+			},
 		})
 	],
 	base: "/Dungeon-Survivor/",
