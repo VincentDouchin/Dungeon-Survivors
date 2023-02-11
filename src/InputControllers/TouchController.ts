@@ -2,6 +2,7 @@ import { AXISX, AXISY } from "../Constants/InputsNames"
 
 import { Entity } from "../Globals/ECS"
 import EventBus from "../Utils/EventBus"
+import { InputController } from "../Globals/InputManager"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import { assets } from "../Globals/Initialize"
@@ -72,7 +73,9 @@ class TouchController implements InputController {
 	enabledInputs: Map<string, TouchInput> = new Map()
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
+
 		this.eventBus.subscribe('enable', (input: string) => {
+			if (navigator.userAgentData?.mobile === false) return
 			this.enabledInputs.set(input, new this.inputs[input](eventBus))
 		})
 		this.eventBus.subscribe('disable', (input: string) => {
@@ -81,6 +84,7 @@ class TouchController implements InputController {
 		})
 
 	}
+
 
 }
 export default TouchController
