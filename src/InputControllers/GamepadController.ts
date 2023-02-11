@@ -1,4 +1,4 @@
-import { AXISX, AXISY, PAUSE } from "../Constants/InputsNames";
+import INPUTS, { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, VALIDATE } from "../Constants/InputsNames";
 
 import Coroutines from "../Globals/Coroutines";
 import EventBus from "../Utils/EventBus";
@@ -10,6 +10,14 @@ class GamepadController implements InputController {
 	enabled = false
 	threshold = 0.4
 	gamepad: Gamepad | null = null
+	inputs: Record<string, number> = {
+		[PAUSE]: 9,
+		[VALIDATE]: 0,
+		[MOVEUP]: 12,
+		[MOVEDOWN]: 13,
+		[MOVELEFT]: 14,
+		[MOVERIGHT]: 15,
+	}
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
 		if (navigator.getGamepads()[0] !== null) {
@@ -42,11 +50,14 @@ class GamepadController implements InputController {
 				} else {
 					self.eventBus.publish(AXISY, 0)
 				}
-				if (gamepad.buttons[9].pressed) {
-					self.eventBus.publish(PAUSE, true)
-					yield* waitFor(10)
-					self.eventBus.publish(PAUSE, false)
+				for (let [input, button] of Object.entries(self.inputs)) {
+					if (gamepad.buttons[button].pressed) {
+						self.eventBus.publish(input, true)
+						yield* waitFor(10)
+						self.eventBus.publish(input, false)
+					}
 				}
+
 				yield
 			}
 			console.log('stopped')
