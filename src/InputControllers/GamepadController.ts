@@ -1,8 +1,8 @@
-import INPUTS, { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, VALIDATE } from "../Constants/InputsNames";
+import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, VALIDATE } from "../Constants/InputsNames";
 
 import Coroutines from "../Globals/Coroutines";
 import EventBus from "../Utils/EventBus";
-import { InputController } from "../Globals/InputManager"
+import { InputController } from "../Globals/InputManager";
 import waitFor from "../Utils/WaitFor";
 
 class GamepadController implements InputController {
