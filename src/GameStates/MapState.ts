@@ -17,6 +17,7 @@ import PathSystem from "../Systems/PathSystem";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
+import SelectionSystem from "../Systems/SelectionSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
 import assets from "../Globals/Assets"
@@ -55,6 +56,7 @@ class MapState implements GameState {
 		MovementSystem.register()
 		PathSystem.register()
 		RenderSystem.register()
+		SelectionSystem.register()
 		this.map = new Entity('map')
 		this.map.addComponent(new SpriteComponent(mapTile))
 		this.map.addComponent(new PositionComponent(0, 0))

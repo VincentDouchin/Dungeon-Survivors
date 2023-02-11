@@ -5,6 +5,7 @@ import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
 import { INTERACT } from "../Constants/InputsNames"
 import RenderSystem from "../Systems/RenderSystem"
+import SelectionSystem from "../Systems/SelectionSystem"
 import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
 
 class LevelUpState implements GameState {
@@ -23,8 +24,9 @@ class LevelUpState implements GameState {
 		render()
 	}
 	set() {
-		this.ui = SkillMenuUIEntity()
 		RenderSystem.register()
+		SelectionSystem.register()
+		this.ui = SkillMenuUIEntity()
 	}
 	unset() {
 		this.ui?.destroy()
