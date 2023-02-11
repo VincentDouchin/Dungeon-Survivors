@@ -22,7 +22,10 @@
       "troika-three-text": [
         "./troika-three-text.d.ts"
       ]
-    }
+    },
+    "types": [
+      "./node_modules/user-agent-data-types"
+    ]
   },
   "include": [
     "src"
