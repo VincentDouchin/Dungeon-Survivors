@@ -22,6 +22,7 @@ class SpriteComponent extends Component {
 	shaderPasses: Map<string, ShaderPass> = new Map()
 	mesh: Mesh
 	opacity: number
+	renderShader?: ShaderPass
 	uniformsKeys: Record<string, string> = {}
 	uniforms = new Proxy<any>(this, {
 		get(target, prop) {
@@ -53,7 +54,7 @@ class SpriteComponent extends Component {
 
 		this.texture = this.renderTarget.texture
 		this.baseTexture = new Uniform(tile.textures[0])
-		this.addShader(new RenderShader(tile.textures[0]), false)
+		this.renderShader = this.addShader(new RenderShader(tile.textures[0]), false)
 		newOptions.shaders.forEach(shaderConstructor => {
 			this.addShader(shaderConstructor, false)
 		})
@@ -80,6 +81,7 @@ class SpriteComponent extends Component {
 		this.effectComposer.insertPass(pass, 1)
 		this.effectComposer.insertPass(new ShaderPass(CopyShader), 2)
 		if (render) this.render()
+		return pass
 	}
 	removeShader(shaderConstructor: Constructor<Shader>) {
 		const pass = this.shaderPasses.get(shaderConstructor.name)

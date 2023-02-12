@@ -12,6 +12,7 @@ class AnimationSystem extends System {
 			const animation = entity.getComponent(AnimationComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			animation.frameCounter++
+			const selectedFrame = animation.selectedFrame
 			if (animation.start) {
 				if (animation.frameCounter > animation.frameRate) {
 					animation.frameCounter = 0
@@ -23,9 +24,11 @@ class AnimationSystem extends System {
 					animation.selectedFrame = 0
 				}
 			}
-
+			if (selectedFrame != animation.selectedFrame && sprite.renderShader) {
+				sprite.renderShader.uniforms.uTexture.value = animation.tile.textures[animation.selectedFrame]
+				sprite.render()
+			}
 			sprite.texture.repeat.x = (animation.flipped ? -1 : 1)
-			sprite.uniforms.uTexture = animation.tile.textures[animation.selectedFrame]
 		})
 	}
 }
