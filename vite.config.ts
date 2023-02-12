@@ -4,6 +4,8 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	plugins: [
 		VitePWA({
+			registerType: 'autoUpdate',
+			injectRegister: 'auto',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
 			manifest: {
 				name: 'Dungeon Survivor',
