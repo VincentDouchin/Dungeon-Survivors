@@ -9,10 +9,6 @@ export default defineConfig({
 		VitePWA({
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
 			registerType: 'autoUpdate',
-			// devOptions: {
-			// enabled: true,
-			// type: 'module',
-			// },
 			manifest: {
 				name: 'Dungeon Survivor',
 				short_name: 'DungeonSurvivor',
