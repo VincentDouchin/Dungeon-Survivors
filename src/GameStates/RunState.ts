@@ -34,7 +34,7 @@ class RunState implements GameState {
 	background?: Entity
 	player?: Entity
 	stats = new StatsComponent(0, true)
-	encounter?: Encounter
+	encounter: Encounter | null = null
 	constructor() {
 	}
 
@@ -76,15 +76,14 @@ class RunState implements GameState {
 			case GameStates.levelUp: {
 				this.encounter?.resume()
 			}; break
-			default: {
-
+			case GameStates.map: {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
 				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
 				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats))
 
-				this.encounter ??= ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
+				this.encounter ??= ENEMYWAVES[options?.enemies ?? 'DEMONS']!.start()
 
 
 			}; break
@@ -111,6 +110,7 @@ class RunState implements GameState {
 				this.background?.destroy()
 				this.ui?.destroy()
 				this.player?.destroy()
+				this.encounter = null
 			}; break
 		}
 	}
