@@ -20,7 +20,7 @@ const Coroutines: {
 	},
 	run() {
 		for (let i = this.coroutines.length - 1; i >= 0; i--) {
-			if (this.coroutines[i].state == 'stopped') return
+			if (this.coroutines[i].state == 'stopped') continue
 			const { done } = this.coroutines[i].generator.next()
 			if (done) {
 				this.coroutines.splice(i, 1)
