@@ -26,7 +26,7 @@ export default defineConfig({
 		// 	},
 		// })
 		VitePWA({
-			includeAssets: ['./assets/favicons/favicon.ico', './assets/favicons/apple-touch-icon.png', './assets/favicons/masked-icon.svg'],
+			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
 			registerType: 'autoUpdate',
 			manifest: {
 				name: 'Dungeon Survivor',
@@ -36,17 +36,17 @@ export default defineConfig({
 				orientation: 'landscape',
 				icons: [
 					{
-						src: './assets/favicons/pwa-192x192.png',
+						src: 'pwa-192x192.png',
 						sizes: '192x192',
 						type: 'image/png'
 					},
 					{
-						src: './assets/favicons/pwa-512x512.png',
+						src: 'pwa-512x512.png',
 						sizes: '512x512',
 						type: 'image/png'
 					},
 					{
-						src: './assets/favicons/pwa-512x512.png',
+						src: 'pwa-512x512.png',
 						sizes: '512x512',
 						type: 'image/png',
 						purpose: 'any maskable'
