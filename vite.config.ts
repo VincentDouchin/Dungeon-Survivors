@@ -26,39 +26,34 @@ export default defineConfig({
 		// 	},
 		// })
 		VitePWA({
-			base: '/Dungeon-Survivor/',
-			// buildBase: '/Dungeon-Survivor/',
-			strategies: 'injectManifest',
+			includeAssets: ['./assets/favicons/favicon.ico', './assets/favicons/apple-touch-icon.png', './assets/favicons/masked-icon.svg'],
 			registerType: 'autoUpdate',
-			includeAssets: ['favicon.svg'],
-			filename: 'custom-sw.ts',
-			srcDir: 'src',
 			manifest: {
-				name: 'PWA Router',
-				short_name: 'PWA Router',
-				theme_color: '#ffffff',
+				name: 'Dungeon Survivor',
+				short_name: 'DungeonSurvivor',
+				description: 'Dungeon Survivor',
+				theme_color: '#000000',
+				orientation: 'landscape',
 				icons: [
 					{
-						src: 'pwa-192x192.png', // <== don't add slash, for testing
+						src: './assets/favicons/pwa-192x192.png',
 						sizes: '192x192',
-						type: 'image/png',
+						type: 'image/png'
 					},
 					{
-						src: '/pwa-512x512.png', // <== don't remove slash, for testing
+						src: './assets/favicons/pwa-512x512.png',
 						sizes: '512x512',
-						type: 'image/png',
+						type: 'image/png'
 					},
 					{
-						src: 'pwa-512x512.png', // <== don't add slash, for testing
+						src: './assets/favicons/pwa-512x512.png',
 						sizes: '512x512',
 						type: 'image/png',
-						purpose: 'any maskable',
-					},
-				],
-			},
-			injectManifest: {
-				injectionPoint: undefined,
-			},
+						purpose: 'any maskable'
+					}
+				]
+			}
+
 		}),
 	],
 	base: "/Dungeon-Survivor/",
