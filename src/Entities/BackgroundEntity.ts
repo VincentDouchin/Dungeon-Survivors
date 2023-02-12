@@ -41,10 +41,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const addSubscriber = ECS.eventBus.subscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
 		background.addChildren(entity)
 	})
-	background.onDestroy(() => {
-		ECS.eventBus.unsubscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, cameraSubscriber)
-		ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
-	})
+
 	State.cameraBounds = {
 		left: backgroundDefinition.infinite.x ? undefined : -width / 2,
 		right: backgroundDefinition.infinite.x ? undefined : width / 2,
@@ -79,14 +76,22 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 
 
 		}
+		let leafing = true
+
+		background.onDestroy(() => {
+			ECS.eventBus.unsubscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, cameraSubscriber)
+			ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
+			leafing = false
+		})
 		Coroutines.add(function* () {
-			while (background) {
+			while (leafing) {
+
 				yield* waitFor(Math.random() * 10 + 50)
 				for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
 					leafEntity()
 				}
-
 			}
+			return
 		})
 	}
 	// ! WALLS
