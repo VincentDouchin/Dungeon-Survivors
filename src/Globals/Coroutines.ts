@@ -1,17 +1,17 @@
-interface Coroutine {
+export interface Coroutine {
 	generator: Generator
 	state: 'running' | 'stopped'
 }
 const Coroutines: {
 	coroutines: Coroutine[],
-	add: (fn: () => Generator) => void,
+	add: (fn: () => Generator) => Coroutine,
 	run: () => void,
 	stop: () => void,
 	resume: () => void,
 } = {
 
 	coroutines: [],
-	add(fn: () => Generator) {
+	add(fn: () => Generator): Coroutine {
 		const generator = fn()
 		generator.next()
 		const coroutine: Coroutine = { generator, state: 'running' }

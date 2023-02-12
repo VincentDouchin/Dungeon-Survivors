@@ -9,6 +9,7 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
+import Encounter from "../Game/Encounter"
 import Engine from "../Globals/Engine"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
@@ -33,6 +34,7 @@ class RunState implements GameState {
 	background?: Entity
 	player?: Entity
 	stats = new StatsComponent(0, true)
+	encounter?: Encounter
 	constructor() {
 	}
 
@@ -69,10 +71,10 @@ class RunState implements GameState {
 		this.ui = UIRunEntity()
 		switch (oldState) {
 			case GameStates.pause: {
-
+				this.encounter?.resume()
 			}; break
 			case GameStates.levelUp: {
-
+				this.encounter?.resume()
 			}; break
 			default: {
 
@@ -81,7 +83,10 @@ class RunState implements GameState {
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
 				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
 				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats))
-				ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
+
+				this.encounter ??= ENEMYWAVES[options?.enemies ?? 'DEMONS']?.start()
+
+
 			}; break
 		}
 		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
@@ -96,6 +101,12 @@ class RunState implements GameState {
 		inputManager.disable('dpad')
 		this.ui?.destroy()
 		switch (newState) {
+			case GameStates.levelUp: {
+				this.encounter?.pause()
+			}; break
+			case GameStates.pause: {
+				this.encounter?.pause()
+			}; break
 			case GameStates.map: {
 				this.background?.destroy()
 				this.ui?.destroy()

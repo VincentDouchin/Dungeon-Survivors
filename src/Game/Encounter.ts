@@ -1,7 +1,7 @@
+import Coroutines, { Coroutine } from "../Globals/Coroutines";
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 
-import Coroutines from "../Globals/Coroutines";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
@@ -22,6 +22,7 @@ class Encounter {
 	started = false
 	subscriber: EventCallBack<Entity>
 	levelSubscriber: EventCallBack<number>
+	coroutine?: Coroutine
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
@@ -110,11 +111,10 @@ class Encounter {
 		return this
 	}
 	stop() {
+		console.log('stop')
 		const self = this
 		this.started = false
 		this.waves.push(function* () {
-
-			yield
 			yield
 			ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, self.subscriber)
 			ECS.eventBus.unsubscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, self.levelSubscriber)
@@ -123,14 +123,26 @@ class Encounter {
 		})
 		return this
 	}
+	pause() {
+		console.log('pause')
+		if (!this.coroutine) return
+		this.coroutine.state = 'stopped'
+	}
+	resume() {
+		console.log('resume')
+		if (!this.coroutine) return
+		this.coroutine.state = 'running'
+	}
 	start() {
+		console.log('start')
 		this.started = true
 		const self = this
-		Coroutines.add(function* () {
+		this.coroutine = Coroutines.add(function* () {
 			for (let wave of self.waves) {
 				yield* wave()
 			}
 		})
+		return this
 	}
 }
 export default Encounter
