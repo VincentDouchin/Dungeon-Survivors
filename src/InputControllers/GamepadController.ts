@@ -60,7 +60,6 @@ class GamepadController implements InputController {
 
 				yield
 			}
-			console.log('stopped')
 		})
 	}
 
