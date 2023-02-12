@@ -461,7 +461,7 @@ const Enemies: Record<string, EnemyType> = {
 	alchemist: {
 		tiles: {
 			idle: assets.npc.Alchemist_Idle,
-			run: assets.npc.Archer_Walk,
+			run: assets.npc.Alchemist_Walk,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
