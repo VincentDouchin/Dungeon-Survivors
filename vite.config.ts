@@ -6,28 +6,13 @@ export default defineConfig({
 		__DATE__: `'${new Date().toISOString()}'`,
 	},
 	plugins: [
-		// VitePWA({
-		// 	injectRegister: 'auto',
-		// 	registerType: 'autoUpdate',
-		// 	includeAssets: ['./assets/icon.png'],
-		// 	manifest: {
-		// 		orientation: 'landscape',
-		// 		name: 'Dungeon Survivor',
-		// 		short_name: 'Dungeon Survivor',
-		// 		description: 'Dungeon Survivor',
-		// 		theme_color: '#000000',
-		// 		icons: [
-		// 			{
-		// 				src: './assets/icon.png',
-		// 				sizes: '64x64',
-		// 				type: 'image/png'
-		// 			}
-		// 		]
-		// 	},
-		// })
 		VitePWA({
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
 			registerType: 'autoUpdate',
+			// devOptions: {
+			// enabled: true,
+			// type: 'module',
+			// },
 			manifest: {
 				name: 'Dungeon Survivor',
 				short_name: 'DungeonSurvivor',
