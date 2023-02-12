@@ -4,7 +4,10 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	plugins: [
 		VitePWA({
-			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+			injectManifest: {
+				injectionPoint: undefined,
+			},
+			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'favicon.svg'],
 			manifest: {
 				name: 'Dungeon Survivor',
 				short_name: 'DungeonSurvivor',
@@ -28,7 +31,8 @@ export default defineConfig({
 						type: 'image/png',
 						purpose: 'any maskable'
 					}
-				]
+				],
+
 			}
 
 		}),
