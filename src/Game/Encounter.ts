@@ -111,7 +111,6 @@ class Encounter {
 		return this
 	}
 	stop() {
-		console.log('stop')
 		const self = this
 		this.started = false
 		this.waves.push(function* () {
@@ -124,17 +123,14 @@ class Encounter {
 		return this
 	}
 	pause() {
-		console.log('pause')
 		if (!this.coroutine) return
 		this.coroutine.state = 'stopped'
 	}
 	resume() {
-		console.log('resume')
 		if (!this.coroutine) return
 		this.coroutine.state = 'running'
 	}
 	start() {
-		console.log('start')
 		this.started = true
 		const self = this
 		this.coroutine = Coroutines.add(function* () {
