@@ -26,7 +26,8 @@
    { "name": "poison", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 207, "w": 16, "h": 17 } }] },
    { "name": "slow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 224, "w": 16, "h": 16 } }] },
    { "name": "curse", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 224, "w": 16, "h": 16 } }] },
-   { "name": "bleed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] }
+   { "name": "bleed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] },
+   { "name": "gem", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 912, "w": 16, "h": 16 } }] }
   ]
  }
 }
