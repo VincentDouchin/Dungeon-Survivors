@@ -1,8 +1,34 @@
+import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from "vite";
 
 export default defineConfig({
 	plugins: [
-
+		VitePWA({
+			registerType: 'autoUpdate',
+			injectRegister: 'auto',
+			includeAssets: ['/favicon.ico', '/apple-touch-icon.png'],
+			manifest: {
+				name: 'Dungeon Survivor',
+				short_name: 'DungeonSurvivor',
+				description: 'Dungeon Survivor',
+				theme_color: '#000000',
+				icons: [
+					{
+						src: '/pwa-192x192.png',
+						sizes: '192x192',
+						type: 'image/png'
+					},
+					{
+						src: '/pwa-512x512.png',
+						sizes: '512x512',
+						type: 'image/png'
+					}
+				]
+			},
+			devOptions: {
+				enabled: true
+			}
+		})
 	],
 	base: "/Dungeon-Survivor/",
 	build: {
