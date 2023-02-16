@@ -13,6 +13,7 @@ import ShadowComponent from "../Components/ShadowComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
+import TokenEntity from "./TokenEntity"
 import WeaponEntity from "./WeaponEntity"
 import XPEntity from "./XPEntity"
 
@@ -27,7 +28,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	enemy.addComponent(new AnimationComponent(type.tiles))
 	enemy.addComponent(new DamageComponent((type.damage ?? 1), [COLLISIONGROUPS.PLAYER], -1, 20))
 	enemy.addComponent(new HealthComponent(type.health * (berserk ? 1.5 : 1), COLLISIONGROUPS.ENEMY))
-	enemy.addComponent(new DroppableComponent(Math.random() < 0.01 ? PotionEntity : XPEntity))
+	enemy.addComponent(new DroppableComponent(Math.random() < 0.05 ? TokenEntity : Math.random() < 0.01 ? PotionEntity : XPEntity))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
 	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER, type.charger ? 100 : 0, type.charger))
 	enemy.addComponent(new ShadowComponent(type.size.width, 6, tile.height / 2))
