@@ -1,4 +1,4 @@
-import { Clock, Mesh, MeshStandardMaterial, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderer } from "three"
+import { AmbientLight, Clock, Color, Mesh, MeshStandardMaterial, MultiplyBlending, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
@@ -58,7 +58,7 @@ const camera = createCamera()
 //! Scenes
 const UIScene = new Scene()
 const scene = new Scene()
-// scene.background = new Color(0x444444)
+
 
 //! Lights
 const lightScene = new Scene()
@@ -68,7 +68,7 @@ const background = new Mesh(
 )
 background.position.set(0, 0, 0)
 lightScene.add(background)
-
+const lightsTarget = new WebGLRenderTarget(window.innerWidth, window.innerHeight, { minFilter: NearestFilter, magFilter: NearestFilter })
 const composer = new EffectComposer(renderer)
 const vignette = new ShaderMaterial({
 	transparent: true,
@@ -91,10 +91,34 @@ const vignette = new ShaderMaterial({
 
 })
 composer.addPass(new ShaderPass(vignette))
+composer.addPass(new ShaderPass(new ShaderMaterial({
+	transparent: true,
+	blending: MultiplyBlending,
+	uniforms: {
+		lightsTexture: new Uniform(lightsTarget.texture)
+	},
+	vertexShader:/*glsl*/`
+	varying vec2 vUv;
+	void main() {
+		vUv = uv;
+		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+		gl_Position = projectionMatrix * modelViewPosition;
+	}`,
+	fragmentShader:/*glsl*/`
+	varying vec2 vUv;
+	uniform sampler2D  lightsTexture;
+	uniform sampler2D  tDiffuse;
+	void main() {
+		gl_FragColor =  texture2D(lightsTexture,vUv);
+	}`
+})))
 
 //! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
+	renderer.setRenderTarget(lightsTarget)
+	renderer.render(lightScene, camera)
+	renderer.setRenderTarget(null)
 	renderer.render(scene, camera)
 	composer.render()
 	renderer.clearDepth()
