@@ -6,6 +6,7 @@ import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import Tile from "../Utils/Tile"
 import arenasSource from './../../assets/map/Arenas.json'
+import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
@@ -61,7 +62,8 @@ const assets: {
 	effects: {
 		Leaf: Tile.fromImage(await AssetLoader.loadImage(leafSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
 		Spark: Tile.fromImage(await AssetLoader.loadImage(sparkSource), ({ buffer }) => ({ buffer, width: 10, frames: 7 })),
-		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 }))
+		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 })),
+		Aura: Tile.fromImage(await AssetLoader.loadImage(auraSource), ({ buffer }) => ({ buffer, width: 32, frames: 4 })),
 	},
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
 	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),
