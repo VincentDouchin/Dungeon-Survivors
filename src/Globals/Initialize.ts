@@ -1,4 +1,4 @@
-import { AmbientLight, Clock, Color, Mesh, MeshStandardMaterial, MultiplyBlending, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
+import { Clock, Mesh, MeshStandardMaterial, MultiplyBlending, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
