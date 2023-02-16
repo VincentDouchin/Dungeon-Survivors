@@ -8,5 +8,6 @@ export const PAUSE = 'Escape'
 export const AXISX = 'axisX'
 export const AXISY = 'axisY'
 export const SWITCH = 'switch'
-const INPUTS = [INTERACT, MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, PAUSE, AXISX, AXISY, SWITCH, VALIDATE]
+export const SKILL = 'skill'
+const INPUTS = [INTERACT, MOVEUP, MOVEDOWN, MOVELEFT, MOVERIGHT, PAUSE, AXISX, AXISY, SWITCH, VALIDATE, SKILL]
 export default INPUTS

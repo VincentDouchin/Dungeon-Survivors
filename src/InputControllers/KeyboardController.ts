@@ -1,4 +1,4 @@
-import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SWITCH, VALIDATE } from "../Constants/InputsNames"
+import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SKILL, SWITCH, VALIDATE } from "../Constants/InputsNames"
 
 import EventBus from "../Utils/EventBus"
 import { InputController } from "../Globals/InputManager"
@@ -14,7 +14,8 @@ class KeyboardController implements InputController {
 		'Escape': PAUSE,
 		'ShiftLeft': SWITCH,
 		'Enter': VALIDATE,
-		'Space': VALIDATE
+		'Space': VALIDATE,
+		'KeyP': SKILL
 
 	}
 	constructor(eventBus: EventBus) {
