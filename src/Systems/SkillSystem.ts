@@ -15,7 +15,7 @@ class SkillSystem extends System {
 			if (inputManager.getInput(SKILL)?.once) {
 				const position = entity.getComponent(PositionComponent)
 
-				const spell = DivineProtectionEntity(position.position)
+				DivineProtectionEntity(position.position)
 			}
 		})
 	}
