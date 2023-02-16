@@ -18,6 +18,7 @@ class StatsComponent extends Component {
 	xp = 0
 	level = 0
 	nextLevel = 20
+	tokens = 0
 	linked: boolean
 	constructor(level = 0, linked = false) {
 		super()
