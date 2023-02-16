@@ -8,6 +8,9 @@ export default defineConfig({
 			injectRegister: 'auto',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
 			manifest: {
+				start_url: "index.html?fullscreen=true",
+				display: "fullscreen",
+				orientation: 'landscape',
 				name: 'Dungeon Survivor',
 				short_name: 'DungeonSurvivor',
 				description: 'Dungeon Survivor',
