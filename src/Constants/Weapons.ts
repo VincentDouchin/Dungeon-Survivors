@@ -16,6 +16,7 @@ export interface WeaponDefinition {
 	group: number
 	target: number,
 	rotationSpeed?: number
+	light?: string
 }
 const WEAPONS: Record<string, WeaponDefinition> = {
 	knife: {
@@ -153,7 +154,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		projectilesNb: 3,
 		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY
+		target: COLLISIONGROUPS.ENEMY,
+		light: 'hsl(39, 30%, 20%)'
 	},
 	staffGem: {
 		tile: assets.tiles.weapon_green_magic_staff,
@@ -162,7 +164,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		projectile: assets.tiles.flame,
 		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY
+		target: COLLISIONGROUPS.ENEMY,
+
 	},
 	bow: {
 		tile: assets.tiles.weapon_bow,
@@ -193,7 +196,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
 		range: 200,
-		speed: 300
+		speed: 300,
 	},
 	bone: {
 		tile: assets.UI.empty,
