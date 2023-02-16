@@ -1,8 +1,10 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
+import { Color } from "three"
 import Coroutines from "../Globals/Coroutines"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
+import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
@@ -16,12 +18,17 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 	if (tile.frames > 1) {
 		projectile.addComponent(new AnimationComponent({ idle: tile }))
 	}
-	projectile.addComponent(new BodyComponent(
-		{ moveForce: projectileDefinition.speed },
-		[
-			{ mass: 0.1, group: projectileDefinition.group, contact: true, sensor: true, canCollideWith: [projectileDefinition.target], width: tile.width, height: tile.height }
-		]
-	))
+	if (projectileDefinition)
+		projectile.addComponent(new BodyComponent(
+			{ moveForce: projectileDefinition.speed },
+			[
+				{ mass: 0.1, group: projectileDefinition.group, contact: true, sensor: true, canCollideWith: [projectileDefinition.target], width: tile.width, height: tile.height }
+			]
+		))
+	if (projectileDefinition.light) {
+
+		projectile.addComponent(new LightComponent(new Color(projectileDefinition.light), 50))
+	}
 	projectile.addComponent(new DamageComponent(projectileDefinition.damage.value, [projectileDefinition.target], 1))
 	projectile.addComponent(new PositionComponent(position.x, position.y))
 	const rotationComponent = projectile.addComponent(new RotationComponent(rotation, 0))
