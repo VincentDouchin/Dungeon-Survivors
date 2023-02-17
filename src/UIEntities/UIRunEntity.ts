@@ -10,6 +10,7 @@ const UIRunEntity = () => {
 	level.addChildren(XPBarEntity())
 	ui.addChildren(PauseButtonEntity())
 	ui.addChildren(TimeCounterEntity())
+	// ui.addChildren(SwitchButtonEntity())
 	return ui
 }
 export default UIRunEntity

@@ -21,6 +21,7 @@ import MovementSystem from "../Systems/MovementSystem"
 import { PAUSE } from "../Constants/InputsNames"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
+import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import SkillSystem from "../Systems/SkillSystem"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
@@ -72,6 +73,7 @@ class RunState implements GameState {
 		SkillSystem.register()
 		BackgroundElementSpawnerSystem.register()
 		ExpirationSystem.register()
+		SelectionSystem.register()
 		this.ui = UIRunEntity()
 		switch (oldState) {
 			case GameStates.pause: {

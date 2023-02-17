@@ -1,5 +1,5 @@
 { "frames": {
-   "GUI.png": {
+   "GUI.ase": {
     "frame": { "x": 0, "y": 0, "w": 401, "h": 304 },
     "rotated": false,
     "trimmed": false,
@@ -17,7 +17,9 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "XPBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 134, "y": 20, "w": 52, "h": 7 } }] },
@@ -36,7 +38,8 @@
    { "name": "button", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 80, "w": 16, "h": 16 } }] },
    { "name": "buttonpressed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 80, "w": 16, "h": 16 } }] },
    { "name": "pauseicon", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 80, "w": 16, "h": 16 } }] },
-   { "name": "arrowselected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 32, "w": 16, "h": 16 } }] }
+   { "name": "arrowselected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 32, "w": 16, "h": 16 } }] },
+   { "name": "character", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 133, "y": 68, "w": 7, "h": 6 } }] }
   ]
  }
 }

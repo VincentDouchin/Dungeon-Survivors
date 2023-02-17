@@ -26,7 +26,6 @@ class SelectionSystem extends System {
 		for (const entity of entities) {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
-
 			if (this.hovered.includes(sprite?.mesh.id)) {
 				this.selectedEntity = entity
 			}
