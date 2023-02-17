@@ -4,12 +4,12 @@ import { Color } from "three"
 import Coroutines from "../Globals/Coroutines"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
+import ExpirationComponent from "../Components/ExpirationComponent"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import waitFor from "../Utils/WaitFor"
 
 const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 	const projectile = new Entity('projectile')
@@ -42,10 +42,7 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 			}
 		})
 	}
-	Coroutines.add(function* () {
-		yield* waitFor(projectileDefinition.range)
-		projectile.destroy()
-	})
+	projectile.addComponent(new ExpirationComponent(projectileDefinition.range))
 	return projectile
 }
 export default ProjectileEntity

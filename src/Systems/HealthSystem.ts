@@ -7,6 +7,7 @@ import BodyComponent from "../Components/BodyComponent";
 import ColorShader from "../Shaders/ColorShader";
 import Coroutines from "../Globals/Coroutines";
 import DamageComponent from "../Components/DamageComponent";
+import ExpirationComponent from "../Components/ExpirationComponent";
 import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
@@ -67,6 +68,7 @@ class HealthSystem extends System {
 						ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
 						const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(assets.UI.empty))
+						damageText.addComponent(new ExpirationComponent(120))
 						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
 						Coroutines.add(function* () {
 							let counter = 0
@@ -77,9 +79,7 @@ class HealthSystem extends System {
 								textSprite.mesh.outlineOpacity = easeOutExpo(counter, 1, 0, 120)
 								yield
 							}
-							damageText.destroy()
 							return
-
 						})
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()

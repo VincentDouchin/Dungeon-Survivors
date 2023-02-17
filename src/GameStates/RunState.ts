@@ -11,6 +11,7 @@ import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
 import Encounter from "../Game/Encounter"
 import Engine from "../Globals/Engine"
+import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
 import HEROS from "../Constants/Heros"
@@ -70,6 +71,7 @@ class RunState implements GameState {
 		StatUpdateSystem.register()
 		SkillSystem.register()
 		BackgroundElementSpawnerSystem.register()
+		ExpirationSystem.register()
 		this.ui = UIRunEntity()
 		switch (oldState) {
 			case GameStates.pause: {
@@ -78,8 +80,8 @@ class RunState implements GameState {
 			case GameStates.levelUp: {
 				this.encounter?.resume()
 			}; break
-			// case GameStates.map: {
-			default: {
+			case GameStates.map: {
+				// default: {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
