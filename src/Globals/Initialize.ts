@@ -90,27 +90,27 @@ const vignette = new ShaderMaterial({
 
 })
 composer.addPass(new ShaderPass(vignette))
-composer.addPass(new ShaderPass(new ShaderMaterial({
-	transparent: true,
-	blending: MultiplyBlending,
-	uniforms: {
-		lightsTexture: new Uniform(lightsTarget.texture)
-	},
-	vertexShader:/*glsl*/`
-	varying vec2 vUv;
-	void main() {
-		vUv = uv;
-		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
-		gl_Position = projectionMatrix * modelViewPosition;
-	}`,
-	fragmentShader:/*glsl*/`
-	varying vec2 vUv;
-	uniform sampler2D  lightsTexture;
-	uniform sampler2D  tDiffuse;
-	void main() {
-		gl_FragColor =  texture2D(lightsTexture,vUv);
-	}`
-})))
+// composer.addPass(new ShaderPass(new ShaderMaterial({
+// 	transparent: true,
+// 	blending: MultiplyBlending,
+// 	uniforms: {
+// 		lightsTexture: new Uniform(lightsTarget.texture)
+// 	},
+// 	vertexShader:/*glsl*/`
+// 	varying vec2 vUv;
+// 	void main() {
+// 		vUv = uv;
+// 		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+// 		gl_Position = projectionMatrix * modelViewPosition;
+// 	}`,
+// 	fragmentShader:/*glsl*/`
+// 	varying vec2 vUv;
+// 	uniform sampler2D  lightsTexture;
+// 	uniform sampler2D  tDiffuse;
+// 	void main() {
+// 		gl_FragColor =  texture2D(lightsTexture,vUv);
+// 	}`
+// })))
 
 //! Render
 const render = () => {
@@ -128,6 +128,5 @@ const render = () => {
 const inputManager = new InputManager(renderer.domElement, INPUTS)
 inputManager.registerControllers(KeyboardController)
 inputManager.registerControllers(GamepadController)
-inputManager.eventBus.subscribe(PAUSE, (s) => console.log(s))
 export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene }
 
