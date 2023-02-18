@@ -15,18 +15,21 @@ const SwitchButtonEntity = (eventBus: EventBus) => {
 	icon.addComponent(new SpriteComponent(assets.UI.character, { scale: 4 }))
 	const iconPosition = icon.addComponent(new UIPositionComponent())
 	button.addChildren(icon)
+	let down = false
 	const downSubscriber = eventBus.subscribe('down', ({ uiObjects }) => {
-		if (uiObjects.includes(sprite.mesh.id)) {
+		if (uiObjects.includes(sprite.mesh.id) && !down) {
 			Coroutines.add(function* () {
+				down = true
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()
 				iconPosition.center.y = 1 / 3
-				eventBus.publish(SWITCH, true)
 				yield* waitFor(10)
+				down = false
 				iconPosition.center.y = 0
 
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
+				eventBus.publish(SWITCH, 1)
 			})
 		}
 

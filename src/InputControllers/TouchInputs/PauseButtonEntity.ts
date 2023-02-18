@@ -26,9 +26,11 @@ const PauseButtonEntity = (eventBus: EventBus) => {
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
 				eventBus.publish(PAUSE, true)
+
 			})
 		}
 	})
+
 	pause.onDestroy(() => {
 		eventBus.unsubscribe('down', downSubscriber)
 	})

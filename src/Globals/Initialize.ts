@@ -1,9 +1,9 @@
 import { Clock, Mesh, MeshStandardMaterial, MultiplyBlending, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Uniform, WebGLRenderTarget, WebGLRenderer } from "three"
+import INPUTS, { PAUSE } from "../Constants/InputsNames"
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import GamepadController from "../InputControllers/GamepadController"
-import INPUTS from "../Constants/InputsNames"
 import InputManager from "./InputManager"
 import KeyboardController from "../InputControllers/KeyboardController"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
@@ -130,6 +130,6 @@ const inputManager = new InputManager(renderer.domElement, INPUTS)
 inputManager.registerControllers(KeyboardController)
 inputManager.registerControllers(GamepadController)
 inputManager.registerControllers(TouchController)
-
+inputManager.eventBus.subscribe(PAUSE, (s) => console.log(s))
 export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene }
 
