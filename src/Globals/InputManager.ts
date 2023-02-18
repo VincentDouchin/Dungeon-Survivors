@@ -34,40 +34,48 @@ class InputManager {
 				domElement.addEventListener(eventName, (event: MouseEvent | TouchEvent) => {
 					const target = event.target as HTMLCanvasElement
 					const bounds = domElement.getBoundingClientRect()
-					const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
-					const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
-					const x = ((clientX - bounds.left) / target.clientWidth) * 2 - 1
-					const y = 1 - ((clientY - bounds.top) / target.clientHeight) * 2
-					const mouse = {
 
-						x,
-						y,
-						clientX: (UICamera.right * x),
-						clientY: (UICamera.top * y),
+
+					const sendEvent = (clientX: number, clientY: number) => {
+						const x = ((clientX - bounds.left) / target.clientWidth) * 2 - 1
+						const y = 1 - ((clientY - bounds.top) / target.clientHeight) * 2
+						const mouse = {
+							x,
+							y,
+							clientX: (UICamera.right * x),
+							clientY: (UICamera.top * y),
+						}
+						const vec = new Vector3()
+						const pos = new Vector3()
+
+						vec.set(
+							(clientX / window.innerWidth) * 2 - 1,
+							- (clientY / window.innerHeight) * 2 + 1,
+							200)
+
+						vec.unproject(camera)
+
+						vec.sub(camera.position).normalize()
+
+						const distance = - camera.position.z / vec.z
+						pos.copy(camera.position).add(vec.multiplyScalar(distance))
+						const raycaster = new Raycaster()
+						raycaster.setFromCamera(mouse, UICamera)
+						const uiObjects = raycaster.intersectObjects(UIScene.children, true).map(intersect => intersect.object.id)
+
+						const raycasterScene = new Raycaster()
+						raycasterScene.setFromCamera(mouse, camera)
+						const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
+
+						this.eventBus.publish(state, { uiObjects, objects, ...mouse })
 					}
-					var vec = new Vector3(); // create once and reuse
-					var pos = new Vector3(); // create once and reuse
-
-					vec.set(
-						(clientX / window.innerWidth) * 2 - 1,
-						- (clientY / window.innerHeight) * 2 + 1,
-						200);
-
-					vec.unproject(camera);
-
-					vec.sub(camera.position).normalize();
-
-					var distance = - camera.position.z / vec.z;
-					pos.copy(camera.position).add(vec.multiplyScalar(distance));
-					const raycaster = new Raycaster()
-					raycaster.setFromCamera(mouse, UICamera);
-					const uiObjects = raycaster.intersectObjects(UIScene.children, true).map(intersect => intersect.object.id)
-
-					const raycasterScene = new Raycaster()
-					raycasterScene.setFromCamera(mouse, camera);
-					const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
-
-					this.eventBus.publish(state, { uiObjects, objects, ...mouse })
+					// const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
+					// const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
+					if (event instanceof TouchEvent) {
+						Array.from(event.touches).forEach(({ clientX, clientY }) => sendEvent(clientX, clientY))
+					} else {
+						sendEvent(event.clientX, event.clientY)
+					}
 				})
 
 			}, false)

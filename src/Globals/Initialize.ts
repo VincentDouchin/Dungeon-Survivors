@@ -7,7 +7,6 @@ import GamepadController from "../InputControllers/GamepadController"
 import InputManager from "./InputManager"
 import KeyboardController from "../InputControllers/KeyboardController"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import TouchController from "../InputControllers/TouchController"
 
 // ! Clock
 const clock = new Clock()
@@ -129,7 +128,6 @@ const render = () => {
 const inputManager = new InputManager(renderer.domElement, INPUTS)
 inputManager.registerControllers(KeyboardController)
 inputManager.registerControllers(GamepadController)
-inputManager.registerControllers(TouchController)
 inputManager.eventBus.subscribe(PAUSE, (s) => console.log(s))
 export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene }
 

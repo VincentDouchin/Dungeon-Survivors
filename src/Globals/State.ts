@@ -7,7 +7,8 @@ const State: {
 		top?: number
 		bottom?: number
 	},
-	timer: number
+	timer: number,
+	mobile: boolean
 } = {
 	cameraBounds: {
 		left: undefined,
@@ -15,6 +16,7 @@ const State: {
 		top: undefined,
 		bottom: undefined,
 	},
-	timer: 0
+	timer: 0,
+	mobile: !!navigator.userAgentData?.mobile
 }
 export default State
