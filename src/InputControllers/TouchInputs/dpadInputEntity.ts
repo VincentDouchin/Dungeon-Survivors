@@ -6,7 +6,7 @@ import SpriteComponent from "../../Components/SpriteComponent"
 import UIPositionComponent from "../../Components/UIPositionComponent"
 import assets from "../../Globals/Assets"
 
-const dpadInputEntity = (eventBus: EventBus) => {
+const DpadInputEntity = (eventBus: EventBus) => {
 	const dpad = new Entity('dpad')
 	const dpadMesh = dpad.addComponent(new SpriteComponent(assets.UI.touchdpad, { scale: 2 }))
 	dpad.addComponent(new UIPositionComponent({ x: -0.95, y: -0.95 }, { x: -1, y: -1 }))
@@ -57,4 +57,4 @@ const dpadInputEntity = (eventBus: EventBus) => {
 	return dpad
 }
 
-export default dpadInputEntity
+export default DpadInputEntity

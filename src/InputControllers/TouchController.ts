@@ -1,16 +1,18 @@
+import ActiveSkillButtonEntity from "./TouchInputs/ActiveSkillButtonEntity"
+import DpadInputEntity from "./TouchInputs/DpadInputEntity"
 import { Entity } from "../Globals/ECS"
 import EventBus from "../Utils/EventBus"
 import { InputController } from "../Globals/InputManager"
 import PauseButtonEntity from "./TouchInputs/PauseButtonEntity"
 import SwitchButtonEntity from "./TouchInputs/SwitchButtonEntity"
-import dpadInputEntity from "./TouchInputs/dpadInputEntity"
 
 class TouchController implements InputController {
 	eventBus: EventBus
 	inputs: Record<string, (eventBus: EventBus) => Entity> = {
-		dpad: dpadInputEntity,
+		dpad: DpadInputEntity,
 		pauseButton: PauseButtonEntity,
-		switchButton: SwitchButtonEntity
+		switchButton: SwitchButtonEntity,
+		activeSkillButton: ActiveSkillButtonEntity
 	}
 	enabledInputs: Map<string, Entity> = new Map()
 	constructor(eventBus: EventBus) {

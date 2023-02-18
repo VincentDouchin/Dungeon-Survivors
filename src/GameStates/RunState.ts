@@ -59,6 +59,7 @@ class RunState implements GameState {
 		inputManager.enable('dpad')
 		inputManager.enable('pauseButton')
 		inputManager.enable('switchButton')
+		inputManager.enable('activeSkillButton')
 		MovementSystem.register()
 		AnimationSystem.register()
 		HealthSystem.register()
@@ -108,6 +109,7 @@ class RunState implements GameState {
 		inputManager.disable('dpad')
 		inputManager.disable('pauseButton')
 		inputManager.disable('switchButton')
+		inputManager.disable('activeSkillButton')
 		this.ui?.destroy()
 		switch (newState) {
 			case GameStates.levelUp: {
