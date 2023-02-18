@@ -57,6 +57,8 @@ class RunState implements GameState {
 	set(oldState: GameStates, options: { background?: backgroundName, enemies?: enemyWaveName }) {
 
 		inputManager.enable('dpad')
+		inputManager.enable('pauseButton')
+		inputManager.enable('switchButton')
 		MovementSystem.register()
 		AnimationSystem.register()
 		HealthSystem.register()
@@ -83,7 +85,6 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				// default: {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
@@ -105,6 +106,8 @@ class RunState implements GameState {
 	unset(newState?: GameStates) {
 		ECS.unRegisterSystems()
 		inputManager.disable('dpad')
+		inputManager.disable('pauseButton')
+		inputManager.disable('switchButton')
 		this.ui?.destroy()
 		switch (newState) {
 			case GameStates.levelUp: {
