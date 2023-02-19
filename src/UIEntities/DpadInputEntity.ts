@@ -15,21 +15,23 @@ const DpadInputEntity = () => {
 	const centerPosition = center.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
 	dpad.addChildren(center)
 	let enabled = false
+	let touch: null | number = null
 	let mouse: { x: null | number, y: null | number, } = { x: null, y: null }
-	const downSubscriber = inputManager.eventBus.subscribe('down', ({ x, y, uiObjects }: TouchCoord) => {
-		if (uiObjects.includes(dpadMesh.mesh.id)) {
+	const downSubscriber = inputManager.eventBus.subscribe('down', (touchCoord: TouchCoord) => {
+		if (touchCoord.uiObjects.includes(dpadMesh.mesh.id)) {
 			enabled = true
-			mouse.x = x
-			mouse.y = y
+			mouse.x = touchCoord.x
+			mouse.y = touchCoord.y
+			touch = touchCoord.touch ?? null
 
 		}
 	})
 
 
-	const moveSubscriber = inputManager.eventBus.subscribe('move', ({ clientX, clientY }: TouchCoord) => {
-		if (enabled && mouse.x && mouse.y) {
-			const centerX = (clientX - dpadMesh.mesh.position.x) / (dpadMesh.width / 2)
-			const centerY = (clientY - dpadMesh.mesh.position.y) / (dpadMesh.height / 2)
+	const moveSubscriber = inputManager.eventBus.subscribe('move', (touchCoord: TouchCoord) => {
+		if (enabled && mouse.x && mouse.y && (!touch || touch == touchCoord.touch)) {
+			const centerX = (touchCoord.clientX - dpadMesh.mesh.position.x) / (dpadMesh.width / 2)
+			const centerY = (touchCoord.clientY - dpadMesh.mesh.position.y) / (dpadMesh.height / 2)
 			const angle = Math.atan2(centerY, centerX)
 			const maxX = Math.abs(Math.cos(angle))
 			const maxY = Math.abs(Math.sin(angle))

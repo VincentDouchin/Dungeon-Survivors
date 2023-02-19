@@ -36,7 +36,7 @@ class InputManager {
 					const bounds = domElement.getBoundingClientRect()
 
 
-					const sendEvent = (clientX: number, clientY: number) => {
+					const sendEvent = ({ clientX, clientY }: { clientX: number, clientY: number }, touchIndex?: number) => {
 						const x = ((clientX - bounds.left) / target.clientWidth) * 2 - 1
 						const y = 1 - ((clientY - bounds.top) / target.clientHeight) * 2
 						const mouse = {
@@ -67,14 +67,13 @@ class InputManager {
 						raycasterScene.setFromCamera(mouse, camera)
 						const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
 
-						this.eventBus.publish(state, { uiObjects, objects, ...mouse })
+						this.eventBus.publish(state, { uiObjects, objects, ...mouse, touch: touchIndex })
 					}
-					// const clientX = (event instanceof TouchEvent ? event.touches[0]?.clientX : event.clientX) ?? 0
-					// const clientY = (event instanceof TouchEvent ? event.touches[0]?.clientY : event.clientY) ?? 0
+
 					if (event instanceof TouchEvent) {
-						Array.from(event.touches).forEach(({ clientX, clientY }) => sendEvent(clientX, clientY))
+						Array.from(event.touches).forEach((touch, i) => sendEvent(touch, i))
 					} else {
-						sendEvent(event.clientX, event.clientY)
+						sendEvent(event)
 					}
 				})
 
