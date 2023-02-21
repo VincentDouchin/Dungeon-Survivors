@@ -6,39 +6,43 @@ export interface Event {
 	data: any
 }
 export interface CAMERA_MOVE extends Event {
-	type: 'CAMERA_MOVE'
+	type: ECSEVENTS.CAMERA_MOVE
 	data: { x: number, y: number }
 }
 export interface DELETE_ENTITY extends Event {
-	type: 'DELETE_ENTITY'
+	type: ECSEVENTS.DELETE_ENTITY
 	data: Entity
 }
 export interface XP_PERCENT extends Event {
-	type: 'XP_PERCENT'
+	type: ECSEVENTS.XP_PERCENT
 	data: number
 }
 export interface LEVEL_UP extends Event {
-	type: 'LEVEL_UP'
+	type: ECSEVENTS.LEVEL_UP
 	data: number
 }
 export interface PATH_POSITION extends Event {
-	type: 'PATH_POSITION'
+	type: ECSEVENTS.PATH_POSITION
 	data: PositionComponent
 }
 export interface SKILL extends Event {
-	type: 'SKILL'
+	type: ECSEVENTS.SKILL
 	data: Skill
 }
 export interface ADD_TO_BACKGROUND extends Event {
-	type: 'ADD_TO_BACKGROUND'
+	type: ECSEVENTS.ADD_TO_BACKGROUND
 	data: Entity
 }
 export interface ENENMY_LEVEL_UP extends Event {
-	type: 'ENENMY_LEVEL_UP'
+	type: ECSEVENTS.ENENMY_LEVEL_UP
+	data: number
+}
+export interface MANA_PERCENT extends Event {
+	type: ECSEVENTS.MANA_PERCENT
 	data: number
 }
 export interface SELECTED extends Event {
-	type: 'SELECTED'
+	type: ECSEVENTS.SELECTED
 	data: Entity
 }
 
@@ -54,6 +58,7 @@ enum ECSEVENTS {
 	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
 	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
 	SELECTED = 'SELECTED',
+	MANA_PERCENT = 'MANA_PERCENT'
 }
 
 export default ECSEVENTS

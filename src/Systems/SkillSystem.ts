@@ -1,4 +1,5 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { MANA_PERCENT } from "../Constants/ECSEvents";
 
 import DivineProtectionEntity from "../Entities/DivineProtectionEntity";
 import PositionComponent from "../Components/PositionComponent";
@@ -12,13 +13,19 @@ class SkillSystem extends System {
 		super(StatsComponent)
 	}
 	update(entities: Entity[]) {
+		const attack = inputManager.getInput(SKILL)?.once
 		entities
-			.filter(entity => entity.getComponent(SwitchingComponent)?.main)
 			.forEach(entity => {
-				if (inputManager.getInput(SKILL)?.once) {
+				const switcher = entity.getComponent(SwitchingComponent)
+				if (attack && switcher && !switcher?.main) {
 					const position = entity.getComponent(PositionComponent)
+					const stats = entity.getComponent(StatsComponent)
+					if (stats.mana > stats.manaCost) {
+						DivineProtectionEntity(position.position)
+						stats.mana -= stats.manaCost
+						ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, stats.mana / stats.maxMana)
+					}
 
-					DivineProtectionEntity(position.position)
 				}
 			})
 	}

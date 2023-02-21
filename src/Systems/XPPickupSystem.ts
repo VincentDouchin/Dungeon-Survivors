@@ -1,4 +1,5 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
+import ECSEVENTS, { MANA_PERCENT } from "../Constants/ECSEvents";
 
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
@@ -39,9 +40,10 @@ class XPPickupSystem extends System {
 				}
 				if (token) {
 					otherEntity.destroy()
-					if (stats?.tokens) {
-						stats.tokens++
-					}
+					if (!stats) return
+					stats.mana = Math.min(stats.maxMana, stats.mana + 15)
+					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, stats.mana / stats.maxMana)
+
 				}
 
 			}, COLLISIONGROUPS.PLAYER)
