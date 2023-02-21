@@ -65,12 +65,11 @@ class InputManager {
 						const raycasterScene = new Raycaster()
 						raycasterScene.setFromCamera(mouse, camera)
 						const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
-
 						this.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
 					}
 
 					if (event instanceof TouchEvent) {
-						Array.from(event.touches).forEach((touch) => sendEvent(touch))
+						[...Array.from(event.touches), ...Array.from(event.changedTouches)].forEach((touch) => sendEvent(touch))
 					} else {
 						sendEvent(event)
 					}
@@ -82,9 +81,9 @@ class InputManager {
 
 
 
-		detectPointerEvent(['mousedown', 'touchstart'], 'down')
-		detectPointerEvent(['mouseup', 'touchend'], 'up')
-		detectPointerEvent(['mousemove', 'touchmove'], 'move')
+		detectPointerEvent(['touchstart'], 'down')
+		detectPointerEvent(['touchend'], 'up')
+		detectPointerEvent(['touchmove'], 'move')
 
 
 	}

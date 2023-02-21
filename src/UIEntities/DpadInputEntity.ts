@@ -22,9 +22,9 @@ const DpadInputEntity = () => {
 			enabled = true
 			mouse.x = touchCoord.x
 			mouse.y = touchCoord.y
-			if (touchCoord.identifier !== null) {
-				touch = touchCoord.identifier
-			}
+
+			touch = touchCoord.identifier
+
 		}
 	})
 
