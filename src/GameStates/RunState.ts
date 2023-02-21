@@ -1,6 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { LEVEL_UP, XP_PERCENT } from "../Constants/ECSEvents"
+import ECSEVENTS, { LEVEL_UP, MANA_PERCENT, XP_PERCENT } from "../Constants/ECSEvents"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
@@ -99,7 +99,7 @@ class RunState implements GameState {
 		}
 		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
 		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.stats.xp / this.stats.nextLevel)
-
+		ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, this.stats.mana / this.stats.maxMana)
 
 
 
