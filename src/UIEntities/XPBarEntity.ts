@@ -10,8 +10,8 @@ import framedTile from "../Utils/FramedTile"
 const scalingOptions = { x: { left: 2, right: 4 }, y: { top: 0, bottom: 0 } }
 const w = 50
 const h = 7
-const bar = framedTile(assets.UI.XPBar, scalingOptions, w, h)
-const full = framedTile(assets.UI.XPFull, scalingOptions, w, h)
+const bar = framedTile(assets.UI.bar, scalingOptions, w, h)
+const full = framedTile(assets.UI.xp, scalingOptions, w, h)
 const XPBarEntity = () => {
 	const xpBar = new Entity('xp bar')
 	const sprite = xpBar.addComponent(new SpriteComponent(bar, { renderOrder: 100, scale: 3, shaders: [new BarShader(full.texture, 0)] }))
