@@ -81,9 +81,9 @@ class InputManager {
 
 
 
-		detectPointerEvent(['touchstart'], 'down')
-		detectPointerEvent(['touchend'], 'up')
-		detectPointerEvent(['touchmove'], 'move')
+		detectPointerEvent(['mousedown', 'touchstart'], 'down')
+		detectPointerEvent(['mouseup', 'touchend'], 'up')
+		detectPointerEvent(['mousemove', 'touchmove'], 'move')
 
 
 	}
