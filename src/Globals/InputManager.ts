@@ -35,10 +35,9 @@ class InputManager {
 					const target = event.target as HTMLCanvasElement
 					const bounds = domElement.getBoundingClientRect()
 
-
-					const sendEvent = ({ clientX, clientY }: { clientX: number, clientY: number }, touchIndex?: number) => {
-						const x = ((clientX - bounds.left) / target.clientWidth) * 2 - 1
-						const y = 1 - ((clientY - bounds.top) / target.clientHeight) * 2
+					const sendEvent = (event: MouseEvent | TouchEvent['touches'][number]) => {
+						const x = ((event.clientX - bounds.left) / target.clientWidth) * 2 - 1
+						const y = 1 - ((event.clientY - bounds.top) / target.clientHeight) * 2
 						const mouse = {
 							x,
 							y,
@@ -49,8 +48,8 @@ class InputManager {
 						const pos = new Vector3()
 
 						vec.set(
-							(clientX / window.innerWidth) * 2 - 1,
-							- (clientY / window.innerHeight) * 2 + 1,
+							(event.clientX / window.innerWidth) * 2 - 1,
+							- (event.clientY / window.innerHeight) * 2 + 1,
 							200)
 
 						vec.unproject(camera)
@@ -67,11 +66,11 @@ class InputManager {
 						raycasterScene.setFromCamera(mouse, camera)
 						const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
 
-						this.eventBus.publish(state, { uiObjects, objects, ...mouse, touch: touchIndex })
+						this.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
 					}
 
 					if (event instanceof TouchEvent) {
-						Array.from(event.touches).forEach((touch, i) => sendEvent(touch, i))
+						Array.from(event.touches).forEach((touch) => sendEvent(touch))
 					} else {
 						sendEvent(event)
 					}

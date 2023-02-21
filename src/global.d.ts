@@ -30,7 +30,7 @@ interface TouchCoord {
 	clientY: number
 	uiObjects: number[]
 	objects: number[]
-	touch?: number
+	identifier: number | null
 }
 interface TiledMapData {
 	width: number;
