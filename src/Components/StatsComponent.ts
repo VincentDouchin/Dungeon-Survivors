@@ -19,6 +19,9 @@ class StatsComponent extends Component {
 	level = 0
 	nextLevel = 20
 	tokens = 0
+	mana = 100
+	maxMana = 100
+	manaCost = 20
 	linked: boolean
 	constructor(level = 0, linked = false) {
 		super()
