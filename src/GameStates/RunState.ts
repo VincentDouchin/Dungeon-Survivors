@@ -23,7 +23,7 @@ import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
-import SkillSystem from "../Systems/SkillSystem"
+import SpellSystem from "../Systems/SpellSystem"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
@@ -73,7 +73,7 @@ class RunState implements GameState {
 		SwitchingSystem.register()
 		FlockingSystem.register()
 		StatUpdateSystem.register()
-		SkillSystem.register()
+		SpellSystem.register()
 		BackgroundElementSpawnerSystem.register()
 		ExpirationSystem.register()
 		SelectionSystem.register()

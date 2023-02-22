@@ -1,18 +1,27 @@
+import { ECS, Entity } from "../Globals/ECS"
+import ECSEVENTS, { SPELL_ICON } from "../Constants/ECSEvents"
+
 import Coroutines from "../Globals/Coroutines"
-import { Entity } from "../Globals/ECS"
 import { SKILL } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
+import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 import { inputManager } from "../Globals/Initialize"
 import waitFor from "../Utils/WaitFor"
 
-const ActiveSkillButtonEntity = () => {
+const SpellButtonEntity = () => {
 	const button = new Entity('active skill button')
 	const sprite = button.addComponent(new SpriteComponent(assets.UI.button, { scale: 4 }))
 	button.addComponent(new UIPositionComponent({ x: (window.innerWidth - 150) / window.innerWidth, y: (-window.innerHeight + 150) / window.innerHeight }))
 	const icon = new Entity('active skill icon')
-	icon.addComponent(new SpriteComponent(assets.skills.divine_protection_spell, { scale: 2.5 }))
+	const iconSprite = icon.addComponent(new SpriteComponent(assets.skills.divine_protection_spell, { scale: 2.5 }))
+	ECS.eventBus.subscribe<SPELL_ICON>(ECSEVENTS.SPELL_ICON, (tile: Tile) => {
+		if (iconSprite.renderShader?.uniforms.uTexture) {
+			iconSprite.renderShader.uniforms.uTexture.value = tile.textures[0]
+			iconSprite.render()
+		}
+	})
 	const iconPosition = icon.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: -1 / 8 }))
 	button.addChildren(icon)
 	const downSubscriber = inputManager.eventBus.subscribe('up', ({ uiObjects }) => {
@@ -37,4 +46,4 @@ const ActiveSkillButtonEntity = () => {
 	return button
 }
 
-export default ActiveSkillButtonEntity
+export default SpellButtonEntity

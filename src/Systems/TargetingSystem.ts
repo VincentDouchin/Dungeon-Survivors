@@ -18,8 +18,9 @@ class TargetingSystem extends System {
 	}
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
-			const position = entity.parent?.getComponent(PositionComponent) ?? entity.getComponent(PositionComponent)
 			const targeter = entity.getComponent(TargeterComponent)
+			if (!targeter.enabled) return
+			const position = entity.parent?.getComponent(PositionComponent) ?? entity.getComponent(PositionComponent)
 			const joint = entity.getComponent(JointComponent)
 			const body = entity.getComponent(BodyComponent)
 			const ranged = entity.getComponent(RangedComponent)

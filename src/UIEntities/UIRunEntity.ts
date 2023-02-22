@@ -1,9 +1,9 @@
-import ActiveSkillButtonEntity from "./ActiveSkillButtonEntity"
 import DpadInputEntity from "./DpadInputEntity"
 import { Entity } from "../Globals/ECS"
 import LevelDisplayEntity from "./LevelDisplayEntity"
 import ManaBarEntity from "./ManaBarEntity"
 import PauseButtonEntity from "./PauseButtonEntity"
+import SpellButtonEntity from "./SpellButtonEntity"
 import State from "../Globals/State"
 import SwitchButtonEntity from "./SwitchButtonEntity"
 import TimeCounterEntity from "./TimeCounterEntity"
@@ -18,7 +18,7 @@ const UIRunEntity = () => {
 	if (State.mobile) {
 		ui.addChildren(DpadInputEntity())
 		ui.addChildren(PauseButtonEntity())
-		const skillbutton = ui.addChildren(ActiveSkillButtonEntity())
+		const skillbutton = ui.addChildren(SpellButtonEntity())
 		skillbutton.addChildren(SwitchButtonEntity())
 	}
 	return ui

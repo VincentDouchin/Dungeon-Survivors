@@ -6,10 +6,12 @@ import { Color } from "three"
 import { Entity } from "../Globals/ECS"
 import FlockingComponent from "../Components/FlockingComponent"
 import HealthComponent from "../Components/HealthComponent"
+import { HeroDefinition } from "../Constants/Heros"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RangedComponent from "../Components/RangedComponent"
 import ShadowComponent from "../Components/ShadowComponent"
+import SpellComponent from "../Components/SpellComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
@@ -20,7 +22,7 @@ import XPPickerComponent from "../Components/XPPickerComponent"
 
 const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: boolean, stats: StatsComponent) => {
 	const player = new Entity('player')
-
+	player.addComponent(new SpellComponent(hero.spell))
 	player.addComponent(new SpriteComponent(hero.tiles.idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
 	player.addComponent(new HealthComponent(stats.health.calculateValue(200), COLLISIONGROUPS.PLAYER))

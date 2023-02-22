@@ -12,6 +12,7 @@ import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
+import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
 import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
 import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
@@ -66,6 +67,7 @@ const assets: {
 		Smoke: Tile.fromImage(await AssetLoader.loadImage(smokeSource), ({ buffer }) => ({ buffer, width: 32, frames: 6 })),
 		Aura: Tile.fromImage(await AssetLoader.loadImage(auraSource), ({ buffer }) => ({ buffer, width: 32, frames: 4 })),
 		FireProjectile: Tile.fromImage(await AssetLoader.loadImage(fireProjectileSource), ({ buffer }) => ({ buffer, width: 16, frames: 15 })),
+		Lightning: Tile.fromImage(await AssetLoader.loadImage(lightningSource), ({ buffer }) => ({ buffer, width: 20, frames: 8 })),
 	},
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
 	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),

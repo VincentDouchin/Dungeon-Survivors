@@ -12,6 +12,7 @@ class TargeterComponent extends Component {
 	chargingDirection = new Vector2()
 	distanceToTarget: number
 	subscriber: EventCallBack<Entity>
+	enabled = true
 	constructor(target: number | string, distanceToTarget: number = 0, charger: boolean = false) {
 		super()
 		this.distanceToTarget = distanceToTarget

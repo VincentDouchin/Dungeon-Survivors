@@ -1,5 +1,6 @@
 import type { Entity } from "../Globals/ECS"
 import type PositionComponent from "../Components/PositionComponent"
+import Tile from "../Utils/Tile"
 
 export interface Event {
 	type: string
@@ -45,6 +46,10 @@ export interface SELECTED extends Event {
 	type: ECSEVENTS.SELECTED
 	data: Entity
 }
+export interface SPELL_ICON extends Event {
+	type: ECSEVENTS.SPELL_ICON
+	data: Tile
+}
 
 
 
@@ -58,7 +63,8 @@ enum ECSEVENTS {
 	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
 	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
 	SELECTED = 'SELECTED',
-	MANA_PERCENT = 'MANA_PERCENT'
+	MANA_PERCENT = 'MANA_PERCENT',
+	SPELL_ICON = 'SPELL_ICON'
 }
 
 export default ECSEVENTS
