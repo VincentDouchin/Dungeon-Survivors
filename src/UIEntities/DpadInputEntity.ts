@@ -22,17 +22,15 @@ const DpadInputEntity = () => {
 			enabled = true
 			mouse.x = touchCoord.x
 			mouse.y = touchCoord.y
-
 			touch = touchCoord.identifier
-
 		}
 	})
 
 
 	const moveSubscriber = inputManager.eventBus.subscribe('move', (touchCoord: TouchCoord) => {
 		if (enabled && mouse.x && mouse.y && touch === touchCoord.identifier) {
-			const centerX = (touchCoord.clientX - dpadMesh.mesh.position.x) / (dpadMesh.width / 2)
-			const centerY = (touchCoord.clientY - dpadMesh.mesh.position.y) / (dpadMesh.height / 2)
+			const centerX = (touchCoord.clientX - dpadMesh.mesh.position.x) / (dpadMesh.width)
+			const centerY = (touchCoord.clientY - dpadMesh.mesh.position.y) / (dpadMesh.height)
 			const angle = Math.atan2(centerY, centerX)
 			const maxX = Math.abs(Math.cos(angle))
 			const maxY = Math.abs(Math.sin(angle))

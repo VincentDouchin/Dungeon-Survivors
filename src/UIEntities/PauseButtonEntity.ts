@@ -15,9 +15,12 @@ const PauseButtonEntity = () => {
 	icon.addComponent(new SpriteComponent(assets.UI.pauseicon, { scale: 1.5 }))
 	const iconPosition = icon.addComponent(new UIPositionComponent())
 	pause.addChildren(icon)
+
+	let down = false
 	const downSubscriber = inputManager.eventBus.subscribe('down', ({ uiObjects }) => {
-		if (uiObjects.includes(sprite.mesh.id)) {
+		if (uiObjects.includes(sprite.mesh.id) && !down) {
 			Coroutines.add(function* () {
+				down = true
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()
 				iconPosition.center.y = 1 / 8
@@ -26,6 +29,7 @@ const PauseButtonEntity = () => {
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
 				inputManager.eventBus.publish(PAUSE, true)
+				down = false
 
 			})
 		}
