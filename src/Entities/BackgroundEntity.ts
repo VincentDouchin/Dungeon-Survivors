@@ -1,5 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { ADD_TO_BACKGROUND, CAMERA_MOVE } from "../Constants/ECSEvents"
+import { easeInSine, linear } from "../Utils/Tween"
 
 import { AmbientLight } from "three"
 import AnimationComponent from "../Components/AnimationComponent"
@@ -12,12 +13,12 @@ import LDTKMap from "../Utils/LDTKMap"
 import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
 import ObstableEntity from "./ObstacleEntity"
+import ParticleEntity from "./ParticleEntitty"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import assets from "../Globals/Assets"
 import { camera } from "../Globals/Initialize"
-import { linear } from "../Utils/Tween"
 import waitFor from "../Utils/WaitFor"
 
 const BackgroundEntity = (backgroundDefinition: Background) => {
@@ -61,11 +62,18 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			const leaf = new Entity('leaf')
 			const sprite = leaf.addComponent(new SpriteComponent(assets.effects.Leaf, { renderOrder: 10, scale: 1.5 }))
 			leaf.addComponent(new AnimationComponent({ default: assets.effects.Leaf }))
-			const position = leaf.addComponent(new PositionComponent(((Math.random() - 0.5) * 2) * camera.right + camera.position.x, ((Math.random() - 0.5) * 2) * camera.top + camera.position.y))
+			const position = leaf.addComponent(new PositionComponent(
+				((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
+				((Math.random() - 0.5) * 2) * camera.top + camera.position.y
+			))
 			Coroutines.add(function* () {
 				let counter = 0
+				let fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
+				let fallingEndTimer = 20 + Math.random() * 20
+				let start = position.y
 				while (counter < 100) {
 					position.y += linear(counter, 0, -2, 100)
+					position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
 					sprite.opacity = linear(counter, 1, 0, 100)
 					counter++
 					yield
@@ -85,13 +93,51 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 		})
 		Coroutines.add(function* () {
 			while (leafing) {
-
 				yield* waitFor(Math.random() * 10 + 50)
 				for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
 					leafEntity()
 				}
 			}
-			return
+		})
+	}
+	if (backgroundDefinition.rain) {
+		const rainEntity = () => {
+			const rain = new Entity('rain')
+			const tile = assets.effects.rainDrop
+			rain.addComponent(new SpriteComponent(tile, { renderOrder: 10, scale: 1.5 }))
+			rain.addComponent(new AnimationComponent({ default: tile, }, { start: false, selectedFrame: Math.floor(Math.random() * 3) }))
+			const position = rain.addComponent(new PositionComponent(
+				((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
+				((Math.random() - 0.5) * 2) * camera.top + camera.position.y
+			))
+			Coroutines.add(function* () {
+				let counter = 0
+				const max = Math.random() * 5 + 10
+				while (counter < max) {
+					position.y -= tile.height
+					position.x -= tile.width / 2
+
+					counter++
+					yield* waitFor(2)
+				}
+				ParticleEntity(position.x, position.y, assets.effects.rainFloor)
+				rain.destroy()
+			})
+
+
+		}
+		let raining = true
+
+		background.onDestroy(() => {
+			ECS.eventBus.unsubscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, cameraSubscriber)
+			ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
+			raining = false
+		})
+		Coroutines.add(function* () {
+			while (raining) {
+				rainEntity()
+				yield* waitFor(Math.random() * 5)
+			}
 		})
 	}
 	// ! WALLS

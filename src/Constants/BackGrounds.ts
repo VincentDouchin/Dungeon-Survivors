@@ -10,6 +10,7 @@ export interface Background {
 	obstacles?: Tile[]
 	obstaclesDensity?: number
 	leafs?: boolean
+	rain?: boolean
 	infinite: { x: boolean, y: boolean }
 }
 
@@ -40,7 +41,8 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.grave1, assets.elements.grave2, assets.elements.grave3, assets.elements.grave4],
 		obstaclesDensity: 0.3,
-		infinite: { x: true, y: true }
+		infinite: { x: true, y: true },
+		rain: true,
 	},
 	TOWN: {
 		level: 'TOWN',
