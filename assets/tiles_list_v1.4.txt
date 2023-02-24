@@ -155,7 +155,7 @@ big_zombie_idle_anim 16 270 32 34 4
 big_zombie_run_anim 144 270 32 34 4
 ogre_idle_anim  16 320 32 32 4
 ogre_run_anim 144 320 32 32 4
-big_demon_idle_anim  16 364 32 36 4
+big_demon_idle_anim 16 364 32 36 4
 big_demon_run_anim 144 364 32 36 4
 
 elf_f_idle_anim 128 4 16 28 4
