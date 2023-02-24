@@ -7,6 +7,7 @@ import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
 import ShadowComponent from "../Components/ShadowComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 import { inputManager } from "../Globals/Initialize";
 
 class MovementSystem extends System {
@@ -18,6 +19,7 @@ class MovementSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			const playerController = entity.getComponent(PlayerControllerComponent)
 			const body = entity.getComponent(BodyComponent)
+			const sprite = entity.getComponent(SpriteComponent)
 			const animation = entity.getComponent(AnimationComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			const shadow = entity.getComponent(ShadowComponent)
@@ -54,7 +56,7 @@ class MovementSystem extends System {
 					}
 				}
 				if (animation) {
-					if (body.velocity.x != 0) animation.flipped = body.velocity.x < 0
+					if (body.velocity.x != 0) sprite.flipped = body.velocity.x < 0
 					animation.state = Math.abs(body.velocity.x + body.velocity.y) > 0.9 ? 'run' : 'idle'
 				}
 
