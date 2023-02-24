@@ -191,7 +191,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		tile: assets.UI.empty,
 		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.tiles.weapon_arrow,
+		projectile: assets.effects.FireProjectile,
 		group: COLLISIONGROUPS.ENEMY,
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
