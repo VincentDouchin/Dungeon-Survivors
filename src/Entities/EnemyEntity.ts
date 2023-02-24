@@ -19,9 +19,10 @@ import XPEntity from "./XPEntity"
 
 const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x: number, y: number }) => {
 	const enemy = new Entity('enemy')
+	const scale = type.boss ? 1.5 : 1
 	const berserk = type.berserk
 	const tile = Object.values(type.tiles)[0]
-	const sprite = enemy.addComponent(new SpriteComponent(tile))
+	const sprite = enemy.addComponent(new SpriteComponent(tile, { scale }))
 	if (berserk) {
 		sprite.addShader(new OutlineShader([1, 0, 0, 1]))
 	}
@@ -31,11 +32,11 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	enemy.addComponent(new DroppableComponent(Math.random() < 0.05 ? TokenEntity : Math.random() < 0.01 ? PotionEntity : XPEntity))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
 	enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER, type.charger ? 100 : 0, type.charger))
-	enemy.addComponent(new ShadowComponent(type.size.width, 6, tile.height / 2))
+	enemy.addComponent(new ShadowComponent(type.size.width * scale, 6, tile.height * scale / 2))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.5 : 1) },
 		[
-			{ width: type.size.width, height: type.size.height, mass: 1, offset: tile.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
+			{ width: type.size.width * scale, height: type.size.height * scale, mass: 1, offset: tile.height * scale, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL] }
 		]
 	))
 	if (stats) {

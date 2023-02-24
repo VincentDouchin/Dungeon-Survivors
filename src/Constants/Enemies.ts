@@ -13,6 +13,7 @@ export interface EnemyType {
 	damage: number,
 	weapon?: WeaponDefinition,
 	charger?: boolean
+	boss?: boolean
 
 }
 const Enemies: Record<string, EnemyType> = {
@@ -66,9 +67,10 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 200,
 		size: BODYSIZES.big,
-		speed: 10,
+		speed: 20,
 		damage: 10,
-		charger: true
+		charger: true,
+		boss: true
 	},
 
 
@@ -114,7 +116,9 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.big,
 		speed: 10,
 		damage: 10,
-		charger: true
+		charger: true,
+		boss: true,
+		weapon: WEAPONS.fireball
 	},
 	// !UNDEAD 
 	zombieSmall: {
@@ -199,7 +203,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.big,
 		speed: 10,
 		damage: 10,
-		charger: true
+		charger: true,
+		boss: true
 	},
 	// ! HUMANS
 	bandit: {
@@ -312,8 +317,10 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 200,
 		size: BODYSIZES.big,
-		speed: 6,
-		damage: 5
+		speed: 20,
+		damage: 10,
+		charger: true,
+		boss: true
 	},
 	bear: {
 		tiles: {
@@ -522,10 +529,12 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Executioner_Idle,
 			run: assets.npc.Executioner_Walk,
 		},
-		health: 15,
+		health: 250,
 		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 5
+		speed: 10,
+		damage: 10,
+		charger: true,
+		boss: true
 	},
 	// ! KINGSGUARD
 	knight: {
