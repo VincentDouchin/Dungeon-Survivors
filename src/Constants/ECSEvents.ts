@@ -50,6 +50,10 @@ export interface SPELL_ICON extends Event {
 	type: ECSEVENTS.SPELL_ICON
 	data: Tile
 }
+export interface SKILL_ICON extends Event {
+	type: ECSEVENTS.SKILL_ICON
+	data: Tile
+}
 
 
 
@@ -64,7 +68,8 @@ enum ECSEVENTS {
 	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
 	SELECTED = 'SELECTED',
 	MANA_PERCENT = 'MANA_PERCENT',
-	SPELL_ICON = 'SPELL_ICON'
+	SPELL_ICON = 'SPELL_ICON',
+	SKILL_ICON = 'SKILL_ICON',
 }
 
 export default ECSEVENTS
