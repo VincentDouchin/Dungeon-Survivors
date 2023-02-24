@@ -1,5 +1,5 @@
 import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
-import { Component, ECS } from "../Globals/ECS";
+import { Component, ECS, Entity } from "../Globals/ECS";
 
 import { Stat } from "../Game/Stat";
 import { Vector2 } from "three";
@@ -55,11 +55,12 @@ class BodyComponent extends Component {
 			return colliderDescription
 		})
 	}
-	contacts(fn: Function, group?: number) {
+	contacts(fn: (entity: Entity) => void, group?: number, targets?: number[]) {
 		if (this.colliders.length) {
 			this.colliders.forEach((collider) => {
 				if (group && Math.floor(collider.collisionGroups() / 0x10000) != group) return
 				const touchCollider = (otherCollider: Collider) => {
+					if (targets?.length && !targets.includes(Math.floor(otherCollider.collisionGroups() / 0x10000))) return
 					const entityId = otherCollider?.parent()?.userData as string
 					const entity = ECS.getEntityById(entityId)
 					fn(entity)
