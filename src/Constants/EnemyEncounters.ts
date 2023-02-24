@@ -25,7 +25,7 @@ const ENENMYENCOUNTERS: Partial<Record<enemyWaveName, Encounter>> = {
 		.addWave([[Enemies.centaurFemale, 5], [Enemies.centaurMale, 5], [berserk(Enemies.centaurFemale), 1], [berserk(Enemies.centaurMale), 1]], 4)
 		.addWave([[berserk(Enemies.bear), 1], [Enemies.bear, 5], [Enemies.direwolf, 10], [Enemies.centaurFemale, 4], [Enemies.centaurMale, 4]], 3)
 		.waitForEnemiesCleared()
-		.addWave([[berserk(Enemies.mushroomBig), 1], [Enemies.mushroomSmall, 30], [Enemies.mushroomMedium, 10], [berserk(Enemies.mushroomMedium), 5]], 1)
+		.addWave([[Enemies.mushroomBig, 1], [Enemies.mushroomSmall, 30], [Enemies.mushroomMedium, 10], [berserk(Enemies.mushroomMedium), 5]], 1)
 		.waitForEnemiesCleared()
 		.stop()
 	,
