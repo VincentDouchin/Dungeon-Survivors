@@ -10,7 +10,7 @@ import waitFor from "../Utils/WaitFor"
 const PauseButtonEntity = () => {
 	const pause = new Entity('pause Button')
 	const sprite = pause.addComponent(new SpriteComponent(assets.UI.button, { scale: 2 }),)
-	pause.addComponent(new UIPositionComponent({ x: 1, y: 1 }, { x: 1, y: 1 }))
+	pause.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }))
 	const icon = new Entity('pause Icon')
 	icon.addComponent(new SpriteComponent(assets.UI.pauseicon, { scale: 1.5 }))
 	const iconPosition = icon.addComponent(new UIPositionComponent())
