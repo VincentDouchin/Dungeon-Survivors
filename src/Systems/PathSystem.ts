@@ -28,12 +28,13 @@ class PathSystem extends System {
 			const walker = ECS.getEntityById(walkerId[0])
 			const walkerPosition = walker.getComponent(PositionComponent)
 			const walkerAnimation = walker.getComponent(AnimationComponent)
+			const walkerSprite = walker.getComponent(SpriteComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
 				ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, position)
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
-				walkerAnimation.flipped = walkerPosition.x - position.x > 0
+				walkerSprite.flipped = walkerPosition.x - position.x > 0
 				walkerAnimation.state = 'run'
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
 				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
