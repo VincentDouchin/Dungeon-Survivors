@@ -13,6 +13,9 @@ import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
 import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
+import rainDropSource from './../../assets/NinjaAdventure/FX/Particle/Rain.png'
+import rainFloorSource from './../../assets/NinjaAdventure/FX/Particle/RainOnFloor.png'
+import smokeCircularSource from './../../assets/NinjaAdventure/FX/Smoke/SmokeCircular/SpriteSheet.png'
 import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
 import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
 import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
@@ -68,6 +71,11 @@ const assets: {
 		Aura: Tile.fromImage(await AssetLoader.loadImage(auraSource), ({ buffer }) => ({ buffer, width: 32, frames: 4 })),
 		FireProjectile: Tile.fromImage(await AssetLoader.loadImage(fireProjectileSource), ({ buffer }) => ({ buffer, width: 16, frames: 15 })),
 		Lightning: Tile.fromImage(await AssetLoader.loadImage(lightningSource), ({ buffer }) => ({ buffer, width: 20, frames: 8 })),
+		SmokeCircular: Tile.fromImage(await AssetLoader.loadImage(smokeCircularSource), ({ buffer }) => ({ buffer, width: 30, frames: 8 })),
+		rainDrop: Tile.fromImage(await AssetLoader.loadImage(rainDropSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
+		rainFloor: Tile.fromImage(await AssetLoader.loadImage(rainFloorSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
+
+
 	},
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
 	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),
