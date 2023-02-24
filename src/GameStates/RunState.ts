@@ -1,6 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { LEVEL_UP, MANA_PERCENT, XP_PERCENT } from "../Constants/ECSEvents"
+import ECSEVENTS, { LEVEL_UP, MANA_PERCENT, SKILL_ICON, SPELL_ICON, XP_PERCENT } from "../Constants/ECSEvents"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
@@ -23,9 +23,11 @@ import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
+import SpellComponent from "../Components/SpellComponent"
 import SpellSystem from "../Systems/SpellSystem"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
 import StatsComponent from "../Components/StatsComponent"
+import SwitchingComponent from "../Components/SwitchingComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import UIRunEntity from "../UIEntities/UIRunEntity"
@@ -89,19 +91,22 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? 'GRAVEYARD']!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats))
-				// this.player.addChildren(PlayerEntity(HEROS.elfMale, WEAPONS.bow, false, this.stats))
 				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats))
-
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? 'DEMONS']!.start()
-
-
 			}; break
 		}
 		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
 		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.stats.xp / this.stats.nextLevel)
 		ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, this.stats.mana / this.stats.maxMana)
-
-
+		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
+			const entity = ECS.getEntityById(id)
+			if (!entity.getComponent(SwitchingComponent).main) {
+				ECS.eventBus.publish<SPELL_ICON>(ECSEVENTS.SPELL_ICON, spell.icon)
+			}
+		})
+		this.stats.skills.forEach(skill => {
+			ECS.eventBus.publish<SKILL_ICON>(ECSEVENTS.SKILL_ICON, skill.icon)
+		})
 
 	}
 	unset(newState?: GameStates) {
