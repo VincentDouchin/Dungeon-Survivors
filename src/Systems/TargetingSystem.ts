@@ -1,14 +1,18 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 
 import BodyComponent from "../Components/BodyComponent";
+import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import Coroutines from "../Globals/Coroutines";
 import HealthComponent from "../Components/HealthComponent";
 import JointComponent from "../Components/JointComponent";
+import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import RangedComponent from "../Components/RangedComponent";
 import RotationComponent from "../Components/RotationComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 import TargeterComponent from "../Components/TargeterComponent";
 import { Vector2 } from "three";
+import assets from "../Globals/Assets";
 import waitFor from "../Utils/WaitFor";
 import { world } from "../Globals/Initialize";
 
@@ -27,7 +31,7 @@ class TargetingSystem extends System {
 			if (!targeter.targetedEnemy) {
 				const enemyId = ECS.getEntitiesAndComponents(HealthComponent)
 					.reduce<[string, number]>(([target, distance], [entityId, health]) => {
-						if (health.type == targeter.target) {
+						if (health.type === targeter.target) {
 							const enemyPosition = ECS.getEntityById(entityId).getComponent(PositionComponent)
 							const distanceToEnemy = enemyPosition.distanceTo(position)
 							if (distanceToEnemy < distance) return [entityId, distanceToEnemy]
@@ -40,6 +44,7 @@ class TargetingSystem extends System {
 
 			const rotation = entity.getComponent(RotationComponent)
 			if (targeter.targetedEnemy) {
+				const sprite = entity.getComponent(SpriteComponent)
 				const enemy = ECS.getEntityById(targeter.targetedEnemy)
 				const enemyPosition = enemy.getComponent(PositionComponent)
 				const direction = enemyPosition.position.clone().sub(position.position).normalize()
@@ -47,7 +52,7 @@ class TargetingSystem extends System {
 				if (targeter.charging) {
 					body.contacts(() => {
 						targeter.charging = false
-					})
+					}, COLLISIONGROUPS.ENEMY, [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.WALL, COLLISIONGROUPS.WEAPON])
 				}
 				if (targeter.charger && distance <= targeter.distanceToTarget && !targeter.charging) {
 					const charge = function* () {
@@ -62,7 +67,7 @@ class TargetingSystem extends System {
 							timer--
 							body.contacts(() => {
 								timer = 0
-							})
+							}, COLLISIONGROUPS.ENEMY, [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.WALL, COLLISIONGROUPS.WEAPON])
 
 							body.velocity.x = targeter.chargingDirection.x * 5
 							body.velocity.y = targeter.chargingDirection.y * 5
@@ -80,6 +85,7 @@ class TargetingSystem extends System {
 					Coroutines.add(function* () {
 						targeter.charging = true
 						yield* waitFor(40)
+						ParticleEntity(position.x, position.y - sprite.scaledHeight / 2, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
 						yield* charge()
 						targeter.charging = false
 					})
