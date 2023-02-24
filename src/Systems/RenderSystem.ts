@@ -58,6 +58,7 @@ class RenderSystem extends System {
 			}
 			sprite.material.opacity = sprite.opacity
 			sprite.mesh.renderOrder = sprite.renderOrder
+			sprite.texture.repeat.x = (sprite.flipped ? -1 : 1)
 		})
 	}
 }

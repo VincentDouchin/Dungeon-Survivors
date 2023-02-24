@@ -10,14 +10,14 @@ class AnimationComponent extends Component {
 	frameRate: number
 	frameCounter = 0
 	maxFrames: number
-	flipped = false
 	start: boolean
-	constructor(tiles: { [key: string]: Tile }, options?: { start?: boolean, frameRate?: number }) {
+	constructor(tiles: { [key: string]: Tile }, options?: { start?: boolean, frameRate?: number, selectedFrame?: number }) {
 		super()
-		const newOptions = Object.assign({ start: true, frameRate: 10 }, options)
+		const newOptions = Object.assign({ start: true, frameRate: 10, selectedFrame: 0 }, options)
 		this.tiles = tiles
 		this.frameRate = newOptions.frameRate
 		this.start = newOptions.start
+		this.selectedFrame = newOptions.selectedFrame
 		this.maxFrames = Math.max(...Object.values(tiles).map(tile => tile.frames))
 		this.currentState = Object.keys(tiles)[0]
 		this.lastState = this.currentState

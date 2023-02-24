@@ -28,7 +28,7 @@ class AnimationSystem extends System {
 				sprite.renderShader.uniforms.uTexture.value = animation.tile.textures[animation.selectedFrame]
 				sprite.render()
 			}
-			sprite.texture.repeat.x = (animation.flipped ? -1 : 1)
+
 		})
 	}
 }

@@ -24,6 +24,7 @@ class SpriteComponent extends Component {
 	opacity: number
 	renderShader?: ShaderPass
 	uniformsKeys: Record<string, string> = {}
+	flipped: boolean
 	uniforms = new Proxy<any>(this, {
 		get(target, prop) {
 			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])).uniforms[prop].value
@@ -35,14 +36,15 @@ class SpriteComponent extends Component {
 			return true
 		}
 	})
-	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[], opacity?: number }) {
+	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[], flipped?: boolean, opacity?: number }) {
 		super()
-		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1 }, options)
+		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1, flipped: false }, options)
 		this.width = tile.width
 		this.height = tile.height
 		this.renderOrder = newOptions.renderOrder
 		this.scale = newOptions.scale
 		this.opacity = newOptions.opacity
+		this.flipped = newOptions.flipped
 
 		this.renderTarget = new WebGLRenderTarget(this.width, this.height)
 		this.effectComposer = new EffectComposer(renderer, this.renderTarget)
