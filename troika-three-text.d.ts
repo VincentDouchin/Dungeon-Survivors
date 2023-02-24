@@ -16,8 +16,8 @@ export class GlyphsGeometry {
     updateGlyphs(...args: any[]): void;
 
 }
-export type anchorY = 'middle' | 'top'
-export type anchorX = 'center'
+export type anchorY = 'middle' | 'top' | 'bottom'
+export type anchorX = 'center' | 'left' | 'right'
 export class Text extends THREE.Object3D {
     text: string
     fontSize: number
