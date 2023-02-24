@@ -18,11 +18,11 @@ class StatsComponent extends Component {
 	xp = 0
 	level = 0
 	nextLevel = 20
-	tokens = 0
 	mana = 100
 	maxMana = 100
 	manaCost = 20
 	linked: boolean
+	skills: Skill[] = []
 	constructor(level = 0, linked = false) {
 		super()
 		this.linked = linked
@@ -30,6 +30,7 @@ class StatsComponent extends Component {
 		if (this.linked) {
 			ECS.eventBus.subscribe<SKILL>(ECSEVENTS.SKILL, (skill: Skill) => {
 				skill.modifier(this)
+				this.skills.push(skill)
 			})
 			ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
 		}
@@ -48,7 +49,7 @@ class StatsComponent extends Component {
 		if (levelUp > 0) {
 			for (let i = 0; i < levelUp; i++) {
 				this.xp = this.xp % this.nextLevel
-				this.nextLevel *= 1.5
+				this.nextLevel *= 1.2
 				this.level++
 				this.updateStats(this.level)
 				ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
