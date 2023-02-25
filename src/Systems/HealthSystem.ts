@@ -54,7 +54,6 @@ class HealthSystem extends System {
 						const damageAmount = damage.calculateDamage(health.defense.value)
 						health.updateHealth(-damageAmount)
 						health.canTakeDamage = false
-
 						// ! Knockback
 						if (body.body) {
 							const knockbackForce = damage.knockback.value * 5000
@@ -75,8 +74,8 @@ class HealthSystem extends System {
 							while (counter < 120) {
 								counter++
 								textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
-								textSprite.mesh.fillOpacity = easeOutExpo(counter, 1, 0, 120)
-								textSprite.mesh.outlineOpacity = easeOutExpo(counter, 1, 0, 120)
+								textSprite.mesh.fillOpacity = easeOutExpo(counter, 2, 0, 120)
+								textSprite.mesh.outlineOpacity = easeOutExpo(counter, 2, 0, 120)
 								yield
 							}
 							return
@@ -88,7 +87,7 @@ class HealthSystem extends System {
 						}
 
 						Coroutines.add(function* () {
-							yield* waitFor(20)
+							yield* waitFor(30)
 							if (sprite) {
 								sprite.removeShader(ColorShader)
 							}
