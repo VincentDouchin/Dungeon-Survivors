@@ -14,6 +14,12 @@ export interface EnemyType {
 	weapon?: WeaponDefinition,
 	charger?: boolean
 	boss?: boolean
+	xp?: number
+	minion?: {
+		type: EnemyType,
+		delay: number,
+		distance: number
+	}
 
 }
 const Enemies: Record<string, EnemyType> = {
@@ -47,7 +53,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 1.5,
 		damage: 3,
-		weapon: WEAPONS.bone
+		weapon: WEAPONS.bone,
+		xp: 2
 	},
 	orcMasked: {
 		tiles: {
@@ -58,7 +65,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3,
-		charger: true
+		charger: true,
+		xp: 2
 	},
 	orcBig: {
 		tiles: {
@@ -70,7 +78,8 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 20,
 		damage: 10,
 		charger: true,
-		boss: true
+		boss: true,
+		xp: 10
 	},
 
 
@@ -105,7 +114,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3,
-		charger: true
+		charger: true,
+		xp: 2
 	},
 	demonBig: {
 		tiles: {
@@ -118,7 +128,8 @@ const Enemies: Record<string, EnemyType> = {
 		damage: 10,
 		charger: true,
 		boss: true,
-		weapon: WEAPONS.fireball
+		weapon: WEAPONS.fireball,
+		xp: 20
 	},
 	// !UNDEAD 
 	zombieSmall: {
@@ -139,7 +150,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		xp: 2
 	},
 	muddy: {
 		tiles: {
@@ -149,7 +161,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.square,
 		speed: 2,
-		damage: 2
+		damage: 2,
+		xp: 2
 	},
 	swampy: {
 		tiles: {
@@ -159,7 +172,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.square,
 		speed: 2,
-		damage: 2
+		damage: 2,
+		xp: 2
 	},
 	necromancer: {
 		tiles: {
@@ -170,7 +184,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 1.5,
 		damage: 3,
-		weapon: WEAPONS.fireball
+		weapon: WEAPONS.fireball,
+		xp: 3
 
 	},
 	zombie: {
@@ -204,7 +219,8 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 10,
 		damage: 10,
 		charger: true,
-		boss: true
+		boss: true,
+		xp: 20
 	},
 	// ! HUMANS
 	bandit: {
@@ -257,7 +273,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3,
-		charger: true
+		charger: true,
+		xp: 2
 	},
 	// ! FOREST
 	bunny: {
@@ -315,12 +332,20 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.mushroom_big_idle_anim,
 			run: assets.tiles.mushroom_big_run_anim
 		},
-		health: 200,
+		health: 300,
 		size: BODYSIZES.big,
 		speed: 20,
 		damage: 10,
 		charger: true,
-		boss: true
+		boss: true,
+		xp: 20,
+		get minion() {
+			return {
+				type: Enemies.mushroomSmall,
+				distance: 50,
+				delay: 180,
+			}
+		}
 	},
 	bear: {
 		tiles: {
@@ -331,7 +356,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.massive,
 		speed: 7,
 		damage: 4,
-		charger: true
+		charger: true,
+		xp: 3
 	},
 	direwolf: {
 		tiles: {
@@ -382,7 +408,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 5
+		damage: 5,
+		xp: 10
 	},
 	elfKing: {
 		tiles: {
@@ -391,7 +418,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 10,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 5
+		damage: 5,
+		xp: 10
 	},
 	leprechaun: {
 		tiles: {
@@ -412,7 +440,8 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2,
-		weapon: WEAPONS.enemyBow
+		weapon: WEAPONS.enemyBow,
+		xp: 2
 	},
 	elfKnight: {
 		tiles: {
@@ -422,7 +451,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		xp: 2
 	},
 	// ! VILLAGERS
 	villagerMale: {
@@ -430,7 +460,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Townsfolk_M_Idle,
 			run: assets.npc.Townsfolk_M_Walk
 		},
-		health: 15,
+		health: 13,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 1
@@ -440,7 +470,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Townsfolk_F_Idle,
 			run: assets.npc.Townsfolk_F_Walk
 		},
-		health: 15,
+		health: 13,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 1
@@ -450,10 +480,11 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Butcher_Idle,
 			run: assets.npc.Butcher_Walk
 		},
-		health: 15,
+		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 2
+		damage: 3,
+		xp: 2
 	},
 	blacksmith: {
 		tiles: {
@@ -462,8 +493,10 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 15,
 		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 2
+		speed: 1.5,
+		damage: 4,
+		weapon: WEAPONS.hammer,
+		xp: 2
 	},
 	alchemist: {
 		tiles: {
@@ -482,17 +515,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 2
-	},
-	herald: {
-		tiles: {
-			idle: assets.npc.Herald_Idle,
-			run: assets.npc.Herald_Walk,
-		},
-		health: 15,
-		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 2
+		damage: 3
 	},
 	thief: {
 		tiles: {
@@ -534,9 +557,20 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 10,
 		damage: 10,
 		charger: true,
-		boss: true
+		boss: true,
+		xp: 30
 	},
 	// ! KINGSGUARD
+	herald: {
+		tiles: {
+			idle: assets.npc.Herald_Idle,
+			run: assets.npc.Herald_Walk,
+		},
+		health: 15,
+		size: BODYSIZES.normal,
+		speed: 2,
+		damage: 2
+	},
 	knight: {
 		tiles: {
 			idle: assets.npc.Knight_Idle,
@@ -555,7 +589,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		xp: 2
 	},
 	knightElite: {
 		tiles: {
@@ -565,7 +600,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 4
+		damage: 4,
+		xp: 2
 	},
 	knightEliteLarge: {
 		tiles: {
@@ -575,7 +611,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.big,
 		speed: 5,
-		damage: 5
+		damage: 5,
+		xp: 4
 	},
 	king: {
 		tiles: {
@@ -585,7 +622,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 5
+		damage: 5,
+		xp: 15
 	},
 	queen: {
 		tiles: {
@@ -595,7 +633,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 4
+		damage: 4,
+		xp: 15
 	},
 	kingOld: {
 		tiles: {
@@ -678,7 +717,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 4
+		damage: 4,
+		xp: 30
 	},
 	angel: {
 		tiles: {
