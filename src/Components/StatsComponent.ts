@@ -46,7 +46,7 @@ class StatsComponent extends Component {
 		if (levelUp > 0) {
 			for (let i = 0; i < levelUp; i++) {
 				this.xp = this.xp % this.nextLevel
-				this.nextLevel *= 1.2
+				this.nextLevel *= (Math.log(this.level + 2) * 1.5)
 				this.level++
 				this.updateStats(this.level)
 				ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
