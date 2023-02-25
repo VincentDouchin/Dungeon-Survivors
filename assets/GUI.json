@@ -1,5 +1,5 @@
 { "frames": {
-   "GUI.ase": {
+   "GUI.png": {
     "frame": { "x": 0, "y": 0, "w": 401, "h": 304 },
     "rotated": false,
     "trimmed": false,
@@ -20,8 +20,8 @@
    { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "bar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 134, "y": 20, "w": 52, "h": 7 } }] },
-   { "name": "xp", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 20, "w": 52, "h": 7 } }] },
+   { "name": "bar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 134, "y": 20, "w": 53, "h": 7 } }] },
+   { "name": "xp", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 20, "w": 53, "h": 7 } }] },
    { "name": "healthBar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 129, "w": 16, "h": 3 } }] },
    { "name": "healthFull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 133, "w": 16, "h": 3 } }] },
    { "name": "box", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 98, "y": 36, "w": 24, "h": 24 } }] },
@@ -38,7 +38,7 @@
    { "name": "pauseicon", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 80, "w": 16, "h": 16 } }] },
    { "name": "arrowselected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 32, "w": 16, "h": 16 } }] },
    { "name": "character", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 133, "y": 67, "w": 8, "h": 7 } }] },
-   { "name": "mana", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 13, "w": 52, "h": 7 } }] }
+   { "name": "mana", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 13, "w": 53, "h": 7 } }] }
   ]
  }
 }
