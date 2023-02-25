@@ -14,6 +14,6 @@ Engine.addState(GameStates.run, new RunState())
 Engine.addState(GameStates.levelUp, new LevelUpState())
 Engine.addState(GameStates.pause, new PauseState())
 Engine.addState(GameStates.map, new MapState())
-Engine.setState(GameStates.map)
+Engine.setState((import.meta.env.VITE_DEBUG_ENCOUNTER as string) === 'true' ? GameStates.run : GameStates.map)
 Engine.start()
 
