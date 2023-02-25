@@ -8,6 +8,7 @@ import FlockingComponent from "../Components/FlockingComponent"
 import HealthComponent from "../Components/HealthComponent"
 import { HeroDefinition } from "../Constants/Heros"
 import LightComponent from "../Components/LightComponent"
+import ManaComponent from "../Components/ManaComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RangedComponent from "../Components/RangedComponent"
 import ShadowComponent from "../Components/ShadowComponent"
@@ -20,7 +21,7 @@ import { WeaponDefinition } from "../Constants/Weapons"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
-const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: boolean, stats: StatsComponent) => {
+const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent) => {
 	const player = new Entity('player')
 	player.addComponent(new SpellComponent(hero.spell))
 	player.addComponent(new SpriteComponent(hero.tiles.idle,))
@@ -40,6 +41,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: bool
 	))
 	player.addComponent(new PositionComponent(Math.random() * 40 - 20, Math.random() * 40 - 20))
 	player.addComponent(stats)
+	player.addComponent(mana)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
 	player.addChildren(WeaponEntity(weapon, player, stats))

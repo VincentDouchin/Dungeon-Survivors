@@ -5,7 +5,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import TokenComponent from "../Components/TokenComponent"
 import assets from "../Globals/Assets"
 
-const TokenEntity = () => {
+const ManaDropEntity = () => {
 	const token = new Entity('token')
 	token.addComponent(new SpriteComponent(assets.icons.gem, { renderOrder: 1, scale: 0.8 }))
 	token.addComponent(new BodyComponent(
@@ -16,4 +16,4 @@ const TokenEntity = () => {
 	token.addComponent(new TokenComponent())
 	return token
 }
-export default TokenEntity
+export default ManaDropEntity

@@ -3,6 +3,7 @@ import ECSEVENTS, { MANA_PERCENT } from "../Constants/ECSEvents";
 
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
+import ManaComponent from "../Components/ManaComponent";
 import PositionComponent from "../Components/PositionComponent";
 import StatsComponent from "../Components/StatsComponent";
 import TokenComponent from "../Components/TokenComponent";
@@ -18,6 +19,7 @@ class XPPickupSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
 			const stats = entity.getRecursiveComponent(StatsComponent)
+			const mana = entity.getRecursiveComponent(ManaComponent)
 			body.contacts((otherEntity: Entity) => {
 
 				const otherBody = otherEntity.getComponent(BodyComponent)
@@ -40,9 +42,9 @@ class XPPickupSystem extends System {
 				}
 				if (token) {
 					otherEntity.destroy()
-					if (!stats) return
-					stats.mana = Math.min(stats.maxMana, stats.mana + 15)
-					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, stats.mana / stats.maxMana)
+					if (!mana) return
+					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
+					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 
 				}
 

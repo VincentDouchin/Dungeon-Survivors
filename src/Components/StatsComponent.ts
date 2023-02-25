@@ -13,27 +13,24 @@ class StatsComponent extends Component {
 	critChance = new StatModifier()
 	knockback = new StatModifier()
 	xpModifier = new StatModifier()
-	defense = new StatModifier(0.05)
-	health = new StatModifier(0.10)
+	defense = new StatModifier(0.02)
+	health = new StatModifier(0.05)
+	manaMax = new StatModifier()
+	spellDamage = new StatModifier()
 	xp = 0
 	level = 0
 	nextLevel = 20
-	mana = 100
-	maxMana = 100
-	manaCost = 20
 	linked: boolean
-	skills: Skill[] = []
 	constructor(level = 0, linked = false) {
 		super()
 		this.linked = linked
 		this.updateStats(level)
 		if (this.linked) {
-			ECS.eventBus.subscribe<SKILL>(ECSEVENTS.SKILL, (skill: Skill) => {
-				skill.modifier(this)
-				this.skills.push(skill)
-			})
 			ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
 		}
+		ECS.eventBus.subscribe<SKILL>(ECSEVENTS.SKILL, (skill: Skill) => {
+			skill.modifier(this)
+		})
 	}
 	get stats() {
 		return [this.attackSpeed, this.speed, this.damage, this.critDamage, this.critChance, this.knockback, this.xpModifier, this.defense, this.health]

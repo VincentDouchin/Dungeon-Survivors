@@ -1,10 +1,10 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 import ECSEVENTS, { MANA_PERCENT } from "../Constants/ECSEvents";
 
+import ManaComponent from "../Components/ManaComponent";
 import PositionComponent from "../Components/PositionComponent";
 import { SKILL } from "../Constants/InputsNames";
 import SpellComponent from "../Components/SpellComponent";
-import StatsComponent from "../Components/StatsComponent";
 import SwitchingComponent from "../Components/SwitchingComponent";
 import { inputManager } from "../Globals/Initialize";
 
@@ -20,11 +20,11 @@ class SpellSystem extends System {
 				if (attack && switcher && !switcher?.main) {
 					const position = entity.getComponent(PositionComponent)
 					const spell = entity.getComponent(SpellComponent)
-					const stats = entity.getComponent(StatsComponent)
-					if (stats.mana > stats.manaCost) {
+					const mana = entity.getComponent(ManaComponent)
+					if (mana.mana > mana.manaCost) {
 						spell.spell(position.position)
-						stats.mana -= stats.manaCost
-						ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, stats.mana / stats.maxMana)
+						mana.mana -= mana.manaCost
+						ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					}
 
 				}

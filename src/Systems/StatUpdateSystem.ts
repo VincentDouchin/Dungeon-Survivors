@@ -3,6 +3,7 @@ import { Entity, System } from "../Globals/ECS";
 import BodyComponent from "../Components/BodyComponent";
 import DamageComponent from "../Components/DamageComponent";
 import HealthComponent from "../Components/HealthComponent";
+import ManaComponent from "../Components/ManaComponent";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
 import StatsComponent from "../Components/StatsComponent";
@@ -19,6 +20,7 @@ class StatUpdateSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			const shooter = entity.getComponent(ShooterComponent)
 			const body = entity.getComponent(BodyComponent)
+			const mana = entity.getComponent(ManaComponent)
 			if (health) {
 				health.maxHealth.modifier ??= stats.health
 				health.defense.modifier ??= stats.health
@@ -38,6 +40,9 @@ class StatUpdateSystem extends System {
 			if (shooter) {
 				shooter.delay.modifier ??= stats.attackSpeed
 				shooter.damage.modifier ??= stats.damage
+			}
+			if (mana) {
+				mana.maxMana.modifier ??= stats.manaMax
 			}
 		})
 	}
