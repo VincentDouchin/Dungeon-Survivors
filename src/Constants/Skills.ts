@@ -37,6 +37,16 @@ const SKILLS: Skill[] = [
 		name: 'Movement speed',
 		modifier: (skill: StatsComponent) => skill.speed.percent += 0.15
 	},
+	{
+		icon: assets.skills.mana_replenish,
+		name: 'Mana up',
+		modifier: (skill: StatsComponent) => skill.manaMax.percent += 0.1
+	},
+	{
+		icon: assets.skills.magic_amplification,
+		name: 'Spell damage',
+		modifier: (skill: StatsComponent) => skill.spellDamage.percent += 0.15
+	},
 
 ]
 export default SKILLS
