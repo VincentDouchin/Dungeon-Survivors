@@ -5,6 +5,7 @@ import ManaComponent from "../Components/ManaComponent";
 import PositionComponent from "../Components/PositionComponent";
 import { SKILL } from "../Constants/InputsNames";
 import SpellComponent from "../Components/SpellComponent";
+import StatsComponent from "../Components/StatsComponent";
 import SwitchingComponent from "../Components/SwitchingComponent";
 import { inputManager } from "../Globals/Initialize";
 
@@ -21,8 +22,9 @@ class SpellSystem extends System {
 					const position = entity.getComponent(PositionComponent)
 					const spell = entity.getComponent(SpellComponent)
 					const mana = entity.getComponent(ManaComponent)
+					const stats = entity.getComponent(StatsComponent)
 					if (mana.mana > mana.manaCost) {
-						spell.spell(position.position)
+						spell.spell(position.position, stats)
 						mana.mana -= mana.manaCost
 						ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					}

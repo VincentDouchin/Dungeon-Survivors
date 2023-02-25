@@ -7,11 +7,12 @@ import DamageComponent from "../Components/DamageComponent"
 import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import { Vector2 } from "three"
 import assets from "../Globals/Assets"
 
-const LightningSpellEntity = (parentPosition: Vector2) => {
+const LightningSpellEntity = (parentPosition: Vector2, stats: StatsComponent) => {
 
 	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [id, position]) => {
 		const enemy = ECS.getEntityById(id)
@@ -32,7 +33,7 @@ const LightningSpellEntity = (parentPosition: Vector2) => {
 		lightning.addComponent(new SpriteComponent(tile))
 		const animation = lightning.addComponent(new AnimationComponent({ default: tile }))
 		lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
-		lightning.addComponent(new DamageComponent(2, [COLLISIONGROUPS.ENEMY], -1))
+		lightning.addComponent(new DamageComponent(stats.spellDamage.calculateValue(2), [COLLISIONGROUPS.ENEMY], -1))
 		lightning.addComponent(new BodyComponent({}, [{
 			width: tile.width, height: tile.height, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
 		}]))
