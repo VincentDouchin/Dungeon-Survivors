@@ -1,6 +1,7 @@
 import { Entity, System } from "../Globals/ECS";
 
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent";
+import PositionComponent from "../Components/PositionComponent";
 import { camera } from "../Globals/Initialize";
 
 class BackgroundElementSpawnerSystem extends System {
@@ -10,6 +11,14 @@ class BackgroundElementSpawnerSystem extends System {
 	update(entities: Entity[]): void {
 		entities.forEach(entity => {
 			const { size, elements, noise, entities, obstaclesDensity } = entity.getComponent(BackgroundElementsComponent)
+			for (const [key, obstacle] of Object.entries(entities)) {
+				const position = obstacle.getComponent(PositionComponent)
+				if (!position) continue
+				if (position.x > camera.position.x + camera.right * 2 || position.x < camera.position.x + camera.left * 2 || position.y > camera.position.y + camera.top * 2 || position.y < camera.position.y + camera.bottom * 2) {
+					delete entities[key]
+					obstacle.destroy()
+				}
+			}
 			for (let x = camera.left + camera.position.x - size; x < camera.right + camera.position.x + size; x += size) {
 				for (let y = camera.bottom + camera.position.y - size; y < camera.top + camera.position.y + size; y += size) {
 					const chunkX = Math.floor(x / size)
