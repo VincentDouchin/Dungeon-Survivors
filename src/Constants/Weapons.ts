@@ -16,7 +16,8 @@ export interface WeaponDefinition {
 	group: number
 	target: number,
 	rotationSpeed?: number
-	light?: string
+	light?: string,
+	scale?: number
 }
 const WEAPONS: Record<string, WeaponDefinition> = {
 	swordKnight: {
@@ -102,6 +103,18 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		range: 150,
 		rotationSpeed: 0.5,
 		speed: 150
+	},
+	iceSpike: {
+		tile: assets.UI.empty,
+		damage: 5,
+		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
+		projectile: assets.effects.iceSpike,
+		group: COLLISIONGROUPS.ENEMY,
+		target: COLLISIONGROUPS.PLAYER,
+		delay: 240,
+		range: 150,
+		speed: 150,
+		scale: 0.5
 	}
 }
 export default WEAPONS

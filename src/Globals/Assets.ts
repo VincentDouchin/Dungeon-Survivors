@@ -8,6 +8,7 @@ import Tile from "../Utils/Tile"
 import arenasSource from './../../assets/map/Arenas.json'
 import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
 import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
+import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
@@ -74,6 +75,7 @@ const assets: {
 		SmokeCircular: Tile.fromImage(await AssetLoader.loadImage(smokeCircularSource), ({ buffer }) => ({ buffer, width: 30, frames: 8 })),
 		rainDrop: Tile.fromImage(await AssetLoader.loadImage(rainDropSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
 		rainFloor: Tile.fromImage(await AssetLoader.loadImage(rainFloorSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
+		iceSpike: Tile.fromImage(await AssetLoader.loadImage(iceSpikeSource), ({ buffer }) => ({ buffer, width: 10, frames: 8 })),
 
 
 	},

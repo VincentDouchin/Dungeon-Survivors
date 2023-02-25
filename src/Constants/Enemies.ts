@@ -193,7 +193,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.zombie_idle_anim,
 			run: assets.tiles.zombie_run_anim
 		},
-		health: 40,
+		health: 30,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2,
@@ -207,7 +207,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 4
+		damage: 4,
+		weapon: WEAPONS.iceSpike
 	},
 	ogre: {
 		tiles: {
