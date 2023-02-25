@@ -9,6 +9,7 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
+import Coroutines from "../Globals/Coroutines"
 import Encounter from "../Game/Encounter"
 import Engine from "../Globals/Engine"
 import ExpirationSystem from "../Systems/ExpirationSystem"
@@ -27,14 +28,19 @@ import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import SpellComponent from "../Components/SpellComponent"
 import SpellSystem from "../Systems/SpellSystem"
+import SpriteComponent from "../Components/SpriteComponent"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
+import TextComponent from "../Components/TextComponent"
+import UIPositionComponent from "../Components/UIPositionComponent"
 import UIRunEntity from "../UIEntities/UIRunEntity"
 import WEAPONS from "../Constants/Weapons"
 import XPPickupSystem from "../Systems/XPPickupSystem"
+import assets from "../Globals/Assets"
+import waitFor from "../Utils/WaitFor"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -43,6 +49,7 @@ class RunState implements GameState {
 	stats = new StatsComponent(0, true)
 	mana = new ManaComponent()
 	encounter: Encounter | null = null
+	tutorialShown = false
 	constructor() {
 	}
 
@@ -95,8 +102,20 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats, this.mana))
-				// this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats, this.mana))
+				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats, this.mana))
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? (import.meta.env.VITE_DEFAULT_ENEMIES as enemyWaveName)]!().start()
+				if (!this.tutorialShown) {
+					const tutorial = new Entity('tutorial')
+					tutorial.addComponent(new SpriteComponent(assets.UI.empty))
+					tutorial.addComponent(new TextComponent('WASD - Movement     Shift - Switch charcaters     P - Spell     Escape - Pause'))
+					tutorial.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: -1 }))
+					Coroutines.add(function* () {
+						yield* waitFor(600)
+						tutorial.destroy()
+
+					})
+					this.tutorialShown = true
+				}
 			}; break
 		}
 		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
