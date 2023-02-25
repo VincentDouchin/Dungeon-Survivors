@@ -12,7 +12,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 	const projectile = new Entity('projectile')
 	const tile = projectileDefinition.projectile
-	projectile.addComponent(new SpriteComponent(tile))
+	projectile.addComponent(new SpriteComponent(tile, { scale: projectileDefinition.scale }))
 	if (tile.frames > 1) {
 		projectile.addComponent(new AnimationComponent({ idle: tile }))
 	}
@@ -23,10 +23,6 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 				{ mass: 0.1, group: projectileDefinition.group, contact: true, sensor: true, canCollideWith: [projectileDefinition.target], width: tile.width, height: tile.height }
 			]
 		))
-	// if (projectileDefinition.light) {
-
-	// 	projectile.addComponent(new LightComponent(new Color(projectileDefinition.light), 50))
-	// }
 	projectile.addComponent(new DamageComponent(projectileDefinition.damage.value, [projectileDefinition.target], 1))
 	projectile.addComponent(new PositionComponent(position.x, position.y))
 	const rotationComponent = projectile.addComponent(new RotationComponent(rotation, 0))

@@ -15,6 +15,7 @@ class ShooterComponent extends Component {
 	speed: number
 	damage: Stat
 	rotationSpeed: number
+	scale: number
 	light?: string
 	constructor(weaponDefinition: WeaponDefinition) {
 		super()
@@ -30,6 +31,7 @@ class ShooterComponent extends Component {
 		this.timer = Math.random() * this.delay.value
 		this.rotationSpeed = (weaponDefinition?.rotationSpeed ?? 0)
 		this.light = weaponDefinition.light
+		this.scale = weaponDefinition.scale ?? 1
 	}
 }
 ShooterComponent.register()
