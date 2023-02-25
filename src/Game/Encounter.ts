@@ -1,6 +1,6 @@
 import Coroutines, { Coroutine } from "../Globals/Coroutines";
 import { ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
+import ECSEVENTS, { ADD_TO_ENCOUNTER, DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
@@ -10,7 +10,7 @@ import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import State from "../Globals/State";
 import StatsComponent from "../Components/StatsComponent";
-import assets from "../Globals/Assets"
+import assets from "../Globals/Assets";
 import { camera } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
 
@@ -22,6 +22,7 @@ class Encounter {
 	started = false
 	subscriber: EventCallBack<Entity>
 	levelSubscriber: EventCallBack<number>
+	addEnemySuscriber: EventCallBack<Entity>
 	coroutine?: Coroutine
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
@@ -31,6 +32,9 @@ class Encounter {
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, (level) => {
 			this.stats.updateStats(level)
+		})
+		this.addEnemySuscriber = ECS.eventBus.subscribe<ADD_TO_ENCOUNTER>(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
+			this.enemies.push(entity.id)
 		})
 		this.stats = new StatsComponent(State.timer % 120)
 
@@ -117,6 +121,7 @@ class Encounter {
 			yield
 			ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, self.subscriber)
 			ECS.eventBus.unsubscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, self.levelSubscriber)
+			ECS.eventBus.unsubscribe<ADD_TO_ENCOUNTER>(ECSEVENTS.ADD_TO_ENCOUNTER, self.addEnemySuscriber)
 			Engine.setState(GameStates.map)
 
 		})

@@ -54,6 +54,10 @@ export interface SKILL_ICON extends Event {
 	type: ECSEVENTS.SKILL_ICON
 	data: Tile
 }
+export interface ADD_TO_ENCOUNTER extends Event {
+	type: ECSEVENTS.ADD_TO_ENCOUNTER
+	data: Entity
+}
 
 
 
@@ -70,6 +74,7 @@ enum ECSEVENTS {
 	MANA_PERCENT = 'MANA_PERCENT',
 	SPELL_ICON = 'SPELL_ICON',
 	SKILL_ICON = 'SKILL_ICON',
+	ADD_TO_ENCOUNTER = 'ADD_TO_ENCOUNTER'
 }
 
 export default ECSEVENTS
