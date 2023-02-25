@@ -105,6 +105,7 @@ weapon_regular_sword 323 26 10 21
 weapon_red_gem_sword 339 26 10 21
 weapon_big_hammer 291 42 10 37
 weapon_hammer 307 55 10 24
+weapon_hammer_projectile 352 64 16 16
 weapon_baton_with_spikes 323 57 10 22
 weapon_mace 339 55 10 24
 weapon_katana 293 82 6 29
