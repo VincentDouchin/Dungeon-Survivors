@@ -30,6 +30,7 @@ import SpellComponent from "../Components/SpellComponent"
 import SpellSystem from "../Systems/SpellSystem"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
+import State from "../Globals/State"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
@@ -109,7 +110,7 @@ class RunState implements GameState {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}
 				this.encounter.start()
-				if (!this.tutorialShown) {
+				if (!this.tutorialShown && !State.mobile) {
 					const tutorial = new Entity('tutorial')
 					tutorial.addComponent(new SpriteComponent(assets.UI.empty))
 					tutorial.addComponent(new TextComponent('WASD - Movement     Shift - Switch charcaters     P - Spell     Escape - Pause'))
