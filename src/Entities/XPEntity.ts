@@ -13,7 +13,7 @@ const XPEntity = () => {
 	xp.addComponent(new BodyComponent(
 		{ moveForce: 1000 },
 		[
-			{ width: 2, height: 2, contact: true, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 }
+			{ width: 2, height: 2, contact: false, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 }
 		]))
 	xp.addComponent(new XPComponent(1))
 	return xp
