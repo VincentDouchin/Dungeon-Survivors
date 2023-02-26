@@ -377,7 +377,7 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 500,
 		size: BODYSIZES.giant,
-		speed: 100,
+		speed: 15,
 		damage: 8
 	},
 	//! ELVES
@@ -406,7 +406,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.elf_queen_m_idle_anim,
 			run: assets.tiles.elf_queen_m_run_anim
 		},
-		health: 30,
+		health: 50,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 5,
@@ -416,7 +416,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.tiles.elf_king_f_idle_anim,
 		},
-		health: 10,
+		health: 50,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 5,
@@ -454,6 +454,17 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 2,
 		damage: 3,
 		xp: 2
+	},
+	goldenKnight: {
+		tiles: {
+			idle: assets.tiles.knight_elite_idle_anim,
+			run: assets.tiles.knight_elite_run_anim
+		},
+		health: 50,
+		size: BODYSIZES.big,
+		speed: 4,
+		damage: 5,
+		xp: 5
 	},
 	// ! VILLAGERS
 	villagerMale: {
@@ -567,7 +578,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Herald_Idle,
 			run: assets.npc.Herald_Walk,
 		},
-		health: 15,
+		health: 10,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -587,7 +598,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.HeavyKnight_Idle,
 			run: assets.npc.HeavyKnight_Walk,
 		},
-		health: 15,
+		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3,
@@ -598,7 +609,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.EliteKnight_Idle,
 			run: assets.npc.EliteKnight_Walk,
 		},
-		health: 15,
+		health: 25,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 4,
@@ -609,7 +620,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.LargeEliteKnight_Idle,
 			run: assets.npc.LargeEliteKnight_Walk,
 		},
-		health: 15,
+		health: 40,
 		size: BODYSIZES.big,
 		speed: 5,
 		damage: 5,
@@ -620,7 +631,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.King_Idle,
 			run: assets.npc.King_Walk,
 		},
-		health: 15,
+		health: 50,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 5,
@@ -631,7 +642,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Queen_Idle,
 			run: assets.npc.Queen_Walk,
 		},
-		health: 15,
+		health: 50,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 4,
@@ -661,7 +672,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.tiles.cleric_1_idle_anim,
 		},
-		health: 15,
+		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -679,7 +690,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.tiles.cleric_3_idle_anim,
 		},
-		health: 15,
+		health: 10,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -688,7 +699,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.npc["FatNun_Idle + Walk"],
 		},
-		health: 15,
+		health: 20,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -706,7 +717,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.npc["SkinnyNun_Idle + Walk"],
 		},
-		health: 15,
+		health: 10,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -720,6 +731,17 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 2,
 		damage: 4,
 		xp: 30
+	},
+	templar: {
+		tiles: {
+			idle: assets.npc.Templar_Idle,
+			run: assets.npc.Templar_Walk
+		},
+		health: 20,
+		size: BODYSIZES.normal,
+		speed: 2,
+		damage: 4,
+		xp: 2
 	},
 	angel: {
 		tiles: {
