@@ -1,19 +1,15 @@
 {
-	"identifier": "CASTLE",
-	"uniqueIdentifer": "236f36b0-9f30-11ed-83b4-816e7fc102f5",
-	"x": 4624,
+	"identifier": "FIELDS",
+	"uniqueIdentifer": "24e3ec70-9f30-11ed-8fb4-c931e5634bed",
+	"x": 5648,
 	"y": -512,
 	"width": 1024,
 	"height": 1024,
 	"bgColor": "#696A79",
 	"neighbourLevels": [
 		{
-			"levelIid": "bb6133f0-9f30-11ed-83b4-5555487a9e28",
+			"levelIid": "236f36b0-9f30-11ed-83b4-816e7fc102f5",
 			"dir": "w"
-		},
-		{
-			"levelIid": "24e3ec70-9f30-11ed-8fb4-c931e5634bed",
-			"dir": "e"
 		}
 	],
 	"customFields": {

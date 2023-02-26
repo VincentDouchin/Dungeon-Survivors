@@ -29,7 +29,8 @@
 		"Water.png",
 		"Tiles.png",
 		"FLOOR_DETAILS.png",
-		"CASTLEROAD.png"
+		"CASTLEROAD.png",
+		"Fields.png"
 	],
 	"entities": {
 		"Wall": [
