@@ -2,7 +2,7 @@ import { Color } from "three"
 import Tile from "../Utils/Tile"
 import assets from "../Globals/Assets"
 
-export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAMP' | 'GRAVEYARD' | 'TOWN' | 'CASTLE'
+export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAMP' | 'GRAVEYARD' | 'TOWN' | 'CASTLE' | 'FIELDS'
 
 export interface Background {
 	level: string
@@ -11,6 +11,10 @@ export interface Background {
 	obstaclesDensity?: number
 	leafs?: boolean
 	rain?: boolean
+	boundaries?: {
+		x: number,
+		y: number
+	}
 	infinite: { x: boolean, y: boolean }
 }
 
@@ -21,7 +25,6 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 		obstacles: [assets.hole.hole],
 		obstaclesDensity: 0.25,
 		infinite: { x: true, y: true }
-
 	},
 	FOREST: {
 		level: 'FOREST',
@@ -34,7 +37,11 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 	CAMP: {
 		level: 'CAMP',
 		lightColor: new Color('hsl(0,0%,100%)'),
-		infinite: { x: false, y: false }
+		infinite: { x: false, y: false },
+		boundaries: {
+			x: 750,
+			y: 750
+		}
 	},
 	GRAVEYARD: {
 		level: 'GRAVEYARD',
@@ -55,6 +62,11 @@ const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
 		level: 'CASTLE',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		infinite: { x: false, y: true }
+	},
+	FIELDS: {
+		level: 'FIELDS',
+		lightColor: new Color('hsl(0,0%,100%)'),
+		infinite: { x: true, y: true }
 	}
 
 }

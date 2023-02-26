@@ -99,11 +99,16 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				this.background = BackgroundEntity(BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!)
+				const backgroundDefinition = BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!
+				this.background = BackgroundEntity(backgroundDefinition)
 				this.player = new Entity('player')
 				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats, this.mana))
 				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats, this.mana))
-				this.encounter ??= ENEMYWAVES[options?.enemies ?? (import.meta.env.VITE_DEFAULT_ENEMIES as enemyWaveName)]!().start()
+				this.encounter ??= ENEMYWAVES[options?.enemies ?? (import.meta.env.VITE_DEFAULT_ENEMIES as enemyWaveName)]()
+				if (backgroundDefinition.boundaries) {
+					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
+				}
+				this.encounter.start()
 				if (!this.tutorialShown) {
 					const tutorial = new Entity('tutorial')
 					tutorial.addComponent(new SpriteComponent(assets.UI.empty))
@@ -112,7 +117,6 @@ class RunState implements GameState {
 					Coroutines.add(function* () {
 						yield* waitFor(600)
 						tutorial.destroy()
-
 					})
 					this.tutorialShown = true
 				}
