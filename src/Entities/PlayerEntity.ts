@@ -21,6 +21,7 @@ import { WeaponDefinition } from "../Constants/Weapons"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
+const playergroup = FlockingComponent.getGroup()
 const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent) => {
 	const player = new Entity('player')
 	player.addComponent(new SpellComponent(hero.spell))
@@ -30,7 +31,7 @@ const PlayerEntity = (hero: HeroDefinition, weapon: WeaponDefinition, main: bool
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (!weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
 	player.addComponent(new SwitchingComponent(main))
-	player.addComponent(new FlockingComponent(!main, 100))
+	player.addComponent(new FlockingComponent(playergroup, !main, 100))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 15000 },
 		[

@@ -27,7 +27,8 @@ class FlockingSystem extends System {
 			let neighborCount = 0
 
 			for (let otherEntity of entities) {
-
+				const otherFlocking = otherEntity.getComponent(FlockingComponent)
+				if (otherFlocking.group !== flocking.group) continue
 				if (otherEntity.id == entity.id) continue
 				const otherPosition = otherEntity.getComponent(PositionComponent)
 				const otherBody = otherEntity.getComponent(BodyComponent)
@@ -46,10 +47,10 @@ class FlockingSystem extends System {
 				cohesion.divide(neighborVec)
 				cohesion.sub(position.position).divide(neighborVec)
 				const velocity = new Vector2()
-					.add(separation.multiply(nbToVec(0.1)))
+					.add(separation.multiply(nbToVec(1)))
 					.add(alignment.multiply(nbToVec(3)))
 					.add(cohesion.multiply(nbToVec(1)))
-				body.velocity = velocity.divide(nbToVec(100))
+				body.velocity = velocity.normalize()
 			}
 		})
 	}
