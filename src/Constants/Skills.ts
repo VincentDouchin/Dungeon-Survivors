@@ -20,7 +20,7 @@ const SKILLS: Skill[] = [
 	{
 		icon: assets.skills.defense_boost,
 		name: 'Defense',
-		modifier: (skill: StatsComponent) => skill.defense.percent += 0.1
+		modifier: (skill: StatsComponent) => skill.defense.percent += 0.10
 	},
 	{
 		icon: assets.skills.exp_boost,
@@ -35,12 +35,12 @@ const SKILLS: Skill[] = [
 	{
 		icon: assets.skills.swiftness,
 		name: 'Movement speed',
-		modifier: (skill: StatsComponent) => skill.speed.percent += 0.15
+		modifier: (skill: StatsComponent) => skill.speed.percent += 0.10
 	},
 	{
 		icon: assets.skills.mana_replenish,
 		name: 'Mana up',
-		modifier: (skill: StatsComponent) => skill.manaMax.percent += 0.1
+		modifier: (skill: StatsComponent) => skill.manaMax.percent += 0.10
 	},
 	{
 		icon: assets.skills.magic_amplification,
