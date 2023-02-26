@@ -6,6 +6,7 @@ import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
 import { EventCallBack } from "../Utils/EventBus";
+import FlockingComponent from "../Components/FlockingComponent";
 import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import State from "../Globals/State";
@@ -43,21 +44,13 @@ class Encounter {
 		this.boundary = { x: x / 2, y: y / 2 }
 		return this
 	}
-	addWave(enemies: Array<[EnemyType, number]>, waves: number, delay?: number) {
+	addWave(enemies: Array<[EnemyType, number]>, waves: number = 1, delay: number = 600) {
 		const self = this
 		this.waves.push(function* () {
-			let counter = 0
-			let timer = 0
-
-			while (counter < waves) {
-				if (timer === 0) {
-					yield* self.spawnEnemies(enemies)
-					counter++
-				}
-				timer = (timer + 1) % (delay ?? 600)
-				yield
+			for (let i = 0; i < waves; i++) {
+				yield* self.spawnEnemies(enemies)
+				yield* waitFor(delay)
 			}
-			yield
 		})
 		return this
 	}
@@ -82,22 +75,28 @@ class Encounter {
 		}
 	}
 	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
-		ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
+		return ParticleEntity(x, y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
 			this.enemies.push(enemy.id)
+			return enemy
 		})
 	}
 	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards: number = 8, distance: number) {
 		const self = this
 		this.waves.push(function* () {
+			const group = FlockingComponent.getGroup()
 			const { x, y } = self.getDistance(distance)
-			self.spawnEnemy(mainEnemy, x, y)
+			self.spawnEnemy(mainEnemy, x, y).then(main => {
+				main.addComponent(new FlockingComponent(group, false))
+			})
 			yield* waitFor(Math.random() * 10)
 			for (let i = 0; i < nbOfGuards; i++) {
 				const angle = Math.PI * 2 * i / nbOfGuards
 				const guardX = x + Math.cos(angle) * distance
 				const guardY = y + Math.sin(angle) * distance
-				self.spawnEnemy(guard, guardX, guardY)
+				self.spawnEnemy(guard, guardX, guardY).then(guard => {
+					guard.addComponent(new FlockingComponent(group, false))
+				})
 				yield* waitFor(Math.random() * 10)
 			}
 		})

@@ -1,12 +1,18 @@
 import { Component } from "../Globals/ECS";
 
+type flockingGroup = string & { __type: 'flocking group' }
 class FlockingComponent extends Component {
 	distance: number
 	main: boolean
-	constructor(main?: boolean, distance?: number) {
+	group: flockingGroup
+	constructor(group: flockingGroup, main: boolean = false, distance: number = 50) {
 		super()
-		this.main = main ?? false
-		this.distance = distance ?? 50
+		this.group = group
+		this.main = main
+		this.distance = distance
+	}
+	static getGroup() {
+		return window.crypto.randomUUID() as flockingGroup
 	}
 }
 FlockingComponent.register()
