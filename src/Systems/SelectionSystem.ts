@@ -1,10 +1,11 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 import ECSEVENTS, { SELECTED } from "../Constants/ECSEvents";
 import INPUTS, { VALIDATE } from "../Constants/InputsNames";
+import { inputManager, soundManager } from "../Globals/Initialize";
 
+import { ALLSOUNDS } from "../Globals/Sounds";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import { inputManager } from "../Globals/Initialize";
 
 class SelectionSystem extends System {
 	selectedEntity?: Entity
@@ -31,6 +32,7 @@ class SelectionSystem extends System {
 			}
 			if (entity.id === this.selectedEntity?.id) {
 				if (this.clicked.includes(sprite.mesh.id) || inputManager.getInput(VALIDATE)?.once) {
+					soundManager.play(ALLSOUNDS.Validate)
 					selectable.onValidated()
 					this.clicked = []
 					break
@@ -38,6 +40,7 @@ class SelectionSystem extends System {
 				sprite.uniforms.uTexture = selectable.selectedTile.texture
 				for (let input of INPUTS) {
 					if (inputManager.getInput(input)?.once) {
+						soundManager.play(ALLSOUNDS.Select)
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {
 							this.selectedEntity = nextEntity

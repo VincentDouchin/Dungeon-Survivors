@@ -23,7 +23,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?
 			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentSprite?.height) / 2, parent),
 			[WEAPONBEHAVIORS.targeter]: new TargeterComponent(weaponDefinition.target),
 			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
-			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, [COLLISIONGROUPS.ENEMY], -1, 5)
+			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, [COLLISIONGROUPS.ENEMY], -1, 5, weaponDefinition.sound)
 		}[behavior]
 		weapon.addComponent(component)
 	}

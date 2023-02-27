@@ -49,5 +49,11 @@ class AssetLoader {
 			return { ...acc, [v.split(/[.\/]/).at(-2) as string]: images[index] }
 		}, {})
 	}
+	static async loadSounds(glob: Record<string, { default: string }>) {
+		const sounds = Object.values(glob).map(module => new Audio(module.default))
+		return Object.keys(glob).reduce((acc, v, index) => {
+			return { ...acc, [v.split(/[.\/]/).at(-2) as string]: sounds[index] }
+		}, {})
+	}
 }
 export default AssetLoader

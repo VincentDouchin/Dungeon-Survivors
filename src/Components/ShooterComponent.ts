@@ -1,4 +1,5 @@
 import { Component } from "../Globals/ECS";
+import { SOUNDS } from "../Globals/Sounds";
 import { Stat } from "../Game/Stat";
 import Tile from "../Utils/Tile";
 import { WeaponDefinition } from "../Constants/Weapons";
@@ -17,6 +18,7 @@ class ShooterComponent extends Component {
 	rotationSpeed: number
 	scale: number
 	light?: string
+	sound?: SOUNDS
 	constructor(weaponDefinition: WeaponDefinition) {
 		super()
 		this.damage = new Stat(weaponDefinition.damage)
@@ -32,6 +34,7 @@ class ShooterComponent extends Component {
 		this.rotationSpeed = (weaponDefinition?.rotationSpeed ?? 0)
 		this.light = weaponDefinition.light
 		this.scale = weaponDefinition.scale ?? 1
+		this.sound = weaponDefinition.sound
 	}
 }
 ShooterComponent.register()

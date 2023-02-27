@@ -1,4 +1,5 @@
 import { Component } from "../Globals/ECS";
+import { SOUNDS } from "../Globals/Sounds";
 import { Stat } from "../Game/Stat";
 
 class DamageComponent extends Component {
@@ -7,10 +8,12 @@ class DamageComponent extends Component {
 	destroyOnHit: number
 	knockback: Stat
 	crit = false
+	sound?: SOUNDS
 	critChance = new Stat(0.05)
 	critDamage = new Stat(1.5)
-	constructor(amount: number, target: number[], destroyOnHit = -1, knockback = 0) {
+	constructor(amount: number, target: number[], destroyOnHit = -1, knockback = 0, sound?: SOUNDS) {
 		super()
+		this.sound = sound
 		this.amount = new Stat(amount)
 		this.knockback = new Stat(knockback)
 		this.target = target

@@ -1,3 +1,5 @@
+import { ALLSOUNDS, SOUNDS } from "../Globals/Sounds"
+
 import COLLISIONGROUPS from "./CollisionGroups"
 import Tile from "../Utils/Tile"
 import WEAPONBEHAVIORS from "./WeaponBehaviros"
@@ -17,7 +19,8 @@ export interface WeaponDefinition {
 	target: number,
 	rotationSpeed?: number
 	light?: string,
-	scale?: number
+	scale?: number,
+	sound?: SOUNDS
 }
 const WEAPONS: Record<string, WeaponDefinition> = {
 	swordKnight: {
@@ -25,7 +28,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY
+		target: COLLISIONGROUPS.ENEMY,
+		sound: ALLSOUNDS.SWORD
 	},
 	staff: {
 		tile: assets.tiles.weapon_red_magic_staff,
@@ -37,7 +41,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
 		target: COLLISIONGROUPS.ENEMY,
-		light: 'hsl(39, 30%, 20%)'
+		light: 'hsl(39, 30%, 20%)',
+		sound: ALLSOUNDS.Fire
 	},
 	staffGem: {
 		tile: assets.tiles.weapon_green_magic_staff,

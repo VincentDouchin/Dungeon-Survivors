@@ -14,6 +14,7 @@ import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
 import assets from "../Globals/Assets";
+import { soundManager } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
 
 ;
@@ -28,6 +29,7 @@ class HealthSystem extends System {
 	}
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
+
 			const health = entity.getComponent(HealthComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
@@ -54,6 +56,9 @@ class HealthSystem extends System {
 						const damageAmount = damage.calculateDamage(health.defense.value)
 						health.updateHealth(-damageAmount)
 						health.canTakeDamage = false
+						if (damage.sound) {
+							soundManager.play(damage.sound)
+						}
 						// ! Knockback
 						if (body.body) {
 							const knockbackForce = damage.knockback.value * 5000

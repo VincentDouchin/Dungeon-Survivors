@@ -7,6 +7,7 @@ import INPUTS from "../Constants/InputsNames"
 import InputManager from "./InputManager"
 import KeyboardController from "../InputControllers/KeyboardController"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
+import SoundManager from "./SoundManager"
 
 // ! Clock
 const clock = new Clock()
@@ -128,5 +129,9 @@ const render = () => {
 const inputManager = new InputManager(renderer.domElement, INPUTS)
 inputManager.registerControllers(KeyboardController)
 inputManager.registerControllers(GamepadController)
-export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene }
+
+//! Sound
+const soundManager = new SoundManager()
+
+export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene, soundManager }
 

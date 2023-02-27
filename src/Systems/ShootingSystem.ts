@@ -7,6 +7,7 @@ import ProjectileEntity from "../Entities/ProjectileEntity";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
 import { Vector2 } from "@dimforge/rapier2d-compat";
+import { soundManager } from "../Globals/Initialize";
 
 class ShootingSystem extends System {
 	constructor() {
@@ -19,6 +20,10 @@ class ShootingSystem extends System {
 			shooter.timer++
 			const nb = shooter.projectilesNb
 			if (shooter.delay.value <= shooter.timer) {
+				if (shooter.sound) {
+
+					soundManager.play(shooter.sound, 0.2)
+				}
 				for (let i = 0; i < nb; i++) {
 					const position = entity.getComponent(PositionComponent)
 					const projectile = ProjectileEntity(

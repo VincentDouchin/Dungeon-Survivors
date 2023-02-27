@@ -1,6 +1,7 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { MANA_PERCENT } from "../Constants/ECSEvents";
+import ECSEVENTS, { MANA_AMOUNT, MANA_PERCENT } from "../Constants/ECSEvents";
 
+import { ALLSOUNDS } from "../Globals/Sounds";
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import ManaComponent from "../Components/ManaComponent";
@@ -9,6 +10,7 @@ import StatsComponent from "../Components/StatsComponent";
 import TokenComponent from "../Components/TokenComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
+import { soundManager } from "../Globals/Initialize";
 
 class XPPickupSystem extends System {
 	constructor() {
@@ -44,8 +46,9 @@ class XPPickupSystem extends System {
 					otherEntity.destroy()
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
+					soundManager.play(ALLSOUNDS.PowerUp)
 					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
-
+					ECS.eventBus.publish<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}
 
 			}, COLLISIONGROUPS.PLAYER)
