@@ -99,6 +99,10 @@ class SpriteComponent extends Component {
 	get scaledHeight() {
 		return this.scale * this.height
 	}
+	changeTexture(texture: Texture) {
+		this.renderShader!.uniforms.uTexture.value = texture
+		this.render()
+	}
 	destroy(): void {
 		this.mesh.geometry.dispose()
 		this.material.dispose()
