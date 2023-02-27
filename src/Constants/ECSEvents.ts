@@ -42,6 +42,10 @@ export interface MANA_PERCENT extends Event {
 	type: ECSEVENTS.MANA_PERCENT
 	data: number
 }
+export interface MANA_AMOUNT extends Event {
+	type: ECSEVENTS.MANA_AMOUNT
+	data: number
+}
 export interface SELECTED extends Event {
 	type: ECSEVENTS.SELECTED
 	data: Entity
@@ -74,7 +78,8 @@ enum ECSEVENTS {
 	MANA_PERCENT = 'MANA_PERCENT',
 	SPELL_ICON = 'SPELL_ICON',
 	SKILL_ICON = 'SKILL_ICON',
-	ADD_TO_ENCOUNTER = 'ADD_TO_ENCOUNTER'
+	ADD_TO_ENCOUNTER = 'ADD_TO_ENCOUNTER',
+	MANA_AMOUNT = 'MANA_AMOUNT',
 }
 
 export default ECSEVENTS

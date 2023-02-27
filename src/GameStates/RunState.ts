@@ -1,6 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { LEVEL_UP, MANA_PERCENT, SKILL_ICON, SPELL_ICON, XP_PERCENT } from "../Constants/ECSEvents"
+import ECSEVENTS, { LEVEL_UP, MANA_AMOUNT, MANA_PERCENT, SKILL_ICON, SPELL_ICON, XP_PERCENT } from "../Constants/ECSEvents"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import { inputManager, render, world } from "../Globals/Initialize"
 
@@ -9,7 +9,6 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
-import Coroutines from "../Globals/Coroutines"
 import Encounter from "../Game/Encounter"
 import Engine from "../Globals/Engine"
 import ExpirationSystem from "../Systems/ExpirationSystem"
@@ -28,20 +27,16 @@ import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
 import SpellComponent from "../Components/SpellComponent"
 import SpellSystem from "../Systems/SpellSystem"
-import SpriteComponent from "../Components/SpriteComponent"
 import StatUpdateSystem from "../Systems/StatUpdateSystem"
 import State from "../Globals/State"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
-import TextComponent from "../Components/TextComponent"
-import UIPositionComponent from "../Components/UIPositionComponent"
+import TutorialEntity from "../UIEntities/TutorialEntity"
 import UIRunEntity from "../UIEntities/UIRunEntity"
 import WEAPONS from "../Constants/Weapons"
 import XPPickupSystem from "../Systems/XPPickupSystem"
-import assets from "../Globals/Assets"
-import waitFor from "../Utils/WaitFor"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -100,6 +95,8 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
+				// soundManager.play(SoundNames.Fight)
+
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!
 				this.background = BackgroundEntity(backgroundDefinition)
 				this.player = new Entity('player')
@@ -111,14 +108,7 @@ class RunState implements GameState {
 				}
 				this.encounter.start()
 				if (!this.tutorialShown && !State.mobile) {
-					const tutorial = new Entity('tutorial')
-					tutorial.addComponent(new SpriteComponent(assets.UI.empty))
-					tutorial.addComponent(new TextComponent('WASD - Movement     Shift - Switch charcaters     P - Spell     Escape - Pause'))
-					tutorial.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: -1 }))
-					Coroutines.add(function* () {
-						yield* waitFor(600)
-						tutorial.destroy()
-					})
+					TutorialEntity()
 					this.tutorialShown = true
 				}
 			}; break
@@ -126,6 +116,7 @@ class RunState implements GameState {
 		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
 		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.stats.xp / this.stats.nextLevel)
 		ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
+		ECS.eventBus.publish<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
 		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
 			const entity = ECS.getEntityById(id)
 			if (!entity.getComponent(SwitchingComponent).main) {
