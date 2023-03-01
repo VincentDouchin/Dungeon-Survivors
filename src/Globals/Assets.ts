@@ -82,5 +82,5 @@ const assets: {
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
 	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),
 	title: Tile.fromImage(await AssetLoader.loadImage(titleSource))
-}
+} as const
 export default assets
