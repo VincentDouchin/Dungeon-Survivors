@@ -24,9 +24,9 @@ class AnimationSystem extends System {
 					animation.selectedFrame = 0
 				}
 			}
-			if (selectedFrame != animation.selectedFrame && sprite.renderShader) {
-				sprite.renderShader.uniforms.uTexture.value = animation.tile.textures[animation.selectedFrame]
-				sprite.render()
+			if (((selectedFrame != animation.selectedFrame) || (animation.currentState !== animation.lastState)) && sprite.renderShader) {
+				sprite.changeTexture(animation.tile.textures[animation.selectedFrame])
+				animation.lastState = animation.currentState
 			}
 
 		})

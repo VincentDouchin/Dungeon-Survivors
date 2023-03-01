@@ -35,7 +35,7 @@ class PathSystem extends System {
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
 				walkerSprite.flipped = walkerPosition.x - position.x > 0
-				walkerAnimation.state = 'run'
+				walkerAnimation.setState('run')
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
 				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
 
@@ -107,7 +107,7 @@ class PathSystem extends System {
 
 				node.showingOptions = true
 			} else if (node.selected) {
-				walkerAnimation.state = 'idle'
+				walkerAnimation.setState('idle')
 			}
 		})
 	}
