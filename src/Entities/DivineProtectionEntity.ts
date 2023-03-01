@@ -14,6 +14,13 @@ import { soundManager } from "../Globals/Initialize"
 
 const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
 	const tile = assets.effects.Aura
+	const beam = new Entity('beam')
+	beam.addComponent(new PositionComponent(position.x, position.y + 12))
+	beam.addComponent(new SpriteComponent(assets.magic.protection, { scale: 1.5 }))
+	const beamAnimation = beam.addComponent(new AnimationComponent({ default: assets.magic.protection }))
+	beamAnimation.playAnimation().then(() => {
+		beam.destroy()
+	})
 	const spell = new Entity('divine protection')
 	spell.addComponent(new PositionComponent(position.x, position.y))
 	spell.addComponent(new SpriteComponent(tile, { scale: 2, renderOrder: 1 }))

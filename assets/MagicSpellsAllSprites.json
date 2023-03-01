@@ -17,11 +17,11 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "smoke", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 480, "y": 0, "w": 96, "h": 24 } }] }
+   { "name": "protection", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 192, "w": 96, "h": 24 } }] },
+   { "name": "healing", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 24, "w": 96, "h": 24 } }] }
   ]
  }
 }
