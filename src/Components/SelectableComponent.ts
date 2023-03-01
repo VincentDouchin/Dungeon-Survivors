@@ -5,12 +5,13 @@ import { MOVELEFT, MOVERIGHT } from "../Constants/InputsNames";
 import Tile from "../Utils/Tile";
 
 class SelectableComponent extends Component {
-	selectedTile: Tile
-	unSelectedTile: Tile
-	onValidated: () => void
+	selectedTile?: Tile
+	unSelectedTile?: Tile
+	onValidated?: () => void
+	onSelected?: () => void
 	next: Partial<{ [key: string]: Entity }> = {}
 	parentId?: string
-	constructor(selectedTile: Tile, unSelectedTile: Tile, fn: () => void) {
+	constructor(selectedTile?: Tile, unSelectedTile?: Tile, fn?: () => void) {
 		super()
 		this.selectedTile = selectedTile
 		this.unSelectedTile = unSelectedTile
