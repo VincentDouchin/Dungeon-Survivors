@@ -5,13 +5,11 @@ import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
 import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import framedTile from "../Utils/FramedTile"
 
 const BoostsEntity = () => {
 	const boosts = new Entity('boosts')
 	boosts.addComponent(new UIPositionComponent({ x: -1, y: -1 }, { x: -1, y: 1 }))
-	boosts.addComponent(new SpriteComponent(framedTile(assets.UI.empty, 0, 1, 16)))
+	boosts.addComponent(new SpriteComponent(Tile.empty(1, 16)))
 	let lastEntity = boosts
 	const icons: Map<Tile, Entity> = new Map()
 	const sub = ECS.eventBus.subscribe<SKILL_ICON>(ECSEVENTS.SKILL_ICON, skillIcon => {

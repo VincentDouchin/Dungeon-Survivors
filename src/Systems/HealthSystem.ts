@@ -13,6 +13,7 @@ import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import TextComponent from "../Components/TextComponent";
+import Tile from "../Utils/Tile";
 import assets from "../Globals/Assets";
 import { soundManager } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
@@ -74,7 +75,7 @@ class HealthSystem extends System {
 						const damageText = new Entity('damageText')
 						ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
 						const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
-						damageText.addComponent(new SpriteComponent(assets.UI.empty))
+						damageText.addComponent(new SpriteComponent(Tile.empty()))
 						damageText.addComponent(new ExpirationComponent(120))
 						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
 						Coroutines.add(function* () {

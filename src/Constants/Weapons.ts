@@ -75,7 +75,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		speed: 100
 	},
 	fireball: {
-		tile: assets.UI.empty,
+		tile: Tile.empty(),
 		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.effects.FireProjectile,
@@ -86,7 +86,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		speed: 300,
 	},
 	bone: {
-		tile: assets.UI.empty,
+		tile: Tile.empty(),
 		damage: 2,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.details.bone,
@@ -98,7 +98,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		speed: 200
 	},
 	hammer: {
-		tile: assets.UI.empty,
+		tile: Tile.empty(),
 		damage: 5,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.tiles.weapon_hammer_projectile,
@@ -110,7 +110,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		speed: 150
 	},
 	iceSpike: {
-		tile: assets.UI.empty,
+		tile: Tile.empty(),
 		damage: 5,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.effects.iceSpike,

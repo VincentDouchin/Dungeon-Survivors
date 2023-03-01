@@ -1,5 +1,4 @@
 import type { Entity } from "../Globals/ECS"
-import { HeroDefinition } from "./Heros"
 import type PositionComponent from "../Components/PositionComponent"
 import Tile from "../Utils/Tile"
 

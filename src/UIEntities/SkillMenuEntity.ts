@@ -9,14 +9,14 @@ import SelectableComponent from "../Components/SelectableComponent"
 import ShimmerShader from "../Shaders/ShimmerShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import TextComponent from "../Components/TextComponent"
+import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 import { clock } from "../Globals/Initialize"
-import framedTile from "../Utils/FramedTile"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity('skillmenu')
-	skillMenu.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 40, 15), { scale: 4 }))
+	skillMenu.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 40, 15), { scale: 4 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPositionComponent({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(-2, 0, 30)
@@ -24,10 +24,10 @@ const SkillMenuEntity = () => {
 	const selectors: Entity[] = []
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity('button')
-		const buttonTile = framedTile(assets.UI.frame2, 4, 24, 24)
+		const buttonTile = assets.UI.frame2.framed(4, 24, 24)
 		const buttonMesh = button.addComponent(new SpriteComponent(buttonTile, { scale: 2 }))
 		const selectableEntity = new Entity('selectableEntity')
-		const emptyTile32 = framedTile(assets.UI.empty, 0, 32, 32)
+		const emptyTile32 = Tile.empty(32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
 			ECS.eventBus.publish<SKILL>(ECSEVENTS.SKILL, skill)
@@ -55,7 +55,7 @@ const SkillMenuEntity = () => {
 		const text = new Entity('text')
 		text.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 0 }))
 		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: 'center' }))
-		text.addComponent(new SpriteComponent(assets.UI.empty))
+		text.addComponent(new SpriteComponent(Tile.empty()))
 
 		button.addChildren(text)
 		button.addChildren(icon)

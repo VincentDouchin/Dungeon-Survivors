@@ -18,7 +18,6 @@ import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
-import { WeaponDefinition } from "../Constants/Weapons"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 

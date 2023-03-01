@@ -1,5 +1,4 @@
-import SOUNDS_SOURCES, { ALLSOUNDS } from "../Globals/Sounds"
-
+import { ALLSOUNDS } from "../Globals/Sounds"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"

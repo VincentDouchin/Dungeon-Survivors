@@ -1,9 +1,8 @@
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
-import { camera, inputManager, lightScene, render, world } from "../Globals/Initialize";
+import { camera, inputManager, render, world } from "../Globals/Initialize";
 
-import { AmbientLight } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
 import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
@@ -11,7 +10,6 @@ import CameraTargetComponent from "../Components/CameraTargetComponent";
 import Coroutines from "../Globals/Coroutines";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
-import HEROS from "../Constants/Heros";
 import MovementSystem from "../Systems/MovementSystem";
 import PathEntity from "../Entities/PathEntity";
 import PathSystem from "../Systems/PathSystem";
@@ -22,7 +20,7 @@ import { SWITCH } from "../Constants/InputsNames";
 import SelectionSystem from "../Systems/SelectionSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
-import assets from "../Globals/Assets"
+import assets from "../Globals/Assets";
 import { easeInOutQuart } from "../Utils/Tween";
 
 class MapState implements GameState {

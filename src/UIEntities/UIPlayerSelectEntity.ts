@@ -17,7 +17,6 @@ import TextComponent from "../Components/TextComponent"
 import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
-import framedTile from "../Utils/FramedTile"
 import waitFor from "../Utils/WaitFor"
 
 const UIPlayerSelectEntity = () => {
@@ -25,9 +24,9 @@ const UIPlayerSelectEntity = () => {
 
 	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: -1 }))
 	uiPosition.moveTo(-3, -1, 30)
-	ui.addComponent(new SpriteComponent(framedTile(assets.UI.frame1, 16, 100, 35), { scale: 3 }))
+	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 100, 35), { scale: 3 }))
 	const description = new Entity('description')
-	description.addComponent(new SpriteComponent(assets.UI.empty))
+	description.addComponent(new SpriteComponent(Tile.empty()))
 	description.addComponent(new TextComponent('Choose your characters', { size: 32 }))
 	description.addComponent(new UIPositionComponent({ x: 0, y: 0.8 }, { x: 0, y: 1 }))
 	ui.addChildren(description)
@@ -147,7 +146,7 @@ const UIPlayerSelectEntity = () => {
 			const buttonSprite = button.addComponent(new SpriteComponent(buttonUnselectedTile, { scale: 2 }))
 			button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1.2 }))
 			const text = new Entity('text')
-			text.addComponent(new SpriteComponent(assets.UI.empty))
+			text.addComponent(new SpriteComponent(Tile.empty()))
 			const textPosition = text.addComponent(new UIPositionComponent({ x: 0, y: 1 / 8 }, { x: 0, y: 0 }))
 			text.addComponent(new TextComponent('Select'))
 			button.addChildren(text)

@@ -7,7 +7,6 @@ import ProjectileEntity from "../Entities/ProjectileEntity";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
 import { Vector2 } from "@dimforge/rapier2d-compat";
-import { soundManager } from "../Globals/Initialize";
 
 class ShootingSystem extends System {
 	constructor() {
