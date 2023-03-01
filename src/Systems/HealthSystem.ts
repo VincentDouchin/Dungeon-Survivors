@@ -94,6 +94,9 @@ class HealthSystem extends System {
 						if (sprite && damage.amount.value > 0) {
 							sprite.addShader(new ColorShader(1, 0, 0, 1))
 						}
+						if (sprite && damage.amount.value < 0) {
+							ParticleEntity(position.x, position.y, assets.magic.healing, { duration: 3 })
+						}
 
 						Coroutines.add(function* () {
 							yield* waitFor(30)
