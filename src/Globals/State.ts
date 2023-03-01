@@ -1,4 +1,4 @@
-
+import { HeroDefinition } from "../Constants/Heros"
 
 const State: {
 	cameraBounds: {
@@ -9,7 +9,9 @@ const State: {
 	},
 	timer: number,
 	mobile: boolean,
-	volume: number
+	volume: number,
+	heros: HeroDefinition[],
+	selectedTiles: number[],
 } = {
 	cameraBounds: {
 		left: undefined,
@@ -17,6 +19,8 @@ const State: {
 		top: undefined,
 		bottom: undefined,
 	},
+	heros: [],
+	selectedTiles: [],
 	timer: 0,
 	mobile: !!navigator.userAgentData?.mobile,
 	volume: 0.1

@@ -14,7 +14,6 @@ import Engine from "../Globals/Engine"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
-import HEROS from "../Constants/Heros"
 import HealthSystem from "../Systems/HealthSystem"
 import LightingSystem from "../Systems/LightingSystem"
 import ManaComponent from "../Components/ManaComponent"
@@ -35,7 +34,6 @@ import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import TutorialEntity from "../UIEntities/TutorialEntity"
 import UIRunEntity from "../UIEntities/UIRunEntity"
-import WEAPONS from "../Constants/Weapons"
 import XPPickupSystem from "../Systems/XPPickupSystem"
 
 class RunState implements GameState {
@@ -95,13 +93,12 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				// soundManager.play(SoundNames.Fight)
 
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!
 				this.background = BackgroundEntity(backgroundDefinition)
 				this.player = new Entity('player')
-				this.player.addChildren(PlayerEntity(HEROS.knightMale, WEAPONS.swordKnight, true, this.stats, this.mana))
-				this.player.addChildren(PlayerEntity(HEROS.wizardFemale, WEAPONS.staff, false, this.stats, this.mana))
+				this.player.addChildren(PlayerEntity(State.heros[0], State.selectedTiles[0], true, this.stats, this.mana))
+				this.player.addChildren(PlayerEntity(State.heros[1], State.selectedTiles[1], false, this.stats, this.mana))
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? (import.meta.env.VITE_DEFAULT_ENEMIES as enemyWaveName)]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
