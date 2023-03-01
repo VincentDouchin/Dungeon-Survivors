@@ -1,5 +1,5 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { SELECTED } from "../Constants/ECSEvents";
+import ECSEVENTS, { DESELECTED, SELECTED } from "../Constants/ECSEvents";
 import INPUTS, { VALIDATE } from "../Constants/InputsNames";
 import { inputManager, soundManager } from "../Globals/Initialize";
 
@@ -20,6 +20,9 @@ class SelectionSystem extends System {
 			this.clicked = [...uiObjects, ...objects]
 		})
 		ECS.eventBus.subscribe<SELECTED>(ECSEVENTS.SELECTED, entity => {
+			if (this.selectedEntity) {
+				ECS.eventBus.publish<DESELECTED>(ECSEVENTS.DESELECTED, this.selectedEntity)
+			}
 			this.selectedEntity = entity
 		})
 	}
@@ -28,30 +31,30 @@ class SelectionSystem extends System {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			if (this.hovered.includes(sprite?.mesh.id)) {
-				this.selectedEntity = entity
+				ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, entity)
+				this.hovered.splice(this.hovered.indexOf(sprite.mesh.id), 1)
 			}
 			if (entity.id === this.selectedEntity?.id) {
 				if (this.clicked.includes(sprite.mesh.id) || inputManager.getInput(VALIDATE)?.once) {
 					soundManager.play(ALLSOUNDS.Validate)
-					selectable.onValidated()
-					this.clicked = []
-					break
+					if (selectable.onValidated) selectable.onValidated()
 				}
-				sprite.uniforms.uTexture = selectable.selectedTile.texture
+				selectable.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
 				for (let input of INPUTS) {
 					if (inputManager.getInput(input)?.once) {
-						soundManager.play(ALLSOUNDS.Select)
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {
-							this.selectedEntity = nextEntity
+							soundManager.play(ALLSOUNDS.Select)
+							ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, nextEntity)
 						}
 
 					}
 				}
 			} else {
-				sprite.uniforms.uTexture = selectable.unSelectedTile.texture
+				selectable?.unSelectedTile && sprite.changeTexture(selectable.unSelectedTile.texture)
 			}
 		}
+		this.clicked = []
 
 
 
