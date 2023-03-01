@@ -9,9 +9,6 @@ import UIPauseEntity from "../UIEntities/UIPauseEntity";
 
 class PauseState implements GameState {
 	ui?: Entity
-	constructor() {
-
-	}
 	update() {
 		ECS.updateSystems()
 		if (inputManager.getInput(PAUSE)?.once) {
