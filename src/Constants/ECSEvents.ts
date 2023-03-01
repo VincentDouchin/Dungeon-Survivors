@@ -1,4 +1,5 @@
 import type { Entity } from "../Globals/ECS"
+import { HeroDefinition } from "./Heros"
 import type PositionComponent from "../Components/PositionComponent"
 import Tile from "../Utils/Tile"
 
@@ -50,6 +51,10 @@ export interface SELECTED extends Event {
 	type: ECSEVENTS.SELECTED
 	data: Entity
 }
+export interface DESELECTED extends Event {
+	type: ECSEVENTS.DESELECTED
+	data: Entity
+}
 export interface SPELL_ICON extends Event {
 	type: ECSEVENTS.SPELL_ICON
 	data: Tile
@@ -64,7 +69,6 @@ export interface ADD_TO_ENCOUNTER extends Event {
 }
 
 
-
 enum ECSEVENTS {
 	CAMERA_MOVE = 'CAMERA_MOVE',
 	DELETE_ENTITY = 'DELETE_ENTITY',
@@ -75,6 +79,7 @@ enum ECSEVENTS {
 	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
 	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
 	SELECTED = 'SELECTED',
+	DESELECTED = 'DESELECTED',
 	MANA_PERCENT = 'MANA_PERCENT',
 	SPELL_ICON = 'SPELL_ICON',
 	SKILL_ICON = 'SKILL_ICON',
