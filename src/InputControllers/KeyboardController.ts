@@ -24,7 +24,8 @@ class KeyboardController implements InputController {
 		window.addEventListener('keyup', this.handleKeyUpDown(false))
 	}
 	handleKeyUpDown = (state: boolean) => (e: KeyboardEvent) => {
-		if (this.keyMap.hasOwnProperty(e.code)) {
+		if (e.repeat) return
+		if (e.code in this.keyMap) {
 			this.eventBus.publish(this.keyMap[e.code], state)
 		}
 	}
