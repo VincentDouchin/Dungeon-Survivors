@@ -46,7 +46,7 @@ class XPPickupSystem extends System {
 					otherEntity.destroy()
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
-					soundManager.play(ALLSOUNDS.PowerUp)
+					soundManager.play(ALLSOUNDS.PowerUp, 0.3)
 					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					ECS.eventBus.publish<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}

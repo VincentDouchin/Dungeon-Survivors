@@ -20,10 +20,6 @@ class ShootingSystem extends System {
 			shooter.timer++
 			const nb = shooter.projectilesNb
 			if (shooter.delay.value <= shooter.timer) {
-				if (shooter.sound) {
-
-					soundManager.play(shooter.sound, 0.2)
-				}
 				for (let i = 0; i < nb; i++) {
 					const position = entity.getComponent(PositionComponent)
 					const projectile = ProjectileEntity(

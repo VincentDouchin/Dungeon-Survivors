@@ -1,3 +1,5 @@
+import SOUNDS_SOURCES, { ALLSOUNDS } from "../Globals/Sounds"
+
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
@@ -9,6 +11,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
 import { Vector2 } from "three"
 import assets from "../Globals/Assets"
+import { soundManager } from "../Globals/Initialize"
 
 const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
 	const tile = assets.effects.Aura
@@ -21,6 +24,7 @@ const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
 	}]))
 	spell.addComponent(new DamageComponent(stats.spellDamage.calculateValue(5), [COLLISIONGROUPS.ENEMY], -1))
 	spell.addComponent(new ExpirationComponent(120))
+	soundManager.play(ALLSOUNDS.Magic,)
 	return spell
 }
 export default DivineProtectionEntity
