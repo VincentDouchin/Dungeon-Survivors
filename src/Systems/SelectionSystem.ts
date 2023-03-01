@@ -35,7 +35,11 @@ class SelectionSystem extends System {
 				this.hovered.splice(this.hovered.indexOf(sprite.mesh.id), 1)
 			}
 			if (entity.id === this.selectedEntity?.id) {
-				if (this.clicked.includes(sprite.mesh.id) || inputManager.getInput(VALIDATE)?.once) {
+				if (this.clicked.includes(sprite.mesh.id)) {
+					inputManager.eventBus.publish(VALIDATE, true)
+					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
+				}
+				if (inputManager.getInput(VALIDATE)?.once) {
 					soundManager.play(ALLSOUNDS.Validate)
 					if (selectable.onValidated) selectable.onValidated()
 				}
