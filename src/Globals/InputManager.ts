@@ -69,7 +69,7 @@ class InputManager {
 					}
 
 					if (event instanceof TouchEvent) {
-						Array.from(event.touches.length ? event.changedTouches : event.changedTouches).forEach((touch) => sendEvent(touch))
+						Array.from(event.changedTouches).forEach((touch) => sendEvent(touch))
 					} else {
 						sendEvent(event)
 					}
