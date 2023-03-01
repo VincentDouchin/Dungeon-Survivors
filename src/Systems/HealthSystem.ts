@@ -7,6 +7,7 @@ import BodyComponent from "../Components/BodyComponent";
 import ColorShader from "../Shaders/ColorShader";
 import Coroutines from "../Globals/Coroutines";
 import DamageComponent from "../Components/DamageComponent";
+import DissolveShader from "../Shaders/DissolveShader";
 import ExpirationComponent from "../Components/ExpirationComponent";
 import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
@@ -109,10 +110,20 @@ class HealthSystem extends System {
 					}
 				})
 			}
-			if (health.health == 0) {
-				const blood = Object.values(assets.blood)
-				ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], { frameRate: 1 })
+			if (health.health === 0) {
+				// const blood = Object.values(assets.blood)
+				// ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], { frameRate: 1 })
+				const deathShader = new DissolveShader(120)
+				const deathAnimation = new Entity('death animation')
+				deathAnimation.addComponent(position)
+				deathAnimation.addComponent(sprite)
+				sprite.removeShader(ColorShader)
+				sprite.addShader(new ColorShader(0.5, 0.5, 0.5, 1))
 				entity.destroy()
+				sprite.addShader(deathShader)
+				deathShader.finish?.then(() => {
+					deathAnimation.destroy()
+				})
 			}
 		})
 	}
