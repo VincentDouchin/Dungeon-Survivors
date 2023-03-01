@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
-import { camera, lightScene, render, world } from "../Globals/Initialize";
+import { camera, inputManager, lightScene, render, world } from "../Globals/Initialize";
 
 import { AmbientLight } from "three";
 import AnimationComponent from "../Components/AnimationComponent";
@@ -9,6 +9,7 @@ import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import Coroutines from "../Globals/Coroutines";
+import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
 import HEROS from "../Constants/Heros";
 import MovementSystem from "../Systems/MovementSystem";
@@ -17,6 +18,7 @@ import PathSystem from "../Systems/PathSystem";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
+import { SWITCH } from "../Constants/InputsNames";
 import SelectionSystem from "../Systems/SelectionSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -26,15 +28,9 @@ import { easeInOutQuart } from "../Utils/Tween";
 class MapState implements GameState {
 	map?: Entity
 	player?: Entity
-	light: AmbientLight
 	path?: Entity
 	lastPosition: { x?: number, y?: number } = { x: 0, y: undefined }
-	constructor() {
-		this.light = new AmbientLight(0xffffff)
 
-
-
-	}
 	render() {
 		render()
 	}
@@ -57,14 +53,15 @@ class MapState implements GameState {
 		PathSystem.register()
 		RenderSystem.register()
 		SelectionSystem.register()
-		this.map = new Entity('map')
-		this.map.addComponent(new SpriteComponent(mapTile))
-		this.map.addComponent(new PositionComponent(0, 0))
-		lightScene.add(this.light)
-
+		if (previousState !== GameStates.playerSelect) {
+			this.map = new Entity('map')
+			this.map.addComponent(new SpriteComponent(mapTile))
+			this.map.addComponent(new PositionComponent(0, 0))
+		}
 		await new Promise<void>((resolve) => {
 			switch (previousState) {
 				case GameStates.none: {
+
 					const title = new Entity('title text')
 					title.addComponent(new SpriteComponent(assets.title))
 					title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
@@ -74,10 +71,14 @@ class MapState implements GameState {
 						let counter = 1
 						while (counter < 600) {
 							yield camera.position.y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
+							if (inputManager.getInput(SWITCH)?.active) {
+								counter += 10
+							}
 							counter++
 						}
 						title.destroy()
-						resolve()
+						Engine.setState(GameStates.playerSelect)
+						return
 					})
 				}; break
 				default: {
@@ -87,9 +88,9 @@ class MapState implements GameState {
 		})
 		if (!assets.map || !assets.map.levels[0]) return
 		this.player = new Entity('player')
-		const knight = HEROS.knightMale
-		this.player.addComponent(new SpriteComponent(knight.tiles.idle, { scale: 0.6, renderOrder: 11 }))
-		this.player.addComponent(new AnimationComponent(knight.tiles))
+		const hero = State.heros[0]
+		this.player.addComponent(new SpriteComponent(hero.tiles[State.selectedTiles[0]].idle, { scale: 0.6, renderOrder: 11 }))
+		this.player.addComponent(new AnimationComponent(hero.tiles[State.selectedTiles[0]]))
 		this.player.addComponent(new CameraTargetComponent())
 		this.player.addComponent(new PathWalkerComponent())
 		ECS.eventBus.subscribe<PATH_POSITION>(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
@@ -109,11 +110,16 @@ class MapState implements GameState {
 		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
 
 	}
-	unset() {
+	unset(newState: GameStates) {
 		ECS.unRegisterSystems()
-		this.light?.removeFromParent()
-		this.map?.destroy()
-		this.player?.destroy()
+		switch (newState) {
+			case GameStates.playerSelect: {
+			}; break
+			default: {
+				this.map?.destroy()
+				this.player?.destroy()
+			}; break
+		}
 	}
 }
 export default MapState
