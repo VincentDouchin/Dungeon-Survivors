@@ -16,7 +16,7 @@ const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
 	const tile = assets.effects.Aura
 	const beam = new Entity('beam')
 	const beamTile = assets.magic.beam
-	beam.addComponent(new PositionComponent(position.x, position.y + 12 + (beamTile.height * 1.5) / 2))
+	beam.addComponent(new PositionComponent(position.x, position.y - 4 + (beamTile.height * 1.5) / 2))
 	beam.addComponent(new SpriteComponent(beamTile, { scale: 1.5, opacity: 0.8 }))
 	const beamAnimation = beam.addComponent(new AnimationComponent({ default: beamTile }))
 	beamAnimation.playAnimation().then(() => {
@@ -33,5 +33,6 @@ const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
 	spell.addComponent(new ExpirationComponent(120))
 	soundManager.play(ALLSOUNDS.Magic,)
 	return spell
+
 }
 export default DivineProtectionEntity
