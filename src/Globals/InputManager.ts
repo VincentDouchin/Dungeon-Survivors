@@ -82,7 +82,7 @@ class InputManager {
 
 		detectPointerEvent(State.mobile ? 'touchstart' : 'mousedown', 'down')
 		detectPointerEvent(State.mobile ? 'touchend' : 'mouseup', 'up')
-		detectPointerEvent('mousemove', 'move')
+		detectPointerEvent(State.mobile ? 'touchmove' : 'mousemove', 'move')
 
 
 	}

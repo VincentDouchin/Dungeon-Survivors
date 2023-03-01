@@ -30,7 +30,7 @@ class SelectionSystem extends System {
 		for (const entity of entities) {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
-			if (this.hovered.includes(sprite?.mesh.id)) {
+			if (this.hovered.includes(sprite?.mesh.id) || this.clicked.includes(sprite.mesh.id)) {
 				ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, entity)
 				this.hovered.splice(this.hovered.indexOf(sprite.mesh.id), 1)
 			}
