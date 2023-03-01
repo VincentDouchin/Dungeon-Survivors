@@ -67,7 +67,6 @@ class InputManager {
 					raycasterScene.setFromCamera(mouse, camera)
 					const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
 					this.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
-					console.log(eventName, event)
 				}
 				if (event instanceof TouchEvent) {
 					Array.from(event.changedTouches).forEach((touch) => sendEvent(touch))
