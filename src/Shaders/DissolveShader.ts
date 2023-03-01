@@ -23,6 +23,7 @@ class DissolveShader extends Shader {
 			})
 			return {
 				time: clock.getElapsedTime(),
+				seed: Math.random()
 			}
 		})
 	}
