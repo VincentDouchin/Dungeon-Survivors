@@ -3,11 +3,12 @@ import ECSEVENTS, { XP_PERCENT } from "../Constants/ECSEvents"
 
 import BarShader from "../Shaders/BarShader"
 import SpriteComponent from "../Components/SpriteComponent"
+import { UICamera } from "../Globals/Initialize"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 
 const scalingOptions = { x: { left: 2, right: 5 }, y: { top: 0, bottom: 0 } }
-const w = window.innerWidth * 0.04
+const w = UICamera.right / 5
 const h = 7
 const bar = assets.UI.bar.framed(scalingOptions, w, h)
 const full = assets.UI.xp.framed(scalingOptions, w, h)
