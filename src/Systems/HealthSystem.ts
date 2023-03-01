@@ -59,6 +59,9 @@ class HealthSystem extends System {
 						if (damage.sound) {
 							soundManager.play(damage.sound)
 						}
+						if (health.sound) {
+							soundManager.play(health.sound)
+						}
 						// ! Knockback
 						if (body.body) {
 							const knockbackForce = damage.knockback.value * 5000
