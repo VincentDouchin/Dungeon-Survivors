@@ -12,7 +12,7 @@ import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
 import { soundManager } from "../Globals/Initialize";
 
-class XPPickupSystem extends System {
+class PickupSystem extends System {
 	constructor() {
 		super(XPPickerComponent)
 	}
@@ -55,4 +55,4 @@ class XPPickupSystem extends System {
 		})
 	}
 }
-export default XPPickupSystem
+export default PickupSystem

@@ -22,6 +22,7 @@ import ManaComponent from "../Components/ManaComponent"
 import MinionSpawnerSytem from "../Systems/MinionSpawnerSystem"
 import MovementSystem from "../Systems/MovementSystem"
 import { PAUSE } from "../Constants/InputsNames"
+import PickupSystem from "../Systems/PickupSystem"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
 import SelectionSystem from "../Systems/SelectionSystem"
@@ -36,7 +37,6 @@ import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import TutorialEntity from "../UIEntities/TutorialEntity"
 import UIRunEntity from "../UIEntities/UIRunEntity"
-import XPPickupSystem from "../Systems/XPPickupSystem"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -72,7 +72,7 @@ class RunState implements GameState {
 		AnimationSystem.register()
 		HealthSystem.register()
 		BodyCreationSystem.register()
-		XPPickupSystem.register()
+		PickupSystem.register()
 		LightingSystem.register()
 		ShootingSystem.register()
 		TargetingSystem.register()
