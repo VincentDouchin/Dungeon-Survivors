@@ -5,7 +5,7 @@ import { easeOutBack, easeOutExpo } from "../Utils/Tween";
 import BarShader from "../Shaders/BarShader";
 import BodyComponent from "../Components/BodyComponent";
 import ColorShader from "../Shaders/ColorShader";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import DamageComponent from "../Components/DamageComponent";
 import DissolveShader from "../Shaders/DissolveShader";
 import ExpirationComponent from "../Components/ExpirationComponent";
@@ -79,7 +79,7 @@ class HealthSystem extends System {
 						damageText.addComponent(new SpriteComponent(Tile.empty()))
 						damageText.addComponent(new ExpirationComponent(120))
 						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
-						Coroutines.add(function* () {
+						new Coroutine(function* () {
 							let counter = 0
 							while (counter < 120) {
 								counter++
@@ -99,7 +99,7 @@ class HealthSystem extends System {
 							ParticleEntity(position.x, position.y, assets.magic.healing, { duration: 3 })
 						}
 
-						Coroutines.add(function* () {
+						new Coroutine(function* () {
 							yield* waitFor(30)
 							if (sprite) {
 								sprite.removeShader(ColorShader)
@@ -113,17 +113,28 @@ class HealthSystem extends System {
 			if (health.health === 0) {
 				// const blood = Object.values(assets.blood)
 				// ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], { frameRate: 1 })
-				const deathShader = new DissolveShader(120)
+
 				const deathAnimation = new Entity('death animation')
 				deathAnimation.addComponent(position)
 				deathAnimation.addComponent(sprite)
+				deathAnimation.addComponent(new ExpirationComponent(120))
 				sprite.removeShader(ColorShader)
-				sprite.addShader(new ColorShader(0.5, 0.5, 0.5, 1))
-				entity.destroy()
-				sprite.addShader(deathShader)
-				deathShader.finish?.then(() => {
-					deathAnimation.destroy()
+				sprite.addShader(new ColorShader(1, 1, 1, 1))
+				new Coroutine(function* () {
+					for (let i = 1; i > 0; i -= 1 / 50) {
+						yield
+						if (sprite.getUniforms(ColorShader)?.color?.value) {
+							sprite.getUniforms(ColorShader).color.value = [1, 1, 1, i]
+						} else {
+							break
+						}
+					}
 				})
+
+
+				sprite.addShader(new DissolveShader(120))
+				entity.destroy()
+
 			}
 		})
 	}

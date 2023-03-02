@@ -1,10 +1,11 @@
 import { ShaderMaterial, Uniform } from "three"
+
 import SpriteComponent from "../Components/SpriteComponent"
 
-abstract class Shader {
+class Shader {
 	uniforms: (sprite: SpriteComponent) => Record<string, any>
-	abstract vert: string
-	abstract frag: string
+	vert: string = ''
+	frag: string = ''
 	constructor(uniforms: (sprite: SpriteComponent) => Record<string, any>) {
 		this.uniforms = uniforms
 	}

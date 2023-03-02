@@ -85,6 +85,9 @@ class SpriteComponent extends Component {
 		if (render) this.render()
 		return pass
 	}
+	getUniforms<T extends Shader>(shaderConstructor: Constructor<T>) {
+		return this.shaderPasses.get(shaderConstructor.name)?.uniforms as Record<keyof ReturnType<T['uniforms']>, Uniform>
+	}
 	removeShader(shaderConstructor: Constructor<Shader>) {
 		const pass = this.shaderPasses.get(shaderConstructor.name)
 		if (pass) {

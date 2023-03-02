@@ -1,4 +1,4 @@
-import Coroutines from '../Globals/Coroutines'
+import Coroutines from '../Globals/Coroutine'
 import Shader from './Shader'
 import { clock } from '../Globals/Initialize'
 import frag from './glsl/dissolve.frag?raw'
@@ -12,7 +12,7 @@ class DissolveShader extends Shader {
 	constructor(duration: number) {
 		super((sprite) => {
 			this.finish = new Promise<void>(resolve => {
-				Coroutines.add(function* () {
+				new Coroutine(function* () {
 					const timestamp = clock.getElapsedTime()
 					for (let i = 0; i < duration; i++) {
 						yield
