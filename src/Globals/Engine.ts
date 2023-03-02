@@ -1,13 +1,27 @@
-import Coroutines from "./Coroutine"
-import DEBUG from "../debug"
-import { GameStates } from "../Constants/GameStates"
+import HEROS, { HeroDefinition } from './../Constants/Heros'
 
+import Coroutines from "./Coroutine"
+import { GameStates } from "../Constants/GameStates"
+import { backgroundName } from './../Constants/BackGrounds'
+import { enemyWaveName } from './../Constants/EnemyEncounters'
+
+export const DEBUG: {
+	ENCOUNTER: boolean
+	DEFAULT_ENEMIES: enemyWaveName
+	DEFAULT_BACKGROUND: backgroundName
+	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
+} = {
+	ENCOUNTER: true && import.meta.env.DEV,
+	DEFAULT_ENEMIES: 'ANIMALS',
+	DEFAULT_BACKGROUND: 'FOREST',
+	DEFAULT_HEROS: [HEROS[2], HEROS[1]]
+}
 const Engine = new class {
 	rafHandle = 0
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.none
+	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.map
 	states: Map<GameStates, GameState> = new Map()
 	get state() {
 		return this.stateName ? this.states.get(this.stateName) : null

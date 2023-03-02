@@ -1,5 +1,5 @@
-import DEBUG from "./debug"
-import Engine from "./Globals/Engine"
+import Engine, { DEBUG } from "./Globals/Engine"
+
 import { GameStates } from "./Constants/GameStates"
 import LevelUpState from "./GameStates/LevelUpState"
 import MapState from "./GameStates/MapState"
