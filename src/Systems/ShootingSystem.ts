@@ -34,13 +34,7 @@ class ShootingSystem extends System {
 				}
 				shooter.timer = 0
 			}
-			for (let projectile of entity.children) {
-				const projectileBody = projectile.getComponent(BodyComponent)
-				const projectileRotation = projectile.getComponent(RotationComponent)
-				const x = -Math.cos(projectileRotation.rotation) * projectileBody.moveForce.value
-				const y = -Math.sin(projectileRotation.rotation) * projectileBody.moveForce.value
-				projectileBody.body?.applyImpulse(new Vector2(x, y), true)
-			}
+
 		})
 	}
 }

@@ -8,6 +8,7 @@ import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import { Vector2 } from "three";
 
 const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 	const projectile = new Entity('projectile')
@@ -28,14 +29,20 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 	const rotationComponent = projectile.addComponent(new RotationComponent(rotation, 0))
 	if (projectileDefinition.rotationSpeed) {
 		new Coroutine(function* () {
-			let timer = 0
-			while (timer < projectileDefinition.range) {
-				timer++
-				rotationComponent.centerRotation += (projectileDefinition?.rotationSpeed ?? 0) / 5
-				yield
-			}
-		})
+			rotationComponent.centerRotation += (projectileDefinition?.rotationSpeed ?? 0) / 5
+		}, projectileDefinition.range)
 	}
+
+	const coroutine = new Coroutine(function* () {
+		yield
+		const projectileBody = projectile.getComponent(BodyComponent)
+		const projectileRotation = projectile.getComponent(RotationComponent)
+		const x = -Math.cos(projectileRotation.rotation) * projectileBody.moveForce.value
+		const y = -Math.sin(projectileRotation.rotation) * projectileBody.moveForce.value
+		projectileBody.body?.applyImpulse(new Vector2(x, y), true)
+
+	}, projectileDefinition.range)
+	projectile.onDestroy(() => coroutine.stop())
 	projectile.addComponent(new ExpirationComponent(projectileDefinition.range))
 	return projectile
 }
