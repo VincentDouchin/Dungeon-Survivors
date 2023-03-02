@@ -1,6 +1,7 @@
 
 class Coroutine {
 	static coroutines: Coroutine[] = []
+
 	static run() {
 		for (let i = this.coroutines.length - 1; i >= 0; i--) {
 			if (!this.coroutines[i].running) continue
@@ -23,8 +24,12 @@ class Coroutine {
 	resume() {
 		this.running = true
 	}
-	stop() {
+	pause() {
 		this.running = false
 	}
+	stop() {
+		Coroutine.coroutines.splice(Coroutine.coroutines.indexOf(this), 1)
+	}
+
 }
 export default Coroutine

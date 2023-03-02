@@ -1,6 +1,7 @@
 import { Entity, System } from "../Globals/ECS";
 
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent";
+import ObstableEntity from "../Entities/ObstacleEntity";
 import PositionComponent from "../Components/PositionComponent";
 import { camera } from "../Globals/Initialize";
 
@@ -10,12 +11,20 @@ class BackgroundElementSpawnerSystem extends System {
 	}
 	update(entities: Entity[]): void {
 		entities.forEach(entity => {
-			const { size, elements, noise, entities, obstaclesDensity } = entity.getComponent(BackgroundElementsComponent)
-			for (const [key, obstacle] of Object.entries(entities)) {
+			const backgroundElements = entity.getComponent(BackgroundElementsComponent)
+			const { size, obstacles, noise, obstaclesEntities, obstaclesDensity, effect, effectDelay } = backgroundElements
+			if (effect && effectDelay) {
+				if (backgroundElements.effectsTimer < 0) {
+					entity.addChildren(effect())
+					backgroundElements.effectsTimer = effectDelay()
+				}
+				backgroundElements.effectsTimer--
+			}
+			for (const [key, obstacle] of Object.entries(obstaclesEntities)) {
 				const position = obstacle.getComponent(PositionComponent)
 				if (!position) continue
 				if (position.x > camera.position.x + camera.right * 2 || position.x < camera.position.x + camera.left * 2 || position.y > camera.position.y + camera.top * 2 || position.y < camera.position.y + camera.bottom * 2) {
-					delete entities[key]
+					delete obstaclesEntities[key]
 					obstacle.destroy()
 				}
 			}
@@ -26,10 +35,10 @@ class BackgroundElementSpawnerSystem extends System {
 					const noiseValue = noise(chunkX, chunkY)
 					if (Math.abs(noiseValue) > (1 - obstaclesDensity)) {
 						const newNoise = noise(chunkX + noiseValue, chunkY + noiseValue)
-						const element = elements[Math.floor((newNoise + 1) / 2 * elements.length)]
-						if (!entities[`${chunkX}|${chunkY}`]) {
-							const obstacle = element(chunkX * size, chunkY * size)
-							entities[`${chunkX}|${chunkY}`] = obstacle
+						const obstacleTile = obstacles[Math.floor((newNoise + 1) / 2 * obstacles.length)]
+						if (!obstaclesEntities[`${chunkX}|${chunkY}`]) {
+							const obstacle = ObstableEntity(obstacleTile)(chunkX * size, chunkY * size)
+							obstaclesEntities[`${chunkX}|${chunkY}`] = obstacle
 							entity.addChildren(obstacle)
 						}
 					}

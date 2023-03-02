@@ -128,7 +128,7 @@ class Encounter {
 	}
 	pause() {
 		if (!this.coroutine) return
-		this.coroutine.stop()
+		this.coroutine.pause()
 	}
 	resume() {
 		if (!this.coroutine) return
