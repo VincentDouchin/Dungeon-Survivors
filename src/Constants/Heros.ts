@@ -59,7 +59,7 @@ const HEROS: HeroDefinition[] = [
 			idle: assets.tiles.elf_m_idle_anim,
 			run: assets.tiles.elf_m_run_anim,
 		}],
-		spell: SPELLS.LIGHTNING,
+		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,
 		weapon: WEAPONS.bow
 	},
