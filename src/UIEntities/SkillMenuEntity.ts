@@ -44,10 +44,13 @@ const SkillMenuEntity = () => {
 
 
 		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
+		let shimmer = true
+		skillMenu.onDestroy(() => shimmer = false)
 		new Coroutine(function* () {
-			while (sprite) {
+			while (shimmer) {
 				yield
 				sprite.uniforms.time = clock.getElapsedTime()
+				console.log('test')
 			}
 		})
 		icon.addComponent(new UIPositionComponent())

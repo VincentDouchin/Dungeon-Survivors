@@ -47,8 +47,8 @@ const SpellButtonEntity = () => {
 		}
 	})
 	button.onDestroy(() => {
-		inputManager.eventBus.unsubscribe('down', downSubscriber)
-		ECS.eventBus.unsubscribe<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, disabledSubscriber)
+		downSubscriber()
+		disabledSubscriber()
 	})
 	return button
 }

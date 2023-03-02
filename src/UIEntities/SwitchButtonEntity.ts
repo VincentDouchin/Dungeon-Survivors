@@ -32,7 +32,7 @@ const SwitchButtonEntity = () => {
 
 	})
 	button.onDestroy(() => {
-		inputManager.eventBus.unsubscribe('down', downSubscriber)
+		downSubscriber()
 	})
 
 	return button

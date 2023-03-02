@@ -113,10 +113,10 @@ class Entity {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
 	onDestroy(fn: () => void) {
-		const subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity) => {
+		const unSubscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			if (entity.id === this.id) {
 				fn()
-				ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, subscriber)
+				unSubscriber()
 			}
 		})
 	}

@@ -1,7 +1,6 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents";
 
-import { EventCallBack } from "../Utils/EventBus";
 import { Vector2 } from "three";
 
 class TargeterComponent extends Component {
@@ -11,7 +10,7 @@ class TargeterComponent extends Component {
 	charging = false
 	chargingDirection = new Vector2()
 	distanceToTarget: number
-	subscriber: EventCallBack<Entity>
+	unSubscriber: () => void
 	enabled = true
 	constructor(target: number | string, distanceToTarget: number = 0, charger: boolean = false) {
 		super()
@@ -22,14 +21,14 @@ class TargeterComponent extends Component {
 		} else {
 			this.target = target
 		}
-		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
+		this.unSubscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (entity.id == this.targetedEnemy) {
 				this.targetedEnemy = null
 			}
 		})
 	}
 	destroy(): void {
-		ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this.subscriber)
+		this.unSubscriber()
 	}
 }
 TargeterComponent.register()

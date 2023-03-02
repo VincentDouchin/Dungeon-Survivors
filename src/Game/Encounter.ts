@@ -21,9 +21,9 @@ class Encounter {
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
 	stats: StatsComponent
 	started = false
-	subscriber: EventCallBack<Entity>
-	levelSubscriber: EventCallBack<number>
-	addEnemySuscriber: EventCallBack<Entity>
+	subscriber: () => void
+	levelSubscriber: () => void
+	addEnemySuscriber: () => void
 	coroutine?: Coroutine
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
@@ -118,9 +118,9 @@ class Encounter {
 		this.started = false
 		this.waves.push(function* () {
 			yield
-			ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, self.subscriber)
-			ECS.eventBus.unsubscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, self.levelSubscriber)
-			ECS.eventBus.unsubscribe<ADD_TO_ENCOUNTER>(ECSEVENTS.ADD_TO_ENCOUNTER, self.addEnemySuscriber)
+			self.subscriber()
+			self.levelSubscriber()
+			self.addEnemySuscriber()
 			Engine.setState(GameStates.map)
 
 		})

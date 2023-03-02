@@ -1,15 +1,14 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { ADD_TO_BACKGROUND, DELETE_ENTITY } from "../Constants/ECSEvents";
 
-import { EventCallBack } from "../Utils/EventBus";
 import PositionComponent from "./PositionComponent";
 
 class DroppableComponent extends Component {
 	parentId?: string
-	subscriber: EventCallBack<Entity>
+	unSubscriber: () => void
 	constructor(entityContructors: Array<() => Entity>) {
 		super()
-		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
+		this.unSubscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.parentId != entity.id) return
 
 			const position = entity.getComponent(PositionComponent)
@@ -25,7 +24,7 @@ class DroppableComponent extends Component {
 		this.parentId = id
 	}
 	destroy(): void {
-		ECS.eventBus.unsubscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this.subscriber)
+		this.unSubscriber()
 	}
 }
 DroppableComponent.register()

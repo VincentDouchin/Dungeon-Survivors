@@ -22,7 +22,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const height = tile.height
 	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
 	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-	const cameraSubscriber = ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+	const cameraUnSubscriber = ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
 		if (backgroundDefinition.infinite.x) {
 			sprite.texture.offset.x = x / width
 			position.x = x
@@ -32,7 +32,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			position.y = y
 		}
 	})
-	const addSubscriber = ECS.eventBus.subscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
+	const addUnSubscriber = ECS.eventBus.subscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
 		background.addChildren(entity)
 	})
 
@@ -54,9 +54,8 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	}
 
 	background.onDestroy(() => {
-		ECS.eventBus.unsubscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, cameraSubscriber)
-		ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
-
+		cameraUnSubscriber()
+		addUnSubscriber()
 	})
 
 	// ! WALLS

@@ -31,7 +31,7 @@ const BoostsEntity = () => {
 		}
 	})
 	boosts.onDestroy(() => {
-		ECS.eventBus.unsubscribe<SKILL_ICON>(ECSEVENTS.SKILL_ICON, sub)
+		sub()
 	})
 
 

@@ -4,12 +4,12 @@ export type EventCallBack<T> = (args: T) => void
 class EventBus {
 	private subscribers: { [event: string]: Function[] } = {};
 
-	subscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>): EventCallBack<T['data']> {
+	subscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
 		if (!this.subscribers[event]) {
 			this.subscribers[event] = [];
 		}
 		this.subscribers[event].push(callback);
-		return callback
+		return () => this.unsubscribe<T>(event, callback)
 	}
 
 	unsubscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
@@ -27,4 +27,6 @@ class EventBus {
 		}
 	}
 }
+
+
 export default EventBus

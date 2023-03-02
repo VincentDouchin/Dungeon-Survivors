@@ -36,7 +36,7 @@ const PauseButtonEntity = () => {
 	})
 
 	pause.onDestroy(() => {
-		inputManager.eventBus.unsubscribe('down', downSubscriber)
+		downSubscriber()
 	})
 	return pause
 }

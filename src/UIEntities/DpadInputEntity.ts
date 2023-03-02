@@ -52,9 +52,9 @@ const DpadInputEntity = () => {
 		}
 	})
 	dpad.onDestroy(() => {
-		inputManager.eventBus.unsubscribe('up', upSubscriber)
-		inputManager.eventBus.unsubscribe('move', moveSubscriber)
-		inputManager.eventBus.unsubscribe('down', downSubscriber)
+		upSubscriber()
+		moveSubscriber()
+		downSubscriber()
 	})
 	return dpad
 }
