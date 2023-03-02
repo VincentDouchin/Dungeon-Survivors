@@ -1,3 +1,4 @@
+import DEBUG from "./debug"
 import Engine from "./Globals/Engine"
 import { GameStates } from "./Constants/GameStates"
 import LevelUpState from "./GameStates/LevelUpState"
@@ -16,6 +17,6 @@ Engine.addState(GameStates.levelUp, new LevelUpState())
 Engine.addState(GameStates.pause, new PauseState())
 Engine.addState(GameStates.map, new MapState())
 Engine.addState(GameStates.playerSelect, new PlayerSelectState())
-Engine.setState((import.meta.env.VITE_DEBUG_ENCOUNTER as string) === 'true' ? GameStates.run : GameStates.map)
+Engine.setState(DEBUG.ENCOUNTER ? GameStates.run : GameStates.map)
 Engine.start()
 

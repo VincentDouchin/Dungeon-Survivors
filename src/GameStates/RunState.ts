@@ -9,6 +9,7 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
+import DEBUG from "../debug"
 import Encounter from "../Game/Encounter"
 import Engine from "../Globals/Engine"
 import ExpirationSystem from "../Systems/ExpirationSystem"
@@ -95,12 +96,12 @@ class RunState implements GameState {
 			}; break
 			case GameStates.map: {
 
-				const backgroundDefinition = BACKGROUNDS[options?.background ?? (import.meta.env.VITE_DEFAULT_ARENA as backgroundName)]!
+				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
 				this.player = new Entity('player')
-				this.player.addChildren(PlayerEntity(State.heros[0] ?? HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats, this.mana))
-				this.player.addChildren(PlayerEntity(State.heros[1] ?? HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats, this.mana))
-				this.encounter ??= ENEMYWAVES[options?.enemies ?? (import.meta.env.VITE_DEFAULT_ENEMIES as enemyWaveName)]()
+				this.player.addChildren(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats, this.mana))
+				this.player.addChildren(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats, this.mana))
+				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}

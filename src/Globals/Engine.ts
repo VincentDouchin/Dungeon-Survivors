@@ -1,4 +1,5 @@
 import Coroutines from "./Coroutine"
+import DEBUG from "../debug"
 import { GameStates } from "../Constants/GameStates"
 
 const Engine = new class {
@@ -6,7 +7,7 @@ const Engine = new class {
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName: GameStates = (import.meta.env.VITE_DEBUG_ENCOUNTER as string) === 'true' ? GameStates.map : GameStates.none
+	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.none
 	states: Map<GameStates, GameState> = new Map()
 	get state() {
 		return this.stateName ? this.states.get(this.stateName) : null

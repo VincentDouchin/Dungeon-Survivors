@@ -21,7 +21,7 @@ export interface Background {
 	effectDelay?: () => number
 }
 
-const BACKGROUNDS: Partial<Record<backgroundName, Background>> = {
+const BACKGROUNDS: Record<backgroundName, Background> = {
 	DUNGEON: {
 		level: 'DUNGEON',
 		lightColor: new Color('hsl(0,0%,6%)'),
