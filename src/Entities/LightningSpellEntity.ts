@@ -9,15 +9,15 @@ import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
-import { Vector2 } from "three"
 import assets from "../Globals/Assets"
 
-const LightningSpellEntity = (parentPosition: Vector2, stats: StatsComponent) => {
-
+const LightningSpellEntity = (entity: Entity) => {
+	const stats = entity.getComponent(StatsComponent)
+	const parentPosition = entity.getComponent(PositionComponent)
 	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [id, position]) => {
 		const enemy = ECS.getEntityById(id)
 		const enemyHealth = enemy.getComponent(HealthComponent)
-		if (position.position.distanceTo(parentPosition) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
+		if (position.position.distanceTo(parentPosition.position) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
 			return [...enemies, enemy]
 		} else {
 			return enemies

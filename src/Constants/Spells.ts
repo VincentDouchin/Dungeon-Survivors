@@ -1,13 +1,13 @@
+import ArrowVolleySpell from "../Entities/ArrowVolleySpell"
 import DivineProtectionEntity from "../Entities/DivineProtectionEntity"
+import { Entity } from "../Globals/ECS"
 import LightningSpellEntity from "../Entities/LightningSpellEntity"
-import StatsComponent from "../Components/StatsComponent"
 import Tile from "../Utils/Tile"
-import { Vector2 } from "three"
 import assets from "../Globals/Assets"
 
 export interface Spell {
 	icon: Tile,
-	spell: (position: Vector2, stats: StatsComponent) => void
+	spell: (entity: Entity) => void
 }
 const SPELLS: Record<string, Spell> = {
 	LIGHTNING: {
@@ -17,6 +17,10 @@ const SPELLS: Record<string, Spell> = {
 	DIVINE_PROTECTION: {
 		icon: assets.skills.divine_protection_spell,
 		spell: DivineProtectionEntity
+	},
+	ARROW_VOLLEY: {
+		icon: assets.skills.divine_protection_spell,
+		spell: ArrowVolleySpell
 	}
 
 }

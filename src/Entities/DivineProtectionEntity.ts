@@ -8,11 +8,12 @@ import ExpirationComponent from "../Components/ExpirationComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
-import { Vector2 } from "three"
 import assets from "../Globals/Assets"
 import { soundManager } from "../Globals/Initialize"
 
-const DivineProtectionEntity = (position: Vector2, stats: StatsComponent) => {
+const DivineProtectionEntity = (entity: Entity) => {
+	const stats = entity.getComponent(StatsComponent)
+	const position = entity.getComponent(PositionComponent)
 	const tile = assets.effects.Aura
 	const beam = new Entity('beam')
 	const beamTile = assets.magic.beam
