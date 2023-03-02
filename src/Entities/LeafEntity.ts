@@ -16,21 +16,18 @@ const LeafEntity = () => {
 		((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
 		((Math.random() - 0.5) * 2) * camera.top + camera.position.y
 	))
-	new Coroutine(function* () {
-		let counter = 0
-		let fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
-		let fallingEndTimer = 20 + Math.random() * 20
-		let start = position.y
-		while (counter < 100) {
-			position.y += linear(counter, 0, -2, 100)
-			position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
-			sprite.opacity = linear(counter, 1, 0, 100)
-			counter++
-			yield
+	const fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
+	const fallingEndTimer = 20 + Math.random() * 20
+	const start = position.y
+	new Coroutine(function* (counter: number) {
+		position.y += linear(counter, 0, -2, 100)
+		position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
+		sprite.opacity = linear(counter, 1, 0, 100)
 
-		}
+		yield
+
 		leaf.destroy()
-	})
+	}, 100)
 	return leaf
 }
 export default LeafEntity
