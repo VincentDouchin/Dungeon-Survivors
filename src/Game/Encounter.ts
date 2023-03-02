@@ -5,7 +5,6 @@ import Coroutine from "../Globals/Coroutine";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
-import { EventCallBack } from "../Utils/EventBus";
 import FlockingComponent from "../Components/FlockingComponent";
 import { GameStates } from "../Constants/GameStates";
 import ParticleEntity from "../Entities/ParticleEntitty";
