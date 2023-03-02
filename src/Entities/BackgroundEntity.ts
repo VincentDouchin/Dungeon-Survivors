@@ -8,7 +8,7 @@ import { Background } from "../Constants/BackGrounds"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import LDTKMap from "../Utils/LDTKMap"
 import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"

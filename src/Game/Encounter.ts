@@ -1,7 +1,7 @@
-import Coroutines, { Coroutine } from "../Globals/Coroutine";
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { ADD_TO_ENCOUNTER, DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 
+import Coroutine from "../Globals/Coroutine";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
@@ -128,11 +128,11 @@ class Encounter {
 	}
 	pause() {
 		if (!this.coroutine) return
-		this.coroutine.state = 'stopped'
+		this.coroutine.stop()
 	}
 	resume() {
 		if (!this.coroutine) return
-		this.coroutine.state = 'running'
+		this.coroutine.resume()
 	}
 	start() {
 		this.started = true

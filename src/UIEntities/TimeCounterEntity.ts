@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { ENENMY_LEVEL_UP } from "../Constants/ECSEvents"
 
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import TextComponent from "../Components/TextComponent"

@@ -1,4 +1,4 @@
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import Engine from "../Globals/Engine"
 import { Entity } from "../Globals/ECS"
 import { GameStates } from "../Constants/GameStates"

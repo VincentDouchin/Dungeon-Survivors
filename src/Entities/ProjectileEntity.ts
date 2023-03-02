@@ -1,6 +1,6 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import ExpirationComponent from "../Components/ExpirationComponent"

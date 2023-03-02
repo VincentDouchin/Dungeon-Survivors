@@ -5,7 +5,7 @@ import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 
 import AnimationComponent from "../Components/AnimationComponent"
 import ColorShader from "../Shaders/ColorShader"
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
 import OutlineShader from "../Shaders/OutlineShader"

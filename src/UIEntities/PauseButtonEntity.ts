@@ -1,4 +1,4 @@
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import { Entity } from "../Globals/ECS"
 import { PAUSE } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"

@@ -2,7 +2,7 @@ import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { MANA_AMOUNT } from "../Constants/ECSEvents"
 
 import ColorShader from "../Shaders/ColorShader"
-import Coroutines from "../Globals/Coroutine"
+import Coroutine from "../Globals/Coroutine";
 import { SKILL } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"

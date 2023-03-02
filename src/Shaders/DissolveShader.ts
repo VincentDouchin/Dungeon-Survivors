@@ -1,4 +1,4 @@
-import Coroutines from '../Globals/Coroutine'
+import Coroutine from '../Globals/Coroutine'
 import Shader from './Shader'
 import { clock } from '../Globals/Initialize'
 import frag from './glsl/dissolve.frag?raw'
