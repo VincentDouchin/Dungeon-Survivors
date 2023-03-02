@@ -13,8 +13,16 @@ class Coroutine {
 	}
 	generator: Generator
 	running: boolean = true
-	constructor(fn: () => Generator) {
-		this.generator = fn()
+	constructor(fn: (args: number) => Generator, duration?: number) {
+		const generatorFunction =
+			duration
+				? function* () {
+					for (let i = 0; i < duration; i++) {
+						yield* fn(i)
+					}
+				}
+				: fn
+		this.generator = generatorFunction(0)
 		this.generator.next()
 		Coroutine.coroutines.push(this)
 	}
