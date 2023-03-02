@@ -29,7 +29,8 @@
    { "name": "bleed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] },
    { "name": "gem", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 912, "w": 16, "h": 16 } }] },
    { "name": "attack", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "switch", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 48, "w": 16, "h": 16 } }] }
+   { "name": "switch", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 48, "w": 16, "h": 16 } }] },
+   { "name": "claw", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 880, "w": 16, "h": 16 } }] }
   ]
  }
 }
