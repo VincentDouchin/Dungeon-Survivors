@@ -7,7 +7,7 @@ import AnimationComponent from "../Components/AnimationComponent";
 import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
 import MovementSystem from "../Systems/MovementSystem";
@@ -63,7 +63,7 @@ class MapState implements GameState {
 					const title = new Entity('title text')
 					title.addComponent(new SpriteComponent(assets.title))
 					title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
-					Coroutines.add(function* () {
+					new Coroutine(function* () {
 						yield
 						camera.position.x = 0
 						let counter = 1

@@ -1,5 +1,5 @@
 import { Component } from "../Globals/ECS";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import { easeInOutQuad } from "../Utils/Tween";
 
 interface position {
@@ -18,7 +18,7 @@ class UIPositionComponent extends Component {
 	moveTo(startPosition: number, endPosition: number, delay: number) {
 		const self = this
 		return new Promise<void>(resolve => {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				let t = 0
 				while (self.relativePosition.y != endPosition) {
 					self.relativePosition.y = easeInOutQuad(t, startPosition, endPosition, delay)

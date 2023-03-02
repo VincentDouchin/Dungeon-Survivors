@@ -1,4 +1,4 @@
-import Coroutines, { Coroutine } from "../Globals/Coroutines";
+import Coroutines, { Coroutine } from "../Globals/Coroutine";
 import { ECS, Entity } from "../Globals/ECS";
 import ECSEVENTS, { ADD_TO_ENCOUNTER, DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 
@@ -137,7 +137,7 @@ class Encounter {
 	start() {
 		this.started = true
 		const self = this
-		this.coroutine = Coroutines.add(function* () {
+		this.coroutine = new Coroutine(function* () {
 			for (let wave of self.waves) {
 				yield* wave()
 			}

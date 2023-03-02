@@ -1,6 +1,6 @@
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import ExpirationComponent from "../Components/ExpirationComponent"
@@ -27,7 +27,7 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 	projectile.addComponent(new PositionComponent(position.x, position.y))
 	const rotationComponent = projectile.addComponent(new RotationComponent(rotation, 0))
 	if (projectileDefinition.rotationSpeed) {
-		Coroutines.add(function* () {
+		new Coroutine(function* () {
 			let timer = 0
 			while (timer < projectileDefinition.range) {
 				timer++

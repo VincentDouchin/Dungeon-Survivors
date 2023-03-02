@@ -1,6 +1,6 @@
 import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, VALIDATE } from "../Constants/InputsNames";
 
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import EventBus from "../Utils/EventBus";
 import { InputController } from "../Globals/InputManager";
 import waitFor from "../Utils/WaitFor";
@@ -36,7 +36,7 @@ class GamepadController implements InputController {
 	enable() {
 		this.enabled = true
 		const self = this
-		Coroutines.add(function* () {
+		new Coroutine(function* () {
 			while (self.enabled) {
 				const gamepad = navigator.getGamepads()[0]
 				if (!gamepad) return

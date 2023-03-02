@@ -1,4 +1,4 @@
-import Coroutines from "./Coroutines"
+import Coroutines from "./Coroutine"
 import { GameStates } from "../Constants/GameStates"
 
 const Engine = new class {

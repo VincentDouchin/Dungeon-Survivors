@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { ENENMY_LEVEL_UP } from "../Constants/ECSEvents"
 
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import TextComponent from "../Components/TextComponent"
@@ -16,7 +16,7 @@ const TimeCounterEntity = () => {
 	timer.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 24, 0), { scale: 1.5 }))
 	timer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
 	const timerText = timer.addComponent(new TextComponent(formatTimer(),))
-	Coroutines.add(function* () {
+	new Coroutine(function* () {
 		let startCounter = true
 		timer.onDestroy(() => startCounter = false)
 		while (startCounter) {

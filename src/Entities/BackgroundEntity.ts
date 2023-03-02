@@ -8,7 +8,7 @@ import { Background } from "../Constants/BackGrounds"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import LDTKMap from "../Utils/LDTKMap"
 import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
@@ -66,7 +66,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 				((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
 				((Math.random() - 0.5) * 2) * camera.top + camera.position.y
 			))
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				let counter = 0
 				let fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
 				let fallingEndTimer = 20 + Math.random() * 20
@@ -91,7 +91,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
 			leafing = false
 		})
-		Coroutines.add(function* () {
+		new Coroutine(function* () {
 			while (leafing) {
 				yield* waitFor(Math.random() * 10 + 50)
 				for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
@@ -110,7 +110,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 				((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
 				((Math.random() - 0.5) * 2) * camera.top + camera.position.y
 			))
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				let counter = 0
 				const max = Math.random() * 5 + 10
 				while (counter < max) {
@@ -133,7 +133,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			ECS.eventBus.unsubscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, addSubscriber)
 			raining = false
 		})
-		Coroutines.add(function* () {
+		new Coroutine(function* () {
 			while (raining) {
 				rainEntity()
 				yield* waitFor(Math.random() * 5)

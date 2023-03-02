@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { SKILL } from "../Constants/ECSEvents"
 
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
 import SKILLS from "../Constants/Skills"
@@ -44,7 +44,7 @@ const SkillMenuEntity = () => {
 
 
 		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
-		Coroutines.add(function* () {
+		new Coroutine(function* () {
 			while (sprite) {
 				yield
 				sprite.uniforms.time = clock.getElapsedTime()

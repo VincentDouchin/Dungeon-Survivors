@@ -1,4 +1,4 @@
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import { Entity } from "../Globals/ECS"
 import { PAUSE } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -19,7 +19,7 @@ const PauseButtonEntity = () => {
 	let down = false
 	const downSubscriber = inputManager.eventBus.subscribe('down', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id) && !down) {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				down = true
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()

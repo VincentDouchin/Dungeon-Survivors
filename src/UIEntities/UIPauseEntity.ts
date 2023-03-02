@@ -1,4 +1,4 @@
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import Engine from "../Globals/Engine"
 import { Entity } from "../Globals/ECS"
 import { GameStates } from "../Constants/GameStates"
@@ -20,7 +20,7 @@ const UIPauseEntity = () => {
 
 	inputManager.eventBus.subscribe('down', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id)) {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				sprite.renderShader!.uniforms.uTexture.value = buttonPressedTile.texture
 				sprite.render()
 				yield* waitFor(10)

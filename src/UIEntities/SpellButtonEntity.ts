@@ -2,7 +2,7 @@ import { ECS, Entity } from "../Globals/ECS"
 import ECSEVENTS, { MANA_AMOUNT } from "../Constants/ECSEvents"
 
 import ColorShader from "../Shaders/ColorShader"
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import { SKILL } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
@@ -22,7 +22,7 @@ const SpellButtonEntity = () => {
 	let disabled = false
 	const downSubscriber = inputManager.eventBus.subscribe('up', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id) && !disabled) {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				sprite.changeTexture(assets.UI.buttonpressed.texture)
 				sprite.render()
 				iconPosition.center.y = 0

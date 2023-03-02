@@ -2,7 +2,7 @@ import { ECS, Entity, System } from "../Globals/ECS";
 
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import HealthComponent from "../Components/HealthComponent";
 import JointComponent from "../Components/JointComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
@@ -77,12 +77,12 @@ class TargetingSystem extends System {
 						body.velocity.x = 0
 						body.velocity.y = 0
 					}
-					Coroutines.add(function* () {
+					new Coroutine(function* () {
 						targeter.charger = false
 						yield* waitFor(180)
 						targeter.charger = true
 					})
-					Coroutines.add(function* () {
+					new Coroutine(function* () {
 						targeter.charging = true
 						yield* waitFor(40)
 						ParticleEntity(position.x, position.y - sprite.scaledHeight / 2, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })

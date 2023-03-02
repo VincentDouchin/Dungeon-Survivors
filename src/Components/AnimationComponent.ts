@@ -1,5 +1,5 @@
 import { Component } from "../Globals/ECS";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import Tile from "../Utils/Tile";
 
 class AnimationComponent extends Component {
@@ -40,7 +40,7 @@ class AnimationComponent extends Component {
 		this.currentState = animation
 		const self = this
 		return new Promise<void>(resolve => {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				let counter: number = (duration ?? 1)
 				while (counter > 0) {
 					while (self.selectedFrame < self.tiles[animation].frames - 1) {

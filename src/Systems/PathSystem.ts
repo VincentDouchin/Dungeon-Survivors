@@ -2,7 +2,7 @@ import { ECS, Entity, System } from "../Globals/ECS";
 import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 
 import AnimationComponent from "../Components/AnimationComponent";
-import Coroutines from "../Globals/Coroutines";
+import Coroutine from "../Globals/Coroutine";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
 import PathNodeComponent from "../Components/PathNodeComponent";
@@ -71,7 +71,7 @@ class PathSystem extends System {
 						entity.addChildren(arrow)
 						arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
-						Coroutines.add(function* () {
+						new Coroutine(function* () {
 							let t = 0
 							let sign = 1
 							const delay = 30

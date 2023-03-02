@@ -5,7 +5,7 @@ import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 
 import AnimationComponent from "../Components/AnimationComponent"
 import ColorShader from "../Shaders/ColorShader"
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
 import OutlineShader from "../Shaders/OutlineShader"
@@ -38,7 +38,7 @@ const UIPlayerSelectEntity = () => {
 	const buttonUnselectedTile = assets.UI.buttondisabled.framed(4, 20, 5)
 	// ! ADD OUTLINE
 	let checkHeros = true
-	Coroutines.add(function* () {
+	new Coroutine(function* () {
 		const withShader: Entity[] = []
 		while (checkHeros) {
 			yield
@@ -121,7 +121,7 @@ const UIPlayerSelectEntity = () => {
 			const button = new Entity(`button ${index}`)
 
 			const selectSelectabled = button.addComponent(new SelectableComponent(buttonTile, buttonUnselectedTile, () => {
-				Coroutines.add(function* () {
+				new Coroutine(function* () {
 					buttonSprite.changeTexture(buttonPressedTile.texture)
 					textPosition.relativePosition.y = 0
 					yield* waitFor(10)

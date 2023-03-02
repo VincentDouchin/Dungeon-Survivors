@@ -1,4 +1,4 @@
-import Coroutines from "../Globals/Coroutines"
+import Coroutines from "../Globals/Coroutine"
 import { Entity } from "../Globals/ECS"
 import { SWITCH } from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -17,7 +17,7 @@ const SwitchButtonEntity = () => {
 	button.addChildren(icon)
 	const downSubscriber = inputManager.eventBus.subscribe('up', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id)) {
-			Coroutines.add(function* () {
+			new Coroutine(function* () {
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()
 				iconPosition.center.y = 0
