@@ -44,15 +44,11 @@ const SkillMenuEntity = () => {
 
 
 		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
-		let shimmer = true
-		skillMenu.onDestroy(() => shimmer = false)
-		new Coroutine(function* () {
-			while (shimmer) {
-				yield
-				sprite.uniforms.time = clock.getElapsedTime()
-				console.log('test')
-			}
-		})
+		const shimmerCoroutine = new Coroutine(function* () {
+			yield
+			sprite.uniforms.time = clock.getElapsedTime()
+		}, Infinity)
+		skillMenu.onDestroy(() => shimmerCoroutine.stop())
 		icon.addComponent(new UIPositionComponent())
 
 		const text = new Entity('text')
