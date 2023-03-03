@@ -10,7 +10,6 @@ import UIPositionComponent from "../Components/UIPositionComponent"
 const skills: Skill[] = []
 ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, skill => {
 	skills.push(skill)
-	console.log(skills, skill)
 })
 const BoostsEntity = () => {
 	const boosts = new Entity('boosts')
