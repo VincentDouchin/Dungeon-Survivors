@@ -8,7 +8,7 @@ import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 
 class SelectionSystem extends System {
-	selectedEntity?: Entity
+	selectedEntity: Entity | null = null
 	hovered: number[] = []
 	clicked: number[] = []
 	constructor() {
@@ -24,38 +24,56 @@ class SelectionSystem extends System {
 				ECS.eventBus.publish(ECSEVENTS.DESELECTED, this.selectedEntity)
 			}
 			this.selectedEntity = entity
+			const selectable = entity.getComponent(SelectableComponent)
+			const sprite = entity.getComponent(SpriteComponent)
+			selectable?.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
+		})
+		ECS.eventBus.subscribe(ECSEVENTS.DESELECTED, entity => {
+			if (this.selectedEntity === entity) {
+				this.selectedEntity = null
+			}
+			const selectable = entity.getComponent(SelectableComponent)
+			const sprite = entity.getComponent(SpriteComponent)
+			selectable?.unSelectedTile && sprite.changeTexture(selectable.unSelectedTile.texture)
 		})
 	}
 	update(entities: Entity[]) {
+		let soundplayed = false
 		for (const entity of entities) {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			if (this.hovered.includes(sprite?.mesh.id) || this.clicked.includes(sprite?.mesh.id)) {
 				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
-				this.hovered.splice(this.hovered.indexOf(sprite.mesh.id), 1)
+
 			}
 			if (entity.id === this.selectedEntity?.id) {
+
+
 				if (this.clicked.includes(sprite.mesh.id)) {
 					inputManager.eventBus.publish(INPUTS.VALIDATE, true)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
 				}
 				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {
-					soundManager.play(ALLSOUNDS.Validate)
-					if (selectable.onValidated) selectable.onValidated()
+
+					if (selectable.onValidated) {
+						if (!soundplayed) {
+							soundManager.play(ALLSOUNDS.Validate).play()
+							soundplayed = true
+						}
+						selectable.onValidated()
+					}
 				}
-				selectable.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
+
 				for (let input of Object.values(INPUTS)) {
 					if (inputManager.getInput(input)?.once) {
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {
-							soundManager.play(ALLSOUNDS.Select)
+							soundManager.play(ALLSOUNDS.Select).play()
 							ECS.eventBus.publish(ECSEVENTS.SELECTED, nextEntity)
 						}
 
 					}
 				}
-			} else {
-				selectable?.unSelectedTile && sprite.changeTexture(selectable.unSelectedTile.texture)
 			}
 		}
 		this.clicked = []
