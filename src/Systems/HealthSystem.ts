@@ -21,7 +21,6 @@ import waitFor from "../Utils/WaitFor";
 
 const empty = assets.UI['healthBar']
 const full = assets.UI['healthFull']
-let t = 0
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
@@ -54,7 +53,6 @@ class HealthSystem extends System {
 						// ! Take damage
 						const damageAmount = damage.calculateDamage(health.defense.value)
 						health.updateHealth(-damageAmount)
-
 						if (damage.sound) {
 							soundManager.play(damage.sound).play()
 						}
@@ -88,16 +86,13 @@ class HealthSystem extends System {
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (sprite && damage.amount.value > 0) {
 
-							t++
 							new Coroutine(function* () {
-								yield
 								health.canTakeDamage = false
 								sprite.addShader(new ColorShader(1, 0, 0, 1))
 								yield* waitFor(30)
 								if (sprite) {
 									sprite.removeShader(ColorShader)
 								}
-								t--
 								health.canTakeDamage = true
 								return
 							})
@@ -131,9 +126,6 @@ class HealthSystem extends System {
 
 
 				sprite.addShader(new DissolveShader(120))
-				if (!entity?.destroy) {
-					debugger
-				}
 				entity.destroy()
 
 			}
