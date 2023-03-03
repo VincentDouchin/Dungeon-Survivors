@@ -39,7 +39,9 @@
    { "name": "arrowselected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 32, "w": 16, "h": 14 } }] },
    { "name": "character", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 133, "y": 67, "w": 8, "h": 7 } }] },
    { "name": "mana", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 13, "w": 53, "h": 7 } }] },
-   { "name": "buttondisabled", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 80, "w": 16, "h": 16 } }] }
+   { "name": "buttondisabled", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 80, "w": 16, "h": 16 } }] },
+   { "name": "barempty", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 48, "y": 32, "w": 48, "h": 16 } }] },
+   { "name": "barfull", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 48, "y": 48, "w": 48, "h": 16 } }] }
   ]
  }
 }
