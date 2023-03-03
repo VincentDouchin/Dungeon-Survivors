@@ -38,7 +38,7 @@ class StatsComponent extends Component {
 		return this
 	}
 	setModifier(statName: STATS, modifier: number = 0) {
-		if (this.stats.has(statName)) {
+		if (!this.stats.has(statName)) {
 			this.stats.set(statName, this.getemptyStat())
 		}
 		this.stats.get(statName)!.modifier = modifier
