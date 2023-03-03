@@ -52,7 +52,7 @@ class PickupSystem extends System {
 					otherEntity.destroy()
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
-					soundManager.play(ALLSOUNDS.PowerUp, 0.3)
+					soundManager.play(ALLSOUNDS.PowerUp, 0.3).play()
 					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}
@@ -60,6 +60,7 @@ class PickupSystem extends System {
 					otherEntity.destroy()
 					stats?.boosts.push(boost)
 					ParticleEntity(entity, assets.magic.healing, { duration: 5, frameRate: 10, color: boost.color })
+					soundManager.play(ALLSOUNDS.BOOST).play()
 
 				}
 
