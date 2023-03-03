@@ -1,6 +1,6 @@
 import HEROS, { HeroDefinition } from './../Constants/Heros'
 
-import Coroutines from "./Coroutine"
+import Coroutine from "./Coroutine"
 import { GameStates } from "../Constants/GameStates"
 import { backgroundName } from './../Constants/BackGrounds'
 import { enemyWaveName } from './../Constants/EnemyEncounters'
@@ -11,17 +11,17 @@ export const DEBUG: {
 	DEFAULT_BACKGROUND: backgroundName
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
 } = {
-	ENCOUNTER: true && import.meta.env.DEV,
+	ENCOUNTER: false && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'FOREST',
-	DEFAULT_HEROS: [HEROS[0], HEROS[0]]
+	DEFAULT_HEROS: [HEROS[0], HEROS[1]]
 }
 const Engine = new class {
 	rafHandle = 0
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.map
+	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.none
 	states: Map<GameStates, GameState> = new Map()
 	get state() {
 		return this.stateName ? this.states.get(this.stateName) : null
@@ -42,8 +42,8 @@ const Engine = new class {
 		}
 
 		while (this.accumulatedTime >= this.timeStep) {
-			Coroutines.run()
 			this.state.update()
+			Coroutine.run()
 			updated = true
 			this.accumulatedTime -= this.timeStep
 		}
