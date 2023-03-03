@@ -47,3 +47,4 @@ export type EventMap = {
 }
 	& Record<INPUTS, boolean | number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
+	& Record<'enable'|'disable',string>

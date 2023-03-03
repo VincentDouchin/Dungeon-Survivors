@@ -126,7 +126,7 @@ const render = () => {
 }
 
 //! Inputs
-const inputManager = new InputManager(renderer.domElement, INPUTS)
+const inputManager = new InputManager(renderer.domElement, Object.values(INPUTS))
 inputManager.registerControllers(KeyboardController)
 inputManager.registerControllers(GamepadController)
 

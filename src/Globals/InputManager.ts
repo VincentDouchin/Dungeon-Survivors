@@ -2,10 +2,11 @@ import { Raycaster, Vector3 } from "three";
 import { UICamera, UIScene, camera, scene } from "./Initialize";
 
 import EventBus from "../Utils/EventBus";
+import INPUTS from "../Constants/InputsNames";
 import State from "./State";
 
 class Input {
-	active = 0
+	active: number | boolean = 0
 	down = false
 	get once() {
 		if (this.active != 0) {
@@ -22,11 +23,11 @@ class InputManager {
 	eventBus = new EventBus()
 	controllers: InputController[] = []
 	inputs: Map<string, Input> = new Map()
-	constructor(domElement: HTMLCanvasElement, inputNames: string[]) {
+	constructor(domElement: HTMLCanvasElement, inputNames: INPUTS[]) {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
-			this.eventBus.subscribe(inputName, (state: number) => {
-				this.inputs.get(inputName)!.down = (state == 0)
+			this.eventBus.subscribe(inputName, (state: number | boolean) => {
+				this.inputs.get(inputName)!.down = (state === 0)
 				this.inputs.get(inputName)!.active = state
 			})
 		})
