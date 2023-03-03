@@ -21,7 +21,7 @@ class MinionSpawnerSytem extends System {
 				const stats = entity.getComponent(StatsComponent)
 				const angle = Math.random() * Math.PI * 2
 				const minionPosition = { x: position.x + Math.cos(angle) * minion.distance, y: position.y + Math.sin(angle) * minion.distance }
-				ParticleEntity(minionPosition.x, minionPosition.y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
+				ParticleEntity(minionPosition, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 					const minionEntity = EnemyEntity(minion.minion, stats)(minionPosition)
 					ECS.eventBus.publish(ECSEVENTS.ADD_TO_ENCOUNTER, minionEntity)
 				})

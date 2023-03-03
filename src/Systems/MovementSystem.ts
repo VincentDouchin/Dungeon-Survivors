@@ -31,10 +31,10 @@ class MovementSystem extends System {
 
 					if (axisX || axisY) {
 						if (axisX && axisX != 0) {
-							body.velocity.x = axisX
+							body.velocity.x = axisX as number
 						}
 						if (axisY && axisY != 0) {
-							body.velocity.y = axisY
+							body.velocity.y = axisY as number
 						}
 					} else {
 						const vel = { x: 0, y: 0 }
