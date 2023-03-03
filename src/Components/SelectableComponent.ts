@@ -18,14 +18,14 @@ class SelectableComponent extends Component {
 		this.onValidated = fn
 
 	}
-	static setFromArray(arr: Entity[]) {
+	static setFromArray(arr: Entity[], topDown: boolean = false) {
 		arr.forEach((entity, index) => {
 			if (index === 0) {
 				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
 			}
 			const selectable = entity.getComponent(SelectableComponent)
-			selectable.next[INPUTS.MOVELEFT] = arr.at(index - 1)
-			selectable.next[INPUTS.MOVERIGHT] = arr.at((index + 1) % arr.length)
+			selectable.next[topDown ? INPUTS.MOVEDOWN : INPUTS.MOVELEFT] = arr.at(index - 1)
+			selectable.next[topDown ? INPUTS.MOVEUP : INPUTS.MOVERIGHT] = arr.at((index + 1) % arr.length)
 		})
 	}
 
