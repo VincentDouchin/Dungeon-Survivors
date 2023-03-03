@@ -9,7 +9,6 @@ const State: {
 	},
 	timer: number,
 	mobile: boolean,
-	volume: number,
 	heros: HeroDefinition[],
 	selectedTiles: number[],
 } = {
@@ -23,6 +22,5 @@ const State: {
 	selectedTiles: [],
 	timer: 0,
 	mobile: !!navigator.userAgentData?.mobile,
-	volume: 0.1
 }
 export default State
