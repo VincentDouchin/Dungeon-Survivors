@@ -1,11 +1,7 @@
-import Engine from "./Engine"
-import { GameStates } from "../Constants/GameStates"
-
 class Coroutine {
 	static coroutines: Coroutine[] = []
 
 	static run() {
-		if (Engine.stateName === GameStates.pause) debugger
 		for (let i = Coroutine.coroutines.length - 1; i >= 0; i--) {
 			if (!Coroutine.coroutines[i].running) continue
 			if (Coroutine.coroutines[i].toStop) {

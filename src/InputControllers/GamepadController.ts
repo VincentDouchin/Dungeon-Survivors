@@ -52,10 +52,6 @@ class GamepadController implements InputController {
 				} else {
 					self.eventBus.publish(INPUTS.AXISY, 0)
 				}
-				gamepad.buttons.forEach((x, i) => {
-
-					if (x.pressed) console.log(i)
-				})
 				for (let [button, input] of self.inputs) {
 					if (gamepad.buttons[button].pressed) {
 						self.eventBus.publish(input, true)

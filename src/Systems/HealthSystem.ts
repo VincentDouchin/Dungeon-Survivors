@@ -130,7 +130,6 @@ class HealthSystem extends System {
 
 			}
 		})
-		console.log(t)
 	}
 
 }
