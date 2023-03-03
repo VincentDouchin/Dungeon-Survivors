@@ -19,7 +19,7 @@ class SpriteComponent extends Component {
 	effectComposer: EffectComposer
 	texture: Texture
 	baseTexture: Uniform
-	shaderPasses: Map<string, ShaderPass> = new Map()
+	shaderPasses: Map<Constructor<Shader>['name'], [ShaderPass, ShaderPass]> = new Map()
 	mesh: Mesh
 	opacity: number
 	renderShader?: ShaderPass
@@ -27,11 +27,11 @@ class SpriteComponent extends Component {
 	flipped: boolean
 	uniforms = new Proxy<any>(this, {
 		get(target, prop) {
-			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])).uniforms[prop].value
+			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value
 
 		},
 		set(target, prop, newValue) {
-			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])).uniforms[prop].value = newValue
+			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value = newValue
 			target.render()
 			return true
 		}
@@ -71,27 +71,29 @@ class SpriteComponent extends Component {
 
 	}
 	addShader(shader: Shader, render = true) {
-		if ([...this.shaderPasses.keys()].includes(shader.constructor.name)) return
+		if (this.shaderPasses.has(shader.constructor.name)) return
 		const shaderMat = shader.create(this)
 		shaderMat.uniforms.tDiffuse = this.baseTexture
 		const pass = new ShaderPass(shaderMat)
-		this.shaderPasses.set(shader.constructor.name, pass)
+		const copypass = new ShaderPass(CopyShader)
+		this.shaderPasses.set(shader.constructor.name, [pass, copypass])
 		Object.keys(pass.uniforms).forEach((name) => {
 			this.uniformsKeys[name] = shader.constructor.name
 		})
 		pass.clear = true
 		this.effectComposer.insertPass(pass, 1)
-		this.effectComposer.insertPass(new ShaderPass(CopyShader), 2)
+		this.effectComposer.insertPass(copypass, 2)
 		if (render) this.render()
 		return pass
 	}
 	getUniforms<T extends Shader>(shaderConstructor: Constructor<T>) {
-		return this.shaderPasses.get(shaderConstructor.name)?.uniforms as Record<keyof ReturnType<T['uniforms']>, Uniform>
+		return this.shaderPasses.get(shaderConstructor.name)?.[0]?.uniforms as Record<keyof ReturnType<T['uniforms']>, Uniform>
 	}
 	removeShader(shaderConstructor: Constructor<Shader>) {
-		const pass = this.shaderPasses.get(shaderConstructor.name)
-		if (pass) {
-			this.effectComposer.removePass(pass)
+		const passes = this.shaderPasses.get(shaderConstructor.name)
+		if (passes) {
+			this.effectComposer.removePass(passes[0])
+			this.effectComposer.removePass(passes[1])
 			this.shaderPasses.delete(shaderConstructor.name)
 			this.render()
 		}
@@ -110,8 +112,10 @@ class SpriteComponent extends Component {
 		this.mesh.geometry.dispose()
 		this.material.dispose()
 		this.effectComposer.dispose()
-		this.shaderPasses.forEach(shaderPass => {
-			shaderPass.dispose()
+		this.shaderPasses.forEach(shaderPasses => {
+			shaderPasses.forEach(pass => {
+				pass.dispose()
+			})
 		})
 		this.renderTarget.dispose()
 		this.mesh.removeFromParent()
