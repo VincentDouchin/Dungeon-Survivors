@@ -6,14 +6,16 @@ import { UIEVENTS } from "../Constants/Events"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 
+let levelNb = 0
 const LevelDisplayEntity = () => {
 	const level = new Entity('level display')
 	const tile = assets.UI.box.framed(3, 10, 10)
 	level.addComponent(new UIPositionComponent({ x: -1, y: 1 }, { x: -1, y: 1 }))
 	level.addComponent(new SpriteComponent(tile, { scale: 3 }))
-	const text = level.addComponent(new TextComponent(String(0), { size: 32 }))
-	ECS.eventBus.subscribe(UIEVENTS.UI_LEVEL, (level) => {
-		text.setText(String(level))
+	const text = level.addComponent(new TextComponent(String(levelNb), { size: 32 }))
+	ECS.eventBus.subscribe(UIEVENTS.UI_LEVEL, (newLevel) => {
+		levelNb = newLevel
+		text.setText(String(levelNb))
 	})
 	return level
 }
