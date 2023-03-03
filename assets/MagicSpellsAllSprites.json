@@ -17,7 +17,8 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "healing", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 24, "w": 96, "h": 24 } }] },

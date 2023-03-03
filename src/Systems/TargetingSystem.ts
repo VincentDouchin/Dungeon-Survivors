@@ -85,7 +85,7 @@ class TargetingSystem extends System {
 					new Coroutine(function* () {
 						targeter.charging = true
 						yield* waitFor(40)
-						ParticleEntity(position.x, position.y - sprite.scaledHeight / 2, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
+						ParticleEntity({ x: position.x, y: position.y - sprite.scaledHeight / 2 }, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
 						yield* charge()
 						targeter.charging = false
 					})

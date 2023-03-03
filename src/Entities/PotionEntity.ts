@@ -10,7 +10,7 @@ const PotionEntity = () => {
 	const tile = assets.tiles.flask_big_green
 	potion.addComponent(new SpriteComponent(tile))
 	potion.addComponent(new BodyComponent({ type: 'fixed' }, [
-		{ width: tile.width, height: tile.height, sensor: false, contact: true, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] }
+		{ width: tile.width, height: tile.height, sensor: true, contact: false, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] }
 	]))
 	potion.addComponent(new DamageComponent(-30, [COLLISIONGROUPS.PLAYER], 1))
 	return potion

@@ -1,5 +1,7 @@
 import AnimationComponent from "../Components/AnimationComponent"
+import BOOSTS from "../Constants/Boosts"
 import BodyComponent from "../Components/BodyComponent"
+import BoostEntity from "./BoostEntity"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
 import DroppableComponent from "../Components/DroppableComponent"
@@ -36,6 +38,10 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	}
 	if (Math.random() < 0.15) {
 		drops.push(ManaDropEntity)
+	}
+	if (Math.random() < 0.02) {
+		const randomBoost = BOOSTS[Math.floor(Math.random() * BOOSTS.length)]
+		drops.push(BoostEntity(randomBoost))
 	}
 	enemy.addComponent(new DroppableComponent(drops))
 	enemy.addComponent(new PositionComponent(position.x, position.y))

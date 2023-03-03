@@ -24,7 +24,7 @@ const RainEntity = () => {
 			position.x -= tile.width / 2
 			yield* waitFor(2)
 		}
-		ParticleEntity(position.x, position.y, assets.effects.rainFloor)
+		ParticleEntity(position, assets.effects.rainFloor)
 		rain.destroy()
 	})
 	return rain

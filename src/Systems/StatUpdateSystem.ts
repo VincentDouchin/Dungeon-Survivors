@@ -15,7 +15,7 @@ class StatUpdateSystem extends System {
 	update(entities: Entity[]): void {
 		entities.forEach(entity => {
 			const stats = entity.getComponent(StatsComponent)
-			for (let i = stats.boosts.length; i > 0; i--) {
+			for (let i = stats.boosts.length - 1; i >= 0; i--) {
 				stats.boosts[i].duration--
 				if (stats.boosts[i].duration === 0) {
 					stats.boosts.splice(i, 1)

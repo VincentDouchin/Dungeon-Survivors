@@ -2,14 +2,17 @@ import { ECS, Entity, System } from "../Globals/ECS";
 
 import { ALLSOUNDS } from "../Globals/Sounds";
 import BodyComponent from "../Components/BodyComponent";
+import BoostComponent from "../Components/BoostComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import { ECSEVENTS } from "../Constants/Events";
 import ManaComponent from "../Components/ManaComponent";
+import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import StatsComponent from "../Components/StatsComponent";
 import TokenComponent from "../Components/TokenComponent";
 import XPComponent from "../Components/XPComponent";
 import XPPickerComponent from "../Components/XPPickerComponent";
+import assets from "../Globals/Assets";
 import { soundManager } from "../Globals/Initialize";
 
 class PickupSystem extends System {
@@ -38,6 +41,7 @@ class PickupSystem extends System {
 			body.contacts((otherEntity: Entity) => {
 				const xp = otherEntity.getComponent(XPComponent)
 				const token = otherEntity.getComponent(TokenComponent)
+				const boost = otherEntity.getComponent(BoostComponent)
 				if (xp && stats) {
 					otherEntity.destroy()
 					stats?.updateXP(xp.amount)
@@ -51,6 +55,12 @@ class PickupSystem extends System {
 					soundManager.play(ALLSOUNDS.PowerUp, 0.3)
 					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
+				}
+				if (boost) {
+					otherEntity.destroy()
+					stats?.boosts.push(boost)
+					ParticleEntity(entity, assets.magic.healing, { duration: 5, frameRate: 10, color: boost.color })
+
 				}
 
 			}, COLLISIONGROUPS.PLAYER)

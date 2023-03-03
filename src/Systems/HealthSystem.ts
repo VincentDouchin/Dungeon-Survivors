@@ -93,7 +93,7 @@ class HealthSystem extends System {
 							sprite.addShader(new ColorShader(1, 0, 0, 1))
 						}
 						if (sprite && damage.amount.value < 0) {
-							ParticleEntity(position.x, position.y, assets.magic.healing, { duration: 3 })
+							ParticleEntity(entity, assets.magic.healing, { duration: 3, color: [0.9, 1, 0, 1] })
 						}
 
 						new Coroutine(function* () {

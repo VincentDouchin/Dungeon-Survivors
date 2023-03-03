@@ -28,9 +28,14 @@
    { "name": "curse", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 224, "w": 16, "h": 16 } }] },
    { "name": "bleed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] },
    { "name": "gem", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 912, "w": 16, "h": 16 } }] },
-   { "name": "attack", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "switch", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 48, "w": 16, "h": 16 } }] },
-   { "name": "claw", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 880, "w": 16, "h": 16 } }] }
+   { "name": "claw", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 880, "w": 16, "h": 16 } }] },
+   { "name": "feather", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 208, "y": 864, "w": 16, "h": 16 } }] },
+   { "name": "attack", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 128, "w": 16, "h": 16 } }] },
+   { "name": "candy", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 336, "w": 16, "h": 16 } }] },
+   { "name": "herbs", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 288, "w": 16, "h": 16 } }] },
+   { "name": "potato", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 304, "w": 16, "h": 16 } }] },
+   { "name": "goldenfish", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 864, "w": 16, "h": 16 } }] }
   ]
  }
 }

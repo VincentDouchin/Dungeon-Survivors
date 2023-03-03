@@ -97,7 +97,7 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(backgroundDefinition)
 
 				this.players.push(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.mana))
-				this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
+				// this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
 				this.players.forEach(player => {
 					const stats = player.getComponent(StatsComponent)
 					const levelUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
