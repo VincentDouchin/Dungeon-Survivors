@@ -30,6 +30,34 @@ class UIPositionComponent extends Component {
 			})
 		})
 	}
+	left() {
+		this.center.x = 1
+		this.center.y = 0
+		this.relativePosition.x = -1
+		this.relativePosition.y = 0
+		return this
+	}
+	right() {
+		this.center.x = -1
+		this.center.y = 0
+		this.relativePosition.x = 1
+		this.relativePosition.y = 0
+		return this
+	}
+	top() {
+		this.center.x = 0
+		this.center.y = -1
+		this.relativePosition.x = 0
+		this.relativePosition.y = 1
+		return this
+	}
+	bottom() {
+		this.center.x = 0
+		this.center.y = 1
+		this.relativePosition.x = 0
+		this.relativePosition.y = -1
+		return this
+	}
 
 }
 UIPositionComponent.register()
