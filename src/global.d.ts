@@ -12,11 +12,7 @@ type npcTileName = "Alchemist_Idle" | "Alchemist_Walk" | "Archer_Idle" | "Archer
 type DamageType = string
 
 type WaveDefinition = Array<EnemyType, number, number>
-interface Skill {
-	icon: Tile
-	name: string
-	modifier: (skill: SkillsComponent) => void
-}
+
 interface TouchCoord {
 	x: number
 	y: number

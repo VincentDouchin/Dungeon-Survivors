@@ -1,9 +1,9 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { DESELECTED, SELECTED } from "../Constants/ECSEvents";
-import INPUTS, { VALIDATE } from "../Constants/InputsNames";
 import { inputManager, soundManager } from "../Globals/Initialize";
 
 import { ALLSOUNDS } from "../Globals/Sounds";
+import { ECSEVENTS } from "../Constants/Events";
+import INPUTS from "../Constants/InputsNames";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 
@@ -19,9 +19,9 @@ class SelectionSystem extends System {
 		inputManager.eventBus.subscribe('down', ({ uiObjects, objects }: TouchCoord) => {
 			this.clicked = [...uiObjects, ...objects]
 		})
-		ECS.eventBus.subscribe<SELECTED>(ECSEVENTS.SELECTED, entity => {
+		ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
 			if (this.selectedEntity) {
-				ECS.eventBus.publish<DESELECTED>(ECSEVENTS.DESELECTED, this.selectedEntity)
+				ECS.eventBus.publish(ECSEVENTS.DESELECTED, this.selectedEntity)
 			}
 			this.selectedEntity = entity
 		})
@@ -31,25 +31,25 @@ class SelectionSystem extends System {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			if (this.hovered.includes(sprite?.mesh.id) || this.clicked.includes(sprite?.mesh.id)) {
-				ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, entity)
+				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
 				this.hovered.splice(this.hovered.indexOf(sprite.mesh.id), 1)
 			}
 			if (entity.id === this.selectedEntity?.id) {
 				if (this.clicked.includes(sprite.mesh.id)) {
-					inputManager.eventBus.publish(VALIDATE, true)
+					inputManager.eventBus.publish(INPUTS.VALIDATE, true)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
 				}
-				if (inputManager.getInput(VALIDATE)?.once) {
+				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {
 					soundManager.play(ALLSOUNDS.Validate)
 					if (selectable.onValidated) selectable.onValidated()
 				}
 				selectable.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
-				for (let input of INPUTS) {
+				for (let input of Object.values(INPUTS)) {
 					if (inputManager.getInput(input)?.once) {
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {
 							soundManager.play(ALLSOUNDS.Select)
-							ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, nextEntity)
+							ECS.eventBus.publish(ECSEVENTS.SELECTED, nextEntity)
 						}
 
 					}

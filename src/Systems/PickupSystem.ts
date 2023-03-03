@@ -1,9 +1,9 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { MANA_AMOUNT, MANA_PERCENT } from "../Constants/ECSEvents";
 
 import { ALLSOUNDS } from "../Globals/Sounds";
 import BodyComponent from "../Components/BodyComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
+import { ECSEVENTS } from "../Constants/Events";
 import ManaComponent from "../Components/ManaComponent";
 import PositionComponent from "../Components/PositionComponent";
 import StatsComponent from "../Components/StatsComponent";
@@ -38,17 +38,19 @@ class PickupSystem extends System {
 			body.contacts((otherEntity: Entity) => {
 				const xp = otherEntity.getComponent(XPComponent)
 				const token = otherEntity.getComponent(TokenComponent)
-				if (xp) {
+				if (xp && stats) {
 					otherEntity.destroy()
 					stats?.updateXP(xp.amount)
+					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity.id, max: stats.nextLevel })
+					ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity.id })
 				}
 				if (token) {
 					otherEntity.destroy()
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
 					soundManager.play(ALLSOUNDS.PowerUp, 0.3)
-					ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
-					ECS.eventBus.publish<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, mana.mana)
+					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
+					ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}
 
 			}, COLLISIONGROUPS.PLAYER)

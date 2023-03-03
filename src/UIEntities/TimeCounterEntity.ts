@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { ENENMY_LEVEL_UP } from "../Constants/ECSEvents"
 
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import TextComponent from "../Components/TextComponent"
@@ -24,7 +24,7 @@ const TimeCounterEntity = () => {
 			State.timer++
 			timerText.setText(formatTimer())
 			if (State.timer % 120 === 0) {
-				ECS.eventBus.publish<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, State.timer % 120)
+				ECS.eventBus.publish(ECSEVENTS.ENENMY_LEVEL_UP, State.timer % 120)
 			}
 		}
 	})

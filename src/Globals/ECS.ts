@@ -1,5 +1,4 @@
-import ECSEVENTS, { DELETE_ENTITY } from "../Constants/ECSEvents"
-
+import { ECSEVENTS } from "../Constants/Events"
 import EventBus from "../Utils/EventBus"
 
 const ECS = new class {
@@ -80,7 +79,7 @@ class Entity {
 	addChildren(child: Entity) {
 		child.parentId = this.id
 		this.childrenIds.push(child.id)
-		ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
+		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			this.removeChildren(entity)
 		})
 		return child
@@ -113,7 +112,7 @@ class Entity {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
 	onDestroy(fn: () => void) {
-		const unSubscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity) => {
+		const unSubscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			if (entity.id === this.id) {
 				fn()
 				unSubscriber()
@@ -122,7 +121,7 @@ class Entity {
 	}
 
 	destroy() {
-		ECS.eventBus.publish<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, this)
+		ECS.eventBus.publish(ECSEVENTS.DELETE_ENTITY, this)
 		for (let children of this.children) {
 			children.destroy()
 		}

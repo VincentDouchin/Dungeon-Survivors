@@ -1,5 +1,4 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { ADD_TO_BACKGROUND } from "../Constants/ECSEvents";
 import { easeOutBack, easeOutExpo } from "../Utils/Tween";
 
 import BarShader from "../Shaders/BarShader";
@@ -8,6 +7,7 @@ import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
 import DamageComponent from "../Components/DamageComponent";
 import DissolveShader from "../Shaders/DissolveShader";
+import { ECSEVENTS } from "../Constants/Events";
 import ExpirationComponent from "../Components/ExpirationComponent";
 import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
@@ -74,22 +74,19 @@ class HealthSystem extends System {
 
 						// ! Damage number display
 						const damageText = new Entity('damageText')
-						ECS.eventBus.publish<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
+						ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
 						const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
 						damageText.addComponent(new SpriteComponent(Tile.empty()))
 						damageText.addComponent(new ExpirationComponent(120))
 						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
-						new Coroutine(function* () {
-							let counter = 0
-							while (counter < 120) {
-								counter++
-								textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
-								textSprite.mesh.fillOpacity = easeOutExpo(counter, 2, 0, 120)
-								textSprite.mesh.outlineOpacity = easeOutExpo(counter, 2, 0, 120)
-								yield
-							}
-							return
-						})
+						new Coroutine(function* (counter) {
+							counter++
+							textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
+							textSprite.mesh.fillOpacity = easeOutExpo(counter, 2, 0, 120)
+							textSprite.mesh.outlineOpacity = easeOutExpo(counter, 2, 0, 120)
+							yield
+
+						}, 120)
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (sprite && damage.amount.value > 0) {
@@ -111,9 +108,6 @@ class HealthSystem extends System {
 				})
 			}
 			if (health.health === 0) {
-				// const blood = Object.values(assets.blood)
-				// ParticleEntity(position.x, position.y, blood[Math.floor(blood.length * Math.random())], { frameRate: 1 })
-
 				const deathAnimation = new Entity('death animation')
 				deathAnimation.addComponent(position)
 				deathAnimation.addComponent(sprite)

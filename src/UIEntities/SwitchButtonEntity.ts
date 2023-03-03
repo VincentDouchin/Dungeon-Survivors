@@ -1,6 +1,6 @@
 import Coroutine from "../Globals/Coroutine";
 import { Entity } from "../Globals/ECS"
-import { SWITCH } from "../Constants/InputsNames"
+import INPUTS from "../Constants/InputsNames";
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
@@ -26,7 +26,7 @@ const SwitchButtonEntity = () => {
 
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
-				inputManager.eventBus.publish(SWITCH, 1)
+				inputManager.eventBus.publish(INPUTS.SWITCH, 1)
 			})
 		}
 

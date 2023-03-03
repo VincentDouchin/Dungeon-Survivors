@@ -1,13 +1,13 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { SELECTED } from "../Constants/ECSEvents"
 import HEROS, { HeroDefinition, isUnlocked } from "../Constants/Heros"
-import { MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames"
 
 import AnimationComponent from "../Components/AnimationComponent"
 import ColorShader from "../Shaders/ColorShader"
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events"
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
+import INPUTS from "../Constants/InputsNames";
 import OutlineShader from "../Shaders/OutlineShader"
 import RotationComponent from "../Components/RotationComponent"
 import SelectableComponent from "../Components/SelectableComponent"
@@ -74,7 +74,7 @@ const UIPlayerSelectEntity = () => {
 	validateButton.addChildren(validateText)
 	ui.addChildren(validateButton)
 
-	ECS.eventBus.subscribe<SELECTED>(ECSEVENTS.SELECTED, entity => {
+	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
 		if (characterFrames.some(frame => frame.id === entity.id) || entity.id === validateButton.id) {
 			characterFrames.forEach(frame => {
 				if (entity.id === frame.id) {
@@ -112,9 +112,9 @@ const UIPlayerSelectEntity = () => {
 		if (unlocked) {
 			unlockedCharacters.push(characterFrame)
 			const characterSelectable = characterFrame.addComponent(new SelectableComponent(undefined, undefined, () => {
-				ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, arrowLeft)
+				ECS.eventBus.publish(ECSEVENTS.SELECTED, arrowLeft)
 			}))
-			characterSelectable.next[MOVEDOWN] = validateButton
+			characterSelectable.next[INPUTS.MOVEDOWN] = validateButton
 
 
 			// ! BUTTON
@@ -127,7 +127,7 @@ const UIPlayerSelectEntity = () => {
 					yield* waitFor(10)
 					buttonSprite.changeTexture(buttonTile.texture)
 					textPosition.relativePosition.y = 1 / 8
-					ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, characterFrame)
+					ECS.eventBus.publish(ECSEVENTS.SELECTED, characterFrame)
 				})
 				// characterSprite.addShader(new OutlineShader([1, 1, 1, 1]))
 				for (let arr of [State.heros, State.selectedTiles]) {
@@ -168,12 +168,12 @@ const UIPlayerSelectEntity = () => {
 					selectedTile = (selectedTile + 1) % tiles.length
 					characterAnim.setState(Object.keys(states)[selectedTile])
 				}))
-				arrowSelectable.next[MOVEDOWN] = button
+				arrowSelectable.next[INPUTS.MOVEDOWN] = button
 
 			})
-			arrowLeft.getComponent(SelectableComponent).next[MOVERIGHT] = arrowRight
-			arrowRight.getComponent(SelectableComponent).next[MOVELEFT] = arrowLeft
-			selectSelectabled.next[MOVEUP] = arrowLeft
+			arrowLeft.getComponent(SelectableComponent).next[INPUTS.MOVERIGHT] = arrowRight
+			arrowRight.getComponent(SelectableComponent).next[INPUTS.MOVELEFT] = arrowLeft
+			selectSelectabled.next[INPUTS.MOVEUP] = arrowLeft
 		} else {
 
 			characterSprite.addShader(new ColorShader(0, 0, 0, 1))
@@ -184,7 +184,7 @@ const UIPlayerSelectEntity = () => {
 
 
 	})
-	validateSelectable.next[MOVEUP] = characterFrames[1]
+	validateSelectable.next[INPUTS.MOVEUP] = characterFrames[1]
 	characterFrames[1].addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
 	ui.addChildren(characterFrames[1])
 	characterFrames[2].addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))

@@ -1,6 +1,7 @@
 import SPELLS, { Spell } from "./Spells"
 import WEAPONS, { WeaponDefinition } from "./Weapons"
 
+import { STATS } from "../Components/StatsComponent"
 import Tile from "../Utils/Tile"
 import assets from "../Globals/Assets"
 import saveData from "../Globals/SaveManager"
@@ -12,6 +13,7 @@ export interface HeroDefinition {
 	needUnlock: boolean
 	unlocked?: boolean
 	weapon: WeaponDefinition
+	stats: Partial<Record<STATS, number>>
 }
 export enum HeroName {
 	'elf' = 'elf',
@@ -35,7 +37,11 @@ const HEROS: HeroDefinition[] = [
 		}],
 		spell: SPELLS.DIVINE_PROTECTION,
 		weapon: WEAPONS.swordKnight,
-		needUnlock: false
+		needUnlock: false,
+		stats: {
+			[STATS.DAMAGE]: 0.1,
+			[STATS.SPEED]: 0
+		}
 	},
 	{
 		name: HeroName.wizzard,
@@ -49,6 +55,7 @@ const HEROS: HeroDefinition[] = [
 		spell: SPELLS.LIGHTNING,
 		needUnlock: false,
 		weapon: WEAPONS.staff,
+		stats: {}
 	},
 	{
 		name: HeroName.elf,
@@ -61,7 +68,8 @@ const HEROS: HeroDefinition[] = [
 		}],
 		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,
-		weapon: WEAPONS.bow
+		weapon: WEAPONS.bow,
+		stats: {}
 	},
 
 ]

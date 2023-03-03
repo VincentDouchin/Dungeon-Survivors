@@ -1,8 +1,8 @@
-import { AXISX, AXISY, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP } from "../Constants/InputsNames";
 import { ECS, Entity, System } from "../Globals/ECS";
 
 import AnimationComponent from "../Components/AnimationComponent";
 import BodyComponent from "../Components/BodyComponent";
+import INPUTS from "../Constants/InputsNames";
 import PlayerControllerComponent from '../Components/PlayerControllerComponent';
 import PositionComponent from '../Components/PositionComponent';
 import RotationComponent from "../Components/RotationComponent";
@@ -26,8 +26,8 @@ class MovementSystem extends System {
 			if (body) {
 
 				if (playerController?.enabled) {
-					const axisX = inputManager.getInput(AXISX)?.active
-					const axisY = inputManager.getInput(AXISY)?.active
+					const axisX = inputManager.getInput(INPUTS.AXISX)?.active
+					const axisY = inputManager.getInput(INPUTS.AXISY)?.active
 
 					if (axisX || axisY) {
 						if (axisX && axisX != 0) {
@@ -38,14 +38,14 @@ class MovementSystem extends System {
 						}
 					} else {
 						const vel = { x: 0, y: 0 }
-						if (inputManager.getInput(MOVEUP)?.active) {
+						if (inputManager.getInput(INPUTS.MOVEUP)?.active) {
 							vel.y = 1
-						} else if (inputManager.getInput(MOVEDOWN)?.active) {
+						} else if (inputManager.getInput(INPUTS.MOVEDOWN)?.active) {
 							vel.y = -1
 						}
-						if (inputManager.getInput(MOVELEFT)?.active) {
+						if (inputManager.getInput(INPUTS.MOVELEFT)?.active) {
 							vel.x = -1
-						} else if (inputManager.getInput(MOVERIGHT)?.active) {
+						} else if (inputManager.getInput(INPUTS.MOVERIGHT)?.active) {
 							vel.x = 1
 						}
 						const max = Math.sqrt(vel.x ** 2 + vel.y ** 2)

@@ -1,7 +1,7 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { SELECTED } from "../Constants/ECSEvents";
-import { MOVELEFT, MOVERIGHT } from "../Constants/InputsNames";
 
+import { ECSEVENTS } from "../Constants/Events";
+import INPUTS from "../Constants/InputsNames";
 import Tile from "../Utils/Tile";
 
 class SelectableComponent extends Component {
@@ -21,11 +21,11 @@ class SelectableComponent extends Component {
 	static setFromArray(arr: Entity[]) {
 		arr.forEach((entity, index) => {
 			if (index === 0) {
-				ECS.eventBus.publish<SELECTED>(ECSEVENTS.SELECTED, entity)
+				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
 			}
 			const selectable = entity.getComponent(SelectableComponent)
-			selectable.next[MOVELEFT] = arr.at(index - 1)
-			selectable.next[MOVERIGHT] = arr.at((index + 1) % arr.length)
+			selectable.next[INPUTS.MOVELEFT] = arr.at(index - 1)
+			selectable.next[INPUTS.MOVERIGHT] = arr.at((index + 1) % arr.length)
 		})
 	}
 

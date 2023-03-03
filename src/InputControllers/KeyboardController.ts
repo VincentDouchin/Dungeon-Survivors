@@ -1,21 +1,20 @@
-import { INTERACT, MOVEDOWN, MOVELEFT, MOVERIGHT, MOVEUP, PAUSE, SKILL, SWITCH, VALIDATE } from "../Constants/InputsNames"
-
 import EventBus from "../Utils/EventBus"
+import INPUTS from "../Constants/InputsNames";
 import { InputController } from "../Globals/InputManager"
 
 class KeyboardController implements InputController {
 	eventBus: EventBus
-	keyMap: { [key: string]: string } = {
-		'KeyW': MOVEUP,
-		'KeyS': MOVEDOWN,
-		'KeyA': MOVELEFT,
-		'KeyD': MOVERIGHT,
-		'KeyE': INTERACT,
-		'Escape': PAUSE,
-		'ShiftLeft': SWITCH,
-		'Enter': VALIDATE,
-		'Space': VALIDATE,
-		'KeyP': SKILL
+	keyMap: Record<string, INPUTS> = {
+		'KeyW': INPUTS.MOVEUP,
+		'KeyS': INPUTS.MOVEDOWN,
+		'KeyA': INPUTS.MOVELEFT,
+		'KeyD': INPUTS.MOVERIGHT,
+		'KeyE': INPUTS.INTERACT,
+		'Escape': INPUTS.PAUSE,
+		'ShiftLeft': INPUTS.SWITCH,
+		'Enter': INPUTS.VALIDATE,
+		'Space': INPUTS.VALIDATE,
+		'KeyP': INPUTS.SKILL
 
 	}
 	constructor(eventBus: EventBus) {

@@ -1,7 +1,7 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { CAMERA_MOVE } from "../Constants/ECSEvents";
 
 import CameraTargetComponent from "../Components/CameraTargetComponent";
+import { ECSEVENTS } from "../Constants/Events";
 import PositionComponent from "../Components/PositionComponent";
 import State from "../Globals/State";
 import { Vector3 } from "three";
@@ -61,7 +61,7 @@ class CameraSystem extends System {
             } else {
                 camera.position.x = position.x
             }
-            ECS.eventBus.publish<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
+            ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
 
             camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
         })

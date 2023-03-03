@@ -1,5 +1,4 @@
 import { ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
 import { camera, inputManager, render, world } from "../Globals/Initialize";
 
@@ -8,15 +7,16 @@ import AnimationSystem from "../Systems/AnimationSystem";
 import CameraSystem from "../Systems/CameraSystem";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
+import INPUTS from "../Constants/InputsNames";
 import MovementSystem from "../Systems/MovementSystem";
 import PathEntity from "../Entities/PathEntity";
 import PathSystem from "../Systems/PathSystem";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
-import { SWITCH } from "../Constants/InputsNames";
 import SelectionSystem from "../Systems/SelectionSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -69,7 +69,7 @@ class MapState implements GameState {
 						let counter = 1
 						while (counter < 600) {
 							yield camera.position.y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
-							if (inputManager.getInput(SWITCH)?.active) {
+							if (inputManager.getInput(INPUTS.SWITCH)?.active) {
 								counter += 10
 							}
 							counter++
@@ -91,7 +91,7 @@ class MapState implements GameState {
 		this.player.addComponent(new AnimationComponent(hero.tiles[State.selectedTiles[0]]))
 		this.player.addComponent(new CameraTargetComponent())
 		this.player.addComponent(new PathWalkerComponent())
-		ECS.eventBus.subscribe<PATH_POSITION>(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
+		ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
 			this.lastPosition.x = position.x
 			this.lastPosition.y = position.y
 		})

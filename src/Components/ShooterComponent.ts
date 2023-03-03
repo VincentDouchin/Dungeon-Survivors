@@ -1,5 +1,6 @@
 import { Component } from "../Globals/ECS";
 import { SOUNDS } from "../Globals/Sounds";
+import { STATS } from "./StatsComponent";
 import { Stat } from "../Game/Stat";
 import Tile from "../Utils/Tile";
 import { WeaponDefinition } from "../Constants/Weapons";
@@ -21,7 +22,7 @@ class ShooterComponent extends Component {
 	sound?: SOUNDS
 	constructor(weaponDefinition: WeaponDefinition) {
 		super()
-		this.damage = new Stat(weaponDefinition.damage)
+		this.damage = new Stat(weaponDefinition.damage, STATS.DAMAGE)
 		this.target = weaponDefinition.target
 		this.group = weaponDefinition.group
 		this.projectile = weaponDefinition.projectile!
@@ -29,7 +30,7 @@ class ShooterComponent extends Component {
 		this.projectilesNb = weaponDefinition.projectilesNb ?? 1
 		this.spread = weaponDefinition.spread ?? 0
 		this.range = weaponDefinition.range ?? 60
-		this.delay = new Stat(weaponDefinition.delay ?? 40)
+		this.delay = new Stat(weaponDefinition.delay ?? 40, STATS.ATTACK_SPEED)
 		this.timer = Math.random() * this.delay.value
 		this.rotationSpeed = (weaponDefinition?.rotationSpeed ?? 0)
 		this.light = weaponDefinition.light

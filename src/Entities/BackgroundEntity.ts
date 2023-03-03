@@ -1,11 +1,11 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { ADD_TO_BACKGROUND, CAMERA_MOVE } from "../Constants/ECSEvents"
 
 import { AmbientLight } from "three"
 import { Background } from "../Constants/BackGrounds"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import { ECSEVENTS } from "../Constants/Events"
 import LDTKMap from "../Utils/LDTKMap"
 import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
@@ -22,7 +22,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	const height = tile.height
 	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
 	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-	const cameraUnSubscriber = ECS.eventBus.subscribe<CAMERA_MOVE>(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+	const cameraUnSubscriber = ECS.eventBus.subscribe(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
 		if (backgroundDefinition.infinite.x) {
 			sprite.texture.offset.x = x / width
 			position.x = x
@@ -32,7 +32,7 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 			position.y = y
 		}
 	})
-	const addUnSubscriber = ECS.eventBus.subscribe<ADD_TO_BACKGROUND>(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
+	const addUnSubscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_BACKGROUND, (entity) => {
 		background.addChildren(entity)
 	})
 

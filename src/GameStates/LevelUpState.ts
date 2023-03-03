@@ -3,7 +3,7 @@ import { inputManager, render } from "../Globals/Initialize"
 
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
-import { INTERACT } from "../Constants/InputsNames"
+import INPUTS from "../Constants/InputsNames";
 import RenderSystem from "../Systems/RenderSystem"
 import SelectionSystem from "../Systems/SelectionSystem"
 import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
@@ -16,7 +16,7 @@ class LevelUpState implements GameState {
 
 	update() {
 		ECS.updateSystems()
-		if (inputManager.getInput(INTERACT)?.once) {
+		if (inputManager.getInput(INPUTS.INTERACT)?.once) {
 			Engine.setState(GameStates.run)
 		}
 	}

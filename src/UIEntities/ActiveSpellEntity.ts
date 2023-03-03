@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { MANA_AMOUNT, SPELL_ICON } from "../Constants/ECSEvents"
 
 import ColorShader from "../Shaders/ColorShader"
+import { ECSEVENTS } from "../Constants/Events"
 import SpriteComponent from "../Components/SpriteComponent"
 import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
@@ -16,13 +16,13 @@ const ActiveSpellEntity = () => {
 	icon.addComponent(new UIPositionComponent())
 	const iconSprite = icon.addComponent(new SpriteComponent(Tile.empty(), { scale: 2.2 }))
 
-	ECS.eventBus.subscribe<SPELL_ICON>(ECSEVENTS.SPELL_ICON, (tile: Tile) => {
+	ECS.eventBus.subscribe(ECSEVENTS.SPELL_ICON, (tile: Tile) => {
 		if (iconSprite.renderShader?.uniforms.uTexture) {
 			iconSprite.changeTexture(tile.texture)
 		}
 	})
 	let disabled = false
-	ECS.eventBus.subscribe<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, mana => {
+	ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, mana => {
 		if (mana < 20) {
 			disabled = true
 			iconSprite.addShader(new ColorShader(1, 1, 1, 0.5))

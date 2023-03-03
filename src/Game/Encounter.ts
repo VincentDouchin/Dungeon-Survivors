@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS";
-import ECSEVENTS, { ADD_TO_ENCOUNTER, DELETE_ENTITY, ENENMY_LEVEL_UP } from "../Constants/ECSEvents";
 
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
@@ -21,19 +21,16 @@ class Encounter {
 	stats: StatsComponent
 	started = false
 	subscriber: () => void
-	levelSubscriber: () => void
+	// levelSubscriber: () => void
 	addEnemySuscriber: () => void
 	coroutine?: Coroutine
 	constructor() {
-		this.subscriber = ECS.eventBus.subscribe<DELETE_ENTITY>(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
+		this.subscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
 			if (this.enemies.includes(entity.id)) {
 				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
 			}
 		})
-		this.levelSubscriber = ECS.eventBus.subscribe<ENENMY_LEVEL_UP>(ECSEVENTS.ENENMY_LEVEL_UP, (level) => {
-			this.stats.updateStats(level)
-		})
-		this.addEnemySuscriber = ECS.eventBus.subscribe<ADD_TO_ENCOUNTER>(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
+		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
 			this.enemies.push(entity.id)
 		})
 		this.stats = new StatsComponent(State.timer % 120)
@@ -118,7 +115,7 @@ class Encounter {
 		this.waves.push(function* () {
 			yield
 			self.subscriber()
-			self.levelSubscriber()
+			// self.levelSubscriber()
 			self.addEnemySuscriber()
 			Engine.setState(GameStates.map)
 

@@ -1,12 +1,12 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { SPELL_ICON } from "../Constants/ECSEvents";
 
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
+import { ECSEVENTS } from "../Constants/Events";
 import FlockingComponent from "../Components/FlockingComponent";
+import INPUTS from "../Constants/InputsNames";
 import OutlineShader from "../Shaders/OutlineShader";
 import PlayerControllerComponent from "../Components/PlayerControllerComponent";
-import { SWITCH } from "../Constants/InputsNames";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import SwitchingComponent from "../Components/SwitchingComponent";
@@ -18,7 +18,7 @@ class SwitchingSystem extends System {
 		super(SwitchingComponent)
 	}
 	update(entities: Entity[]) {
-		const toSwitch = inputManager.getInput(SWITCH)!.once
+		const toSwitch = inputManager.getInput(INPUTS.SWITCH)!.once
 		entities.forEach(entity => {
 			const switcher = entity.getComponent(SwitchingComponent)
 			if (toSwitch || !switcher.initiated) {
@@ -26,7 +26,7 @@ class SwitchingSystem extends System {
 				const flocking = entity.getComponent(FlockingComponent)
 				const spell = entity.getComponent(SpellComponent)
 				if (switcher.main) {
-					ECS.eventBus.publish<SPELL_ICON>(ECSEVENTS.SPELL_ICON, spell.icon)
+					ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 					entity.addComponent(new PlayerControllerComponent())
 					entity.removeComponent(TargeterComponent)
 					entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))

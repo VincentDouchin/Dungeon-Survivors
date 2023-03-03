@@ -1,4 +1,5 @@
 import { Component } from "../Globals/ECS";
+import { STATS } from "./StatsComponent";
 import { Stat } from "../Game/Stat";
 
 class RotationComponent extends Component {
@@ -8,7 +9,7 @@ class RotationComponent extends Component {
 	constructor(rotation: number, angVel: number = 0) {
 		super()
 		this.rotation = rotation
-		this.angVel = new Stat(angVel)
+		this.angVel = new Stat(angVel, STATS.ATTACK_SPEED)
 	}
 }
 RotationComponent.register()

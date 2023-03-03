@@ -1,6 +1,6 @@
 import Coroutine from "../Globals/Coroutine";
 import { Entity } from "../Globals/ECS"
-import { PAUSE } from "../Constants/InputsNames"
+import INPUTS from "../Constants/InputsNames";
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
@@ -28,7 +28,7 @@ const PauseButtonEntity = () => {
 				iconPosition.center.y = 0
 				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
-				inputManager.eventBus.publish(PAUSE, true)
+				inputManager.eventBus.publish(INPUTS.PAUSE, true)
 				down = false
 
 			})

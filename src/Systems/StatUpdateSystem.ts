@@ -15,6 +15,12 @@ class StatUpdateSystem extends System {
 	update(entities: Entity[]): void {
 		entities.forEach(entity => {
 			const stats = entity.getComponent(StatsComponent)
+			for (let i = stats.boosts.length; i > 0; i--) {
+				stats.boosts[i].duration--
+				if (stats.boosts[i].duration === 0) {
+					stats.boosts.splice(i, 1)
+				}
+			}
 			const damage = entity.getComponent(DamageComponent)
 			const health = entity.getComponent(HealthComponent)
 			const rotation = entity.getComponent(RotationComponent)
@@ -22,27 +28,27 @@ class StatUpdateSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const mana = entity.getComponent(ManaComponent)
 			if (health) {
-				health.maxHealth.modifier ??= stats.health
-				health.defense.modifier ??= stats.health
+				health.maxHealth.modifier ??= stats
+				health.defense.modifier ??= stats
 			}
 			if (damage) {
-				damage.amount.modifier ??= stats.damage
-				damage.critChance.modifier ??= stats.critChance
-				damage.critDamage.modifier ??= stats.critDamage
-				damage.knockback.modifier ??= stats.knockback
+				damage.amount.modifier ??= stats
+				damage.critChance.modifier ??= stats
+				damage.critDamage.modifier ??= stats
+				damage.knockback.modifier ??= stats
 			}
 			if (rotation) {
-				rotation.angVel.modifier ??= stats.attackSpeed
+				rotation.angVel.modifier ??= stats
 			}
 			if (body) {
-				body.moveForce.modifier ??= stats.speed
+				body.moveForce.modifier ??= stats
 			}
 			if (shooter) {
-				shooter.delay.modifier ??= stats.attackSpeed
-				shooter.damage.modifier ??= stats.damage
+				shooter.delay.modifier ??= stats
+				shooter.damage.modifier ??= stats
 			}
 			if (mana) {
-				mana.maxMana.modifier ??= stats.manaMax
+				mana.maxMana.modifier ??= stats
 			}
 		})
 	}

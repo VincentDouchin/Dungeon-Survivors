@@ -1,6 +1,5 @@
-import { AXISX, AXISY } from "../Constants/InputsNames"
-
 import { Entity } from "../Globals/ECS"
+import INPUTS from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
@@ -38,8 +37,8 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			inputManager.eventBus.publish(AXISX, positionX)
-			inputManager.eventBus.publish(AXISY, positionY)
+			inputManager.eventBus.publish(INPUTS.AXISX, positionX)
+			inputManager.eventBus.publish(INPUTS.AXISY, positionY)
 		}
 	})
 	const upSubscriber = inputManager.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
@@ -47,8 +46,8 @@ const DpadInputEntity = () => {
 			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
-			inputManager.eventBus.publish(AXISX, 0)
-			inputManager.eventBus.publish(AXISY, 0)
+			inputManager.eventBus.publish(INPUTS.AXISX, 0)
+			inputManager.eventBus.publish(INPUTS.AXISY, 0)
 		}
 	})
 	dpad.onDestroy(() => {

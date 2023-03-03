@@ -1,6 +1,6 @@
 import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { LEVEL_UP, MANA_AMOUNT, MANA_PERCENT, SKILL_ICON, SPELL_ICON, XP_PERCENT } from "../Constants/ECSEvents"
+import { ECSEVENTS, UIEVENTS } from "../Constants/Events"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import Engine, { DEBUG } from "../Globals/Engine"
 import { inputManager, render, world } from "../Globals/Initialize"
@@ -15,11 +15,11 @@ import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
 import HealthSystem from "../Systems/HealthSystem"
+import INPUTS from "../Constants/InputsNames"
 import LightingSystem from "../Systems/LightingSystem"
 import ManaComponent from "../Components/ManaComponent"
 import MinionSpawnerSytem from "../Systems/MinionSpawnerSystem"
 import MovementSystem from "../Systems/MovementSystem"
-import { PAUSE } from "../Constants/InputsNames"
 import PickupSystem from "../Systems/PickupSystem"
 import PlayerEntity from "../Entities/PlayerEntity"
 import RenderSystem from "../Systems/RenderSystem"
@@ -39,8 +39,7 @@ import UIRunEntity from "../UIEntities/UIRunEntity"
 class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
-	player?: Entity
-	stats = new StatsComponent(0, true)
+	players: Entity[] = []
 	mana = new ManaComponent()
 	encounter: Encounter | null = null
 	tutorialShown = false
@@ -52,7 +51,7 @@ class RunState implements GameState {
 	update() {
 		world.step()
 		ECS.updateSystems()
-		if (inputManager.getInput(PAUSE)?.once) {
+		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
 			Engine.setState(GameStates.pause)
 		}
 	}
@@ -96,9 +95,32 @@ class RunState implements GameState {
 
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
-				this.player = new Entity('player')
-				this.player.addChildren(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats, this.mana))
-				this.player.addChildren(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats, this.mana))
+
+				this.players.push(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.mana))
+				this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
+				this.players.forEach(player => {
+					const stats = player.getComponent(StatsComponent)
+					const levelUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
+						if (this.players.some(player => player.id === entity)) {
+							stats.level = level
+						}
+						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
+					})
+					const xpUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
+						if (this.players.some(player => player.id === entity)) {
+							stats.xp = amount
+						}
+						ECS.eventBus.publish(UIEVENTS.UI_XP, stats.xp / stats.nextLevel)
+					})
+					const SkillUnsubcriber = ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
+						stats.setModifier(skill.statName, skill.amount)
+					})
+					player.onDestroy(() => {
+						levelUnsubscriber()
+						xpUnsubscriber()
+						SkillUnsubcriber()
+					})
+				})
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
@@ -110,20 +132,15 @@ class RunState implements GameState {
 				}
 			}; break
 		}
-		ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.stats.level)
-		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.stats.xp / this.stats.nextLevel)
-		ECS.eventBus.publish<MANA_PERCENT>(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
-		ECS.eventBus.publish<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
+
+		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
+		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
 		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
 			const entity = ECS.getEntityById(id)
 			if (!entity.getComponent(SwitchingComponent).main) {
-				ECS.eventBus.publish<SPELL_ICON>(ECSEVENTS.SPELL_ICON, spell.icon)
+				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 			}
 		})
-		this.mana.skills.forEach(skill => {
-			ECS.eventBus.publish<SKILL_ICON>(ECSEVENTS.SKILL_ICON, skill.icon)
-		})
-
 	}
 	unset(newState?: GameStates) {
 		ECS.unRegisterSystems()
@@ -142,7 +159,6 @@ class RunState implements GameState {
 			case GameStates.map: {
 				this.background?.destroy()
 				this.ui?.destroy()
-				this.player?.destroy()
 				this.encounter = null
 			}; break
 		}

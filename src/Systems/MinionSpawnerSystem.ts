@@ -1,6 +1,6 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { ADD_TO_ENCOUNTER } from "../Constants/ECSEvents";
 
+import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
 import MinionSpawnerComponent from "../Components/MinionSpawnerComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
@@ -23,7 +23,7 @@ class MinionSpawnerSytem extends System {
 				const minionPosition = { x: position.x + Math.cos(angle) * minion.distance, y: position.y + Math.sin(angle) * minion.distance }
 				ParticleEntity(minionPosition.x, minionPosition.y, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 					const minionEntity = EnemyEntity(minion.minion, stats)(minionPosition)
-					ECS.eventBus.publish<ADD_TO_ENCOUNTER>(ECSEVENTS.ADD_TO_ENCOUNTER, minionEntity)
+					ECS.eventBus.publish(ECSEVENTS.ADD_TO_ENCOUNTER, minionEntity)
 				})
 				minion.timer = 0
 			}

@@ -1,3 +1,5 @@
+import StatsComponent, { STATS } from "../Components/StatsComponent"
+
 import { ALLSOUNDS } from "../Globals/Sounds"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
@@ -7,7 +9,6 @@ import { Entity } from "../Globals/ECS"
 import ExpirationComponent from "../Components/ExpirationComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import StatsComponent from "../Components/StatsComponent"
 import assets from "../Globals/Assets"
 import { soundManager } from "../Globals/Initialize"
 
@@ -30,7 +31,7 @@ const DivineProtectionEntity = (entity: Entity) => {
 	spell.addComponent(new BodyComponent({}, [{
 		sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.PLAYER, contact: true, width: tile.width * 2, height: tile.height * 2
 	}]))
-	spell.addComponent(new DamageComponent(stats.spellDamage.calculateValue(5), [COLLISIONGROUPS.ENEMY], -1))
+	spell.addComponent(new DamageComponent(stats.get(STATS.SPELL_DAMAGE, 5), [COLLISIONGROUPS.ENEMY], -1))
 	spell.addComponent(new ExpirationComponent(120))
 	soundManager.play(ALLSOUNDS.Magic,)
 	return spell

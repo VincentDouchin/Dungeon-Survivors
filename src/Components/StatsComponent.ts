@@ -1,55 +1,61 @@
-import { Component, ECS } from "../Globals/ECS";
-import ECSEVENTS, { LEVEL_UP, SKILL, XP_PERCENT } from "../Constants/ECSEvents";
-
+import { Component } from "../Globals/ECS";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
-import { StatModifier } from "../Game/Stat";
 
+export enum STATS {
+	ATTACK_SPEED = 'ATTACK_SPEED',
+	SPEED = 'SPEED',
+	DAMAGE = 'DAMAGE',
+	CRIT_DAMAGE = 'CRIT_DAMAGE',
+	CRIT_CHANCE = 'CRIT_CHANCE',
+	KNOCKBACK = 'KNOCKBACK',
+	XP_MDOIFIER = 'XP_MDOIFIER',
+	DEFENSE = 'DEFENSE',
+	MAX_HEALTH = 'MAX_HEALTH',
+	MAX_MANA = 'MAX_MANA',
+	SPELL_DAMAGE = 'SPELL_DAMAGE',
+
+}
+export interface BoostModifier {
+	stat: STATS
+	duration: number
+	modifier: number
+}
 class StatsComponent extends Component {
-	attackSpeed = new StatModifier(0.05)
-	speed = new StatModifier()
-	damage = new StatModifier(0.05)
-	critDamage = new StatModifier()
-	critChance = new StatModifier()
-	knockback = new StatModifier()
-	xpModifier = new StatModifier()
-	defense = new StatModifier(0.02)
-	health = new StatModifier(0.05)
-	manaMax = new StatModifier()
-	spellDamage = new StatModifier()
+	stats: Map<STATS, { levelModifier: number, modifier: number }> = new Map()
+	boosts: BoostModifier[] = []
 	xp = 0
 	level = 0
 	nextLevel = 20
-	linked: boolean
-	constructor(level = 0, linked = false) {
+	getemptyStat = () => ({ levelModifier: 0, modifier: 0 })
+	constructor(level = 0) {
 		super()
-		this.linked = linked
-		this.updateStats(level)
-		if (this.linked) {
-			ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
+		this.level = level
+	}
+	set(statName: STATS, levelModifier: number = 0) {
+		this.stats.set(statName, this.getemptyStat())
+		this.stats.get(statName)!.levelModifier = levelModifier
+		return this
+	}
+	setModifier(statName: STATS, modifier: number = 0) {
+		if (this.stats.has(statName)) {
+			this.stats.set(statName, this.getemptyStat())
 		}
-		ECS.eventBus.subscribe<SKILL>(ECSEVENTS.SKILL, (skill: Skill) => {
-			skill.modifier(this)
-		})
+		this.stats.get(statName)!.modifier = modifier
 	}
-	get stats() {
-		return [this.attackSpeed, this.speed, this.damage, this.critDamage, this.critChance, this.knockback, this.xpModifier, this.defense, this.health]
+	get(statName: STATS, base: number) {
+		const stat = this.stats.get(statName) ?? this.getemptyStat()
+		const boost = this.boosts.reduce((acc, boostModifier) => boostModifier.stat === statName ? acc + boostModifier.modifier : acc, 0)
+		return (base + (base * this.level * stat.levelModifier)) * (1 + stat.modifier + boost)
 	}
-	updateStats(level: number) {
-		this.stats.forEach(stat => stat.level = level)
-	}
-
 	updateXP(amount: number) {
 		this.xp += amount
-		ECS.eventBus.publish<XP_PERCENT>(ECSEVENTS.XP_PERCENT, this.xp / this.nextLevel)
 		const levelUp = Math.floor(this.xp / this.nextLevel)
 		if (levelUp > 0) {
 			for (let i = 0; i < levelUp; i++) {
 				this.xp = this.xp % this.nextLevel
-				this.nextLevel *= (Math.log(this.level + 2) * 1.5)
+				this.nextLevel = Math.ceil(10 * (1 + Math.log(this.level + 2) * 5))
 				this.level++
-				this.updateStats(this.level)
-				ECS.eventBus.publish<LEVEL_UP>(ECSEVENTS.LEVEL_UP, this.level)
 			}
 			Engine.setState(GameStates.levelUp)
 		}

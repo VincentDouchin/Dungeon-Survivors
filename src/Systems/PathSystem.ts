@@ -1,8 +1,8 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import ECSEVENTS, { PATH_POSITION } from "../Constants/ECSEvents";
 
 import AnimationComponent from "../Components/AnimationComponent";
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
 import PathNodeComponent from "../Components/PathNodeComponent";
@@ -31,7 +31,7 @@ class PathSystem extends System {
 			const walkerSprite = walker.getComponent(SpriteComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (node.selected) {
-				ECS.eventBus.publish<PATH_POSITION>(ECSEVENTS.PATH_POSITION, position)
+				ECS.eventBus.publish(ECSEVENTS.PATH_POSITION, position)
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
 				walkerSprite.flipped = walkerPosition.x - position.x > 0

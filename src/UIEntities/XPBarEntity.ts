@@ -1,9 +1,9 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { XP_PERCENT } from "../Constants/ECSEvents"
 
 import BarShader from "../Shaders/BarShader"
 import SpriteComponent from "../Components/SpriteComponent"
 import { UICamera } from "../Globals/Initialize"
+import { UIEVENTS } from "../Constants/Events"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 
@@ -15,7 +15,7 @@ const full = assets.UI.xp.framed(scalingOptions, w, h)
 const XPBarEntity = () => {
 	const xpBar = new Entity('xp bar')
 	const sprite = xpBar.addComponent(new SpriteComponent(bar, { renderOrder: 100, scale: 3, shaders: [new BarShader(full.texture, 0)] }))
-	ECS.eventBus.subscribe<XP_PERCENT>(ECSEVENTS.XP_PERCENT, (percent: number) => {
+	ECS.eventBus.subscribe(UIEVENTS.UI_XP, (percent) => {
 		sprite.uniforms.percent = percent
 	})
 	xpBar.addComponent(new UIPositionComponent({ x: 1, y: 1 }, { x: -1, y: 1 }))

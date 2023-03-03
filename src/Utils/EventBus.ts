@@ -1,29 +1,42 @@
-import { Event } from "../Constants/ECSEvents";
+import { EventMap } from "../Constants/Events"
 
-export type EventCallBack<T> = (args: T) => void
+type EventName = keyof EventMap
+
+
+interface Event<Name extends EventName> {
+	type: Name
+	data: EventMap[Name]
+}
+
+type EventCallback<Name extends EventName> = (event: Event<Name>['data']) => void
+
+type Subscribers = {
+	[Name in EventName]?: EventCallback<Name>[]
+}
+// export type EventCallBack<T> = (args: T) => void
 class EventBus {
-	private subscribers: { [event: string]: Function[] } = {};
+	private subscribers: Subscribers = {};
 
-	subscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
+	subscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
 		if (!this.subscribers[event]) {
-			this.subscribers[event] = [];
+			this.subscribers[event] = []
 		}
-		this.subscribers[event].push(callback);
-		return () => this.unsubscribe<T>(event, callback)
+		this.subscribers[event]!.push(callback);
+		return () => this.unsubscribe<Name>(event, callback)
 	}
 
-	unsubscribe<T extends Event>(event: T['type'], callback: EventCallBack<T['data']>) {
+	unsubscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
 		if (this.subscribers[event]) {
-			const index = this.subscribers[event].indexOf(callback);
+			const index = this.subscribers[event]!.indexOf(callback);
 			if (index !== -1) {
-				this.subscribers[event].splice(index, 1);
+				this.subscribers[event]!.splice(index, 1);
 			}
 		}
 	}
 
-	publish<T extends Event>(event: T['type'], data: T['data']) {
+	publish<Name extends EventName>(event: Name, data: Event<Name>['data']) {
 		if (this.subscribers[event]) {
-			this.subscribers[event].forEach((callback) => callback(data));
+			this.subscribers[event]!.forEach((callback) => callback(data));
 		}
 	}
 }

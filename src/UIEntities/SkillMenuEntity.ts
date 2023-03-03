@@ -1,7 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { SKILL } from "../Constants/ECSEvents"
 
 import Coroutine from "../Globals/Coroutine";
+import { ECSEVENTS } from "../Constants/Events"
 import Engine from "../Globals/Engine"
 import { GameStates } from "../Constants/GameStates"
 import SKILLS from "../Constants/Skills"
@@ -30,7 +30,7 @@ const SkillMenuEntity = () => {
 		const emptyTile32 = Tile.empty(32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
-			ECS.eventBus.publish<SKILL>(ECSEVENTS.SKILL, skill)
+			ECS.eventBus.publish(ECSEVENTS.NEW_SKILL, skill)
 			skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(GameStates.run))
 		}))
 		selectors.push(selectableEntity)

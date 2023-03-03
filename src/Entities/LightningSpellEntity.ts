@@ -1,4 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS"
+import StatsComponent, { STATS } from "../Components/StatsComponent"
 
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
@@ -7,7 +8,6 @@ import DamageComponent from "../Components/DamageComponent"
 import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
-import StatsComponent from "../Components/StatsComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import assets from "../Globals/Assets"
 
@@ -33,7 +33,7 @@ const LightningSpellEntity = (entity: Entity) => {
 		lightning.addComponent(new SpriteComponent(tile))
 		const animation = lightning.addComponent(new AnimationComponent({ default: tile }))
 		lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
-		lightning.addComponent(new DamageComponent(stats.spellDamage.calculateValue(2), [COLLISIONGROUPS.ENEMY], -1))
+		lightning.addComponent(new DamageComponent(stats.get(STATS.SPELL_DAMAGE, 2), [COLLISIONGROUPS.ENEMY], -1))
 		lightning.addComponent(new BodyComponent({}, [{
 			width: tile.width, height: tile.height, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
 		}]))

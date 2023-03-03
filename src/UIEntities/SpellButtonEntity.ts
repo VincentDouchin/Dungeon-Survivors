@@ -1,9 +1,9 @@
 import { ECS, Entity } from "../Globals/ECS"
-import ECSEVENTS, { MANA_AMOUNT } from "../Constants/ECSEvents"
 
 import ColorShader from "../Shaders/ColorShader"
 import Coroutine from "../Globals/Coroutine";
-import { SKILL } from "../Constants/InputsNames"
+import { ECSEVENTS } from "../Constants/Events"
+import INPUTS from "../Constants/InputsNames"
 import SpriteComponent from "../Components/SpriteComponent"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
@@ -31,11 +31,11 @@ const SpellButtonEntity = () => {
 
 				sprite.changeTexture(assets.UI.button.texture)
 				sprite.render()
-				inputManager.eventBus.publish(SKILL, 1)
+				inputManager.eventBus.publish(INPUTS.SKILL, 1)
 			})
 		}
 	})
-	const disabledSubscriber = ECS.eventBus.subscribe<MANA_AMOUNT>(ECSEVENTS.MANA_AMOUNT, (mana) => {
+	const disabledSubscriber = ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, (mana) => {
 		if (mana < 20) {
 			disabled = true
 			sprite.changeTexture(assets.UI.buttondisabled.texture)
