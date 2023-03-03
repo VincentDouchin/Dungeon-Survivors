@@ -19,12 +19,9 @@ import assets from "../Globals/Assets";
 import { soundManager } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
 
-;
-
-
 const empty = assets.UI['healthBar']
 const full = assets.UI['healthFull']
-
+let t = 0
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
@@ -57,12 +54,12 @@ class HealthSystem extends System {
 						// ! Take damage
 						const damageAmount = damage.calculateDamage(health.defense.value)
 						health.updateHealth(-damageAmount)
-						health.canTakeDamage = false
+
 						if (damage.sound) {
-							soundManager.play(damage.sound)
+							soundManager.play(damage.sound).play()
 						}
 						if (health.sound) {
-							soundManager.play(health.sound)
+							soundManager.play(health.sound).play()
 						}
 						// ! Knockback
 						if (body.body) {
@@ -90,19 +87,26 @@ class HealthSystem extends System {
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (sprite && damage.amount.value > 0) {
-							sprite.addShader(new ColorShader(1, 0, 0, 1))
+
+							t++
+							new Coroutine(function* () {
+								yield
+								health.canTakeDamage = false
+								sprite.addShader(new ColorShader(1, 0, 0, 1))
+								yield* waitFor(30)
+								if (sprite) {
+									sprite.removeShader(ColorShader)
+								}
+								t--
+								health.canTakeDamage = true
+								return
+							})
 						}
 						if (sprite && damage.amount.value < 0) {
 							ParticleEntity(entity, assets.magic.healing, { duration: 3, color: [0.9, 1, 0, 1] })
 						}
 
-						new Coroutine(function* () {
-							yield* waitFor(30)
-							if (sprite) {
-								sprite.removeShader(ColorShader)
-							}
-							health.canTakeDamage = true
-						})
+
 
 					}
 				})
@@ -127,10 +131,14 @@ class HealthSystem extends System {
 
 
 				sprite.addShader(new DissolveShader(120))
+				if (!entity?.destroy) {
+					debugger
+				}
 				entity.destroy()
 
 			}
 		})
+		console.log(t)
 	}
 
 }
