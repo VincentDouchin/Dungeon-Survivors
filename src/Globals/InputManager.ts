@@ -22,7 +22,7 @@ export interface InputController {
 class InputManager {
 	eventBus = new EventBus()
 	controllers: InputController[] = []
-	inputs: Map<string, Input> = new Map()
+	inputs: Map<INPUTS, Input> = new Map()
 	constructor(domElement: HTMLCanvasElement, inputNames: INPUTS[]) {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
@@ -90,7 +90,7 @@ class InputManager {
 	registerControllers(...inputControllers: Constructor<InputController>[]) {
 		this.controllers = inputControllers.map(controller => new controller(this.eventBus))
 	}
-	getInput(inputName: string) {
+	getInput(inputName: INPUTS) {
 		return this.inputs.get(inputName)
 	}
 	enable(inputname: string) {

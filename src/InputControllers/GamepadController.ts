@@ -9,14 +9,17 @@ class GamepadController implements InputController {
 	enabled = false
 	threshold = 0.4
 	gamepad: Gamepad | null = null
-	inputs: Partial<Record<INPUTS, number>> = {
-		[INPUTS.PAUSE]: 9,
-		[INPUTS.VALIDATE]: 0,
-		[INPUTS.MOVEUP]: 12,
-		[INPUTS.MOVEDOWN]: 13,
-		[INPUTS.MOVELEFT]: 14,
-		[INPUTS.MOVERIGHT]: 15,
-	}
+	inputs: Map<number, INPUTS> = new Map([
+		[9, INPUTS.PAUSE],
+		[0, INPUTS.VALIDATE],
+		[12, INPUTS.MOVEUP],
+		[13, INPUTS.MOVEDOWN],
+		[14, INPUTS.MOVELEFT],
+		[15, INPUTS.MOVERIGHT],
+		[4, INPUTS.SWITCH],
+		[5, INPUTS.SWITCH],
+		[1, INPUTS.SKILL]
+	])
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
 		if (navigator.getGamepads()[0] !== null) {
@@ -49,7 +52,11 @@ class GamepadController implements InputController {
 				} else {
 					self.eventBus.publish(INPUTS.AXISY, 0)
 				}
-				for (let [input, button] of Object.entries(self.inputs) as [INPUTS, number][]) {
+				gamepad.buttons.forEach((x, i) => {
+
+					if (x.pressed) console.log(i)
+				})
+				for (let [button, input] of self.inputs) {
 					if (gamepad.buttons[button].pressed) {
 						self.eventBus.publish(input, true)
 						yield* waitFor(10)
