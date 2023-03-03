@@ -3,8 +3,9 @@ import { ECS, Entity } from "../Globals/ECS"
 import { ECSEVENTS, UIEVENTS } from "../Constants/Events"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import Engine, { DEBUG } from "../Globals/Engine"
-import { inputManager, render, world } from "../Globals/Initialize"
+import { inputManager, render, soundManager, world } from "../Globals/Initialize"
 
+import { ALLSOUNDS } from "../Globals/Sounds"
 import AnimationSystem from "../Systems/AnimationSystem"
 import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerSystem"
 import BackgroundEntity from "../Entities/BackgroundEntity"
@@ -43,17 +44,18 @@ class RunState implements GameState {
 	mana = new ManaComponent()
 	encounter: Encounter | null = null
 	tutorialShown = false
+	music: HTMLAudioElement | null = null
 	constructor() {
 	}
 
 
 
 	update() {
-		world.step()
-		ECS.updateSystems()
 		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
 			Engine.setState(GameStates.pause)
 		}
+		world.step()
+		ECS.updateSystems()
 	}
 	render() {
 
@@ -84,6 +86,7 @@ class RunState implements GameState {
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
 		this.ui = UIRunEntity()
+
 		switch (oldState) {
 			case GameStates.pause: {
 				this.encounter?.resume()
@@ -92,12 +95,15 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-
+				if (!this.music) {
+					this.music ??= soundManager.play(ALLSOUNDS.Fight, 0.8)
+					this.music.loop = true
+				}
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
 
 				this.players.push(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.mana))
-				// this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
+				this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
 				this.players.forEach(player => {
 					const stats = player.getComponent(StatsComponent)
 					const levelUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
@@ -132,6 +138,7 @@ class RunState implements GameState {
 				}
 			}; break
 		}
+		this.music?.play()
 
 		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
 		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
@@ -149,6 +156,7 @@ class RunState implements GameState {
 		inputManager.disable('switchButton')
 		inputManager.disable('activeSkillButton')
 		this.ui?.destroy()
+		this.music?.pause()
 		switch (newState) {
 			case GameStates.levelUp: {
 				this.encounter?.pause()
@@ -160,6 +168,7 @@ class RunState implements GameState {
 				this.background?.destroy()
 				this.ui?.destroy()
 				this.encounter = null
+				this.music = null
 			}; break
 		}
 	}
