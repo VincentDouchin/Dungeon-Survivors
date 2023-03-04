@@ -1,6 +1,6 @@
 import { Component, ECS } from "../Globals/ECS";
 
-import { SOUNDS } from "../Globals/Sounds";
+import { SOUND } from "../Globals/Sounds";
 import { STATS } from "./StatsComponent";
 import SpriteComponent from "./SpriteComponent";
 import { Stat } from "../Game/Stat";
@@ -13,8 +13,8 @@ class HealthComponent extends Component {
 	canTakeDamage: boolean = true
 	show: boolean
 	defense = new Stat(1, STATS.DEFENSE)
-	sound?: SOUNDS
-	constructor(health: number, type: number, show = true, sound?: SOUNDS) {
+	sound?: SOUND
+	constructor(health: number, type: number, show = true, sound?: SOUND) {
 		super()
 		this.health = health
 		this.maxHealth = new Stat(health, STATS.MAX_HEALTH)
