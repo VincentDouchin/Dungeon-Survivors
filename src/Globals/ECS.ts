@@ -92,9 +92,11 @@ class Entity {
 		}
 
 	}
-	removeComponent<T extends Component>(component: Constructor<T>) {
-		const componentMap = ECS.components.get(component.name)
+	removeComponent<T extends Component>(componentConstructor: Constructor<T>) {
+		const componentMap = ECS.components.get(componentConstructor.name)
+		const component = componentMap?.get(this.id)
 		componentMap?.delete(this.id)
+		return component as T
 	}
 
 	addComponent<T extends Component>(component: T) {
