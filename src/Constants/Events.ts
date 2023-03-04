@@ -31,8 +31,8 @@ export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
 	[ECSEVENTS.DELETE_ENTITY]: Entity
 	[ECSEVENTS.TAKE_DAMAGE]: Entity
-	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: string }
-	[ECSEVENTS.LEVEL_UP]: { level: number, entity: string }
+	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: Entity }
+	[ECSEVENTS.LEVEL_UP]: { level: number, entity: Entity }
 	[ECSEVENTS.PATH_POSITION]: PositionComponent
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
