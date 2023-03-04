@@ -1,5 +1,6 @@
 import Engine, { DEBUG } from "./Globals/Engine"
 
+import GameOverState from "./GameStates/GameOverState"
 import { GameStates } from "./Constants/GameStates"
 import LevelUpState from "./GameStates/LevelUpState"
 import MapState from "./GameStates/MapState"
@@ -16,7 +17,8 @@ Engine.addState(GameStates.run, new RunState())
 Engine.addState(GameStates.levelUp, new LevelUpState())
 Engine.addState(GameStates.pause, new PauseState())
 Engine.addState(GameStates.map, new MapState())
+Engine.addState(GameStates.gameOver, new GameOverState())
 Engine.addState(GameStates.playerSelect, new PlayerSelectState())
-Engine.setState(DEBUG.ENCOUNTER ? GameStates.run : GameStates.map)
+Engine.setState(DEBUG.DEFAULT_STATE)
 Engine.start()
 
