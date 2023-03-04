@@ -10,11 +10,15 @@ export const DEBUG: {
 	DEFAULT_ENEMIES: enemyWaveName
 	DEFAULT_BACKGROUND: backgroundName
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
+	DEFAULT_STATE: GameStates
 } = {
 	ENCOUNTER: false && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'FOREST',
-	DEFAULT_HEROS: [HEROS[0], HEROS[1]]
+	DEFAULT_HEROS: [HEROS[0], HEROS[1]],
+	get DEFAULT_STATE() {
+		return this.ENCOUNTER ? GameStates.run : GameStates.map
+	}
 }
 const Engine = new class {
 	rafHandle = 0
