@@ -24,8 +24,6 @@ export const isUnlocked = (hero: HeroDefinition) => {
 	return !hero.needUnlock || saveData.heros.includes(hero.name)
 }
 const HEROS: HeroDefinition[] = [
-
-
 	{
 		name: HeroName.knight,
 		tiles: [{
@@ -39,8 +37,9 @@ const HEROS: HeroDefinition[] = [
 		weapon: WEAPONS.swordKnight,
 		needUnlock: false,
 		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.1,
-			[STATS.SPEED]: 0
+			[STATS.KNOCKBACK]: 0.1,
 		}
 	},
 	{
@@ -55,7 +54,11 @@ const HEROS: HeroDefinition[] = [
 		spell: SPELLS.LIGHTNING,
 		needUnlock: false,
 		weapon: WEAPONS.staff,
-		stats: {}
+		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.DAMAGE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.1
+		}
 	},
 	{
 		name: HeroName.elf,
@@ -69,7 +72,11 @@ const HEROS: HeroDefinition[] = [
 		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,
 		weapon: WEAPONS.bow,
-		stats: {}
+		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.CRIT_CHANCE]: 0.3,
+			[STATS.CRIT_DAMAGE]: 0.3,
+		}
 	},
 
 ]

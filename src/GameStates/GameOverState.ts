@@ -2,7 +2,7 @@ import { ECS, Entity } from "../Globals/ECS";
 import { render, soundManager } from "../Globals/Initialize";
 
 import RenderSystem from "../Systems/RenderSystem";
-import { SOUNDS } from "../Globals/Sounds";
+import { SOUNDS } from "../Constants/Sounds";
 import SelectionSystem from "../Systems/SelectionSystem";
 import UIGameOverEntity from "../UIEntities/UIGameOverEntity";
 

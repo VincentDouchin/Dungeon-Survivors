@@ -1,4 +1,4 @@
-import { SOUND, SOUNDS } from "../Globals/Sounds"
+import { SOUND, SOUNDS } from "./Sounds"
 
 import COLLISIONGROUPS from "./CollisionGroups"
 import Tile from "../Utils/Tile"
