@@ -1,18 +1,72 @@
-import SOUNDS_SOURCES, { SOUNDS } from './Sounds'
+import SOUNDS_SOURCES, { SOUND } from './Sounds'
 
+import { renderer } from './Initialize'
 import saveData from './SaveManager'
 
+interface soundManagerOptions {
+	volume?: number,
+	playbackRate?: number,
+	autoplay?: boolean,
+	loop?: boolean,
+	fade?: boolean
+}
 class SoundManager {
 	sounds: Record<keyof typeof SOUNDS_SOURCES, HTMLAudioElement> = SOUNDS_SOURCES
-
+	ctx = new AudioContext()
+	effects: Map<HTMLAudioElement, number> = new Map()
+	musics: Map<HTMLAudioElement, number> = new Map()
 	constructor() {
+		if (this.ctx.state === 'suspended') {
+			const listener = () => {
+				this.ctx.resume()
+				renderer.domElement.removeEventListener('click', listener)
+			}
+			renderer.domElement.addEventListener('click', listener)
+		}
+
 	}
-	play(name: SOUNDS, volume = 1, playbackRate = 1) {
-		const selectedSound: keyof typeof SOUNDS_SOURCES = Array.isArray(name) ? name[Math.floor(Math.random() * name.length)] : name
-		const sound = this.sounds[selectedSound].cloneNode() as HTMLAudioElement
-		sound.volume = volume * saveData.volume
-		sound.playbackRate = playbackRate
-		return sound
+
+	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions,) {
+		const nodes: AudioNode[] = []
+		const newOptions = { volume: 1, playbackRate: 1, autoplay: true, loop: false, fade: false, ...options }
+		const selectedSound = Array.isArray(name) ? name[Math.floor(Math.random() * name.length)] : name
+		const audioElement = this.sounds[selectedSound].cloneNode() as HTMLAudioElement
+		const target = type === 'music' ? this.musics : this.effects
+		const volume = type === 'music' ? saveData.musicVolume : saveData.effectsVolume
+
+		target.set(audioElement, newOptions.volume)
+		audioElement.addEventListener('ended', () => {
+			target.delete(audioElement)
+		})
+		nodes.push(this.ctx.createMediaElementSource(audioElement))
+		audioElement.volume = newOptions.volume * volume
+		audioElement.playbackRate = newOptions.playbackRate
+		if (newOptions.loop) audioElement.loop = true
+
+		if (newOptions.fade) {
+			const gainNode = this.ctx.createGain()
+			gainNode.gain.setValueAtTime(1, this.ctx.currentTime)
+			gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + this.sounds[selectedSound].duration)
+			nodes.push(gainNode)
+		}
+		for (let i = 0; i < nodes.length; i++) {
+
+			if (i !== 0) nodes[i - 1].connect(nodes[i])
+			if (i === nodes.length - 1) nodes[i].connect(this.ctx.destination)
+		}
+		if (newOptions.autoplay) audioElement.play()
+		return audioElement
+	}
+	updateVolume() {
+		const collections: [Map<HTMLAudioElement, number>, number][] = [
+			[this.musics, saveData.musicVolume],
+			[this.effects, saveData.effectsVolume]
+		]
+		collections.forEach(([audio, volume]) => {
+			for (let [audioElement, elementVolume] of audio) {
+				audioElement.volume = elementVolume * volume
+			}
+		})
 	}
 
 }
