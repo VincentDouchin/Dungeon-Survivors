@@ -1,5 +1,7 @@
+import ButtonEntity from "./ButtonEntity";
+import Engine from "../Globals/Engine";
 import { Entity } from "../Globals/ECS";
-import ResumeButtonEntity from "./ResumeButtonEntity";
+import { GameStates } from "../Constants/GameStates";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import UIPositionComponent from "../Components/UIPositionComponent";
@@ -10,16 +12,21 @@ import saveData from "../Globals/SaveManager";
 const UIPauseEntity = () => {
 	const uiPause = new Entity('ui pause')
 	const pauseFrame = new Entity('pause frame')
-	pauseFrame.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 50, 50), { scale: 3 }))
+	pauseFrame.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 50, 55), { scale: 3 }))
 	pauseFrame.addComponent(new UIPositionComponent())
 
-	const resume = ResumeButtonEntity()
+	const resume = ButtonEntity(30, 8, 2, 'Resume', 1.5, () => {
+		Engine.setState(GameStates.run)
+	})
+	resume.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 2 }))
 	pauseFrame.addChildren(resume)
-	const effectsVolume = VolumeBarEntity(() => saveData.effectsVolume, (nb: number) => saveData.effectsVolume = nb, 'Effects volume')
-	const musicVolume = VolumeBarEntity(() => saveData.musicVolume, (nb: number) => saveData.musicVolume = nb, 'Music volume')
+	const effectsVolume = VolumeBarEntity(0.1, 0.2, () => saveData.effectsVolume, (nb: number) => saveData.effectsVolume = nb, 'Effects volume')
+	const musicVolume = VolumeBarEntity(0.1, 0.2, () => saveData.musicVolume, (nb: number) => saveData.musicVolume = nb, 'Music volume')
+	const zoom = VolumeBarEntity(700, 910, () => saveData.zoom, (nb: number) => saveData.zoom = nb, 'Zoom')
 	resume.addChildren(musicVolume)
 	musicVolume.addChildren(effectsVolume)
-	SelectableComponent.setFromArray([resume, effectsVolume, musicVolume], true)
+	effectsVolume.addChildren(zoom)
+	SelectableComponent.setFromArray([resume, zoom, effectsVolume, musicVolume], true)
 	uiPause.addChildren(pauseFrame)
 
 	return uiPause

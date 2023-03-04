@@ -6,12 +6,13 @@ import PositionComponent from "../Components/PositionComponent";
 import State from "../Globals/State";
 import { Vector3 } from "three";
 import { camera } from "../Globals/Initialize";
+import saveData from "../Globals/SaveManager";
 
 class CameraSystem extends System {
     frustumSize: number = 600
     newFrustrumSize?: number
     aspect: number = window.innerWidth / window.innerHeight
-    defaultFrustrumSize = 700
+    // defaultFrustrumSize = 700
     defaultAspect = window.innerHeight / window.innerWidth
     constructor() {
         super(CameraTargetComponent)
@@ -21,8 +22,8 @@ class CameraSystem extends System {
         if (
             (cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
             && (
-                ((cameraTarget.right - cameraTarget.left) < this.defaultFrustrumSize)
-                || ((cameraTarget.top - cameraTarget.bottom) < (this.defaultFrustrumSize * this.defaultAspect))
+                ((cameraTarget.right - cameraTarget.left) < saveData.zoom)
+                || ((cameraTarget.top - cameraTarget.bottom) < (saveData.zoom * this.defaultAspect))
             )
 
         ) {
@@ -32,7 +33,7 @@ class CameraSystem extends System {
             this.aspect = height < width ? window.innerWidth / window.innerHeight : window.innerHeight / window.innerWidth
 
         } else {
-            this.newFrustrumSize = this.defaultFrustrumSize
+            this.newFrustrumSize = saveData.zoom
             this.aspect = this.defaultAspect
         }
         if (this.frustumSize != this.newFrustrumSize) {

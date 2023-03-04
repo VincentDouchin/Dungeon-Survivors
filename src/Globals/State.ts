@@ -1,6 +1,6 @@
 import { HeroDefinition } from "../Constants/Heros"
 
-const State: {
+interface State {
 	cameraBounds: {
 		left?: number
 		right?: number
@@ -11,7 +11,8 @@ const State: {
 	mobile: boolean,
 	heros: HeroDefinition[],
 	selectedTiles: number[],
-} = {
+}
+const blanckState: State = {
 	cameraBounds: {
 		left: undefined,
 		right: undefined,
@@ -22,5 +23,8 @@ const State: {
 	selectedTiles: [],
 	timer: 0,
 	mobile: !!navigator.userAgentData?.mobile,
+
 }
+let State: State = structuredClone(blanckState)
+export const resetState = () => State = structuredClone(blanckState)
 export default State

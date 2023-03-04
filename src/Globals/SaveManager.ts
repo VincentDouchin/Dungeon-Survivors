@@ -1,11 +1,12 @@
 import { HeroName } from "../Constants/Heros"
 
-const blankSave: {
+interface Save {
 	heros: HeroName[]
 	effectsVolume: number
 	musicVolume: number
 	zoom: number
-} = {
+}
+const blankSave: Save = {
 	heros: [],
 	effectsVolume: 0.1,
 	musicVolume: 0.1,
@@ -16,7 +17,7 @@ const getSaveData = () => {
 	if (localSave) {
 		const parsedSave = JSON.parse(localSave)
 		if (Object.keys(parsedSave).every(key => Object.keys(blankSave).includes(key))) {
-			return parsedSave
+			return parsedSave as Save
 		} else {
 			return { ...blankSave }
 		}
