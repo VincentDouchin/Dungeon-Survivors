@@ -11,6 +11,7 @@ import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerS
 import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
+import Coroutine from "../Globals/Coroutine"
 import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
@@ -36,6 +37,7 @@ import SwitchingSystem from "../Systems/SwitchingSystem"
 import TargetingSystem from "../Systems/TargetingSystem"
 import TutorialEntity from "../UIEntities/TutorialEntity"
 import UIRunEntity from "../UIEntities/UIRunEntity"
+import waitFor from "../Utils/WaitFor"
 
 class RunState implements GameState {
 	ui?: Entity
@@ -133,8 +135,12 @@ class RunState implements GameState {
 				}
 				this.encounter.start()
 				if (!this.tutorialShown && !State.mobile) {
-					TutorialEntity()
+					const tutorial = TutorialEntity()
 					this.tutorialShown = true
+					new Coroutine(function* () {
+						yield* waitFor(600)
+						tutorial.destroy()
+					})
 				}
 			}; break
 		}
