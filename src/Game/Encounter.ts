@@ -1,5 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS";
 
+import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
 import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
@@ -7,7 +8,10 @@ import { EnemyType } from "../Constants/Enemies";
 import Engine from "../Globals/Engine";
 import FlockingComponent from "../Components/FlockingComponent";
 import { GameStates } from "../Constants/GameStates";
+import HealthComponent from "../Components/HealthComponent";
+import OutlineShader from "../Shaders/OutlineShader";
 import ParticleEntity from "../Entities/ParticleEntitty";
+import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
 import StatsComponent from "../Components/StatsComponent";
 import assets from "../Globals/Assets";
@@ -81,17 +85,50 @@ class Encounter {
 		const self = this
 		this.waves.push(function* () {
 			const group = FlockingComponent.getGroup()
+			const guards: Set<Entity> = new Set()
 			const { x, y } = self.getDistance(distance)
+
 			self.spawnEnemy(mainEnemy, x, y).then(main => {
 				main.addComponent(new FlockingComponent(group, false))
+				const mainHealth = main.removeComponent(HealthComponent)
+				const mainSprite = main.getComponent(SpriteComponent)
+				mainSprite.addShader(new OutlineShader([1, 1, 0, 1]))
+				const invicibilitySub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
+					const damageFlashSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, entity => {
+						let flash = true
+						if (guards.has(entity) && flash) {
+							flash = false
+							new Coroutine(function* () {
+								mainSprite.addShader(new ColorShader(0.3, 0.3, 0.3, 0.1, 'add'))
+								yield* waitFor(30)
+								mainSprite.removeShader(ColorShader)
+								flash = true
+							})
+						}
+					})
+
+					if (guards.has(entity)) {
+						guards.delete(entity)
+						if (guards.size === 0) {
+							main.addComponent(mainHealth)
+							invicibilitySub()
+							damageFlashSub()
+							mainSprite.removeShader(OutlineShader)
+						}
+					}
+				})
+
 			})
+
 			yield* waitFor(Math.random() * 10)
 			for (let i = 0; i < nbOfGuards; i++) {
 				const angle = Math.PI * 2 * i / nbOfGuards
 				const guardX = x + Math.cos(angle) * distance
 				const guardY = y + Math.sin(angle) * distance
-				self.spawnEnemy(guard, guardX, guardY).then(guard => {
-					guard.addComponent(new FlockingComponent(group, false))
+				self.spawnEnemy(guard, guardX, guardY).then(guardEntity => {
+					guardEntity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 0, 1]))
+					guardEntity.addComponent(new FlockingComponent(group, false))
+					guards.add(guardEntity)
 				})
 				yield* waitFor(Math.random() * 10)
 			}
