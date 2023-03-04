@@ -1,23 +1,23 @@
-import { ECS, Entity } from "../Globals/ECS"
-import HEROS, { HeroDefinition, isUnlocked } from "../Constants/Heros"
+import { ECS, Entity } from "../Globals/ECS";
+import HEROS, { HeroDefinition, isUnlocked } from "../Constants/Heros";
 
-import AnimationComponent from "../Components/AnimationComponent"
-import ColorShader from "../Shaders/ColorShader"
+import AnimationComponent from "../Components/AnimationComponent";
+import ButtonEntity from "./ButtonEntity";
+import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events"
-import Engine from "../Globals/Engine"
-import { GameStates } from "../Constants/GameStates"
+import { ECSEVENTS } from "../Constants/Events";
+import Engine from "../Globals/Engine";
+import { GameStates } from "../Constants/GameStates";
 import INPUTS from "../Constants/InputsNames";
-import OutlineShader from "../Shaders/OutlineShader"
-import RotationComponent from "../Components/RotationComponent"
-import SelectableComponent from "../Components/SelectableComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import State from "../Globals/State"
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import waitFor from "../Utils/WaitFor"
+import OutlineShader from "../Shaders/OutlineShader";
+import RotationComponent from "../Components/RotationComponent";
+import SelectableComponent from "../Components/SelectableComponent";
+import SpriteComponent from "../Components/SpriteComponent";
+import State from "../Globals/State";
+import TextComponent from "../Components/TextComponent";
+import Tile from "../Utils/Tile";
+import UIPositionComponent from "../Components/UIPositionComponent";
+import assets from "../Globals/Assets";
 
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
@@ -33,9 +33,7 @@ const UIPlayerSelectEntity = () => {
 	const heroFrames: Map<HeroDefinition, Entity> = new Map()
 	const unlockedCharacters: Entity[] = []
 	const characterFrames: Entity[] = []
-	const buttonTile = assets.UI.button.framed(4, 20, 5)
-	const buttonPressedTile = assets.UI.buttonpressed.framed(4, 20, 5)
-	const buttonUnselectedTile = assets.UI.buttondisabled.framed(4, 20, 5)
+
 	// ! ADD OUTLINE
 	let checkHeros = true
 	new Coroutine(function* () {
@@ -56,22 +54,15 @@ const UIPlayerSelectEntity = () => {
 	ui.onDestroy(() => checkHeros = false)
 
 	// ! Validate Button
-	const validateButton = new Entity('validateButton')
-	const validateSelectable = validateButton.addComponent(new SelectableComponent(assets.UI.button.framed(5, 60, 5), assets.UI.buttondisabled.framed(5, 60, 5), () => {
+	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.length === 2) {
 			uiPosition.moveTo(-1, -3, 30).then(() => {
 				Engine.setState(GameStates.map)
 			})
 		}
-	}))
-	validateButton.addComponent(new SpriteComponent(assets.UI.button.framed(5, 60, 5), { scale: 2, renderOrder: 0 }))
+	})
 	validateButton.addComponent(new UIPositionComponent({ x: 0, y: -0.7 }, { x: 0, y: 0 }))
-	const validateText = new Entity('validate text')
-	const textValidate = validateText.addComponent(new TextComponent('Choose 2 characters'))
-	validateText.addComponent(new SpriteComponent(Tile.empty(76, 21), { scale: 2 }))
 
-	validateText.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: -1 / 8 }))
-	validateButton.addChildren(validateText)
 	ui.addChildren(validateButton)
 
 	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
@@ -118,18 +109,8 @@ const UIPlayerSelectEntity = () => {
 
 
 			// ! BUTTON
-			const button = new Entity(`button ${index}`)
-
-			const selectSelectabled = button.addComponent(new SelectableComponent(buttonTile, buttonUnselectedTile, () => {
-				new Coroutine(function* () {
-					buttonSprite.changeTexture(buttonPressedTile.texture)
-					textPosition.relativePosition.y = 0
-					yield* waitFor(10)
-					buttonSprite.changeTexture(buttonTile.texture)
-					textPosition.relativePosition.y = 1 / 8
-					ECS.eventBus.publish(ECSEVENTS.SELECTED, characterFrame)
-				})
-				// characterSprite.addShader(new OutlineShader([1, 1, 1, 1]))
+			const button = ButtonEntity(20, 4, 2, 'Select', 1, () => {
+				ECS.eventBus.publish(ECSEVENTS.SELECTED, characterFrame)
 				for (let arr of [State.heros, State.selectedTiles]) {
 					if (arr.length === 2) {
 						arr.pop()
@@ -137,19 +118,14 @@ const UIPlayerSelectEntity = () => {
 				}
 				State.heros.push(hero)
 				State.selectedTiles.push(selectedTile)
+				const textValidate = validateButton.children[0].getComponent(TextComponent)
 				if (State.heros.length === 1) {
 					textValidate.setText('Choose 1 character')
 				} else if (State.heros.length === 2) {
 					textValidate.setText('Start your adventure')
 				}
-			}))
-			const buttonSprite = button.addComponent(new SpriteComponent(buttonUnselectedTile, { scale: 2 }))
+			})
 			button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1.2 }))
-			const text = new Entity('text')
-			text.addComponent(new SpriteComponent(Tile.empty()))
-			const textPosition = text.addComponent(new UIPositionComponent({ x: 0, y: 1 / 8 }, { x: 0, y: 0 }))
-			text.addComponent(new TextComponent('Select'))
-			button.addChildren(text)
 			character.addChildren(button)
 			const arrowRight = new Entity('character arrow')
 			arrowRight.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
@@ -173,7 +149,7 @@ const UIPlayerSelectEntity = () => {
 			})
 			arrowLeft.getComponent(SelectableComponent).next[INPUTS.MOVERIGHT] = arrowRight
 			arrowRight.getComponent(SelectableComponent).next[INPUTS.MOVELEFT] = arrowLeft
-			selectSelectabled.next[INPUTS.MOVEUP] = arrowLeft
+			button.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = arrowLeft
 		} else {
 
 			characterSprite.addShader(new ColorShader(0, 0, 0, 1))
@@ -188,7 +164,7 @@ const UIPlayerSelectEntity = () => {
 
 
 	})
-	validateSelectable.next[INPUTS.MOVEUP] = characterFrames[1]
+	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1]
 	characterFrames[1].addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
 	ui.addChildren(characterFrames[1])
 	characterFrames[2].addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
