@@ -166,7 +166,6 @@ class RunState implements GameState {
 			}; break
 			case GameStates.map: {
 				this.background?.destroy()
-				this.ui?.destroy()
 				this.encounter = null
 				this.music = null
 			}; break
