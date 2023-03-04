@@ -13,7 +13,6 @@ type EventCallback<Name extends EventName> = (event: Event<Name>['data']) => voi
 type Subscribers = {
 	[Name in EventName]?: EventCallback<Name>[]
 }
-// export type EventCallBack<T> = (args: T) => void
 class EventBus {
 	private subscribers: Subscribers = {};
 
