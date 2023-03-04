@@ -1,6 +1,5 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 
-import { ALLSOUNDS } from "../Globals/Sounds";
 import BodyComponent from "../Components/BodyComponent";
 import BoostComponent from "../Components/BoostComponent";
 import COLLISIONGROUPS from "../Constants/CollisionGroups";
@@ -8,6 +7,7 @@ import { ECSEVENTS } from "../Constants/Events";
 import ManaComponent from "../Components/ManaComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
+import { SOUNDS } from "../Globals/Sounds";
 import StatsComponent from "../Components/StatsComponent";
 import TokenComponent from "../Components/TokenComponent";
 import XPComponent from "../Components/XPComponent";
@@ -52,7 +52,7 @@ class PickupSystem extends System {
 					otherEntity.destroy()
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
-					soundManager.play(ALLSOUNDS.PowerUp, 0.3).play()
+					soundManager.play('effect', SOUNDS.PowerUp, { volume: 0.3 })
 					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 					ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}
@@ -60,7 +60,7 @@ class PickupSystem extends System {
 					otherEntity.destroy()
 					stats?.boosts.push(boost)
 					ParticleEntity(entity, assets.magic.healing, { duration: 5, frameRate: 10, color: boost.color })
-					soundManager.play(ALLSOUNDS.BOOST).play()
+					soundManager.play('effect', SOUNDS.BOOST)
 
 				}
 

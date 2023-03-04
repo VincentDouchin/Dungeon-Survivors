@@ -1,9 +1,9 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 import { inputManager, soundManager } from "../Globals/Initialize";
 
-import { ALLSOUNDS } from "../Globals/Sounds";
 import { ECSEVENTS } from "../Constants/Events";
 import INPUTS from "../Constants/InputsNames";
+import { SOUNDS } from "../Globals/Sounds";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 
@@ -57,7 +57,7 @@ class SelectionSystem extends System {
 
 					if (selectable.onValidated) {
 						if (!soundplayed) {
-							soundManager.play(ALLSOUNDS.Validate).play()
+							soundManager.play('effect', SOUNDS.Validate)
 							soundplayed = true
 						}
 						selectable.onValidated()
@@ -68,7 +68,7 @@ class SelectionSystem extends System {
 					if (inputManager.getInput(input)?.once) {
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {
-							soundManager.play(ALLSOUNDS.Select).play()
+							soundManager.play('effect', SOUNDS.Select)
 							ECS.eventBus.publish(ECSEVENTS.SELECTED, nextEntity)
 						}
 
