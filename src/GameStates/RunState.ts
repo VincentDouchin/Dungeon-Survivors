@@ -182,6 +182,7 @@ class RunState implements GameState {
 				this.encounter?.pause()
 			}; break
 			case GameStates.map: {
+				this.players.forEach(player => player.destroy())
 				this.background?.destroy()
 				this.encounter = null
 				this.music = null
