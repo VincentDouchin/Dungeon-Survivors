@@ -13,7 +13,7 @@ import LightComponent from "../Components/LightComponent"
 import ManaComponent from "../Components/ManaComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RangedComponent from "../Components/RangedComponent"
-import { SOUNDS } from "../Globals/Sounds"
+import { SOUNDS } from "../Constants/Sounds"
 import ShadowComponent from "../Components/ShadowComponent"
 import SpellComponent from "../Components/SpellComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -33,7 +33,7 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(new SpellComponent(hero.spell))
 	player.addComponent(new SpriteComponent(hero.tiles[selectedTile].idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
-	player.addComponent(new HealthComponent(stats.get(STATS.MAX_HEALTH, 200), COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
+	player.addComponent(new HealthComponent(stats.get(STATS.MAX_HEALTH, 1), COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
 	player.addComponent(new AnimationComponent(hero.tiles[selectedTile]))
 	if (!hero.weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
 	player.addComponent(new SwitchingComponent(main))

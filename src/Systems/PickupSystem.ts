@@ -7,7 +7,7 @@ import { ECSEVENTS } from "../Constants/Events";
 import ManaComponent from "../Components/ManaComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
-import { SOUNDS } from "../Globals/Sounds";
+import { SOUNDS } from "../Constants/Sounds";
 import StatsComponent from "../Components/StatsComponent";
 import TokenComponent from "../Components/TokenComponent";
 import XPComponent from "../Components/XPComponent";
@@ -45,8 +45,8 @@ class PickupSystem extends System {
 				if (xp && stats) {
 					otherEntity.destroy()
 					stats?.updateXP(xp.amount)
-					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity.id, max: stats.nextLevel })
-					ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity.id })
+					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity, max: stats.nextLevel })
+					ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity })
 				}
 				if (token) {
 					otherEntity.destroy()

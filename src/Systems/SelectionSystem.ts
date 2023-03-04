@@ -3,7 +3,7 @@ import { inputManager, soundManager } from "../Globals/Initialize";
 
 import { ECSEVENTS } from "../Constants/Events";
 import INPUTS from "../Constants/InputsNames";
-import { SOUNDS } from "../Globals/Sounds";
+import { SOUNDS } from "../Constants/Sounds";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 

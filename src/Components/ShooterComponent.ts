@@ -1,5 +1,5 @@
 import { Component } from "../Globals/ECS";
-import { SOUND } from "../Globals/Sounds";
+import { SOUND } from "../Constants/Sounds";
 import { STATS } from "./StatsComponent";
 import { Stat } from "../Game/Stat";
 import Tile from "../Utils/Tile";

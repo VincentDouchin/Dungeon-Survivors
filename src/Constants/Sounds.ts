@@ -9,7 +9,8 @@ export const SOUNDS = {
 	PowerUp: 'PowerUp1',
 	Fireball: 'Fire2',
 	PLAYER_DAMAGE: ['11_human_damage_1', '11_human_damage_2'],
-	BOOST: 'Fx'
+	BOOST: 'Fx',
+	GAME_OVER: 'GameOver2'
 } as const
 export const MUSICS = {
 	Fight: '17 - Fight',

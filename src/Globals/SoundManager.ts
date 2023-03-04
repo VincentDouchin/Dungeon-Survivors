@@ -1,4 +1,4 @@
-import SOUNDS_SOURCES, { SOUND } from './Sounds'
+import SOUNDS_SOURCES, { SOUND } from '../Constants/Sounds'
 
 import { renderer } from './Initialize'
 import saveData from './SaveManager'
