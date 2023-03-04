@@ -23,7 +23,7 @@ const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x:
 			{ mass: 0.1, group: projectileDefinition.group, contact: false, sensor: true, canCollideWith: [projectileDefinition.target], width: tile.width, height: tile.height }
 		]
 	))
-	projectile.addComponent(new DamageComponent(projectileDefinition.damage.value, [projectileDefinition.target], 1))
+	projectile.addComponent(new DamageComponent(projectileDefinition.damage.value, [projectileDefinition.target], 1, 2, projectileDefinition.sound))
 	projectile.addComponent(new PositionComponent(position.x, position.y))
 	projectile.addComponent(new ExpirationComponent(projectileDefinition.range))
 	projectile.addComponent(new RotationComponent({
