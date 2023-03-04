@@ -1,6 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS";
 import { inputManager, render } from "../Globals/Initialize";
 
+import CameraSystem from "../Systems/CameraSystem";
 import Engine from "../Globals/Engine";
 import { GameStates } from "../Constants/GameStates";
 import INPUTS from "../Constants/InputsNames";
@@ -24,6 +25,7 @@ class PauseState implements GameState {
 	set() {
 		RenderSystem.register()
 		SelectionSystem.register()
+		CameraSystem.register()
 		this.ui = UIPauseEntity()
 		this.tutorial = TutorialEntity()
 	}
