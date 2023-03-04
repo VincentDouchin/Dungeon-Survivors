@@ -7,6 +7,7 @@ import MapState from "./GameStates/MapState"
 import PauseState from "./GameStates/PauseState"
 import PlayerSelectState from "./GameStates/PlayerSelectState"
 import RunState from "./GameStates/RunState"
+import WinState from "./GameStates/WinState"
 import m5x7 from '../assets/fonts/m5x7.ttf?url'
 import { preloadFont } from 'troika-three-text'
 
@@ -19,6 +20,7 @@ Engine.addState(GameStates.pause, new PauseState())
 Engine.addState(GameStates.map, new MapState())
 Engine.addState(GameStates.gameOver, new GameOverState())
 Engine.addState(GameStates.playerSelect, new PlayerSelectState())
+Engine.addState(GameStates.win, new WinState())
 Engine.setState(DEBUG.DEFAULT_STATE)
 Engine.start()
 

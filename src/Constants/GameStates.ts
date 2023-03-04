@@ -5,5 +5,6 @@ export enum GameStates {
 	levelUp = 'levelUp',
 	pause = 'pause',
 	playerSelect = 'PlayerSelect',
-	gameOver = 'gameOver'
+	gameOver = 'gameOver',
+	win = 'win'
 }
