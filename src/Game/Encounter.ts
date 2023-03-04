@@ -154,6 +154,7 @@ class Encounter {
 			self.subscriber()
 			// self.levelSubscriber()
 			self.addEnemySuscriber()
+			yield* waitFor(60)
 			Engine.setState(GameStates.map)
 
 		})
