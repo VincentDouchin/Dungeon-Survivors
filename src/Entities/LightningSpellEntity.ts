@@ -31,9 +31,9 @@ const LightningSpellEntity = (entity: Entity) => {
 		const lightning = new Entity('lightning')
 		const tile = assets.effects.Lightning
 		lightning.addComponent(new SpriteComponent(tile))
-		const animation = lightning.addComponent(new AnimationComponent({ default: tile }))
+		const animation = lightning.addComponent(new AnimationComponent({ default: tile, }, { frameRate: 4 }))
 		lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
-		lightning.addComponent(new DamageComponent(stats.get(STATS.SPELL_DAMAGE, 2), [COLLISIONGROUPS.ENEMY], -1))
+		lightning.addComponent(new DamageComponent(stats.get(STATS.SPELL_DAMAGE, 5), [COLLISIONGROUPS.ENEMY], -1))
 		lightning.addComponent(new BodyComponent({}, [{
 			width: tile.width, height: tile.height, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
 		}]))
