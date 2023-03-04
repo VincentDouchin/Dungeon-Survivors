@@ -72,6 +72,9 @@ class Entity {
 		this.name = name ?? ''
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
+		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
+			this.removeChildren(entity)
+		})
 	}
 	get children() {
 		return this.childrenIds.map(childId => ECS.getEntityById(childId))
@@ -79,9 +82,7 @@ class Entity {
 	addChildren(child: Entity) {
 		child.parentId = this.id
 		this.childrenIds.push(child.id)
-		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
-			this.removeChildren(entity)
-		})
+
 		return child
 	}
 	removeChildren(child: Entity) {
@@ -121,6 +122,8 @@ class Entity {
 	}
 
 	destroy() {
+		// if (this.name == 'weapon') debugger
+		// if (this.children.some(x => !x)) debugger
 		ECS.eventBus.publish(ECSEVENTS.DELETE_ENTITY, this)
 		for (let children of this.children) {
 			children.destroy()
