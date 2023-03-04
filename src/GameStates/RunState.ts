@@ -18,7 +18,7 @@ import { GameStates } from "../Constants/GameStates"
 import HealthSystem from "../Systems/HealthSystem"
 import INPUTS from "../Constants/InputsNames"
 import LightingSystem from "../Systems/LightingSystem"
-import { MUSICS } from "../Globals/Sounds"
+import { MUSICS } from "../Constants/Sounds"
 import ManaComponent from "../Components/ManaComponent"
 import MinionSpawnerSytem from "../Systems/MinionSpawnerSystem"
 import MovementSystem from "../Systems/MovementSystem"
@@ -42,7 +42,7 @@ import waitFor from "../Utils/WaitFor"
 class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
-	players: Entity[] = []
+	players: Set<Entity> = new Set()
 	mana = new ManaComponent()
 	encounter: Encounter | null = null
 	tutorialShown = false
@@ -88,7 +88,7 @@ class RunState implements GameState {
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
 		this.ui = UIRunEntity()
-
+		this.encounter?.resume()
 		switch (oldState) {
 			case GameStates.pause: {
 				this.encounter?.resume()
@@ -97,24 +97,25 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				if (!this.music) {
-					this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
-				}
+				// !MUSIC
+				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
+
+				// !BACKGROUND
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
-
-				this.players.push(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.mana))
-				this.players.push(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
+				// !PLAYERS
+				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.mana))
+				this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.mana))
 				this.players.forEach(player => {
 					const stats = player.getComponent(StatsComponent)
 					const levelUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
-						if (this.players.some(player => player.id === entity)) {
+						if (this.players.has(entity)) {
 							stats.level = level
 						}
 						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
 					})
 					const xpUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
-						if (this.players.some(player => player.id === entity)) {
+						if (this.players.has(entity)) {
 							stats.xp = amount
 						}
 						ECS.eventBus.publish(UIEVENTS.UI_XP, stats.xp / stats.nextLevel)
@@ -128,6 +129,7 @@ class RunState implements GameState {
 						SkillUnsubcriber()
 					})
 				})
+				// !Encounter
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
@@ -145,12 +147,21 @@ class RunState implements GameState {
 		}
 		this.music?.play()
 
+		// !INITIALIZE UI
 		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
 		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
 		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
 			const entity = ECS.getEntityById(id)
 			if (!entity.getComponent(SwitchingComponent).main) {
 				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
+			}
+		})
+		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+			if (this.players.has(entity)) {
+				this.players.delete(entity)
+				if (this.players.size === 0) {
+					Engine.setState(GameStates.gameOver)
+				}
 			}
 		})
 	}
@@ -162,6 +173,7 @@ class RunState implements GameState {
 		inputManager.disable('activeSkillButton')
 		this.ui?.destroy()
 		this.music?.pause()
+		this.encounter?.pause()
 		switch (newState) {
 			case GameStates.levelUp: {
 				this.encounter?.pause()
