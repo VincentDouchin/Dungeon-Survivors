@@ -47,6 +47,9 @@ class RunState implements GameState {
 	encounter: Encounter | null = null
 	tutorialShown = false
 	music: HTMLAudioElement | null = null
+	subscribers: Array<() => void> = []
+	tutoCoroutine?: Coroutine
+	stats: [StatsComponent, StatsComponent] = [new StatsComponent(), new StatsComponent()]
 	player1Stats = new StatsComponent()
 	player2Stats = new StatsComponent()
 	constructor() {
@@ -108,29 +111,31 @@ class RunState implements GameState {
 				// !PLAYERS
 				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.player1Stats, this.mana))
 				this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.player2Stats, this.mana))
-				this.players.forEach(player => {
-					const stats = player.getComponent(StatsComponent)
-					const levelUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
+				this.stats.forEach(stat => {
+					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
 						if (this.players.has(entity)) {
-							stats.level = level
+							stat.level = level
 						}
 						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
-					})
-					const xpUnsubscriber = ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
+					}))
+					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
 						if (this.players.has(entity)) {
-							stats.xp = amount
+							stat.xp = amount
 						}
-						ECS.eventBus.publish(UIEVENTS.UI_XP, stats.xp / stats.nextLevel)
-					})
-					const SkillUnsubcriber = ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
-						stats.setModifier(skill.statName, skill.amount)
-					})
-					player.onDestroy(() => {
-						levelUnsubscriber()
-						xpUnsubscriber()
-						SkillUnsubcriber()
-					})
+						ECS.eventBus.publish(UIEVENTS.UI_XP, stat.xp / stat.nextLevel)
+					}))
+					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
+						stat.setModifier(skill.statName, skill.amount)
+					}))
 				})
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+					if (this.players.has(entity)) {
+						this.players.delete(entity)
+						if (this.players.size === 0) {
+							Engine.setState(GameStates.gameOver)
+						}
+					}
+				}))
 				// !Encounter
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {
@@ -140,7 +145,7 @@ class RunState implements GameState {
 				if (!this.tutorialShown && !State.mobile) {
 					const tutorial = TutorialEntity()
 					this.tutorialShown = true
-					new Coroutine(function* () {
+					this.tutoCoroutine = new Coroutine(function* () {
 						yield* waitFor(600)
 						tutorial.destroy()
 					})
@@ -158,14 +163,7 @@ class RunState implements GameState {
 				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 			}
 		})
-		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
-			if (this.players.has(entity)) {
-				this.players.delete(entity)
-				if (this.players.size === 0) {
-					Engine.setState(GameStates.gameOver)
-				}
-			}
-		})
+
 	}
 	unset(newState?: GameStates) {
 		ECS.unRegisterSystems()
@@ -184,6 +182,9 @@ class RunState implements GameState {
 				this.encounter?.pause()
 			}; break
 			case GameStates.map: {
+				debugger
+				this.tutoCoroutine?.stop()
+				this.subscribers.forEach(sub => sub())
 				this.players.forEach(player => player.destroy())
 				this.background?.destroy()
 				this.encounter = null
