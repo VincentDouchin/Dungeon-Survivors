@@ -94,7 +94,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
 		range: 200,
-		rotationSpeed: 1,
+		rotationSpeed: 0.2,
 		speed: 200
 	},
 	hammer: {
@@ -106,7 +106,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: COLLISIONGROUPS.PLAYER,
 		delay: 240,
 		range: 150,
-		rotationSpeed: 0.5,
+		rotationSpeed: 0.1,
 		speed: 150
 	},
 	iceSpike: {

@@ -71,6 +71,9 @@ class MovementSystem extends System {
 						if (rotation.angVel.value) {
 							body.body.setAngvel(rotation.angVel.value, true)
 						}
+						if (rotation.rotationVel) {
+							rotation.centerRotation += rotation.rotationVel
+						}
 						rotation.rotation = body.body.rotation()
 					}
 				}
