@@ -10,7 +10,7 @@ import ShooterComponent from "../Components/ShooterComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 
 const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
-	if (!projectileDefinition) return
+
 	const projectile = new Entity('projectile')
 	const tile = projectileDefinition.projectile
 	projectile.addComponent(new SpriteComponent(tile, { scale: projectileDefinition.scale }))
