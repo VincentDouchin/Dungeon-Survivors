@@ -177,6 +177,10 @@ const UIPlayerSelectEntity = () => {
 		} else {
 
 			characterSprite.addShader(new ColorShader(0, 0, 0, 1))
+			const lock = new Entity('lock')
+			lock.addComponent(new SpriteComponent(assets.icons.lock, { scale: 2 }))
+			lock.addComponent(new UIPositionComponent())
+			characterFrame.addChildren(lock)
 
 		}
 

@@ -35,7 +35,8 @@
    { "name": "candy", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 336, "w": 16, "h": 16 } }] },
    { "name": "herbs", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 288, "w": 16, "h": 16 } }] },
    { "name": "potato", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 304, "w": 16, "h": 16 } }] },
-   { "name": "goldenfish", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 864, "w": 16, "h": 16 } }] }
+   { "name": "goldenfish", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 864, "w": 16, "h": 16 } }] },
+   { "name": "lock", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 32, "w": 16, "h": 16 } }] }
   ]
  }
 }
