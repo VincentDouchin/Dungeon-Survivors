@@ -25,10 +25,12 @@ export enum ECSEVENTS {
 	SKILL_ICON = 'SKILL_ICON',
 	ADD_TO_ENCOUNTER = 'ADD_TO_ENCOUNTER',
 	MANA_AMOUNT = 'MANA_AMOUNT',
+	TAKE_DAMAGE = 'TAKE_DAMAGE',
 }
 export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
 	[ECSEVENTS.DELETE_ENTITY]: Entity
+	[ECSEVENTS.TAKE_DAMAGE]: Entity
 	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: string }
 	[ECSEVENTS.LEVEL_UP]: { level: number, entity: string }
 	[ECSEVENTS.PATH_POSITION]: PositionComponent
@@ -47,4 +49,4 @@ export type EventMap = {
 }
 	& Record<INPUTS, boolean | number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
-	& Record<'enable'|'disable',string>
+	& Record<'enable' | 'disable', string>

@@ -85,7 +85,7 @@ class HealthSystem extends System {
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						if (sprite && damage.amount.value > 0) {
-
+							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, entity)
 							new Coroutine(function* () {
 								health.canTakeDamage = false
 								sprite.addShader(new ColorShader(1, 0, 0, 1))
