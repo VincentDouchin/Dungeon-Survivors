@@ -23,9 +23,9 @@ import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
 const playergroup = FlockingComponent.getGroup()
-const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean, mana: ManaComponent) => {
+const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean, stats: StatsComponent, mana: ManaComponent) => {
 	const player = new Entity('player')
-	const stats = new StatsComponent()
+
 	for (let [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
 		stats.set(statName, modifier)
 	}

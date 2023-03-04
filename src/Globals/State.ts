@@ -1,4 +1,5 @@
 import { HeroDefinition } from "../Constants/Heros"
+import StatsComponent from "../Components/StatsComponent"
 
 interface State {
 	cameraBounds: {
