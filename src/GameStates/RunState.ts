@@ -5,7 +5,6 @@ import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import Engine, { DEBUG } from "../Globals/Engine"
 import { inputManager, render, soundManager, world } from "../Globals/Initialize"
 
-import { ALLSOUNDS } from "../Globals/Sounds"
 import AnimationSystem from "../Systems/AnimationSystem"
 import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerSystem"
 import BackgroundEntity from "../Entities/BackgroundEntity"
@@ -19,6 +18,7 @@ import { GameStates } from "../Constants/GameStates"
 import HealthSystem from "../Systems/HealthSystem"
 import INPUTS from "../Constants/InputsNames"
 import LightingSystem from "../Systems/LightingSystem"
+import { MUSICS } from "../Globals/Sounds"
 import ManaComponent from "../Components/ManaComponent"
 import MinionSpawnerSytem from "../Systems/MinionSpawnerSystem"
 import MovementSystem from "../Systems/MovementSystem"
@@ -98,8 +98,7 @@ class RunState implements GameState {
 			}; break
 			case GameStates.map: {
 				if (!this.music) {
-					this.music ??= soundManager.play(ALLSOUNDS.Fight, 0.8)
-					this.music.loop = true
+					this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 				}
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
