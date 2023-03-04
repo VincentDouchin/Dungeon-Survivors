@@ -77,17 +77,21 @@ class TargetingSystem extends System {
 						body.velocity.x = 0
 						body.velocity.y = 0
 					}
-					new Coroutine(function* () {
+					const resetCoroutine = new Coroutine(function* () {
 						targeter.charger = false
 						yield* waitFor(180)
 						targeter.charger = true
 					})
-					new Coroutine(function* () {
+					const startCoroutine = new Coroutine(function* () {
 						targeter.charging = true
 						yield* waitFor(40)
 						ParticleEntity({ x: position.x, y: position.y - sprite.scaledHeight / 2 }, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
 						yield* charge()
 						targeter.charging = false
+					})
+					entity.onDestroy(() => {
+						resetCoroutine.stop()
+						startCoroutine.stop()
 					})
 
 				} else if (joint?.type == 'revolute') {
