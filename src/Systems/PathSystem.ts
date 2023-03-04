@@ -35,10 +35,9 @@ class PathSystem extends System {
 			}
 			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
 				walkerSprite.flipped = walkerPosition.x - position.x > 0
-				walkerAnimation.setState('run')
+				walkerAnimation.setState(GameStates.run)
 				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
 				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
-
 			} else if (node.selected && node.encounter) {
 				node.encounter = false
 				Engine.setState(GameStates.run, node)
@@ -46,7 +45,9 @@ class PathSystem extends System {
 			} else if (node.selected && !node.showingOptions) {
 
 				const possibleDirections = Object.entries(node.nodes)
-				if (possibleDirections.length == 1) {
+				if (possibleDirections.length === 0) {
+					Engine.setState(GameStates.win)
+				} else if (possibleDirections.length == 1) {
 					node.nodes[possibleDirections[0][0] as nodeDirection]!.getComponent(PathNodeComponent).selected = true
 
 					entity.destroy()
