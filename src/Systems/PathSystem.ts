@@ -93,11 +93,11 @@ class PathSystem extends System {
 							}; break
 							case 'top': {
 								arrowPosition.y += 16
-								arrow.addComponent(new RotationComponent(Math.PI))
+								arrow.addComponent(new RotationComponent({ rotation: Math.PI }))
 							}; break
 							case 'right': {
 								arrowPosition.x += 16
-								arrow.addComponent(new RotationComponent(Math.PI / 2))
+								arrow.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
 							}; break
 
 						}
