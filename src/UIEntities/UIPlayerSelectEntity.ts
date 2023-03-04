@@ -153,7 +153,7 @@ const UIPlayerSelectEntity = () => {
 			character.addChildren(button)
 			const arrowRight = new Entity('character arrow')
 			arrowRight.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
-			arrowRight.addComponent(new RotationComponent(Math.PI / 2))
+			arrowRight.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
 			arrows.push(arrowRight)
 			character.addChildren(arrowRight)
 			const arrowLeft = new Entity('character arrow')

@@ -31,7 +31,7 @@ const VolumeBarEntity = () => {
 	const arrowRight = new Entity('arrow volume right')
 	arrowRight.addComponent(new SpriteComponent(assets.UI.arrow, { scale: 2 }))
 	arrowRight.addComponent(new UIPositionComponent().right())
-	arrowRight.addComponent(new RotationComponent(Math.PI / 2))
+	arrowRight.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
 	const arrows = [arrowRight, arrowLeft]
 	arrows.forEach((arrow, index) => {
 		const arrowSelect = arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow, () => {
