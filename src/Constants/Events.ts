@@ -33,7 +33,7 @@ export type EventMap = {
 	[ECSEVENTS.TAKE_DAMAGE]: Entity
 	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: Entity }
 	[ECSEVENTS.LEVEL_UP]: { level: number, entity: Entity }
-	[ECSEVENTS.PATH_POSITION]: PositionComponent
+	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent, encounter: boolean }
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
 	[ECSEVENTS.ENENMY_LEVEL_UP]: number
