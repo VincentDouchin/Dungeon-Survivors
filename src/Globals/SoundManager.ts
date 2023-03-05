@@ -23,9 +23,7 @@ class SoundManager {
 			}
 			renderer.domElement.addEventListener('click', listener)
 		}
-
 	}
-
 	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions,) {
 		const nodes: AudioNode[] = []
 		const newOptions = { volume: 1, playbackRate: 1, autoplay: true, loop: false, fade: false, ...options }
@@ -35,9 +33,12 @@ class SoundManager {
 		const volume = type === 'music' ? saveData.musicVolume : saveData.effectsVolume
 
 		target.set(audioElement, newOptions.volume)
-		audioElement.addEventListener('ended', () => {
+		const endListener = () => {
 			target.delete(audioElement)
-		})
+			audioElement.removeEventListener('ended', endListener)
+			audioElement.remove()
+		}
+		audioElement.addEventListener('ended', endListener)
 		nodes.push(this.ctx.createMediaElementSource(audioElement))
 		audioElement.volume = newOptions.volume * volume
 		audioElement.playbackRate = newOptions.playbackRate
@@ -50,7 +51,6 @@ class SoundManager {
 			nodes.push(gainNode)
 		}
 		for (let i = 0; i < nodes.length; i++) {
-
 			if (i !== 0) nodes[i - 1].connect(nodes[i])
 			if (i === nodes.length - 1) nodes[i].connect(this.ctx.destination)
 		}
