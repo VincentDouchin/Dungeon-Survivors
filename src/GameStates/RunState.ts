@@ -134,16 +134,13 @@ class RunState implements GameState {
 						}
 					}
 				}))
-				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount }) => {
-					if (this.players.has(entity) && amount > 0) {
-						this.players.forEach(player => {
-							if (player !== entity) {
-								ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount }))
-
-							}
-						})
-					}
-				}))
+				this.players.forEach(player => {
+					ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
+						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
+							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
+						}
+					})
+				})
 				// !Encounter
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {

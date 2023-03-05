@@ -30,7 +30,7 @@ export enum ECSEVENTS {
 export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
 	[ECSEVENTS.DELETE_ENTITY]: Entity
-	[ECSEVENTS.TAKE_DAMAGE]: { entity: Entity, amount: number }
+	[ECSEVENTS.TAKE_DAMAGE]: { entity: Entity, amount: number, loop?: boolean }
 	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: Entity }
 	[ECSEVENTS.LEVEL_UP]: { level: number, entity: Entity }
 	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent, encounter: boolean }

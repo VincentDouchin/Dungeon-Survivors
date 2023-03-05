@@ -26,6 +26,7 @@ class HealthSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			const health = entity.getComponent(HealthComponent)
 			health.updateHealth(-amount)
+			console.log(entity.name, amount)
 			if (sprite && amount > 0) {
 				new Coroutine(function* () {
 					health.canTakeDamage = false
