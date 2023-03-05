@@ -1,12 +1,12 @@
 import ButtonEntity from "./ButtonEntity";
-import Engine from "../Globals/Engine";
 import { Entity } from "../Globals/ECS";
-import { GameStates } from "../Constants/GameStates";
+import INPUTS from "../Constants/InputsNames";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import UIPositionComponent from "../Components/UIPositionComponent";
 import VolumeBarEntity from "./VolumeBarEntity";
 import assets from "../Globals/Assets";
+import { inputManager } from "../Globals/Initialize";
 import saveData from "../Globals/SaveManager";
 
 const UIPauseEntity = () => {
@@ -16,7 +16,7 @@ const UIPauseEntity = () => {
 	pauseFrame.addComponent(new UIPositionComponent())
 
 	const resume = ButtonEntity(30, 8, 2, 'Resume', 1.5, () => {
-		Engine.setState(GameStates.run)
+		inputManager.eventBus.publish(INPUTS.PAUSE, true)
 	})
 	resume.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 2 }))
 	pauseFrame.addChildren(resume)
