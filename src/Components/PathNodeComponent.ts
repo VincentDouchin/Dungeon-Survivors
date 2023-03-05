@@ -7,29 +7,37 @@ export interface node {
 	id: number
 	x: number
 	y: number
-	top: number | string
-	left: number | string
-	right: number | string
+	top: number
+	left: number
+	right: number
 	start: boolean
 	end?: boolean
 	encounter: boolean
 	BACKGROUND: backgroundName
 	ENEMIES: enemyWaveName
+	flag: boolean
 }
 class PathNodeComponent extends Component {
-	nodes: Partial<Record<nodeDirection, Entity>>
-	selected: boolean
+	nodes: Map<number, Entity>
 	encounter: boolean
 	background: backgroundName
 	enemies: enemyWaveName
 	showingOptions = false
-	constructor(nodes: Partial<Record<nodeDirection, Entity>>, selected: boolean, options: node) {
+	options: node
+	constructor(options: node, nodes: Map<number, Entity>) {
 		super()
 		this.encounter = options.encounter
 		this.background = options.BACKGROUND
 		this.enemies = options.ENEMIES
 		this.nodes = nodes
-		this.selected = selected
+		this.options = options
+	}
+	next(direction: nodeDirection) {
+		return this.nodes.get(this.options[direction])
+	}
+	get possibleDirections() {
+		const directions = ['left', 'right', 'top'] as nodeDirection[]
+		return directions.filter(direction => this.options[direction]).length
 	}
 }
 PathNodeComponent.register()

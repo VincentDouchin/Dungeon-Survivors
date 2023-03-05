@@ -12,71 +12,79 @@ import RotationComponent from "../Components/RotationComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import assets from "../Globals/Assets";
-import { easeInCubic } from './../Utils/Tween';
+import { easeInCubic } from "../Utils/Tween";
 
 class PathSystem extends System {
+	position?: PositionComponent
+	encounter?: boolean
 	constructor() {
-		super(PathNodeComponent)
+		super(PathWalkerComponent)
+		ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, ({ position, encounter }) => {
+			this.position = position
+			this.encounter = encounter
+		})
 	}
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
-
-			const node = entity.getComponent(PathNodeComponent)
-
-			const [walkerId] = ECS.getEntitiesAndComponents(PathWalkerComponent)
-			if (!walkerId) return
-			const walker = ECS.getEntityById(walkerId[0])
-			const walkerPosition = walker.getComponent(PositionComponent)
-			const walkerAnimation = walker.getComponent(AnimationComponent)
-			const walkerSprite = walker.getComponent(SpriteComponent)
+		entities.forEach((entity) => {
+			const sprite = entity.getComponent(SpriteComponent)
+			const animation = entity.getComponent(AnimationComponent)
 			const position = entity.getComponent(PositionComponent)
-			if (node.selected) {
-				ECS.eventBus.publish(ECSEVENTS.PATH_POSITION, position)
+			if (!position && this.position) {
+				entity.addComponent(this.position)
+				return
+			} else if (this.position) {
+				if (position.x !== this.position.x || position.y !== this.position.y) {
+					animation.setState(GameStates.run)
+					sprite.flipped = position.x - this.position.x > 0
+					position.x += Math.sign(this.position.x - position.x)
+					position.y += Math.sign(this.position.y - position.y)
+					return
+				}
 			}
-			if (node.selected && (walkerPosition.x != position.x || walkerPosition.y != position.y)) {
-				walkerSprite.flipped = walkerPosition.x - position.x > 0
-				walkerAnimation.setState(GameStates.run)
-				walkerPosition.x += Math.sign(position.x - walkerPosition.x)
-				walkerPosition.y += Math.sign(position.y - walkerPosition.y)
-			} else if (node.selected && node.encounter) {
-				node.encounter = false
+
+			const nodes = ECS.getEntitiesAndComponents(PathNodeComponent)
+			const selectedNode = nodes.find(([_, pathNode]) => {
+				return pathNode.options.x === this.position?.x && pathNode.options.y === this.position?.y
+			})
+			if (!selectedNode) return
+			const [nodeId, node] = selectedNode
+			const nodeEntity = ECS.getEntityById(nodeId)
+			if (node.encounter && !this.encounter) {
 				Engine.setState(GameStates.run, node)
 				return
-			} else if (node.selected && !node.showingOptions) {
-
-				const possibleDirections = Object.entries(node.nodes)
-				if (possibleDirections.length === 0) {
-					Engine.setState(GameStates.win)
-				} else if (possibleDirections.length == 1) {
-					node.nodes[possibleDirections[0][0] as nodeDirection]!.getComponent(PathNodeComponent).selected = true
-
-					entity.destroy()
-				} else {
-					const arrows: Entity[] = []
-					for (let [direction, otherNodeode] of possibleDirections) {
+			}
+			if (node.possibleDirections === 0) {
+				Engine.setState(GameStates.win)
+			} else if (!node.showingOptions) {
+				const arrows: Entity[] = []
+				for (let direction of ['left', 'right', 'top'] as nodeDirection[]) {
+					const otherNode = node.next(direction)
+					const otherPathNode = otherNode?.getComponent(PathNodeComponent)
+					const otherNodePosition = otherNode?.getComponent(PositionComponent)
+					if (node.possibleDirections > 1 && otherNode && otherNodePosition) {
 
 						const arrow = new Entity('arrow')
 						arrow.addComponent(new SelectableComponent(
 							assets.UI.arrowselected,
 							assets.UI.arrow,
 							() => {
-								otherNodeode.getComponent(PathNodeComponent).selected = true
-								node.selected = false
-								arrow.destroy()
-								entity.destroy()
+								this.position = otherNodePosition
+								this.encounter = !otherPathNode?.encounter
+								arrows.forEach(arrow => arrow.destroy())
 							})
 						)
 
 
 						arrows.push(arrow)
-						entity.addChildren(arrow)
-						arrow.addComponent(new SpriteComponent(assets.UI.arrow,))
+						nodeEntity.addChildren(arrow)
+						arrow.addComponent(new SpriteComponent(assets.UI.arrow))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
-						new Coroutine(function* () {
+
+						const arrowBounce = new Coroutine(function* () {
 							let t = 0
 							let sign = 1
 							const delay = 30
-							while (arrow) {
+							while (true) {
 								while (t < delay) {
 									arrowPosition.y += easeInCubic(t, -0.1, 0.1, delay) * sign
 									t++
@@ -86,6 +94,7 @@ class PathSystem extends System {
 								sign *= -1
 							}
 						})
+						arrow.onDestroy(() => arrowBounce.stop())
 
 
 						switch (direction) {
@@ -102,14 +111,20 @@ class PathSystem extends System {
 							}; break
 
 						}
-					}
-					SelectableComponent.setFromArray(arrows)
-				}
+					} else {
+						if (otherNode && otherNodePosition) {
+							this.position = otherNodePosition
+							this.encounter = !otherPathNode?.encounter
 
-				node.showingOptions = true
-			} else if (node.selected) {
-				walkerAnimation.setState('idle')
+						}
+					}
+
+
+				}
+				SelectableComponent.setFromArray(arrows)
 			}
+
+			node.showingOptions = true
 		})
 	}
 }

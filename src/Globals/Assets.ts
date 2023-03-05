@@ -8,6 +8,7 @@ import Tile from "../Utils/Tile"
 import arenasSource from './../../assets/map/Arenas.json'
 import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
 import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
+import flagSource from './../../assets/map/flag.png'
 import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
@@ -37,7 +38,7 @@ const assets: {
 	icons: Record<string, Tile>
 	magic: Record<string, Tile>
 	tiles: Record<tileName, Tile>
-	skills: Record<skillName, Tile>,
+	skills: Record<skillName, Tile>
 	blood: Record<string, Tile>
 	npc: Record<npcTileName, Tile>
 	nature: Record<string, Tile>
@@ -47,6 +48,7 @@ const assets: {
 	details: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
+	flag: Tile
 	title: Tile
 } = {
 	UI: await AssetLoader.loadFromSlices(GUIData, GUISource),
@@ -60,6 +62,7 @@ const assets: {
 		const frames = buffer.canvas.width / buffer.canvas.height
 		return { buffer, frames, width: buffer.canvas.height }
 	}),
+	flag: await Tile.fromImage(await AssetLoader.loadImage(flagSource), ({ buffer }) => ({ buffer, width: 16, frames: 4 })),
 	npc: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/npc/*.png', { eager: true }), ({ buffer }) => ({ buffer, frames: 4, width: 32 })) as Record<npcTileName, Tile>,
 	map: await LDTKMap.load(ldtkmapSource),
 	arenas: await LDTKMap.load(arenasSource),

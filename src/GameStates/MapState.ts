@@ -27,8 +27,8 @@ class MapState implements GameState {
 	map?: Entity
 	player?: Entity
 	path?: Entity
-	lastPosition: { x?: number, y?: number } = { x: 0, y: undefined }
-
+	initialPosition = true
+	lastPosition?: PositionComponent
 	render() {
 		render()
 	}
@@ -37,6 +37,7 @@ class MapState implements GameState {
 		world.step()
 	}
 	async set(previousState: GameStates) {
+		let wasEncounter = false
 		const level = assets.map.levels[0]
 		const mapTile = LDTKMap.tiles[level.identifier]
 		State.cameraBounds = {
@@ -58,6 +59,10 @@ class MapState implements GameState {
 		}
 		await new Promise<void>((resolve) => {
 			switch (previousState) {
+				case GameStates.run: {
+					wasEncounter = true
+					resolve()
+				}; break
 				case GameStates.none: {
 
 					const title = new Entity('title text')
@@ -91,22 +96,14 @@ class MapState implements GameState {
 		this.player.addComponent(new AnimationComponent(hero.tiles[State.selectedTiles[0]]))
 		this.player.addComponent(new CameraTargetComponent())
 		this.player.addComponent(new PathWalkerComponent())
-		ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, (position: PositionComponent) => {
-			this.lastPosition.x = position.x
-			this.lastPosition.y = position.y
-		})
+		const pathEntities = level
+			.layerInstances?.find(layer => layer.__identifier == 'Path')
+			?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)!) as ldtkNode[]
+		this.path = PathEntity(pathEntities)
 
-
-		if (!this.lastPosition.x && !this.lastPosition.y) {
-			const pathEntities = level
-				.layerInstances?.find(layer => layer.__identifier == 'Path')
-				?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)!) as ldtkNode[]
-			PathEntity(pathEntities)
+		if (this.lastPosition) {
+			ECS.eventBus.publish(ECSEVENTS.PATH_POSITION, { position: this.lastPosition, encounter: wasEncounter })
 		}
-
-
-		this.player.addComponent(new PositionComponent(this.lastPosition.x!, this.lastPosition.y!))
-
 	}
 	unset(newState: GameStates) {
 		ECS.unRegisterSystems()
@@ -114,7 +111,9 @@ class MapState implements GameState {
 			case GameStates.playerSelect: {
 			}; break
 			default: {
+				this.lastPosition = this.player?.getComponent(PositionComponent)
 				this.map?.destroy()
+				this.path?.destroy()
 				this.player?.destroy()
 			}; break
 		}
