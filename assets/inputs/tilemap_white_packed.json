@@ -1,0 +1,31 @@
+{ "frames": {
+   "tilemap_white_packed.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 544, "h": 384 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 544, "h": 384 },
+    "sourceSize": { "w": 544, "h": 384 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "I8",
+  "size": { "w": 544, "h": 384 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "ljoystick", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 208, "w": 16, "h": 16 } }] },
+   { "name": "ltrigger", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 288, "w": 16, "h": 16 } }] },
+   { "name": "rtrigger", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 288, "w": 16, "h": 16 } }] },
+   { "name": "Slice 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "pause", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 304, "w": 16, "h": 16 } }] }
+  ]
+ }
+}

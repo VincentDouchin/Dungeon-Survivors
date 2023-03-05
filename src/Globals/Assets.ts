@@ -12,6 +12,8 @@ import flagSource from './../../assets/map/flag.png'
 import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
+import inputsData from './../../assets/inputs/tilemap_white_packed.json'
+import inputsSource from './../../assets/inputs/tilemap_white_packed.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
 import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
@@ -46,6 +48,7 @@ const assets: {
 	effects: Record<string, Tile>
 	hole: Record<string, Tile>
 	details: Record<string, Tile>
+	inputs: Record<string, Tile>
 	map: LDTKMap
 	arenas: LDTKMap
 	flag: Tile
@@ -84,6 +87,7 @@ const assets: {
 	},
 	hole: await AssetLoader.loadFromSlices(tilesetHoleData, tilesetHoleSource),
 	details: await AssetLoader.loadFromSlices(tilesetFloorDetailData, tilesetFloorDetailSource),
-	title: Tile.fromImage(await AssetLoader.loadImage(titleSource))
+	title: Tile.fromImage(await AssetLoader.loadImage(titleSource)),
+	inputs: await AssetLoader.loadFromSlices(inputsData, inputsSource),
 } as const
 export default assets
