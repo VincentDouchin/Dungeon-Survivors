@@ -129,7 +129,14 @@ const Enemies: Record<string, EnemyType> = {
 		charger: true,
 		boss: true,
 		weapon: WEAPONS.fireball,
-		xp: 20
+		xp: 20,
+		get minion() {
+			return {
+				type: Enemies.imp,
+				distance: 50,
+				delay: 120,
+			}
+		}
 	},
 	// !UNDEAD 
 	zombieSmall: {
@@ -221,7 +228,14 @@ const Enemies: Record<string, EnemyType> = {
 		damage: 10,
 		charger: true,
 		boss: true,
-		xp: 20
+		xp: 20,
+		get minion() {
+			return {
+				type: Enemies.zombieSmall,
+				distance: 50,
+				delay: 180,
+			}
+		}
 	},
 	// ! HUMANS
 	bandit: {
