@@ -5,7 +5,7 @@ import RainEntity from "../Entities/RainEntity"
 import Tile from "../Utils/Tile"
 import assets from "../Globals/Assets"
 
-export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAMP' | 'GRAVEYARD' | 'TOWN' | 'CASTLE' | 'FIELDS'
+export type backgroundName = 'FOREST' | 'DUNGEON' | 'CAVE' | 'GRAVEYARD' | 'TOWN' | 'CASTLE' | 'FIELDS'
 
 export interface Background {
 	level: string
@@ -39,14 +39,12 @@ const BACKGROUNDS: Record<backgroundName, Background> = {
 		effect: LeafEntity,
 		effectDelay: () => Math.random() * 10 + 50
 	},
-	CAMP: {
-		level: 'CAMP',
+	CAVE: {
+		level: 'CAVE',
+		obstacles: [assets.nature.rockbig, assets.nature.rocksmall2, assets.nature.rocksmall1],
 		lightColor: new Color('hsl(0,0%,100%)'),
-		infinite: { x: false, y: false },
-		boundaries: {
-			x: 750,
-			y: 750
-		}
+		obstaclesDensity: 0.3,
+		infinite: { x: true, y: true },
 	},
 	GRAVEYARD: {
 		level: 'GRAVEYARD',
