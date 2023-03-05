@@ -48,6 +48,7 @@ class CameraSystem extends System {
 
         entities.forEach(entity => {
             const position = entity.getComponent(PositionComponent)
+            if (!position) return
             if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
                 camera.position.y = cameraTarget.bottom - camera.bottom
             } else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
