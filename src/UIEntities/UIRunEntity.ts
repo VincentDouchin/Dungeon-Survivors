@@ -24,7 +24,7 @@ const UIRunEntity = () => {
 	activeSpell.addChildren(ManaBarEntity())
 	ui.addChildren(TimeCounterEntity())
 
-	const pause = ButtonEntity(8, 8, 2, assets.UI.pauseicon, 2, () => {
+	const pause = ButtonEntity(8, 8, 2, assets.icons.settings, 2, () => {
 		inputManager.eventBus.publish(INPUTS.PAUSE, true)
 	}, true)
 	pause.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }))
