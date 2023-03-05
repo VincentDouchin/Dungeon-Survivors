@@ -1,10 +1,13 @@
 import { ECS, Entity, System } from "../Globals/ECS";
 
+import ColorShader from "../Shaders/ColorShader";
+import DroppableComponent from "../Components/DroppableComponent";
 import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
 import MinionSpawnerComponent from "../Components/MinionSpawnerComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
+import SpriteComponent from "../Components/SpriteComponent";
 import StatsComponent from "../Components/StatsComponent";
 import assets from "../Globals/Assets";
 
@@ -23,6 +26,8 @@ class MinionSpawnerSytem extends System {
 				const minionPosition = { x: position.x + Math.cos(angle) * minion.distance, y: position.y + Math.sin(angle) * minion.distance }
 				ParticleEntity(minionPosition, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 					const minionEntity = EnemyEntity(minion.minion, stats)(minionPosition)
+					minionEntity.removeComponent(DroppableComponent)
+					minionEntity.getComponent(SpriteComponent).addShader(new ColorShader(0.1, 0.1, 0.1, 0, 'add'))
 					ECS.eventBus.publish(ECSEVENTS.ADD_TO_ENCOUNTER, minionEntity)
 				})
 				minion.timer = 0
