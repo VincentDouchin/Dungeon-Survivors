@@ -24,7 +24,7 @@ const TimeCounterEntity = () => {
 			State.timer++
 			timerText.setText(formatTimer())
 			if (State.timer % 120 === 0) {
-				ECS.eventBus.publish(ECSEVENTS.ENENMY_LEVEL_UP, State.timer % 120)
+				ECS.eventBus.publish(ECSEVENTS.ENENMY_LEVEL_UP, State.timer)
 			}
 		}
 	})
