@@ -33,13 +33,17 @@ class SoundManager {
 		const volume = type === 'music' ? saveData.musicVolume : saveData.effectsVolume
 
 		target.set(audioElement, newOptions.volume)
+		const sound = this.ctx.createMediaElementSource(audioElement)
+		nodes.push(sound)
 		const endListener = () => {
 			target.delete(audioElement)
-			audioElement.removeEventListener('ended', endListener)
 			audioElement.remove()
+			sound.disconnect()
+			audioElement.src = ""
+			audioElement.srcObject = null
+			audioElement.removeEventListener('ended', endListener)
 		}
 		audioElement.addEventListener('ended', endListener)
-		nodes.push(this.ctx.createMediaElementSource(audioElement))
 		audioElement.volume = newOptions.volume * volume
 		audioElement.playbackRate = newOptions.playbackRate
 		if (newOptions.loop) audioElement.loop = true
