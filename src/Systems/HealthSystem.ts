@@ -57,7 +57,7 @@ class HealthSystem extends System {
 							soundManager.play('effect', damage.sound, { fade: true })
 						}
 						if (health.sound) {
-							soundManager.play('effect', health.sound, { fade: true })
+							soundManager.play('effect', health.sound, { fade: true, })
 						}
 						// ! Knockback
 						if (body.body) {

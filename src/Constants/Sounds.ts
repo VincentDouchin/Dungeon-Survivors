@@ -7,9 +7,11 @@ export const SOUNDS = {
 	Select: 'Select',
 	Validate: 'Validate',
 	PowerUp: 'PowerUp1',
-	Fireball: 'Fire2',
-	PLAYER_DAMAGE: ['11_human_damage_1', '11_human_damage_2'],
+	XP: '68_ATB_4',
+	Fireball: ['01_Fire_explosion_01_small', '02_Fire_explosion_02_small'],
+	PLAYER_DAMAGE: ['14_Impact_flesh_01', '15_Impact_flesh_02', '16_Impact_flesh_03', '17_Impact_flesh_04', '18_Impact_flesh_05'],
 	BOOST: 'Fx',
+	THUNDER: '17_Thunder_01',
 	GAME_OVER: 'GameOver2'
 } as const
 export const MUSICS = {

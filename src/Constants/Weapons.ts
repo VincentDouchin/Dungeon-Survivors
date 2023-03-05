@@ -42,7 +42,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		group: COLLISIONGROUPS.PLAYER,
 		target: COLLISIONGROUPS.ENEMY,
 		light: 'hsl(39, 30%, 20%)',
-		// sound: ALLSOUNDS.Fireball
+		sound: SOUNDS.Fireball
 	},
 	staffGem: {
 		tile: assets.tiles.weapon_green_magic_staff,

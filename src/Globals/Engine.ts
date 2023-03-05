@@ -12,7 +12,7 @@ export const DEBUG: {
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
 	DEFAULT_STATE: GameStates
 } = {
-	ENCOUNTER: false && import.meta.env.DEV,
+	ENCOUNTER: true && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'FOREST',
 	DEFAULT_HEROS: [HEROS[0], HEROS[1]],

@@ -43,7 +43,7 @@ class PickupSystem extends System {
 				const token = otherEntity.getComponent(TokenComponent)
 				const boost = otherEntity.getComponent(BoostComponent)
 				if (xp && stats) {
-					soundManager.play('effect', SOUNDS.PowerUp, { playbackRate: 4, volume: 0.1 })
+					soundManager.play('effect', SOUNDS.XP, { playbackRate: 2, volume: 0.5 })
 					otherEntity.destroy()
 					stats?.updateXP(xp.amount)
 					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity, max: stats.nextLevel })

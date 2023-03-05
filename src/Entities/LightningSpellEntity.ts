@@ -7,9 +7,11 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
 import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
+import { SOUNDS } from "../Constants/Sounds"
 import SpriteComponent from "../Components/SpriteComponent"
 import TargeterComponent from "../Components/TargeterComponent"
 import assets from "../Globals/Assets"
+import { soundManager } from "../Globals/Initialize"
 
 const LightningSpellEntity = (entity: Entity) => {
 	const stats = entity.getComponent(StatsComponent)
@@ -24,6 +26,7 @@ const LightningSpellEntity = (entity: Entity) => {
 		}
 	}, [])
 	enemies.sort(() => 0.5 - Math.random())
+	soundManager.play('effect', SOUNDS.THUNDER)
 	for (const enemy of enemies.slice(0, 10)) {
 		const targeter = enemy.getComponent(TargeterComponent)
 		const enemyPosition = enemy.getComponent(PositionComponent)
