@@ -28,6 +28,9 @@ const ECS = new class {
 		})
 	}
 	unRegisterSystems() {
+		this.systems.forEach(system => {
+			system.subscribers.forEach(sub => sub())
+		})
 		this.systems = []
 	}
 
@@ -38,6 +41,7 @@ interface System {
 }
 class System {
 	target
+	subscribers: Array<() => void> = []
 	static register() {
 		ECS.registerSystem(this)
 	}
