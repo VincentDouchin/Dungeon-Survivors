@@ -97,7 +97,7 @@ class Encounter {
 				const mainSprite = main.getComponent(SpriteComponent)
 				mainSprite.addShader(new OutlineShader([1, 1, 0, 1]))
 				const invicibilitySub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
-					const damageFlashSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, entity => {
+					const damageFlashSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
 						let flash = true
 						if (guards.has(entity) && flash) {
 							flash = false
