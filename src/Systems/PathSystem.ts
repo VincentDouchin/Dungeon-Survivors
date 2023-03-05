@@ -19,10 +19,10 @@ class PathSystem extends System {
 	encounter?: boolean
 	constructor() {
 		super(PathWalkerComponent)
-		ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, ({ position, encounter }) => {
+		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, ({ position, encounter }) => {
 			this.position = position
 			this.encounter = encounter
-		})
+		}))
 	}
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
