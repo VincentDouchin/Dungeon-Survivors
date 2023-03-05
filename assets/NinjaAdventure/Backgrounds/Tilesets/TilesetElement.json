@@ -1,5 +1,5 @@
 { "frames": {
-   "TilesetElement.png": {
+   "TilesetElement.aseprite": {
     "frame": { "x": 0, "y": 0, "w": 256, "h": 240 },
     "rotated": false,
     "trimmed": false,
@@ -17,17 +17,18 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "grave1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 32, "w": 16, "h": 16 } }] },
    { "name": "grave2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 32, "w": 16, "h": 16 } }] },
+   { "name": "well", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 27, "w": 16, "h": 21 } }] },
+   { "name": "cart1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 51, "w": 27, "h": 27 } }] },
+   { "name": "cart2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 36, "y": 50, "w": 27, "h": 28 } }] },
+   { "name": "pile", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 67, "y": 60, "w": 27, "h": 20 } }] },
    { "name": "grave3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 80, "w": 16, "h": 32 } }] },
    { "name": "grave4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 80, "w": 16, "h": 32 } }] },
-   { "name": "pile", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 60, "w": 32, "h": 20 } }] },
-   { "name": "cart2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 48, "w": 32, "h": 32 } }] },
-   { "name": "cart1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 48, "w": 32, "h": 32 } }] },
-   { "name": "well", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 27, "w": 16, "h": 21 } }] }
+   { "name": "pot", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 160, "w": 16, "h": 16 } }] }
   ]
  }
 }

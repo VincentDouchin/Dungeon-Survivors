@@ -1,5 +1,5 @@
 { "frames": {
-   "TilesetNature.png": {
+   "TilesetNature.aseprite": {
     "frame": { "x": 0, "y": 0, "w": 256, "h": 336 },
     "rotated": false,
     "trimmed": false,
@@ -21,9 +21,14 @@
   ],
   "slices": [
    { "name": "tree1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 32, "h": 32 } }] },
-   { "name": "stumpbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 128, "w": 32, "h": 32 } }] },
+   { "name": "stumpbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 134, "w": 32, "h": 23 } }] },
    { "name": "stumpsmall1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 128, "w": 16, "h": 16 } }] },
-   { "name": "trunksmall", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 128, "w": 16, "h": 16 } }] }
+   { "name": "trunksmall", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 128, "w": 16, "h": 16 } }] },
+   { "name": "hay", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 128, "w": 17, "h": 16 } }] },
+   { "name": "flower", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 176, "w": 16, "h": 16 } }] },
+   { "name": "rockbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 66, "y": 196, "w": 29, "h": 27 } }] },
+   { "name": "rocksmall1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 208, "w": 16, "h": 16 } }] },
+   { "name": "rocksmall2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 208, "w": 16, "h": 16 } }] }
   ]
  }
 }

@@ -1,19 +1,15 @@
 {
-	"identifier": "FIELDS",
-	"uniqueIdentifer": "24e3ec70-9f30-11ed-8fb4-c931e5634bed",
-	"x": 5648,
-	"y": -512,
+	"identifier": "CAVE",
+	"uniqueIdentifer": "9441bfa0-9f30-11ed-8c3e-190035649149",
+	"x": 6672,
+	"y": -528,
 	"width": 1024,
 	"height": 1024,
 	"bgColor": "#696A79",
 	"neighbourLevels": [
 		{
-			"levelIid": "236f36b0-9f30-11ed-83b4-816e7fc102f5",
+			"levelIid": "24e3ec70-9f30-11ed-8fb4-c931e5634bed",
 			"dir": "w"
-		},
-		{
-			"levelIid": "9441bfa0-9f30-11ed-8c3e-190035649149",
-			"dir": "e"
 		}
 	],
 	"customFields": {
