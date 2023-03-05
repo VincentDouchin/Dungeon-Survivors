@@ -124,8 +124,6 @@ class Entity {
 	}
 
 	destroy() {
-		// if (this.name == 'weapon') debugger
-		// if (this.children.some(x => !x)) debugger
 		ECS.eventBus.publish(ECSEVENTS.DELETE_ENTITY, this)
 		for (let children of this.children) {
 			children.destroy()

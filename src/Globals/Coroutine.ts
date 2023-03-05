@@ -8,7 +8,6 @@ class Coroutine {
 				Coroutine.coroutines.splice(i, 1)
 				continue
 			}
-			if (!Coroutine.coroutines[i]?.generator) debugger
 			const { done } = Coroutine.coroutines[i].generator.next()
 			if (done) {
 				Coroutine.coroutines.splice(i, 1)
