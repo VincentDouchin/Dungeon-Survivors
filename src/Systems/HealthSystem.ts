@@ -1,11 +1,11 @@
 import { ECS, Entity, System } from "../Globals/ECS";
-import { easeOutBack, easeOutExpo } from "../Utils/Tween";
 
 import BarShader from "../Shaders/BarShader";
 import BodyComponent from "../Components/BodyComponent";
 import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
 import DamageComponent from "../Components/DamageComponent";
+import DamageTextEntity from "../Entities/DamageTextEntity";
 import DissolveShader from "../Shaders/DissolveShader";
 import { ECSEVENTS } from "../Constants/Events";
 import ExpirationComponent from "../Components/ExpirationComponent";
@@ -13,8 +13,6 @@ import HealthComponent from "../Components/HealthComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import TextComponent from "../Components/TextComponent";
-import Tile from "../Utils/Tile";
 import assets from "../Globals/Assets";
 import { soundManager } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
@@ -24,6 +22,26 @@ const full = assets.UI['healthFull']
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
+		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount }) => {
+			const sprite = entity.getComponent(SpriteComponent)
+			const health = entity.getComponent(HealthComponent)
+			health.updateHealth(-amount)
+			if (sprite && amount > 0) {
+				new Coroutine(function* () {
+					health.canTakeDamage = false
+					sprite.addShader(new ColorShader(1, 0, 0, 1))
+					yield* waitFor(30)
+					if (sprite) {
+						sprite.removeShader(ColorShader)
+					}
+					health.canTakeDamage = true
+					return
+				})
+			}
+			if (sprite && amount < 0) {
+				ParticleEntity(entity, assets.magic.healing, { duration: 3, color: [0.9, 1, 0, 1] })
+			}
+		}))
 	}
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
@@ -52,7 +70,7 @@ class HealthSystem extends System {
 
 						// ! Take damage
 						const damageAmount = damage.calculateDamage(health.defense.value)
-						health.updateHealth(-damageAmount)
+
 						if (damage.sound) {
 							soundManager.play('effect', damage.sound, { fade: true })
 						}
@@ -68,38 +86,12 @@ class HealthSystem extends System {
 
 
 						// ! Damage number display
-						const damageText = new Entity('damageText')
-						ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, damageText)
-						const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
-						damageText.addComponent(new SpriteComponent(Tile.empty()))
-						damageText.addComponent(new ExpirationComponent(120))
-						const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damage?.crit ? 0xff0000 : 0xffffff, outlineWidth: 0.5, }))
-						new Coroutine(function* (counter) {
-							counter++
-							textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
-							textSprite.mesh.fillOpacity = easeOutExpo(counter, 2, 0, 120)
-							textSprite.mesh.outlineOpacity = easeOutExpo(counter, 2, 0, 120)
-							yield
-
-						}, 120)
+						DamageTextEntity(position, damageAmount, damage.crit)
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
-						if (sprite && damage.amount.value > 0) {
-							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, entity)
-							new Coroutine(function* () {
-								health.canTakeDamage = false
-								sprite.addShader(new ColorShader(1, 0, 0, 1))
-								yield* waitFor(30)
-								if (sprite) {
-									sprite.removeShader(ColorShader)
-								}
-								health.canTakeDamage = true
-								return
-							})
-						}
-						if (sprite && damage.amount.value < 0) {
-							ParticleEntity(entity, assets.magic.healing, { duration: 3, color: [0.9, 1, 0, 1] })
-						}
+						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: damageAmount })
+
+
 
 
 
