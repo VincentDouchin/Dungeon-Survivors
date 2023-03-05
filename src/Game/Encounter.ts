@@ -1,4 +1,5 @@
 import { ECS, Entity } from "../Globals/ECS";
+import StatsComponent, { STATS } from "../Components/StatsComponent";
 
 import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
@@ -13,7 +14,6 @@ import OutlineShader from "../Shaders/OutlineShader";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
-import StatsComponent from "../Components/StatsComponent";
 import assets from "../Globals/Assets";
 import { camera } from "../Globals/Initialize";
 import waitFor from "../Utils/WaitFor";
@@ -22,10 +22,10 @@ class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats: StatsComponent
+	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
 	started = false
 	subscriber: () => void
-	// levelSubscriber: () => void
+	levelSubscriber: () => void
 	addEnemySuscriber: () => void
 	coroutine?: Coroutine
 	constructor() {
@@ -37,7 +37,10 @@ class Encounter {
 		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
 			this.enemies.push(entity.id)
 		})
-		this.stats = new StatsComponent(State.timer % 120)
+		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.ENENMY_LEVEL_UP, () => {
+			this.stats.level = Math.floor(State.timer / 120)
+		})
+
 
 	}
 	setBoundary(x: number, y: number) {
@@ -74,7 +77,7 @@ class Encounter {
 
 		}
 	}
-	spawnEnemy(enemyType: EnemyType, x: number, y: number) {
+	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		return ParticleEntity({ x, y }, assets.effects.Smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
 			this.enemies.push(enemy.id)
@@ -152,7 +155,7 @@ class Encounter {
 		this.waves.push(function* () {
 			yield
 			self.subscriber()
-			// self.levelSubscriber()
+			self.levelSubscriber()
 			self.addEnemySuscriber()
 			yield* waitFor(60)
 			Engine.setState(GameStates.map)
