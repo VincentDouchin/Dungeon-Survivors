@@ -32,7 +32,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	enemy.addComponent(new AnimationComponent(type.tiles))
 	enemy.addComponent(new DamageComponent((type.damage), [COLLISIONGROUPS.PLAYER], -1, 20))
 	enemy.addComponent(new HealthComponent(type.health * (berserk ? 1.5 : 1), COLLISIONGROUPS.ENEMY))
-	const drops = new Array(type.xp ?? 1).fill(XPEntity)
+	const drops = [XPEntity(type.xp ?? 1)]
 	if (Math.random() < 0.01) {
 		drops.push(PotionEntity)
 	}

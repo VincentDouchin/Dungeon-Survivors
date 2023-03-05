@@ -8,8 +8,9 @@ export const SOUNDS = {
 	Validate: 'Validate',
 	PowerUp: 'PowerUp1',
 	XP: '68_ATB_4',
-	Fireball: ['01_Fire_explosion_01_small', '02_Fire_explosion_02_small'],
-	PLAYER_DAMAGE: ['14_Impact_flesh_01', '15_Impact_flesh_02', '16_Impact_flesh_03', '17_Impact_flesh_04', '18_Impact_flesh_05'],
+	LEVEL_UP: '75_Lvl_up_03',
+	Fireball: ['08_Fireball_02', '09_Fireball_03'],
+	PLAYER_DAMAGE: '77_flesh_02',
 	BOOST: 'Fx',
 	THUNDER: '17_Thunder_01',
 	GAME_OVER: 'GameOver2'
