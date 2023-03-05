@@ -56,9 +56,6 @@ class RunState implements GameState {
 
 
 	update() {
-		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
-			Engine.setState(GameStates.pause)
-		}
 		world.step()
 		ECS.updateSystems()
 	}
