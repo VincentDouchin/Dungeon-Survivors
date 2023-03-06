@@ -15,6 +15,7 @@ import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
+import HealthComponent from "../Components/HealthComponent"
 import HealthSystem from "../Systems/HealthSystem"
 import LightingSystem from "../Systems/LightingSystem"
 import { MUSICS } from "../Constants/Sounds"
@@ -96,6 +97,9 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
+					Engine.setState(GameStates.levelUp)
+				}))
 				// !MUSIC
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 
@@ -109,9 +113,11 @@ class RunState implements GameState {
 					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
 						if (this.players.has(entity)) {
 							stat.level = level
+
 						}
 						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
 					}))
+
 					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
 						if (this.players.has(entity)) {
 							stat.xp = amount
@@ -131,11 +137,13 @@ class RunState implements GameState {
 					}
 				}))
 				this.players.forEach(player => {
-					ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
+					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
 						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
 							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
+							const h = player.getComponent(HealthComponent)
+							console.log(h.health, h.maxHealth.value)
 						}
-					})
+					}))
 				})
 				// !Encounter
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()

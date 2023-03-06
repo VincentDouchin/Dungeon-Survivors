@@ -1,6 +1,4 @@
 import { Component } from "../Globals/ECS";
-import Engine from "../Globals/Engine";
-import { GameStates } from "../Constants/GameStates";
 
 export enum STATS {
 	ATTACK_SPEED = 'ATTACK_SPEED',
@@ -57,8 +55,8 @@ class StatsComponent extends Component {
 				this.nextLevel = Math.ceil(10 * (1 + Math.log(this.level + 2) * 5))
 				this.level++
 			}
-			Engine.setState(GameStates.levelUp)
 		}
+		return this.level
 	}
 
 }
