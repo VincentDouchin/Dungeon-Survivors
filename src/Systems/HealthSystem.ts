@@ -26,7 +26,6 @@ class HealthSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			const health = entity.getComponent(HealthComponent)
 			health.updateHealth(-amount)
-			console.log(entity.name, amount)
 			if (sprite && amount > 0) {
 				new Coroutine(function* () {
 					health.canTakeDamage = false
@@ -91,11 +90,6 @@ class HealthSystem extends System {
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: damageAmount })
-
-
-
-
-
 					}
 				})
 			}
@@ -116,8 +110,6 @@ class HealthSystem extends System {
 						}
 					}
 				})
-
-
 				sprite.addShader(new DissolveShader(120))
 				entity.destroy()
 
