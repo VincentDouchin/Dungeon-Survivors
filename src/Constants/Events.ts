@@ -26,6 +26,7 @@ export enum ECSEVENTS {
 	ADD_TO_ENCOUNTER = 'ADD_TO_ENCOUNTER',
 	MANA_AMOUNT = 'MANA_AMOUNT',
 	TAKE_DAMAGE = 'TAKE_DAMAGE',
+	TIMER = 'TIMER'
 }
 export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
@@ -44,6 +45,7 @@ export type EventMap = {
 	[ECSEVENTS.SPELL_ICON]: Tile
 	[ECSEVENTS.SKILL_ICON]: Tile
 	[ECSEVENTS.ADD_TO_ENCOUNTER]: Entity
+	[ECSEVENTS.TIMER]: number
 	[UIEVENTS.UI_XP]: number
 	[UIEVENTS.UI_LEVEL]: number
 }

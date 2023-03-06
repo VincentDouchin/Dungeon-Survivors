@@ -44,6 +44,7 @@ class RunState implements GameState {
 	background?: Entity
 	players: Set<Entity> = new Set()
 	mana = new ManaComponent()
+	timer?: Coroutine
 	encounter: Encounter | null = null
 	tutorialShown = false
 	music: HTMLAudioElement | null = null
@@ -89,6 +90,11 @@ class RunState implements GameState {
 		MinionSpawnerSytem.register()
 		this.ui = UIRunEntity()
 		this.encounter?.resume()
+		this.timer = new Coroutine(function* () {
+			yield* waitFor(60)
+			State.timer++
+			ECS.eventBus.publish(ECSEVENTS.TIMER, State.timer)
+		}, Infinity)
 		switch (oldState) {
 			case GameStates.pause: {
 				this.encounter?.resume()
@@ -183,6 +189,7 @@ class RunState implements GameState {
 		this.ui?.destroy()
 		this.music?.pause()
 		this.encounter?.pause()
+		this.timer?.stop()
 		switch (newState) {
 			case GameStates.levelUp: {
 				this.encounter?.pause()

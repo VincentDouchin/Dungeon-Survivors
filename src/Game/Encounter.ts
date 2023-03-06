@@ -22,7 +22,7 @@ class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.2).set(STATS.DAMAGE, 0.2)
+	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
 	started = false
 	subscriber: () => void
 	levelSubscriber: () => void
@@ -37,8 +37,8 @@ class Encounter {
 		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
 			this.enemies.push(entity.id)
 		})
-		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.ENENMY_LEVEL_UP, () => {
-			this.stats.level = Math.floor(State.timer / 120)
+		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
+			this.stats.level = Math.floor(State.timer / 60)
 		})
 
 
