@@ -1,20 +1,20 @@
 import HEROS, { HeroDefinition } from './../Constants/Heros'
 
+import { BACKGROUND } from './../Constants/BackGrounds'
 import Coroutine from "./Coroutine"
 import { GameStates } from "../Constants/GameStates"
-import { backgroundName } from './../Constants/BackGrounds'
 import { enemyWaveName } from './../Constants/EnemyEncounters'
 
 export const DEBUG: {
 	ENCOUNTER: boolean
 	DEFAULT_ENEMIES: enemyWaveName
-	DEFAULT_BACKGROUND: backgroundName
+	DEFAULT_BACKGROUND: BACKGROUND
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
 	DEFAULT_STATE: GameStates
 } = {
 	ENCOUNTER: true && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
-	DEFAULT_BACKGROUND: 'FOREST',
+	DEFAULT_BACKGROUND: 'TOWN',
 	DEFAULT_HEROS: [HEROS[0], HEROS[1]],
 	get DEFAULT_STATE() {
 		return this.ENCOUNTER ? GameStates.run : GameStates.map

@@ -1,6 +1,6 @@
 import { Component, Entity } from "../Globals/ECS";
 
-import { backgroundName } from "../Constants/BackGrounds";
+import { BACKGROUND } from "../Constants/BackGrounds";
 import { enemyWaveName } from "../Constants/EnemyEncounters";
 
 export interface node {
@@ -13,14 +13,14 @@ export interface node {
 	start: boolean
 	end?: boolean
 	encounter: boolean
-	BACKGROUND: backgroundName
+	BACKGROUND: BACKGROUND
 	ENEMIES: enemyWaveName
 	flag: boolean
 }
 class PathNodeComponent extends Component {
 	nodes: Map<number, Entity>
 	encounter: boolean
-	background: backgroundName
+	background: BACKGROUND
 	enemies: enemyWaveName
 	showingOptions = false
 	options: node
