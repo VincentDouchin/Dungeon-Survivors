@@ -22,7 +22,7 @@ class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
+	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.2).set(STATS.DAMAGE, 0.2)
 	started = false
 	subscriber: () => void
 	levelSubscriber: () => void
