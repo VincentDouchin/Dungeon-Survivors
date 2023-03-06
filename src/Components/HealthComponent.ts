@@ -27,7 +27,9 @@ class HealthComponent extends Component {
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth.value))
 
 		if (this.healthBarId) {
-			ECS.getEntityById(this.healthBarId).getComponent(SpriteComponent).uniforms.percent = this.health / this.maxHealth.value
+			const healthSprite = ECS.getEntityById(this.healthBarId).getComponent(SpriteComponent)
+			healthSprite.uniforms.percent = this.health / this.maxHealth.value
+			healthSprite.render()
 		}
 	}
 
