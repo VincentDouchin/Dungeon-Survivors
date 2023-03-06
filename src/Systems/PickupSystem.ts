@@ -45,9 +45,13 @@ class PickupSystem extends System {
 				if (xp && stats) {
 					soundManager.play('effect', SOUNDS.XP, { playbackRate: 2, volume: 0.5 })
 					otherEntity.destroy()
-					stats?.updateXP(xp.amount)
+					const initialLevel = stats.level
+					const newLevel = stats.updateXP(xp.amount)
+					if (initialLevel !== newLevel) {
+						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: -5 })
+						ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity })
+					}
 					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity, max: stats.nextLevel })
-					ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity })
 				}
 				if (token) {
 					otherEntity.destroy()
