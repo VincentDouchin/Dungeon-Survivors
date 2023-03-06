@@ -9,6 +9,7 @@ class Tile {
 	frames: number
 	texture: CanvasTexture
 	textures: CanvasTexture[] = []
+	buffers: CanvasRenderingContext2D[] = []
 	constructor({ buffer, width, height, frames = 1, padding = false }: tileOptions) {
 		this.buffer = buffer
 		this.texture = new CanvasTexture(buffer.canvas)
@@ -30,12 +31,12 @@ class Tile {
 			const texture = new CanvasTexture(frameBuffer.canvas)
 			texture.minFilter = NearestFilter
 			texture.magFilter = NearestFilter
-
+			this.buffers.push(frameBuffer)
 			this.textures.push(texture)
 
 		}
 	}
-	static fromImage(image: HTMLImageElement, fn = (tileOptions: tileOptions) => tileOptions) {
+	static fromImage(image: HTMLImageElement, fn = (tileOptions: tileOptions) => tileOptions): Tile {
 		const buffer = getBuffer(image.width, image.height)
 		buffer.drawImage(image, 0, 0)
 		return new Tile(fn({ buffer }))
