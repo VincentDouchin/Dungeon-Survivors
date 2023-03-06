@@ -9,6 +9,8 @@ import arenasSource from './../../assets/map/Arenas.json'
 import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
 import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
 import flagSource from './../../assets/map/flag.png'
+import grassParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Grass.png'
+import hayParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Hay.png'
 import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
@@ -19,6 +21,8 @@ import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
 import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
 import rainDropSource from './../../assets/NinjaAdventure/FX/Particle/Rain.png'
 import rainFloorSource from './../../assets/NinjaAdventure/FX/Particle/RainOnFloor.png'
+import rockBlueParticlesSource from './../../assets/NinjaAdventure/FX/Particle/RockBlue.png'
+import rockParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Rock.png'
 import smokeCircularSource from './../../assets/NinjaAdventure/FX/Smoke/SmokeCircular/SpriteSheet.png'
 import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
 import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
@@ -33,6 +37,8 @@ import tilesetHoleSource from './../../assets/NinjaAdventure/Backgrounds/Tileset
 import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
 import tilesetNatureSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.png'
 import titleSource from './../../assets/title.png'
+import vaseParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Vase.png'
+import woodParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Wood.png'
 
 //! Assets
 const assets: {
@@ -82,6 +88,12 @@ const assets: {
 		rainDrop: Tile.fromImage(await AssetLoader.loadImage(rainDropSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
 		rainFloor: Tile.fromImage(await AssetLoader.loadImage(rainFloorSource), ({ buffer }) => ({ buffer, width: 8, frames: 3 })),
 		iceSpike: Tile.fromImage(await AssetLoader.loadImage(iceSpikeSource), ({ buffer }) => ({ buffer, width: 10, frames: 8 })),
+		rockParticle: Tile.fromImage(await AssetLoader.loadImage(rockParticlesSource), ({ buffer }) => ({ buffer, width: 16, frames: 5 })),
+		rockBlueParticle: Tile.fromImage(await AssetLoader.loadImage(rockBlueParticlesSource), ({ buffer }) => ({ buffer, width: 16, frames: 5 })),
+		grassParticle: Tile.fromImage(await AssetLoader.loadImage(grassParticlesSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
+		hayParticle: Tile.fromImage(await AssetLoader.loadImage(hayParticlesSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
+		vaseParticle: Tile.fromImage(await AssetLoader.loadImage(vaseParticlesSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
+		woodParticle: Tile.fromImage(await AssetLoader.loadImage(woodParticlesSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
 
 
 	},
