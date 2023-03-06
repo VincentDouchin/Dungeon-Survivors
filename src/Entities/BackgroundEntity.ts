@@ -1,10 +1,8 @@
 import { ECS, Entity } from "../Globals/ECS"
 
 import { AmbientLight } from "three"
-import { Background } from "../Constants/BackGrounds"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
+import { BackgroundOptions } from "../Constants/BackGrounds"
 import { ECSEVENTS } from "../Constants/Events"
 import LDTKMap from "../Utils/LDTKMap"
 import { LayerInstance } from "../../ldtk"
@@ -14,7 +12,7 @@ import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import assets from "../Globals/Assets"
 
-const BackgroundEntity = (backgroundDefinition: Background) => {
+const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	const background = new Entity('background')
 	const position = background.addComponent(new PositionComponent(0, 0))
 	const tile = LDTKMap.tiles[backgroundDefinition.level]
@@ -43,13 +41,24 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 		top: backgroundDefinition.infinite.y ? undefined : height / 2,
 	}
 
-	if (backgroundDefinition?.obstacles?.length) {
-
+	if (backgroundDefinition?.obstacles?.length || backgroundDefinition.lootables.length) {
+		const walls = level
+			?.layerInstances
+			?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')
+			?.entityInstances
+			.map(wall => ({
+				width: wall.width,
+				height: wall.height,
+				x: wall.px[0] - level.pxWid / 2 + wall.width / 2,
+				y: level.pxHei / 2 - wall.px[1] - wall.height / 2
+			}))
 		background.addComponent(new BackgroundElementsComponent({
 			obstaclesDensity: backgroundDefinition?.obstaclesDensity,
 			obstacles: backgroundDefinition.obstacles,
 			effect: backgroundDefinition.effect,
-			effectDelay: backgroundDefinition.effectDelay
+			effectDelay: backgroundDefinition.effectDelay,
+			lootables: backgroundDefinition.lootables,
+			walls
 		}))
 	}
 
@@ -59,16 +68,16 @@ const BackgroundEntity = (backgroundDefinition: Background) => {
 	})
 
 	// ! WALLS
-	level?.layerInstances?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
-		const wallEntity = new Entity('wall')
-		wallEntity.addComponent(new BodyComponent(
-			{ type: 'fixed' },
-			[
-				{ width: wall.width, height: wall.height, contact: false, group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY] }]
-		))
-		wallEntity.addComponent(new PositionComponent(wall.px[0] - level.pxWid / 2 + wall.width / 2, level.pxHei / 2 - wall.px[1] - wall.height / 2))
-		background.addChildren(wallEntity)
-	})
+	// level?.layerInstances?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')?.entityInstances.forEach(wall => {
+	// 	const wallEntity = new Entity('wall')
+	// 	wallEntity.addComponent(new BodyComponent(
+	// 		{ type: 'fixed' },
+	// 		[
+	// 			{ width: wall.width, height: wall.height, contact: false, group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY] }]
+	// 	))
+	// 	wallEntity.addComponent(new PositionComponent(wall.px[0] - level.pxWid / 2 + wall.width / 2, level.pxHei / 2 - wall.px[1] - wall.height / 2))
+	// 	background.addChildren(wallEntity)
+	// })
 	if (backgroundDefinition.lightColor) {
 		background.addComponent(new LightComponent(backgroundDefinition.lightColor, 1, AmbientLight))
 	}
