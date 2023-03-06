@@ -20,7 +20,7 @@ const SkillMenuEntity = () => {
 	skillMenu.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 40, 15), { scale: 4 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPositionComponent({ x: 0, y: 2 }))
 
-	skillMenuPosition.moveTo(-2, 0, 30)
+	skillMenuPosition.moveTo(0, 30)
 	const possibleSkills = [...SKILLS]
 	const selectors: Entity[] = []
 	for (let i = 0; i < 3; i++) {
@@ -33,7 +33,7 @@ const SkillMenuEntity = () => {
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
 			ECS.eventBus.publish(ECSEVENTS.NEW_SKILL, skill)
 			State.skills.push(skill)
-			skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(GameStates.run))
+			skillMenuPosition.moveTo(-2, 30).then(() => Engine.setState(GameStates.run))
 		}))
 		selectors.push(selectableEntity)
 

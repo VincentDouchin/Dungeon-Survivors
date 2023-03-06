@@ -12,7 +12,9 @@ const formatTimer = () => `${Math.floor(State.timer / 60)}:${String(State.timer 
 const TimeCounterEntity = () => {
 	const timer = new Entity('timer')
 	timer.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 24, 0), { scale: 1.5 }))
-	timer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
+	const position = timer.addComponent(new UIPositionComponent({ x: 0, y: 2 }, { x: 0, y: 1 }))
+	position.moveTo(1, 30)
+
 	const timerText = timer.addComponent(new TextComponent(formatTimer(),))
 	const enemyLevel = new Entity('enemy level')
 	enemyLevel.addComponent(new SpriteComponent(assets.icons.skull, { scale: 2 }))

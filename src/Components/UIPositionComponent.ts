@@ -15,16 +15,14 @@ class UIPositionComponent extends Component {
 		this.center = center ?? { x: 0, y: 0 }
 
 	}
-	moveTo(startPosition: number, endPosition: number, delay: number) {
+	moveTo(endRelativePosition: number, delay: number) {
 		const self = this
+		const startRelativePosition = this.relativePosition.y
 		return new Promise<void>(resolve => {
 			new Coroutine(function* () {
-				let t = 0
-				while (self.relativePosition.y != endPosition) {
-					self.relativePosition.y = easeInOutQuad(t, startPosition, endPosition, delay)
-					t++
+				for (let t = 0; t < delay; t++) {
+					self.relativePosition.y = easeInOutQuad(t, startRelativePosition, endRelativePosition, delay)
 					yield
-
 				}
 				resolve()
 			})

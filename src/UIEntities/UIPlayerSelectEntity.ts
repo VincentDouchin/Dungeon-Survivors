@@ -23,7 +23,7 @@ const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
 
 	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: -1 }))
-	uiPosition.moveTo(-3, -1, 30)
+	uiPosition.moveTo(-1, 30)
 	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 100, 35), { scale: 3 }))
 	const description = new Entity('description')
 	description.addComponent(new SpriteComponent(Tile.empty()))
@@ -56,7 +56,7 @@ const UIPlayerSelectEntity = () => {
 	// ! Validate Button
 	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.length === 2) {
-			uiPosition.moveTo(-1, -3, 30).then(() => {
+			uiPosition.moveTo(-3, 30).then(() => {
 				Engine.setState(GameStates.map)
 			})
 		}

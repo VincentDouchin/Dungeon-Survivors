@@ -16,13 +16,13 @@ const UIPauseEntity = () => {
 	const pauseFrame = new Entity('pause frame')
 	pauseFrame.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 50, 55), { scale: 3 }))
 	const framePosition = pauseFrame.addComponent(new UIPositionComponent({ x: 0, y: -2 }, { x: 0, y: 0 }))
-	framePosition.moveTo(-2, 0, 30)
+	framePosition.moveTo(0, 30)
 	const resume = ButtonEntity(30, 8, 2, 'Resume', 1.5, () => {
 		inputManager.eventBus.publish(INPUTS.PAUSE, true)
 	})
 	const remuseSub = inputManager.eventBus.subscribe(INPUTS.PAUSE, async state => {
 		if (!state) return
-		await framePosition.moveTo(0, -2, 30)
+		await framePosition.moveTo(-2, 30)
 		inputManager.eventBus.publish(INPUTS.PAUSE, false)
 		Engine.setState(GameStates.run)
 	})

@@ -10,7 +10,9 @@ import assets from "../Globals/Assets"
 const ActiveSpellEntity = () => {
 	const level = new Entity('level display')
 	const tile = assets.UI.box.framed(3, 10, 10)
-	level.addComponent(new UIPositionComponent({ x: 1, y: 1 }, { x: 1, y: 1 }))
+	const position = level.addComponent(new UIPositionComponent({ x: 1, y: 2 }, { x: 1, y: 1 }))
+	position.moveTo(1, 30)
+
 	level.addComponent(new SpriteComponent(tile, { scale: 3, flipped: true }))
 	const icon = new Entity('skill icon')
 	icon.addComponent(new UIPositionComponent())
