@@ -14,9 +14,15 @@ const TimeCounterEntity = () => {
 	timer.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 24, 0), { scale: 1.5 }))
 	timer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
 	const timerText = timer.addComponent(new TextComponent(formatTimer(),))
+	const enemyLevel = new Entity('enemy level')
+	enemyLevel.addComponent(new SpriteComponent(assets.icons.skull, { scale: 2 }))
+	enemyLevel.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
+	const enemyLevelText = enemyLevel.addComponent(new TextComponent(String(Math.floor(State.timer / 60)), { outlineWidth: 1 }))
 	const timerSub = ECS.eventBus.subscribe(ECSEVENTS.TIMER, (_) => {
 		timerText.setText(formatTimer())
+		enemyLevelText.setText(String(Math.floor(State.timer / 60)))
 	})
+	timer.addChildren(enemyLevel)
 	timer.onDestroy(() => timerSub())
 	return timer
 }
