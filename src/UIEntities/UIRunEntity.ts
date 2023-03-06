@@ -1,5 +1,3 @@
-import { UICamera, inputManager } from "../Globals/Initialize"
-
 import ActiveSpellEntity from "./ActiveSpellEntity"
 import BoostsEntity from "./BoostsEntity"
 import ButtonEntity from "./ButtonEntity"
@@ -11,14 +9,13 @@ import INPUTS from "../Constants/InputsNames"
 import LevelDisplayEntity from "./LevelDisplayEntity"
 import ManaBarEntity from "./ManaBarEntity"
 import SpellButtonEntity from "./SpellButtonEntity"
-import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import SwitchButtonEntity from "./SwitchButtonEntity"
-import Tile from "../Utils/Tile"
 import TimeCounterEntity from "./TimeCounterEntity"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import XPBarEntity from "./XPBarEntity"
 import assets from "../Globals/Assets"
+import { inputManager } from "../Globals/Initialize"
 
 const UIRunEntity = () => {
 	const ui = new Entity('ui run')

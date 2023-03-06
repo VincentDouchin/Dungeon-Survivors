@@ -1,4 +1,4 @@
-import BACKGROUNDS, { backgroundName } from "../Constants/BackGrounds"
+import BACKGROUNDS, { BACKGROUND } from "../Constants/BackGrounds"
 import { ECS, Entity } from "../Globals/ECS"
 import { ECSEVENTS, UIEVENTS } from "../Constants/Events"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
@@ -16,7 +16,6 @@ import ExpirationSystem from "../Systems/ExpirationSystem"
 import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
 import HealthSystem from "../Systems/HealthSystem"
-import INPUTS from "../Constants/InputsNames"
 import LightingSystem from "../Systems/LightingSystem"
 import { MUSICS } from "../Constants/Sounds"
 import ManaComponent from "../Components/ManaComponent"
@@ -63,7 +62,7 @@ class RunState implements GameState {
 
 		render()
 	}
-	set(oldState: GameStates, options: { background?: backgroundName, enemies?: enemyWaveName }) {
+	set(oldState: GameStates, options: { background?: BACKGROUND, enemies?: enemyWaveName }) {
 
 		inputManager.enable('dpad')
 		inputManager.enable('pauseButton')
