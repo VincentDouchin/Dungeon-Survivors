@@ -8,6 +8,7 @@ import SKILLS from "../Constants/Skills"
 import SelectableComponent from "../Components/SelectableComponent"
 import ShimmerShader from "../Shaders/ShimmerShader"
 import SpriteComponent from "../Components/SpriteComponent"
+import State from "../Globals/State";
 import TextComponent from "../Components/TextComponent"
 import Tile from "../Utils/Tile"
 import UIPositionComponent from "../Components/UIPositionComponent"
@@ -31,6 +32,7 @@ const SkillMenuEntity = () => {
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
 			ECS.eventBus.publish(ECSEVENTS.NEW_SKILL, skill)
+			State.skills.push(skill)
 			skillMenuPosition.moveTo(0, -2, 30).then(() => Engine.setState(GameStates.run))
 		}))
 		selectors.push(selectableEntity)

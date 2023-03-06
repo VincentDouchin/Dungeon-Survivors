@@ -1,4 +1,5 @@
 import { HeroDefinition } from "../Constants/Heros"
+import { Skill } from "../Constants/Skills"
 
 interface State {
 	cameraBounds: {
@@ -11,6 +12,7 @@ interface State {
 	mobile: boolean,
 	heros: HeroDefinition[],
 	selectedTiles: number[],
+	skills: Skill[]
 }
 const blanckState: State = {
 	cameraBounds: {
@@ -23,6 +25,7 @@ const blanckState: State = {
 	selectedTiles: [],
 	timer: 0,
 	mobile: !!navigator.userAgentData?.mobile,
+	skills: []
 
 }
 let State: State = structuredClone(blanckState)
