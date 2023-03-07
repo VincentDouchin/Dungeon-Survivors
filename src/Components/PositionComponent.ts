@@ -15,6 +15,9 @@ class PositionComponent extends Component {
 	distanceTo(position: PositionComponent) {
 		return this.position.distanceTo(position.position)
 	}
+	clone() {
+		return new PositionComponent(this.x, this.y)
+	}
 }
 PositionComponent.register()
 export default PositionComponent
