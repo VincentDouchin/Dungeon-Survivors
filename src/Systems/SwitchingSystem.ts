@@ -10,7 +10,6 @@ import PlayerControllerComponent from "../Components/PlayerControllerComponent";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import SwitchingComponent from "../Components/SwitchingComponent";
-import TargeterComponent from "../Components/TargeterComponent";
 import { inputManager } from "../Globals/Initialize";
 
 class SwitchingSystem extends System {
@@ -28,7 +27,6 @@ class SwitchingSystem extends System {
 		})
 		if (this.setFollower) {
 			this.setFollower.getComponent(AIMovementComponent).follower = entities.find(other => other !== this.setFollower && other.getComponent(SwitchingComponent).main)
-			console.log(this.setFollower.getComponent(AIMovementComponent).follower)
 			this.setFollower = null
 		}
 
@@ -45,12 +43,11 @@ class SwitchingSystem extends System {
 				if (switcher.main) {
 					ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 					entity.addComponent(new PlayerControllerComponent())
-					entity.removeComponent(TargeterComponent)
 					entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))
 					entity.addComponent(new CameraTargetComponent())
 					entity.removeComponent(AIMovementComponent)
 				} else {
-					entity.addComponent(new AIMovementComponent({ seeking: COLLISIONGROUPS.ENEMY, seekingDistance: 50, followingDistance: 70 }))
+					entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: 50, followingDistance: 70 }))
 					this.setFollower = entity
 					entity.getComponent(SpriteComponent).removeShader(OutlineShader)
 					entity.removeComponent(CameraTargetComponent)

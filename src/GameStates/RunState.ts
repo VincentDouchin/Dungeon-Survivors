@@ -12,6 +12,7 @@ import BackgroundEntity from "../Entities/BackgroundEntity"
 import BodyCreationSystem from "../Systems/BodyCreationSystem"
 import CameraSystem from "../Systems/CameraSystem"
 import Coroutine from "../Globals/Coroutine"
+import DroppingSystem from "../Systems/DroppingSystem"
 import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import { GameStates } from "../Constants/GameStates"
@@ -33,7 +34,6 @@ import State from "../Globals/State"
 import StatsComponent from "../Components/StatsComponent"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import SwitchingSystem from "../Systems/SwitchingSystem"
-import TargetingSystem from "../Systems/TargetingSystem"
 import TutorialEntity from "../UIEntities/TutorialEntity"
 import UIRunEntity from "../UIEntities/UIRunEntity"
 import waitFor from "../Utils/WaitFor"
@@ -76,11 +76,9 @@ class RunState implements GameState {
 		PickupSystem.register()
 		LightingSystem.register()
 		ShootingSystem.register()
-		TargetingSystem.register()
 		CameraSystem.register()
 		RenderSystem.register()
 		SwitchingSystem.register()
-		// FlockingSystem.register()
 		AIMovementSystem.register()
 		StatUpdateSystem.register()
 		SpellSystem.register()
@@ -88,6 +86,7 @@ class RunState implements GameState {
 		ExpirationSystem.register()
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
+		DroppingSystem.register()
 		this.ui = UIRunEntity()
 		this.encounter?.resume()
 		this.timer = new Coroutine(function* () {

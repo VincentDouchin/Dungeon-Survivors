@@ -1,3 +1,4 @@
+import AIMovementComponent from "../Components/AIMovementComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
@@ -8,7 +9,6 @@ import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
-import TargeterComponent from "../Components/TargeterComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 
@@ -21,7 +21,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?
 	for (let behavior of weaponDefinition.behaviors) {
 		const component = {
 			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentSprite?.height) / 2, parent),
-			[WEAPONBEHAVIORS.targeter]: new TargeterComponent(weaponDefinition.target),
+			[WEAPONBEHAVIORS.targeter]: new AIMovementComponent({ seeking: weaponDefinition.target }),
 			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
 			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, weaponDefinition.target, -1, 5, weaponDefinition.sound)
 		}[behavior]

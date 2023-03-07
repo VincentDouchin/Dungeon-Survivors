@@ -36,7 +36,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	if (Math.random() < 0.01) {
 		drops.push(PotionEntity)
 	}
-	if (Math.random() < 0.15) {
+	if (Math.random() < 0.10) {
 		drops.push(ManaDropEntity)
 	}
 	if (Math.random() < 0.02) {
@@ -45,8 +45,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	}
 	enemy.addComponent(new DroppableComponent(drops))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
-	// enemy.addComponent(new TargeterComponent(COLLISIONGROUPS.PLAYER, type.charger ? 100 : 0, type.charger))
-	enemy.addComponent(new AIMovementComponent({ seeking: COLLISIONGROUPS.PLAYER, seekingDistance: 0 }))
+	enemy.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.PLAYER], seekingDistance: 0, charger: type.charger }))
 	enemy.addComponent(new ShadowComponent(type.size.width * scale, 6, tile.height * scale / 2))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.3 : 1) },
