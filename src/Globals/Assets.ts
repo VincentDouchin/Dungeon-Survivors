@@ -1,44 +1,46 @@
-import LDTKMap from "../Utils/LDTKMap"
-import Tile from "../Utils/Tile"
-import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
+import AssetLoader from "./../Utils/AssetLoader"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
+import LDTKMap from "../Utils/LDTKMap"
+import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
+import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
+import Tile from "../Utils/Tile"
+import arenasSource from './../../assets/map/Arenas.json'
+import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
+import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
+import flagSource from './../../assets/map/flag.png'
+import grassParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Grass.png'
+import hayParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Hay.png'
+import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
 import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import inputsData from './../../assets/inputs/tilemap_white_packed.json'
 import inputsSource from './../../assets/inputs/tilemap_white_packed.png'
-import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
-import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
-import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
-import arenasSource from './../../assets/map/Arenas.json'
-import flagSource from './../../assets/map/flag.png'
 import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
+import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
+import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
+import rainDropSource from './../../assets/NinjaAdventure/FX/Particle/Rain.png'
+import rainFloorSource from './../../assets/NinjaAdventure/FX/Particle/RainOnFloor.png'
+import rockBlueParticlesSource from './../../assets/NinjaAdventure/FX/Particle/RockBlue.png'
+import rockParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Rock.png'
+import smokeCircularSource from './../../assets/NinjaAdventure/FX/Smoke/SmokeCircular/SpriteSheet.png'
+import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
+import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
+import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
+import tilesSource from './../../assets/0x72_DungeonTilesetII_v1.4.png'
 import tilesetElementData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.json'
 import tilesetElementSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.png'
 import tilesetFloorDetailData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetFloorDetail.json'
 import tilesetFloorDetailSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetFloorDetail.png'
 import tilesetHoleData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.json'
 import tilesetHoleSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHole.png'
+import tilesetHouseData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHouse.json'
+import tilesetHouseSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetHouse.png'
 import tilesetNatureData from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.json'
 import tilesetNatureSource from './../../assets/NinjaAdventure/Backgrounds/Tilesets/TilesetNature.png'
-import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
-import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
-import grassParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Grass.png'
-import hayParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Hay.png'
-import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
-import rainDropSource from './../../assets/NinjaAdventure/FX/Particle/Rain.png'
-import rainFloorSource from './../../assets/NinjaAdventure/FX/Particle/RainOnFloor.png'
-import rockParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Rock.png'
-import rockBlueParticlesSource from './../../assets/NinjaAdventure/FX/Particle/RockBlue.png'
-import sparkSource from './../../assets/NinjaAdventure/FX/Particle/Spark.png'
+import titleSource from './../../assets/title.png'
 import vaseParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Vase.png'
 import woodParticlesSource from './../../assets/NinjaAdventure/FX/Particle/Wood.png'
-import iceSpikeSource from './../../assets/NinjaAdventure/FX/Projectile/IceSpike-sheet.png'
-import smokeSource from './../../assets/NinjaAdventure/FX/Smoke/Smoke/SpriteSheet.png'
-import smokeCircularSource from './../../assets/NinjaAdventure/FX/Smoke/SmokeCircular/SpriteSheet.png'
-import tilesList from './../../assets/tiles_list_v1.4.txt?raw'
-import titleSource from './../../assets/title.png'
-import AssetLoader from "./../Utils/AssetLoader"
 
 //! Assets
 const assets: {
@@ -51,6 +53,7 @@ const assets: {
 	npc: Record<npcTileName, Tile>
 	nature: Record<string, Tile>
 	elements: Record<string, Tile>
+	house: Record<string, Tile>
 	effects: Record<string, Tile>
 	hole: Record<string, Tile>
 	details: Record<string, Tile>
@@ -79,6 +82,7 @@ const assets: {
 	arenas: await LDTKMap.load(arenasSource),
 	nature: await AssetLoader.loadFromSlices(tilesetNatureData, tilesetNatureSource),
 	elements: await AssetLoader.loadFromSlices(tilesetElementData, tilesetElementSource),
+	house: await AssetLoader.loadFromSlices(tilesetHouseData, tilesetHouseSource),
 	effects: {
 		Leaf: Tile.fromImage(await AssetLoader.loadImage(leafSource), ({ buffer }) => ({ buffer, width: 12, frames: 6 })),
 		Spark: Tile.fromImage(await AssetLoader.loadImage(sparkSource), ({ buffer }) => ({ buffer, width: 10, frames: 7 })),
