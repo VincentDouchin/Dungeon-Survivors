@@ -41,8 +41,8 @@ const UIRunEntity = () => {
 	const remuseSub = inputManager.eventBus.subscribe(INPUTS.PAUSE, async state => {
 		if (!state) return
 		await Promise.all([
-			...[level, activeSpell, timer].map(entity => entity.getComponent(UIPositionComponent).moveTo(2, 30)),
-			...mobileEntities.map(entity => entity.getComponent(UIPositionComponent).moveTo(-2, 30))
+			...[level, activeSpell, timer].map(entity => entity.getComponent(UIPositionComponent).moveTo(2, 10)),
+			...mobileEntities.map(entity => entity.getComponent(UIPositionComponent).moveTo(-2, 10))
 		])
 		inputManager.eventBus.publish(INPUTS.PAUSE, false)
 		Engine.setState(GameStates.pause)

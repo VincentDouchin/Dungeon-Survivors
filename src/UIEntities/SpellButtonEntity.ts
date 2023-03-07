@@ -14,7 +14,7 @@ const SpellButtonEntity = () => {
 	const button = new Entity('active skill button')
 	const sprite = button.addComponent(new SpriteComponent(assets.UI.button, { scale: 4 }))
 	const position = button.addComponent(new UIPositionComponent({ x: (window.innerWidth - 150) / window.innerWidth, y: -2 }))
-	position.moveTo((-window.innerHeight + 150) / window.innerHeight, 30)
+	position.moveTo((-window.innerHeight + 150) / window.innerHeight, 20)
 	const icon = new Entity('active skill icon')
 	const iconSprite = icon.addComponent(new SpriteComponent(assets.icons.attack, { scale: 2.5 }))
 

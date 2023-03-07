@@ -11,7 +11,7 @@ const ActiveSpellEntity = () => {
 	const level = new Entity('level display')
 	const tile = assets.UI.box.framed(3, 10, 10)
 	const position = level.addComponent(new UIPositionComponent({ x: 1, y: 2 }, { x: 1, y: 1 }))
-	position.moveTo(1, 30)
+	position.moveTo(1, 20)
 
 	level.addComponent(new SpriteComponent(tile, { scale: 3, flipped: true }))
 	const icon = new Entity('skill icon')

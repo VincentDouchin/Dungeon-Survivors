@@ -9,7 +9,7 @@ const DpadInputEntity = () => {
 	const dpad = new Entity('dpad')
 	const dpadMesh = dpad.addComponent(new SpriteComponent(assets.UI.touchdpad, { scale: 2 }))
 	const position = dpad.addComponent(new UIPositionComponent({ x: -0.9, y: -2 }, { x: -1, y: 0.5 }))
-	position.moveTo(0, 30)
+	position.moveTo(0, 20)
 	const center = new Entity('dpadCenter')
 	center.addComponent(new SpriteComponent(assets.UI.touchdpadcenter, { scale: 2 }))
 	const centerPosition = center.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
