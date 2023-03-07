@@ -1,16 +1,16 @@
 import { EventMap } from "../Constants/Events"
 
-type EventName = keyof EventMap
+export type EventName = keyof EventMap
 
 
-interface Event<Name extends EventName> {
+export interface Event<Name extends EventName> {
 	type: Name
 	data: EventMap[Name]
 }
 
-type EventCallback<Name extends EventName> = (event: Event<Name>['data']) => void
+export type EventCallback<Name extends EventName> = (event: Event<Name>['data']) => void
 
-type Subscribers = {
+export type Subscribers = {
 	[Name in EventName]?: EventCallback<Name>[]
 }
 class EventBus {
