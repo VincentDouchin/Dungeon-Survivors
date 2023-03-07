@@ -110,7 +110,7 @@ class HealthSystem extends System {
 						}
 					}
 				})
-				sprite.addShader(new DissolveShader(120))
+				sprite.addShader(new DissolveShader(120, false, 5))
 				entity.destroy()
 
 			}
