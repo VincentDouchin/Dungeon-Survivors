@@ -29,7 +29,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.goblin_idle_anim,
 			run: assets.tiles.goblin_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1,
@@ -89,7 +89,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.imp_idle_anim,
 			run: assets.tiles.imp_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -144,7 +144,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.tiny_zombie_idle_anim,
 			run: assets.tiles.tiny_zombie_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -254,7 +254,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.puppy_idle_anim,
 			run: assets.tiles.puppy_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -297,7 +297,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.bunny_idle_anim,
 			run: assets.tiles.bunny_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -327,7 +327,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.mushroom_small_idle_anim,
 			run: assets.tiles.mushroom_small_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -441,7 +441,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.leprechaun_idle_anim,
 			run: assets.tiles.leprechaun_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
@@ -592,7 +592,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.npc.Herald_Idle,
 			run: assets.npc.Herald_Walk,
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -704,7 +704,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.tiles.cleric_3_idle_anim,
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -731,7 +731,7 @@ const Enemies: Record<string, EnemyType> = {
 		tiles: {
 			idle: assets.npc["SkinnyNun_Idle + Walk"],
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
@@ -762,7 +762,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.tiles.angel_idle_anim,
 			run: assets.tiles.angel_run_anim
 		},
-		health: 10,
+		health: 11,
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
