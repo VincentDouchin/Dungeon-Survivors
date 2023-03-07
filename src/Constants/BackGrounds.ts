@@ -47,7 +47,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'CAVE',
 		obstacles: [assets.nature.rockbig, assets.nature.rocksmall2, assets.nature.rocksmall1],
 		lightColor: new Color('hsl(0,0%,100%)'),
-		obstaclesDensity: 0.4,
+		obstaclesDensity: 0.25,
 		lootables: [LOOTABLES.ROCK],
 		infinite: { x: true, y: true },
 	},
