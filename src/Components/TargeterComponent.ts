@@ -4,7 +4,7 @@ import { ECSEVENTS } from "../Constants/Events";
 import { Vector2 } from "three";
 
 class TargeterComponent extends Component {
-	target: number | null = null
+	target: number[] | null = null
 	targetedEnemy: string | null = null
 	charger: boolean
 	charging = false
@@ -12,7 +12,7 @@ class TargeterComponent extends Component {
 	distanceToTarget: number
 	unSubscriber: () => void
 	enabled = true
-	constructor(target: number | string, distanceToTarget: number = 0, charger: boolean = false) {
+	constructor(target: number[] | string, distanceToTarget: number = 0, charger: boolean = false) {
 		super()
 		this.distanceToTarget = distanceToTarget
 		this.charger = charger

@@ -21,9 +21,9 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 	lootable.addComponent(new BodyComponent(
 		{ type: 'fixed' },
 		[
-			{ width: tile.width, height: tile.height, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.WEAPON] }
+			{ width: tile.width, height: tile.height, contact: false, group: COLLISIONGROUPS.LOOT, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.WEAPON] }
 		]))
-	lootable.addComponent(new HealthComponent(30, COLLISIONGROUPS.ENEMY, false))
+	lootable.addComponent(new HealthComponent(30, COLLISIONGROUPS.LOOT, false))
 	lootable.addComponent(new DroppableComponent([
 		PotionEntity
 	]))

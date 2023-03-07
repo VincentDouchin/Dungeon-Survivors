@@ -1,7 +1,8 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
 
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent";
 import DroppableComponent from "../Components/DroppableComponent";
+import { ECSEVENTS } from "../Constants/Events";
 import LootableEntity from "../Entities/LootableEntity";
 import ObstableEntity from "../Entities/ObstacleEntity";
 import PositionComponent from "../Components/PositionComponent";
@@ -44,6 +45,7 @@ class BackgroundElementSpawnerSystem extends System {
 							const obstacleEntity = Math.abs(noise(newNoise, obstaclesDensity)) > 0.1 ? ObstableEntity(getRandom(obstacles)) : LootableEntity(getRandom(lootables))
 							const obstacle = obstacleEntity(chunkX * size, chunkY * size)
 							obstaclesEntities[`${chunkX}|${chunkY}`] = obstacle
+							ECS.eventBus.publish(ECSEVENTS.ADD_WALL, obstacle)
 							entity.addChildren(obstacle)
 						}
 					}

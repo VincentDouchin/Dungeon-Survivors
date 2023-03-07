@@ -15,7 +15,7 @@ export const DEBUG: {
 	ENCOUNTER: true && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'TOWN',
-	DEFAULT_HEROS: [HEROS[0], HEROS[1]],
+	DEFAULT_HEROS: [HEROS[2], HEROS[2]],
 	get DEFAULT_STATE() {
 		return this.ENCOUNTER ? GameStates.run : GameStates.map
 	}

@@ -5,6 +5,7 @@ import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
 import Engine, { DEBUG } from "../Globals/Engine"
 import { inputManager, render, soundManager, world } from "../Globals/Initialize"
 
+import AIMovementSystem from "../Systems/AIMovementSystem"
 import AnimationSystem from "../Systems/AnimationSystem"
 import BackgroundElementSpawnerSystem from "../Systems/BackgroundElementSpawnerSystem"
 import BackgroundEntity from "../Entities/BackgroundEntity"
@@ -13,9 +14,7 @@ import CameraSystem from "../Systems/CameraSystem"
 import Coroutine from "../Globals/Coroutine"
 import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
-import FlockingSystem from "../Systems/FlockingSystem"
 import { GameStates } from "../Constants/GameStates"
-import HealthComponent from "../Components/HealthComponent"
 import HealthSystem from "../Systems/HealthSystem"
 import LightingSystem from "../Systems/LightingSystem"
 import { MUSICS } from "../Constants/Sounds"
@@ -81,7 +80,8 @@ class RunState implements GameState {
 		CameraSystem.register()
 		RenderSystem.register()
 		SwitchingSystem.register()
-		FlockingSystem.register()
+		// FlockingSystem.register()
+		AIMovementSystem.register()
 		StatUpdateSystem.register()
 		SpellSystem.register()
 		BackgroundElementSpawnerSystem.register()
@@ -146,8 +146,6 @@ class RunState implements GameState {
 					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
 						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
 							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
-							const h = player.getComponent(HealthComponent)
-							console.log(h.health, h.maxHealth.value)
 						}
 					}))
 				})

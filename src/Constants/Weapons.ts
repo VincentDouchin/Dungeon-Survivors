@@ -16,7 +16,7 @@ export interface WeaponDefinition {
 	delay?: number
 	range?: number
 	group: number
-	target: number,
+	target: number[],
 	rotationSpeed?: number
 	light?: string,
 	scale?: number,
@@ -28,7 +28,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY,
+		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		sound: SOUNDS.SWORD
 	},
 	staff: {
@@ -40,28 +40,17 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		projectilesNb: 3,
 		speed: 300,
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY,
+		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		light: 'hsl(39, 30%, 20%)',
 		sound: SOUNDS.Fireball
 	},
-	staffGem: {
-		tile: assets.tiles.weapon_green_magic_staff,
-		damage: 15,
-		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.effects.FireProjectile,
-		speed: 300,
-		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY,
-		// sound: ALLSOUNDS.Fireball
 
-
-	},
 	bow: {
 		tile: assets.tiles.weapon_bow,
 		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		group: COLLISIONGROUPS.PLAYER,
-		target: COLLISIONGROUPS.ENEMY,
+		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		projectile: assets.tiles.weapon_arrow,
 		speed: 500,
 	},
@@ -71,7 +60,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.tiles.weapon_arrow,
 		group: COLLISIONGROUPS.ENEMY,
-		target: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 200,
 		speed: 100
@@ -82,7 +71,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.effects.FireProjectile,
 		group: COLLISIONGROUPS.ENEMY,
-		target: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 200,
 		speed: 300,
@@ -93,7 +82,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.details.bone,
 		group: COLLISIONGROUPS.ENEMY,
-		target: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 200,
 		rotationSpeed: 0.2,
@@ -105,7 +94,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.tiles.weapon_hammer_projectile,
 		group: COLLISIONGROUPS.ENEMY,
-		target: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 150,
 		rotationSpeed: 0.1,
@@ -117,7 +106,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.effects.iceSpike,
 		group: COLLISIONGROUPS.ENEMY,
-		target: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 150,
 		speed: 150,

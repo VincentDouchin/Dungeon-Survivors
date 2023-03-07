@@ -1,6 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 import StatsComponent, { STATS } from "../Components/StatsComponent"
 
+import AIMovementComponent from "../Components/AIMovementComponent"
 import AnimationComponent from "../Components/AnimationComponent"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
@@ -9,7 +10,6 @@ import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
 import { SOUNDS } from "../Constants/Sounds"
 import SpriteComponent from "../Components/SpriteComponent"
-import TargeterComponent from "../Components/TargeterComponent"
 import assets from "../Globals/Assets"
 import { soundManager } from "../Globals/Initialize"
 
@@ -28,7 +28,7 @@ const LightningSpellEntity = (entity: Entity) => {
 	enemies.sort(() => 0.5 - Math.random())
 	soundManager.play('effect', SOUNDS.THUNDER)
 	for (const enemy of enemies.slice(0, 10)) {
-		const targeter = enemy.getComponent(TargeterComponent)
+		const targeter = enemy.getComponent(AIMovementComponent)
 		const enemyPosition = enemy.getComponent(PositionComponent)
 		targeter.enabled = false
 		const lightning = new Entity('lightning')

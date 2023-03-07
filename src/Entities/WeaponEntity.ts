@@ -23,13 +23,13 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?
 			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentSprite?.height) / 2, parent),
 			[WEAPONBEHAVIORS.targeter]: new TargeterComponent(weaponDefinition.target),
 			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
-			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, [COLLISIONGROUPS.ENEMY], -1, 5, weaponDefinition.sound)
+			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, weaponDefinition.target, -1, 5, weaponDefinition.sound)
 		}[behavior]
 		weapon.addComponent(component)
 	}
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
-		[{ width: tile.width, height: tile.height, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY] }]
+		[{ width: tile.width, height: tile.height, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.target }]
 	))
 	weapon.addComponent(new SpriteComponent(tile))
 	const angVel = weaponDefinition.behaviors.includes(WEAPONBEHAVIORS.targeter) ? 0 : 1

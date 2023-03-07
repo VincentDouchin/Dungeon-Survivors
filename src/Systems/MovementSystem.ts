@@ -56,7 +56,7 @@ class MovementSystem extends System {
 					}
 				}
 				if (animation) {
-					if (body.velocity.x != 0) sprite.flipped = body.velocity.x < 0
+					if (Math.abs(body.velocity.x) > 0.1) sprite.flipped = body.velocity.x < 0
 					animation.setState(Math.abs(body.velocity.x + body.velocity.y) > 0.9 ? 'run' : 'idle')
 				}
 

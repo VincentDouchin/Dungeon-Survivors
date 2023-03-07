@@ -12,7 +12,7 @@ class ShooterComponent extends Component {
 	spread: number
 	range: number
 	projectilesNb: number
-	target: number
+	target: number[]
 	group: number
 	speed: number
 	damage: Stat
