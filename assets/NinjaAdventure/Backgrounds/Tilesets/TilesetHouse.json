@@ -1,0 +1,27 @@
+{ "frames": {
+   "TilesetHouse.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 528, "h": 368 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 528, "h": 368 },
+    "sourceSize": { "w": 528, "h": 368 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 528, "h": 368 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "portal", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 320, "w": 48, "h": 48 } }] },
+   { "name": "stairs", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 304, "w": 48, "h": 48 } }] }
+  ]
+ }
+}
