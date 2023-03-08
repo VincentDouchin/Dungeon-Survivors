@@ -20,9 +20,9 @@ class SwitchingSystem extends System {
 		super(SwitchingComponent)
 	}
 	update(entities: Entity[]) {
-		const toSwitch = inputManager.getInput(INPUTS.SWITCH)!.once
-		const canSwitch = entities.length > 1
-		const needsSwitch = !entities.some(entity => {
+		const toSwitch = inputManager.getInput(INPUTS.SWITCH)!.once && entities.length > 1
+
+		const needsSwitch = entities.every(entity => {
 			const switcher = entity.getComponent(SwitchingComponent)
 			return switcher.initiated && !switcher.main
 		})
@@ -30,35 +30,41 @@ class SwitchingSystem extends System {
 			this.setFollower.getComponent(AIMovementComponent).follower = entities.find(other => other !== this.setFollower && other.getComponent(SwitchingComponent).main)
 			this.setFollower = null
 		}
-
-		if (!canSwitch && !needsSwitch) return
 		entities.forEach(entity => {
 			const switcher = entity.getComponent(SwitchingComponent)
-			if (toSwitch || !switcher.initiated || (!canSwitch && needsSwitch)) {
-				if (!switcher.initiated) {
-					switcher.initiated = true
-				} else {
-					switcher.main = !switcher.main
-				}
-				const spell = entity.getComponent(SpellComponent)
-				const ranged = entity.getComponent(RangedComponent)
-				if (switcher.main) {
-					ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
-					entity.addComponent(new PlayerControllerComponent())
-					entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))
-					entity.addComponent(new CameraTargetComponent())
-					entity.removeComponent(AIMovementComponent)
-				} else {
-					entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: ranged ? 50 : 30, followingDistance: 70 }))
-					this.setFollower = entity
-					entity.getComponent(SpriteComponent).removeShader(OutlineShader)
-					entity.removeComponent(CameraTargetComponent)
-					entity.removeComponent(PlayerControllerComponent)
-				}
+			if (!switcher.initiated) {
+				this.addComponents(entity, switcher.main)
+				switcher.initiated = true
 			}
-
+			if (toSwitch) {
+				this.addComponents(entity, switcher.main)
+				switcher.main = !switcher.main
+			}
+			if (needsSwitch && !switcher.main) {
+				console.log('ok')
+				this.addComponents(entity, true)
+				switcher.main = true
+			}
 		})
 
+
+	}
+	addComponents(entity: Entity, main: boolean) {
+		if (main) {
+			const spell = entity.getComponent(SpellComponent)
+			ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
+			entity.addComponent(new PlayerControllerComponent())
+			entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))
+			entity.addComponent(new CameraTargetComponent())
+			entity.removeComponent(AIMovementComponent)
+		} else {
+			const ranged = entity.getComponent(RangedComponent)
+			entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: ranged ? 50 : 30, followingDistance: 70 }))
+			this.setFollower = entity
+			entity.getComponent(SpriteComponent).removeShader(OutlineShader)
+			entity.removeComponent(CameraTargetComponent)
+			entity.removeComponent(PlayerControllerComponent)
+		}
 	}
 }
 export default SwitchingSystem
