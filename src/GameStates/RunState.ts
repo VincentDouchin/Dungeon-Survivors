@@ -168,7 +168,7 @@ class RunState implements GameState {
 
 			}; break
 		}
-		this.music?.play()
+		soundManager.resume(this.music)
 
 		// !INITIALIZE UI
 		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
