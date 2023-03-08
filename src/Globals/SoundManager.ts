@@ -19,9 +19,17 @@ class SoundManager {
 		if (this.ctx.state === 'suspended') {
 			const listener = () => {
 				this.ctx.resume()
+				this.musics.forEach((_, element) => {
+					element.play()
+				})
 				renderer.domElement.removeEventListener('click', listener)
 			}
 			renderer.domElement.addEventListener('click', listener)
+		}
+	}
+	resume(element: HTMLAudioElement | null) {
+		if (this.ctx.state === 'running' && element) {
+			element.play()
 		}
 	}
 	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions,) {
@@ -62,6 +70,7 @@ class SoundManager {
 		return audioElement
 	}
 	updateVolume() {
+
 		const collections: [Map<HTMLAudioElement, number>, number][] = [
 			[this.musics, saveData.musicVolume],
 			[this.effects, saveData.effectsVolume]
@@ -71,6 +80,7 @@ class SoundManager {
 				audioElement.volume = elementVolume * volume
 			}
 		})
+
 	}
 
 }
