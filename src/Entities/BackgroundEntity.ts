@@ -53,7 +53,6 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 				y: level.pxHei / 2 - wall.px[1] - wall.height / 2
 			}))
 		background.addComponent(new BackgroundElementsComponent({
-			obstaclesDensity: backgroundDefinition?.obstaclesDensity,
 			obstacles: backgroundDefinition.obstacles,
 			effect: backgroundDefinition.effect,
 			effectDelay: backgroundDefinition.effectDelay,
