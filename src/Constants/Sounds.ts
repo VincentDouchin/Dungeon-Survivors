@@ -13,7 +13,8 @@ export const SOUNDS = {
 	PLAYER_DAMAGE: '77_flesh_02',
 	BOOST: 'Fx',
 	THUNDER: '17_Thunder_01',
-	GAME_OVER: 'GameOver2'
+	GAME_OVER: 'GameOver2',
+	UNLOCK: 'winsquare-6993',
 } as const
 export const MUSICS = {
 	Fight: '17 - Fight',
