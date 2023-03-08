@@ -17,6 +17,8 @@ export interface colliderOptions {
 	width: number
 	height: number
 	offset?: number
+	offsetX?: number
+	offsetY?: number
 	sensor?: boolean
 	mass?: number
 	group: number
@@ -49,7 +51,7 @@ class BodyComponent extends Component {
 				.setDensity(colliderOption.mass ?? 0.00000001)
 				.setSensor(colliderOption.sensor ?? false)
 				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
-				.setTranslation(0, colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0)
+				.setTranslation(colliderOption.offsetX ?? 0, (colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0) + (colliderOption.offsetY ?? 0))
 			if (colliderOption.contact) {
 				colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
 			}
@@ -64,7 +66,7 @@ class BodyComponent extends Component {
 					if (targets?.length && !targets.includes(Math.floor(otherCollider.collisionGroups() / 0x10000))) return
 					const entityId = otherCollider?.parent()?.userData as string
 					const entity = ECS.getEntityById(entityId)
-					fn(entity)
+					return fn(entity)
 				}
 				world.contactsWith(collider, touchCollider)
 				world.intersectionsWith(collider, touchCollider)
