@@ -28,6 +28,10 @@ class UIPositionComponent extends Component {
 			})
 		})
 	}
+	offsetX(length: number, index: number) {
+		this.center.x = (index - Math.floor(length / 2)) * 2 + (length % 2 === 0 ? 1 : 0)
+		return this
+	}
 	left() {
 		this.center.x = 1
 		this.center.y = 0
