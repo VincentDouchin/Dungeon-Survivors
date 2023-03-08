@@ -14,7 +14,6 @@ export interface BackgroundOptions {
 	lightColor?: Color
 	obstacles: Tile[]
 	lootables: LootableOptions[]
-	obstaclesDensity: number
 	boundaries?: {
 		x: number,
 		y: number
@@ -29,7 +28,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'DUNGEON',
 		lightColor: new Color('hsl(0,0%,6%)'),
 		obstacles: [assets.hole.hole],
-		obstaclesDensity: 0.25,
 		lootables: [LOOTABLES.POT],
 		infinite: { x: true, y: true }
 	},
@@ -37,7 +35,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'FOREST',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [...new Array(3).fill(assets.nature.tree1), assets.nature.stumpbig, assets.nature.stumpsmall1, assets.nature.trunksmall],
-		obstaclesDensity: 0.25,
 		lootables: [LOOTABLES.FLOWER],
 		infinite: { x: true, y: true },
 		effect: LeafEntity,
@@ -47,7 +44,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'CAVE',
 		obstacles: [assets.nature.rockbig, assets.nature.rocksmall2, assets.nature.rocksmall1],
 		lightColor: new Color('hsl(0,0%,100%)'),
-		obstaclesDensity: 0.25,
 		lootables: [LOOTABLES.ROCK],
 		infinite: { x: true, y: true },
 	},
@@ -55,7 +51,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'GRAVEYARD',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.nature.treedead, assets.elements.grave1, assets.elements.grave2, assets.elements.grave3, assets.elements.grave4],
-		obstaclesDensity: 0.24,
 		lootables: [LOOTABLES.GRAVE],
 		infinite: { x: true, y: true },
 		effect: RainEntity,
@@ -66,7 +61,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'TOWN',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.well, assets.elements.cart1, assets.elements.cart2, assets.elements.pile],
-		obstaclesDensity: 0.25,
 		lootables: [LOOTABLES.CRATE],
 		infinite: { x: true, y: true }
 	},
@@ -74,7 +68,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'CASTLE',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [],
-		obstaclesDensity: 0.25,
 		lootables: [],
 		infinite: { x: false, y: true }
 	},
@@ -82,7 +75,6 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'FIELDS',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.cart1],
-		obstaclesDensity: 0.2,
 		lootables: [LOOTABLES.HAY],
 		infinite: { x: true, y: true }
 	}

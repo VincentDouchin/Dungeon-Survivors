@@ -1,6 +1,7 @@
 import { Entity, System } from "../Globals/ECS";
 
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent";
+import DroppableComponent from "../Components/DroppableComponent";
 import { camera } from "../Globals/Initialize";
 
 class BackgroundElementSpawnerSystem extends System {
@@ -30,6 +31,7 @@ class BackgroundElementSpawnerSystem extends System {
 						|| node.position.y > camera.position.y + camera.top * 2
 						|| node.position.y < camera.position.y + camera.bottom * 2
 					) {
+						node.entity.getComponent(DroppableComponent)?.destroy()
 						node.entity.destroy()
 						node.position = null
 						node.entity = null
@@ -43,11 +45,8 @@ class BackgroundElementSpawnerSystem extends System {
 					const chunkY = Math.floor(y / size)
 					const node = backgroundElements.getNode(chunkX, chunkY)
 					if (!node) {
-
 						backgroundElements.createNode(chunkX, chunkY)
-
 					}
-
 					if (node && node.obstacle && !node.entity) {
 						const obstacle = backgroundElements.createEntity(chunkX, chunkY)
 						if (obstacle) {
