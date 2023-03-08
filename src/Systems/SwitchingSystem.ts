@@ -7,6 +7,7 @@ import { ECSEVENTS } from "../Constants/Events";
 import INPUTS from "../Constants/InputsNames";
 import OutlineShader from "../Shaders/OutlineShader";
 import PlayerControllerComponent from "../Components/PlayerControllerComponent";
+import RangedComponent from "../Components/RangedComponent";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import SwitchingComponent from "../Components/SwitchingComponent";
@@ -40,6 +41,7 @@ class SwitchingSystem extends System {
 					switcher.main = !switcher.main
 				}
 				const spell = entity.getComponent(SpellComponent)
+				const ranged = entity.getComponent(RangedComponent)
 				if (switcher.main) {
 					ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 					entity.addComponent(new PlayerControllerComponent())
@@ -47,7 +49,7 @@ class SwitchingSystem extends System {
 					entity.addComponent(new CameraTargetComponent())
 					entity.removeComponent(AIMovementComponent)
 				} else {
-					entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: 50, followingDistance: 70 }))
+					entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: ranged ? 50 : 30, followingDistance: 70 }))
 					this.setFollower = entity
 					entity.getComponent(SpriteComponent).removeShader(OutlineShader)
 					entity.removeComponent(CameraTargetComponent)
