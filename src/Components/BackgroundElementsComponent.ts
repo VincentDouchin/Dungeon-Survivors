@@ -1,5 +1,6 @@
 import { Component, ECS, Entity } from "../Globals/ECS";
 
+import DroppableComponent from "./DroppableComponent";
 import { ECSEVENTS } from "../Constants/Events";
 import LootableEntity from "../Entities/LootableEntity";
 import { LootableOptions } from "../Constants/Lootables";
@@ -19,6 +20,7 @@ export interface ObstacleNode {
 	entityConstructor?: (x: number, y: number) => Entity
 	entity?: Entity | null
 	position?: PositionComponent | null
+	destroyed?: boolean
 }
 class BackgroundElementsComponent extends Component {
 	obstaclesMap: Map<string, ObstacleNode> = new Map()
@@ -33,6 +35,7 @@ class BackgroundElementsComponent extends Component {
 	effectDelay?: () => number
 	effectsTimer = 0
 	removeWallSub: () => void
+
 	constructor(options: { obstaclesDensity?: number, obstacles: Tile[], effect?: () => Entity, effectDelay?: () => number, lootables?: LootableOptions[], walls?: Wall[] }) {
 		super()
 		this.obstacles = options.obstacles
@@ -43,13 +46,12 @@ class BackgroundElementsComponent extends Component {
 		this.effectDelay = options.effectDelay
 		this.lootables = options.lootables ?? []
 		this.walls = options.walls ?? []
-		this.removeWallSub = ECS.eventBus.subscribe(ECSEVENTS.REMOVE_WALL, (wall) => {
+		this.removeWallSub = ECS.eventBus.subscribe(ECSEVENTS.REMOVE_WALL, ({ entity, deleteLoot }) => {
 			this.obstaclesMap.forEach(node => {
-				if (node.entity === wall) {
-					wall.destroy()
-					node.entity = new Entity('blank')
-					ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, node.entity)
-
+				if (node.entity === entity) {
+					if (deleteLoot) entity.getComponent(DroppableComponent)?.destroy()
+					// wall.destroy()
+					node.destroyed = true
 				}
 			})
 		})
@@ -61,12 +63,13 @@ class BackgroundElementsComponent extends Component {
 		if (noiseValue > 0.1) {
 			this.obstaclesMap.set(key, { obstacle: false })
 		} else {
-			const loot = Math.random() < 0.1
+			const loot = Math.random() < 0.05
 			const getRandom = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)]
 			const entityConstructor = loot ? LootableEntity(getRandom(this.lootables)) : ObstableEntity(getRandom(this.obstacles))
 			this.obstaclesMap.set(key, {
 				obstacle: true,
 				entityConstructor,
+				destroyed: false
 			})
 
 		}

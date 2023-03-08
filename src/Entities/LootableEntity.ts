@@ -46,12 +46,15 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 		},)
 
 	}
-	ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
+	const particleSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
 		if (entity === lootable) {
 			createParticle()
 		}
 	})
+
 	lootable.onDestroy(() => {
+		ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, { entity: lootable, deleteLoot: false })
+		particleSub()
 		const particleNb = Math.floor(Math.random() * 3) + 2
 		new Coroutine(function* () {
 			for (let i = 0; i < particleNb; i++) {

@@ -47,7 +47,7 @@ class BackgroundElementSpawnerSystem extends System {
 					if (!node) {
 						backgroundElements.createNode(chunkX, chunkY)
 					}
-					if (node && node.obstacle && !node.entity) {
+					if (node && node.obstacle && !node.entity && !node.destroyed) {
 						const obstacle = backgroundElements.createEntity(chunkX, chunkY)
 						if (obstacle) {
 							entity.addChildren(obstacle)

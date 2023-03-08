@@ -15,9 +15,9 @@ class PortalSystem extends System {
 		entities.forEach(entity => {
 			const body = entity.getComponent(BodyComponent)
 			body.contacts(entity => {
-				ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, entity)
+				ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, { entity, deleteLoot: true })
 			}, COLLISIONGROUPS.SENSOR, [COLLISIONGROUPS.WALL])
-			body.contacts(entity => {
+			body.contacts(() => {
 				Engine.setState(GameStates.map)
 			}, COLLISIONGROUPS.PORTAL, [COLLISIONGROUPS.PLAYER])
 		})
