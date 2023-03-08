@@ -28,6 +28,7 @@ export enum ECSEVENTS {
 	TAKE_DAMAGE = 'TAKE_DAMAGE',
 	TIMER = 'TIMER',
 	ADD_WALL = 'ADD_WALL',
+	REMOVE_WALL = 'REMOVE_WALL',
 }
 export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
@@ -48,6 +49,7 @@ export type EventMap = {
 	[ECSEVENTS.ADD_TO_ENCOUNTER]: Entity
 	[ECSEVENTS.TIMER]: number
 	[ECSEVENTS.ADD_WALL]: Entity
+	[ECSEVENTS.REMOVE_WALL]: Entity
 	[UIEVENTS.UI_XP]: number
 	[UIEVENTS.UI_LEVEL]: number
 }

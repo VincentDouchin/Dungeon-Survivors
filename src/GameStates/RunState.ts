@@ -24,6 +24,7 @@ import MinionSpawnerSytem from "../Systems/MinionSpawnerSystem"
 import MovementSystem from "../Systems/MovementSystem"
 import PickupSystem from "../Systems/PickupSystem"
 import PlayerEntity from "../Entities/PlayerEntity"
+import PortalSystem from "../Systems/PortalSystem"
 import RenderSystem from "../Systems/RenderSystem"
 import SelectionSystem from "../Systems/SelectionSystem"
 import ShootingSystem from "../Systems/ShootingSystem"
@@ -75,6 +76,7 @@ class RunState implements GameState {
 		BodyCreationSystem.register()
 		PickupSystem.register()
 		LightingSystem.register()
+		PortalSystem.register()
 		ShootingSystem.register()
 		CameraSystem.register()
 		RenderSystem.register()
@@ -105,6 +107,7 @@ class RunState implements GameState {
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
 					Engine.setState(GameStates.levelUp)
 				}))
+
 				// !MUSIC
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 
@@ -162,6 +165,7 @@ class RunState implements GameState {
 						tutorial.destroy()
 					})
 				}
+
 			}; break
 		}
 		this.music?.play()

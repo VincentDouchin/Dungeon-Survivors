@@ -10,7 +10,7 @@ const ObstableEntity = (tile: Tile) => (x: number, y: number) => {
 	entity.addComponent(new BodyComponent(
 		{ type: 'fixed' },
 		[
-			{ width: tile.width, height: tile.height, contact: false, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WALL }
+			{ width: tile.width, height: tile.height, contact: false, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.SENSOR], group: COLLISIONGROUPS.WALL }
 		]
 	))
 	entity.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))

@@ -12,6 +12,7 @@ import { GameStates } from "../Constants/GameStates";
 import HealthComponent from "../Components/HealthComponent";
 import OutlineShader from "../Shaders/OutlineShader";
 import ParticleEntity from "../Entities/ParticleEntitty";
+import PortalEntity from "../Entities/PortalEntity";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
 import assets from "../Globals/Assets";
@@ -158,7 +159,8 @@ class Encounter {
 			self.levelSubscriber()
 			self.addEnemySuscriber()
 			yield* waitFor(60)
-			Engine.setState(GameStates.map)
+			const portal = PortalEntity()
+			ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, portal)
 
 		})
 		return this
