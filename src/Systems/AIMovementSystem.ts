@@ -53,7 +53,6 @@ class AIMovementSystem extends System {
 
 			if (ai.chargingDirection) {
 				const chargingForce = Math.min((ai.chargingTimer + 45) / 90, 1)
-				console.log(chargingForce)
 				chargingVelocity.add(ai.chargingDirection.clone().multiply(new Vector2(chargingForce, chargingForce)))
 				body.contacts(() => {
 					ai.chargingDirection = null
