@@ -1,6 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS"
 
 import { AmbientLight } from "three"
+import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import { BackgroundOptions } from "../Constants/BackGrounds"
 import { ECSEVENTS } from "../Constants/Events"
 import LightComponent from "../Components/LightComponent"
@@ -50,15 +51,13 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	// 			x: wall.px[0] - level.pxWid / 2 + wall.width / 2,
 	// 			y: level.pxHei / 2 - wall.px[1] - wall.height / 2
 	// 		}))
-	// 	background.addComponent(new BackgroundElementsComponent({
-	// 		obstacles: backgroundDefinition.obstacles,
-	// 		effect: backgroundDefinition.effect,
-	// 		effectDelay: backgroundDefinition.effectDelay,
-	// 		lootables: backgroundDefinition.lootables,
-	// 		walls
-	// 	}))
 	// }
-
+	background.addComponent(new BackgroundElementsComponent({
+		obstacles: backgroundDefinition.obstacles,
+		effect: backgroundDefinition.effect,
+		effectDelay: backgroundDefinition.effectDelay,
+		lootables: backgroundDefinition.lootables,
+	}))
 	background.onDestroy(() => {
 		cameraUnSubscriber()
 		addUnSubscriber()
