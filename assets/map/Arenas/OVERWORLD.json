@@ -11,7 +11,7 @@
 	"iid": "d32995d0-7820-11ed-a5bd-77fd42b7a0e1",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 798,
+	"nextUid": 799,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -38,6 +38,34 @@
 	"customCommands": [],
 	"flags": [],
 	"defs": { "layers": [
+		{
+			"__type": "Entities",
+			"identifier": "Path",
+			"type": "Entities",
+			"uid": 365,
+			"doc": null,
+			"gridSize": 16,
+			"guideGridWid": 0,
+			"guideGridHei": 0,
+			"displayOpacity": 1,
+			"inactiveOpacity": 0.6,
+			"hideInList": false,
+			"hideFieldsWhenInactive": true,
+			"canSelectWhenInactive": true,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"parallaxFactorX": 0,
+			"parallaxFactorY": 0,
+			"parallaxScaling": true,
+			"requiredTags": [],
+			"excludedTags": [],
+			"intGridValues": [],
+			"autoRuleGroups": [],
+			"autoSourceLayerDefUid": null,
+			"tilesetDefUid": null,
+			"tilePivotX": 0,
+			"tilePivotY": 0
+		},
 		{
 			"__type": "Tiles",
 			"identifier": "Lava_lake",
@@ -1234,34 +1262,6 @@
 			],
 			"autoSourceLayerDefUid": null,
 			"tilesetDefUid": 312,
-			"tilePivotX": 0,
-			"tilePivotY": 0
-		},
-		{
-			"__type": "Entities",
-			"identifier": "Path",
-			"type": "Entities",
-			"uid": 365,
-			"doc": null,
-			"gridSize": 16,
-			"guideGridWid": 0,
-			"guideGridHei": 0,
-			"displayOpacity": 1,
-			"inactiveOpacity": 0.6,
-			"hideInList": false,
-			"hideFieldsWhenInactive": true,
-			"canSelectWhenInactive": true,
-			"pxOffsetX": 0,
-			"pxOffsetY": 0,
-			"parallaxFactorX": 0,
-			"parallaxFactorY": 0,
-			"parallaxScaling": true,
-			"requiredTags": [],
-			"excludedTags": [],
-			"intGridValues": [],
-			"autoRuleGroups": [],
-			"autoSourceLayerDefUid": null,
-			"tilesetDefUid": null,
 			"tilePivotX": 0,
 			"tilePivotY": 0
 		},
@@ -5465,7 +5465,8 @@
 			{ "id": "TOWN", "tileId": null, "color": 14984818, "__tileSrcRect": null },
 			{ "id": "GRAVEYARD", "tileId": null, "color": 7552569, "__tileSrcRect": null },
 			{ "id": "CASTLE", "tileId": null, "color": 4073265, "__tileSrcRect": null },
-			{ "id": "FIELDS", "tileId": null, "color": 16690740, "__tileSrcRect": null }
+			{ "id": "SNOW", "tileId": null, "color": 16690740, "__tileSrcRect": null },
+			{ "id": "LAVA", "tileId": null, "color": 16705377, "__tileSrcRect": null }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
 		{ "identifier": "ENEMIES", "uid": 367, "values": [
 			{ "id": "ORCS", "tileId": null, "color": 12470831, "__tileSrcRect": null },
@@ -5500,6 +5501,1776 @@
 			"externalRelPath": null,
 			"fieldInstances": [],
 			"layerInstances": [
+				{
+					"__identifier": "Path",
+					"__type": "Entities",
+					"__cWid": 23,
+					"__cHei": 70,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+					"levelId": 0,
+					"layerDefUid": 365,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 8409700,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,70],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "5ee16d80-7820-11ed-a6ad-67416ad4dd60",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,1120],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6055be00-7820-11ed-a6ad-454a1bb6b69f"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": true, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,65],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,1048],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6e822130-7820-11ed-a6ad-23c6813ecdba"]
+								}] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["62156f60-7820-11ed-a6ad-81c289c9aab3"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,65],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,1048],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["638022f0-7820-11ed-a6ad-f97cb5f3e7da"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,62],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,1000],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["64eafd90-7820-11ed-a6ad-ef3cd1b4f38c"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "CAVE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["CAVE"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "ORCS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ORCS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,57],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,920],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,63],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,1016],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["73b17de0-7820-11ed-a6ad-7b3e13e52acf"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,63],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,1016],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7fa09b40-7820-11ed-a6ad-b317f3f29f5e"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,57],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,920],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,60],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,968],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["759ab040-7820-11ed-a6ad-33f17e8fa625"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["FOREST"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "ANIMALS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ANIMALS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ false ]
+								}] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [12,57],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "97740090-7820-11ed-a6ad-fddf369300a9",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [192,920],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [12,56],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [192,896],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["a9339ca0-7820-11ed-a6ad-a717216c6e5d"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["FOREST"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "ELVES", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ELVES"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [12,54],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [192,872],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [null] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ad51fe80-7820-11ed-a6ad-61560ecd38da"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [13,54],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [216,872],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["c51425c0-7820-11ed-a6ad-87ee43340f4b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ false ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [13,51],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [216,824],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [null] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["c8e48eb0-7820-11ed-a6ad-af4f88441cc7"]
+								}] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "2c0155b0-9f30-11ed-b0d0-61bc0bb913bb",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["2c0155b0-9f30-11ed-b0d0-61bc0bb913bb"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [14,50],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [232,808],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["c7d71650-7820-11ed-a6ad-231d173e24d4"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [16,50],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [264,808],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6d1556a0-9f30-11ed-b0d0-4784dae6458b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6d1556a0-9f30-11ed-b0d0-4784dae6458b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [8,51],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [136,824],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "5ec90f60-9f30-11ed-b0d0-858066ecae24",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["5ec90f60-9f30-11ed-b0d0-858066ecae24"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [14,51],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "2c0155b0-9f30-11ed-b0d0-61bc0bb913bb",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [232,824],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["c68c94f0-7820-11ed-a6ad-ab8cdcae72ba"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [8,44],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "5ec90f60-9f30-11ed-b0d0-858066ecae24",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [136,712],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "TOWN", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["TOWN"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "VILLAGERS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["VILLAGERS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": true, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [8,41],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [136,664],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "66a51580-9f30-11ed-b0d0-7d0325d66d0e",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["66a51580-9f30-11ed-b0d0-7d0325d66d0e"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,41],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "66a51580-9f30-11ed-b0d0-7d0325d66d0e",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,664],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["67a6f520-9f30-11ed-b0d0-9511abd2383b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,34],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,552],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "71e41cc0-9f30-11ed-b0d0-4b6c80a32202",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["71e41cc0-9f30-11ed-b0d0-4b6c80a32202"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,34],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "68df7520-9f30-11ed-b0d0-b5a5d976c7f8",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,552],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["67a6f520-9f30-11ed-b0d0-9511abd2383b"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,35],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,568],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "68df7520-9f30-11ed-b0d0-b5a5d976c7f8",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["68df7520-9f30-11ed-b0d0-b5a5d976c7f8"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,35],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "69ff3d00-9f30-11ed-b0d0-333b5e1f2088",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,568],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,36],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6af18c40-9f30-11ed-b0d0-15c3dee8b21d",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,584],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "69ff3d00-9f30-11ed-b0d0-333b5e1f2088",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["69ff3d00-9f30-11ed-b0d0-333b5e1f2088"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [16,36],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6b6360e0-9f30-11ed-b0d0-dd4ee46d096f",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [264,584],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "6af18c40-9f30-11ed-b0d0-15c3dee8b21d",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6af18c40-9f30-11ed-b0d0-15c3dee8b21d"]
+								}] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "6be75df0-9f30-11ed-b0d0-2598c1c635b9",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6be75df0-9f30-11ed-b0d0-2598c1c635b9"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,36],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6be75df0-9f30-11ed-b0d0-2598c1c635b9",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,584],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6e08b750-9f30-11ed-b0d0-29b5f34f72c1",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6e08b750-9f30-11ed-b0d0-29b5f34f72c1"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [16,46],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6d1556a0-9f30-11ed-b0d0-4784dae6458b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [264,744],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6b6360e0-9f30-11ed-b0d0-dd4ee46d096f",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6b6360e0-9f30-11ed-b0d0-dd4ee46d096f"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "GRAVEYARD", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["GRAVEYARD"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "UNDEAD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["UNDEAD"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,34],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6e08b750-9f30-11ed-b0d0-29b5f34f72c1",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,552],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "6e797a80-9f30-11ed-b0d0-5d4a3d90efbe",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6e797a80-9f30-11ed-b0d0-5d4a3d90efbe"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [20,34],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6e797a80-9f30-11ed-b0d0-5d4a3d90efbe",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [328,552],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "6fce3510-9f30-11ed-b0d0-4700f063f75b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6fce3510-9f30-11ed-b0d0-4700f063f75b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [20,29],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "6fce3510-9f30-11ed-b0d0-4700f063f75b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [328,472],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "76365fe0-9f30-11ed-b0d0-8741464a618c",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["76365fe0-9f30-11ed-b0d0-8741464a618c"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "CASTLE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["CASTLE"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "PRIESTS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["PRIESTS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,24],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "71e41cc0-9f30-11ed-b0d0-4b6c80a32202",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,392],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "73603570-9f30-11ed-b0d0-c1f8ba276d7d",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["73603570-9f30-11ed-b0d0-c1f8ba276d7d"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "CASTLE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["CASTLE"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "KINGSGUARD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["KINGSGUARD"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,19],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "73603570-9f30-11ed-b0d0-c1f8ba276d7d",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,312],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "e6687370-9f30-11ed-b0d0-3d233b177f30",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["e6687370-9f30-11ed-b0d0-3d233b177f30"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "740464b0-9f30-11ed-b0d0-d5d01169c341",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["740464b0-9f30-11ed-b0d0-d5d01169c341"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [14,19],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "740464b0-9f30-11ed-b0d0-d5d01169c341",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [232,312],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [14,14],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [232,232],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "74e0e200-9f30-11ed-b0d0-7dd6db5398dc",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["74e0e200-9f30-11ed-b0d0-7dd6db5398dc"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,14],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "74e0e200-9f30-11ed-b0d0-7dd6db5398dc",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,232],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "7538ed10-9f30-11ed-b0d0-912eebe9ac7b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7538ed10-9f30-11ed-b0d0-912eebe9ac7b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [15,13],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7538ed10-9f30-11ed-b0d0-912eebe9ac7b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [248,216],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["75bd3840-9f30-11ed-b0d0-57dcb30f4c3b"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,13],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,216],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "ea2665d0-9f30-11ed-b0d0-17029d7e9d87",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ea2665d0-9f30-11ed-b0d0-17029d7e9d87"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [20,15],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "76365fe0-9f30-11ed-b0d0-8741464a618c",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [328,248],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "7698f240-9f30-11ed-b0d0-95eca4cfc4f3",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7698f240-9f30-11ed-b0d0-95eca4cfc4f3"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,15],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7698f240-9f30-11ed-b0d0-95eca4cfc4f3",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,248],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["75bd3840-9f30-11ed-b0d0-57dcb30f4c3b"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,8],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "772e7b80-9f30-11ed-b0d0-33c7142061ae",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,136],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "77af1d30-9f30-11ed-b0d0-d108aa033ed5",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["77af1d30-9f30-11ed-b0d0-d108aa033ed5"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [18,8],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "77af1d30-9f30-11ed-b0d0-d108aa033ed5",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [296,136],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [18,7],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [296,120],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": {
+									"entityIid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["78ce48d0-9f30-11ed-b0d0-913b609ef3c3"]
+								}] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,7],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,120],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "d570e250-9f30-11ed-b0d0-a77585eac896",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["d570e250-9f30-11ed-b0d0-a77585eac896"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,8],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "793c73f0-9f30-11ed-b0d0-e1255c6e0fcf",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,136],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["78ce48d0-9f30-11ed-b0d0-913b609ef3c3"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [7,8],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [120,136],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "793c73f0-9f30-11ed-b0d0-e1255c6e0fcf",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["793c73f0-9f30-11ed-b0d0-e1255c6e0fcf"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [7,9],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [120,152],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,9],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,152],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": {
+									"entityIid": "7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96"]
+								}] },
+								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
+								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
+								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [11,3],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "d570e250-9f30-11ed-b0d0-a77585eac896",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [184,56],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "DUNGEON", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["DUNGEON"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "DEMONS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["DEMONS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [6,14],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "e6687370-9f30-11ed-b0d0-3d233b177f30",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [104,232],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "SNOW", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["SNOW"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "UNDEAD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["UNDEAD"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": true, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] }
+							]
+						},
+						{
+							"__identifier": "PathNode",
+							"__grid": [19,10],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "ea2665d0-9f30-11ed-b0d0-17029d7e9d87",
+							"width": 16,
+							"height": 16,
+							"defUid": 360,
+							"px": [312,168],
+							"fieldInstances": [
+								{ "__identifier": "top", "__value": {
+									"entityIid": "772e7b80-9f30-11ed-b0d0-33c7142061ae",
+									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
+									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
+									"worldIid": "f2862430-9f30-11ed-a786-45c46811ca22"
+								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["772e7b80-9f30-11ed-b0d0-33c7142061ae"]
+								}] },
+								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
+								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
+								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] },
+								{ "__identifier": "BACKGROUND", "__value": "LAVA", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["LAVA"]
+								}] },
+								{ "__identifier": "ENEMIES", "__value": "ORCS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["ORCS"]
+								}] },
+								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
+								{ "__identifier": "flag", "__value": true, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
+									"id": "V_Bool",
+									"params": [ true ]
+								}] }
+							]
+						}
+					]
+				},
 				{
 					"__identifier": "Lava_lake",
 					"__type": "Tiles",
@@ -5998,1764 +7769,6 @@
 					"overrideTilesetUid": null,
 					"gridTiles": [],
 					"entityInstances": []
-				},
-				{
-					"__identifier": "Path",
-					"__type": "Entities",
-					"__cWid": 23,
-					"__cHei": 70,
-					"__gridSize": 16,
-					"__opacity": 1,
-					"__pxTotalOffsetX": 0,
-					"__pxTotalOffsetY": 0,
-					"__tilesetDefUid": null,
-					"__tilesetRelPath": null,
-					"iid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-					"levelId": 0,
-					"layerDefUid": 365,
-					"pxOffsetX": 0,
-					"pxOffsetY": 0,
-					"visible": true,
-					"optionalRules": [],
-					"intGridCsv": [],
-					"autoLayerTiles": [],
-					"seed": 8409700,
-					"overrideTilesetUid": null,
-					"gridTiles": [],
-					"entityInstances": [
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,70],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "5ee16d80-7820-11ed-a6ad-67416ad4dd60",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,1120],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6055be00-7820-11ed-a6ad-454a1bb6b69f"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": true, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,65],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6055be00-7820-11ed-a6ad-454a1bb6b69f",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,1048],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6e822130-7820-11ed-a6ad-23c6813ecdba"]
-								}] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["62156f60-7820-11ed-a6ad-81c289c9aab3"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,65],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "62156f60-7820-11ed-a6ad-81c289c9aab3",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,1048],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["638022f0-7820-11ed-a6ad-f97cb5f3e7da"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,62],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "638022f0-7820-11ed-a6ad-f97cb5f3e7da",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,1000],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["64eafd90-7820-11ed-a6ad-ef3cd1b4f38c"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "CAVE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["CAVE"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "ORCS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ORCS"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,57],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "64eafd90-7820-11ed-a6ad-ef3cd1b4f38c",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,920],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,63],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6e822130-7820-11ed-a6ad-23c6813ecdba",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,1016],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["73b17de0-7820-11ed-a6ad-7b3e13e52acf"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,63],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "73b17de0-7820-11ed-a6ad-7b3e13e52acf",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,1016],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7fa09b40-7820-11ed-a6ad-b317f3f29f5e"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,57],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,920],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "97740090-7820-11ed-a6ad-fddf369300a9",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["97740090-7820-11ed-a6ad-fddf369300a9"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,60],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7fa09b40-7820-11ed-a6ad-b317f3f29f5e",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,968],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "759ab040-7820-11ed-a6ad-33f17e8fa625",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["759ab040-7820-11ed-a6ad-33f17e8fa625"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["FOREST"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "ANIMALS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ANIMALS"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ false ]
-								}] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [12,57],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "97740090-7820-11ed-a6ad-fddf369300a9",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [192,920],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [12,56],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "9a5d3dd0-7820-11ed-a6ad-034b5fd4ce0c",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [192,896],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["a9339ca0-7820-11ed-a6ad-a717216c6e5d"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["FOREST"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "ELVES", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ELVES"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [12,54],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "a9339ca0-7820-11ed-a6ad-a717216c6e5d",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [192,872],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [null] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ad51fe80-7820-11ed-a6ad-61560ecd38da"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [13,54],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "ad51fe80-7820-11ed-a6ad-61560ecd38da",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [216,872],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["c51425c0-7820-11ed-a6ad-87ee43340f4b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ false ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [13,51],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "c51425c0-7820-11ed-a6ad-87ee43340f4b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [216,824],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [null] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["c8e48eb0-7820-11ed-a6ad-af4f88441cc7"]
-								}] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "2c0155b0-9f30-11ed-b0d0-61bc0bb913bb",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["2c0155b0-9f30-11ed-b0d0-61bc0bb913bb"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [14,50],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [232,808],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["c7d71650-7820-11ed-a6ad-231d173e24d4"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [16,50],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "c7d71650-7820-11ed-a6ad-231d173e24d4",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [264,808],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6d1556a0-9f30-11ed-b0d0-4784dae6458b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6d1556a0-9f30-11ed-b0d0-4784dae6458b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [8,51],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "c8e48eb0-7820-11ed-a6ad-af4f88441cc7",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [136,824],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "5ec90f60-9f30-11ed-b0d0-858066ecae24",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["5ec90f60-9f30-11ed-b0d0-858066ecae24"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [14,51],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "2c0155b0-9f30-11ed-b0d0-61bc0bb913bb",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [232,824],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "c68c94f0-7820-11ed-a6ad-ab8cdcae72ba",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["c68c94f0-7820-11ed-a6ad-ab8cdcae72ba"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [8,44],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "5ec90f60-9f30-11ed-b0d0-858066ecae24",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [136,712],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [8,41],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "5f7e2e90-9f30-11ed-b0d0-61d3b81fd78b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [136,664],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "66a51580-9f30-11ed-b0d0-7d0325d66d0e",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["66a51580-9f30-11ed-b0d0-7d0325d66d0e"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,41],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "66a51580-9f30-11ed-b0d0-7d0325d66d0e",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,664],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["67a6f520-9f30-11ed-b0d0-9511abd2383b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,34],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,552],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "71e41cc0-9f30-11ed-b0d0-4b6c80a32202",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["71e41cc0-9f30-11ed-b0d0-4b6c80a32202"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,34],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "68df7520-9f30-11ed-b0d0-b5a5d976c7f8",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,552],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "67a6f520-9f30-11ed-b0d0-9511abd2383b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["67a6f520-9f30-11ed-b0d0-9511abd2383b"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,35],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,568],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "68df7520-9f30-11ed-b0d0-b5a5d976c7f8",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["68df7520-9f30-11ed-b0d0-b5a5d976c7f8"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,35],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "69ff3d00-9f30-11ed-b0d0-333b5e1f2088",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,568],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6953e1d0-9f30-11ed-b0d0-cdb96fa3b0b4"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,36],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6af18c40-9f30-11ed-b0d0-15c3dee8b21d",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,584],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "69ff3d00-9f30-11ed-b0d0-333b5e1f2088",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["69ff3d00-9f30-11ed-b0d0-333b5e1f2088"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [16,36],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6b6360e0-9f30-11ed-b0d0-dd4ee46d096f",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [264,584],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "6af18c40-9f30-11ed-b0d0-15c3dee8b21d",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6af18c40-9f30-11ed-b0d0-15c3dee8b21d"]
-								}] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "6be75df0-9f30-11ed-b0d0-2598c1c635b9",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6be75df0-9f30-11ed-b0d0-2598c1c635b9"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,36],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6be75df0-9f30-11ed-b0d0-2598c1c635b9",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,584],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6e08b750-9f30-11ed-b0d0-29b5f34f72c1",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6e08b750-9f30-11ed-b0d0-29b5f34f72c1"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [16,45],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6d1556a0-9f30-11ed-b0d0-4784dae6458b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [264,728],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6b6360e0-9f30-11ed-b0d0-dd4ee46d096f",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6b6360e0-9f30-11ed-b0d0-dd4ee46d096f"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "GRAVEYARD", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["GRAVEYARD"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "UNDEAD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["UNDEAD"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,34],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6e08b750-9f30-11ed-b0d0-29b5f34f72c1",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,552],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "6e797a80-9f30-11ed-b0d0-5d4a3d90efbe",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6e797a80-9f30-11ed-b0d0-5d4a3d90efbe"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [20,34],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6e797a80-9f30-11ed-b0d0-5d4a3d90efbe",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [328,552],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "6fce3510-9f30-11ed-b0d0-4700f063f75b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["6fce3510-9f30-11ed-b0d0-4700f063f75b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [20,29],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "6fce3510-9f30-11ed-b0d0-4700f063f75b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [328,472],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "76365fe0-9f30-11ed-b0d0-8741464a618c",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["76365fe0-9f30-11ed-b0d0-8741464a618c"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "CASTLE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["CASTLE"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "PRIESTS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["PRIESTS"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,24],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "71e41cc0-9f30-11ed-b0d0-4b6c80a32202",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,392],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "73603570-9f30-11ed-b0d0-c1f8ba276d7d",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["73603570-9f30-11ed-b0d0-c1f8ba276d7d"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "CASTLE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["CASTLE"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "KINGSGUARD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["KINGSGUARD"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,19],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "73603570-9f30-11ed-b0d0-c1f8ba276d7d",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,312],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "e6687370-9f30-11ed-b0d0-3d233b177f30",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["e6687370-9f30-11ed-b0d0-3d233b177f30"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "740464b0-9f30-11ed-b0d0-d5d01169c341",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["740464b0-9f30-11ed-b0d0-d5d01169c341"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [14,19],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "740464b0-9f30-11ed-b0d0-d5d01169c341",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [232,312],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [14,14],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "748cf5a0-9f30-11ed-b0d0-9fbdc7e74f42",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [232,232],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "74e0e200-9f30-11ed-b0d0-7dd6db5398dc",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["74e0e200-9f30-11ed-b0d0-7dd6db5398dc"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,14],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "74e0e200-9f30-11ed-b0d0-7dd6db5398dc",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,232],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "7538ed10-9f30-11ed-b0d0-912eebe9ac7b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7538ed10-9f30-11ed-b0d0-912eebe9ac7b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [15,13],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7538ed10-9f30-11ed-b0d0-912eebe9ac7b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [248,216],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["75bd3840-9f30-11ed-b0d0-57dcb30f4c3b"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,13],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,216],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "ea2665d0-9f30-11ed-b0d0-17029d7e9d87",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ea2665d0-9f30-11ed-b0d0-17029d7e9d87"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [20,15],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "76365fe0-9f30-11ed-b0d0-8741464a618c",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [328,248],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "7698f240-9f30-11ed-b0d0-95eca4cfc4f3",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7698f240-9f30-11ed-b0d0-95eca4cfc4f3"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,15],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7698f240-9f30-11ed-b0d0-95eca4cfc4f3",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,248],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "75bd3840-9f30-11ed-b0d0-57dcb30f4c3b",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["75bd3840-9f30-11ed-b0d0-57dcb30f4c3b"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,8],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "772e7b80-9f30-11ed-b0d0-33c7142061ae",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,136],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "77af1d30-9f30-11ed-b0d0-d108aa033ed5",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["77af1d30-9f30-11ed-b0d0-d108aa033ed5"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [18,8],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "77af1d30-9f30-11ed-b0d0-d108aa033ed5",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [296,136],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [18,7],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7839a9f0-9f30-11ed-b0d0-91f0b0aec4eb",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [296,120],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": {
-									"entityIid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["78ce48d0-9f30-11ed-b0d0-913b609ef3c3"]
-								}] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,7],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,120],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "d570e250-9f30-11ed-b0d0-a77585eac896",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["d570e250-9f30-11ed-b0d0-a77585eac896"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,8],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "793c73f0-9f30-11ed-b0d0-e1255c6e0fcf",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,136],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "78ce48d0-9f30-11ed-b0d0-913b609ef3c3",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["78ce48d0-9f30-11ed-b0d0-913b609ef3c3"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [7,8],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [120,136],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "793c73f0-9f30-11ed-b0d0-e1255c6e0fcf",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["793c73f0-9f30-11ed-b0d0-e1255c6e0fcf"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [7,9],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [120,152],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["79bffbd0-9f30-11ed-b0d0-8b4f1f9beb55"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,9],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,152],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": {
-									"entityIid": "7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7a2e4e00-9f30-11ed-b0d0-8f0f026e3f96"]
-								}] },
-								{ "__identifier": "encounter", "__value": false, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [] },
-								{ "__identifier": "BACKGROUND", "__value": null, "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [] },
-								{ "__identifier": "ENEMIES", "__value": null, "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [11,3],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "d570e250-9f30-11ed-b0d0-a77585eac896",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [184,56],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "DUNGEON", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["DUNGEON"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "DEMONS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["DEMONS"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": false, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [6,14],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "e6687370-9f30-11ed-b0d0-3d233b177f30",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [104,232],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["7aa049b0-9f30-11ed-b0d0-8bb7fc0968a9"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "FOREST", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["FOREST"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "UNDEAD", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["UNDEAD"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": true, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] }
-							]
-						},
-						{
-							"__identifier": "PathNode",
-							"__grid": [19,10],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "ea2665d0-9f30-11ed-b0d0-17029d7e9d87",
-							"width": 16,
-							"height": 16,
-							"defUid": 360,
-							"px": [312,168],
-							"fieldInstances": [
-								{ "__identifier": "top", "__value": {
-									"entityIid": "772e7b80-9f30-11ed-b0d0-33c7142061ae",
-									"layerIid": "58df0960-7820-11ed-a6ad-1de8eb55bf1e",
-									"levelIid": "d32a0b00-7820-11ed-a5bd-eb9278f1ac1f",
-									"worldIid": "ad181f50-9f30-11ed-bcd2-edce7f7e8580"
-								}, "__type": "EntityRef", "__tile": null, "defUid": 361, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["772e7b80-9f30-11ed-b0d0-33c7142061ae"]
-								}] },
-								{ "__identifier": "left", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 362, "realEditorValues": [] },
-								{ "__identifier": "right", "__value": null, "__type": "EntityRef", "__tile": null, "defUid": 363, "realEditorValues": [] },
-								{ "__identifier": "encounter", "__value": true, "__type": "Bool", "__tile": null, "defUid": 364, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] },
-								{ "__identifier": "BACKGROUND", "__value": "CAVE", "__type": "LocalEnum.BACKGROUND", "__tile": null, "defUid": 368, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["CAVE"]
-								}] },
-								{ "__identifier": "ENEMIES", "__value": "ORCS", "__type": "LocalEnum.ENEMIES", "__tile": null, "defUid": 369, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["ORCS"]
-								}] },
-								{ "__identifier": "start", "__value": false, "__type": "Bool", "__tile": null, "defUid": 370, "realEditorValues": [] },
-								{ "__identifier": "flag", "__value": true, "__type": "Bool", "__tile": null, "defUid": 426, "realEditorValues": [{
-									"id": "V_Bool",
-									"params": [ true ]
-								}] }
-							]
-						}
-					]
 				},
 				{
 					"__identifier": "Town",

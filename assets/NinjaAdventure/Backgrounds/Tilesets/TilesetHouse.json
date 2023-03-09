@@ -21,7 +21,12 @@
   ],
   "slices": [
    { "name": "portal", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 320, "w": 48, "h": 48 } }] },
-   { "name": "stairs", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 304, "w": 48, "h": 48 } }] }
+   { "name": "stairs", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 304, "w": 48, "h": 48 } }] },
+   { "name": "stock", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 176, "w": 32, "h": 32 } }] },
+   { "name": "barrel1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 288, "y": 176, "w": 16, "h": 16 } }] },
+   { "name": "barrel2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 272, "y": 208, "w": 16, "h": 16 } }] },
+   { "name": "barrel3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 288, "y": 208, "w": 16, "h": 16 } }] },
+   { "name": "barrel4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 288, "y": 192, "w": 16, "h": 16 } }] }
   ]
  }
 }

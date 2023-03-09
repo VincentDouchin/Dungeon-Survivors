@@ -11,6 +11,7 @@
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.2.35-x64",
+  "image": "TilesetNature.png",
   "format": "RGBA8888",
   "size": { "w": 256, "h": 336 },
   "scale": "1",
@@ -22,8 +23,8 @@
   "slices": [
    { "name": "tree1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 32, "h": 32 } }] },
    { "name": "stumpbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 134, "w": 32, "h": 23 } }] },
-   { "name": "stumpsmall1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 128, "w": 16, "h": 16 } }] },
-   { "name": "trunksmall", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 128, "w": 16, "h": 16 } }] },
+   { "name": "stumpsmall1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 129, "w": 16, "h": 15 } }] },
+   { "name": "trunksmall", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 131, "w": 16, "h": 13 } }] },
    { "name": "hay", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 128, "w": 16, "h": 16 } }] },
    { "name": "flower", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 176, "w": 16, "h": 16 } }] },
    { "name": "rockbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 66, "y": 196, "w": 29, "h": 27 } }] },
@@ -31,7 +32,18 @@
    { "name": "rocksmall2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 208, "w": 16, "h": 16 } }] },
    { "name": "rockbreakable", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 208, "w": 16, "h": 16 } }] },
    { "name": "treedead", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 0, "w": 32, "h": 32 } }] },
-   { "name": "bushdead", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 144, "w": 16, "h": 16 } }] }
+   { "name": "bushdead", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 144, "w": 16, "h": 16 } }] },
+   { "name": "rocksnowsmall1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 192, "w": 16, "h": 16 } }] },
+   { "name": "rocksnowbig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 193, "w": 32, "h": 31 } }] },
+   { "name": "rocksnowsmall2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 192, "w": 16, "h": 16 } }] },
+   { "name": "tree2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 0, "w": 32, "h": 32 } }] },
+   { "name": "treesnow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 0, "w": 32, "h": 32 } }] },
+   { "name": "rocklavasmall", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 224, "w": 16, "h": 16 } }] },
+   { "name": "rocklavabig", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 224, "w": 32, "h": 32 } }] },
+   { "name": "lavacrystal", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 224, "w": 16, "h": 16 } }] },
+   { "name": "rocksmall3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 240, "w": 16, "h": 16 } }] },
+   { "name": "rocksnowsmall3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 192, "w": 16, "h": 16 } }] },
+   { "name": "flowersnow", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 176, "w": 16, "h": 16 } }] }
   ]
  }
 }
