@@ -16,7 +16,7 @@ class SpellSystem extends System {
 		entities
 			.forEach(entity => {
 				const switcher = entity.getComponent(SwitchingComponent)
-				if (attack && switcher && switcher?.main) {
+				if (attack && switcher && !switcher?.main) {
 					const spell = entity.getComponent(SpellComponent)
 					const mana = entity.getComponent(ManaComponent)
 					if (mana.mana >= mana.manaCost) {
