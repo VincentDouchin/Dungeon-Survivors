@@ -57,6 +57,7 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 		effect: backgroundDefinition.effect,
 		effectDelay: backgroundDefinition.effectDelay,
 		lootables: backgroundDefinition.lootables,
+		obstacleDensity: backgroundDefinition.obstacleDensity
 	}))
 	background.onDestroy(() => {
 		cameraUnSubscriber()

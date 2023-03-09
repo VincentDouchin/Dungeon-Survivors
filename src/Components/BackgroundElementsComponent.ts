@@ -36,7 +36,7 @@ class BackgroundElementsComponent extends Component {
 	effectsTimer = 0
 	removeWallSub: () => void
 
-	constructor(options: { obstacleDensity: number, obstacles: WeightedList<Tile> | null, effect?: () => Entity, effectDelay?: () => number, lootables?: LootableOptions[] | null, walls?: Wall[] }) {
+	constructor(options: { obstacleDensity?: number, obstacles?: WeightedList<Tile>, effect?: () => Entity, effectDelay?: () => number, lootables?: LootableOptions[] | null, walls?: Wall[] }) {
 		super()
 		this.obstacles = options.obstacles ?? null
 		this.size = options.obstacles?.elements.reduce((acc, v) => {
