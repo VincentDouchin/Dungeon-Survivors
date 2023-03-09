@@ -22,9 +22,11 @@ import assets from "../Globals/Assets";
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
 
-	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: -1 }))
-	uiPosition.moveTo(-1, 30)
-	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 100, 35), { scale: 3 }))
+	const characterFrameWidth = 40
+	const frameWidth = (HEROS.length - 0.5) * characterFrameWidth
+	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: 0 }))
+	uiPosition.moveTo(0, 30)
+	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, frameWidth, 35), { scale: 3 }))
 	const description = new Entity('description')
 	description.addComponent(new SpriteComponent(Tile.empty()))
 	description.addComponent(new TextComponent('Choose your characters', { size: 32 }))
@@ -76,16 +78,17 @@ const UIPlayerSelectEntity = () => {
 			})
 		}
 	})
-	HEROS.sort((a, b) => (isUnlocked(b) ? 1 : 0) - (isUnlocked(a) ? 1 : 0)).forEach((hero, index) => {
+	HEROS.forEach((hero, index) => {
 		const tiles = hero.tiles.map(tiles => tiles.idle)
 		const unlocked = isUnlocked(hero)
 		const arrows: Entity[] = []
 		let selectedTile = 0
 		// ! FRAME
 		const characterFrame = new Entity('character frame')
-		characterFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 40, 35), { scale: 2 }))
+		characterFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, characterFrameWidth, 35), { scale: 2 }))
+		characterFrame.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }).offsetX(HEROS.length, index))
 		characterFrames.push(characterFrame)
-
+		ui.addChildren(characterFrame)
 
 		// ! CHARACTER
 		const character = new Entity(`character ${index}`)
@@ -164,14 +167,9 @@ const UIPlayerSelectEntity = () => {
 
 
 	})
-	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1]
-	characterFrames[1].addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }))
-	ui.addChildren(characterFrames[1])
-	characterFrames[2].addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
-	characterFrames[1].addChildren(characterFrames[2])
-	characterFrames[0].addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: 1, y: 0 }))
-	characterFrames[1].addChildren(characterFrames[0])
-	SelectableComponent.setFromArray(unlockedCharacters)
+	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[Math.floor(characterFrames.length / 2)]
+
+	SelectableComponent.setFromArray(unlockedCharacters.reverse())
 	return ui
 }
 export default UIPlayerSelectEntity
