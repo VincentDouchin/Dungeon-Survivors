@@ -41,7 +41,6 @@ class SwitchingSystem extends System {
 				switcher.main = !switcher.main
 			}
 			if (needsSwitch && !switcher.main) {
-				console.log('ok')
 				this.addComponents(entity, true)
 				switcher.main = true
 			}
