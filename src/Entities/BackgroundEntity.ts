@@ -1,11 +1,8 @@
 import { ECS, Entity } from "../Globals/ECS"
 
 import { AmbientLight } from "three"
-import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import { BackgroundOptions } from "../Constants/BackGrounds"
 import { ECSEVENTS } from "../Constants/Events"
-import LDTKMap from "../Utils/LDTKMap"
-import { LayerInstance } from "../../ldtk"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -15,10 +12,11 @@ import assets from "../Globals/Assets"
 const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	const background = new Entity('background')
 	const position = background.addComponent(new PositionComponent(0, 0))
-	const tile = LDTKMap.tiles[backgroundDefinition.level]
+	const level = assets.maps[backgroundDefinition.level]
+	const tile = level.tile
+
 	const width = tile.width
 	const height = tile.height
-	const level = assets.arenas.levels.find(level => level.identifier == backgroundDefinition.level)
 	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
 	const cameraUnSubscriber = ECS.eventBus.subscribe(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
 		if (backgroundDefinition.infinite.x) {
@@ -41,25 +39,25 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 		top: backgroundDefinition.infinite.y ? undefined : height / 2,
 	}
 
-	if (backgroundDefinition?.obstacles?.length || backgroundDefinition.lootables.length) {
-		const walls = level
-			?.layerInstances
-			?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')
-			?.entityInstances
-			.map(wall => ({
-				width: wall.width,
-				height: wall.height,
-				x: wall.px[0] - level.pxWid / 2 + wall.width / 2,
-				y: level.pxHei / 2 - wall.px[1] - wall.height / 2
-			}))
-		background.addComponent(new BackgroundElementsComponent({
-			obstacles: backgroundDefinition.obstacles,
-			effect: backgroundDefinition.effect,
-			effectDelay: backgroundDefinition.effectDelay,
-			lootables: backgroundDefinition.lootables,
-			walls
-		}))
-	}
+	// if (backgroundDefinition?.obstacles?.length || backgroundDefinition.lootables.length) {
+	// 	const walls = level
+	// 		?.layerInstances
+	// 		?.find((layer: LayerInstance) => layer.__identifier == 'Wall_entities')
+	// 		?.entityInstances
+	// 		.map(wall => ({
+	// 			width: wall.width,
+	// 			height: wall.height,
+	// 			x: wall.px[0] - level.pxWid / 2 + wall.width / 2,
+	// 			y: level.pxHei / 2 - wall.px[1] - wall.height / 2
+	// 		}))
+	// 	background.addComponent(new BackgroundElementsComponent({
+	// 		obstacles: backgroundDefinition.obstacles,
+	// 		effect: backgroundDefinition.effect,
+	// 		effectDelay: backgroundDefinition.effectDelay,
+	// 		lootables: backgroundDefinition.lootables,
+	// 		walls
+	// 	}))
+	// }
 
 	background.onDestroy(() => {
 		cameraUnSubscriber()

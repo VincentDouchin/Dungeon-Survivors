@@ -71,8 +71,15 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		lootables: [],
 		infinite: { x: false, y: true }
 	},
-	FIELDS: {
-		level: 'FIELDS',
+	SNOW: {
+		level: 'SNOW',
+		lightColor: new Color('hsl(0,0%,100%)'),
+		obstacles: [assets.elements.cart1],
+		lootables: [LOOTABLES.HAY],
+		infinite: { x: true, y: true }
+	},
+	LAVA: {
+		level: 'LAVA',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: [assets.elements.cart1],
 		lootables: [LOOTABLES.HAY],

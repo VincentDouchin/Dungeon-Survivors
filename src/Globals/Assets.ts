@@ -1,11 +1,11 @@
 import AssetLoader from "./../Utils/AssetLoader"
+import { BACKGROUND } from "../Constants/BackGrounds"
 import GUIData from './../../assets/GUI.json'
 import GUISource from './../../assets/GUI.png'
 import LDTKMap from "../Utils/LDTKMap"
 import MagicSpellsAllSpritesData from './../../assets/MagicSpellsAllSprites.json'
 import MagicSpellsAllSpritesSource from './../../assets/MagicSpellsAllSprites.png'
 import Tile from "../Utils/Tile"
-import arenasSource from './../../assets/map/Arenas.json'
 import auraSource from './../../assets/NinjaAdventure/FX/Magic/Circle/SpriteSheetOrange.png'
 import fireProjectileSource from './../../assets/magic projectiles/orangefire.png'
 import flagSource from './../../assets/map/flag.png'
@@ -16,7 +16,6 @@ import iconsData from './../../assets/icons.json'
 import iconsSource from './../../assets/icons.png'
 import inputsData from './../../assets/inputs/tilemap_white_packed.json'
 import inputsSource from './../../assets/inputs/tilemap_white_packed.png'
-import ldtkmapSource from './../../assets/map/ldtkOverworld.json'
 import leafSource from './../../assets/NinjaAdventure/FX/Particle/Leaf.png'
 import lightningSource from './../../assets/NinjaAdventure/FX/Elemental/Thunder/SpriteSheet.png'
 import rainDropSource from './../../assets/NinjaAdventure/FX/Particle/Rain.png'
@@ -58,8 +57,7 @@ const assets: {
 	hole: Record<string, Tile>
 	details: Record<string, Tile>
 	inputs: Record<string, Tile>
-	map: LDTKMap
-	arenas: LDTKMap
+	maps: Record<BACKGROUND, LDTKMap>
 	flag: Tile
 	title: Tile
 } = {
@@ -78,8 +76,7 @@ const assets: {
 	}),
 	flag: await Tile.fromImage(await AssetLoader.loadImage(flagSource), ({ buffer }) => ({ buffer, width: 16, frames: 4 })),
 	npc: await AssetLoader.loadFromGlob(import.meta.glob('./../../assets/npc/*.png', { eager: true }), ({ buffer }) => ({ buffer, frames: 4, width: 32 })) as Record<npcTileName, Tile>,
-	map: await LDTKMap.load(ldtkmapSource),
-	arenas: await LDTKMap.load(arenasSource),
+	maps: await LDTKMap.load(import.meta.glob(['/assets/**/_composite.png', '/assets/map/Arenas/*.json'], { eager: true })),
 	nature: await AssetLoader.loadFromSlices(tilesetNatureData, tilesetNatureSource),
 	elements: await AssetLoader.loadFromSlices(tilesetElementData, tilesetElementSource),
 	house: await AssetLoader.loadFromSlices(tilesetHouseData, tilesetHouseSource),

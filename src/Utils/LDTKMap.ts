@@ -1,6 +1,7 @@
 import { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
 
 import AssetLoader from "./AssetLoader"
+import { BACKGROUND } from '../Constants/BackGrounds'
 import Tile from "./Tile"
 import { node } from '../Components/PathNodeComponent'
 
@@ -16,21 +17,33 @@ interface entityInstanceFormatted {
 }
 export type ldtkNode = entityInstanceFormatted & node
 class LDTKMap implements LDTKMapDefinition {
+	tile: Tile
 	static tiles: Record<string, Tile> = {}
-	constructor(data: LDTKMap) {
+	static data: Record<BACKGROUND, any> = {}
+	constructor(data: LDTKMap, tile: Tile) {
 		Object.assign(this, data)
-
+		this.tile = tile
 	}
-	static sources: Record<string, { default: string }> = import.meta.glob('/assets/**/_composite.png', { eager: true })
-	static async load(data: any) {
-		for (let level of data.levels) {
-			const source = Object.entries(LDTKMap.sources).reduce<string>((acc, [path, source]) => {
-				if (path.split('/').includes(level.identifier)) return source.default
-				return acc
-			}, '')
-			this.tiles[level.identifier] = Tile.fromImage(await AssetLoader.loadImage(source))
+
+	static async load(glob: Record<string, { default: string } | any>) {
+		Object.entries(glob)
+		const maps: Record<BACKGROUND, LDTKMap> = {}
+		debugger
+
+		for (const [path, data] of Object.entries(glob)) {
+			const pathSplit = path.split(/[\/.]/)
+			if (pathSplit.at(-1) === 'json') {
+				const name = pathSplit.at(-2) as BACKGROUND
+				const tilePath = Object.entries(glob).find(([path, _]) => {
+					return path.includes(name) && path.split('.').at(-1) === 'png'
+				})?.[1].default
+				const tile = tilePath ? Tile.fromImage(await AssetLoader.loadImage(tilePath)) : Tile.empty(1024, 1024)
+				maps[name] = new LDTKMap(data, tile)
+			}
+
 		}
-		return new LDTKMap(data)
+		return maps
+
 	}
 	static getPropertiesOfEntity(level: Level,) {
 		return (entityInstance: EntityInstance) => {
