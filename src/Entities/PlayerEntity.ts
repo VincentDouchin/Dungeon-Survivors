@@ -39,9 +39,9 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(new SwitchingComponent(main))
 	player.addComponent(new FlockingComponent(playergroup, !main, 100))
 	player.addComponent(new BodyComponent(
-		{ moveForce: 12000 },
+		{ moveForce: 52000 },
 		[
-			{ width: BODYSIZES.normal.width, height: BODYSIZES.normal.height, mass: 10, offset: hero.tiles[0].idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL, COLLISIONGROUPS.PORTAL] },
+			{ width: BODYSIZES.normal.width, height: BODYSIZES.normal.height, mass: 10, offset: hero.tiles[0].idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL, COLLISIONGROUPS.PORTAL, COLLISIONGROUPS.LOOT] },
 			{ width: 100, height: 100, mass: 0, contact: true, sensor: true, group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.XP] }
 		]
 
