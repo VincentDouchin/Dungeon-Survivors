@@ -32,7 +32,17 @@ const LOOTABLES: Record<string, LootableOptions> = {
 	HAY: {
 		tile: assets.nature.hay,
 		particle: assets.effects.hayParticle
+	},
+	FLOWER_SNOW: {
+		tile: assets.nature.flowersnow,
+		particle: assets.effects.grassParticle
+	},
+	LAVA_CRYSTAL: {
+		tile: assets.nature.lavacrystal,
+		particle: assets.effects.grassParticle
+
 	}
+
 }
 export default LOOTABLES
 
