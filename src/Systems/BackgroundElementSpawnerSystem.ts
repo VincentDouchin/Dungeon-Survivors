@@ -38,9 +38,10 @@ class BackgroundElementSpawnerSystem extends System {
 					}
 				}
 			})
-
+			if (!size) return
 			for (let x = camera.left + camera.position.x - size; x < camera.right + camera.position.x + size; x += size) {
 				for (let y = camera.bottom + camera.position.y - size; y < camera.top + camera.position.y + size; y += size) {
+					// console.log('ok')
 					const chunkX = Math.floor(x / size)
 					const chunkY = Math.floor(y / size)
 					const node = backgroundElements.getNode(chunkX, chunkY)
