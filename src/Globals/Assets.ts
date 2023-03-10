@@ -1,19 +1,21 @@
-import AssetLoader, { AssetLoaderChain } from "./../Utils/AssetLoader"
+import AssetLoader, { loadImage } from "./../Utils/AssetLoader"
 import { Background, UI, characters, effects, icons } from './../../assets/images/images'
 
 import { BACKGROUND } from "../Constants/BackGrounds"
 import Tile from "../Utils/Tile"
 import {sounds} from './../../assets/sounds/sounds'
 
-const loadCharacterTilesFromFolder = new AssetLoaderChain<Tile>()
-	.chain(async x => await AssetLoader.loadImage(x.default))
+const getFileName = (path:string)=>path.split(/[./]/g).at(-2)!
+
+const loadCharacterTilesFromFolder = new AssetLoader<Tile>(getFileName)
+	.chain(async x => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x, { frames: 4 }))
-const loadTilesFromFolder = new AssetLoaderChain<Tile>()
-	.chain(async x => await AssetLoader.loadImage(x.default))
+const loadTilesFromFolder = new AssetLoader<Tile>(getFileName)
+	.chain(async x => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x))
-const loadAudio = new AssetLoaderChain<HTMLAudioElement>()
+const loadAudio = new AssetLoader<HTMLAudioElement>(getFileName)
 	.chain(x => new Audio(x.default))
-const loadJSON = new AssetLoaderChain()
+const loadJSON = new AssetLoader(getFileName)
 
 const framesNb: Record<effects, number> = {
 	"Leaf": 6,
@@ -36,19 +38,18 @@ const framesNb: Record<effects, number> = {
 	"flag": 4,
 	"Snow": 7
 }
-const loadEffects = new AssetLoaderChain<Tile>()
-	.chain(async x => await AssetLoader.loadImage(x.default))
+const loadEffects = new AssetLoader<Tile>(getFileName)
+	.chain(async x => await loadImage(x.default))
 	.chain((image, key) => Tile.fromImage(image, { frames: framesNb[key as effects] }))
-
 //! Assets
 const assets = {
-	characters: await loadCharacterTilesFromFolder.load<characters>(import.meta.glob('./../../assets/characters/*.png', { eager: true })),
-	UI: await loadTilesFromFolder.load<UI>(import.meta.glob('./../../assets/UI/*.png', { eager: true })),
-	icons: await loadTilesFromFolder.load<icons>(import.meta.glob('./../../assets/icons/*.png', { eager: true })),
-	background: await loadTilesFromFolder.load<Background>(import.meta.glob('./../../assets/Background/*.png', { eager: true })),
-	effects: await loadEffects.load<effects>(import.meta.glob('./../../assets/effects/*.png', { eager: true })),
+	characters: await loadCharacterTilesFromFolder.load<characters>(import.meta.glob('./../../assets/images/characters/*.png', { eager: true })),
+	UI: await loadTilesFromFolder.load<UI>(import.meta.glob('./../../assets/images/UI/*.png', { eager: true })),
+	icons: await loadTilesFromFolder.load<icons>(import.meta.glob('./../../assets/images/icons/*.png', { eager: true })),
+	background: await loadTilesFromFolder.load<Background>(import.meta.glob('./../../assets/images/Background/*.png', { eager: true })),
+	effects: await loadEffects.load<effects>(import.meta.glob('./../../assets/images/effects/*.png', { eager: true })),
 	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.*')),
-	mapTiles: await loadTilesFromFolder.load<BACKGROUND>(import.meta.glob('/assets/**/_composite.png', { eager: true })),
+	mapTiles: await loadTilesFromFolder.load<BACKGROUND>(import.meta.glob('/assets/map/Arenas/**/*.png', { eager: true })),
 	mapData: await loadJSON.load<BACKGROUND>(import.meta.glob('/assets/map/Arenas/*.json', { eager: true }))
 } as const
 debugger

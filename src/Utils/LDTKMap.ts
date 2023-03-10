@@ -1,6 +1,5 @@
 import { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
 
-import AssetLoader from "./AssetLoader"
 import { BACKGROUND } from '../Constants/BackGrounds'
 import Tile from "./Tile"
 import { node } from '../Components/PathNodeComponent'
@@ -23,27 +22,6 @@ class LDTKMap implements LDTKMapDefinition {
 	constructor(data: LDTKMap, tile: Tile) {
 		Object.assign(this, data)
 		this.tile = tile
-	}
-
-	static async load(glob: Record<string, { default: string } | any>) {
-		Object.entries(glob)
-		const maps: Record<BACKGROUND, LDTKMap> = {}
-		debugger
-
-		for (const [path, data] of Object.entries(glob)) {
-			const pathSplit = path.split(/[\/.]/)
-			if (pathSplit.at(-1) === 'json') {
-				const name = pathSplit.at(-2) as BACKGROUND
-				const tilePath = Object.entries(glob).find(([path, _]) => {
-					return path.includes(name) && path.split('.').at(-1) === 'png'
-				})?.[1].default
-				const tile = tilePath ? Tile.fromImage(await AssetLoader.loadImage(tilePath)) : Tile.empty(1024, 1024)
-				maps[name] = new LDTKMap(data, tile)
-			}
-
-		}
-		return maps
-
 	}
 	static getPropertiesOfEntity(level: Level,) {
 		return (entityInstance: EntityInstance) => {

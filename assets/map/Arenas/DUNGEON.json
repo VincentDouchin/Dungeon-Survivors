@@ -27,8 +27,8 @@
 	"minifyJson": false,
 	"externalLevels": false,
 	"exportTiled": false,
-	"simplifiedExport": true,
-	"imageExportMode": "None",
+	"simplifiedExport": false,
+	"imageExportMode": "OneImagePerLevel",
 	"exportLevelBg": true,
 	"pngFilePattern": null,
 	"backupOnSave": false,
@@ -230,7 +230,7 @@
 	], "enums": [], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
-			"identifier": "Level_0",
+			"identifier": "DUNGEON",
 			"iid": "c74cc2e0-9f30-11ed-8627-11e4899c7e57",
 			"uid": 0,
 			"worldX": 0,
@@ -240,7 +240,7 @@
 			"pxHei": 1024,
 			"__bgColor": "#696A79",
 			"bgColor": null,
-			"useAutoIdentifier": true,
+			"useAutoIdentifier": false,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,

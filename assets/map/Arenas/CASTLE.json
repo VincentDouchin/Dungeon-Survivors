@@ -14,11 +14,11 @@
 	"nextUid": 48,
 	"identifierStyle": "Capitalize",
 	"toc": [],
-	"worldLayout": "Free",
-	"worldGridWidth": 256,
-	"worldGridHeight": 256,
-	"defaultLevelWidth": 256,
-	"defaultLevelHeight": 256,
+	"worldLayout": null,
+	"worldGridWidth": null,
+	"worldGridHeight": null,
+	"defaultLevelWidth": null,
+	"defaultLevelHeight": null,
 	"defaultPivotX": 0,
 	"defaultPivotY": 0,
 	"defaultGridSize": 16,
@@ -27,8 +27,8 @@
 	"minifyJson": false,
 	"externalLevels": false,
 	"exportTiled": false,
-	"simplifiedExport": true,
-	"imageExportMode": "None",
+	"simplifiedExport": false,
+	"imageExportMode": "OneImagePerLevel",
 	"exportLevelBg": true,
 	"pngFilePattern": null,
 	"backupOnSave": false,
@@ -36,7 +36,7 @@
 	"levelNamePattern": "Level_%idx",
 	"tutorialDesc": null,
 	"customCommands": [],
-	"flags": [],
+	"flags": ["MultiWorlds"],
 	"defs": { "layers": [
 		{
 			"__type": "Tiles",
@@ -175,9 +175,10 @@
 			"cachedPixelData": null
 		}
 	], "enums": [], "externalEnums": [], "levelFields": [] },
-	"levels": [
+	"levels": [],
+	"worlds": [{ "iid": "f8da39d0-9f30-11ed-83f7-995b4d9768ba", "identifier": "World", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
 		{
-			"identifier": "Level_0",
+			"identifier": "CASTLE",
 			"iid": "c74cc2e0-9f30-11ed-8627-11e4899c7e57",
 			"uid": 0,
 			"worldX": 0,
@@ -187,7 +188,7 @@
 			"pxHei": 1024,
 			"__bgColor": "#696A79",
 			"bgColor": null,
-			"useAutoIdentifier": true,
+			"useAutoIdentifier": false,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
@@ -7394,6 +7395,5 @@
 			],
 			"__neighbours": []
 		}
-	],
-	"worlds": []
+	] }]
 }
