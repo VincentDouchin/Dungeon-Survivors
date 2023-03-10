@@ -2,6 +2,13 @@ import { CanvasTexture, NearestFilter } from "three"
 
 import getBuffer from "./Buffer"
 
+interface tileOptions {
+	buffer: CanvasRenderingContext2D
+	width?: number
+	height?: number
+	frames?: number
+	padding?: boolean
+}
 class Tile {
 	buffer: CanvasRenderingContext2D
 	width: number
@@ -15,12 +22,12 @@ class Tile {
 		this.texture = new CanvasTexture(buffer.canvas)
 		this.texture.minFilter = NearestFilter
 		this.texture.magFilter = NearestFilter
-		const realWidth = width ?? buffer.canvas.width
-		const realHeight = height ?? buffer.canvas.height
+		const realWidth = (width ?? buffer.canvas.width) / frames
+		const realHeight = (height ?? buffer.canvas.height)
 		this.width = padding ? realWidth + 2 : realWidth
 		this.height = padding ? realHeight + 2 : realHeight
 		this.frames = frames
-		for (let i = 0; i <= frames - 1; i++) {
+		for (let i = 0; i < frames; i++) {
 			const frameBuffer = getBuffer(this.width, this.height)
 			const offset = padding ? 1 : 0
 			frameBuffer.drawImage(
@@ -36,10 +43,10 @@ class Tile {
 
 		}
 	}
-	static fromImage(image: HTMLImageElement, fn = (tileOptions: tileOptions) => tileOptions): Tile {
+	static fromImage(image: HTMLImageElement, tileOptions: Partial<tileOptions> = {}): Tile {
 		const buffer = getBuffer(image.width, image.height)
 		buffer.drawImage(image, 0, 0)
-		return new Tile(fn({ buffer }))
+		return new Tile(({ ...tileOptions, buffer }))
 	}
 	static empty(x: number = 16, y: number = 16) {
 		const buffer = getBuffer(x, y)
