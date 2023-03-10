@@ -125,8 +125,8 @@ class Entity {
 	onDestroy(fn: () => void) {
 		const unSubscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			if (entity.id === this.id) {
-				unSubscriber()
 				fn()
+				unSubscriber()
 			}
 		})
 	}
