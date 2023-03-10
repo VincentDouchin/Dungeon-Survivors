@@ -81,10 +81,3 @@ interface TiledProperty {
 }
 
 type nodeDirection = 'left' | 'right' | 'top'
-interface tileOptions {
-	buffer: CanvasRenderingContext2D
-	width?: number
-	height?: number
-	frames?: number
-	padding?: boolean
-}
