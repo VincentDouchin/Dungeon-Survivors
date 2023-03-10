@@ -50,8 +50,12 @@ class BackgroundElementsComponent extends Component {
 		this.removeWallSub = ECS.eventBus.subscribe(ECSEVENTS.REMOVE_WALL, ({ entity, deleteLoot }) => {
 			this.obstaclesMap.forEach(node => {
 				if (node.entity === entity) {
-					if (deleteLoot) entity.getComponent(DroppableComponent)?.destroy()
-					entity.destroy()
+					if (deleteLoot){
+						 entity.getComponent(DroppableComponent)?.destroy()
+						}else {
+							entity.destroy()
+						}
+					
 					node.destroyed = true
 				}
 			})
