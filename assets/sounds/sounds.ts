@@ -1,0 +1,1 @@
+export type sounds = "08_Fireball_02" | "09_Fireball_03" | "10_human_special_atk_2" | "17 - Fight" | "17_Thunder_01" | "26_sword_hit_1" | "26_sword_hit_2" | "26_sword_hit_3" | "68_ATB_4" | "75_Lvl_up_03" | "77_flesh_02" | "Fx" | "GameOver2" | "PowerUp1" | "Select" | "Validate" | "winsquare-6993"
