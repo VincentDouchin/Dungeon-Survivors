@@ -41,7 +41,6 @@ class MapState implements GameState {
 		const map = new LDTKMap(assets.mapData['OVERWORLD'],assets.mapTiles['OVERWORLD'])
 		const level = map.levels[0]
 		const mapTile = map.tile
-		debugger
 		State.cameraBounds = {
 			left: -mapTile.width / 2,
 			right: mapTile.width / 2,
