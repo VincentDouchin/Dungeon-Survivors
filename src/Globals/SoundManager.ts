@@ -1,7 +1,7 @@
-import SOUNDS_SOURCES, { SOUND } from '../Constants/Sounds'
-
+import  { SOUND } from '../Constants/Sounds'
 import { renderer } from './Initialize'
 import saveData from './SaveManager'
+import { sounds } from '../../assets/sounds/sounds'
 
 interface soundManagerOptions {
 	volume?: number,
@@ -11,11 +11,12 @@ interface soundManagerOptions {
 	fade?: boolean
 }
 class SoundManager {
-	sounds: Record<keyof typeof SOUNDS_SOURCES, HTMLAudioElement> = SOUNDS_SOURCES
+	sounds: Record<sounds, HTMLAudioElement> 
 	ctx = new AudioContext()
 	effects: Map<HTMLAudioElement, number> = new Map()
 	musics: Map<HTMLAudioElement, number> = new Map()
-	constructor() {
+	constructor(sounds:Record<sounds,HTMLAudioElement>) {
+		this.sounds = sounds
 		if (this.ctx.state === 'suspended') {
 			const listener = () => {
 				this.ctx.resume()
@@ -35,7 +36,7 @@ class SoundManager {
 	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions,) {
 		const nodes: AudioNode[] = []
 		const newOptions = { volume: 1, playbackRate: 1, autoplay: true, loop: false, fade: false, ...options }
-		const selectedSound = Array.isArray(name) ? name[Math.floor(Math.random() * name.length)] : name
+		const selectedSound =  name[Math.floor(Math.random() * name.length)] 
 		const audioElement = this.sounds[selectedSound].cloneNode() as HTMLAudioElement
 		const target = type === 'music' ? this.musics : this.effects
 		const volume = type === 'music' ? saveData.musicVolume : saveData.effectsVolume
