@@ -9,7 +9,6 @@ import assets from "../Globals/Assets"
 
 const XPEntity = (amount = 1) => (position: PositionComponent) => {
 	const xp = new Entity('xp')
-	debugger
 	xp.addComponent(new SpriteComponent(assets.effects.Spark, { renderOrder: 1, scale: 0.8 * (1 + amount / 10) }))
 	xp.addComponent(new AnimationComponent({ idle: assets.effects.Spark }))
 	xp.addComponent(new BodyComponent(
