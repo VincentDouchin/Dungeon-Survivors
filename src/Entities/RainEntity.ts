@@ -10,7 +10,7 @@ import waitFor from "../Utils/WaitFor"
 
 const RainEntity = () => {
 	const rain = new Entity('rain')
-	const tile = assets.effects.rainDrop
+	const tile = assets.effects.Rain
 	rain.addComponent(new SpriteComponent(tile, { renderOrder: 10, scale: 1.5 }))
 	rain.addComponent(new AnimationComponent({ default: tile, }, { start: false, selectedFrame: Math.floor(Math.random() * 3) }))
 	const position = rain.addComponent(new PositionComponent(
@@ -24,7 +24,7 @@ const RainEntity = () => {
 			position.x -= tile.width / 2
 			yield* waitFor(2)
 		}
-		ParticleEntity(position, assets.effects.rainFloor)
+		ParticleEntity(position, assets.effects.RainOnFloor)
 		rain.destroy()
 	})
 	return rain

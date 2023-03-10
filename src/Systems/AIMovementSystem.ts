@@ -103,7 +103,7 @@ class AIMovementSystem extends System {
 									const sprite = entity.getComponent(SpriteComponent)
 									new Coroutine(function* () {
 										ai.enabled = false
-										ParticleEntity({ x: position.x, y: position.y - sprite.scaledHeight / 2 }, assets.effects.SmokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
+										ParticleEntity({ x: position.x, y: position.y - sprite.scaledHeight / 2 }, assets.effects.smokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
 										yield* waitFor(30)
 										ai.chargingDirection = seekingVelocity.clone().multiply(new Vector2(5, 5))
 										ai.enabled = true

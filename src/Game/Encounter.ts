@@ -77,7 +77,7 @@ class Encounter {
 		}
 	}
 	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
-		return ParticleEntity({ x, y }, assets.effects.Smoke, { scale: 0.5 }).then(() => {
+		return ParticleEntity({ x, y }, assets.effects.smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
 			this.enemies.push(enemy.id)
 			return enemy

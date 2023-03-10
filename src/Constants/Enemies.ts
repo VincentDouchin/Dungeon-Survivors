@@ -26,8 +26,8 @@ const Enemies: Record<string, EnemyType> = {
 	// ! ORCS
 	goblin: {
 		tiles: {
-			idle: assets.tiles.goblin_idle_anim,
-			run: assets.tiles.goblin_run_anim
+			idle: assets.characters.orcSmallWalk,
+			run: assets.characters.orcSmallRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -36,8 +36,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orc: {
 		tiles: {
-			idle: assets.tiles.orc_warrior_idle_anim,
-			run: assets.tiles.orc_warrior_run_anim
+			idle: assets.characters.orcWalk,
+			run: assets.characters.orcRun
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -46,8 +46,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orcShaman: {
 		tiles: {
-			idle: assets.tiles.orc_shaman_idle_anim,
-			run: assets.tiles.orc_shaman_run_anim
+			idle: assets.characters.orcShamanWalk,
+			run: assets.characters.orcShamanRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -58,8 +58,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orcMasked: {
 		tiles: {
-			idle: assets.tiles.masked_orc_idle_anim,
-			run: assets.tiles.masked_orc_run_anim,
+			idle: assets.characters.orcMaskedWalk,
+			run: assets.characters.orcMaskedRun,
 		},
 		health: 40,
 		size: BODYSIZES.normal,
@@ -70,8 +70,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orcBig: {
 		tiles: {
-			idle: assets.tiles.orc_boss_idle_anim,
-			run: assets.tiles.orc_boss_run_anim,
+			idle: assets.characters.orcBigPatchWalk,
+			run: assets.characters.orcBigPatchRun,
 		},
 		health: 400,
 		size: BODYSIZES.big,
@@ -86,8 +86,8 @@ const Enemies: Record<string, EnemyType> = {
 	// ! DEMONS
 	imp: {
 		tiles: {
-			idle: assets.tiles.imp_idle_anim,
-			run: assets.tiles.imp_run_anim
+			idle: assets.characters.impWalk,
+			run: assets.characters.impRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -96,8 +96,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	wogol: {
 		tiles: {
-			idle: assets.tiles.wogol_idle_anim,
-			run: assets.tiles.wogol_run_anim
+			idle: assets.characters.wogolWalk,
+			run: assets.characters.wogolRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -107,8 +107,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	chort: {
 		tiles: {
-			idle: assets.tiles.chort_idle_anim,
-			run: assets.tiles.chort_run_anim
+			idle: assets.characters.chortWalk,
+			run: assets.characters.chortRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -119,8 +119,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	demonBig: {
 		tiles: {
-			idle: assets.tiles.big_demon_idle_anim,
-			run: assets.tiles.big_demon_run_anim
+			idle: assets.characters.demonBigWalk,
+			run: assets.characters.demonBigRun
 		},
 		health: 500,
 		size: BODYSIZES.big,
@@ -141,8 +141,8 @@ const Enemies: Record<string, EnemyType> = {
 	// !UNDEAD 
 	zombieSmall: {
 		tiles: {
-			idle: assets.tiles.tiny_zombie_idle_anim,
-			run: assets.tiles.tiny_zombie_run_anim
+			idle: assets.characters.zombieSmallWalk,
+			run: assets.characters.zombieSmallRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -151,8 +151,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	skeleton: {
 		tiles: {
-			idle: assets.tiles.skelet_idle_anim,
-			run: assets.tiles.skelet_run_anim
+			idle: assets.characters.skeletonWalk,
+			run: assets.characters.skeletonRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -162,8 +162,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	muddy: {
 		tiles: {
-			idle: assets.tiles.muddy_idle_anim,
-			run: assets.tiles.muddy_run_anim
+			idle: assets.characters.muddy,
+			run: assets.characters.muddy
 		},
 		health: 30,
 		size: BODYSIZES.square,
@@ -173,8 +173,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	swampy: {
 		tiles: {
-			idle: assets.tiles.swampy_idle_anim,
-			run: assets.tiles.swampy_run_anim
+			idle: assets.characters.slimy,
+			run: assets.characters.slimy
 		},
 		health: 30,
 		size: BODYSIZES.square,
@@ -184,8 +184,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	necromancer: {
 		tiles: {
-			idle: assets.tiles.necromancer_idle_anim,
-			run: assets.tiles.necromancer_run_anim
+			idle: assets.characters.necromancerWalk,
+			run: assets.characters.necromancerRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -197,8 +197,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	zombie: {
 		tiles: {
-			idle: assets.tiles.zombie_idle_anim,
-			run: assets.tiles.zombie_run_anim
+			idle: assets.characters.zombie,
+			run: assets.characters.zombie
 		},
 		health: 30,
 		size: BODYSIZES.normal,
@@ -208,8 +208,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	iceZombie: {
 		tiles: {
-			idle: assets.tiles.ice_zombie_idle_anim,
-			run: assets.tiles.ice_zombie_run_anim
+			idle: assets.characters.icyZombie,
+			run: assets.characters.icyZombie
 		},
 		health: 40,
 		size: BODYSIZES.normal,
@@ -219,8 +219,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	ogre: {
 		tiles: {
-			idle: assets.tiles.big_zombie_idle_anim,
-			run: assets.tiles.big_zombie_run_anim,
+			idle: assets.characters.zombieBigWalk,
+			run: assets.characters.zombieBigRun,
 		},
 		health: 400,
 		size: BODYSIZES.big,
@@ -240,62 +240,62 @@ const Enemies: Record<string, EnemyType> = {
 	// ! HUMANS
 	bandit: {
 		tiles: {
-			idle: assets.tiles.bandit_idle_anim,
-			run: assets.tiles.bandit_run_anim
+			idle: assets.characters.banditWalk,
+			run: assets.characters.banditRun
 		},
 		health: 40,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
 	},
-	// ! GNOLL
-	puppy: {
-		tiles: {
-			idle: assets.tiles.puppy_idle_anim,
-			run: assets.tiles.puppy_run_anim
-		},
-		health: 11,
-		size: BODYSIZES.small,
-		speed: 1,
-		damage: 1
-	},
-	gnoll: {
-		tiles: {
-			idle: assets.tiles.gnoll_grunt_idle_anim,
-			run: assets.tiles.gnoll_grunt_run_anim
-		},
-		health: 20,
-		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 2
-	},
-	gnollBrute: {
-		tiles: {
-			idle: assets.tiles.gnoll_brute_idle_anim,
-			run: assets.tiles.gnoll_brute_run_anim
-		},
-		health: 20,
-		size: BODYSIZES.normal,
-		speed: 1.5,
-		damage: 3
-	},
-	gnollMasked: {
-		tiles: {
-			idle: assets.tiles.gnoll_masked_idle_anim,
-			run: assets.tiles.gnoll_brute_run_anim,
-		},
-		health: 40,
-		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 3,
-		charger: true,
-		xp: 2
-	},
+	// // ! GNOLL
+	// puppy: {
+	// 	tiles: {
+	// 		idle: assets.characters.puppy_idle_anim,
+	// 		run: assets.characters.puppy_run_anim
+	// 	},
+	// 	health: 11,
+	// 	size: BODYSIZES.small,
+	// 	speed: 1,
+	// 	damage: 1
+	// },
+	// gnoll: {
+	// 	tiles: {
+	// 		idle: assets.characters.gnoll_grunt_idle_anim,
+	// 		run: assets.characters.gnoll_grunt_run_anim
+	// 	},
+	// 	health: 20,
+	// 	size: BODYSIZES.normal,
+	// 	speed: 2,
+	// 	damage: 2
+	// },
+	// gnollBrute: {
+	// 	tiles: {
+	// 		idle: assets.characters.gnoll_brute_idle_anim,
+	// 		run: assets.characters.gnoll_brute_run_anim
+	// 	},
+	// 	health: 20,
+	// 	size: BODYSIZES.normal,
+	// 	speed: 1.5,
+	// 	damage: 3
+	// },
+	// gnollMasked: {
+	// 	tiles: {
+	// 		idle: assets.characters.gnoll_masked_idle_anim,
+	// 		run: assets.characters.gnoll_brute_run_anim,
+	// 	},
+	// 	health: 40,
+	// 	size: BODYSIZES.normal,
+	// 	speed: 2,
+	// 	damage: 3,
+	// 	charger: true,
+	// 	xp: 2
+	// },
 	// ! FOREST
 	bunny: {
 		tiles: {
-			idle: assets.tiles.bunny_idle_anim,
-			run: assets.tiles.bunny_run_anim
+			idle: assets.characters.bunnyWalk,
+			run: assets.characters.bunnyRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -304,8 +304,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	centaurFemale: {
 		tiles: {
-			idle: assets.tiles.centaur_f_idle_anim,
-			run: assets.tiles.centaur_f_run_anim
+			idle: assets.characters.centaurFemaleWalk,
+			run: assets.characters.centaurFemaleRun
 		},
 		health: 25,
 		size: BODYSIZES.centaur,
@@ -314,8 +314,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	centaurMale: {
 		tiles: {
-			idle: assets.tiles.centaur_m_idle_anim,
-			run: assets.tiles.centaur_m_run_anim
+			idle: assets.characters.centaurMaleWalk,
+			run: assets.characters.centaurMaleRun
 		},
 		health: 25,
 		size: BODYSIZES.centaur,
@@ -324,8 +324,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	mushroomSmall: {
 		tiles: {
-			idle: assets.tiles.mushroom_small_idle_anim,
-			run: assets.tiles.mushroom_small_run_anim
+			idle: assets.characters.mushroomSmallWalk,
+			run: assets.characters.mushroomSmallRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -334,8 +334,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	mushroomMedium: {
 		tiles: {
-			idle: assets.tiles.mushroom_medium_idle_anim,
-			run: assets.tiles.mushroom_medium_run_anim
+			idle: assets.characters.mushroomNormalWalk,
+			run: assets.characters.mushroomNormalRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -344,8 +344,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	mushroomBig: {
 		tiles: {
-			idle: assets.tiles.mushroom_big_idle_anim,
-			run: assets.tiles.mushroom_big_run_anim
+			idle: assets.characters.mushroomBigWalk,
+			run: assets.characters.mushroomBigRun
 		},
 		health: 300,
 		size: BODYSIZES.big,
@@ -364,8 +364,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	bear: {
 		tiles: {
-			idle: assets.tiles.bear_idle_anim,
-			run: assets.tiles.bear_run_anim
+			idle: assets.characters.bearWalk,
+			run: assets.characters.bearRun
 		},
 		health: 60,
 		size: BODYSIZES.massive,
@@ -376,29 +376,29 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	direwolf: {
 		tiles: {
-			idle: assets.tiles.direwolf_idle_anim,
-			run: assets.tiles.direwolf_run_anim
+			idle: assets.characters.wolfWalk,
+			run: assets.characters.wolfRun
 		},
 		health: 30,
 		size: BODYSIZES.wide,
 		speed: 3,
 		damage: 2
 	},
-	golem: {
-		tiles: {
-			idle: assets.tiles.golem_idle_anim,
-			run: assets.tiles.golem_run_anim
-		},
-		health: 500,
-		size: BODYSIZES.giant,
-		speed: 15,
-		damage: 8
-	},
+	// golem: {
+	// 	tiles: {
+	// 		idle: assets.characters.golem_idle_anim,
+	// 		run: assets.characters.golem_run_anim
+	// 	},
+	// 	health: 500,
+	// 	size: BODYSIZES.giant,
+	// 	speed: 15,
+	// 	damage: 8
+	// },
 	//! ELVES
 	woodElfMale: {
 		tiles: {
-			idle: assets.tiles.wood_elf_m_idle_anim,
-			run: assets.tiles.wood_elf_m_run_anim
+			idle: assets.characters.elfVillagerMaleWalk,
+			run: assets.characters.elfVillagerMaleRun
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -407,8 +407,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	woodElfFemale: {
 		tiles: {
-			idle: assets.tiles.wood_elf_f_idle_anim,
-			run: assets.tiles.wood_elf_f_run_anim
+			idle: assets.characters.elfVillagerFemaleWalk,
+			run: assets.characters.elfVillagerFemaleRun
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -417,8 +417,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	elfQueen: {
 		tiles: {
-			idle: assets.tiles.elf_queen_m_idle_anim,
-			run: assets.tiles.elf_queen_m_run_anim
+			idle: assets.characters.elfQueenWalk,
+			run: assets.characters.elfQueenRun
 		},
 		health: 200,
 		size: BODYSIZES.normal,
@@ -428,7 +428,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	elfKing: {
 		tiles: {
-			idle: assets.tiles.elf_king_f_idle_anim,
+			idle: assets.characters.elfKing,
 		},
 		health: 200,
 		size: BODYSIZES.normal,
@@ -438,8 +438,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	leprechaun: {
 		tiles: {
-			idle: assets.tiles.leprechaun_idle_anim,
-			run: assets.tiles.leprechaun_run_anim
+			idle: assets.characters.leprechaunWalk,
+			run: assets.characters.leprechaunRun
 		},
 		health: 11,
 		size: BODYSIZES.small,
@@ -448,8 +448,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	elfRanger: {
 		tiles: {
-			idle: assets.tiles.ranger_idle_anim,
-			run: assets.tiles.ranger_run_anim
+			idle: assets.characters.elfArcherWalk,
+			run: assets.characters.elfArcherRun
 		},
 		health: 30,
 		size: BODYSIZES.normal,
@@ -460,8 +460,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	elfKnight: {
 		tiles: {
-			idle: assets.tiles.elf_knight_idle_anim,
-			run: assets.tiles.elf_knight_run_anim
+			idle: assets.characters.elfKnightWalk,
+			run: assets.characters.elfKnightRun
 		},
 		health: 30,
 		size: BODYSIZES.normal,
@@ -471,8 +471,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	goldenKnight: {
 		tiles: {
-			idle: assets.tiles.knight_elite_idle_anim,
-			run: assets.tiles.knight_elite_run_anim
+			idle: assets.characters.goldenKnightWalk,
+			run: assets.characters.goldenKnightRun
 		},
 		health: 50,
 		size: BODYSIZES.big,
@@ -483,8 +483,8 @@ const Enemies: Record<string, EnemyType> = {
 	// ! VILLAGERS
 	villagerMale: {
 		tiles: {
-			idle: assets.npc.Townsfolk_M_Idle,
-			run: assets.npc.Townsfolk_M_Walk
+			idle: assets.characters.elfVillagerMaleWalk,
+			run: assets.characters.elfVillagerMaleRun
 		},
 		health: 13,
 		size: BODYSIZES.normal,
@@ -493,8 +493,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	villagerFemale: {
 		tiles: {
-			idle: assets.npc.Townsfolk_F_Idle,
-			run: assets.npc.Townsfolk_F_Walk
+			idle: assets.characters.elfVillagerFemaleWalk,
+			run: assets.characters.elfVillagerFemaleRun
 		},
 		health: 13,
 		size: BODYSIZES.normal,
@@ -503,8 +503,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	butcher: {
 		tiles: {
-			idle: assets.npc.Butcher_Idle,
-			run: assets.npc.Butcher_Walk
+			idle: assets.characters.butcherWalk,
+			run: assets.characters.butcherRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -514,8 +514,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	blacksmith: {
 		tiles: {
-			idle: assets.npc.Blacksmith_Idle,
-			run: assets.npc.Blacksmith_Walk
+			idle: assets.characters.blacksmithWalk,
+			run: assets.characters.blacksmithRun
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -526,47 +526,30 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	alchemist: {
 		tiles: {
-			idle: assets.npc.Alchemist_Idle,
-			run: assets.npc.Alchemist_Walk,
+			idle: assets.characters.alchemistWalk,
+			run: assets.characters.alchemistRun,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 3
 	},
-	shopKeeper: {
-		tiles: {
-			idle: assets.npc["MagicShopKeeper_Idle + Walk"],
-		},
-		health: 15,
-		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 3
-	},
+
 	thief: {
 		tiles: {
-			idle: assets.npc.Thief_Idle,
-			run: assets.npc.Thief_Walk,
+			idle: assets.characters.thiefWalk,
+			run: assets.characters.thiefRun,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 2
 	},
-	mage: {
-		tiles: {
-			idle: assets.npc.Mage_Idle,
-			run: assets.npc.Mage_Walk,
-		},
-		health: 15,
-		size: BODYSIZES.normal,
-		speed: 2,
-		damage: 3
-	},
+
 	archer: {
 		tiles: {
-			idle: assets.npc.Archer_Idle,
-			run: assets.npc.Archer_Walk,
+			idle: assets.characters.scoutWalk,
+			run: assets.characters.scoutRun,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -575,8 +558,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	executioner: {
 		tiles: {
-			idle: assets.npc.Executioner_Idle,
-			run: assets.npc.Executioner_Walk,
+			idle: assets.characters.executionerWalk,
+			run: assets.characters.executionerRun,
 		},
 		health: 400,
 		size: BODYSIZES.normal,
@@ -589,8 +572,8 @@ const Enemies: Record<string, EnemyType> = {
 	// ! KINGSGUARD
 	herald: {
 		tiles: {
-			idle: assets.npc.Herald_Idle,
-			run: assets.npc.Herald_Walk,
+			idle: assets.characters.heralsWalk,
+			run: assets.characters.heralsRun,
 		},
 		health: 11,
 		size: BODYSIZES.normal,
@@ -599,8 +582,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	knight: {
 		tiles: {
-			idle: assets.npc.Knight_Idle,
-			run: assets.npc.Knight_Walk,
+			idle: assets.characters.knightNormalWalk,
+			run: assets.characters.knightNormalRun,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -609,8 +592,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	knightFat: {
 		tiles: {
-			idle: assets.npc.HeavyKnight_Idle,
-			run: assets.npc.HeavyKnight_Walk,
+			idle: assets.characters.knightFatWalk,
+			run: assets.characters.knightFatRun,
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -620,8 +603,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	knightElite: {
 		tiles: {
-			idle: assets.npc.EliteKnight_Idle,
-			run: assets.npc.EliteKnight_Walk,
+			idle: assets.characters.eliteKnightWalk,
+			run: assets.characters.eliteKnightRun,
 		},
 		health: 25,
 		size: BODYSIZES.normal,
@@ -631,8 +614,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	knightEliteLarge: {
 		tiles: {
-			idle: assets.npc.LargeEliteKnight_Idle,
-			run: assets.npc.LargeEliteKnight_Walk,
+			idle: assets.characters.largeKnightWalk,
+			run: assets.characters.largeKnightRun,
 		},
 		health: 40,
 		size: BODYSIZES.big,
@@ -642,8 +625,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	king: {
 		tiles: {
-			idle: assets.npc.King_Idle,
-			run: assets.npc.King_Walk,
+			idle: assets.characters.knigYoungWalk,
+			run: assets.characters.knigYoungRUn,
 		},
 		health: 200,
 		size: BODYSIZES.normal,
@@ -653,8 +636,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	queen: {
 		tiles: {
-			idle: assets.npc.Queen_Idle,
-			run: assets.npc.Queen_Walk,
+			idle: assets.characters.queenWalk,
+			run: assets.characters.queenRun,
 		},
 		health: 50,
 		size: BODYSIZES.normal,
@@ -664,7 +647,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	kingOld: {
 		tiles: {
-			idle: assets.npc["MountainKing_Idle + Walk"],
+			idle: assets.characters.kingOldWalk,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -673,8 +656,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	princess: {
 		tiles: {
-			idle: assets.npc.Princess_Idle,
-			run: assets.npc.Princess_Walk,
+			idle: assets.characters.princessWalk,
+			run: assets.characters.princessRun,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -684,7 +667,7 @@ const Enemies: Record<string, EnemyType> = {
 	// ! PRIESTS
 	clericFat: {
 		tiles: {
-			idle: assets.tiles.cleric_1_idle_anim,
+			idle: assets.characters.monkFatWalk,
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -693,7 +676,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	clericNormal: {
 		tiles: {
-			idle: assets.tiles.cleric_2_idle_anim,
+			idle: assets.characters.monkNormalWalk,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -702,7 +685,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	clericSkinny: {
 		tiles: {
-			idle: assets.tiles.cleric_3_idle_anim,
+			idle: assets.characters.monkSkinnyWalk,
 		},
 		health: 11,
 		size: BODYSIZES.normal,
@@ -711,7 +694,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	nunFat: {
 		tiles: {
-			idle: assets.npc["FatNun_Idle + Walk"],
+			idle: assets.characters.nunFatWalk,
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -720,7 +703,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	nunNormal: {
 		tiles: {
-			idle: assets.npc["NormalNun_Idle + Walk"],
+			idle: assets.characters.nunNormalWalk,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -729,7 +712,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	nunSkinny: {
 		tiles: {
-			idle: assets.npc["SkinnyNun_Idle + Walk"],
+			idle: assets.characters.nunSkinnyWalk,
 		},
 		health: 11,
 		size: BODYSIZES.normal,
@@ -738,7 +721,7 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	bishop: {
 		tiles: {
-			idle: assets.npc["Bishop_Idle + Walk"],
+			idle: assets.characters.bishopWalk,
 		},
 		health: 15,
 		size: BODYSIZES.normal,
@@ -748,8 +731,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	templar: {
 		tiles: {
-			idle: assets.npc.Templar_Idle,
-			run: assets.npc.Templar_Walk
+			idle: assets.characters.templarWalk,
+			run: assets.characters.templarRun
 		},
 		health: 20,
 		size: BODYSIZES.normal,
@@ -759,8 +742,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	angel: {
 		tiles: {
-			idle: assets.tiles.angel_idle_anim,
-			run: assets.tiles.angel_run_anim
+			idle: assets.characters.angelWalk,
+			run: assets.characters.angelRun
 		},
 		health: 11,
 		size: BODYSIZES.small,

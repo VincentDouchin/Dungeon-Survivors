@@ -32,7 +32,7 @@ const LightningSpellEntity = (entity: Entity) => {
 		const enemyPosition = enemy.getComponent(PositionComponent)
 		targeter.enabled = false
 		const lightning = new Entity('lightning')
-		const tile = assets.effects.Lightning
+		const tile = assets.effects.lightning
 		lightning.addComponent(new SpriteComponent(tile))
 		const animation = lightning.addComponent(new AnimationComponent({ default: tile, }, { frameRate: 4 }))
 		lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))

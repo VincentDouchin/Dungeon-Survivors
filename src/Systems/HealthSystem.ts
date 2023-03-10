@@ -39,7 +39,7 @@ class HealthSystem extends System {
 				})
 			}
 			if (sprite && amount < 0) {
-				ParticleEntity(entity, assets.magic.healing, { duration: 3, color: [0.9, 1, 0, 1] })
+				ParticleEntity(entity, assets.effects.healing, { duration: 3, color: [0.9, 1, 0, 1] })
 			}
 		}))
 	}

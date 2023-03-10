@@ -20,8 +20,8 @@ const PathEntity = (nodes: node[]) => {
 		path.addChildren(nodeEntity)
 		nodeEntity.addComponent(new PathNodeComponent(node, nodeEntities))
 		if (node.flag) {
-			nodeEntity.addComponent(new SpriteComponent(assets.flag))
-			nodeEntity.addComponent(new AnimationComponent({ idle: assets.flag }))
+			nodeEntity.addComponent(new SpriteComponent(assets.effects.flag))
+			nodeEntity.addComponent(new AnimationComponent({ idle: assets.effects.flag }))
 		}
 	}
 	return path

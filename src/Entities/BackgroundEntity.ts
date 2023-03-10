@@ -4,6 +4,7 @@ import { AmbientLight } from "three"
 import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
 import { BackgroundOptions } from "../Constants/BackGrounds"
 import { ECSEVENTS } from "../Constants/Events"
+import LDTKMap from "../Utils/LDTKMap"
 import LightComponent from "../Components/LightComponent"
 import PositionComponent from "../Components/PositionComponent"
 import SpriteComponent from "../Components/SpriteComponent"
@@ -13,7 +14,7 @@ import assets from "../Globals/Assets"
 const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	const background = new Entity('background')
 	const position = background.addComponent(new PositionComponent(0, 0))
-	const level = assets.maps[backgroundDefinition.level]
+	const level = new LDTKMap(assets.mapData[backgroundDefinition.level],assets.mapTiles[backgroundDefinition.level])
 	const tile = level.tile
 
 	const width = tile.width

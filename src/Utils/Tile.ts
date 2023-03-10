@@ -46,7 +46,8 @@ class Tile {
 	static fromImage(image: HTMLImageElement, tileOptions: Partial<tileOptions> = {}): Tile {
 		const buffer = getBuffer(image.width, image.height)
 		buffer.drawImage(image, 0, 0)
-		return new Tile(({ ...tileOptions, buffer }))
+		
+		return new Tile(({  buffer,...tileOptions }))
 	}
 	static empty(x: number = 16, y: number = 16) {
 		const buffer = getBuffer(x, y)

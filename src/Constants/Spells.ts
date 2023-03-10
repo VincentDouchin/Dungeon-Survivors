@@ -11,15 +11,15 @@ export interface Spell {
 }
 const SPELLS: Record<string, Spell> = {
 	LIGHTNING: {
-		icon: assets.skills.lightning_spell,
+		icon: assets.icons.lightning_spell,
 		spell: LightningSpellEntity
 	},
 	DIVINE_PROTECTION: {
-		icon: assets.skills.divine_protection_spell,
+		icon: assets.icons.divine_protection_spell,
 		spell: DivineProtectionEntity
 	},
 	ARROW_VOLLEY: {
-		icon: assets.skills.divine_protection_spell,
+		icon: assets.icons.divine_protection_spell,
 		spell: ArrowVolleySpell
 	}
 

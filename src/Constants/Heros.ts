@@ -27,11 +27,11 @@ const HEROS: HeroDefinition[] = [
 	{
 		name: HeroName.knight,
 		tiles: [{
-			idle: assets.tiles.knight_m_idle_anim,
-			run: assets.tiles.knight_m_run_anim,
+			idle: assets.characters.knightMaleWalk,
+			run: assets.characters.knightMaleRun,
 		}, {
-			idle: assets.tiles.knight_f_idle_anim,
-			run: assets.tiles.knight_f_run_anim,
+			idle: assets.characters.knightFemaleRun,
+			run: assets.characters.knightFemaleRun,
 		}],
 		spell: SPELLS.DIVINE_PROTECTION,
 		weapon: WEAPONS.swordKnight,
@@ -45,11 +45,11 @@ const HEROS: HeroDefinition[] = [
 	{
 		name: HeroName.wizzard,
 		tiles: [{
-			idle: assets.tiles.wizzard_m_idle_anim,
-			run: assets.tiles.wizzard_m_run_anim,
+			idle: assets.characters.wizzardMaleWalk,
+			run: assets.characters.wizzardMaleRun,
 		}, {
-			idle: assets.tiles.wizzard_f_idle_anim,
-			run: assets.tiles.wizzard_f_run_anim,
+			idle: assets.characters.wizzardFemaleWalk,
+			run: assets.characters.wizzardFemaleRun,
 		}],
 		spell: SPELLS.LIGHTNING,
 		needUnlock: false,
@@ -63,11 +63,11 @@ const HEROS: HeroDefinition[] = [
 	{
 		name: HeroName.elf,
 		tiles: [{
-			idle: assets.tiles.elf_f_idle_anim,
-			run: assets.tiles.elf_f_idle_anim,
+			idle: assets.characters.elfMaleWalk,
+			run: assets.characters.elfMaleRun,
 		}, {
-			idle: assets.tiles.elf_m_idle_anim,
-			run: assets.tiles.elf_m_run_anim,
+			idle: assets.characters.elfFemaleWalk,
+			run: assets.characters.elfFemaleRun,
 		}],
 		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,

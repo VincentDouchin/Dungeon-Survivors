@@ -1,6 +1,6 @@
 import HEROS, { HeroDefinition } from './../Constants/Heros'
 
-import { BACKGROUND } from './../Constants/BackGrounds'
+import { Arenas } from '../../assets/map/Map'
 import Coroutine from "./Coroutine"
 import { GameStates } from "../Constants/GameStates"
 import { enemyWaveName } from './../Constants/EnemyEncounters'
@@ -8,11 +8,11 @@ import { enemyWaveName } from './../Constants/EnemyEncounters'
 export const DEBUG: {
 	ENCOUNTER: boolean
 	DEFAULT_ENEMIES: enemyWaveName
-	DEFAULT_BACKGROUND: BACKGROUND
+	DEFAULT_BACKGROUND: Arenas
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
 	DEFAULT_STATE: GameStates
 } = {
-	ENCOUNTER: true && import.meta.env.DEV,
+	ENCOUNTER: false && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'TOWN',
 	DEFAULT_HEROS: [HEROS[2], HEROS[2]],

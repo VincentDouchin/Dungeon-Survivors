@@ -38,7 +38,7 @@ class MapState implements GameState {
 	}
 	async set(previousState: GameStates) {
 		let wasEncounter = false
-		const map = assets.maps['OVERWORLD']
+		const map = new LDTKMap(assets.mapData['OVERWORLD'],assets.mapTiles['OVERWORLD'])
 		const level = map.levels[0]
 		const mapTile = map.tile
 		debugger
@@ -68,7 +68,7 @@ class MapState implements GameState {
 				case GameStates.none: {
 
 					const title = new Entity('title text')
-					title.addComponent(new SpriteComponent(assets.title))
+					title.addComponent(new SpriteComponent(assets.UI.title))
 					title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
 					new Coroutine(function* () {
 						yield
@@ -91,7 +91,7 @@ class MapState implements GameState {
 				}; break
 			}
 		})
-		if (!assets.maps || !assets.maps['OVERWORLD'].levels[0]) return
+		if (!level ) return
 		this.player = new Entity('player')
 		const hero = State.heros[0]
 		this.player.addComponent(new SpriteComponent(hero.tiles[State.selectedTiles[0]].idle, { scale: 0.6, renderOrder: 11 }))

@@ -1,5 +1,6 @@
 import LOOTABLES, { LootableOptions } from "./Lootables"
 
+import { Arenas } from "../../assets/map/Map"
 import { Color } from "three"
 import { Entity } from "../Globals/ECS"
 import LeafEntity from "../Entities/LeafEntity"
@@ -8,10 +9,8 @@ import Tile from "../Utils/Tile"
 import WeightedList from "../Utils/WeightedList"
 import assets from "../Globals/Assets"
 
-export type BACKGROUND = keyof typeof BACKGROUNDS
-
 export interface BackgroundOptions {
-	level: string
+	level: Arenas
 	lightColor?: Color
 	obstacles?: WeightedList<Tile>
 	lootables?: LootableOptions[]
@@ -29,10 +28,10 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 	CAVE: {
 		level: 'CAVE',
 		obstacles: new WeightedList<Tile>()
-			.add(assets.nature.rockbig, 3)
-			.add(assets.nature.rocksmall1, 1)
-			.add(assets.nature.rocksmall2, 1)
-			.add(assets.nature.rocksmall3, 1),
+			.add(assets.background.rockbig, 3)
+			.add(assets.background.rocksmall1, 1)
+			.add(assets.background.rocksmall2, 1)
+			.add(assets.background.rocksmall3, 1),
 		lightColor: new Color('hsl(0,0%,100%)'),
 		lootables: [LOOTABLES.ROCK],
 		infinite: { x: true, y: true },
@@ -40,8 +39,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 	DUNGEON: {
 		level: 'DUNGEON',
 		lightColor: new Color('hsl(0,0%,6%)'),
-		obstacles: new WeightedList<Tile>()
-			.add(assets.hole.hole),
+		obstacles: new WeightedList<Tile>(),
+			// .add(assets.background.hole),
 		obstacleDensity: 0.5,
 		lootables: [LOOTABLES.POT],
 		infinite: { x: true, y: true }
@@ -50,10 +49,10 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'FOREST',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
-			.add(assets.nature.tree1, 4)
-			.add(assets.nature.stumpbig, 1)
-			.add(assets.nature.trunksmall, 1)
-			.add(assets.nature.stumpsmall1, 1),
+			.add(assets.background.tree1, 4)
+			.add(assets.background.stumpbig, 1)
+			.add(assets.background.trunksmall, 1)
+			.add(assets.background.stumpsmall1, 1),
 		lootables: [LOOTABLES.FLOWER],
 		infinite: { x: true, y: true },
 		effect: LeafEntity,
@@ -64,11 +63,11 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'GRAVEYARD',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
-			.add(assets.nature.treedead)
-			.add(assets.elements.grave1)
-			.add(assets.elements.grave2)
-			.add(assets.elements.grave3)
-			.add(assets.elements.grave4),
+			.add(assets.background.treedead)
+			.add(assets.background.grave1)
+			.add(assets.background.grave2)
+			.add(assets.background.grave3)
+			.add(assets.background.grave4),
 		lootables: [LOOTABLES.GRAVE],
 		infinite: { x: true, y: true },
 		effect: RainEntity,
@@ -79,15 +78,15 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'TOWN',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
-			.add(assets.elements.well, 2)
-			.add(assets.elements.cart1, 1)
-			.add(assets.elements.cart2, 1)
-			.add(assets.elements.pile, 2)
-			.add(assets.house.stock, 2)
-			.add(assets.house.barrel1, 2)
-			.add(assets.house.barrel2, 2)
-			.add(assets.house.barrel3, 2)
-			.add(assets.house.barrel4, 2)
+			.add(assets.background.well, 2)
+			.add(assets.background.cart1, 1)
+			.add(assets.background.cart2, 1)
+			.add(assets.background.pile, 2)
+			.add(assets.background.stock, 2)
+			.add(assets.background.barrel1, 2)
+			.add(assets.background.barrel2, 2)
+			.add(assets.background.barrel3, 2)
+			.add(assets.background.barrel4, 2)
 		,
 		obstacleDensity: 0.03,
 		lootables: [LOOTABLES.CRATE],
@@ -102,11 +101,11 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'SNOW',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
-			.add(assets.nature.rocksnowbig, 1)
-			.add(assets.nature.treesnow, 3)
-			.add(assets.nature.rocksnowsmall1, 1)
-			.add(assets.nature.rocksnowsmall2, 1)
-			.add(assets.nature.rocksnowsmall3, 1)
+			.add(assets.background.rocksnowbig, 1)
+			.add(assets.background.treesnow, 3)
+			.add(assets.background.rocksnowsmall1, 1)
+			.add(assets.background.rocksnowsmall2, 1)
+			.add(assets.background.rocksnowsmall3, 1)
 		,
 		lootables: [LOOTABLES.FLOWER_SNOW],
 		infinite: { x: true, y: true }
@@ -115,8 +114,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'LAVA',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
-			.add(assets.nature.rocklavabig, 1)
-			.add(assets.nature.rocklavasmall, 3)
+			.add(assets.background.rocklavabig, 1)
+			.add(assets.background.rocklavasmall, 3)
 		,
 		lootables: [LOOTABLES.LAVA_CRYSTAL],
 		infinite: { x: true, y: true }

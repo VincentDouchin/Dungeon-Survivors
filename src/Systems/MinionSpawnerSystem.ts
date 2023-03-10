@@ -24,7 +24,7 @@ class MinionSpawnerSytem extends System {
 				const stats = entity.getComponent(StatsComponent)
 				const angle = Math.random() * Math.PI * 2
 				const minionPosition = { x: position.x + Math.cos(angle) * minion.distance, y: position.y + Math.sin(angle) * minion.distance }
-				ParticleEntity(minionPosition, assets.effects.Smoke, { scale: 0.5 }).then(() => {
+				ParticleEntity(minionPosition, assets.effects.smoke, { scale: 0.5 }).then(() => {
 					const minionEntity = EnemyEntity(minion.minion, stats)(minionPosition)
 					minionEntity.removeComponent(DroppableComponent)
 					minionEntity.getComponent(SpriteComponent).addShader(new ColorShader(0.1, 0.1, 0.1, 0, 'add'))

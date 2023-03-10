@@ -13,12 +13,12 @@ class AssetLoaderChain<R>{
 	}
 	
 	async load<K extends string>(glob: Record<string, any>,) {
-		const keys = Object.keys(glob) as K[]
+		const keys = Object.keys(glob).map(this.keyTransform) as K[]
 		let values = Object.values(glob)
-		for (const [index, transform] of this.chains.entries()) {
-			values = await Promise.all(values.map(value => transform(value, keys[index]))) as ReturnType<typeof transform>[]
+		for (const transform of this.chains) {
+			values = await Promise.all(values.map((value,index) => transform(value, keys[index]))) 
 		}
-		return keys.reduce((acc, v, i) => ({ ...acc, [this.keyTransform(v)]: values[i] }), {}) as Record<K, R>
+		return keys.reduce((acc, v, i) => ({ ...acc, [v]: values[i] }), {}) as Record<K, R>
 	}
 
 }

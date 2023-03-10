@@ -10,36 +10,36 @@ export type LOOTABLE = keyof typeof LOOTABLES
 
 const LOOTABLES: Record<string, LootableOptions> = {
 	ROCK: {
-		tile: assets.nature.rockbreakable,
-		particle: assets.effects.rockParticle
+		tile: assets.background.rockbreakable,
+		particle: assets.effects.Rock
 	},
 	FLOWER: {
-		tile: assets.nature.flower,
-		particle: assets.effects.grassParticle
+		tile: assets.background.flower,
+		particle: assets.effects.Grass
 	},
 	GRAVE: {
-		tile: assets.elements.graveloot,
-		particle: assets.effects.rockBlueParticle
+		tile: assets.background.graveloot,
+		particle: assets.effects.RockBlue
 	},
 	POT: {
-		tile: assets.elements.pot,
-		particle: assets.effects.vaseParticle
+		tile: assets.background.pot,
+		particle: assets.effects.Vase
 	},
 	CRATE: {
-		tile: assets.elements.crate,
-		particle: assets.effects.woodParticle
+		tile: assets.background.crate,
+		particle: assets.effects.Wood
 	},
 	HAY: {
-		tile: assets.nature.hay,
-		particle: assets.effects.hayParticle
+		tile: assets.background.hay,
+		particle: assets.effects.Hay
 	},
 	FLOWER_SNOW: {
-		tile: assets.nature.flowersnow,
-		particle: assets.effects.grassParticle
+		tile: assets.background.flowersnow,
+		particle: assets.effects.Grass
 	},
 	LAVA_CRYSTAL: {
-		tile: assets.nature.lavacrystal,
-		particle: assets.effects.grassParticle
+		tile: assets.background.lavacrystal,
+		particle: assets.effects.Rock
 
 	}
 

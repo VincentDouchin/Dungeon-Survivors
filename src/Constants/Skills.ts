@@ -11,55 +11,55 @@ export interface Skill {
 }
 const SKILLS: Skill[] = [
 	{
-		icon: assets.skills.attack_speed_boost,
+		icon: assets.icons.attack_speed_boost,
 		name: 'Attack speed',
 		statName: STATS.ATTACK_SPEED,
 		amount: 0.2
 	},
 	{
-		icon: assets.skills.attack_boost,
+		icon: assets.icons.attack_boost,
 		name: 'Damage',
 		statName: STATS.DAMAGE,
 		amount: 0.1
 	},
 	{
-		icon: assets.skills.critical_boost,
+		icon: assets.icons.critical_boost,
 		name: 'Critical damage',
 		statName: STATS.CRIT_DAMAGE,
 		amount: 0.3
 	},
 	{
-		icon: assets.skills.defense_boost,
+		icon: assets.icons.defense_boost,
 		name: 'Defense',
 		statName: STATS.DEFENSE,
 		amount: 0.1
 	},
 	{
-		icon: assets.skills.exp_boost,
+		icon: assets.icons.exp_boost,
 		name: 'Experience up',
 		statName: STATS.XP_MDOIFIER,
 		amount: 0.05
 	},
 	{
-		icon: assets.skills.knockback_boost,
+		icon: assets.icons.knockback_boost,
 		name: 'Knockback',
 		statName: STATS.KNOCKBACK,
 		amount: 0.2
 	},
 	{
-		icon: assets.skills.swiftness,
+		icon: assets.icons.swiftness,
 		name: 'Movement speed',
 		statName: STATS.SPEED,
 		amount: 0.1
 	},
 	{
-		icon: assets.skills.mana_replenish,
+		icon: assets.icons.mana_replenish,
 		name: 'Mana up',
 		statName: STATS.MAX_MANA,
 		amount: 0.1
 	},
 	{
-		icon: assets.skills.magic_amplification,
+		icon: assets.icons.magic_amplification,
 		name: 'Spell damage',
 		statName: STATS.SPELL_DAMAGE,
 		amount: 0.15

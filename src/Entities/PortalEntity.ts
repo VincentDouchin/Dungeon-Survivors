@@ -17,14 +17,14 @@ import { camera } from "../Globals/Initialize"
 const PortalEntity = () => {
 	const portal = new Entity('portal')
 	const scale = 1.5
-	portal.addComponent(new SpriteComponent(assets.house.portal, { shaders: [new DissolveShader(180, true, 10)], scale, renderOrder: 100 }))
+	portal.addComponent(new SpriteComponent(assets.background.portal, { shaders: [new DissolveShader(180, true, 10)], scale, renderOrder: 100 }))
 	const portalPosition = portal.addComponent(new PositionComponent(camera.position.x, camera.position.y + camera.top + 100))
 	const backPortal = new Entity('back portal')
 	backPortal.addComponent(new SpriteComponent(Tile.empty(50, 50), { shaders: [new StarShader(backPortal)], renderOrder: 1, }))
 	backPortal.addComponent(new PositionComponent(camera.position.x, camera.position.y + camera.top + 95))
 
 	const stairs = new Entity('stairs')
-	const stairsTile = assets.house.stairs
+	const stairsTile = assets.background.stairs
 	stairs.addComponent(new BodyComponent(
 		{ type: 'fixed' },
 		[

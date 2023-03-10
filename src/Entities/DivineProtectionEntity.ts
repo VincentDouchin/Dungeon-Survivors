@@ -15,9 +15,9 @@ import { soundManager } from "../Globals/Initialize"
 const DivineProtectionEntity = (entity: Entity) => {
 	const stats = entity.getComponent(StatsComponent)
 	const position = entity.getComponent(PositionComponent)
-	const tile = assets.effects.Aura
+	const tile = assets.effects.auraCircle
 	const beam = new Entity('beam')
-	const beamTile = assets.magic.beam
+	const beamTile = assets.effects.beam
 	beam.addComponent(new PositionComponent(position.x, position.y - 4 + (beamTile.height * 1.5) / 2))
 	beam.addComponent(new SpriteComponent(beamTile, { scale: 1.5, opacity: 0.8 }))
 	const beamAnimation = beam.addComponent(new AnimationComponent({ default: beamTile }))

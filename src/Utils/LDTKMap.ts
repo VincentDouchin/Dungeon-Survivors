@@ -1,6 +1,5 @@
 import { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
 
-import { BACKGROUND } from '../Constants/BackGrounds'
 import Tile from "./Tile"
 import { node } from '../Components/PathNodeComponent'
 
@@ -17,9 +16,7 @@ interface entityInstanceFormatted {
 export type ldtkNode = entityInstanceFormatted & node
 class LDTKMap implements LDTKMapDefinition {
 	tile: Tile
-	static tiles: Record<string, Tile> = {}
-	static data: Record<BACKGROUND, any> = {}
-	constructor(data: LDTKMap, tile: Tile) {
+	constructor(data: any, tile: Tile) {
 		Object.assign(this, data)
 		this.tile = tile
 	}

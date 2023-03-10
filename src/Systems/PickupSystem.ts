@@ -64,7 +64,7 @@ class PickupSystem extends System {
 				if (boost) {
 					otherEntity.destroy()
 					stats?.boosts.push(boost)
-					ParticleEntity(entity, assets.magic.healing, { duration: 5, frameRate: 10, color: boost.color })
+					ParticleEntity(entity, assets.effects.healing, { duration: 5, frameRate: 10, color: boost.color })
 					soundManager.play('effect', SOUNDS.BOOST)
 
 				}
