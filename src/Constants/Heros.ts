@@ -18,7 +18,8 @@ export interface HeroDefinition {
 export enum HeroName {
 	'elf' = 'elf',
 	'wizzard' = 'wizzard',
-	'knight' = 'knight'
+	'knight' = 'knight',
+	'ninja' = 'ninja'
 }
 export const isUnlocked = (hero: HeroDefinition) => {
 	return !hero.needUnlock || saveData.heros.includes(hero.name)
@@ -74,10 +75,25 @@ const HEROS: HeroDefinition[] = [
 		weapon: WEAPONS.bow,
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
-			[STATS.CRIT_CHANCE]: 0.3,
-			[STATS.CRIT_DAMAGE]: 0.3,
+			[STATS.CRIT_CHANCE]: 0.2,
+			[STATS.CRIT_DAMAGE]: 0.2,
 		}
 	},
+	// {
+	// 	name: HeroName.ninja,
+	// 	tiles: [{
+	// 		idle: assets.characters.ninjaWalk,
+	// 		run: assets.characters.ninjaRun
+	// 	}],
+	// 	spell: SPELLS.ARROW_VOLLEY,
+	// 	needUnlock: true,
+	// 	weapon: WEAPONS.sai,
+	// 	stats: {
+	// 		[STATS.MAX_HEALTH]: 0.05,
+	// 		[STATS.CRIT_DAMAGE]: 0.05,
+	// 		[STATS.ATTACK_SPEED]: 0.10
+	// 	}
+	// }
 
 ]
 export default HEROS
