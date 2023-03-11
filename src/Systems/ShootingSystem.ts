@@ -16,7 +16,7 @@ class ShootingSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			shooter.timer++
 			const nb = shooter.projectilesNb
-			if (shooter.delay.value <= shooter.timer) {
+			if ((shooter.delay.base * (shooter.delay.base / shooter.delay.value)) <= shooter.timer) {
 				for (let i = 0; i < nb; i++) {
 					const position = entity.getComponent(PositionComponent)
 					const projectile = ProjectileEntity(
