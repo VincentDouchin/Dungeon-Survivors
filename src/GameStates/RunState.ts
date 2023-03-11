@@ -47,7 +47,7 @@ class RunState implements GameState {
 	mana = new ManaComponent()
 	timer?: Coroutine
 	encounter: Encounter | null = null
-	tutorialShown = false
+	tutorialShown = false || State.mobile
 	music: HTMLAudioElement | null = null
 	subscribers: Array<() => void> = []
 	tutoCoroutine?: Coroutine

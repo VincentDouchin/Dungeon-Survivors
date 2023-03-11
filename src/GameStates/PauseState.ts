@@ -3,6 +3,7 @@ import { ECS, Entity } from "../Globals/ECS";
 import CameraSystem from "../Systems/CameraSystem";
 import RenderSystem from "../Systems/RenderSystem";
 import SelectionSystem from "../Systems/SelectionSystem";
+import State from "../Globals/State";
 import TutorialEntity from "../UIEntities/TutorialEntity";
 import UIPauseEntity from "../UIEntities/UIPauseEntity";
 import { render } from "../Globals/Initialize";
@@ -21,7 +22,9 @@ class PauseState implements GameState {
 		SelectionSystem.register()
 		CameraSystem.register()
 		this.ui = UIPauseEntity()
-		this.tutorial = TutorialEntity()
+		if (!State.mobile) {
+			this.tutorial = TutorialEntity()
+		}
 	}
 	unset() {
 		ECS.unRegisterSystems()
