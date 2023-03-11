@@ -31,6 +31,13 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		sound: SOUNDS.SWORD
 	},
+	sai: {
+		tile: assets.weapons.sai,
+		damage: 10,
+		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
+		group: COLLISIONGROUPS.PLAYER,
+		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
+	},
 	staff: {
 		tile: assets.weapons.staff,
 		damage: 15,
