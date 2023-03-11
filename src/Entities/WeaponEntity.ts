@@ -12,7 +12,7 @@ import StatsComponent from "../Components/StatsComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 
-const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?: StatsComponent) => {
+const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent) => {
 
 	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
@@ -20,7 +20,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, stats?
 	const tile = weaponDefinition.tile
 	for (let behavior of weaponDefinition.behaviors) {
 		const component = {
-			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentSprite?.height) / 2, parent),
+			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentHeight) / 2, parent),
 			[WEAPONBEHAVIORS.targeter]: new AIMovementComponent({ seeking: weaponDefinition.target }),
 			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
 			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, weaponDefinition.target, -1, 5, weaponDefinition.sound)

@@ -51,7 +51,7 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(mana)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
-	player.addChildren(WeaponEntity(hero.weapon, player, stats))
+	player.addChildren(WeaponEntity(hero.weapon, player, BODYSIZES.normal.height, stats))
 	return player
 }
 
