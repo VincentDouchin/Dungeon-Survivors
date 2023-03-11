@@ -302,6 +302,16 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 1,
 		damage: 1
 	},
+	fox: {
+		tiles: {
+			idle: assets.characters.foxWalk,
+			run: assets.characters.foxRun
+		},
+		health: 20,
+		size: BODYSIZES.wide,
+		speed: 3,
+		damage: 2
+	},
 	centaurFemale: {
 		tiles: {
 			idle: assets.characters.centaurFemaleWalk,
@@ -750,8 +760,68 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 1,
 		damage: 1
 	},
+	cultist: {
+		tiles: {
+			idle: assets.characters.cultistWalk,
+			run: assets.characters.cultistRun,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
+	cultistHooded: {
+		tiles: {
+			idle: assets.characters.hoodedCultistWalk,
+			run: assets.characters.hoodedCultistRun,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
+	vampireMale: {
+		tiles: {
+			idle: assets.characters.vampireMaleWalk,
+			run: assets.characters.vampireMaleRun,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
+	vampireFemale: {
+		tiles: {
+			idle: assets.characters.vampireFemaleWalk,
+			run: assets.characters.vampireFemaleRun,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
+	vampireLord: {
+		tiles: {
+			idle: assets.characters.vampireLordWalk,
+			run: assets.characters.vampireLordRun,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
+	bat: {
+		tiles: {
+			idle: assets.characters.bat,
+		},
+		health: 10,
+		size: BODYSIZES.normal,
+		speed: 1,
+		damage: 1
+	},
 
 
 
-}
+
+} as const
 export default Enemies
