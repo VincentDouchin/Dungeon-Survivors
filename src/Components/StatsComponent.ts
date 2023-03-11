@@ -39,7 +39,7 @@ class StatsComponent extends Component {
 		if (!this.stats.has(statName)) {
 			this.stats.set(statName, this.getemptyStat())
 		}
-		this.stats.get(statName)!.modifier = modifier
+		this.stats.get(statName)!.modifier += modifier
 	}
 	get(statName: STATS, base: number) {
 		const stat = this.stats.get(statName) ?? this.getemptyStat()
