@@ -11,6 +11,8 @@ import { GameStates } from "../Constants/GameStates";
 import INPUTS from "../Constants/InputsNames";
 import OutlineShader from "../Shaders/OutlineShader";
 import RotationComponent from "../Components/RotationComponent";
+import SKILLS from "../Constants/Skills";
+import { STATS } from "../Components/StatsComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -26,9 +28,9 @@ const UIPlayerSelectEntity = () => {
 	const frameWidth = (HEROS.length - 0.5) * characterFrameWidth
 	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: 0 }))
 	uiPosition.moveTo(0, 30)
-	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, frameWidth, 35), { scale: 3 }))
+	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, frameWidth, 60), { scale: 3 }))
 	const description = new Entity('description')
-	description.addComponent(new SpriteComponent(Tile.empty()))
+	description.addComponent(new SpriteComponent(Tile.empty(32, 32)))
 	description.addComponent(new TextComponent('Choose your characters', { size: 32 }))
 	description.addComponent(new UIPositionComponent({ x: 0, y: 0.8 }, { x: 0, y: 1 }))
 	ui.addChildren(description)
@@ -86,9 +88,9 @@ const UIPlayerSelectEntity = () => {
 		// ! FRAME
 		const characterFrame = new Entity('character frame')
 		characterFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, characterFrameWidth, 35), { scale: 2 }))
-		characterFrame.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: 0 }).offsetX(HEROS.length, index))
+		characterFrame.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }).offsetX(HEROS.length, index))
 		characterFrames.push(characterFrame)
-		ui.addChildren(characterFrame)
+		description.addChildren(characterFrame)
 
 		// ! CHARACTER
 		const character = new Entity(`character ${index}`)
@@ -110,7 +112,21 @@ const UIPlayerSelectEntity = () => {
 			}))
 			characterSelectable.next[INPUTS.MOVEDOWN] = validateButton
 
+			// ! STATS
+			Object.entries(hero.stats).forEach(([stat, amount], index) => {
+				const statEntity = new Entity('stat')
+				const skill = SKILLS.find(skill => skill.statName === stat as STATS)
+				if (!skill) return
+				statEntity.addComponent(new SpriteComponent(Tile.empty(characterFrameWidth * 2, 16)))
+				statEntity.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 + index * 2 }))
+				characterFrame.addChildren(statEntity)
+				const statIcon = new Entity('stat icon')
+				statIcon.addComponent(new SpriteComponent(skill.icon))
+				statIcon.addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: 1, y: 0 }))
+				statEntity.addComponent(new TextComponent(`+${Math.floor(amount * 100)}% ${skill.name} per lvl`, { size: 9 }))
+				statEntity.addChildren(statIcon)
 
+			})
 			// ! BUTTON
 			const button = ButtonEntity(20, 4, 2, 'Select', 1, () => {
 				ECS.eventBus.publish(ECSEVENTS.SELECTED, characterFrame)
