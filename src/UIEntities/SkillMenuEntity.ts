@@ -17,7 +17,11 @@ import { clock } from "../Globals/Initialize"
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity('skillmenu')
-	skillMenu.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 40, 15), { scale: 4 }))
+	const container = new Entity('container')
+	container.addComponent(new SpriteComponent(Tile.empty(48, 24), { scale: 4 }))
+	container.addComponent(new UIPositionComponent())
+	skillMenu.addChildren(container)
+	skillMenu.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 48, 16), { scale: 4 }))
 	const skillMenuPosition = skillMenu.addComponent(new UIPositionComponent({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(0, 30)
@@ -26,7 +30,7 @@ const SkillMenuEntity = () => {
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity('button')
 		const buttonTile = assets.UI.frame2.framed(4, 24, 24)
-		const buttonMesh = button.addComponent(new SpriteComponent(buttonTile, { scale: 2 }))
+		button.addComponent(new SpriteComponent(buttonTile, { scale: 2 }))
 		const selectableEntity = new Entity('selectableEntity')
 		const emptyTile32 = Tile.empty(32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
@@ -39,7 +43,7 @@ const SkillMenuEntity = () => {
 
 		selectableEntity.addComponent(new UIPositionComponent())
 		button.addChildren(selectableEntity)
-		button.addComponent(new UIPositionComponent({ x: [-0.5, 0, 0.5][i], y: 0 }))
+		button.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }).offsetX(3, i))
 		const icon = new Entity('icon')
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
@@ -53,22 +57,19 @@ const SkillMenuEntity = () => {
 		skillMenu.onDestroy(() => shimmerCoroutine.stop())
 		icon.addComponent(new UIPositionComponent())
 
-		const text = new Entity('text')
-		text.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 0 }))
-		text.addComponent(new TextComponent(skill.name, { maxWidth: buttonMesh.width, anchorY: 'top', anchorX: 'center' }))
-		text.addComponent(new SpriteComponent(Tile.empty()))
+		skill.name.split(' ').forEach((text, index) => {
+			const textEntity = new Entity('skill text')
+			textEntity.addComponent(new SpriteComponent(Tile.empty()))
+			textEntity.addComponent(new TextComponent(text, { outlineWidth: 1 }))
+			textEntity.addComponent(new UIPositionComponent({ x: 0, y: - 1 }, { x: 0, y: 1 + index * 2 }))
+			button.addChildren(textEntity)
+		})
 
-		button.addChildren(text)
 		button.addChildren(icon)
-		skillMenu.addChildren(button)
-		// const sub = inputManager.eventBus.subscribe('down', ({ uiObjects }: TouchCoord) => {
-		// 	if (uiObjects.includes(buttonMesh.mesh.id)) {
-		// 		inputManager.eventBus.unsubscribe('down', sub)
+		container.addChildren(button)
 
-		// 	}
-		// })
 	}
-	SelectableComponent.setFromArray(selectors)
+	SelectableComponent.setFromArray(selectors.reverse())
 
 	return skillMenu
 }
