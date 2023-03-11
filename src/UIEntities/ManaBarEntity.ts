@@ -7,7 +7,7 @@ import { UICamera } from "../Globals/Initialize"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import assets from "../Globals/Assets"
 
-const scalingOptions = { x: { left: 2, right: 5 }, y: { top: 0, bottom: 0 } }
+const scalingOptions = { x: { left: 2, right: 6 }, y: { top: 0, bottom: 0 } }
 const w = UICamera.right / 5
 const h = 7
 const bar = assets.UI.bar.framed(scalingOptions, w, h)
