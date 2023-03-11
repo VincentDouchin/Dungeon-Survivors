@@ -52,7 +52,7 @@ const assets = {
 	other: await loadTilesFromFolder.load<others>(import.meta.glob('./../../assets/images/others/*.png', { eager: true })),
 	background: await loadTilesFromFolder.load<Background>(import.meta.glob('./../../assets/images/Background/*.png', { eager: true })),
 	effects: await loadEffects.load<effects>(import.meta.glob('./../../assets/images/effects/*.png', { eager: true })),
-	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.*')),
+	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.*',{eager:true})),
 	mapTiles: await loadTilesFromFolder.load<Arenas>(import.meta.glob('/assets/map/Arenas/**/*.png', { eager: true })),
 	mapData: await loadJSON.load<Arenas>(import.meta.glob('/assets/map/Arenas/*.json', { eager: true }))
 } as const
