@@ -19,7 +19,7 @@ const SPELLS: Record<string, Spell> = {
 		spell: DivineProtectionEntity
 	},
 	ARROW_VOLLEY: {
-		icon: assets.icons.divine_protection_spell,
+		icon: assets.icons.arrowVolley,
 		spell: ArrowVolleySpell
 	}
 
