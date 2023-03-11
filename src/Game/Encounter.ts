@@ -101,31 +101,14 @@ class Encounter {
 				const mainHealth = main.removeComponent(HealthComponent)
 				const mainSprite = main.getComponent(SpriteComponent)
 				mainSprite.addShader(new OutlineShader([1, 1, 0, 1]))
-				mainSprite.addShader(new ColorShader(0, 0, 0, 0, 'add'))
 				let coroutine: Coroutine
 				const invicibilitySub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
-					let flash = true
-					const damageFlashSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
-						if (guards.has(entity) && flash) {
-							flash = false
-							coroutine = new Coroutine(function* () {
-								mainSprite.getUniforms(ColorShader).color.value = [0.3, 0.3, 0.3, 0.1]
-								mainSprite.render()
-								yield* waitFor(30)
-								if (mainSprite.getUniforms(ColorShader)) {
-									mainSprite.getUniforms(ColorShader).color.value = [0, 0, 0, 0]
-								}
-								mainSprite.render()
-								flash = true
-							})
-						}
-					})
+
 
 					if (guards.has(entity)) {
 						guards.delete(entity)
 						if (guards.size === 0) {
 							invicibilitySub()
-							damageFlashSub()
 							coroutine.stop()
 							main.addComponent(mainHealth)
 							mainSprite.removeShader(OutlineShader)
