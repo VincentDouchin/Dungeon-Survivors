@@ -40,6 +40,8 @@ class HealthSystem extends System {
 			}
 			if (sprite && amount < 0) {
 				ParticleEntity(entity, assets.effects.healing, { duration: 3, color: [0.9, 1, 0, 1] })
+			} else if (health.sound) {
+				soundManager.play('effect', health.sound, { fade: true, })
 			}
 		}))
 	}
@@ -74,9 +76,7 @@ class HealthSystem extends System {
 						if (damage.sound) {
 							soundManager.play('effect', damage.sound, { fade: true })
 						}
-						if (health.sound) {
-							soundManager.play('effect', health.sound, { fade: true, })
-						}
+
 						// ! Knockback
 						if (body.body) {
 							const knockbackForce = damage.knockback.value * 5000
