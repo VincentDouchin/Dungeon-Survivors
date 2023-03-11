@@ -32,6 +32,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.rocksmall1, 1)
 			.add(assets.background.rocksmall2, 1)
 			.add(assets.background.rocksmall3, 1),
+		obstacleDensity: 0.07,
 		lightColor: new Color('hsl(0,0%,100%)'),
 		lootables: [LOOTABLES.ROCK],
 		infinite: { x: true, y: true },
@@ -40,8 +41,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'DUNGEON',
 		lightColor: new Color('hsl(0,0%,6%)'),
 		obstacles: new WeightedList<Tile>(),
-			// .add(assets.background.hole),
-		obstacleDensity: 0.5,
+		// .add(assets.background.hole),
+		obstacleDensity: 0.05,
 		lootables: [LOOTABLES.POT],
 		infinite: { x: true, y: true }
 	},
@@ -54,6 +55,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.trunksmall, 1)
 			.add(assets.background.stumpsmall1, 1),
 		lootables: [LOOTABLES.FLOWER],
+		obstacleDensity: 0.07,
 		infinite: { x: true, y: true },
 		effect: LeafEntity,
 		effectDelay: () => Math.random() * 10 + 50
