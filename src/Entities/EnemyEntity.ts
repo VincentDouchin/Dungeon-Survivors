@@ -57,7 +57,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 		enemy.addComponent(stats)
 	}
 	if (type.weapon) {
-		enemy.addChildren(WeaponEntity(type.weapon, enemy))
+		enemy.addChildren(WeaponEntity(type.weapon, enemy, type.size.height, stats))
 	}
 	if (type.minion) {
 		enemy.addComponent(new MinionSpawnerComponent(type.minion.type, type.minion.distance, type.minion.delay))
