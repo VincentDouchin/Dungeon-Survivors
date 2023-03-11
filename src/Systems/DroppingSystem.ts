@@ -1,7 +1,8 @@
+import { ECS, System } from "../Globals/ECS";
+
 import DroppableComponent from "../Components/DroppableComponent";
 import { ECSEVENTS } from "../Constants/Events";
 import PositionComponent from "../Components/PositionComponent";
-import { System } from "../Globals/ECS";
 
 class DroppingSystem extends System {
 	constructor() {
@@ -10,7 +11,11 @@ class DroppingSystem extends System {
 			const drops = entity.getComponent(DroppableComponent)?.entityContructors
 			if (drops) {
 				const parentPosition = entity.getComponent(PositionComponent)
-				drops.forEach(drop => drop(parentPosition.clone()))
+				drops.forEach(drop => {
+					const dropEntity = drop(parentPosition.clone())
+					ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, dropEntity)
+				})
+
 			}
 		})
 	}
