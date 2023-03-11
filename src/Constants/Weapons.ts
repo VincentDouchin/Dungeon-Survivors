@@ -60,10 +60,11 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		projectile: assets.weapons.arrow,
 		speed: 500,
+		delay: 60
 	},
 	enemyBow: {
 		tile: assets.weapons.bow,
-		damage: 3,
+		damage: 2,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.weapons.arrow,
 		group: COLLISIONGROUPS.ENEMY,
