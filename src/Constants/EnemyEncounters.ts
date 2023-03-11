@@ -3,7 +3,7 @@ import Enemies, { EnemyType } from "./Enemies"
 import Encounter from "../Game/Encounter"
 
 const {
-	goblin, orc, orcShaman, orcMasked, orcBig,
+	goblin, orc, orcShaman, orcMasked, orcBig, orcBigPatch,
 	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, bear, fox,
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
 	villagerFemale, villagerMale, shopKeeper, butcher, blacksmith, executioner,
@@ -29,7 +29,7 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 		.waitForEnemiesCleared()
 		.addWave([[orcMasked, 5], [orcShaman, 3], [orc, 10], [goblin, 10]], 3) //84
 		.waitForEnemiesCleared()
-		.addWave([[orcBig, 1], [goblin, 20], [orcMasked, 8], [orcShaman, 5], [orc, 10]], 1) // 44
+		.addWave([[orcBig, 1], [orcBigPatch, 1], [goblin, 20], [orcMasked, 8], [orcShaman, 5], [orc, 10]], 1) // 44
 		.waitForEnemiesCleared()
 		.stop(),
 	ANIMALS: () => new Encounter() // 21 Waves 498 enemies

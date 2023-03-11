@@ -70,14 +70,26 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	orcBig: {
 		tiles: {
-			idle: assets.characters.orcBigPatchWalk,
-			run: assets.characters.orcBigPatchRun,
+			idle: assets.characters.orcBigWalk,
+			run: assets.characters.orcBigRun,
 		},
-		health: 400,
+		health: 300,
 		size: BODYSIZES.big,
 		speed: 20,
 		damage: 10,
 		charger: true,
+		boss: true,
+		xp: 10
+	},
+	orcBigPatch: {
+		tiles: {
+			idle: assets.characters.orcBigPatchWalk,
+			run: assets.characters.orcBigPatchRun,
+		},
+		health: 300,
+		size: BODYSIZES.big,
+		speed: 20,
+		damage: 10,
 		boss: true,
 		xp: 10
 	},
