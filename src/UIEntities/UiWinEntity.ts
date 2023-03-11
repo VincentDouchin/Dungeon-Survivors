@@ -21,8 +21,10 @@ const UIWinEntity = () => {
 	const selectText = new Entity('select text')
 	selectText.addComponent(new SpriteComponent(Tile.empty(200, 30)))
 	selectText.addComponent(new UIPositionComponent().bottom())
-	selectText.addComponent(new TextComponent('Select a character to unlock', { size: 32, outlineWidth: 2 }))
+
 	const unlockedHeros = HEROS.filter((hero) => !isUnlocked(hero))
+	const winText = unlockedHeros.length > 0 ? 'Select a character to unlock' : 'Congratulations, you finished the game!'
+	selectText.addComponent(new TextComponent(winText, { size: 32, outlineWidth: 2 }))
 
 
 	const heros = unlockedHeros.map((hero, index) => {
