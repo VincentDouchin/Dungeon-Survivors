@@ -4,15 +4,16 @@ import Encounter from "../Game/Encounter"
 
 const {
 	goblin, orc, orcShaman, orcMasked, orcBig,
-	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, centaurMale, centaurFemale, bear,
+	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, centaurMale, centaurFemale, bear, fox,
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
 	villagerFemale, villagerMale, shopKeeper, butcher, blacksmith, executioner,
 	angel, clericFat, clericNormal, clericSkinny, nunFat, nunSkinny, nunNormal, bishop, templar,
 	zombieSmall, muddy, swampy, zombie, iceZombie, ogre, skeleton,
 	knight, knightFat, knightElite, knightEliteLarge, king, queen, herald,
-	imp, wogol, chort, demonBig, necromancer
+	imp, wogol, chort, demonBig, necromancer,
+	cultist, cultistHooded, vampireMale, vampireFemale, vampireLord, bat
 } = Enemies
-export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS' | 'UNDEAD' | 'KINGSGUARD'
+export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS' | 'UNDEAD' | 'KINGSGUARD' | 'VAMPIRES'
 const berserk = (enemyType: EnemyType): EnemyType => ({ ...enemyType, berserk: true })
 
 
@@ -34,13 +35,13 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 	ANIMALS: () => new Encounter() // 21 Waves 498 enemies
 		.addWave([[berserk(bunny), 5], [bunny, 10], [mushroomSmall, 10], [mushroomMedium, 10]], 5) //175
 		.waitForEnemiesCleared()
-		.addWave([[direwolf, 10], [bunny, 10]], 5) //100
+		.addWave([[fox, 10], [bunny, 10]], 5) //100
 		.waitForEnemiesCleared()
-		.addWave([[centaurFemale, 5], [centaurMale, 5], [berserk(centaurFemale), 1], [berserk(centaurMale), 1]], 4) //48
+		.addWave([[direwolf, 5], [fox, 5], [berserk(fox), 1], [berserk(direwolf), 1]], 4) //48
 		.waitForEnemiesCleared()
 		.addWave([[bear, 2], [direwolf, 5], [berserk(direwolf), 2], [bunny, 10]], 3) // 57
 		.waitForEnemiesCleared()
-		.addWave([[berserk(bear), 1], [bear, 5], [direwolf, 10], [centaurFemale, 4], [centaurMale, 4]], 3) //72
+		.addWave([[berserk(bear), 1], [bear, 5], [direwolf, 10], [bunny, 4], [fox, 4]], 3) //72
 		.waitForEnemiesCleared()
 		.addWave([[mushroomBig, 1], [mushroomSmall, 30], [mushroomMedium, 10], [berserk(mushroomMedium), 5]], 1) // 46
 		.waitForEnemiesCleared()
@@ -127,7 +128,9 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 		.addWave([[chort, 5], [berserk(chort), 5], [wogol, 5], [imp, 10], [necromancer, 5]], 1)
 		.addGroup(demonBig, chort, 12, 100)
 		.waitForEnemiesCleared()
-		.stop()
+		.stop(),
+	VAMPIRES: () => new Encounter()
+		.addWave([[cultist, 3], [cultistHooded, 3], [vampireFemale, 3], [vampireMale, 4], [vampireLord, 3], [bat, 5]], 1)
 
 
 }
