@@ -40,8 +40,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 	DUNGEON: {
 		level: 'DUNGEON',
 		lightColor: new Color('hsl(0,0%,6%)'),
-		obstacles: new WeightedList<Tile>(),
-		// .add(assets.background.hole),
+		obstacles: new WeightedList<Tile>()
+			.add(assets.background.hole),
 		obstacleDensity: 0.05,
 		lootables: [LOOTABLES.POT],
 		infinite: { x: true, y: true }
