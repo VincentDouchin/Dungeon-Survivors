@@ -37,8 +37,8 @@ class SwitchingSystem extends System {
 				switcher.initiated = true
 			}
 			if (toSwitch) {
-				this.addComponents(entity, switcher.main)
 				switcher.main = !switcher.main
+				this.addComponents(entity, switcher.main)
 			}
 			if (needsSwitch && !switcher.main) {
 				this.addComponents(entity, true)
