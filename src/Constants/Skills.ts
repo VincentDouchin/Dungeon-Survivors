@@ -64,6 +64,19 @@ const SKILLS: Skill[] = [
 		statName: STATS.SPELL_DAMAGE,
 		amount: 0.15
 	},
+	{
+		icon: assets.icons.lucky_boost,
+		name: 'Critical chance',
+		statName: STATS.CRIT_CHANCE,
+		amount: 0.2
+	},
+	{
+		icon: assets.icons.health_up,
+		name: 'Health up',
+		statName: STATS.MAX_HEALTH,
+		amount: 0.1
+	},
+
 
 ]
 export default SKILLS
