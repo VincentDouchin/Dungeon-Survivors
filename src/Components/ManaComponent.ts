@@ -9,6 +9,9 @@ class ManaComponent extends Component {
 	constructor() {
 		super()
 	}
+	fill() {
+		this.mana = this.maxMana.value
+	}
 }
 ManaComponent.register()
 export default ManaComponent

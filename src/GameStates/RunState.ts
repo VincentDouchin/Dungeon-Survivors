@@ -108,7 +108,7 @@ class RunState implements GameState {
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
 					Engine.setState(GameStates.levelUp)
 				}))
-
+				this.mana.fill()
 				// !MUSIC
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 
@@ -116,6 +116,7 @@ class RunState implements GameState {
 				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
 				this.background = BackgroundEntity(backgroundDefinition)
 				// !PLAYERS
+
 				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana))
 				this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana))
 				this.stats.forEach(stat => {
@@ -176,7 +177,7 @@ class RunState implements GameState {
 		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
 		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
 			const entity = ECS.getEntityById(id)
-			if (!entity.getComponent(SwitchingComponent).main) {
+			if (entity.getComponent(SwitchingComponent).main) {
 				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 			}
 		})
