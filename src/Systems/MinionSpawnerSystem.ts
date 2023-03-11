@@ -27,7 +27,7 @@ class MinionSpawnerSytem extends System {
 				ParticleEntity(minionPosition, assets.effects.smoke, { scale: 0.5 }).then(() => {
 					const minionEntity = EnemyEntity(minion.minion, stats)(minionPosition)
 					minionEntity.removeComponent(DroppableComponent)
-					minionEntity.getComponent(SpriteComponent).addShader(new ColorShader(0.1, 0.1, 0.1, 0, 'add'))
+					minionEntity.getComponent(SpriteComponent).addShader(new ColorShader(0.3, 0.3, 0.3, 0, 'add'))
 					ECS.eventBus.publish(ECSEVENTS.ADD_TO_ENCOUNTER, minionEntity)
 				})
 				minion.timer = 0
