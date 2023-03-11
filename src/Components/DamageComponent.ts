@@ -21,6 +21,7 @@ class DamageComponent extends Component {
 		this.destroyOnHit = destroyOnHit
 	}
 	calculateDamage(defense: number) {
+		if (this.amount.value < 0) return this.amount.value
 		this.crit = this.critChance.value > Math.random()
 		let damage = (this.amount.value) * (1 / defense)
 
