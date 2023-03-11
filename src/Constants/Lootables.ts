@@ -40,7 +40,10 @@ const LOOTABLES: Record<string, LootableOptions> = {
 	LAVA_CRYSTAL: {
 		tile: assets.background.lavacrystal,
 		particle: assets.effects.Rock
-
+	},
+	STATUE: {
+		tile: assets.background.statue,
+		particle: assets.effects.Rock
 	}
 
 }

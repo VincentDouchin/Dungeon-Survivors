@@ -97,7 +97,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 	CASTLE: {
 		level: 'CASTLE',
 		lightColor: new Color('hsl(0,0%,100%)'),
-		infinite: { x: false, y: true }
+		infinite: { x: false, y: true },
+		lootables: [LOOTABLES.STATUE]
 	},
 	SNOW: {
 		level: 'SNOW',
