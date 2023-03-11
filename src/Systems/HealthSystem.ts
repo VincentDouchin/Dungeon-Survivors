@@ -100,18 +100,9 @@ class HealthSystem extends System {
 				deathAnimation.addComponent(new ExpirationComponent(120))
 				sprite.removeShader(ColorShader)
 				sprite.addShader(new ColorShader(1, 1, 1, 1))
-				new Coroutine(function* () {
-					for (let i = 1; i > 0; i -= 1 / 50) {
-						yield
-						if (sprite.getUniforms(ColorShader)?.color?.value) {
-							sprite.getUniforms(ColorShader).color.value = [1, 1, 1, i]
-						} else {
-							break
-						}
-					}
-				})
-				sprite.addShader(new DissolveShader(120, false, 3))
 				entity.destroy()
+				sprite.addShader(new DissolveShader(90, false, 10))
+
 
 			}
 		})
