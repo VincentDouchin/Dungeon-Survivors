@@ -379,8 +379,8 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 60,
 		size: BODYSIZES.massive,
-		speed: 7,
-		damage: 4,
+		speed: 6,
+		damage: 3,
 		charger: true,
 		xp: 3
 	},
