@@ -43,7 +43,7 @@ const SkillMenuEntity = () => {
 
 		selectableEntity.addComponent(new UIPositionComponent())
 		button.addChildren(selectableEntity)
-		button.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }).offsetX(3, i))
+		button.addComponent(new UIPositionComponent({ x: [-0.8, 0, 0.8][i], y: 1 }, { x: 0, y: 1 }))
 		const icon = new Entity('icon')
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
@@ -69,7 +69,7 @@ const SkillMenuEntity = () => {
 		container.addChildren(button)
 
 	}
-	SelectableComponent.setFromArray(selectors.reverse())
+	SelectableComponent.setFromArray(selectors)
 
 	return skillMenu
 }
