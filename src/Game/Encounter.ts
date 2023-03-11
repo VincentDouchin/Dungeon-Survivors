@@ -3,6 +3,7 @@ import StatsComponent, { STATS } from "../Components/StatsComponent";
 
 import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
+import DIFFICULTY from "../Constants/DIfficulty";
 import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
@@ -20,8 +21,13 @@ import waitFor from "../Utils/WaitFor";
 class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: string[] = []
+	difficulty = {
+		[DIFFICULTY.EASY]: 120,
+		[DIFFICULTY.NORMAL]: 90,
+		[DIFFICULTY.HARD]: 60,
+	}[State.difficulty ?? DIFFICULTY.EASY]
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / 120)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
+	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / this.difficulty)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
 	started = false
 	subscriber: () => void
 	levelSubscriber: () => void
@@ -37,7 +43,7 @@ class Encounter {
 			this.enemies.push(entity.id)
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
-			this.stats.level = Math.floor(State.timer / 60)
+			this.stats.level = Math.floor(State.timer / this.difficulty)
 		})
 
 

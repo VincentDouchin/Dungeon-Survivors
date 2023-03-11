@@ -5,6 +5,7 @@ import BODYSIZES from "../Constants/BodySizes"
 import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import { Color } from "three"
+import DIFFICULTY from "../Constants/DIfficulty"
 import { Entity } from "../Globals/ECS"
 import FlockingComponent from "../Components/FlockingComponent"
 import HealthComponent from "../Components/HealthComponent"
@@ -17,6 +18,7 @@ import { SOUNDS } from "../Constants/Sounds"
 import ShadowComponent from "../Components/ShadowComponent"
 import SpellComponent from "../Components/SpellComponent"
 import SpriteComponent from "../Components/SpriteComponent"
+import State from "../Globals/State"
 import SwitchingComponent from "../Components/SwitchingComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import WeaponEntity from "./WeaponEntity"
@@ -33,7 +35,13 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(new SpellComponent(hero.spell))
 	player.addComponent(new SpriteComponent(hero.tiles[selectedTile].idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
-	player.addComponent(new HealthComponent(stats.get(STATS.MAX_HEALTH, 100), COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
+	const playerHealth: number = {
+		[DIFFICULTY.EASY]: 300,
+		[DIFFICULTY.NORMAL]: 200,
+		[DIFFICULTY.HARD]: 100,
+	}[State.difficulty ?? DIFFICULTY.EASY]
+
+	player.addComponent(new HealthComponent(stats.get(STATS.MAX_HEALTH, playerHealth), COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
 	player.addComponent(new AnimationComponent(hero.tiles[selectedTile]))
 	if (!hero.weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
 	player.addComponent(new SwitchingComponent(main))
