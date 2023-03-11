@@ -20,7 +20,7 @@ const loadJSON = new AssetLoader(getFileName)
 const framesNb: Record<effects, number> = {
 	"Leaf": 6,
 	"Spark": 7,
-	"smoke": 7,
+	"smoke": 6,
 	"auraCircle": 4,
 	"fireProjectile": 15,
 	"lightning": 8,
