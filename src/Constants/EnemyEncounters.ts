@@ -4,7 +4,7 @@ import Encounter from "../Game/Encounter"
 
 const {
 	goblin, orc, orcShaman, orcMasked, orcBig,
-	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, centaurMale, centaurFemale, bear, fox,
+	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, bear, fox,
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
 	villagerFemale, villagerMale, shopKeeper, butcher, blacksmith, executioner,
 	angel, clericFat, clericNormal, clericSkinny, nunFat, nunSkinny, nunNormal, bishop, templar,
