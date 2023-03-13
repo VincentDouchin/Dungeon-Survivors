@@ -10,6 +10,7 @@ import { Entity } from "../Globals/ECS"
 import FlockingComponent from "../Components/FlockingComponent"
 import HealthComponent from "../Components/HealthComponent"
 import { HeroDefinition } from "../Constants/Heros"
+import LevelComponent from "../Components/LevelComponent"
 import LightComponent from "../Components/LightComponent"
 import ManaComponent from "../Components/ManaComponent"
 import PositionComponent from "../Components/PositionComponent"
@@ -25,7 +26,7 @@ import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
 const playergroup = FlockingComponent.getGroup()
-const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean, stats: StatsComponent, mana: ManaComponent) => {
+const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent) => {
 	const player = new Entity(`player ${main}`)
 
 	for (let [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
@@ -41,7 +42,7 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 		[DIFFICULTY.HARD]: 100,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 
-	player.addComponent(new HealthComponent(stats.get(STATS.MAX_HEALTH, playerHealth), COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
+	player.addComponent(new HealthComponent(playerHealth, COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
 	player.addComponent(new AnimationComponent(hero.tiles[selectedTile]))
 	if (!hero.weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
 	player.addComponent(new SwitchingComponent(main))
@@ -57,6 +58,7 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(new PositionComponent(Math.random() * 40 - 20, Math.random() * 40 - 20))
 
 	player.addComponent(mana)
+	player.addComponent(level)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
 	player.addChildren(WeaponEntity(hero.weapon, player, BODYSIZES.normal.height, stats))

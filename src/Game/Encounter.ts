@@ -9,6 +9,7 @@ import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import FlockingComponent from "../Components/FlockingComponent";
 import HealthComponent from "../Components/HealthComponent";
+import LevelComponent from "../Components/LevelComponent";
 import OutlineShader from "../Shaders/OutlineShader";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PortalEntity from "../Entities/PortalEntity";
@@ -20,14 +21,15 @@ import waitFor from "../Utils/WaitFor";
 
 class Encounter {
 	waves: (() => Generator)[] = []
-	enemies: string[] = []
+	enemies: Set<Entity> = new Set()
 	difficulty = {
 		[DIFFICULTY.EASY]: 120,
 		[DIFFICULTY.NORMAL]: 90,
 		[DIFFICULTY.HARD]: 60,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats: StatsComponent = new StatsComponent(Math.floor(State.timer / this.difficulty)).set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
+	stats = new StatsComponent().set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
+	level = new LevelComponent()
 	started = false
 	subscriber: () => void
 	levelSubscriber: () => void
@@ -35,15 +37,15 @@ class Encounter {
 	coroutine?: Coroutine
 	constructor() {
 		this.subscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
-			if (this.enemies.includes(entity.id)) {
-				this.enemies.splice(this.enemies.indexOf(entity.id), 1)
+			if (this.enemies.has(entity)) {
+				this.enemies.delete(entity)
 			}
 		})
 		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
-			this.enemies.push(entity.id)
+			this.enemies.add(entity)
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
-			this.stats.level = Math.floor(State.timer / this.difficulty)
+			this.level.level = Math.floor(State.timer / this.difficulty)
 		})
 
 
@@ -85,7 +87,7 @@ class Encounter {
 	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		return ParticleEntity({ x, y }, assets.effects.smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
-			this.enemies.push(enemy.id)
+			this.enemies.add(enemy)
 			return enemy
 		})
 	}
@@ -138,7 +140,7 @@ class Encounter {
 		const self = this
 		this.waves.push(function* () {
 			yield
-			while (self.enemies.length > 0) {
+			while (self.enemies.size > 0) {
 				yield
 			}
 			return

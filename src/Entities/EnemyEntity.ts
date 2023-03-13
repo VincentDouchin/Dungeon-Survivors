@@ -9,6 +9,7 @@ import DroppableComponent from "../Components/DroppableComponent"
 import { EnemyType } from "../Constants/Enemies"
 import { Entity } from "../Globals/ECS"
 import HealthComponent from "../Components/HealthComponent"
+import LevelComponent from "../Components/LevelComponent"
 import ManaDropEntity from "./ManaDropEntity"
 import MinionSpawnerComponent from "../Components/MinionSpawnerComponent"
 import OutlineShader from "../Shaders/OutlineShader"
@@ -20,7 +21,7 @@ import StatsComponent from "../Components/StatsComponent"
 import WeaponEntity from "./WeaponEntity"
 import XPEntity from "./XPEntity"
 
-const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x: number, y: number }) => {
+const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelComponent) => (position: { x: number, y: number }) => {
 	const enemy = new Entity('enemy')
 	const scale = type.boss ? 1.5 : 1
 	const berserk = type.berserk
@@ -55,6 +56,9 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent) => (position: { x:
 	))
 	if (stats) {
 		enemy.addComponent(stats)
+	}
+	if (level) {
+		enemy.addComponent(level)
 	}
 	if (type.weapon) {
 		enemy.addChildren(WeaponEntity(type.weapon, enemy, type.size.height, stats))
