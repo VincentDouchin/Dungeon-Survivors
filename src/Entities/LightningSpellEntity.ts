@@ -1,5 +1,4 @@
 import { ECS, Entity } from "../Globals/ECS"
-import StatsComponent, { STATS } from "../Components/StatsComponent"
 
 import AIMovementComponent from "../Components/AIMovementComponent"
 import AnimationComponent from "../Components/AnimationComponent"
@@ -9,12 +8,12 @@ import DamageComponent from "../Components/DamageComponent"
 import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
 import { SOUNDS } from "../Constants/Sounds"
+import SpellComponent from "../Components/SpellComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import assets from "../Globals/Assets"
 import { soundManager } from "../Globals/Initialize"
 
 const LightningSpellEntity = (entity: Entity) => {
-	const stats = entity.getComponent(StatsComponent)
 	const parentPosition = entity.getComponent(PositionComponent)
 	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [id, position]) => {
 		const enemy = ECS.getEntityById(id)
@@ -34,9 +33,10 @@ const LightningSpellEntity = (entity: Entity) => {
 		const lightning = new Entity('lightning')
 		const tile = assets.effects.lightning
 		lightning.addComponent(new SpriteComponent(tile))
+		const spellComponent = entity.getComponent(SpellComponent)
 		const animation = lightning.addComponent(new AnimationComponent({ default: tile, }, { frameRate: 4 }))
 		lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
-		lightning.addComponent(new DamageComponent(stats.get(STATS.SPELL_DAMAGE, 5), [COLLISIONGROUPS.ENEMY], -1))
+		lightning.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 		lightning.addComponent(new BodyComponent({}, [{
 			width: tile.width, height: tile.height, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
 		}]))

@@ -8,19 +8,23 @@ import assets from "../Globals/Assets"
 export interface Spell {
 	icon: Tile,
 	spell: (entity: Entity) => void
+	damage: number
 }
 const SPELLS: Record<string, Spell> = {
 	LIGHTNING: {
 		icon: assets.icons.lightning_spell,
-		spell: LightningSpellEntity
+		spell: LightningSpellEntity,
+		damage: 5
 	},
 	DIVINE_PROTECTION: {
 		icon: assets.icons.divine_protection_spell,
-		spell: DivineProtectionEntity
+		spell: DivineProtectionEntity,
+		damage: 5
 	},
 	ARROW_VOLLEY: {
 		icon: assets.icons.arrowVolley,
-		spell: ArrowVolleySpell
+		spell: ArrowVolleySpell,
+		damage: 10
 	}
 
 }
