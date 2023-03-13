@@ -24,7 +24,8 @@ class PickupSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
 			const stats = entity.getComponent(StatsComponent)
-			const mana = entity.getRecursiveComponent(ManaComponent)
+			const xpPicker = entity.getComponent(XPPickerComponent)
+			const mana = entity.getComponent(ManaComponent)
 			body.contacts((otherEntity: Entity) => {
 
 				const otherBody = otherEntity.getComponent(BodyComponent)
@@ -45,7 +46,7 @@ class PickupSystem extends System {
 				if (xp) {
 					soundManager.play('effect', SOUNDS.XP, { playbackRate: 2, volume: 0.5 })
 					otherEntity.destroy()
-					ECS.eventBus.publish(ECSEVENTS.XP_UP, { entity, amount: xp.amount })
+					ECS.eventBus.publish(ECSEVENTS.XP_UP, { entity, amount: xp.amount * xpPicker.xpModifier.value })
 				}
 				if (token) {
 					otherEntity.destroy()
