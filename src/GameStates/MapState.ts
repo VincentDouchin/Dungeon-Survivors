@@ -99,7 +99,6 @@ class MapState implements GameState {
 					}
 					while (State.difficulty === null) {
 						yield
-						console.log(State.difficulty)
 					}
 					counter++
 
