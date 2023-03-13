@@ -7,7 +7,7 @@ class LevelComponent extends Component {
 		super()
 	}
 	nextLevel(level = this.level) {
-		return Math.pow(level, 0.5) * 20 + 10
+		return Math.pow(level, 0.7) * 15 + 25
 	}
 }
 LevelComponent.register()
