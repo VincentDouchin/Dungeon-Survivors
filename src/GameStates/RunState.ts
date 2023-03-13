@@ -18,6 +18,7 @@ import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import { GameStates } from "../Constants/GameStates"
 import HealthSystem from "../Systems/HealthSystem"
+import LevelComponent from "../Components/LevelComponent"
 import LightingSystem from "../Systems/LightingSystem"
 import { MUSICS } from "../Constants/Sounds"
 import ManaComponent from "../Components/ManaComponent"
@@ -44,6 +45,7 @@ class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
 	players: Set<Entity> = new Set()
+	playerLevel = new LevelComponent()
 	mana = new ManaComponent()
 	timer?: Coroutine
 	encounter: Encounter | null = null
@@ -105,9 +107,9 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
-					Engine.setState(GameStates.levelUp)
-				}))
+				// this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
+				// 	Engine.setState(GameStates.levelUp)
+				// }))
 				this.mana.fill()
 				// !MUSIC
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
@@ -117,35 +119,45 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(backgroundDefinition)
 				// !PLAYERS
 
-				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana))
-				this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana))
-				this.stats.forEach(stat => {
-					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
-						if (this.players.has(entity)) {
-							stat.level = level
-
-						}
-						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
-					}))
-
-					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
-						if (this.players.has(entity)) {
-							stat.xp = amount
-						}
-						ECS.eventBus.publish(UIEVENTS.UI_XP, stat.xp / stat.nextLevel)
-					}))
-					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
-						stat.setModifier(skill.statName, skill.amount)
-					}))
-				})
-				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
+				// this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 					if (this.players.has(entity)) {
-						this.players.delete(entity)
-						if (this.players.size === 0) {
-							Engine.setState(GameStates.gameOver)
-						}
+						ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
 					}
 				}))
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, (entity) => {
+					if (this.players.has(entity)) {
+						ECS.eventBus.publish(UIEVENTS.UI_LEVEL, entity.getComponent(LevelComponent).level)
+						Engine.setState(GameStates.levelUp)
+					}
+				}))
+				// this.stats.forEach(stat => {
+				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
+				// 		if (this.players.has(entity)) {
+				// 			stat.level = level
+				// 		}
+				// 		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
+				// 	}))
+
+				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
+				// 		if (this.players.has(entity)) {
+				// 			stat.xp = amount
+				// 		}
+				// 		ECS.eventBus.publish(UIEVENTS.UI_XP, stat.xp / stat.nextLevel)
+				// 	}))
+				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
+				// 		stat.setModifier(skill.statName, skill.amount)
+				// 	}))
+				// })
+				// this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+				// 	if (this.players.has(entity)) {
+				// 		this.players.delete(entity)
+				// 		if (this.players.size === 0) {
+				// 			Engine.setState(GameStates.gameOver)
+				// 		}
+				// 	}
+				// }))
 				this.players.forEach(player => {
 					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
 						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
@@ -181,6 +193,9 @@ class RunState implements GameState {
 				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 			}
 		})
+		ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
+		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, this.playerLevel.level)
+
 
 	}
 	unset(newState?: GameStates) {
