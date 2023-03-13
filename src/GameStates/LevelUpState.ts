@@ -1,13 +1,13 @@
-import { ECS, Entity } from "../Globals/ECS"
-import { inputManager, render, soundManager } from "../Globals/Initialize"
+import { ECS, Entity } from "../Globals/ECS";
+import { engine, inputManager, render, soundManager } from "../Globals/Initialize";
 
-import Engine from "../Globals/Engine"
-import { GameStates } from "../Constants/GameStates"
+import { GameState } from "../Globals/Engine";
 import INPUTS from "../Constants/InputsNames";
-import RenderSystem from "../Systems/RenderSystem"
+import RenderSystem from "../Systems/RenderSystem";
+import RunState from "./RunState";
 import { SOUNDS } from "../Constants/Sounds";
-import SelectionSystem from "../Systems/SelectionSystem"
-import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts"
+import SelectionSystem from "../Systems/SelectionSystem";
+import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts";
 
 class LevelUpState implements GameState {
 	ui: Entity | null = null
@@ -18,7 +18,7 @@ class LevelUpState implements GameState {
 	update() {
 		ECS.updateSystems()
 		if (inputManager.getInput(INPUTS.INTERACT)?.once) {
-			Engine.setState(GameStates.run)
+			engine.setState(RunState)
 		}
 	}
 	render() {

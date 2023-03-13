@@ -1,10 +1,10 @@
 import { ECS, Entity } from "../Globals/ECS";
-import { inputManager, render } from "../Globals/Initialize";
+import { engine, inputManager, render } from "../Globals/Initialize";
 
-import Engine from "../Globals/Engine";
-import { GameStates } from "../Constants/GameStates";
+import { GameState } from "../Globals/Engine";
 import INPUTS from "../Constants/InputsNames";
 import RenderSystem from "../Systems/RenderSystem";
+import RunState from "./RunState";
 import SelectionSystem from "../Systems/SelectionSystem";
 import UIWinEntity from "../UIEntities/UiWinEntity";
 
@@ -12,7 +12,7 @@ class WinState implements GameState {
 	ui?: Entity
 	update() {
 		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
-			Engine.setState(GameStates.run)
+			engine.setState(RunState)
 		}
 		ECS.updateSystems()
 	}

@@ -6,9 +6,8 @@ import ButtonEntity from "./ButtonEntity";
 import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
 import { ECSEVENTS } from "../Constants/Events";
-import Engine from "../Globals/Engine";
-import { GameStates } from "../Constants/GameStates";
 import INPUTS from "../Constants/InputsNames";
+import MapState from "../GameStates/MapState";
 import OutlineShader from "../Shaders/OutlineShader";
 import RotationComponent from "../Components/RotationComponent";
 import SKILLS from "../Constants/Skills";
@@ -20,6 +19,7 @@ import TextComponent from "../Components/TextComponent";
 import Tile from "../Utils/Tile";
 import UIPositionComponent from "../Components/UIPositionComponent";
 import assets from "../Globals/Assets";
+import { engine } from "../Globals/Initialize";
 
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
@@ -61,7 +61,7 @@ const UIPlayerSelectEntity = () => {
 	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.length === 2) {
 			uiPosition.moveTo(-3, 30).then(() => {
-				Engine.setState(GameStates.map)
+				engine.setState(MapState)
 			})
 		}
 	})

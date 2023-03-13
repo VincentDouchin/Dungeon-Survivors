@@ -1,13 +1,14 @@
+import { engine, inputManager } from "../Globals/Initialize"
+
 import ActiveSpellEntity from "./ActiveSpellEntity"
 import BoostsEntity from "./BoostsEntity"
 import ButtonEntity from "./ButtonEntity"
 import DpadInputEntity from "./DpadInputEntity"
-import Engine from "../Globals/Engine"
 import { Entity } from "../Globals/ECS"
-import { GameStates } from "../Constants/GameStates"
 import INPUTS from "../Constants/InputsNames"
 import LevelDisplayEntity from "./LevelDisplayEntity"
 import ManaBarEntity from "./ManaBarEntity"
+import PauseState from "../GameStates/PauseState"
 import SpellButtonEntity from "./SpellButtonEntity"
 import State from "../Globals/State"
 import SwitchButtonEntity from "./SwitchButtonEntity"
@@ -15,7 +16,6 @@ import TimeCounterEntity from "./TimeCounterEntity"
 import UIPositionComponent from "../Components/UIPositionComponent"
 import XPBarEntity from "./XPBarEntity"
 import assets from "../Globals/Assets"
-import { inputManager } from "../Globals/Initialize"
 
 const UIRunEntity = () => {
 	const ui = new Entity('ui run')
@@ -45,7 +45,7 @@ const UIRunEntity = () => {
 			...mobileEntities.map(entity => entity.getComponent(UIPositionComponent).moveTo(-2, 10))
 		])
 		inputManager.eventBus.publish(INPUTS.PAUSE, false)
-		Engine.setState(GameStates.pause)
+		engine.setState(PauseState)
 	})
 	ui.onDestroy(() => remuseSub())
 

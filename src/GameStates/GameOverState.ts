@@ -1,6 +1,7 @@
 import { ECS, Entity } from "../Globals/ECS";
 import { render, soundManager } from "../Globals/Initialize";
 
+import { GameState } from "../Globals/Engine";
 import RenderSystem from "../Systems/RenderSystem";
 import { SOUNDS } from "../Constants/Sounds";
 import SelectionSystem from "../Systems/SelectionSystem";
@@ -8,13 +9,8 @@ import UIGameOverEntity from "../UIEntities/UIGameOverEntity";
 
 class GameOverState implements GameState {
 	ui: Entity | null = null
-	construtor() {
-
-	}
-
 	update() {
 		ECS.updateSystems()
-
 	}
 	render() {
 		render()

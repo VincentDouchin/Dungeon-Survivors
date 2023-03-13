@@ -2,6 +2,7 @@ import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, P
 import RAPIER, { World } from "@dimforge/rapier2d-compat"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import Engine from "./Engine"
 import GamepadController from "../InputControllers/GamepadController"
 import INPUTS from "../Constants/InputsNames"
 import InputManager from "./InputManager"
@@ -9,6 +10,10 @@ import KeyboardController from "../InputControllers/KeyboardController"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import SoundManager from "./SoundManager"
 import assets from "./Assets"
+
+// ! Engine
+
+const engine = new Engine()
 
 // ! Clock
 const clock = new Clock()
@@ -134,5 +139,5 @@ inputManager.registerControllers(GamepadController)
 //! Sound
 const soundManager = new SoundManager(assets.sounds)
 
-export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene, soundManager }
+export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene, soundManager, engine }
 

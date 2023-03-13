@@ -1,14 +1,14 @@
+import { engine, inputManager } from "../Globals/Initialize";
+
 import ButtonEntity from "./ButtonEntity";
-import Engine from "../Globals/Engine";
 import { Entity } from "../Globals/ECS";
-import { GameStates } from "../Constants/GameStates";
 import INPUTS from "../Constants/InputsNames";
+import RunState from "../GameStates/RunState";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import UIPositionComponent from "../Components/UIPositionComponent";
 import VolumeBarEntity from "./VolumeBarEntity";
 import assets from "../Globals/Assets";
-import { inputManager } from "../Globals/Initialize";
 import saveData from "../Globals/SaveManager";
 
 const UIPauseEntity = () => {
@@ -24,7 +24,7 @@ const UIPauseEntity = () => {
 		if (!state) return
 		await framePosition.moveTo(-2, 10)
 		inputManager.eventBus.publish(INPUTS.PAUSE, false)
-		Engine.setState(GameStates.run)
+		engine.setState(RunState)
 	})
 	uiPause.onDestroy(() => remuseSub())
 	resume.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 2 }))

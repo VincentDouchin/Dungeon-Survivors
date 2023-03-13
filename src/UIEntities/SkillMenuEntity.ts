@@ -1,19 +1,18 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from "../Globals/ECS";
+import { clock, engine } from "../Globals/Initialize";
 
 import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events"
-import Engine from "../Globals/Engine"
-import { GameStates } from "../Constants/GameStates"
-import SKILLS from "../Constants/Skills"
-import SelectableComponent from "../Components/SelectableComponent"
-import ShimmerShader from "../Shaders/ShimmerShader"
-import SpriteComponent from "../Components/SpriteComponent"
+import { ECSEVENTS } from "../Constants/Events";
+import RunState from "../GameStates/RunState";
+import SKILLS from "../Constants/Skills";
+import SelectableComponent from "../Components/SelectableComponent";
+import ShimmerShader from "../Shaders/ShimmerShader";
+import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import { clock } from "../Globals/Initialize"
+import TextComponent from "../Components/TextComponent";
+import Tile from "../Utils/Tile";
+import UIPositionComponent from "../Components/UIPositionComponent";
+import assets from "../Globals/Assets";
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity('skillmenu')
@@ -37,7 +36,7 @@ const SkillMenuEntity = () => {
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
 			ECS.eventBus.publish(ECSEVENTS.NEW_SKILL, skill)
 			State.skills.push(skill)
-			skillMenuPosition.moveTo(-2, 30).then(() => Engine.setState(GameStates.run))
+			skillMenuPosition.moveTo(-2, 30).then(() => engine.setState(RunState))
 		}))
 		selectors.push(selectableEntity)
 

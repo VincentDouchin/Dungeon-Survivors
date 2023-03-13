@@ -2,36 +2,34 @@ import HEROS, { HeroDefinition } from './../Constants/Heros'
 
 import { Arenas } from '../../assets/map/Map'
 import Coroutine from "./Coroutine"
-import { GameStates } from "../Constants/GameStates"
 import { enemyWaveName } from './../Constants/EnemyEncounters'
+
+export interface GameState {
+	update(): void
+	render(): void
+	set(state: Constructor<GameState> | null, options?: any): void
+	unset(state: Constructor<GameState> | null): void
+}
 
 export const DEBUG: {
 	ENCOUNTER: boolean
 	DEFAULT_ENEMIES: enemyWaveName
 	DEFAULT_BACKGROUND: Arenas
 	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
-	DEFAULT_STATE: GameStates
 } = {
 	ENCOUNTER: false && import.meta.env.DEV,
 	DEFAULT_ENEMIES: 'ANIMALS',
 	DEFAULT_BACKGROUND: 'TOWN',
 	DEFAULT_HEROS: [HEROS[2], HEROS[2]],
-	get DEFAULT_STATE() {
-		return this.ENCOUNTER ? GameStates.run : GameStates.map
-	}
 }
-const Engine = new class {
+class Engine {
 	rafHandle = 0
 	accumulatedTime = 0
 	currentTime = 0
 	timeStep = 1000 / 60
-	stateName: GameStates = DEBUG.ENCOUNTER ? GameStates.map : GameStates.none
-	states: Map<GameStates, GameState> = new Map()
-	get state() {
-		return this.stateName ? this.states.get(this.stateName) : null
-	}
+	states: Map<Constructor<GameState>['name'], GameState> = new Map()
+	state: GameState | null = null
 	cycle = (timeStamp: number) => {
-
 		if (!this.state) return
 		this.rafHandle = window.requestAnimationFrame(this.cycle)
 
@@ -61,16 +59,21 @@ const Engine = new class {
 	stop() {
 		window.cancelAnimationFrame(this.rafHandle)
 	}
-	addState(stateName: GameStates, state: GameState) {
-		this.states.set(stateName, state)
+	addState<T extends GameState>(state: Constructor<T>) {
+		this.states.set(state.name, new state())
 	}
-	setState(stateName: GameStates, options?: any) {
-		const oldState = this.stateName
-		if (this.state) {
-			this.state.unset(stateName)
+	getState<T extends GameState>(state: Constructor<T>) {
+		return this.states.get(state.constructor.name) as T
+	}
+	setState<T extends GameState>(state: Constructor<T>, options?: any) {
+		const currentState = this.state === null ? null : this.state.constructor as Constructor<GameState>
+		this.state?.unset(state)
+		const newState = this.states.get(state.name)
+		if (newState) {
+			this.state = newState
 		}
-		this.stateName = stateName
-		this.state?.set(oldState, options)
+		debugger
+		this.state?.set(currentState, options)
 	}
 }
 export default Engine

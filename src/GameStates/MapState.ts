@@ -1,6 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS";
 import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
-import { camera, inputManager, render, world } from "../Globals/Initialize";
+import { camera, engine, inputManager, render, world } from "../Globals/Initialize";
 
 import AnimationComponent from "../Components/AnimationComponent";
 import AnimationSystem from "../Systems/AnimationSystem";
@@ -8,15 +8,16 @@ import CameraSystem from "../Systems/CameraSystem";
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import Coroutine from "../Globals/Coroutine";
 import { ECSEVENTS } from "../Constants/Events";
-import Engine from "../Globals/Engine";
-import { GameStates } from "../Constants/GameStates";
+import { GameState } from "../Globals/Engine";
 import INPUTS from "../Constants/InputsNames";
 import MovementSystem from "../Systems/MovementSystem";
 import PathEntity from "../Entities/PathEntity";
 import PathSystem from "../Systems/PathSystem";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
+import PlayerSelectState from "./PlayerSelectState";
 import PositionComponent from "../Components/PositionComponent";
 import RenderSystem from "../Systems/RenderSystem";
+import RunState from "./RunState";
 import SelectionSystem from "../Systems/SelectionSystem";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -38,7 +39,7 @@ class MapState implements GameState {
 		ECS.updateSystems()
 		world.step()
 	}
-	async set(previousState: GameStates) {
+	async set(previousState: Constructor<GameState> | null) {
 		const showMap = () => {
 			if (!level) return
 			this.player = new Entity('player')
@@ -73,16 +74,16 @@ class MapState implements GameState {
 		PathSystem.register()
 		RenderSystem.register()
 		SelectionSystem.register()
-		if (previousState !== GameStates.playerSelect) {
+		if (previousState !== PlayerSelectState) {
 			this.map = new Entity('map')
 			this.map.addComponent(new SpriteComponent(mapTile))
 			this.map.addComponent(new PositionComponent(0, 0))
 		}
 		this.ui = UIMapEntity()
-		if (previousState === GameStates.run) {
+		if (previousState === RunState) {
 			wasEncounter = true
 		}
-		if (previousState === GameStates.none) {
+		if (previousState === null) {
 			const title = new Entity('title text')
 			title.addComponent(new SpriteComponent(assets.UI.title))
 			title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
@@ -104,7 +105,7 @@ class MapState implements GameState {
 
 				}
 				title.destroy()
-				Engine.setState(GameStates.playerSelect)
+				engine.setState(PlayerSelectState)
 				return
 			})
 		} else {
@@ -113,11 +114,11 @@ class MapState implements GameState {
 
 
 	}
-	unset(newState: GameStates) {
+	unset(newState: Constructor<GameState> | null) {
 		ECS.unRegisterSystems()
 		this.ui?.destroy()
 		switch (newState) {
-			case GameStates.playerSelect: {
+			case PlayerSelectState: {
 			}; break
 			default: {
 				this.lastPosition = this.player?.getComponent(PositionComponent)

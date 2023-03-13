@@ -3,16 +3,17 @@ import { ECS, Entity, System } from "../Globals/ECS";
 import AnimationComponent from "../Components/AnimationComponent";
 import Coroutine from "../Globals/Coroutine";
 import { ECSEVENTS } from "../Constants/Events";
-import Engine from "../Globals/Engine";
-import { GameStates } from "../Constants/GameStates";
 import PathNodeComponent from "../Components/PathNodeComponent";
 import PathWalkerComponent from "../Components/PathWalkerComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import RunState from "../GameStates/RunState";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import WinState from "../GameStates/WinState";
 import assets from "../Globals/Assets";
 import { easeInCubic } from "../Utils/Tween";
+import { engine } from "../Globals/Initialize";
 
 class PathSystem extends System {
 	position?: PositionComponent
@@ -34,7 +35,7 @@ class PathSystem extends System {
 				return
 			} else if (this.position) {
 				if (position.x !== this.position.x || position.y !== this.position.y) {
-					animation.setState(GameStates.run)
+					animation.setState('run')
 					sprite.flipped = position.x - this.position.x > 0
 					position.x += Math.sign(this.position.x - position.x)
 					position.y += Math.sign(this.position.y - position.y)
@@ -50,11 +51,11 @@ class PathSystem extends System {
 			const [nodeId, node] = selectedNode
 			const nodeEntity = ECS.getEntityById(nodeId)
 			if (node.encounter && !this.encounter) {
-				Engine.setState(GameStates.run, node)
+				engine.setState(RunState, node)
 				return
 			}
 			if (node.possibleDirections === 0) {
-				Engine.setState(GameStates.win)
+				engine.setState(WinState)
 			} else if (!node.showingOptions) {
 				const arrows: Entity[] = []
 				for (let direction of ['left', 'right', 'top'] as nodeDirection[]) {
