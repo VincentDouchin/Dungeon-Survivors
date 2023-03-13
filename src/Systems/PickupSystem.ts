@@ -23,7 +23,7 @@ class PickupSystem extends System {
 		entities.forEach((entity) => {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
-			const stats = entity.getRecursiveComponent(StatsComponent)
+			const stats = entity.getComponent(StatsComponent)
 			const mana = entity.getRecursiveComponent(ManaComponent)
 			body.contacts((otherEntity: Entity) => {
 
@@ -42,16 +42,10 @@ class PickupSystem extends System {
 				const xp = otherEntity.getComponent(XPComponent)
 				const token = otherEntity.getComponent(TokenComponent)
 				const boost = otherEntity.getComponent(BoostComponent)
-				if (xp && stats) {
+				if (xp) {
 					soundManager.play('effect', SOUNDS.XP, { playbackRate: 2, volume: 0.5 })
 					otherEntity.destroy()
-					const initialLevel = stats.level
-					const newLevel = stats.updateXP(xp.amount)
-					if (initialLevel !== newLevel) {
-						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: -5 })
-						ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, { level: stats.level, entity: entity })
-					}
-					ECS.eventBus.publish(ECSEVENTS.XP_PERCENT, { amount: stats.xp, entity: entity, max: stats.nextLevel })
+					ECS.eventBus.publish(ECSEVENTS.XP_UP, { entity, amount: xp.amount })
 				}
 				if (token) {
 					otherEntity.destroy()

@@ -1,16 +1,30 @@
-import { Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from "../Globals/ECS";
 
 import BodyComponent from "../Components/BodyComponent";
 import DamageComponent from "../Components/DamageComponent";
+import { ECSEVENTS } from "../Constants/Events";
 import HealthComponent from "../Components/HealthComponent";
+import LevelComponent from "../Components/LevelComponent";
 import ManaComponent from "../Components/ManaComponent";
 import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
+import SpellComponent from "../Components/SpellComponent";
 import StatsComponent from "../Components/StatsComponent";
 
 class StatUpdateSystem extends System {
 	constructor() {
 		super(StatsComponent)
+		this.subscribe(ECSEVENTS.XP_UP, ({ entity, amount }) => {
+			const level = entity.getComponent(LevelComponent)
+			level.xp += amount
+			if (level.xp > level.nextLevel()) {
+				level.xp = level.xp % level.nextLevel()
+				ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, entity)
+			}
+		})
+		this.subscribe(ECSEVENTS.LEVEL_UP, entity => {
+			entity.getComponent(LevelComponent).level++
+		})
 	}
 	update(entities: Entity[]): void {
 		entities.forEach(entity => {
@@ -21,34 +35,39 @@ class StatUpdateSystem extends System {
 					stats.boosts.splice(i, 1)
 				}
 			}
+			const level = entity.getComponent(LevelComponent)
 			const damage = entity.getComponent(DamageComponent)
 			const health = entity.getComponent(HealthComponent)
 			const rotation = entity.getComponent(RotationComponent)
 			const shooter = entity.getComponent(ShooterComponent)
 			const body = entity.getComponent(BodyComponent)
 			const mana = entity.getComponent(ManaComponent)
+			const spell = entity.getComponent(SpellComponent)
 			if (health) {
-				health.maxHealth.modifier ??= stats
-				health.defense.modifier ??= stats
+				health.maxHealth.setModifiers(stats, level)
+				health.defense.setModifiers(stats, level)
 			}
 			if (damage) {
-				damage.amount.modifier ??= stats
-				damage.critChance.modifier ??= stats
-				damage.critDamage.modifier ??= stats
-				damage.knockback.modifier ??= stats
+				damage.amount.setModifiers(stats, level)
+				damage.critChance.setModifiers(stats, level)
+				damage.critDamage.setModifiers(stats, level)
+				damage.knockback.setModifiers(stats, level)
 			}
 			if (rotation) {
-				rotation.angVel.modifier ??= stats
+				rotation.angVel.setModifiers(stats, level)
 			}
 			if (body) {
-				body.moveForce.modifier ??= stats
+				body.moveForce.setModifiers(stats, level)
 			}
 			if (shooter) {
-				shooter.delay.modifier ??= stats
-				shooter.damage.modifier ??= stats
+				shooter.delay.setModifiers(stats, level)
+				shooter.damage.setModifiers(stats, level)
 			}
 			if (mana) {
-				mana.maxMana.modifier ??= stats
+				mana.maxMana.setModifiers(stats, level)
+			}
+			if (spell) {
+				spell.spellDamage.setModifiers(stats, level)
 			}
 		})
 	}
