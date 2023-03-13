@@ -107,9 +107,6 @@ class RunState implements GameState {
 				this.encounter?.resume()
 			}; break
 			case GameStates.map: {
-				// this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, () => {
-				// 	Engine.setState(GameStates.levelUp)
-				// }))
 				this.mana.fill()
 				// !MUSIC
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
@@ -132,32 +129,6 @@ class RunState implements GameState {
 						Engine.setState(GameStates.levelUp)
 					}
 				}))
-				// this.stats.forEach(stat => {
-				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, ({ level, entity }) => {
-				// 		if (this.players.has(entity)) {
-				// 			stat.level = level
-				// 		}
-				// 		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, level)
-				// 	}))
-
-				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_PERCENT, ({ amount, entity }) => {
-				// 		if (this.players.has(entity)) {
-				// 			stat.xp = amount
-				// 		}
-				// 		ECS.eventBus.publish(UIEVENTS.UI_XP, stat.xp / stat.nextLevel)
-				// 	}))
-				// 	this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
-				// 		stat.setModifier(skill.statName, skill.amount)
-				// 	}))
-				// })
-				// this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
-				// 	if (this.players.has(entity)) {
-				// 		this.players.delete(entity)
-				// 		if (this.players.size === 0) {
-				// 			Engine.setState(GameStates.gameOver)
-				// 		}
-				// 	}
-				// }))
 				this.players.forEach(player => {
 					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
 						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
