@@ -1,10 +1,10 @@
 import { ECS, Entity } from "../Globals/ECS";
+import { ECSEVENTS, UIEVENTS } from "../Constants/Events";
 import StatsComponent, { STATS } from "../Components/StatsComponent";
 
 import ColorShader from "../Shaders/ColorShader";
 import Coroutine from "../Globals/Coroutine";
 import DIFFICULTY from "../Constants/DIfficulty";
-import { ECSEVENTS } from "../Constants/Events";
 import EnemyEntity from "../Entities/EnemyEntity";
 import { EnemyType } from "../Constants/Enemies";
 import FlockingComponent from "../Components/FlockingComponent";
@@ -45,7 +45,11 @@ class Encounter {
 			this.enemies.add(entity)
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
+			const initialLevel = this.level.level
 			this.level.level = Math.floor(State.timer / this.difficulty)
+			if (this.level.level !== initialLevel) {
+				ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.level.level)
+			}
 		})
 
 

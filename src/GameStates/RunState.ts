@@ -162,7 +162,7 @@ class RunState implements GameState {
 		})
 		ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
 		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, this.playerLevel.level)
-
+		ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.encounter?.level.level ?? 0)
 
 	}
 	unset(newState: Constructor<GameState>) {

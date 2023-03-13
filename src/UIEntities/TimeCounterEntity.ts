@@ -1,6 +1,6 @@
 import { ECS, Entity } from "../Globals/ECS";
+import { ECSEVENTS, UIEVENTS } from "../Constants/Events";
 
-import { ECSEVENTS } from "../Constants/Events";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
 import TextComponent from "../Components/TextComponent";
@@ -19,13 +19,18 @@ const TimeCounterEntity = () => {
 	const enemyLevel = new Entity('enemy level')
 	enemyLevel.addComponent(new SpriteComponent(assets.icons.skull, { scale: 2 }))
 	enemyLevel.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
-	const enemyLevelText = enemyLevel.addComponent(new TextComponent(String(Math.floor(State.timer / 60)), { outlineWidth: 1 }))
+	const enemyLevelText = enemyLevel.addComponent(new TextComponent(String(0), { outlineWidth: 1 }))
 	const timerSub = ECS.eventBus.subscribe(ECSEVENTS.TIMER, (_) => {
 		timerText.setText(formatTimer())
-		enemyLevelText.setText(String(Math.floor(State.timer / 60)))
+	})
+	const enemyLevelSub = ECS.eventBus.subscribe(UIEVENTS.ENEMY_LEVEL, (level) => {
+		enemyLevelText.setText(String(level))
 	})
 	timer.addChildren(enemyLevel)
-	timer.onDestroy(() => timerSub())
+	timer.onDestroy(() => {
+		enemyLevelSub()
+		timerSub()
+	})
 	return timer
 }
 export default TimeCounterEntity

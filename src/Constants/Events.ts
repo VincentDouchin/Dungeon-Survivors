@@ -6,7 +6,8 @@ import Tile from "../Utils/Tile"
 
 export enum UIEVENTS {
 	UI_XP = 'UI_XP',
-	UI_LEVEL = 'UI_LEVEL'
+	UI_LEVEL = 'UI_LEVEL',
+	ENEMY_LEVEL = 'ENEMY_LEVEL'
 }
 
 export enum ECSEVENTS {
@@ -17,7 +18,6 @@ export enum ECSEVENTS {
 	NEW_SKILL = 'NEW_SKILL',
 	PATH_POSITION = 'PATH_POSITION',
 	ADD_TO_BACKGROUND = 'ADD_TO_BACKGROUND',
-	ENENMY_LEVEL_UP = 'ENENMY_LEVEL_UP',
 	SELECTED = 'SELECTED',
 	DESELECTED = 'DESELECTED',
 	MANA_PERCENT = 'MANA_PERCENT',
@@ -40,7 +40,6 @@ export type EventMap = {
 	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent, encounter: boolean }
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
-	[ECSEVENTS.ENENMY_LEVEL_UP]: number
 	[ECSEVENTS.MANA_PERCENT]: number
 	[ECSEVENTS.MANA_AMOUNT]: number
 	[ECSEVENTS.SELECTED]: Entity
@@ -54,6 +53,7 @@ export type EventMap = {
 	[ECSEVENTS.REMOVE_WALL]: { entity: Entity, deleteLoot: boolean }
 	[UIEVENTS.UI_XP]: number
 	[UIEVENTS.UI_LEVEL]: number
+	[UIEVENTS.ENEMY_LEVEL]: number
 }
 	& Record<INPUTS, boolean | number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
