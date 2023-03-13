@@ -29,13 +29,14 @@ export enum ECSEVENTS {
 	TIMER = 'TIMER',
 	ADD_WALL = 'ADD_WALL',
 	REMOVE_WALL = 'REMOVE_WALL',
+	XP_UP = 'XP_UP',
 }
 export type EventMap = {
 	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
 	[ECSEVENTS.DELETE_ENTITY]: Entity
 	[ECSEVENTS.TAKE_DAMAGE]: { entity: Entity, amount: number, loop?: boolean }
 	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: Entity }
-	[ECSEVENTS.LEVEL_UP]: { level: number, entity: Entity }
+	[ECSEVENTS.LEVEL_UP]: Entity
 	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent, encounter: boolean }
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
@@ -48,6 +49,7 @@ export type EventMap = {
 	[ECSEVENTS.SKILL_ICON]: Tile
 	[ECSEVENTS.ADD_TO_ENCOUNTER]: Entity
 	[ECSEVENTS.TIMER]: number
+	[ECSEVENTS.XP_UP]: { entity: Entity, amount: number }
 	[ECSEVENTS.ADD_WALL]: Entity
 	[ECSEVENTS.REMOVE_WALL]: { entity: Entity, deleteLoot: boolean }
 	[UIEVENTS.UI_XP]: number
