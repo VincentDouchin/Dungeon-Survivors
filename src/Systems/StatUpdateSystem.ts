@@ -10,6 +10,7 @@ import RotationComponent from "../Components/RotationComponent";
 import ShooterComponent from "../Components/ShooterComponent";
 import SpellComponent from "../Components/SpellComponent";
 import StatsComponent from "../Components/StatsComponent";
+import XPPickerComponent from "../Components/XPPickerComponent";
 
 class StatUpdateSystem extends System {
 	constructor() {
@@ -19,11 +20,9 @@ class StatUpdateSystem extends System {
 			level.xp += amount
 			if (level.xp > level.nextLevel()) {
 				level.xp = level.xp % level.nextLevel()
+				entity.getComponent(LevelComponent).level++
 				ECS.eventBus.publish(ECSEVENTS.LEVEL_UP, entity)
 			}
-		})
-		this.subscribe(ECSEVENTS.LEVEL_UP, entity => {
-			entity.getComponent(LevelComponent).level++
 		})
 	}
 	update(entities: Entity[]): void {
@@ -43,6 +42,7 @@ class StatUpdateSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const mana = entity.getComponent(ManaComponent)
 			const spell = entity.getComponent(SpellComponent)
+			const xpPicker = entity.getComponent(XPPickerComponent)
 			if (health) {
 				health.maxHealth.setModifiers(stats, level)
 				health.defense.setModifiers(stats, level)
@@ -68,6 +68,9 @@ class StatUpdateSystem extends System {
 			}
 			if (spell) {
 				spell.spellDamage.setModifiers(stats, level)
+			}
+			if (xpPicker) {
+				xpPicker.xpModifier.setModifiers(stats, level)
 			}
 		})
 	}
