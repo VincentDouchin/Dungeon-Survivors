@@ -16,8 +16,8 @@ class HealthComponent extends Component {
 	sound?: SOUND
 	constructor(health: number, type: number, show = true, sound?: SOUND) {
 		super()
-		this.health = health
 		this.maxHealth = new Stat(health, STATS.MAX_HEALTH)
+		this.health = this.maxHealth.value
 		this.type = type
 		this.show = show
 		this.sound = sound
