@@ -90,7 +90,7 @@ class Encounter {
 	}
 	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		return ParticleEntity({ x, y }, assets.effects.smoke, { scale: 0.5 }).then(() => {
-			const enemy = EnemyEntity(enemyType, this.stats)({ x, y })
+			const enemy = EnemyEntity(enemyType, this.stats, this.level)({ x, y })
 			this.enemies.add(enemy)
 			return enemy
 		})

@@ -4,6 +4,7 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import DamageComponent from "../Components/DamageComponent"
 import { Entity } from "../Globals/ECS"
 import JointComponent from "../Components/JointComponent"
+import LevelComponent from "../Components/LevelComponent"
 import PositionComponent from "../Components/PositionComponent"
 import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
@@ -12,7 +13,7 @@ import StatsComponent from "../Components/StatsComponent"
 import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 
-const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent) => {
+const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent, level?: LevelComponent) => {
 
 	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
@@ -36,6 +37,9 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 	weapon.addComponent(new PositionComponent(parentPosition.x, parentPosition.y))
 	if (stats) {
 		weapon.addComponent(stats)
+	}
+	if (level) {
+		weapon.addComponent(level)
 	}
 	return weapon
 }
