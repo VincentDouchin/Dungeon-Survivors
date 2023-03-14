@@ -115,6 +115,7 @@ class RunState implements GameState {
 
 				this.players.add(PlayerEntity(State.heros[0]!, State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
 				this.players.add(PlayerEntity(State.heros[1]!, State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
+
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 					if (this.players.has(entity)) {
 						ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
@@ -136,6 +137,7 @@ class RunState implements GameState {
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
 					if (this.players.has(entity)) {
 						this.players.delete(entity)
+						debugger
 						if (this.players.size === 0) {
 							engine.setState(GameOverState)
 						}
