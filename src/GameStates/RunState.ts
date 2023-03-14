@@ -16,6 +16,7 @@ import Coroutine from "../Globals/Coroutine"
 import DroppingSystem from "../Systems/DroppingSystem"
 import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
+import GameOverState from "./GameOverState"
 import HealthSystem from "../Systems/HealthSystem"
 import LevelComponent from "../Components/LevelComponent"
 import LevelUpState from "./LevelUpState"
@@ -132,6 +133,14 @@ class RunState implements GameState {
 						}
 					}))
 				})
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+					if (this.players.has(entity)) {
+						this.players.delete(entity)
+					}
+					if (this.players.size === 0) {
+						engine.setState(GameOverState)
+					}
+				}))
 				// !Encounter
 				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
 				if (backgroundDefinition.boundaries) {
