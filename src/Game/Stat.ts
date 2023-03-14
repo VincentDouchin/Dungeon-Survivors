@@ -16,7 +16,7 @@ class Stat {
 		this.modifier = modifier
 	}
 	get value() {
-		return (this.base + (this.base * (this.level?.level ?? 0) * (this.modifier?.getLevelModifier(this.name) ?? 0))) * (1 + (this.modifier?.getModifier(this.name) ?? 0))
+		return this.base * (((this.level?.level ?? 1) * (this.modifier?.getLevelModifier(this.name) ?? 1)) + (this.modifier?.getModifier(this.name) ?? 0))
 	}
 }
 
