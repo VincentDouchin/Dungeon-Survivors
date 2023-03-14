@@ -44,6 +44,10 @@ const LOOTABLES: Record<string, LootableOptions> = {
 	STATUE: {
 		tile: assets.background.statue,
 		particle: assets.effects.Rock
+	},
+	BOOKS: {
+		tile: assets.background.books,
+		particle: assets.effects.Rock
 	}
 
 }

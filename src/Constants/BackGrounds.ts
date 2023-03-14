@@ -122,6 +122,17 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		,
 		lootables: [LOOTABLES.LAVA_CRYSTAL],
 		infinite: { x: true, y: true }
+	},
+	DRACULA: {
+		level: 'DRACULA',
+		lightColor: new Color('hsl(0,0%,100%)'),
+		obstacles: new WeightedList<Tile>()
+			.add(assets.background.bookshelf1, 1)
+			.add(assets.background.bookshelf2, 3)
+			.add(assets.background.candelabra, 2)
+		,
+		lootables: [LOOTABLES.BOOKS],
+		infinite: { x: true, y: true }
 	}
 
 }
