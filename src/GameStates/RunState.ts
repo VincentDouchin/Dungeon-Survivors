@@ -136,9 +136,9 @@ class RunState implements GameState {
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
 					if (this.players.has(entity)) {
 						this.players.delete(entity)
-					}
-					if (this.players.size === 0) {
-						engine.setState(GameOverState)
+						if (this.players.size === 0) {
+							engine.setState(GameOverState)
+						}
 					}
 				}))
 				// !Encounter
