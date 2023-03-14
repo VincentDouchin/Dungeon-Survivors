@@ -14,9 +14,12 @@ class HealthComponent extends Component {
 	show: boolean
 	defense = new Stat(1, STATS.DEFENSE)
 	sound?: SOUND
+	lastMaxHealth: number
 	constructor(health: number, type: number, show = true, sound?: SOUND) {
 		super()
+
 		this.maxHealth = new Stat(health, STATS.MAX_HEALTH)
+		this.lastMaxHealth = this.maxHealth.value
 		this.health = this.maxHealth.value
 		this.type = type
 		this.show = show

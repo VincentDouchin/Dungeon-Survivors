@@ -22,7 +22,7 @@ const full = assets.UI['healthFull']
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
-		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount }) => {
+		this.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount }) => {
 			const sprite = entity.getComponent(SpriteComponent)
 			const health = entity.getComponent(HealthComponent)
 			health.updateHealth(-amount)
@@ -43,12 +43,22 @@ class HealthSystem extends System {
 			} else if (health.sound) {
 				soundManager.play('effect', health.sound, { fade: true, })
 			}
-		}))
+		})
 	}
 	update(entities: Entity[]) {
 		entities.forEach(entity => {
 
+
+
 			const health = entity.getComponent(HealthComponent)
+			if (health.lastMaxHealth !== health.maxHealth.value) {
+
+				console.log(`level up heal for ${entity.name}`)
+				health.updateHealth(health.lastMaxHealth - health.maxHealth.value)
+				health.lastMaxHealth = health.maxHealth.value
+
+			}
+
 			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
@@ -84,12 +94,11 @@ class HealthSystem extends System {
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}
 
-
+						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: damageAmount })
 						// ! Damage number display
 						DamageTextEntity(position, damageAmount, damage.crit)
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
-						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: damageAmount })
 					}
 				})
 			}
