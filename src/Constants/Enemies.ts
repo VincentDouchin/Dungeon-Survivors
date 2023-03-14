@@ -76,7 +76,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 300,
 		size: BODYSIZES.big,
 		speed: 20,
-		damage: 10,
+		damage: 5,
 		charger: true,
 		boss: true,
 		xp: 10
@@ -89,7 +89,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 300,
 		size: BODYSIZES.big,
 		speed: 20,
-		damage: 10,
+		damage: 5,
 		boss: true,
 		xp: 10
 	},
@@ -137,7 +137,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 500,
 		size: BODYSIZES.big,
 		speed: 10,
-		damage: 10,
+		damage: 5,
 		charger: true,
 		boss: true,
 		weapon: WEAPONS.fireball,
@@ -237,7 +237,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 400,
 		size: BODYSIZES.big,
 		speed: 10,
-		damage: 10,
+		damage: 2,
 		charger: true,
 		boss: true,
 		xp: 20,
@@ -372,7 +372,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 300,
 		size: BODYSIZES.big,
 		speed: 20,
-		damage: 10,
+		damage: 5,
 		charger: true,
 		boss: true,
 		xp: 20,
@@ -586,7 +586,7 @@ const Enemies: Record<string, EnemyType> = {
 		health: 400,
 		size: BODYSIZES.normal,
 		speed: 10,
-		damage: 10,
+		damage: 5,
 		charger: true,
 		boss: true,
 		xp: 30
@@ -772,6 +772,7 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 1,
 		damage: 1
 	},
+	// ! VAMPIRES
 	cultist: {
 		tiles: {
 			idle: assets.characters.cultistWalk,
