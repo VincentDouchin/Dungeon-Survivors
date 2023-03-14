@@ -110,7 +110,7 @@ class Encounter {
 				const invicibilitySub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 					if (guards.has(entity)) {
 						guards.delete(entity)
-						debugger
+
 						if (guards.size === 0) {
 							invicibilitySub()
 							main.addComponent(mainHealth)

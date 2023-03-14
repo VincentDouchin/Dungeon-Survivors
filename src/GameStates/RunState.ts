@@ -1,4 +1,3 @@
-import { DEBUG, GameState } from "../Globals/Engine"
 import { ECS, Entity } from "../Globals/ECS"
 import { ECSEVENTS, UIEVENTS } from "../Constants/Events"
 import ENEMYWAVES, { enemyWaveName } from "../Constants/EnemyEncounters"
@@ -17,6 +16,7 @@ import DroppingSystem from "../Systems/DroppingSystem"
 import Encounter from "../Game/Encounter"
 import ExpirationSystem from "../Systems/ExpirationSystem"
 import GameOverState from "./GameOverState"
+import { GameState } from "../Globals/Engine"
 import HealthSystem from "../Systems/HealthSystem"
 import LevelComponent from "../Components/LevelComponent"
 import LevelUpState from "./LevelUpState"
@@ -109,12 +109,12 @@ class RunState implements GameState {
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 
 				// !BACKGROUND
-				const backgroundDefinition = BACKGROUNDS[options?.background ?? DEBUG.DEFAULT_BACKGROUND]
+				const backgroundDefinition = BACKGROUNDS[options.background!]
 				this.background = BackgroundEntity(backgroundDefinition)
 				// !PLAYERS
 
-				this.players.add(PlayerEntity(State.heros[0] ?? DEBUG.DEFAULT_HEROS[0], State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
-				this.players.add(PlayerEntity(State.heros[1] ?? DEBUG.DEFAULT_HEROS[1], State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
+				this.players.add(PlayerEntity(State.heros[0]!, State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
+				this.players.add(PlayerEntity(State.heros[1]!, State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 					if (this.players.has(entity)) {
 						ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
@@ -142,7 +142,7 @@ class RunState implements GameState {
 					}
 				}))
 				// !Encounter
-				this.encounter ??= ENEMYWAVES[options?.enemies ?? DEBUG.DEFAULT_ENEMIES]()
+				this.encounter ??= ENEMYWAVES[options.enemies!]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}

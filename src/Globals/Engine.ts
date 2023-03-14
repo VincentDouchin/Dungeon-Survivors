@@ -1,8 +1,4 @@
-import HEROS, { HeroDefinition } from './../Constants/Heros'
-
-import { Arenas } from '../../assets/map/Map'
 import Coroutine from "./Coroutine"
-import { enemyWaveName } from './../Constants/EnemyEncounters'
 
 export interface GameState {
 	update(): void
@@ -11,17 +7,7 @@ export interface GameState {
 	unset(state: Constructor<GameState> | null): void
 }
 
-export const DEBUG: {
-	ENCOUNTER: boolean
-	DEFAULT_ENEMIES: enemyWaveName
-	DEFAULT_BACKGROUND: Arenas
-	DEFAULT_HEROS: [HeroDefinition, HeroDefinition]
-} = {
-	ENCOUNTER: false && import.meta.env.DEV,
-	DEFAULT_ENEMIES: 'ANIMALS',
-	DEFAULT_BACKGROUND: 'TOWN',
-	DEFAULT_HEROS: [HEROS[2], HEROS[2]],
-}
+
 class Engine {
 	rafHandle = 0
 	accumulatedTime = 0
@@ -72,7 +58,6 @@ class Engine {
 		if (newState) {
 			this.state = newState
 		}
-		debugger
 		this.state?.set(currentState, options)
 	}
 }
