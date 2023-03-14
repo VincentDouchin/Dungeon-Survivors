@@ -107,15 +107,12 @@ class Encounter {
 				const mainHealth = main.removeComponent(HealthComponent)
 				const mainSprite = main.getComponent(SpriteComponent)
 				mainSprite.addShader(new OutlineShader([1, 1, 0, 1]))
-				let coroutine: Coroutine
 				const invicibilitySub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
-
-
 					if (guards.has(entity)) {
 						guards.delete(entity)
+						debugger
 						if (guards.size === 0) {
 							invicibilitySub()
-							coroutine.stop()
 							main.addComponent(mainHealth)
 							mainSprite.removeShader(OutlineShader)
 							mainSprite.removeShader(ColorShader)
