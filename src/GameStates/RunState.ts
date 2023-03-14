@@ -186,6 +186,7 @@ class RunState implements GameState {
 				this.tutoCoroutine?.stop()
 				this.subscribers.forEach(sub => sub())
 				this.players.forEach(player => player.destroy())
+				this.players.clear()
 				this.background?.destroy()
 				this.encounter = null
 				this.music = null
