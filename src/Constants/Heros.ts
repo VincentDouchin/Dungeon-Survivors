@@ -40,7 +40,7 @@ const HEROS: HeroDefinition[] = [
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.1,
-			[STATS.KNOCKBACK]: 0.1,
+			[STATS.DEFENSE]: 0.05,
 		}
 	},
 	{
@@ -75,6 +75,7 @@ const HEROS: HeroDefinition[] = [
 		weapon: WEAPONS.bow,
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.DAMAGE]: 0.05,
 			[STATS.CRIT_CHANCE]: 0.2,
 			[STATS.CRIT_DAMAGE]: 0.2,
 		}
