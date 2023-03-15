@@ -41,7 +41,7 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 		.waitForEnemiesCleared()
 		.addWave([[bear, 2], [direwolf, 5], [berserk(direwolf), 2], [bunny, 10]], 3) // 57
 		.waitForEnemiesCleared()
-		.addWave([[berserk(bear), 1], [bear, 5], [direwolf, 10], [bunny, 4], [fox, 4]], 3) //72
+		.addWave([[berserk(bear), 1], [bear, 3], [direwolf, 5], [bunny, 10], [fox, 4]], 3) //72
 		.waitForEnemiesCleared()
 		.addWave([[mushroomBig, 1], [mushroomSmall, 30], [mushroomMedium, 10], [berserk(mushroomMedium), 5]], 1) // 46
 		.waitForEnemiesCleared()
