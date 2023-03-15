@@ -133,13 +133,15 @@ class RunState implements GameState {
 						engine.setState(LevelUpState)
 					}
 				}))
-				this.players.forEach(player => {
-					this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
-						if (amount < 0 && this.players.has(entity) && entity !== player && !loop) {
-							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
-						}
-					}))
-				})
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
+					if (this.players.has(entity) && !loop && amount < 0) {
+						this.players.forEach(player => {
+							if (player != entity) {
+								ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
+							}
+						})
+					}
+				}))
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
 					if (this.players.has(entity)) {
 						this.players.delete(entity)
