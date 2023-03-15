@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Dungeon-Survivor/sw.js', { scope: '/Dungeon-Survivor/' })})}
