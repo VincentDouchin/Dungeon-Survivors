@@ -10,7 +10,6 @@ import RotationComponent from "../Components/RotationComponent";
 import RunState from "../GameStates/RunState";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
-import TransitionEntity from "../UIEntities/TransitionEntity";
 import WinState from "../GameStates/WinState";
 import assets from "../Globals/Assets";
 import { easeInCubic } from "../Utils/Tween";
@@ -19,6 +18,7 @@ import { engine } from "../Globals/Initialize";
 class PathSystem extends System {
 	position?: PositionComponent
 	encounter?: boolean
+	transitionFinished = false
 	constructor() {
 		super(PathWalkerComponent)
 		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.PATH_POSITION, ({ position, encounter }) => {
@@ -52,9 +52,7 @@ class PathSystem extends System {
 			const [nodeId, node] = selectedNode
 			const nodeEntity = ECS.getEntityById(nodeId)
 			if (node.encounter && !this.encounter) {
-				TransitionEntity(60, () => {
-					engine.setState(RunState, node)
-				})
+				engine.setState(RunState, node)
 				return
 			}
 			if (node.possibleDirections === 0) {
