@@ -505,8 +505,8 @@ const Enemies: Record<string, EnemyType> = {
 	// ! VILLAGERS
 	villagerMale: {
 		tiles: {
-			idle: assets.characters.elfVillagerMaleWalk,
-			run: assets.characters.elfVillagerMaleRun
+			idle: assets.characters.villagerMaleWalk,
+			run: assets.characters.villagerFemaleRun
 		},
 		health: 13,
 		size: BODYSIZES.normal,
@@ -515,8 +515,8 @@ const Enemies: Record<string, EnemyType> = {
 	},
 	villagerFemale: {
 		tiles: {
-			idle: assets.characters.elfVillagerFemaleWalk,
-			run: assets.characters.elfVillagerFemaleRun
+			idle: assets.characters.villagerFemaleWalk,
+			run: assets.characters.villagerFemaleRun
 		},
 		health: 13,
 		size: BODYSIZES.normal,
@@ -539,10 +539,10 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.characters.blacksmithWalk,
 			run: assets.characters.blacksmithRun
 		},
-		health: 15,
+		health: 25,
 		size: BODYSIZES.normal,
 		speed: 1.5,
-		damage: 4,
+		damage: 3,
 		weapon: WEAPONS.hammer,
 		xp: 2
 	},
@@ -585,7 +585,7 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 400,
 		size: BODYSIZES.normal,
-		speed: 10,
+		speed: 5,
 		damage: 5,
 		charger: true,
 		boss: true,
@@ -828,7 +828,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		charger: true
 	},
 	vampireFemale: {
 		tiles: {
@@ -838,7 +839,8 @@ const Enemies: Record<string, EnemyType> = {
 		health: 30,
 		size: BODYSIZES.normal,
 		speed: 2,
-		damage: 3
+		damage: 3,
+		weapon: WEAPONS.darkProjectile
 	},
 	vampireLord: {
 		tiles: {
