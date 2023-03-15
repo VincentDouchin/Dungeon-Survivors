@@ -130,7 +130,18 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 		.waitForEnemiesCleared()
 		.stop(),
 	VAMPIRES: () => new Encounter()
-		.addWave([[cultist, 3], [cultistHooded, 3], [vampireFemale, 3], [vampireMale, 4], [vampireLord, 3], [bat, 5]], 1)
+		.addWave([[cultist, 10], [bat, 10]], 5)
+		.waitForEnemiesCleared()
+		.addWave([[cultist, 5], [bat, 5], [cultistHooded, 5]], 5)
+		.waitForEnemiesCleared()
+		.addWave([[cultist, 5], [cultistHooded, 5], [bat, 5], [vampireMale, 3], [vampireFemale, 3]], 4)
+		.waitForEnemiesCleared()
+		.addWave([[cultist, 5], [cultistHooded, 5], [bat, 5], [vampireMale, 6], [vampireFemale, 6]], 3)
+		.waitForEnemiesCleared()
+		.addWave([[vampireLord, 1]], 1)
+		.addWave([[bat, 5], [vampireMale, 5], [vampireFemale, 5]], 1)
+		.waitForEnemiesCleared()
+		.stop()
 
 
 }

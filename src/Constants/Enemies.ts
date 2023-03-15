@@ -778,9 +778,9 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.characters.cultistWalk,
 			run: assets.characters.cultistRun,
 		},
-		health: 10,
+		health: 15,
 		size: BODYSIZES.normal,
-		speed: 1,
+		speed: 2,
 		damage: 1
 	},
 	cultistHooded: {
@@ -788,49 +788,50 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.characters.hoodedCultistWalk,
 			run: assets.characters.hoodedCultistRun,
 		},
-		health: 10,
+		health: 20,
 		size: BODYSIZES.normal,
-		speed: 1,
-		damage: 1
+		speed: 2,
+		damage: 2
 	},
 	vampireMale: {
 		tiles: {
 			idle: assets.characters.vampireMaleWalk,
 			run: assets.characters.vampireMaleRun,
 		},
-		health: 10,
+		health: 30,
 		size: BODYSIZES.normal,
-		speed: 1,
-		damage: 1
+		speed: 2,
+		damage: 3
 	},
 	vampireFemale: {
 		tiles: {
 			idle: assets.characters.vampireFemaleWalk,
 			run: assets.characters.vampireFemaleRun,
 		},
-		health: 10,
+		health: 30,
 		size: BODYSIZES.normal,
-		speed: 1,
-		damage: 1
+		speed: 2,
+		damage: 3
 	},
 	vampireLord: {
 		tiles: {
 			idle: assets.characters.vampireLordWalk,
 			run: assets.characters.vampireLordRun,
 		},
-		health: 10,
+		health: 100,
 		size: BODYSIZES.normal,
-		speed: 1,
-		damage: 1
+		speed: 2,
+		damage: 5,
+		boss: true
 	},
 	bat: {
 		tiles: {
 			idle: assets.characters.bat,
 		},
-		health: 10,
+		health: 15,
 		size: BODYSIZES.normal,
-		speed: 1,
-		damage: 1
+		speed: 2,
+		damage: 2
 	},
 
 
