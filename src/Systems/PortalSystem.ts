@@ -5,6 +5,7 @@ import COLLISIONGROUPS from "../Constants/CollisionGroups";
 import { ECSEVENTS } from "../Constants/Events";
 import MapState from "../GameStates/MapState";
 import PortalComponent from "../Components/PortalComponent";
+import TransitionEntity from "../UIEntities/TransitionEntity";
 import { engine } from "../Globals/Initialize";
 
 class PortalSystem extends System {
@@ -18,7 +19,9 @@ class PortalSystem extends System {
 				ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, { entity, deleteLoot: true })
 			}, COLLISIONGROUPS.SENSOR, [COLLISIONGROUPS.WALL])
 			body.contacts(() => {
-				engine.setState(MapState)
+				TransitionEntity(60, () => {
+					engine.setState(MapState)
+				})
 			}, COLLISIONGROUPS.PORTAL, [COLLISIONGROUPS.PLAYER])
 		})
 	}

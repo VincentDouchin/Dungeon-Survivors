@@ -10,6 +10,7 @@ import RotationComponent from "../Components/RotationComponent";
 import RunState from "../GameStates/RunState";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import TransitionEntity from "../UIEntities/TransitionEntity";
 import WinState from "../GameStates/WinState";
 import assets from "../Globals/Assets";
 import { easeInCubic } from "../Utils/Tween";
@@ -51,7 +52,9 @@ class PathSystem extends System {
 			const [nodeId, node] = selectedNode
 			const nodeEntity = ECS.getEntityById(nodeId)
 			if (node.encounter && !this.encounter) {
-				engine.setState(RunState, node)
+				TransitionEntity(60, () => {
+					engine.setState(RunState, node)
+				})
 				return
 			}
 			if (node.possibleDirections === 0) {
