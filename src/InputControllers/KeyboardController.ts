@@ -13,9 +13,7 @@ class KeyboardController implements InputController {
 		'Escape': INPUTS.PAUSE,
 		'ShiftLeft': INPUTS.SWITCH,
 		'Enter': INPUTS.VALIDATE,
-		'Space': INPUTS.VALIDATE,
-		'KeyP': INPUTS.SKILL
-
+		'Space': INPUTS.SKILL,
 	}
 	constructor(eventBus: EventBus) {
 		this.eventBus = eventBus
