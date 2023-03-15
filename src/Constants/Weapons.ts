@@ -98,7 +98,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 	},
 	hammer: {
 		tile: Tile.empty(),
-		damage: 5,
+		damage: 4,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.weapons.hammer,
 		group: COLLISIONGROUPS.ENEMY,
@@ -106,7 +106,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		delay: 240,
 		range: 150,
 		rotationSpeed: 0.1,
-		speed: 150
+		speed: 100
 	},
 	iceSpike: {
 		tile: Tile.empty(),
@@ -117,7 +117,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 150,
-		speed: 150,
+		speed: 100,
 		scale: 0.5
 	},
 	cross: {
@@ -129,9 +129,20 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		target: [COLLISIONGROUPS.PLAYER],
 		delay: 240,
 		range: 150,
-		speed: 150,
+		speed: 100,
 		scale: 0.8,
 		rotationSpeed: 0.1,
+	},
+	darkProjectile: {
+		tile: Tile.empty(),
+		damage: 3,
+		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
+		projectile: assets.effects.darkProjectile,
+		group: COLLISIONGROUPS.ENEMY,
+		target: [COLLISIONGROUPS.PLAYER],
+		delay: 240,
+		range: 200,
+		speed: 100,
 	}
 
 }
