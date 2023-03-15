@@ -26,6 +26,7 @@ const framesNb: Record<effects, number> = {
 	"smoke": 6,
 	"auraCircle": 4,
 	"fireProjectile": 15,
+	"darkProjectile": 15,
 	"lightning": 8,
 	"smokeCircular": 8,
 	"Rain": 3,
