@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && git commit -m \"build\"",
     "preview": "vite preview",
     "deploy": "git subtree push  --prefix dist origin gh-pages"
   },
