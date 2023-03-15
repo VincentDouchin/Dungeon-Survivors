@@ -40,27 +40,27 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 	},
 	staff: {
 		tile: assets.weapons.staff,
-		damage: 15,
+		damage: 10,
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		projectile: assets.effects.fireProjectile,
 		spread: 0.5,
 		projectilesNb: 3,
 		speed: 300,
+		delay: 60,
 		group: COLLISIONGROUPS.PLAYER,
 		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		light: 'hsl(39, 30%, 20%)',
 		sound: SOUNDS.Fireball
 	},
-
 	bow: {
 		tile: assets.weapons.bow,
-		damage: 10,
+		damage: 15,
 		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
 		group: COLLISIONGROUPS.PLAYER,
 		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 		projectile: assets.weapons.arrow,
 		speed: 500,
-		delay: 60
+		delay: 40
 	},
 	enemyBow: {
 		tile: assets.weapons.bow,
