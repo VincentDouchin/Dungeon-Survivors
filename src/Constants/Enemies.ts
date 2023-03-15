@@ -756,7 +756,7 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.characters.templarWalk,
 			run: assets.characters.templarRun
 		},
-		health: 20,
+		health: 25,
 		size: BODYSIZES.normal,
 		speed: 2,
 		damage: 4,
@@ -771,6 +771,33 @@ const Enemies: Record<string, EnemyType> = {
 		size: BODYSIZES.small,
 		speed: 1,
 		damage: 1
+	},
+	archAngel: {
+		tiles: {
+			idle: assets.characters.archAngelWalk
+		},
+		health: 300,
+		boss: true,
+		size: BODYSIZES.normal,
+		speed: 5,
+		damage: 5,
+		get minion() {
+			return {
+				type: Enemies.angel,
+				delay: 180,
+				distance: 70
+			}
+		}
+	},
+	inquisitor: {
+		tiles: {
+			idle: assets.characters.inquisitorWalk
+		},
+		health: 30,
+		size: BODYSIZES.normal,
+		speed: 1.5,
+		damage: 3,
+		weapon: WEAPONS.cross
 	},
 	// ! VAMPIRES
 	cultist: {

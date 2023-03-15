@@ -119,6 +119,20 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		range: 150,
 		speed: 150,
 		scale: 0.5
+	},
+	cross: {
+		tile: Tile.empty(),
+		damage: 3,
+		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
+		projectile: assets.weapons.cross,
+		group: COLLISIONGROUPS.ENEMY,
+		target: [COLLISIONGROUPS.PLAYER],
+		delay: 240,
+		range: 150,
+		speed: 150,
+		scale: 0.8,
+		rotationSpeed: 0.1,
 	}
+
 }
 export default WEAPONS

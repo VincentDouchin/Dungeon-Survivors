@@ -7,7 +7,7 @@ const {
 	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, bear, fox,
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
 	villagerFemale, villagerMale, shopKeeper, butcher, blacksmith, executioner,
-	angel, clericFat, clericNormal, clericSkinny, nunFat, nunSkinny, nunNormal, bishop, templar,
+	angel, clericFat, clericNormal, clericSkinny, bishop, templar, inquisitor, archAngel,
 	zombieSmall, muddy, swampy, zombie, iceZombie, ogre, skeleton,
 	knight, knightFat, knightElite, knightEliteLarge, king, queen, herald,
 	imp, wogol, chort, demonBig, necromancer,
@@ -75,17 +75,17 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 		.waitForEnemiesCleared()
 		.stop(),
 	PRIESTS: () => new Encounter()
-		.addWave([[angel, 10], [berserk(angel), 3], [clericFat, 5], [clericNormal, 5], [clericSkinny, 5], [templar, 3],], 5)
+		// .addWave([[clericFat, 7], [clericNormal, 7], [clericSkinny, 7]], 5)
+		// .waitForEnemiesCleared()
+		// .addWave([[clericFat, 7], [clericNormal, 7], [clericSkinny, 7], [templar, 3]], 4)
+		// .waitForEnemiesCleared()
+		// .addWave([[clericFat, 7], [clericNormal, 7], [clericSkinny, 7], [templar, 5], [inquisitor, 3]], 3)
+		// .waitForEnemiesCleared()
+		.addWave([[templar, 10], [inquisitor, 5]])
+		.addGroup(bishop, templar, 5, 50)
+		.addGroup(bishop, templar, 5, 50)
 		.waitForEnemiesCleared()
-		.addWave([[angel, 10], [clericFat, 10], [clericNormal, 10], [clericSkinny, 10], [templar, 3]], 4)
-		.waitForEnemiesCleared()
-		.addWave([[nunFat, 10], [nunNormal, 10], [nunSkinny, 10], [templar, 3]], 3)
-		.waitForEnemiesCleared()
-		.addWave([[templar, 15], [angel, 10], [berserk(angel), 5]])
-		.addGroup(bishop, templar, 5, 50)
-		.addGroup(bishop, templar, 5, 50)
-		.addGroup(bishop, templar, 5, 50)
-		.addGroup(bishop, templar, 5, 50)
+		.addGroup(archAngel, angel, 12, 50)
 		.waitForEnemiesCleared()
 		.stop(),
 	UNDEAD: () => new Encounter()
