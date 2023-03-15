@@ -14,7 +14,7 @@ const SKILLS: Skill[] = [
 		icon: assets.icons.attack_speed_boost,
 		name: 'Attack speed',
 		statName: STATS.ATTACK_SPEED,
-		amount: 0.2
+		amount: 0.1
 	},
 	{
 		icon: assets.icons.attack_boost,
