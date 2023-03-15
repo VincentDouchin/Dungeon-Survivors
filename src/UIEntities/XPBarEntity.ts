@@ -10,7 +10,7 @@ import assets from "../Globals/Assets"
 const XPBarEntity = () => {
 	let percent = 0
 	const scalingOptions = { x: { left: 2, right: 6 }, y: { top: 0, bottom: 0 } }
-	const w = UICamera.right / 5
+	const w = UICamera.right / 4 - 20
 	const h = 7
 	const bar = assets.UI.bar.framed(scalingOptions, w, h)
 	const full = assets.UI.xp.framed(scalingOptions, w, h)
