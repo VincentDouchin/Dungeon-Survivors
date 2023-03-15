@@ -64,7 +64,7 @@ class RunState implements GameState {
 	render() {
 		render()
 	}
-	set(oldState: Constructor<GameState>, options: { background?: Arenas, enemies?: enemyWaveName }) {
+	set(oldState: Constructor<GameState>, options: { background: Arenas, enemies: enemyWaveName }) {
 
 		inputManager.enable('dpad')
 		inputManager.enable('pauseButton')
@@ -109,12 +109,18 @@ class RunState implements GameState {
 				this.music ??= soundManager.play('music', MUSICS.Fight, { volume: 0.8, autoplay: false, loop: true })
 
 				// !BACKGROUND
-				const backgroundDefinition = BACKGROUNDS[options.background!]
+				const backgroundDefinition = BACKGROUNDS[options.background]
 				this.background = BackgroundEntity(backgroundDefinition)
 				// !PLAYERS
 
 				this.players.add(PlayerEntity(State.heros[0]!, State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
 				this.players.add(PlayerEntity(State.heros[1]!, State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
+
+				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, skill => {
+					this.stats.forEach(stat => {
+						stat.setModifier(skill.statName, skill.amount)
+					})
+				}))
 
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 					if (this.players.has(entity)) {
@@ -144,7 +150,7 @@ class RunState implements GameState {
 					}
 				}))
 				// !Encounter
-				this.encounter ??= ENEMYWAVES[options.enemies!]()
+				this.encounter ??= ENEMYWAVES[options.enemies]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}
