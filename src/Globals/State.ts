@@ -11,7 +11,7 @@ interface State {
 	},
 	timer: number,
 	mobile: boolean,
-	heros: HeroDefinition[],
+	heros: Set<HeroDefinition>,
 	selectedTiles: number[],
 	skills: Skill[]
 	difficulty: DIFFICULTY | null
@@ -23,7 +23,7 @@ const blanckState: State = {
 		top: undefined,
 		bottom: undefined,
 	},
-	heros: [],
+	heros: new Set(),
 	selectedTiles: [],
 	timer: 0,
 	mobile: !!navigator.userAgentData?.mobile,
