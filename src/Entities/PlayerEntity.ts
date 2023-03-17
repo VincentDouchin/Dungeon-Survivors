@@ -26,7 +26,7 @@ import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
 const playergroup = FlockingComponent.getGroup()
-const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent) => {
+const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent) => {
 	const player = new Entity(`player ${main}`)
 
 	for (let [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
@@ -34,7 +34,7 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	}
 	player.addComponent(stats)
 	player.addComponent(new SpellComponent(hero.spell))
-	player.addComponent(new SpriteComponent(hero.tiles[selectedTile].idle,))
+	player.addComponent(new SpriteComponent(hero.tiles.idle,))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
 	const playerHealth: number = {
 		[DIFFICULTY.EASY]: 300,
@@ -43,14 +43,16 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 
 	player.addComponent(new HealthComponent(playerHealth, COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
-	player.addComponent(new AnimationComponent(hero.tiles[selectedTile]))
-	if (!hero.weapon.behaviors.includes(WEAPONBEHAVIORS.toucher)) player.addComponent(new RangedComponent())
+	player.addComponent(new AnimationComponent(hero.tiles))
+	if (!hero.weapon.some(weapon => weapon.behaviors.includes(WEAPONBEHAVIORS.toucher))) {
+		player.addComponent(new RangedComponent())
+	}
 	player.addComponent(new SwitchingComponent(main))
 	player.addComponent(new FlockingComponent(playergroup, !main, 100))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 12000 },
 		[
-			{ width: BODYSIZES.normal.width, height: BODYSIZES.normal.height, mass: 10, offset: hero.tiles[0].idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL, COLLISIONGROUPS.PORTAL, COLLISIONGROUPS.LOOT] },
+			{ width: BODYSIZES.normal.width, height: BODYSIZES.normal.height, mass: 10, offset: hero.tiles.idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL, COLLISIONGROUPS.PORTAL, COLLISIONGROUPS.LOOT] },
 			{ width: 100, height: 100, mass: 0, contact: true, sensor: true, group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.XP] }
 		]
 
@@ -61,7 +63,9 @@ const PlayerEntity = (hero: HeroDefinition, selectedTile: number, main: boolean,
 	player.addComponent(level)
 	player.addComponent(new ShadowComponent(16, 6, 14))
 	player.addComponent(new XPPickerComponent())
-	player.addChildren(WeaponEntity(hero.weapon, player, BODYSIZES.normal.height, stats, level))
+	for (const weapon of hero.weapon) {
+		player.addChildren(WeaponEntity(weapon, player, BODYSIZES.normal.height, stats, level))
+	}
 	return player
 }
 
