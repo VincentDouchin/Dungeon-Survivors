@@ -8,18 +8,20 @@ import saveData from "../Globals/SaveManager"
 
 export interface HeroDefinition {
 	name: HeroName
-	tiles: Record<string, Tile>[]
+	tiles: Record<string, Tile>
 	spell: Spell
 	needUnlock: boolean
 	unlocked?: boolean
-	weapon: WeaponDefinition
+	weapon: WeaponDefinition[]
 	stats: Partial<Record<STATS, number>>
 }
 export enum HeroName {
 	'elf' = 'elf',
 	'wizzard' = 'wizzard',
 	'knight' = 'knight',
-	'ninja' = 'ninja'
+	'ninja' = 'ninja',
+	'pirate' = 'pirate',
+	'fairy' = 'fairy'
 }
 export const isUnlocked = (hero: HeroDefinition) => {
 	return !hero.needUnlock || saveData.heros.includes(hero.name)
@@ -27,15 +29,12 @@ export const isUnlocked = (hero: HeroDefinition) => {
 const HEROS: HeroDefinition[] = [
 	{
 		name: HeroName.knight,
-		tiles: [{
+		tiles: {
 			idle: assets.characters.knightMaleWalk,
 			run: assets.characters.knightMaleRun,
-		}, {
-			idle: assets.characters.knightFemaleRun,
-			run: assets.characters.knightFemaleRun,
-		}],
+		},
 		spell: SPELLS.DIVINE_PROTECTION,
-		weapon: WEAPONS.swordKnight,
+		weapon: [WEAPONS.swordKnight],
 		needUnlock: false,
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
@@ -45,16 +44,13 @@ const HEROS: HeroDefinition[] = [
 	},
 	{
 		name: HeroName.wizzard,
-		tiles: [{
-			idle: assets.characters.wizzardMaleWalk,
-			run: assets.characters.wizzardMaleRun,
-		}, {
+		tiles: {
 			idle: assets.characters.wizzardFemaleWalk,
 			run: assets.characters.wizzardFemaleRun,
-		}],
+		},
 		spell: SPELLS.LIGHTNING,
 		needUnlock: false,
-		weapon: WEAPONS.staff,
+		weapon: [WEAPONS.staff],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.05,
@@ -63,16 +59,13 @@ const HEROS: HeroDefinition[] = [
 	},
 	{
 		name: HeroName.elf,
-		tiles: [{
-			idle: assets.characters.elfMaleWalk,
-			run: assets.characters.elfMaleRun,
-		}, {
+		tiles: {
 			idle: assets.characters.elfFemaleWalk,
 			run: assets.characters.elfFemaleRun,
-		}],
+		},
 		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,
-		weapon: WEAPONS.bow,
+		weapon: [WEAPONS.bow],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.05,
@@ -80,21 +73,51 @@ const HEROS: HeroDefinition[] = [
 			[STATS.CRIT_DAMAGE]: 0.2,
 		}
 	},
-	// {
-	// 	name: HeroName.ninja,
-	// 	tiles: [{
-	// 		idle: assets.characters.ninjaWalk,
-	// 		run: assets.characters.ninjaRun
-	// 	}],
-	// 	spell: SPELLS.ARROW_VOLLEY,
-	// 	needUnlock: true,
-	// 	weapon: WEAPONS.sai,
-	// 	stats: {
-	// 		[STATS.MAX_HEALTH]: 0.05,
-	// 		[STATS.CRIT_DAMAGE]: 0.05,
-	// 		[STATS.ATTACK_SPEED]: 0.10
-	// 	}
-	// }
+	{
+		name: HeroName.ninja,
+		tiles: {
+			idle: assets.characters.ninjaWalk,
+			run: assets.characters.ninjaRun
+		},
+		spell: SPELLS.ARROW_VOLLEY,
+		needUnlock: true,
+		weapon: [WEAPONS.sai, WEAPONS.sai2],
+		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.CRIT_DAMAGE]: 0.05,
+			[STATS.ATTACK_SPEED]: 0.10
+		}
+	},
+	{
+		name: HeroName.pirate,
+		tiles: {
+			idle: assets.characters.pirateCaptainWalk,
+			run: assets.characters.pirateCaptainRun
+		},
+		spell: SPELLS.ARROW_VOLLEY,
+		needUnlock: true,
+		weapon: [WEAPONS.sai],
+		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.CRIT_DAMAGE]: 0.05,
+			[STATS.ATTACK_SPEED]: 0.10
+		}
+	},
+	{
+		name: HeroName.fairy,
+		tiles: {
+			idle: assets.characters.fairyWalk,
+			run: assets.characters.fairyWalk
+		},
+		spell: SPELLS.ARROW_VOLLEY,
+		needUnlock: true,
+		weapon: [WEAPONS.sai],
+		stats: {
+			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.CRIT_DAMAGE]: 0.05,
+			[STATS.ATTACK_SPEED]: 0.10
+		}
+	},
 
 ]
 export default HEROS
