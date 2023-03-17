@@ -43,9 +43,9 @@ class MapState implements GameState {
 		const showMap = () => {
 			if (!level) return
 			this.player = new Entity('player')
-			const hero = State.heros[0]
-			this.player.addComponent(new SpriteComponent(hero.tiles[State.selectedTiles[0]].idle, { scale: 0.6, renderOrder: 11 }))
-			this.player.addComponent(new AnimationComponent(hero.tiles[State.selectedTiles[0]]))
+			const hero = [...State.heros][0]
+			this.player.addComponent(new SpriteComponent(hero.tiles.idle, { scale: 0.6, renderOrder: 11 }))
+			this.player.addComponent(new AnimationComponent(hero.tiles))
 			this.player.addComponent(new CameraTargetComponent())
 			this.player.addComponent(new PathWalkerComponent())
 			const pathEntities = level

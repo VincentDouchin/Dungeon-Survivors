@@ -4,14 +4,11 @@ import HEROS, { HeroDefinition, isUnlocked } from "../Constants/Heros";
 import AnimationComponent from "../Components/AnimationComponent";
 import ButtonEntity from "./ButtonEntity";
 import ColorShader from "../Shaders/ColorShader";
-import Coroutine from "../Globals/Coroutine";
 import { ECSEVENTS } from "../Constants/Events";
 import INPUTS from "../Constants/InputsNames";
 import MapState from "../GameStates/MapState";
 import OutlineShader from "../Shaders/OutlineShader";
-import RotationComponent from "../Components/RotationComponent";
 import SKILLS from "../Constants/Skills";
-import { STATS } from "../Components/StatsComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -24,54 +21,119 @@ import { engine } from "../Globals/Initialize";
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
 
-	const characterFrameWidth = 40
-	const frameWidth = (HEROS.length - 0.5) * characterFrameWidth
+
+	// ! UI
 	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: 0 }))
 	uiPosition.moveTo(0, 30)
-	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, frameWidth, 60), { scale: 3 }))
-	const description = new Entity('description')
-	description.addComponent(new SpriteComponent(Tile.empty(32, 32)))
-	description.addComponent(new TextComponent('Choose your characters', { size: 32 }))
-	description.addComponent(new UIPositionComponent({ x: 0, y: 0.8 }, { x: 0, y: 1 }))
-	ui.addChildren(description)
-	const heroFrames: Map<HeroDefinition, Entity> = new Map()
-	const unlockedCharacters: Entity[] = []
-	const characterFrames: Entity[] = []
+	ui.addComponent(new SpriteComponent(assets.UI.frame1.framed(16, 110, 60), { scale: 3 }))
+	const container = new Entity('container')
+	container.addComponent(new SpriteComponent(Tile.empty(130, 80), { scale: 3 }))
+	container.addComponent(new UIPositionComponent())
+	ui.addChildren(container)
+	// ! STATS
+	const stats = new Entity('player select stats')
+	stats.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 30, 65), { scale: 3 }))
+	stats.addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: -1, y: 0 }))
+	container.addChildren(stats)
+	const statsContainer = new Entity('stats container')
+	statsContainer.addComponent(new SpriteComponent(Tile.empty(30, 65), { scale: 3 }))
+	statsContainer.addComponent(new UIPositionComponent())
+	stats.addChildren(statsContainer)
+	SKILLS.forEach((skill, index) => {
+		const skillContainer = new Entity('skill container')
+		skillContainer.addComponent(new SpriteComponent(Tile.empty(120, 24)))
+		skillContainer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: index * 1.5 + index * 0.1 }))
 
-	// ! ADD OUTLINE
-	let checkHeros = true
-	new Coroutine(function* () {
-		const withShader: Entity[] = []
-		while (checkHeros) {
-			yield
-			for (let [hero, character] of heroFrames.entries()) {
-				if (State.heros.includes(hero) && !withShader.includes(character)) {
-					character.getComponent(SpriteComponent)?.addShader(new OutlineShader([1, 1, 1, 1]))
-					withShader.push(character)
-				} else if (!State.heros.includes(hero)) {
-					character.getComponent(SpriteComponent)?.removeShader(OutlineShader)
-					withShader.splice(withShader.indexOf(character), 1)
-				}
-			}
-		}
+		statsContainer.addChildren(skillContainer)
+		const skillIcon = new Entity('skill icon')
+		skillIcon.addComponent(new SpriteComponent(skill.icon))
+		skillIcon.addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: -1, y: 0 }))
+		skillContainer.addChildren(skillIcon)
+		const text = new Entity('text')
+		text.addComponent(new SpriteComponent(Tile.empty(1, 24)))
+		text.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
+		text.addComponent(new TextComponent(skill.name, { anchorX: 'left', size: 12, outlineWidth: 1 }))
+		skillIcon.addChildren(text)
 	})
-	ui.onDestroy(() => checkHeros = false)
 
-	// ! Validate Button
+	// ! VALIDATE BUTTON
 	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
-		if (State.heros.length === 2) {
+		if (State.heros.size === 2) {
 			uiPosition.moveTo(-3, 30).then(() => {
 				engine.setState(MapState)
 			})
 		}
 	})
-	validateButton.addComponent(new UIPositionComponent({ x: 0, y: -0.7 }, { x: 0, y: 0 }))
+	validateButton.addComponent(new UIPositionComponent({ x: 0.3, y: -0.7 }, { x: 0, y: 0 }))
+
+	container.addChildren(validateButton)
 
 	ui.addChildren(validateButton)
+	const positions = [
+		{ x: 5, y: 1 },
+		{ x: 3, y: 1 },
+		{ x: 1, y: 1 },
+		{ x: 5, y: 3 },
+		{ x: 3, y: 3 },
+		{ x: 1, y: 3 },
+	]
+	const characterFrames: Entity[][] = [[], []]
+	const heroSprites = new Map<HeroDefinition, SpriteComponent>()
+	const withOutline = new Set<SpriteComponent>()
+	HEROS.forEach((hero, index) => {
+		// ! CHARACTER FRAME
+		const characterFrame = new Entity('character frame')
+		characterFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 12, 12), { scale: 3 }))
+		characterFrame.addComponent(new UIPositionComponent({ x: 1, y: 1 }, positions[index]))
+		const selectable = characterFrame.addComponent(new SelectableComponent())
+		container.addChildren(characterFrame)
+		characterFrames[Math.floor(index / 3)].push(characterFrame)
 
+		// ! HERO
+		const heroIcon = new Entity('hero')
+		const heroSprite = heroIcon.addComponent(new SpriteComponent(hero.tiles.idle, { scale: 2 }))
+		heroSprites.set(hero, heroSprite)
+		heroIcon.addComponent(new AnimationComponent({ idle: hero.tiles.idle }))
+		heroIcon.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: -0.3 }))
+		characterFrame.addChildren(heroIcon)
+
+		// ! UNLOCKED
+		if (isUnlocked(hero)) {
+			selectable.onValidated = () => {
+				if (State.heros.has(hero)) {
+					State.heros.delete(hero)
+				} else if (State.heros.size < 2) {
+					State.heros.add(hero)
+				}
+				heroSprites.forEach((sprite, hero) => {
+					if (State.heros.has(hero) && !withOutline.has(sprite)) {
+						sprite.addShader(new OutlineShader([1, 1, 1, 1]))
+						withOutline.add(sprite)
+					} else if (withOutline.has(sprite) && !State.heros.has(hero)) {
+						sprite.removeShader(OutlineShader)
+						withOutline.delete(sprite)
+					}
+				})
+				const textValidate = validateButton.children[0].getComponent(TextComponent)
+				if (State.heros.size === 2) {
+					textValidate.setText('Start your adventure')
+				} else {
+					textValidate.setText(`Choose ${2 - State.heros.size} characters`)
+				}
+			}
+		} else {
+			heroSprite.addShader(new ColorShader(0, 0, 0, 1))
+			const lock = new Entity('lock')
+			lock.addComponent(new SpriteComponent(assets.icons.lock, { scale: 2 }))
+			lock.addComponent(new UIPositionComponent())
+			characterFrame.addChildren(lock)
+		}
+
+	})
 	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
-		if (characterFrames.some(frame => frame.id === entity.id) || entity.id === validateButton.id) {
-			characterFrames.forEach(frame => {
+		const allFrames = characterFrames.flat()
+		if (allFrames.some(frame => frame.id === entity.id)) {
+			allFrames.forEach(frame => {
 				if (entity.id === frame.id) {
 					frame.getComponent(SpriteComponent).removeShader(ColorShader)
 				} else {
@@ -80,112 +142,12 @@ const UIPlayerSelectEntity = () => {
 			})
 		}
 	})
-	HEROS.forEach((hero, index) => {
-		const tiles = hero.tiles.map(tiles => tiles.idle)
-		const unlocked = isUnlocked(hero)
-		const arrows: Entity[] = []
-		let selectedTile = 0
-		// ! FRAME
-		const characterFrame = new Entity('character frame')
-		characterFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, characterFrameWidth, 35), { scale: 2 }))
-		characterFrame.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }).offsetX(HEROS.length, index))
-		characterFrames.push(characterFrame)
-		description.addChildren(characterFrame)
-
-		// ! CHARACTER
-		const character = new Entity(`character ${index}`)
-		character.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 1 }))
-		const characterSprite = character.addComponent(new SpriteComponent(tiles[0], { scale: 2 }))
-		const states = tiles.reduce((acc, v, i) => ({ ...acc, [`tile ${i}`]: v }), {})
-		const characterAnim = character.addComponent(new AnimationComponent(states))
-		characterFrame.addChildren(character)
-		heroFrames.set(hero, character)
-
-
-
-
-		// ! ARROWS
-		if (unlocked) {
-			unlockedCharacters.push(characterFrame)
-			const characterSelectable = characterFrame.addComponent(new SelectableComponent(undefined, undefined, () => {
-				ECS.eventBus.publish(ECSEVENTS.SELECTED, arrowLeft)
-			}))
-			characterSelectable.next[INPUTS.MOVEDOWN] = validateButton
-
-			// ! STATS
-			Object.entries(hero.stats).forEach(([stat, amount], index) => {
-				const statEntity = new Entity('stat')
-				const skill = SKILLS.find(skill => skill.statName === stat as STATS)
-				if (!skill) return
-				statEntity.addComponent(new SpriteComponent(Tile.empty(characterFrameWidth * 2, 16)))
-				statEntity.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 + index * 2 }))
-				characterFrame.addChildren(statEntity)
-				const statIcon = new Entity('stat icon')
-				statIcon.addComponent(new SpriteComponent(skill.icon))
-				statIcon.addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: 1, y: 0 }))
-				statEntity.addComponent(new TextComponent(`+${Math.floor(amount * 100)}% ${skill.name} per lvl`, { size: 9 }))
-				statEntity.addChildren(statIcon)
-
-			})
-			// ! BUTTON
-			const button = ButtonEntity(20, 4, 2, 'Select', 1, () => {
-				ECS.eventBus.publish(ECSEVENTS.SELECTED, characterFrame)
-				for (let arr of [State.heros, State.selectedTiles]) {
-					if (arr.length === 2) {
-						arr.pop()
-					}
-				}
-				State.heros.push(hero)
-				State.selectedTiles.push(selectedTile)
-				const textValidate = validateButton.children[0].getComponent(TextComponent)
-				if (State.heros.length === 1) {
-					textValidate.setText('Choose 1 character')
-				} else if (State.heros.length === 2) {
-					textValidate.setText('Start your adventure')
-				}
-			})
-			button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1.2 }))
-			character.addChildren(button)
-			const arrowRight = new Entity('character arrow')
-			arrowRight.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
-			arrowRight.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
-			arrows.push(arrowRight)
-			character.addChildren(arrowRight)
-			const arrowLeft = new Entity('character arrow')
-			arrowLeft.addComponent(new UIPositionComponent({ x: -1, y: 0 }, { x: 1, y: 0 }))
-
-
-			arrows.push(arrowLeft)
-			character.addChildren(arrowLeft)
-			arrows.forEach(arrow => {
-				arrow.addComponent(new SpriteComponent(assets.UI.arrow, { scale: 2 }))
-				const arrowSelectable = arrow.addComponent(new SelectableComponent(assets.UI.arrowselected, assets.UI.arrow, () => {
-					selectedTile = (selectedTile + 1) % tiles.length
-					characterAnim.setState(Object.keys(states)[selectedTile])
-				}))
-				arrowSelectable.next[INPUTS.MOVEDOWN] = button
-
-			})
-			arrowLeft.getComponent(SelectableComponent).next[INPUTS.MOVERIGHT] = arrowRight
-			arrowRight.getComponent(SelectableComponent).next[INPUTS.MOVELEFT] = arrowLeft
-			button.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = arrowLeft
-		} else {
-
-			characterSprite.addShader(new ColorShader(0, 0, 0, 1))
-			const lock = new Entity('lock')
-			lock.addComponent(new SpriteComponent(assets.icons.lock, { scale: 2 }))
-			lock.addComponent(new UIPositionComponent())
-			characterFrame.addChildren(lock)
-
-		}
-
-
-
-
+	SelectableComponent.setFromGrid(characterFrames)
+	characterFrames[1].forEach(characterFrame => {
+		characterFrame.getComponent(SelectableComponent).next[INPUTS.MOVEDOWN] = validateButton
 	})
-	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[Math.floor(characterFrames.length / 2)]
+	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1][1]
 
-	SelectableComponent.setFromArray(unlockedCharacters.reverse())
 	return ui
 }
 export default UIPlayerSelectEntity

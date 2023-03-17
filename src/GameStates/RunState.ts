@@ -113,8 +113,8 @@ class RunState implements GameState {
 				this.background = BackgroundEntity(backgroundDefinition)
 				// !PLAYERS
 
-				this.players.add(PlayerEntity(State.heros[0]!, State.selectedTiles[0] ?? 0, true, this.stats[0], this.mana, this.playerLevel))
-				this.players.add(PlayerEntity(State.heros[1]!, State.selectedTiles[1] ?? 0, false, this.stats[1], this.mana, this.playerLevel))
+				this.players.add(PlayerEntity([...State.heros][0]!, true, this.stats[0], this.mana, this.playerLevel))
+				this.players.add(PlayerEntity([...State.heros][1]!, false, this.stats[1], this.mana, this.playerLevel))
 
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, skill => {
 					this.stats.forEach(stat => {
