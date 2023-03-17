@@ -33,7 +33,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 	))
 	weapon.addComponent(new SpriteComponent(tile))
 	const angVel = weaponDefinition.behaviors.includes(WEAPONBEHAVIORS.targeter) ? 0 : 1
-	weapon.addComponent(new RotationComponent({ angVel }))
+	weapon.addComponent(new RotationComponent({ angVel, rotation: weaponDefinition.angle ?? 0 }))
 	weapon.addComponent(new PositionComponent(parentPosition.x, parentPosition.y))
 	if (stats) {
 		weapon.addComponent(stats)

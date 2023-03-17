@@ -9,6 +9,7 @@ export interface WeaponDefinition {
 	tile: Tile
 	damage: number
 	behaviors: string[],
+	angle?: number
 	projectile?: Tile
 	speed?: number
 	spread?: number
@@ -37,6 +38,9 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
 		group: COLLISIONGROUPS.PLAYER,
 		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
+	},
+	get sai2() {
+		return { ...WEAPONS.sai, angle: Math.PI }
 	},
 	staff: {
 		tile: assets.weapons.staff,
