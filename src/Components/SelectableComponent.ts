@@ -28,6 +28,22 @@ class SelectableComponent extends Component {
 			selectable.next[topDown ? INPUTS.MOVEUP : INPUTS.MOVERIGHT] = arr.at((index + 1) % arr.length)
 		})
 	}
+	static setFromGrid(grid: Entity[][]) {
+		for (let x = 0; x < grid.length; x++) {
+			const line = grid[x]
+			for (let y = 0; y < line.length; y++) {
+				const entity = line[y]
+				if (x === 0 && y === 0) {
+					ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
+				}
+				const selectable = entity.getComponent(SelectableComponent)
+				selectable.next[INPUTS.MOVELEFT] = line.at(y - 1)
+				selectable.next[INPUTS.MOVERIGHT] = line.at((y + 1) % line.length)
+				selectable.next[INPUTS.MOVEUP] = grid.at(x - 1)?.at(y)
+				selectable.next[INPUTS.MOVEDOWN] = grid.at((x + 1) % grid.length)?.at(y)
+			}
+		}
+	}
 
 }
 
