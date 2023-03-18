@@ -1,7 +1,9 @@
 import ArrowVolleySpell from "../Entities/ArrowVolleySpell"
+import CannonSpellEntity from "../Entities/CannonSpellEntity"
 import DivineProtectionEntity from "../Entities/DivineProtectionEntity"
 import { Entity } from "../Globals/ECS"
 import LightningSpellEntity from "../Entities/LightningSpellEntity"
+import ShurikenSpellEntity from "../Entities/ShurikenSpellEntity"
 import Tile from "../Utils/Tile"
 import assets from "../Globals/Assets"
 
@@ -25,6 +27,16 @@ const SPELLS: Record<string, Spell> = {
 		icon: assets.icons.arrowVolley,
 		spell: ArrowVolleySpell,
 		damage: 10
+	},
+	SHURIKEN: {
+		icon: assets.icons.shurikenSpell,
+		spell: ShurikenSpellEntity,
+		damage: 10
+	},
+	CANNON: {
+		icon: assets.icons.cannon,
+		spell: CannonSpellEntity,
+		damage: 20
 	}
 
 }

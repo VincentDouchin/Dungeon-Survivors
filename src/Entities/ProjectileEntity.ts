@@ -22,23 +22,24 @@ export interface ProjectileOptions {
 	rotationSpeed?: number
 	scale?: number
 	piercing?: number
+	afterHit?: (entity: Entity) => any
 }
-const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, }: ProjectileOptions) => (parent: Entity) => {
-	debugger
+const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit }: ProjectileOptions) => (parent: Entity) => {
 	const projectiles = new Entity('projectiles')
+	let counter = nb
 	for (let i = 0; i < nb; i++) {
 		const projectile = new Entity('projectile')
-		projectiles.addChildren(projectile)
-		const position = parent.getComponent(PositionComponent)
-		projectile.addComponent(position.clone())
 
+		const position = parent.getComponent(PositionComponent)
 		const rotation = parent.getComponent(RotationComponent)
 		const projectileRotation = rotation.rotation - spread / 2 + (rotation.rotation * i / nb / 2)
+		const height = (parent.getComponent(SpriteComponent).height / 2 ?? 0) + (tile?.height / 2 ?? 0)
+		projectile.addComponent(new PositionComponent(position.x - Math.cos(rotation.rotation) * height, position.y - Math.sin(rotation.rotation) * height))
 		projectile.addComponent(new RotationComponent({
 			rotation: projectileRotation,
 			rotationVel: rotationSpeed
 		}))
-		projectile.addComponent(new SpriteComponent(tile, { scale }))
+		projectile.addComponent(new SpriteComponent(tile, { scale, renderOrder: 1 }))
 		if (tile.frames > 1) {
 			projectile.addComponent(new AnimationComponent({ idle: tile }, { selectedFrame: Math.floor(Math.random() * tile.frames) }))
 		}
@@ -54,15 +55,21 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 			projectileBody.velocity.y = -Math.sin(projectileRotation)
 		}, Infinity)
 		projectile.addComponent(new DamageComponent(damage, targetGroup.target, piercing, 5))
-		projectile.onDestroy(() => coroutine.stop())
 		projectile.addComponent(new ExpirationComponent(range))
-		parent.addChildren(projectile)
+		projectile.onDestroy(() => {
+			coroutine.stop()
+			counter--
+			if (afterHit) {
+				afterHit(projectile)
+			}
+			if (counter === 0) {
+				projectiles.destroy()
+
+			}
+		})
+		projectiles.addChildren(projectile)
 	}
-
-
-
-
-
 	return projectiles
+
 }
 export default ProjectileEntity

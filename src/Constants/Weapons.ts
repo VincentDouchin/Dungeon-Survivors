@@ -20,11 +20,11 @@ export interface TargetGroup {
 	target: number[]
 	group: number
 }
-const enemyGroup: TargetGroup = {
+export const enemyGroup: TargetGroup = {
 	target: [COLLISIONGROUPS.PLAYER],
 	group: COLLISIONGROUPS.ENEMY
 }
-const playerGroup: TargetGroup = {
+export const playerGroup: TargetGroup = {
 	group: COLLISIONGROUPS.PLAYER,
 	target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
 }
@@ -106,6 +106,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 			cooldownTrigger: 6,
 		},
 	},
+
 	// ! ENEMY
 	enemyBow: {
 		tile: assets.weapons.bow,
