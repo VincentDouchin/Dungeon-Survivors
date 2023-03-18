@@ -42,7 +42,8 @@ const framesNb: Record<effects, number> = {
 	"flag": 4,
 	"Snow": 7,
 	"beam": 4,
-	"healing": 4
+	"healing": 4,
+	"CanonBall": 5
 }
 const loadEffects = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
