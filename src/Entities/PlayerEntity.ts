@@ -21,7 +21,6 @@ import SpellComponent from "../Components/SpellComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import State from "../Globals/State"
 import SwitchingComponent from "../Components/SwitchingComponent"
-import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import WeaponEntity from "./WeaponEntity"
 import XPPickerComponent from "../Components/XPPickerComponent"
 
@@ -44,7 +43,7 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 
 	player.addComponent(new HealthComponent(playerHealth, COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
 	player.addComponent(new AnimationComponent(hero.tiles))
-	if (!hero.weapon.some(weapon => weapon.behaviors.includes(WEAPONBEHAVIORS.toucher))) {
+	if (!hero.weapon.some(weapon => weapon.damage)) {
 		player.addComponent(new RangedComponent())
 	}
 	player.addComponent(new SwitchingComponent(main))
