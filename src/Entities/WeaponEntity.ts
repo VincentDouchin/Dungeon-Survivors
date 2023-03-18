@@ -10,7 +10,6 @@ import RotationComponent from "../Components/RotationComponent"
 import ShooterComponent from "../Components/ShooterComponent"
 import SpriteComponent from "../Components/SpriteComponent"
 import StatsComponent from "../Components/StatsComponent"
-import WEAPONBEHAVIORS from "../Constants/WeaponBehaviros"
 import { WeaponDefinition } from "../Constants/Weapons"
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent, level?: LevelComponent) => {
@@ -18,23 +17,30 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
 	const tile = weaponDefinition.tile
-	for (let behavior of weaponDefinition.behaviors) {
-		const component = {
-			[WEAPONBEHAVIORS.orbiter]: new JointComponent('revolute', (tile.height + parentHeight) / 2, parent),
-			[WEAPONBEHAVIORS.targeter]: new AIMovementComponent({ seeking: weaponDefinition.target }),
-			[WEAPONBEHAVIORS.shooter]: new ShooterComponent(weaponDefinition),
-			[WEAPONBEHAVIORS.toucher]: new DamageComponent(weaponDefinition.damage, weaponDefinition.target, -1, 5, weaponDefinition.sound)
-		}[behavior]
-		weapon.addComponent(component)
+
+	if (weaponDefinition.targeter) {
+		weapon.addComponent(new AIMovementComponent({ seeking: weaponDefinition.targetGroup.target }))
 	}
+	if (weaponDefinition.projectile) {
+		weapon.addComponent(new ShooterComponent(weaponDefinition.projectile))
+	}
+	if (weaponDefinition.orbiter) {
+		weapon.addComponent(new JointComponent('revolute', ((tile?.height ?? 16) + parentHeight) / 2, parent))
+	}
+	if (weaponDefinition.damage) {
+		weapon.addComponent(new DamageComponent(weaponDefinition.damage, weaponDefinition.targetGroup.target, -1, 5, weaponDefinition.sound))
+	}
+
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
-		[{ width: tile.width, height: tile.height, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.target }]
+		[{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target }]
 	))
-	weapon.addComponent(new SpriteComponent(tile))
-	const angVel = weaponDefinition.behaviors.includes(WEAPONBEHAVIORS.targeter) ? 0 : 1
+	if (tile) {
+		weapon.addComponent(new SpriteComponent(tile))
+	}
+	const angVel = weaponDefinition.targeter ? 0 : 1
 	weapon.addComponent(new RotationComponent({ angVel, rotation: weaponDefinition.angle ?? 0 }))
-	weapon.addComponent(new PositionComponent(parentPosition.x, parentPosition.y))
+	weapon.addComponent(parentPosition.clone())
 	if (stats) {
 		weapon.addComponent(stats)
 	}

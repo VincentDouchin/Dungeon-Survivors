@@ -1,153 +1,226 @@
 import { SOUND, SOUNDS } from "./Sounds"
 
 import COLLISIONGROUPS from "./CollisionGroups"
+import { Entity } from "../Globals/ECS"
+import ProjectileEntity from "../Entities/ProjectileEntity"
 import Tile from "../Utils/Tile"
-import WEAPONBEHAVIORS from "./WeaponBehaviros"
 import assets from "../Globals/Assets"
 
 export interface WeaponDefinition {
-	tile: Tile
-	damage: number
-	behaviors: string[],
+	tile?: Tile
+	damage?: number
+	targetGroup: TargetGroup
+	targeter?: boolean
+	projectile?: ProjectileDefinition,
+	orbiter?: boolean
 	angle?: number
-	projectile?: Tile
-	speed?: number
-	spread?: number
-	projectilesNb?: number
-	delay?: number
-	range?: number
-	group: number
-	target: number[],
-	rotationSpeed?: number
-	light?: string,
-	scale?: number,
 	sound?: SOUND
 }
+export interface TargetGroup {
+	target: number[]
+	group: number
+}
+const enemyGroup: TargetGroup = {
+	target: [COLLISIONGROUPS.PLAYER],
+	group: COLLISIONGROUPS.ENEMY
+}
+const playerGroup: TargetGroup = {
+	group: COLLISIONGROUPS.PLAYER,
+	target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
+}
+export interface ProjectileDefinition {
+	spawn: (parent: Entity) => Entity
+	delay: number
+	cooldownAmount?: number
+	cooldownTrigger?: number
+}
+
 const WEAPONS: Record<string, WeaponDefinition> = {
+	// ! PLAYER
 	swordKnight: {
+		orbiter: true,
 		tile: assets.weapons.sword,
 		damage: 10,
-		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
-		group: COLLISIONGROUPS.PLAYER,
-		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
+		targetGroup: playerGroup,
 		sound: SOUNDS.SWORD
 	},
 	sai: {
+		orbiter: true,
 		tile: assets.weapons.sai,
 		damage: 10,
-		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.toucher],
-		group: COLLISIONGROUPS.PLAYER,
-		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
+		targetGroup: playerGroup,
 	},
 	get sai2() {
 		return { ...WEAPONS.sai, angle: Math.PI }
 	},
 	staff: {
+		orbiter: true,
 		tile: assets.weapons.staff,
-		damage: 10,
-		behaviors: [WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.effects.fireProjectile,
-		spread: 0.5,
-		projectilesNb: 3,
-		speed: 300,
-		delay: 60,
-		group: COLLISIONGROUPS.PLAYER,
-		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
-		light: 'hsl(39, 30%, 20%)',
+		targetGroup: playerGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 10,
+				nb: 3,
+				spread: 0.5,
+				speed: 300,
+				targetGroup: playerGroup,
+				tile: assets.effects.fireProjectile,
+				range: 200
+			}),
+			delay: 60,
+		},
 		sound: SOUNDS.Fireball
 	},
 	bow: {
+		orbiter: true,
+		targetGroup: playerGroup,
 		tile: assets.weapons.bow,
-		damage: 15,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		group: COLLISIONGROUPS.PLAYER,
-		target: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT],
-		projectile: assets.weapons.arrow,
-		speed: 500,
-		delay: 40
+		targeter: true,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 15,
+				speed: 500,
+				targetGroup: playerGroup,
+				tile: assets.weapons.arrow,
+				range: 200
+			}),
+			delay: 40
+		},
 	},
+	flintlock: {
+		tile: assets.weapons.flintlock,
+		orbiter: true,
+		targeter: true,
+		targetGroup: playerGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 15,
+				speed: 100,
+				targetGroup: playerGroup,
+				tile: assets.weapons.bullet,
+				range: 400,
+				piercing: 2
+			}),
+			delay: 30,
+			cooldownAmount: 120,
+			cooldownTrigger: 6,
+		},
+	},
+	// ! ENEMY
 	enemyBow: {
 		tile: assets.weapons.bow,
-		damage: 2,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.weapons.arrow,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 200,
-		speed: 100
+		targeter: true,
+		orbiter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 2,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.weapons.arrow,
+				range: 200
+			}),
+			delay: 240
+		},
 	},
 	fireball: {
-		tile: Tile.empty(),
-		damage: 10,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.effects.fireProjectile,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 200,
-		speed: 300,
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 5,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.effects.fireProjectile,
+				range: 200
+			}),
+			delay: 240,
+		},
 	},
 	bone: {
-		tile: Tile.empty(),
-		damage: 2,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.weapons.bone,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 200,
-		rotationSpeed: 0.2,
-		speed: 200
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 2,
+				speed: 200,
+				targetGroup: enemyGroup,
+				tile: assets.weapons.bone,
+				range: 200,
+				rotationSpeed: 0.2,
+			}),
+			delay: 240,
+		},
 	},
 	hammer: {
-		tile: Tile.empty(),
-		damage: 4,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.weapons.hammer,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 150,
-		rotationSpeed: 0.1,
-		speed: 100
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 3,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.weapons.hammer,
+				range: 150, rotationSpeed: 0.1,
+			}),
+			delay: 240,
+		},
 	},
 	iceSpike: {
-		tile: Tile.empty(),
-		damage: 5,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.effects["IceSpike-sheet"],
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 150,
-		speed: 100,
-		scale: 0.5
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 4,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.effects["IceSpike-sheet"],
+				range: 150, scale: 0.5
+
+			}),
+			delay: 240,
+		},
 	},
 	cross: {
-		tile: Tile.empty(),
-		damage: 3,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.weapons.cross,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 150,
-		speed: 100,
-		scale: 0.8,
-		rotationSpeed: 0.1,
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 3,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.weapons.cross,
+				range: 150,
+				scale: 0.8,
+				rotationSpeed: 0.1
+			}),
+
+			delay: 240,
+		},
 	},
 	darkProjectile: {
-		tile: Tile.empty(),
-		damage: 3,
-		behaviors: [WEAPONBEHAVIORS.targeter, WEAPONBEHAVIORS.orbiter, WEAPONBEHAVIORS.shooter],
-		projectile: assets.effects.darkProjectile,
-		group: COLLISIONGROUPS.ENEMY,
-		target: [COLLISIONGROUPS.PLAYER],
-		delay: 240,
-		range: 200,
-		speed: 100,
-	}
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 3,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.effects.darkProjectile,
+				range: 150,
+			}),
+			delay: 240,
+		},
+	},
+	// harp: {
+	// 	tile: assets.weapons.harp,
+	// },
 
 }
 export default WEAPONS

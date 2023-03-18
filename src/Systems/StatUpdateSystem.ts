@@ -61,7 +61,6 @@ class StatUpdateSystem extends System {
 			}
 			if (shooter) {
 				shooter.delay.setModifiers(stats, level)
-				shooter.damage.setModifiers(stats, level)
 			}
 			if (mana) {
 				mana.maxMana.setModifiers(stats, level)

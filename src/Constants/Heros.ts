@@ -79,7 +79,7 @@ const HEROS: HeroDefinition[] = [
 			idle: assets.characters.ninjaWalk,
 			run: assets.characters.ninjaRun
 		},
-		spell: SPELLS.ARROW_VOLLEY,
+		spell: SPELLS.SHURIKEN,
 		needUnlock: true,
 		weapon: [WEAPONS.sai, WEAPONS.sai2],
 		stats: {
@@ -94,9 +94,9 @@ const HEROS: HeroDefinition[] = [
 			idle: assets.characters.pirateCaptainWalk,
 			run: assets.characters.pirateCaptainRun
 		},
-		spell: SPELLS.ARROW_VOLLEY,
+		spell: SPELLS.CANNON,
 		needUnlock: true,
-		weapon: [WEAPONS.sai],
+		weapon: [WEAPONS.flintlock],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.CRIT_DAMAGE]: 0.05,
@@ -111,7 +111,7 @@ const HEROS: HeroDefinition[] = [
 		},
 		spell: SPELLS.ARROW_VOLLEY,
 		needUnlock: true,
-		weapon: [WEAPONS.sai],
+		weapon: [WEAPONS.harp],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.CRIT_DAMAGE]: 0.05,

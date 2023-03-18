@@ -1,42 +1,47 @@
-import { Component } from "../Globals/ECS";
+import { Component, Entity } from "../Globals/ECS";
+
+import { ProjectileDefinition } from "../Constants/Weapons";
 import { SOUND } from "../Constants/Sounds";
 import { STATS } from "./StatsComponent";
 import { Stat } from "../Game/Stat";
-import Tile from "../Utils/Tile";
-import { WeaponDefinition } from "../Constants/Weapons";
 
 class ShooterComponent extends Component {
-	projectile: Tile
 	timer: number
 	delay: Stat
-	spread: number
-	range: number
-	projectilesNb: number
-	target: number[]
-	group: number
-	speed: number
-	damage: Stat
-	rotationSpeed: number
-	scale: number
-	light?: string
+	spawn: (parent: Entity) => Entity
 	sound?: SOUND
-	constructor(weaponDefinition: WeaponDefinition) {
+	cooldown: number
+	cooldownTimer: number = 0
+	trigger: number
+	triggerTimer: number = 0
+	constructor(shooter: ProjectileDefinition) {
 		super()
-		this.damage = new Stat(weaponDefinition.damage, STATS.DAMAGE)
-		this.target = weaponDefinition.target
-		this.group = weaponDefinition.group
-		this.projectile = weaponDefinition.projectile!
-		this.speed = weaponDefinition.speed!
-		this.projectilesNb = weaponDefinition.projectilesNb ?? 1
-		this.spread = weaponDefinition.spread ?? 0
-		this.range = weaponDefinition.range ?? 60
-		this.delay = new Stat(weaponDefinition.delay, STATS.ATTACK_SPEED)
+		this.spawn = shooter.spawn
+		this.delay = new Stat(shooter.delay, STATS.ATTACK_SPEED)
 		this.timer = Math.random() * this.delay.value
-		this.rotationSpeed = (weaponDefinition?.rotationSpeed ?? 0)
-		this.light = weaponDefinition.light
-		this.scale = weaponDefinition.scale ?? 1
-		this.sound = weaponDefinition.sound
+		this.cooldown = shooter.cooldownAmount ?? 0
+		this.trigger = shooter.cooldownTrigger ?? 0
+
 	}
 }
+
+// constructor(cooldown: number, trigger: number) {
+// 	super()
+// 	this.cooldown = cooldown
+// 	this.trigger = trigger
+// }
+// tick() {
+// 	if (this.triggerTimer <= 0) {
+// 		this.cooldownTimer = this.cooldown
+// 		this.triggerTimer = this.trigger
+// 	}
+// 	this.cooldownTimer--
+// }
+// get canShoot() {
+// 	return this.cooldownTimer <= 0
+// }
+// shot() {
+// 	this.triggerTimer--
+// }
 ShooterComponent.register()
 export default ShooterComponent
