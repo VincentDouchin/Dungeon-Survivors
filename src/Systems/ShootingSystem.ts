@@ -16,7 +16,7 @@ class ShootingSystem extends System {
 			if (shooter.cooldownTimer <= 0) {
 				shooter.timer++
 				if ((shooter.delay.base * (shooter.delay.base / shooter.delay.value)) <= shooter.timer) {
-					entity.addChildren(shooter.spawn(entity))
+					shooter.spawn(entity)
 					shooter.timer = 0
 					shooter.triggerTimer--
 				}
