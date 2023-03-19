@@ -40,6 +40,7 @@ const HEROS: HeroDefinition[] = [
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.1,
 			[STATS.DEFENSE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.05
 		}
 	},
 	{
@@ -54,7 +55,7 @@ const HEROS: HeroDefinition[] = [
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.05,
-			[STATS.SPELL_DAMAGE]: 0.1
+			[STATS.SPELL_DAMAGE]: 0.15
 		}
 	},
 	{
@@ -69,8 +70,9 @@ const HEROS: HeroDefinition[] = [
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
 			[STATS.DAMAGE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.05,
 			[STATS.CRIT_CHANCE]: 0.2,
-			[STATS.CRIT_DAMAGE]: 0.2,
+			[STATS.CRIT_DAMAGE]: 0.1,
 		}
 	},
 	{
@@ -84,8 +86,11 @@ const HEROS: HeroDefinition[] = [
 		weapon: [WEAPONS.sai, WEAPONS.sai2],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.DAMAGE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.05,
 			[STATS.CRIT_DAMAGE]: 0.05,
-			[STATS.ATTACK_SPEED]: 0.10
+			[STATS.CRIT_CHANCE]: 0.10,
+			[STATS.ATTACK_SPEED]: 0.05
 		}
 	},
 	{
@@ -99,8 +104,11 @@ const HEROS: HeroDefinition[] = [
 		weapon: [WEAPONS.flintlock],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
-			[STATS.CRIT_DAMAGE]: 0.05,
-			[STATS.ATTACK_SPEED]: 0.10
+			[STATS.DAMAGE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.05,
+			[STATS.KNOCKBACK]: 0.05,
+			[STATS.DEFENSE]: 0.05,
+			[STATS.ATTACK_SPEED]: 0.05
 		}
 	},
 	{
@@ -109,13 +117,17 @@ const HEROS: HeroDefinition[] = [
 			idle: assets.characters.fairyWalk,
 			run: assets.characters.fairyWalk
 		},
-		spell: SPELLS.ARROW_VOLLEY,
+		spell: SPELLS.CHARM,
 		needUnlock: true,
 		weapon: [WEAPONS.harp],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
+			[STATS.DAMAGE]: 0.05,
+			[STATS.SPELL_DAMAGE]: 0.05,
 			[STATS.CRIT_DAMAGE]: 0.05,
-			[STATS.ATTACK_SPEED]: 0.10
+			[STATS.ATTACK_SPEED]: 0.05,
+			[STATS.CRIT_DAMAGE]: 0.05,
+			[STATS.CRIT_CHANCE]: 0.10,
 		}
 	},
 
