@@ -34,8 +34,8 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 
 		const position = parent.getComponent(PositionComponent)
 		const rotation = parent.getComponent(RotationComponent)
-		const projectileRotation = rotation.rotation - spread / 2 + (rotation.rotation * i / nb / 2)
-		const height = (parent.getComponent(SpriteComponent).height / 2 ?? 0) + (tile?.height / 2 ?? 0)
+		const projectileRotation = rotation.rotation - spread / 2 + (spread * i / nb)
+		const height = (parent.getComponent(SpriteComponent)?.height ?? 0) / 2 + (tile?.height ?? 0) / 2
 		projectile.addComponent(new PositionComponent(position.x - Math.cos(rotation.rotation) * height, position.y - Math.sin(rotation.rotation) * height))
 		projectile.addComponent(new RotationComponent({
 			rotation: projectileRotation,
@@ -69,8 +69,14 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 
 			}
 		})
-		projectile.addComponent(parent.getComponent(StatsComponent))
-		projectile.addComponent(parent.getComponent(LevelComponent))
+		const stats = parent.getComponent(StatsComponent)
+		if (stats) {
+			projectile.addComponent(stats)
+		}
+		const level = parent.getComponent(LevelComponent)
+		if (level) {
+			projectile.addComponent(level)
+		}
 		projectiles.addChildren(projectile)
 	}
 	return projectiles
