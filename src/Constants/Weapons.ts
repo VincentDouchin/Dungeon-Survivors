@@ -2,6 +2,7 @@ import { SOUND, SOUNDS } from "./Sounds"
 
 import COLLISIONGROUPS from "./CollisionGroups"
 import { Entity } from "../Globals/ECS"
+import NoteProjectileEntity from "../Entities/NoteProjectileEntity"
 import ProjectileEntity from "../Entities/ProjectileEntity"
 import Tile from "../Utils/Tile"
 import assets from "../Globals/Assets"
@@ -106,7 +107,15 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 			cooldownTrigger: 6,
 		},
 	},
-
+	harp: {
+		tile: assets.weapons.harp,
+		targetGroup: playerGroup,
+		orbiter: true,
+		projectile: {
+			spawn: NoteProjectileEntity,
+			delay: 30
+		}
+	},
 	// ! ENEMY
 	enemyBow: {
 		tile: assets.weapons.bow,
@@ -219,9 +228,6 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 			delay: 240,
 		},
 	},
-	// harp: {
-	// 	tile: assets.weapons.harp,
-	// },
 
 }
 export default WEAPONS
