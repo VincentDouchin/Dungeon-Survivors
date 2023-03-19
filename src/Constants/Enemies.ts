@@ -506,7 +506,7 @@ const Enemies: Record<string, EnemyType> = {
 	villagerMale: {
 		tiles: {
 			idle: assets.characters.villagerMaleWalk,
-			run: assets.characters.villagerFemaleRun
+			run: assets.characters.villagerMaleRun
 		},
 		health: 13,
 		size: BODYSIZES.normal,
