@@ -1,5 +1,6 @@
 import ArrowVolleySpell from "../Entities/ArrowVolleySpell"
 import CannonSpellEntity from "../Entities/CannonSpellEntity"
+import CharmSpellEntity from "../Entities/CharmSpellEntity"
 import DivineProtectionEntity from "../Entities/DivineProtectionEntity"
 import { Entity } from "../Globals/ECS"
 import LightningSpellEntity from "../Entities/LightningSpellEntity"
@@ -37,6 +38,11 @@ const SPELLS: Record<string, Spell> = {
 		icon: assets.icons.cannon,
 		spell: CannonSpellEntity,
 		damage: 20
+	},
+	CHARM: {
+		icon: assets.icons.charm,
+		spell: CharmSpellEntity,
+		damage: 50
 	}
 
 }
