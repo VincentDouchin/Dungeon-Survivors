@@ -63,7 +63,6 @@ class HealthSystem extends System {
 			const regen = entity.getComponent(HealthRegenComponent)
 			if (regen) {
 				regen.timer--
-				debugger
 				if (regen.timer <= 0) {
 					health.updateHealth(regen.amount)
 					regen.timer = regen.time

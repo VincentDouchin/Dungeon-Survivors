@@ -6,7 +6,7 @@ const {
 	goblin, orc, orcShaman, orcMasked, orcBig, orcBigPatch,
 	bunny, mushroomSmall, mushroomMedium, mushroomBig, direwolf, bear, fox,
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
-	villagerFemale, villagerMale, shopKeeper, butcher, blacksmith, executioner,
+	villagerFemale, villagerMale, butcher, blacksmith, executioner,
 	angel, clericFat, clericNormal, clericSkinny, bishop, templar, inquisitor, archAngel,
 	zombieSmall, muddy, swampy, zombie, iceZombie, ogre, skeleton,
 	knight, knightFat, knightElite, knightEliteLarge, king, queen, herald,
@@ -65,7 +65,7 @@ const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 	VILLAGERS: () => new Encounter() // 21 waves 636 enemies
 		.addWave([[villagerFemale, 10], [berserk(villagerFemale), 3], [villagerMale, 10], [berserk(villagerMale), 3]], 5) // 130
 		.waitForEnemiesCleared()
-		.addWave([[berserk(villagerFemale), 3], [berserk(villagerMale), 3], [villagerFemale, 5], [villagerMale, 5], [butcher, 5], [berserk(shopKeeper), 2]], 5) //115
+		.addWave([[berserk(villagerFemale), 3], [berserk(villagerMale), 3], [villagerFemale, 5], [villagerMale, 5], [butcher, 5]], 5) //115
 		.waitForEnemiesCleared()
 		.addWave([[blacksmith, 2], [butcher, 5], [berserk(butcher), 5], [villagerFemale, 10], [villagerMale, 10]], 4) //150
 		.waitForEnemiesCleared()

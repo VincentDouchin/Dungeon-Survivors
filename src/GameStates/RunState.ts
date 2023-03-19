@@ -145,14 +145,13 @@ class RunState implements GameState {
 				this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
 					if (this.players.has(entity)) {
 						this.players.delete(entity)
-						debugger
 						if (this.players.size === 0) {
 							engine.setState(GameOverState)
 						}
 					}
 				}))
 				// !Encounter
-				this.encounter ??= ENEMYWAVES[options.enemies]()
+				this.encounter ??= ENEMYWAVES['VILLAGERS']()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}
