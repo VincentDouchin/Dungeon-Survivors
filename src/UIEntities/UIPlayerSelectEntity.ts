@@ -9,6 +9,7 @@ import INPUTS from "../Constants/InputsNames";
 import MapState from "../GameStates/MapState";
 import OutlineShader from "../Shaders/OutlineShader";
 import SKILLS from "../Constants/Skills";
+import { STATS } from "../Components/StatsComponent";
 import SelectableComponent from "../Components/SelectableComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import State from "../Globals/State";
@@ -39,10 +40,11 @@ const UIPlayerSelectEntity = () => {
 	statsContainer.addComponent(new SpriteComponent(Tile.empty(30, 65), { scale: 3 }))
 	statsContainer.addComponent(new UIPositionComponent())
 	stats.addChildren(statsContainer)
+	const statAmounts = new Map<STATS, TextComponent>()
 	SKILLS.forEach((skill, index) => {
 		const skillContainer = new Entity('skill container')
-		skillContainer.addComponent(new SpriteComponent(Tile.empty(120, 24)))
-		skillContainer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: index * 1.5 + index * 0.1 }))
+		skillContainer.addComponent(new SpriteComponent(Tile.empty(100, 16)))
+		skillContainer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: index * 1.5 + index }))
 
 		statsContainer.addChildren(skillContainer)
 		const skillIcon = new Entity('skill icon')
@@ -52,7 +54,13 @@ const UIPlayerSelectEntity = () => {
 		const text = new Entity('text')
 		text.addComponent(new SpriteComponent(Tile.empty(1, 24)))
 		text.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
-		text.addComponent(new TextComponent(skill.name, { anchorX: 'left', size: 12, outlineWidth: 1 }))
+		text.addComponent(new TextComponent(skill.name, { anchorX: 'left', anchorY: 'bottom', size: 9, outlineWidth: 0.7 }))
+		const statAmount = new Entity('Stat amount')
+		statAmount.addComponent(new SpriteComponent(Tile.empty(120, 16)))
+		const statmountText = statAmount.addComponent(new TextComponent('', { anchorX: 'left', anchorY: 'top', size: 9, outlineWidth: 0.7, color: 0xFFFF00 }))
+		statAmounts.set(skill.statName, statmountText)
+		statAmount.addComponent(new UIPositionComponent())
+		text.addChildren(statAmount)
 		skillIcon.addChildren(text)
 	})
 
@@ -120,6 +128,16 @@ const UIPlayerSelectEntity = () => {
 				} else {
 					textValidate.setText(`Choose ${2 - State.heros.size} characters`)
 				}
+
+			}
+			selectable.onSelected = () => {
+				statAmounts.forEach((statText, stat) => {
+					const amount = hero.stats[stat]
+					const text = amount ? `+ ${Math.floor(amount * 100)}% per level` : ''
+					const color = [STATS.MAX_HEALTH, STATS.DAMAGE, STATS.SPELL_DAMAGE].includes(stat) && amount === 0.05 ? 0xFFFFFF : 0xFFFF00
+					statText.mesh.color = color
+					statText.setText(text)
+				})
 			}
 		} else {
 			heroSprite.addShader(new ColorShader(0, 0, 0, 1))
