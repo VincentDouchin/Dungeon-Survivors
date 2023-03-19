@@ -29,7 +29,7 @@ const UIWinEntity = () => {
 
 	const heros = unlockedHeros.map((hero, index) => {
 		const heroEntity = new Entity('select hero')
-		const heroSprite = heroEntity.addComponent(new SpriteComponent(hero.tiles[0].idle, { scale: 5, renderOrder: 100, shaders: [new ColorShader(0, 0, 0, 1)] }))
+		const heroSprite = heroEntity.addComponent(new SpriteComponent(hero.tiles.idle, { scale: 5, renderOrder: 100, shaders: [new ColorShader(0, 0, 0, 1)] }))
 
 		heroEntity.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }).offsetX(unlockedHeros.length, index))
 		heroEntity.addComponent(new SelectableComponent(undefined, undefined, () => {
