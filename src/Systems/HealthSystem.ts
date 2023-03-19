@@ -10,6 +10,7 @@ import DissolveShader from "../Shaders/DissolveShader";
 import { ECSEVENTS } from "../Constants/Events";
 import ExpirationComponent from "../Components/ExpirationComponent";
 import HealthComponent from "../Components/HealthComponent";
+import HealthRegenComponent from "../Components/HealthRegenComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
 import SpriteComponent from "../Components/SpriteComponent";
@@ -56,6 +57,15 @@ class HealthSystem extends System {
 				health.updateHealth(health.maxHealth.value - health.lastMaxHealth)
 				health.lastMaxHealth = health.maxHealth.value
 
+			}
+			const regen = entity.getComponent(HealthRegenComponent)
+			if (regen) {
+				regen.timer--
+				debugger
+				if (regen.timer <= 0) {
+					health.updateHealth(regen.amount)
+					regen.timer = regen.time
+				}
 			}
 
 			const sprite = entity.getComponent(SpriteComponent)
