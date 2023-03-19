@@ -4,9 +4,11 @@ import Coroutine from "../Globals/Coroutine";
 import DamageComponent from "../Components/DamageComponent";
 import { Entity } from "../Globals/ECS";
 import ExpirationComponent from "../Components/ExpirationComponent";
+import LevelComponent from "../Components/LevelComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import StatsComponent from "../Components/StatsComponent";
 import { TargetGroup } from "../Constants/Weapons";
 import Tile from "../Utils/Tile";
 
@@ -67,6 +69,8 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 
 			}
 		})
+		projectile.addComponent(parent.getComponent(StatsComponent))
+		projectile.addComponent(parent.getComponent(LevelComponent))
 		projectiles.addChildren(projectile)
 	}
 	return projectiles
