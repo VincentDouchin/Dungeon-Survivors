@@ -6,6 +6,7 @@ import BodyComponent from "../Components/BodyComponent"
 import COLLISIONGROUPS from "../Constants/CollisionGroups"
 import Coroutine from "../Globals/Coroutine"
 import DamageComponent from "../Components/DamageComponent"
+import { ECSEVENTS } from "../Constants/Events"
 import HealthComponent from "../Components/HealthComponent"
 import PositionComponent from "../Components/PositionComponent"
 import { SOUNDS } from "../Constants/Sounds"
@@ -27,8 +28,17 @@ const LightningSpellEntity = (entity: Entity) => {
 		}
 	}, [])
 	enemies.sort(() => 0.5 - Math.random())
+	const deletedEntities: Entity[] = []
+	const deleteSub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
+		deletedEntities.push(entity)
+	})
 	new Coroutine(function* () {
-		for (const enemy of enemies.slice(0, 10)) {
+		let counter = 0
+		for (const enemy of enemies) {
+			if (deletedEntities.includes(enemy)) continue
+			counter++
+			if (counter === 10) break
+			console.count('lightning')
 			soundManager.play('effect', SOUNDS.THUNDER)
 			const targeter = enemy.getComponent(AIMovementComponent)
 			const enemyPosition = enemy.getComponent(PositionComponent)
@@ -41,7 +51,7 @@ const LightningSpellEntity = (entity: Entity) => {
 			lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
 			lightning.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 			lightning.addComponent(new BodyComponent({}, [{
-				width: tile.width, height: tile.height, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
+				width: 1, height: 1, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
 			}]))
 			animation.playAnimation().then(() => {
 				lightning.destroy()
@@ -49,6 +59,7 @@ const LightningSpellEntity = (entity: Entity) => {
 			})
 			yield* waitFor(5)
 		}
+		deleteSub
 	})
 
 
