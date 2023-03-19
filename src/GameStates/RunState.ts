@@ -151,7 +151,7 @@ class RunState implements GameState {
 					}
 				}))
 				// !Encounter
-				this.encounter ??= ENEMYWAVES['VILLAGERS']()
+				this.encounter ??= ENEMYWAVES[options.enemies]()
 				if (backgroundDefinition.boundaries) {
 					this.encounter.setBoundary(backgroundDefinition.boundaries.x, backgroundDefinition.boundaries.y)
 				}
