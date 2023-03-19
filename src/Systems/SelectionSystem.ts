@@ -20,11 +20,14 @@ class SelectionSystem extends System {
 			this.clicked = [...uiObjects, ...objects]
 		}))
 		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
+			const selectable = entity.getComponent(SelectableComponent)
+			if (selectable.onSelected) {
+				selectable.onSelected()
+			}
 			if (this.selectedEntity) {
 				ECS.eventBus.publish(ECSEVENTS.DESELECTED, this.selectedEntity)
 			}
 			this.selectedEntity = entity
-			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			selectable?.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
 		}))
