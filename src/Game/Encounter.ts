@@ -23,12 +23,12 @@ class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: Set<Entity> = new Set()
 	difficulty = {
-		[DIFFICULTY.EASY]: 120,
-		[DIFFICULTY.NORMAL]: 90,
-		[DIFFICULTY.HARD]: 60,
+		[DIFFICULTY.EASY]: 0.025,
+		[DIFFICULTY.NORMAL]: 0.05,
+		[DIFFICULTY.HARD]: 0.075,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
-	stats = new StatsComponent().set(STATS.MAX_HEALTH, 0.1).set(STATS.DAMAGE, 0.1)
+	stats = new StatsComponent().set(STATS.MAX_HEALTH, this.difficulty).set(STATS.DAMAGE, this.difficulty)
 	level = new LevelComponent()
 	started = false
 	subscriber: () => void
@@ -46,7 +46,7 @@ class Encounter {
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
 			const initialLevel = this.level.level
-			this.level.level = Math.floor(State.timer / this.difficulty)
+			this.level.level = Math.floor(State.timer / 60)
 			if (this.level.level !== initialLevel) {
 				ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.level.level)
 			}
