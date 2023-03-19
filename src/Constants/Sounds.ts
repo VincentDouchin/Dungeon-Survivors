@@ -1,6 +1,6 @@
 import { sounds } from "../../assets/sounds/sounds"
 
-export const SOUNDS :Record<string,sounds[]> = {
+export const SOUNDS: Record<string, sounds[]> = {
 	Magic: ['10_human_special_atk_2'],
 	SWORD: ['26_sword_hit_1', '26_sword_hit_2', '26_sword_hit_3'],
 	Select: ['Select'],
@@ -14,8 +14,17 @@ export const SOUNDS :Record<string,sounds[]> = {
 	THUNDER: ['17_Thunder_01'],
 	GAME_OVER: ['GameOver2'],
 	UNLOCK: ['winsquare-6993'],
-} 
-export const MUSICS:Record<string,sounds[]> = {
+	CHARM: ['Paladin_Blades_of_Justice_Cast_Effect_Only'],
+	HEAL: ['07_Regen_02'],
+	CANNON_BALL: ['05_Fire_explosion_05_large'],
+	BOW: ['41_bow_draw_01'],
+	ARROW_HIT: ['48_Bow_hit_02'],
+	GUN: ['02_Fire_explosion_02_small'],
+	SHURIKEN: ['29_swoosh_02', '30_swoosh_03'],
+	ARROW_VOLLEY: ['60_Special_move_02']
+
+}
+export const MUSICS: Record<string, sounds[]> = {
 	Fight: ['17 - Fight'],
-} 
+}
 export type SOUND = typeof SOUNDS[keyof typeof SOUNDS] | typeof MUSICS[keyof typeof MUSICS]

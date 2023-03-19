@@ -14,8 +14,9 @@ class ShooterComponent extends Component {
 	cooldownTimer: number = 0
 	trigger: number
 	triggerTimer: number = 0
-	constructor(shooter: ProjectileDefinition) {
+	constructor(shooter: ProjectileDefinition, sound?: SOUND) {
 		super()
+		this.sound = sound
 		this.spawn = shooter.spawn
 		this.delay = new Stat(shooter.delay, STATS.ATTACK_SPEED)
 		this.timer = Math.random() * this.delay.value

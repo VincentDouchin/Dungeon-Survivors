@@ -7,10 +7,12 @@ import ExpirationComponent from "../Components/ExpirationComponent";
 import LevelComponent from "../Components/LevelComponent";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import { SOUND } from "../Constants/Sounds";
 import SpriteComponent from "../Components/SpriteComponent";
 import StatsComponent from "../Components/StatsComponent";
 import { TargetGroup } from "../Constants/Weapons";
 import Tile from "../Utils/Tile";
+import { soundManager } from "../Globals/Initialize";
 
 // const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 export interface ProjectileOptions {
@@ -24,9 +26,10 @@ export interface ProjectileOptions {
 	rotationSpeed?: number
 	scale?: number
 	piercing?: number
+	sound?: SOUND
 	afterHit?: (entity: Entity) => any
 }
-const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit }: ProjectileOptions) => (parent: Entity) => {
+const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit, sound }: ProjectileOptions) => (parent: Entity) => {
 	const projectiles = new Entity('projectiles')
 	let counter = nb
 	for (let i = 0; i < nb; i++) {
@@ -61,6 +64,9 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 		projectile.onDestroy(() => {
 			coroutine.stop()
 			counter--
+			if (sound) {
+				soundManager.play("effect", sound)
+			}
 			if (afterHit) {
 				afterHit(projectile)
 			}

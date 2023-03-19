@@ -7,8 +7,10 @@ import HealthComponent from "../Components/HealthComponent";
 import HealthRegenComponent from "../Components/HealthRegenComponent";
 import OutlineShader from "../Shaders/OutlineShader";
 import PositionComponent from "../Components/PositionComponent";
+import { SOUNDS } from "../Constants/Sounds";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
+import { soundManager } from "../Globals/Initialize";
 
 const CharmSpellEntity = (parent: Entity) => {
 	const parentPosition = parent.getComponent(PositionComponent)
@@ -23,7 +25,7 @@ const CharmSpellEntity = (parent: Entity) => {
 	}, [])
 	enemies.sort(() => 0.5 - Math.random())
 	let charmAmount = parent.getComponent(SpellComponent).spellDamage.value
-
+	soundManager.play('effect', SOUNDS.CHARM)
 	for (const enemy of enemies.slice(0, 10)) {
 		if (charmAmount < enemy.getComponent(HealthComponent).maxHealth.base) continue
 		const health = enemy.removeComponent(HealthComponent)

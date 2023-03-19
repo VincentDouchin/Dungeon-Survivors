@@ -22,7 +22,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 		weapon.addComponent(new AIMovementComponent({ seeking: weaponDefinition.targetGroup.target }))
 	}
 	if (weaponDefinition.projectile) {
-		weapon.addComponent(new ShooterComponent(weaponDefinition.projectile))
+		weapon.addComponent(new ShooterComponent(weaponDefinition.projectile, weaponDefinition.sound))
 	}
 	if (weaponDefinition.orbiter) {
 		weapon.addComponent(new JointComponent('revolute', ((tile?.height ?? 16) + parentHeight) / 2, parent))

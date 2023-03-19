@@ -7,6 +7,7 @@ import ExpirationComponent from "../Components/ExpirationComponent";
 import PositionComponent from "../Components/PositionComponent";
 import ProjectileEntity from "./ProjectileEntity";
 import RotationComponent from "../Components/RotationComponent";
+import { SOUNDS } from "../Constants/Sounds";
 import ShooterComponent from "../Components/ShooterComponent";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
@@ -31,6 +32,7 @@ const CannonSpellEntity = (entity: Entity) => {
 				speed: 400,
 				targetGroup: playerGroup,
 				range: 150,
+				sound: SOUNDS.CANNON_BALL,
 				afterHit: (projectile) => {
 					const explosion = new Entity('Explosion')
 					const tile = assets.effects.smoke

@@ -5,9 +5,11 @@ import DamageComponent from "../Components/DamageComponent";
 import { Entity } from "../Globals/ECS";
 import PositionComponent from "../Components/PositionComponent";
 import RotationComponent from "../Components/RotationComponent";
+import { SOUNDS } from "../Constants/Sounds";
 import SpellComponent from "../Components/SpellComponent";
 import SpriteComponent from "../Components/SpriteComponent";
 import assets from "../Globals/Assets";
+import { soundManager } from "../Globals/Initialize";
 
 const ShurikenSpellEntity = (entity: Entity, nb = 10, startPosition?: PositionComponent) => {
 	const spellComponent = entity.getComponent(SpellComponent)
@@ -21,6 +23,7 @@ const ShurikenSpellEntity = (entity: Entity, nb = 10, startPosition?: PositionCo
 			{ mass: 0.1, group: COLLISIONGROUPS.WEAPON, contact: false, sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width, height: tile.height }
 		]
 	))
+	soundManager.play('effect', SOUNDS.SHURIKEN)
 	shuriken.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: 0 }))
 	shuriken.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], 1, 2,))
 	shuriken.addComponent(position.clone())

@@ -13,6 +13,7 @@ import HealthComponent from "../Components/HealthComponent";
 import HealthRegenComponent from "../Components/HealthRegenComponent";
 import ParticleEntity from "../Entities/ParticleEntitty";
 import PositionComponent from "../Components/PositionComponent";
+import { SOUNDS } from "../Constants/Sounds";
 import SpriteComponent from "../Components/SpriteComponent";
 import assets from "../Globals/Assets";
 import { soundManager } from "../Globals/Initialize";
@@ -41,6 +42,7 @@ class HealthSystem extends System {
 			}
 			if (sprite && amount < 0) {
 				ParticleEntity(entity, assets.effects.healing, { duration: 3, color: [0.9, 1, 0, 1] })
+				soundManager.play('effect', SOUNDS.HEAL)
 			} else if (health.sound) {
 				soundManager.play('effect', health.sound, { fade: true, })
 			}
@@ -93,7 +95,7 @@ class HealthSystem extends System {
 						const damageAmount = damage.calculateDamage(health.defense.value)
 
 						if (damage.sound) {
-							soundManager.play('effect', damage.sound, { fade: true })
+							soundManager.play('effect', damage.sound)
 						}
 
 						// ! Knockback

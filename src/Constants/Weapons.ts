@@ -58,6 +58,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		orbiter: true,
 		tile: assets.weapons.staff,
 		targetGroup: playerGroup,
+		sound: SOUNDS.Fireball,
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 10,
@@ -66,24 +67,25 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				speed: 300,
 				targetGroup: playerGroup,
 				tile: assets.effects.fireProjectile,
-				range: 200
+				range: 200,
 			}),
 			delay: 60,
 		},
-		sound: SOUNDS.Fireball
 	},
 	bow: {
 		orbiter: true,
 		targetGroup: playerGroup,
 		tile: assets.weapons.bow,
 		targeter: true,
+		sound: SOUNDS.BOW,
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 15,
 				speed: 500,
 				targetGroup: playerGroup,
 				tile: assets.weapons.arrow,
-				range: 200
+				range: 200,
+				sound: SOUNDS.ARROW_HIT
 			}),
 			delay: 40
 		},
@@ -93,6 +95,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		orbiter: true,
 		targeter: true,
 		targetGroup: playerGroup,
+		sound: SOUNDS.GUN,
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 15,
@@ -100,7 +103,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				targetGroup: playerGroup,
 				tile: assets.weapons.bullet,
 				range: 400,
-				piercing: 2
+				piercing: 2,
 			}),
 			delay: 30,
 			cooldownAmount: 120,
@@ -137,6 +140,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		orbiter: true,
 		targeter: true,
 		targetGroup: enemyGroup,
+		sound: SOUNDS.Fireball,
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 5,

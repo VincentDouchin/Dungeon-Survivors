@@ -1,6 +1,7 @@
 import { Entity, System } from "../Globals/ECS";
 
 import ShooterComponent from "../Components/ShooterComponent";
+import { soundManager } from "../Globals/Initialize";
 
 class ShootingSystem extends System {
 	constructor() {
@@ -17,6 +18,9 @@ class ShootingSystem extends System {
 				shooter.timer++
 				if ((shooter.delay.base * (shooter.delay.base / shooter.delay.value)) <= shooter.timer) {
 					shooter.spawn(entity)
+					if (shooter.sound) {
+						soundManager.play('effect', shooter.sound)
+					}
 					shooter.timer = 0
 					shooter.triggerTimer--
 				}
