@@ -1,25 +1,25 @@
-import DamageComponent from "../Components/DamageComponent";
 import { Entity } from "../Globals/ECS";
 import PositionComponent from "../Components/PositionComponent";
 import ProjectileEntity from "./ProjectileEntity";
-import ShooterComponent from "../Components/ShooterComponent";
+import RotationComponent from "../Components/RotationComponent";
 import SpellComponent from "../Components/SpellComponent";
+import assets from "../Globals/Assets";
+import { playerGroup } from "../Constants/Weapons";
 
 const ArrowVolleySpell = (entity: Entity) => {
-	const arrows: Entity[] = []
-	const bow = entity.children.find(child => child.getComponent(ShooterComponent))
-	if (!bow) return
 	const spellComponent = entity.getComponent(SpellComponent)
-	const shooter = bow.getComponent(ShooterComponent)
-	const parentPosition = entity.getComponent(PositionComponent)
-	for (let i = 0; i <= Math.PI * 2; i += Math.PI / 8) {
-		const arrow = ProjectileEntity(shooter, parentPosition, i)
-		const arrowDamage = arrow.getComponent(DamageComponent)
-		arrowDamage.amount = spellComponent.spellDamage
-		arrowDamage.destroyOnHit = 5
-
-		arrows.push(arrow)
-		arrow.onDestroy(() => arrows.splice(arrows.indexOf(arrow), 1))
-	}
+	const origin = new Entity('arrow volley')
+	origin.addComponent(entity.getComponent(PositionComponent).clone())
+	origin.addComponent(new RotationComponent({}))
+	ProjectileEntity({
+		tile: assets.weapons.arrow,
+		damage: spellComponent.spellDamage.value,
+		speed: 300,
+		targetGroup: playerGroup,
+		range: 400,
+		nb: 16,
+		spread: Math.PI * 2,
+		piercing: 4
+	})(origin)
 }
 export default ArrowVolleySpell
