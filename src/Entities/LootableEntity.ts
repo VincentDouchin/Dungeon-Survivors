@@ -53,6 +53,7 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 	})
 
 	lootable.onDestroy(() => {
+		if (!lootable.getComponent(DroppableComponent)) return
 		ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, { entity: lootable, deleteLoot: false })
 		particleSub()
 		const particleNb = Math.floor(Math.random() * 3) + 2

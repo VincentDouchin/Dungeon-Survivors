@@ -31,17 +31,17 @@ class BackgroundElementSpawnerSystem extends System {
 						|| node.position.y > camera.position.y + camera.top * 2
 						|| node.position.y < camera.position.y + camera.bottom * 2
 					) {
-						node.entity.getComponent(DroppableComponent)?.destroy()
+						const loot = node.entity.removeComponent(DroppableComponent)
 						node.entity.destroy()
 						node.position = null
 						node.entity = null
+						if (loot) debugger
 					}
 				}
 			})
 			if (!size) return
 			for (let x = camera.left + camera.position.x - size; x < camera.right + camera.position.x + size; x += size) {
 				for (let y = camera.bottom + camera.position.y - size; y < camera.top + camera.position.y + size; y += size) {
-					// console.log('ok')
 					const chunkX = Math.floor(x / size)
 					const chunkY = Math.floor(y / size)
 					const node = backgroundElements.getNode(chunkX, chunkY)
