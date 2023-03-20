@@ -5,6 +5,7 @@ import { Color } from "three"
 import { Entity } from "../Globals/ECS"
 import LeafEntity from "../Entities/LeafEntity"
 import RainEntity from "../Entities/RainEntity"
+import SnowEntity from "../Entities/SnowEntity"
 import Tile from "../Utils/Tile"
 import WeightedList from "../Utils/WeightedList"
 import assets from "../Globals/Assets"
@@ -108,6 +109,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 	SNOW: {
 		level: 'SNOW',
 		lightColor: new Color('hsl(0,0%,100%)'),
+		effect: SnowEntity,
+		effectDelay: () => Math.random() * 60,
 		obstacles: new WeightedList<Tile>()
 			.add(assets.background.rocksnowbig, 1)
 			.add(assets.background.treesnow, 3)
