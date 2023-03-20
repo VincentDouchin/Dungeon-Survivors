@@ -38,7 +38,6 @@ const LightningSpellEntity = (entity: Entity) => {
 			if (deletedEntities.includes(enemy)) continue
 			counter++
 			if (counter === 10) break
-			console.count('lightning')
 			soundManager.play('effect', SOUNDS.THUNDER)
 			const targeter = enemy.getComponent(AIMovementComponent)
 			const enemyPosition = enemy.getComponent(PositionComponent)
