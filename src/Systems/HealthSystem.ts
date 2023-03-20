@@ -110,7 +110,7 @@ class HealthSystem extends System {
 						damage.destroyOnHit--
 						if (damage.destroyOnHit === 0) otherEntity.destroy()
 					}
-				})
+				}, health.type)
 			}
 			if (health.health === 0) {
 				const deathAnimation = new Entity('death animation')
