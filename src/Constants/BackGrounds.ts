@@ -98,6 +98,11 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		level: 'CASTLE',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		infinite: { x: false, y: true },
+		obstacles: new WeightedList<Tile>()
+			.add(assets.background.bench1, 2)
+			.add(assets.background.bench2, 2)
+			.add(assets.background.lectern, 1),
+		obstacleDensity: 0.03,
 		lootables: [LOOTABLES.STATUE]
 	},
 	SNOW: {
