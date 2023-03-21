@@ -1,7 +1,9 @@
 import BODYSIZES, { bodySize } from "./BodySizes"
 import WEAPONS, { WeaponDefinition } from "./Weapons"
 
+import { Entity } from "../Globals/ECS"
 import Tile from "../Utils/Tile"
+import VampireLordTransform from "../Game/Bosses/VampireLordTransform"
 import assets from "../Globals/Assets"
 
 export interface EnemyType {
@@ -15,6 +17,7 @@ export interface EnemyType {
 	charger?: boolean
 	boss?: boolean
 	xp?: number
+	transforms?: Array<(enemy: Entity) => void>
 	minion?: {
 		type: EnemyType,
 		delay: number,
@@ -847,11 +850,12 @@ const Enemies: Record<string, EnemyType> = {
 			idle: assets.characters.vampireLordWalk,
 			run: assets.characters.vampireLordRun,
 		},
-		health: 100,
+		health: 200,
 		size: BODYSIZES.normal,
-		speed: 2,
+		speed: 10,
 		damage: 5,
-		boss: true
+		boss: true,
+		transforms: [VampireLordTransform]
 	},
 	bat: {
 		tiles: {
@@ -866,5 +870,5 @@ const Enemies: Record<string, EnemyType> = {
 
 
 
-} as const
+}
 export default Enemies

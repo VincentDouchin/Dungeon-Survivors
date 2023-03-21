@@ -66,6 +66,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	if (type.minion) {
 		enemy.addComponent(new MinionSpawnerComponent(type.minion.type, type.minion.distance, type.minion.delay))
 	}
+	type.transforms?.forEach(transform => transform(enemy))
 	return enemy
 }
 
