@@ -94,7 +94,7 @@ class HealthSystem extends System {
 						const damageAmount = damage.calculateDamage(health.defense.value)
 
 						if (damage.sound) {
-							soundManager.play('effect', damage.sound)
+							soundManager.play('effect', damage.sound,{fade:true})
 						}
 
 						// ! Knockback
