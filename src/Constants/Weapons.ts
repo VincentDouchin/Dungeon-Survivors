@@ -100,11 +100,11 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		mirror: true,
 		projectile: {
 			spawn: ProjectileEntity({
-				damage: 15,
+				damage: 10,
 				speed: 100,
 				targetGroup: playerGroup,
 				tile: assets.weapons.bullet,
-				range: 400,
+				range: 20,
 				piercing: 2,
 			}),
 			delay: 30,
