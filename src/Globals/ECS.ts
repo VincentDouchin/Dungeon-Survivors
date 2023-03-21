@@ -55,17 +55,17 @@ class System {
 
 }
 interface Component {
-	destroy(): void
+
 	bind(id: string): void
 }
-class Component {
+abstract class Component {
 	static register() {
 		ECS.components.set(this.name, new Map())
 	}
 	save() {
 		return JSON.stringify(this)
 	}
-	destroy() {
+	destroy(): void {
 
 	}
 
