@@ -14,6 +14,7 @@ export interface WeaponDefinition {
 	targeter?: boolean
 	projectile?: ProjectileDefinition,
 	orbiter?: boolean
+	mirror?: boolean
 	angle?: number
 	sound?: SOUND
 }
@@ -96,6 +97,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		targeter: true,
 		targetGroup: playerGroup,
 		sound: SOUNDS.GUN,
+		mirror: true,
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 15,

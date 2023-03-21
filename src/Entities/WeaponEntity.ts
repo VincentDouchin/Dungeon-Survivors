@@ -39,7 +39,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 		weapon.addComponent(new SpriteComponent(tile, { renderOrder: 2 }))
 	}
 	const angVel = weaponDefinition.targeter ? 0 : 1
-	weapon.addComponent(new RotationComponent({ angVel, rotation: weaponDefinition.angle ?? 0 }))
+	weapon.addComponent(new RotationComponent({ angVel, rotation: weaponDefinition.angle ?? 0, mirror: weaponDefinition.mirror }))
 	weapon.addComponent(parentPosition.clone())
 	if (stats) {
 		weapon.addComponent(stats)

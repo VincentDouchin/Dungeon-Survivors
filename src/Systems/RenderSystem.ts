@@ -45,6 +45,9 @@ class RenderSystem extends System {
 			}
 			if (rotation) {
 				sprite.mesh.rotation.z = rotation.rotation + rotation.centerRotation + Math.PI / 2
+				if (rotation.mirror) {
+					sprite.flipped = rotation.rotation <= Math.PI / 2 && rotation.rotation >= -Math.PI / 2
+				}
 			}
 			if (sprite && sprite.mesh.parent && text) {
 				sprite.mesh.add(text.mesh)

@@ -7,12 +7,14 @@ class RotationComponent extends Component {
 	angVel: Stat
 	centerRotation: number
 	rotationVel: number
-	constructor({ rotation = 0, angVel = 0, centerRotation = 0, rotationVel = 0 }) {
+	mirror: boolean
+	constructor({ rotation = 0, angVel = 0, centerRotation = 0, rotationVel = 0, mirror = false }) {
 		super()
 		this.rotation = rotation
 		this.angVel = new Stat(angVel, STATS.ATTACK_SPEED)
 		this.centerRotation = centerRotation
 		this.rotationVel = rotationVel
+		this.mirror = mirror
 	}
 }
 RotationComponent.register()
