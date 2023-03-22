@@ -1,10 +1,10 @@
 import { ECS, Entity, System } from "../Globals/ECS";
+import { Vector2, Vector3 } from "three";
 
 import CameraTargetComponent from "../Components/CameraTargetComponent";
 import { ECSEVENTS } from "../Constants/Events";
 import PositionComponent from "../Components/PositionComponent";
 import State from "../Globals/State";
-import { Vector3 } from "three";
 import { camera } from "../Globals/Initialize";
 import saveData from "../Globals/SaveManager";
 
@@ -44,29 +44,31 @@ class CameraSystem extends System {
             camera.bottom = -this.frustumSize * this.aspect / 2
             camera.updateProjectionMatrix()
         }
+        if (entities.length === 0) return
+        const position = entities.reduce((acc, v) => {
+            const position = v.getComponent(PositionComponent)
+            if (!position) return acc
+            return acc.add(position.position)
+        }, new Vector2()).divide(new Vector2(entities.length, entities.length))
 
+        if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
+            camera.position.y = cameraTarget.bottom - camera.bottom
+        } else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
+            camera.position.y = cameraTarget.top - camera.top
+        } else {
+            camera.position.y = position.y
+        }
+        if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
+            camera.position.x = cameraTarget.left - camera.left
+        } else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
+            camera.position.x = cameraTarget.right - camera.right
+        } else {
+            camera.position.x = position.x
+        }
+        ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
 
-        entities.forEach(entity => {
-            const position = entity.getComponent(PositionComponent)
-            if (!position) return
-            if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
-                camera.position.y = cameraTarget.bottom - camera.bottom
-            } else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
-                camera.position.y = cameraTarget.top - camera.top
-            } else {
-                camera.position.y = position.y
-            }
-            if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
-                camera.position.x = cameraTarget.left - camera.left
-            } else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
-                camera.position.x = cameraTarget.right - camera.right
-            } else {
-                camera.position.x = position.x
-            }
-            ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
+        camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
 
-            camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
-        })
     }
 }
 export default CameraSystem
