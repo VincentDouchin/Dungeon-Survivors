@@ -35,7 +35,6 @@ class BackgroundElementSpawnerSystem extends System {
 						node.entity.destroy()
 						node.position = null
 						node.entity = null
-						if (loot) debugger
 					}
 				}
 			})
