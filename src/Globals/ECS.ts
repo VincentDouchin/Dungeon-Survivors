@@ -19,7 +19,7 @@ const ECS = new class {
 		return Array.from(components.entries()) as Array<[string, T]>
 	}
 	registerSystem<S extends Constructor<System>>(system: S) {
-		this.systems.push(new system())
+		this.systems.push(new system)
 	}
 	updateSystems() {
 		this.systems.forEach((system) => {
@@ -27,7 +27,7 @@ const ECS = new class {
 			if(!componentMap)return
 			const entitiesID: string[] = [... componentMap.keys()]
 			const entities= entitiesID.map(id => this.getEntityById(id)).filter(Boolean)
-			system.update(entities)
+			system.update && system.update(entities)
 		})
 	}
 	unRegisterSystems() {
@@ -88,7 +88,7 @@ class Entity {
 		})
 	}
 	get children() {
-		return this.childrenIds.map(childId => ECS.getEntityById(childId))
+		return this.childrenIds.map(childId => ECS.getEntityById(childId)).filter(Boolean)
 	}
 	addChildren(child: Entity) {
 		child.parentId = this.id
@@ -141,7 +141,7 @@ class Entity {
 		}
 		ECS.components.forEach(componentMap => {
 			if (!componentMap.has(this.id)) return
-			componentMap.get(this.id)?.destroy()
+			componentMap.get(this.id)?.destroy && componentMap.get(this.id)?.destroy()
 			componentMap.delete(this.id)
 		})
 		ECS.entities.delete(this.id)

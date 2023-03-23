@@ -12,7 +12,7 @@ import { inputManager } from '../Globals/Initialize'
 const UIMapEntity = () => {
 	const ui = new Entity('ui map')
 
-	if (!State.difficulty || !State.multiplayer) {
+	if (!State.difficulty || State.multiplayer === null) {
 		const showDifficulty = ()=>{
 			const difficultySelect = new Entity('difficulty select')
 			const difficultyText = new Entity('difficulty text')

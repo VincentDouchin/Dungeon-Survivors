@@ -17,12 +17,12 @@ class EventBus {
 	private subscribers: Subscribers = {}
 
 	subscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
-		let subscribers = this.subscribers[event]
-		if (!subscribers) {
-			subscribers = []
+		if (!this.subscribers[event]) {
+			this.subscribers[event] = []
 		}
+		const subscribers = this.subscribers[event]
 		
-		subscribers.push(callback)
+		subscribers && subscribers.push(callback)
 		return () => this.unsubscribe<Name>(event, callback)
 	}
 
@@ -38,7 +38,8 @@ class EventBus {
 	
 	publish<Name extends EventName>(event: Name, data: Event<Name>['data']) {
 		const subscribers = this.subscribers[event]
-		if (subscribers) {
+		if (subscribers?.length) {
+			
 			subscribers.forEach((callback) => callback(data))
 		}
 	}

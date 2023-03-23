@@ -44,6 +44,7 @@ class SelectionSystem extends System {
 	}
 	update(entities: Entity[]) {
 		let soundplayed = false
+		
 		for (const entity of entities) {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
