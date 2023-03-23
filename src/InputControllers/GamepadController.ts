@@ -5,10 +5,11 @@ import { InputController } from "../Globals/InputManager";
 import waitFor from "../Utils/WaitFor";
 
 class GamepadController implements InputController {
-	eventBus: EventBus
+	eventBus?: EventBus
 	enabled = false
 	threshold = 0.4
 	gamepad: Gamepad | null = null
+	index:number
 	inputs: Map<number, INPUTS> = new Map([
 		[9, INPUTS.PAUSE],
 		[0, INPUTS.VALIDATE],
@@ -20,9 +21,9 @@ class GamepadController implements InputController {
 		[5, INPUTS.SWITCH],
 		[1, INPUTS.SKILL]
 	])
-	constructor(eventBus: EventBus) {
-		this.eventBus = eventBus
-		if (navigator.getGamepads()[0] !== null) {
+	constructor(index=0) {
+		this.index = index
+		if (navigator.getGamepads()[this.index] !== null) {
 			this.enable()
 			return
 		}
@@ -40,23 +41,23 @@ class GamepadController implements InputController {
 		const self = this
 		new Coroutine(function* () {
 			while (self.enabled) {
-				const gamepad = navigator.getGamepads()[0]
+				const gamepad = navigator.getGamepads()[self.index]
 				if (!gamepad) return
 				if (Math.abs(gamepad.axes[0]) > self.threshold) {
-					self.eventBus.publish(INPUTS.AXISX, gamepad?.axes[0])
+					self.eventBus?.publish(INPUTS.AXISX, gamepad?.axes[0])
 				} else {
-					self.eventBus.publish(INPUTS.AXISX, 0)
+					self.eventBus?.publish(INPUTS.AXISX, 0)
 				}
 				if (Math.abs(gamepad.axes[1]) > self.threshold) {
-					self.eventBus.publish(INPUTS.AXISY, gamepad?.axes[1] * -1)
+					self.eventBus?.publish(INPUTS.AXISY, gamepad?.axes[1] * -1)
 				} else {
-					self.eventBus.publish(INPUTS.AXISY, 0)
+					self.eventBus?.publish(INPUTS.AXISY, 0)
 				}
 				for (let [button, input] of self.inputs) {
 					if (gamepad.buttons[button].pressed) {
-						self.eventBus.publish(input, true)
+						self.eventBus?.publish(input, true)
 						yield* waitFor(10)
-						self.eventBus.publish(input, false)
+						self.eventBus?.publish(input, false)
 					}
 				}
 

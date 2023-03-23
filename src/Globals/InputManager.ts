@@ -2,7 +2,9 @@ import { Raycaster, Vector3 } from "three";
 import { UICamera, UIScene, camera, scene } from "./Initialize";
 
 import EventBus from "../Utils/EventBus";
+import GamepadController from "../InputControllers/GamepadController";
 import INPUTS from "../Constants/InputsNames";
+import KeyboardController from "../InputControllers/KeyboardController";
 import State from "./State";
 
 class Input {
@@ -17,7 +19,7 @@ class Input {
 	}
 }
 export interface InputController {
-	eventBus: EventBus
+	eventBus?: EventBus
 }
 class InputManager {
 	eventBus = new EventBus()
@@ -77,18 +79,22 @@ class InputManager {
 			})
 
 		}
-
-
-
-
 		detectPointerEvent(State.mobile ? 'touchstart' : 'mousedown', 'down')
 		detectPointerEvent(State.mobile ? 'touchend' : 'mouseup', 'up')
 		detectPointerEvent(State.mobile ? 'touchmove' : 'mousemove', 'move')
 
 
+
+
+
+
 	}
 	registerControllers(...inputControllers: Constructor<InputController>[]) {
-		this.controllers = inputControllers.map(controller => new controller(this.eventBus))
+		this.controllers = inputControllers.map(controllerConstructor => {
+			const controller = new controllerConstructor()
+			controller.eventBus = this.eventBus
+			return controller
+		})
 	}
 	getInput(inputName: INPUTS) {
 		return this.inputs.get(inputName)
@@ -98,6 +104,16 @@ class InputManager {
 	}
 	disable(inputname: string) {
 		this.eventBus.publish('disable', inputname)
+	}
+	getInputMethods() {
+		const inputMethods :[string, InputController][] = []
+		if (!State.mobile) {
+			inputMethods.push(['Keyboard', new KeyboardController()])
+		}
+		navigator.getGamepads().filter(Boolean).forEach((_, index) => {
+			inputMethods.push([`Gamepad ${index}`, new GamepadController(index)])
+		})
+		return inputMethods
 	}
 
 }

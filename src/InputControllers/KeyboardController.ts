@@ -3,7 +3,7 @@ import INPUTS from "../Constants/InputsNames";
 import { InputController } from "../Globals/InputManager"
 
 class KeyboardController implements InputController {
-	eventBus: EventBus
+	eventBus?: EventBus
 	keyMap: Record<string, INPUTS> = {
 		'KeyW': INPUTS.MOVEUP,
 		'KeyS': INPUTS.MOVEDOWN,
@@ -15,15 +15,14 @@ class KeyboardController implements InputController {
 		'Enter': INPUTS.VALIDATE,
 		'Space': INPUTS.SKILL,
 	}
-	constructor(eventBus: EventBus) {
-		this.eventBus = eventBus
+	constructor() {
 		window.addEventListener('keydown', this.handleKeyUpDown(true))
 		window.addEventListener('keyup', this.handleKeyUpDown(false))
 	}
 	handleKeyUpDown = (state: boolean) => (e: KeyboardEvent) => {
 		if (e.repeat) return
 		if (e.code in this.keyMap) {
-			this.eventBus.publish(this.keyMap[e.code], state)
+			this.eventBus?.publish(this.keyMap[e.code], state)
 		}
 	}
 }
