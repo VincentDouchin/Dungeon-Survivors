@@ -1,5 +1,5 @@
-import { Component } from "../Globals/ECS";
-import { EnemyType } from "../Constants/Enemies";
+import { Component } from '../Globals/ECS'
+import { EnemyType } from '../Constants/Enemies'
 
 class MinionSpawnerComponent extends Component {
 	minion: EnemyType

@@ -1,19 +1,19 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent";
-import BoostComponent from "../Components/BoostComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import { ECSEVENTS } from "../Constants/Events";
-import ManaComponent from "../Components/ManaComponent";
-import ParticleEntity from "../Entities/ParticleEntitty";
-import PositionComponent from "../Components/PositionComponent";
-import { SOUNDS } from "../Constants/Sounds";
-import StatsComponent from "../Components/StatsComponent";
-import TokenComponent from "../Components/TokenComponent";
-import XPComponent from "../Components/XPComponent";
-import XPPickerComponent from "../Components/XPPickerComponent";
-import assets from "../Globals/Assets";
-import { soundManager } from "../Globals/Initialize";
+import BodyComponent from '../Components/BodyComponent'
+import BoostComponent from '../Components/BoostComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { ECSEVENTS } from '../Constants/Events'
+import ManaComponent from '../Components/ManaComponent'
+import ParticleEntity from '../Entities/ParticleEntitty'
+import PositionComponent from '../Components/PositionComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import StatsComponent from '../Components/StatsComponent'
+import TokenComponent from '../Components/TokenComponent'
+import XPComponent from '../Components/XPComponent'
+import XPPickerComponent from '../Components/XPPickerComponent'
+import assets from '../Globals/Assets'
+import { soundManager } from '../Globals/Initialize'
 
 class PickupSystem extends System {
 	constructor() {
@@ -35,7 +35,7 @@ class PickupSystem extends System {
 				const orientation = { x: x > 0 ? 1 : -1, y: y > 0 ? 1 : -1 }
 				const distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
 				const force = otherBody.moveForce.value * 1 / distance
-				otherBody.body!.applyImpulse({ x: force * orientation.x, y: force * orientation.y }, true)
+				otherBody.body?.applyImpulse({ x: force * orientation.x, y: force * orientation.y }, true)
 
 
 			}, COLLISIONGROUPS.SENSOR)

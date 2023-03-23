@@ -1,10 +1,10 @@
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import TokenComponent from "../Components/TokenComponent"
-import assets from "../Globals/Assets"
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TokenComponent from '../Components/TokenComponent'
+import assets from '../Globals/Assets'
 
 const ManaDropEntity = (position: PositionComponent) => {
 	const token = new Entity('token')

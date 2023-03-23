@@ -1,14 +1,14 @@
-import LOOTABLES, { LootableOptions } from "./Lootables"
+import LOOTABLES, { LootableOptions } from './Lootables'
 
-import { Arenas } from "../../assets/map/Map"
-import { Color } from "three"
-import { Entity } from "../Globals/ECS"
-import LeafEntity from "../Entities/LeafEntity"
-import RainEntity from "../Entities/RainEntity"
-import SnowEntity from "../Entities/SnowEntity"
-import Tile from "../Utils/Tile"
-import WeightedList from "../Utils/WeightedList"
-import assets from "../Globals/Assets"
+import { Arenas } from '../../assets/map/Map'
+import { Color } from 'three'
+import { Entity } from '../Globals/ECS'
+import LeafEntity from '../Entities/LeafEntity'
+import RainEntity from '../Entities/RainEntity'
+import SnowEntity from '../Entities/SnowEntity'
+import Tile from '../Utils/Tile'
+import WeightedList from '../Utils/WeightedList'
+import assets from '../Globals/Assets'
 
 export interface BackgroundOptions {
 	level: Arenas

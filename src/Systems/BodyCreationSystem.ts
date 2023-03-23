@@ -1,11 +1,11 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent";
-import JointComponent from "../Components/JointComponent";
-import { JointData } from "@dimforge/rapier2d-compat";
-import PositionComponent from "../Components/PositionComponent";
-import RotationComponent from "../Components/RotationComponent";
-import { world } from "../Globals/Initialize";
+import BodyComponent from '../Components/BodyComponent'
+import JointComponent from '../Components/JointComponent'
+import { JointData } from '@dimforge/rapier2d-compat'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import { world } from '../Globals/Initialize'
 
 class BodyCreationSystem extends System {
 	constructor() {
@@ -22,8 +22,9 @@ class BodyCreationSystem extends System {
 				body.body = world.createRigidBody(body.bodyDescription)
 				if (rotation) body.body.setRotation(rotation.rotation, true)
 			}
-			if (!body.colliders.length && body.body) {
-				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, body.body!))
+			if (!body.colliders.length && body.body ) {
+				const parentBody = body.body
+				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, parentBody))
 			}
 
 			if (joint && !joint?.jointed && body.body && joint.parentId) {
@@ -31,15 +32,15 @@ class BodyCreationSystem extends System {
 				if (!ownerBody.body) return
 				const getParams = () => {
 					switch (joint.type) {
-						case 'revolute': {
-							return JointData.revolute({ x: 0.0, y: -8 }, { x: joint.distance, y: 0 })
-						}; break
-						case 'prismatic': {
-							const params = JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: 0.0 }, { x: 1.0, y: 1.0 })
-							params.limitsEnabled = true
-							params.limits = [30, 60]
-							return params
-						}
+					case 'revolute': {
+						return JointData.revolute({ x: 0.0, y: -8 }, { x: joint.distance, y: 0 })
+					} break
+					case 'prismatic': {
+						const params = JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: 0.0 }, { x: 1.0, y: 1.0 })
+						params.limitsEnabled = true
+						params.limits = [30, 60]
+						return params
+					}
 					}
 				}
 				world.createImpulseJoint(getParams(), ownerBody.body, body.body, true)

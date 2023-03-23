@@ -1,11 +1,11 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import { ECSEVENTS } from "../Constants/Events";
-import INPUTS from "../Constants/InputsNames";
-import ManaComponent from "../Components/ManaComponent";
-import SpellComponent from "../Components/SpellComponent";
-import SwitchingComponent from "../Components/SwitchingComponent";
-import { inputManager } from "../Globals/Initialize";
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import ManaComponent from '../Components/ManaComponent'
+import SpellComponent from '../Components/SpellComponent'
+import SwitchingComponent from '../Components/SwitchingComponent'
+import { inputManager } from '../Globals/Initialize'
 
 class SpellSystem extends System {
 	constructor() {

@@ -1,9 +1,9 @@
-import { Entity } from "../Globals/ECS"
-import INPUTS from "../Constants/InputsNames"
-import SpriteComponent from "../Components/SpriteComponent"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import { inputManager } from "../Globals/Initialize"
+import { Entity } from '../Globals/ECS'
+import INPUTS from '../Constants/InputsNames'
+import SpriteComponent from '../Components/SpriteComponent'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { inputManager } from '../Globals/Initialize'
 
 const DpadInputEntity = () => {
 	const dpad = new Entity('dpad')
@@ -16,7 +16,7 @@ const DpadInputEntity = () => {
 	dpad.addChildren(center)
 	let enabled = false
 	let touch: null | number = null
-	let mouse: { x: null | number, y: null | number, } = { x: null, y: null }
+	const mouse: { x: null | number, y: null | number, } = { x: null, y: null }
 	const downSubscriber = inputManager.eventBus.subscribe('down', (touchCoord: TouchCoord) => {
 		if (touchCoord.uiObjects.includes(dpadMesh.mesh.id)) {
 			enabled = true

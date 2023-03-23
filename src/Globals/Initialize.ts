@@ -1,15 +1,15 @@
-import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderTarget, WebGLRenderer } from "three"
-import RAPIER, { World } from "@dimforge/rapier2d-compat"
+import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderTarget, WebGLRenderer } from 'three'
+import RAPIER, { World } from '@dimforge/rapier2d-compat'
 
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import Engine from "./Engine"
-import GamepadController from "../InputControllers/GamepadController"
-import INPUTS from "../Constants/InputsNames"
-import InputManager from "./InputManager"
-import KeyboardController from "../InputControllers/KeyboardController"
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import SoundManager from "./SoundManager"
-import assets from "./Assets"
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import Engine from './Engine'
+import GamepadController from '../InputControllers/GamepadController'
+import INPUTS from '../Constants/InputsNames'
+import InputManager from './InputManager'
+import KeyboardController from '../InputControllers/KeyboardController'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+import SoundManager from './SoundManager'
+import assets from './Assets'
 
 // ! Engine
 
@@ -46,7 +46,7 @@ const createRenderer = () => {
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(window.innerWidth, window.innerHeight)
 	})
 	renderer.setClearColor(0xffffff, 0)
 	renderer.autoClear = false

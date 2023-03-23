@@ -1,4 +1,4 @@
-import Shader from "./Shader"
+import Shader from './Shader'
 import frag from './glsl/colors.frag?raw'
 import vert from './glsl/main.vert?raw'
 

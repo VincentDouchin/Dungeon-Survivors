@@ -1,8 +1,8 @@
-import { ECS, System } from "../Globals/ECS";
+import { ECS, System } from '../Globals/ECS'
 
-import DroppableComponent from "../Components/DroppableComponent";
-import { ECSEVENTS } from "../Constants/Events";
-import PositionComponent from "../Components/PositionComponent";
+import DroppableComponent from '../Components/DroppableComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import PositionComponent from '../Components/PositionComponent'
 
 class DroppingSystem extends System {
 	constructor() {
@@ -18,9 +18,6 @@ class DroppingSystem extends System {
 
 			}
 		})
-	}
-	update(): void {
-
 	}
 }
 export default DroppingSystem

@@ -1,13 +1,13 @@
-import AIMovementComponent from "../../Components/AIMovementComponent"
-import Coroutine from "../../Globals/Coroutine"
-import Enemies from "../../Constants/Enemies"
-import EnemyEntity from "../../Entities/EnemyEntity"
-import { Entity } from "../../Globals/ECS"
-import LevelComponent from "../../Components/LevelComponent"
-import PositionComponent from "../../Components/PositionComponent"
-import RangedComponent from "../../Components/RangedComponent"
-import StatsComponent from "../../Components/StatsComponent"
-import waitFor from "../../Utils/WaitFor"
+import AIMovementComponent from '../../Components/AIMovementComponent'
+import Coroutine from '../../Globals/Coroutine'
+import Enemies from '../../Constants/Enemies'
+import EnemyEntity from '../../Entities/EnemyEntity'
+import { Entity } from '../../Globals/ECS'
+import LevelComponent from '../../Components/LevelComponent'
+import PositionComponent from '../../Components/PositionComponent'
+import RangedComponent from '../../Components/RangedComponent'
+import StatsComponent from '../../Components/StatsComponent'
+import waitFor from '../../Utils/WaitFor'
 
 const VampireLordTransform = (boss: Entity) => {
 	const stats = boss.getComponent(StatsComponent)

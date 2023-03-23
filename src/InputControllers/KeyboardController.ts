@@ -1,6 +1,6 @@
-import EventBus from "../Utils/EventBus"
-import INPUTS from "../Constants/InputsNames";
-import { InputController } from "../Globals/InputManager"
+import EventBus from '../Utils/EventBus'
+import INPUTS from '../Constants/InputsNames'
+import { InputController } from '../Globals/InputManager'
 
 class KeyboardController implements InputController {
 	eventBus?: EventBus

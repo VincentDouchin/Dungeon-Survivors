@@ -1,20 +1,16 @@
-import { ECS, Entity } from "../Globals/ECS";
-import { engine, inputManager, render, soundManager } from "../Globals/Initialize";
+import { ECS, Entity } from '../Globals/ECS'
+import { engine, inputManager, render, soundManager } from '../Globals/Initialize'
 
-import { GameState } from "../Globals/Engine";
-import INPUTS from "../Constants/InputsNames";
-import RenderSystem from "../Systems/RenderSystem";
-import RunState from "./RunState";
-import { SOUNDS } from "../Constants/Sounds";
-import SelectionSystem from "../Systems/SelectionSystem";
-import SkillMenuUIEntity from "../UIEntities/UISkillMenuEntity.ts";
+import { GameState } from '../Globals/Engine'
+import INPUTS from '../Constants/InputsNames'
+import RenderSystem from '../Systems/RenderSystem'
+import RunState from './RunState'
+import { SOUNDS } from '../Constants/Sounds'
+import SelectionSystem from '../Systems/SelectionSystem'
+import SkillMenuUIEntity from '../UIEntities/UISkillMenuEntity.ts'
 
 class LevelUpState implements GameState {
 	ui: Entity | null = null
-	construtor() {
-
-	}
-
 	update() {
 		ECS.updateSystems()
 		if (inputManager.getInput(INPUTS.INTERACT)?.once) {

@@ -1,8 +1,8 @@
-import { Entity } from "../Globals/ECS";
-import SpriteComponent from "../Components/SpriteComponent";
-import TextComponent from "../Components/TextComponent";
-import Tile from "../Utils/Tile";
-import UIPositionComponent from "../Components/UIPositionComponent";
+import { Entity } from '../Globals/ECS'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
 
 const TutorialEntity = () => {
 	const tutorial = new Entity('tutorial')

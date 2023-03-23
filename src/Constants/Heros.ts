@@ -1,10 +1,10 @@
-import SPELLS, { Spell } from "./Spells"
-import WEAPONS, { WeaponDefinition } from "./Weapons"
+import SPELLS, { Spell } from './Spells'
+import WEAPONS, { WeaponDefinition } from './Weapons'
 
-import { STATS } from "../Components/StatsComponent"
-import Tile from "../Utils/Tile"
-import assets from "../Globals/Assets"
-import saveData from "../Globals/SaveManager"
+import { STATS } from '../Components/StatsComponent'
+import Tile from '../Utils/Tile'
+import assets from '../Globals/Assets'
+import saveData from '../Globals/SaveManager'
 
 export interface HeroDefinition {
 	name: HeroName

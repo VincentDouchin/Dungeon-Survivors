@@ -1,11 +1,11 @@
-import Coroutine from "../Globals/Coroutine";
-import { Entity } from "../Globals/ECS"
-import INPUTS from "../Constants/InputsNames";
-import SpriteComponent from "../Components/SpriteComponent"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import { inputManager } from "../Globals/Initialize"
-import waitFor from "../Utils/WaitFor"
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import INPUTS from '../Constants/InputsNames'
+import SpriteComponent from '../Components/SpriteComponent'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { inputManager } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const SwitchButtonEntity = () => {
 	const button = new Entity('switch Button')
@@ -18,13 +18,14 @@ const SwitchButtonEntity = () => {
 	const downSubscriber = inputManager.eventBus.subscribe('up', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id)) {
 			new Coroutine(function* () {
-				sprite.renderShader!.uniforms.uTexture.value = assets.UI.buttonpressed.texture
+				if(!sprite.renderShader)return
+				sprite.renderShader.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()
 				iconPosition.center.y = 0
 				yield* waitFor(10)
 				iconPosition.center.y = -1 / 8
 
-				sprite.renderShader!.uniforms.uTexture.value = assets.UI.button.texture
+				sprite.renderShader.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
 				inputManager.eventBus.publish(INPUTS.SWITCH, 1)
 			})

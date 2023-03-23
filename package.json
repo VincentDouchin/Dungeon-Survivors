@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "git subtree push  --prefix dist origin gh-pages"
+    "deploy": "git subtree push  --prefix dist origin gh-pages",
+    "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
+    "@total-typescript/ts-reset": "^0.4.2",
     "@types/dat.gui": "^0.7.7",
     "@types/three": "^0.146.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "dat.gui": "^0.7.9",
     "eslint": "^8.35.0",
     "typescript": "^4.9.4",

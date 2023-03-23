@@ -1,16 +1,16 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent";
-import DamageComponent from "../Components/DamageComponent";
-import { ECSEVENTS } from "../Constants/Events";
-import HealthComponent from "../Components/HealthComponent";
-import LevelComponent from "../Components/LevelComponent";
-import ManaComponent from "../Components/ManaComponent";
-import RotationComponent from "../Components/RotationComponent";
-import ShooterComponent from "../Components/ShooterComponent";
-import SpellComponent from "../Components/SpellComponent";
-import StatsComponent from "../Components/StatsComponent";
-import XPPickerComponent from "../Components/XPPickerComponent";
+import BodyComponent from '../Components/BodyComponent'
+import DamageComponent from '../Components/DamageComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import HealthComponent from '../Components/HealthComponent'
+import LevelComponent from '../Components/LevelComponent'
+import ManaComponent from '../Components/ManaComponent'
+import RotationComponent from '../Components/RotationComponent'
+import ShooterComponent from '../Components/ShooterComponent'
+import SpellComponent from '../Components/SpellComponent'
+import StatsComponent from '../Components/StatsComponent'
+import XPPickerComponent from '../Components/XPPickerComponent'
 
 class StatUpdateSystem extends System {
 	constructor() {

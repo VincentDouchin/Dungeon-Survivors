@@ -1,6 +1,6 @@
-import { STATS } from "../Components/StatsComponent"
-import Tile from "../Utils/Tile"
-import assets from "../Globals/Assets"
+import { STATS } from '../Components/StatsComponent'
+import Tile from '../Utils/Tile'
+import assets from '../Globals/Assets'
 
 export interface Skill {
 	icon: Tile

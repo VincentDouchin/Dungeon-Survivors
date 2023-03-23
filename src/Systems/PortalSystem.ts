@@ -1,11 +1,11 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import { ECSEVENTS } from "../Constants/Events";
-import MapState from "../GameStates/MapState";
-import PortalComponent from "../Components/PortalComponent";
-import { engine } from "../Globals/Initialize";
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { ECSEVENTS } from '../Constants/Events'
+import MapState from '../GameStates/MapState'
+import PortalComponent from '../Components/PortalComponent'
+import { engine } from '../Globals/Initialize'
 
 class PortalSystem extends System {
 	constructor() {

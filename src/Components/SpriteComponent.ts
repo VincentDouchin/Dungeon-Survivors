@@ -1,13 +1,13 @@
-import { Material, Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from "three";
+import { Material, Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from 'three'
 
-import { Component } from "../Globals/ECS";
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
-import RenderShader from "../Shaders/RenderShader";
-import Shader from "../Shaders/Shader";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
-import Tile from "../Utils/Tile";
-import { renderer } from "../Globals/Initialize";
+import { Component } from '../Globals/ECS'
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import RenderShader from '../Shaders/RenderShader'
+import Shader from '../Shaders/Shader'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+import Tile from '../Utils/Tile'
+import { renderer } from '../Globals/Initialize'
 
 class SpriteComponent extends Component {
 	renderTarget: WebGLRenderTarget
@@ -105,7 +105,9 @@ class SpriteComponent extends Component {
 		return this.scale * this.height
 	}
 	changeTexture(texture: Texture) {
-		this.renderShader!.uniforms.uTexture.value = texture
+		if(this.renderShader){
+			this.renderShader.uniforms.uTexture.value = texture
+		}
 		this.render()
 	}
 	destroy(): void {

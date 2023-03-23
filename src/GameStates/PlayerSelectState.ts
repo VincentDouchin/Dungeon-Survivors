@@ -1,11 +1,11 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import AnimationSystem from "../Systems/AnimationSystem"
-import { GameState } from "../Globals/Engine"
-import RenderSystem from "../Systems/RenderSystem"
-import SelectionSystem from "../Systems/SelectionSystem"
-import UIPlayerSelectEntity from "../UIEntities/UIPlayerSelectEntity"
-import { render } from "../Globals/Initialize"
+import AnimationSystem from '../Systems/AnimationSystem'
+import { GameState } from '../Globals/Engine'
+import RenderSystem from '../Systems/RenderSystem'
+import SelectionSystem from '../Systems/SelectionSystem'
+import UIPlayerSelectEntity from '../UIEntities/UIPlayerSelectEntity'
+import { render } from '../Globals/Initialize'
 
 class PlayerSelectState implements GameState {
 	ui?: Entity

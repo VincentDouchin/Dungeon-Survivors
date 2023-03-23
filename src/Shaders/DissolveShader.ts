@@ -8,7 +8,7 @@ class DissolveShader extends Shader {
 	vert = vert
 	frag = noise + frag
 
-	constructor(duration: number, invert: boolean = false, kernel: number) {
+	constructor(duration: number, invert = false, kernel: number) {
 		super((sprite) => {
 			new Coroutine(function* (i) {
 				yield

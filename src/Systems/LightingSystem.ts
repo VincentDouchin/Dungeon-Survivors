@@ -1,9 +1,9 @@
-import { AmbientLight, Color, PointLight } from "three";
-import { Entity, System } from "../Globals/ECS";
+import { AmbientLight, Color, PointLight } from 'three'
+import { Entity, System } from '../Globals/ECS'
 
-import LightComponent from "../Components/LightComponent";
-import PositionComponent from "../Components/PositionComponent";
-import { lightScene } from "../Globals/Initialize";
+import LightComponent from '../Components/LightComponent'
+import PositionComponent from '../Components/PositionComponent'
+import { lightScene } from '../Globals/Initialize'
 
 class LightingSystem extends System {
 	constructor() {

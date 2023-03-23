@@ -1,4 +1,4 @@
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 
 class TokenComponent extends Component {
 	amount = 1

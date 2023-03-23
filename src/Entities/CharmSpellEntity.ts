@@ -1,16 +1,16 @@
-import { ECS, Entity } from "../Globals/ECS";
+import { ECS, Entity } from '../Globals/ECS'
 
-import AIMovementComponent from "../Components/AIMovementComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import DamageComponent from "../Components/DamageComponent";
-import HealthComponent from "../Components/HealthComponent";
-import HealthRegenComponent from "../Components/HealthRegenComponent";
-import OutlineShader from "../Shaders/OutlineShader";
-import PositionComponent from "../Components/PositionComponent";
-import { SOUNDS } from "../Constants/Sounds";
-import SpellComponent from "../Components/SpellComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import { soundManager } from "../Globals/Initialize";
+import AIMovementComponent from '../Components/AIMovementComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import DamageComponent from '../Components/DamageComponent'
+import HealthComponent from '../Components/HealthComponent'
+import HealthRegenComponent from '../Components/HealthRegenComponent'
+import OutlineShader from '../Shaders/OutlineShader'
+import PositionComponent from '../Components/PositionComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import { soundManager } from '../Globals/Initialize'
 
 const CharmSpellEntity = (parent: Entity) => {
 	const parentPosition = parent.getComponent(PositionComponent)

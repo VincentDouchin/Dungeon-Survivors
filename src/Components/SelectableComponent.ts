@@ -1,8 +1,8 @@
-import { Component, ECS, Entity } from "../Globals/ECS";
+import { Component, ECS, Entity } from '../Globals/ECS'
 
-import { ECSEVENTS } from "../Constants/Events";
-import INPUTS from "../Constants/InputsNames";
-import Tile from "../Utils/Tile";
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import Tile from '../Utils/Tile'
 
 class SelectableComponent extends Component {
 	selectedTile?: Tile
@@ -18,7 +18,7 @@ class SelectableComponent extends Component {
 		this.onValidated = fn
 
 	}
-	static setFromArray(arr: Entity[], topDown: boolean = false) {
+	static setFromArray(arr: Entity[], topDown = false) {
 		arr.forEach((entity, index) => {
 			if (index === 0) {
 				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)

@@ -1,8 +1,8 @@
-import { CanvasTexture } from "three";
+import { CanvasTexture } from 'three'
 
-import vert from './glsl/main.vert?raw';
-import frag from './glsl/offset.frag?raw';
-import Shader from "./Shader";
+import vert from './glsl/main.vert?raw'
+import frag from './glsl/offset.frag?raw'
+import Shader from './Shader'
 
 class TileShader extends Shader {
 	vert = vert

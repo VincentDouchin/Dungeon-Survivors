@@ -1,4 +1,4 @@
-import { HeroName } from "../Constants/Heros"
+import { HeroName } from '../Constants/Heros'
 
 interface Save {
 	heros: HeroName[]

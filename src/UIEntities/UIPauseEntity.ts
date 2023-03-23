@@ -1,15 +1,15 @@
-import { engine, inputManager } from "../Globals/Initialize";
+import { engine, inputManager } from '../Globals/Initialize'
 
-import ButtonEntity from "./ButtonEntity";
-import { Entity } from "../Globals/ECS";
-import INPUTS from "../Constants/InputsNames";
-import RunState from "../GameStates/RunState";
-import SelectableComponent from "../Components/SelectableComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import UIPositionComponent from "../Components/UIPositionComponent";
-import VolumeBarEntity from "./VolumeBarEntity";
-import assets from "../Globals/Assets";
-import saveData from "../Globals/SaveManager";
+import ButtonEntity from './ButtonEntity'
+import { Entity } from '../Globals/ECS'
+import INPUTS from '../Constants/InputsNames'
+import RunState from '../GameStates/RunState'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import VolumeBarEntity from './VolumeBarEntity'
+import assets from '../Globals/Assets'
+import saveData from '../Globals/SaveManager'
 
 const UIPauseEntity = () => {
 	const uiPause = new Entity('ui pause')

@@ -1,18 +1,18 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import ColorShader from "../Shaders/ColorShader"
-import Coroutine from "../Globals/Coroutine"
-import DroppableComponent from "../Components/DroppableComponent"
-import { ECSEVENTS } from "../Constants/Events"
-import HealthComponent from "../Components/HealthComponent"
-import { LootableOptions } from "../Constants/Lootables"
-import PositionComponent from "../Components/PositionComponent"
-import PotionEntity from "./PotionEntity"
-import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
-import waitFor from "../Utils/WaitFor"
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import DroppableComponent from '../Components/DroppableComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import HealthComponent from '../Components/HealthComponent'
+import { LootableOptions } from '../Constants/Lootables'
+import PositionComponent from '../Components/PositionComponent'
+import PotionEntity from './PotionEntity'
+import SpriteComponent from '../Components/SpriteComponent'
+import Tile from '../Utils/Tile'
+import waitFor from '../Utils/WaitFor'
 
 const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: number) => {
 	const lootable = new Entity('lootable')

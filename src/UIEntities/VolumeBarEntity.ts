@@ -1,18 +1,18 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import BarShader from "../Shaders/BarShader"
-import { ECSEVENTS } from "../Constants/Events"
-import INPUTS from "../Constants/InputsNames"
-import OutlineShader from "../Shaders/OutlineShader"
-import RotationComponent from "../Components/RotationComponent"
-import SelectableComponent from "../Components/SelectableComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import { save } from "../Globals/SaveManager"
-import { soundManager } from "../Globals/Initialize"
+import BarShader from '../Shaders/BarShader'
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import OutlineShader from '../Shaders/OutlineShader'
+import RotationComponent from '../Components/RotationComponent'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { save } from '../Globals/SaveManager'
+import { soundManager } from '../Globals/Initialize'
 
 const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number, setter: (nb: number) => void, text: string) => {
 	const volumeFrame = new Entity('volume frame')

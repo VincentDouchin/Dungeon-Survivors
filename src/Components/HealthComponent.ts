@@ -1,16 +1,16 @@
-import { Component, ECS } from "../Globals/ECS";
+import { Component, ECS } from '../Globals/ECS'
 
-import { SOUND } from "../Constants/Sounds";
-import { STATS } from "./StatsComponent";
-import SpriteComponent from "./SpriteComponent";
-import { Stat } from "../Game/Stat";
+import { SOUND } from '../Constants/Sounds'
+import { STATS } from './StatsComponent'
+import SpriteComponent from './SpriteComponent'
+import { Stat } from '../Game/Stat'
 
 class HealthComponent extends Component {
 	health: number
 	maxHealth: Stat
 	type: number
 	healthBarId: string | null = null
-	canTakeDamage: boolean = true
+	canTakeDamage = true
 	show: boolean
 	defense = new Stat(1, STATS.DEFENSE)
 	sound?: SOUND

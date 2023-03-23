@@ -1,19 +1,19 @@
-import AnimationComponent from "../Components/AnimationComponent";
-import BodyComponent from "../Components/BodyComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import DamageComponent from "../Components/DamageComponent";
-import { Entity } from "../Globals/ECS";
-import ExpirationComponent from "../Components/ExpirationComponent";
-import PositionComponent from "../Components/PositionComponent";
-import ProjectileEntity from "./ProjectileEntity";
-import RotationComponent from "../Components/RotationComponent";
-import { SOUNDS } from "../Constants/Sounds";
-import ShooterComponent from "../Components/ShooterComponent";
-import SpellComponent from "../Components/SpellComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import WeaponEntity from "./WeaponEntity";
-import assets from "../Globals/Assets";
-import { playerGroup } from "../Constants/Weapons";
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import DamageComponent from '../Components/DamageComponent'
+import { Entity } from '../Globals/ECS'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import PositionComponent from '../Components/PositionComponent'
+import ProjectileEntity from './ProjectileEntity'
+import RotationComponent from '../Components/RotationComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import ShooterComponent from '../Components/ShooterComponent'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import WeaponEntity from './WeaponEntity'
+import assets from '../Globals/Assets'
+import { playerGroup } from '../Constants/Weapons'
 
 const CannonSpellEntity = (entity: Entity) => {
 

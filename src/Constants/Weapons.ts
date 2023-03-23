@@ -1,11 +1,11 @@
-import { SOUND, SOUNDS } from "./Sounds"
+import { SOUND, SOUNDS } from './Sounds'
 
-import COLLISIONGROUPS from "./CollisionGroups"
-import { Entity } from "../Globals/ECS"
-import NoteProjectileEntity from "../Entities/NoteProjectileEntity"
-import ProjectileEntity from "../Entities/ProjectileEntity"
-import Tile from "../Utils/Tile"
-import assets from "../Globals/Assets"
+import COLLISIONGROUPS from './CollisionGroups'
+import { Entity } from '../Globals/ECS'
+import NoteProjectileEntity from '../Entities/NoteProjectileEntity'
+import ProjectileEntity from '../Entities/ProjectileEntity'
+import Tile from '../Utils/Tile'
+import assets from '../Globals/Assets'
 
 export interface WeaponDefinition {
 	tile?: Tile
@@ -194,7 +194,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				damage: 4,
 				speed: 100,
 				targetGroup: enemyGroup,
-				tile: assets.effects["IceSpike-sheet"],
+				tile: assets.effects['IceSpike-sheet'],
 				range: 150, scale: 0.5
 
 			}),

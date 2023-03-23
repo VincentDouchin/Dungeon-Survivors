@@ -1,7 +1,7 @@
-import { Entity, System } from "../Globals/ECS";
+import { Entity, System } from '../Globals/ECS'
 
-import AnimationComponent from "../Components/AnimationComponent";
-import SpriteComponent from "../Components/SpriteComponent";
+import AnimationComponent from '../Components/AnimationComponent'
+import SpriteComponent from '../Components/SpriteComponent'
 
 class AnimationSystem extends System {
 	constructor() {

@@ -1,11 +1,13 @@
-import GameOverState from "./GameStates/GameOverState"
-import LevelUpState from "./GameStates/LevelUpState"
-import MapState from "./GameStates/MapState"
-import PauseState from "./GameStates/PauseState"
-import PlayerSelectState from "./GameStates/PlayerSelectState"
-import RunState from "./GameStates/RunState"
-import WinState from "./GameStates/WinState"
-import { engine } from "./Globals/Initialize"
+import '@total-typescript/ts-reset'
+
+import GameOverState from './GameStates/GameOverState'
+import LevelUpState from './GameStates/LevelUpState'
+import MapState from './GameStates/MapState'
+import PauseState from './GameStates/PauseState'
+import PlayerSelectState from './GameStates/PlayerSelectState'
+import RunState from './GameStates/RunState'
+import WinState from './GameStates/WinState'
+import { engine } from './Globals/Initialize'
 import m5x7 from '../assets/fonts/m5x7.ttf?url'
 import { preloadFont } from 'troika-three-text'
 

@@ -1,10 +1,10 @@
-import { Entity } from "../Globals/ECS"
-import ExpirationComponent from "../Components/ExpirationComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
-import TransitionShader from "../Shaders/TransitionShader"
-import { UICamera } from "../Globals/Initialize"
-import UIPositionComponent from "../Components/UIPositionComponent"
+import { Entity } from '../Globals/ECS'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import Tile from '../Utils/Tile'
+import TransitionShader from '../Shaders/TransitionShader'
+import { UICamera } from '../Globals/Initialize'
+import UIPositionComponent from '../Components/UIPositionComponent'
 
 const TransitionEntity = (duration: number, atHalf?: () => void) => {
 

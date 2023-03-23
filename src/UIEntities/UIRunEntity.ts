@@ -1,21 +1,21 @@
-import { engine, inputManager } from "../Globals/Initialize"
+import { engine, inputManager } from '../Globals/Initialize'
 
-import ActiveSpellEntity from "./ActiveSpellEntity"
-import BoostsEntity from "./BoostsEntity"
-import ButtonEntity from "./ButtonEntity"
-import DpadInputEntity from "./DpadInputEntity"
-import { Entity } from "../Globals/ECS"
-import INPUTS from "../Constants/InputsNames"
-import LevelDisplayEntity from "./LevelDisplayEntity"
-import ManaBarEntity from "./ManaBarEntity"
-import PauseState from "../GameStates/PauseState"
-import SpellButtonEntity from "./SpellButtonEntity"
-import State from "../Globals/State"
-import SwitchButtonEntity from "./SwitchButtonEntity"
-import TimeCounterEntity from "./TimeCounterEntity"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import XPBarEntity from "./XPBarEntity"
-import assets from "../Globals/Assets"
+import ActiveSpellEntity from './ActiveSpellEntity'
+import BoostsEntity from './BoostsEntity'
+import ButtonEntity from './ButtonEntity'
+import DpadInputEntity from './DpadInputEntity'
+import { Entity } from '../Globals/ECS'
+import INPUTS from '../Constants/InputsNames'
+import LevelDisplayEntity from './LevelDisplayEntity'
+import ManaBarEntity from './ManaBarEntity'
+import PauseState from '../GameStates/PauseState'
+import SpellButtonEntity from './SpellButtonEntity'
+import State from '../Globals/State'
+import SwitchButtonEntity from './SwitchButtonEntity'
+import TimeCounterEntity from './TimeCounterEntity'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import XPBarEntity from './XPBarEntity'
+import assets from '../Globals/Assets'
 
 const UIRunEntity = () => {
 	const ui = new Entity('ui run')

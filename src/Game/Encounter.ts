@@ -1,23 +1,23 @@
-import { ECS, Entity } from "../Globals/ECS";
-import { ECSEVENTS, UIEVENTS } from "../Constants/Events";
-import StatsComponent, { STATS } from "../Components/StatsComponent";
+import { ECS, Entity } from '../Globals/ECS'
+import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
+import StatsComponent, { STATS } from '../Components/StatsComponent'
 
-import ColorShader from "../Shaders/ColorShader";
-import Coroutine from "../Globals/Coroutine";
-import DIFFICULTY from "../Constants/DIfficulty";
-import EnemyEntity from "../Entities/EnemyEntity";
-import { EnemyType } from "../Constants/Enemies";
-import FlockingComponent from "../Components/FlockingComponent";
-import HealthComponent from "../Components/HealthComponent";
-import LevelComponent from "../Components/LevelComponent";
-import OutlineShader from "../Shaders/OutlineShader";
-import ParticleEntity from "../Entities/ParticleEntitty";
-import PortalEntity from "../Entities/PortalEntity";
-import SpriteComponent from "../Components/SpriteComponent";
-import State from "../Globals/State";
-import assets from "../Globals/Assets";
-import { camera } from "../Globals/Initialize";
-import waitFor from "../Utils/WaitFor";
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import DIFFICULTY from '../Constants/DIfficulty'
+import EnemyEntity from '../Entities/EnemyEntity'
+import { EnemyType } from '../Constants/Enemies'
+import FlockingComponent from '../Components/FlockingComponent'
+import HealthComponent from '../Components/HealthComponent'
+import LevelComponent from '../Components/LevelComponent'
+import OutlineShader from '../Shaders/OutlineShader'
+import ParticleEntity from '../Entities/ParticleEntitty'
+import PortalEntity from '../Entities/PortalEntity'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import assets from '../Globals/Assets'
+import { camera } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 class Encounter {
 	waves: (() => Generator)[] = []
@@ -58,7 +58,7 @@ class Encounter {
 		this.boundary = { x: x / 2, y: y / 2 }
 		return this
 	}
-	addWave(enemies: Array<[EnemyType, number]>, waves: number = 1, delay: number = 600) {
+	addWave(enemies: Array<[EnemyType, number]>, waves = 1, delay = 600) {
 		const self = this
 		this.waves.push(function* () {
 			for (let i = 0; i < waves; i++) {
@@ -68,7 +68,7 @@ class Encounter {
 		})
 		return this
 	}
-	getDistance(offset: number = 0) {
+	getDistance(offset = 0) {
 		const angle = Math.random() * Math.PI * 2
 
 		const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
@@ -95,7 +95,7 @@ class Encounter {
 			return enemy
 		})
 	}
-	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards: number = 8, distance: number) {
+	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards = 8, distance: number) {
 		const self = this
 		this.waves.push(function* () {
 			const group = FlockingComponent.getGroup()
@@ -175,7 +175,7 @@ class Encounter {
 		this.started = true
 		const self = this
 		this.coroutine = new Coroutine(function* () {
-			for (let wave of self.waves) {
+			for (const wave of self.waves) {
 				yield* wave()
 			}
 		})

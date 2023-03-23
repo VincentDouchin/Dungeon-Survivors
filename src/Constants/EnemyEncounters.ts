@@ -1,6 +1,6 @@
-import Enemies, { EnemyType } from "./Enemies"
+import Enemies, { EnemyType } from './Enemies'
 
-import Encounter from "../Game/Encounter"
+import Encounter from '../Game/Encounter'
 
 const {
 	goblin, orc, orcShaman, orcMasked, orcBig, orcBigPatch,

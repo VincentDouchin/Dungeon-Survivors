@@ -1,13 +1,13 @@
-import { Component, ECS, Entity } from "../Globals/ECS";
+import { Component, ECS, Entity } from '../Globals/ECS'
 
-import DroppableComponent from "./DroppableComponent";
-import { ECSEVENTS } from "../Constants/Events";
-import LootableEntity from "../Entities/LootableEntity";
-import { LootableOptions } from "../Constants/Lootables";
-import ObstableEntity from "../Entities/ObstacleEntity";
-import PositionComponent from "./PositionComponent";
-import Tile from "../Utils/Tile";
-import WeightedList from "../Utils/WeightedList";
+import DroppableComponent from './DroppableComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import LootableEntity from '../Entities/LootableEntity'
+import { LootableOptions } from '../Constants/Lootables'
+import ObstableEntity from '../Entities/ObstacleEntity'
+import PositionComponent from './PositionComponent'
+import Tile from '../Utils/Tile'
+import WeightedList from '../Utils/WeightedList'
 
 export interface Wall {
 	width: number

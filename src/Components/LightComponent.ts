@@ -1,7 +1,7 @@
-import { AmbientLight, Color, PointLight } from "three";
+import { AmbientLight, Color, PointLight } from 'three'
 
-import { Component } from "../Globals/ECS";
-import { lightScene } from "../Globals/Initialize";
+import { Component } from '../Globals/ECS'
+import { lightScene } from '../Globals/Initialize'
 
 class LightComponent extends Component {
 	// light: SpotLight

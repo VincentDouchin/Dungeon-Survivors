@@ -1,5 +1,5 @@
-import Tile from "../Utils/Tile"
-import assets from "../Globals/Assets"
+import Tile from '../Utils/Tile'
+import assets from '../Globals/Assets'
 
 export interface LootableOptions {
 	tile: Tile

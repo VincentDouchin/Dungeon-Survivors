@@ -1,13 +1,13 @@
-import { ECS, Entity } from "../Globals/ECS"
-import { easeOutBack, easeOutExpo } from "../Utils/Tween"
+import { ECS, Entity } from '../Globals/ECS'
+import { easeOutBack, easeOutExpo } from '../Utils/Tween'
 
-import Coroutine from "../Globals/Coroutine"
-import { ECSEVENTS } from "../Constants/Events"
-import ExpirationComponent from "../Components/ExpirationComponent"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
 
 const DamageTextEntity = (position: PositionComponent, damageAmount: number, crit: boolean) => {
 	const damageText = new Entity('damageText')

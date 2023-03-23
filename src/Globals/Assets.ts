@@ -1,14 +1,15 @@
-import AssetLoader, { loadImage } from "./../Utils/AssetLoader"
+import AssetLoader, { loadImage } from './../Utils/AssetLoader'
 import { Background, UI, characters, effects, icons, others, weapons } from './../../assets/images/images'
 
 import { Arenas } from './../../assets/map/Map'
-import Tile from "../Utils/Tile"
+import LDTKMap from '../Utils/LDTKMap'
+import Tile from '../Utils/Tile'
 import { sounds } from './../../assets/sounds/sounds'
 
-const getFileName = (path: string) => path.split(/[./]/g).at(-2)!
+const getFileName = (path: string) => path.split(/[./]/g).at(-2)??''
 
 const loadCharacterTilesFromFolder = new AssetLoader<Tile>(getFileName)
-	.chain(async x => await loadImage(x.default))
+	.chain(async (x) => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x, { frames: 4, padding: true }))
 const loadTilesFromFolder = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
@@ -18,32 +19,32 @@ const loadIconsFromFolder = new AssetLoader<Tile>(getFileName)
 	.chain(x => Tile.fromImage(x, { padding: true }))
 const loadAudio = new AssetLoader<HTMLAudioElement>(getFileName)
 	.chain(x => new Audio(x.default))
-const loadJSON = new AssetLoader(getFileName)
+const loadJSON = new AssetLoader<LDTKMap>(getFileName)
 
 const framesNb: Record<effects, number> = {
-	"Leaf": 6,
-	"Spark": 7,
-	"smoke": 6,
-	"auraCircle": 4,
-	"fireProjectile": 15,
-	"darkProjectile": 15,
-	"lightning": 8,
-	"smokeCircular": 8,
-	"Rain": 3,
-	"RainOnFloor": 3,
-	"IceSpike-sheet": 8,
-	"Rock": 5,
-	"RockBlue": 5,
-	"Grass": 6,
-	"Hay": 6,
-	"Vase": 6,
-	"Wood": 6,
-	"Clouds": 1,
-	"flag": 4,
-	"Snow": 7,
-	"beam": 4,
-	"healing": 4,
-	"CanonBall": 5
+	'Leaf': 6,
+	'Spark': 7,
+	'smoke': 6,
+	'auraCircle': 4,
+	'fireProjectile': 15,
+	'darkProjectile': 15,
+	'lightning': 8,
+	'smokeCircular': 8,
+	'Rain': 3,
+	'RainOnFloor': 3,
+	'IceSpike-sheet': 8,
+	'Rock': 5,
+	'RockBlue': 5,
+	'Grass': 6,
+	'Hay': 6,
+	'Vase': 6,
+	'Wood': 6,
+	'Clouds': 1,
+	'flag': 4,
+	'Snow': 7,
+	'beam': 4,
+	'healing': 4,
+	'CanonBall': 5
 }
 const loadEffects = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))

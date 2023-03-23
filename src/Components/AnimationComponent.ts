@@ -1,11 +1,11 @@
-import { Component } from "../Globals/ECS";
-import Coroutine from "../Globals/Coroutine";
-import Tile from "../Utils/Tile";
+import { Component } from '../Globals/ECS'
+import Coroutine from '../Globals/Coroutine'
+import Tile from '../Utils/Tile'
 
 class AnimationComponent extends Component {
 	tiles: { [key: string]: Tile }
-	lastState: string = ''
-	currentState: string = ''
+	lastState = ''
+	currentState = ''
 	selectedFrame = 0
 	frameRate: number
 	frameCounter = 0

@@ -1,10 +1,10 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import SpriteComponent from "../Components/SpriteComponent"
-import TextComponent from "../Components/TextComponent"
-import { UIEVENTS } from "../Constants/Events"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import { UIEVENTS } from '../Constants/Events'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
 
 let levelNb = 0
 const LevelDisplayEntity = () => {

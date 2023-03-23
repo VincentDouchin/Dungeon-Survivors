@@ -1,7 +1,7 @@
-import { Entity, System } from "../Globals/ECS";
+import { Entity, System } from '../Globals/ECS'
 
-import { ECSEVENTS } from "../Constants/Events";
-import ExpirationComponent from "../Components/ExpirationComponent";
+import { ECSEVENTS } from '../Constants/Events'
+import ExpirationComponent from '../Components/ExpirationComponent'
 
 class ExpirationSystem extends System {
 	skipEntities = new Set<Entity>()

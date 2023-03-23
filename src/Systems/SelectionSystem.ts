@@ -1,11 +1,11 @@
-import { ECS, Entity, System } from "../Globals/ECS";
-import { inputManager, soundManager } from "../Globals/Initialize";
+import { ECS, Entity, System } from '../Globals/ECS'
+import { inputManager, soundManager } from '../Globals/Initialize'
 
-import { ECSEVENTS } from "../Constants/Events";
-import INPUTS from "../Constants/InputsNames";
-import { SOUNDS } from "../Constants/Sounds";
-import SelectableComponent from "../Components/SelectableComponent";
-import SpriteComponent from "../Components/SpriteComponent";
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import { SOUNDS } from '../Constants/Sounds'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
 
 class SelectionSystem extends System {
 	selectedEntity: Entity | null = null
@@ -69,7 +69,7 @@ class SelectionSystem extends System {
 					}
 				}
 
-				for (let input of Object.values(INPUTS)) {
+				for (const input of Object.values(INPUTS)) {
 					if (inputManager.getInput(input)?.once) {
 						const nextEntity = selectable.next[input]
 						if (nextEntity) {

@@ -1,5 +1,5 @@
-import { Texture } from "three";
-import Shader from "./Shader";
+import { Texture } from 'three'
+import Shader from './Shader'
 import vert from './glsl/main.vert?raw'
 import frag from './glsl/bar.frag?raw'
 class BarShader extends Shader {

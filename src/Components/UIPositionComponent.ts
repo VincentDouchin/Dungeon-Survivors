@@ -1,6 +1,6 @@
-import { Component } from "../Globals/ECS";
-import Coroutine from "../Globals/Coroutine";
-import { easeInOutQuad } from "../Utils/Tween";
+import { Component } from '../Globals/ECS'
+import Coroutine from '../Globals/Coroutine'
+import { easeInOutQuad } from '../Utils/Tween'
 
 interface position {
 	x: number

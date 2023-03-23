@@ -1,8 +1,8 @@
-import Coroutine from "../Globals/Coroutine";
-import EventBus from "../Utils/EventBus";
-import INPUTS from "../Constants/InputsNames";
-import { InputController } from "../Globals/InputManager";
-import waitFor from "../Utils/WaitFor";
+import Coroutine from '../Globals/Coroutine'
+import EventBus from '../Utils/EventBus'
+import INPUTS from '../Constants/InputsNames'
+import { InputController } from '../Globals/InputManager'
+import waitFor from '../Utils/WaitFor'
 
 class GamepadController implements InputController {
 	eventBus?: EventBus
@@ -27,11 +27,11 @@ class GamepadController implements InputController {
 			this.enable()
 			return
 		}
-		window.addEventListener("gamepadconnected", () => {
+		window.addEventListener('gamepadconnected', () => {
 			this.enable()
 
 		})
-		window.addEventListener("gamepaddisconnected", () => {
+		window.addEventListener('gamepaddisconnected', () => {
 			this.enabled = false
 		})
 	}
@@ -53,7 +53,7 @@ class GamepadController implements InputController {
 				} else {
 					self.eventBus?.publish(INPUTS.AXISY, 0)
 				}
-				for (let [button, input] of self.inputs) {
+				for (const [button, input] of self.inputs) {
 					if (gamepad.buttons[button].pressed) {
 						self.eventBus?.publish(input, true)
 						yield* waitFor(10)

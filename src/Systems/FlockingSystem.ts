@@ -1,9 +1,9 @@
-import { Entity, System } from "../Globals/ECS";
+import { Entity, System } from '../Globals/ECS'
 
-import BodyComponent from "../Components/BodyComponent";
-import FlockingComponent from "../Components/FlockingComponent";
-import PositionComponent from "../Components/PositionComponent";
-import { Vector2 } from "three";
+import BodyComponent from '../Components/BodyComponent'
+import FlockingComponent from '../Components/FlockingComponent'
+import PositionComponent from '../Components/PositionComponent'
+import { Vector2 } from 'three'
 
 const nbToVec = (nb: number) => new Vector2(nb, nb)
 class FlockingSystem extends System {
@@ -26,7 +26,7 @@ class FlockingSystem extends System {
 			const cohesion = new Vector2()
 			let neighborCount = 0
 
-			for (let otherEntity of entities) {
+			for (const otherEntity of entities) {
 				const otherFlocking = otherEntity.getComponent(FlockingComponent)
 				if (otherFlocking.group !== flocking.group) continue
 				if (otherEntity.id == entity.id) continue

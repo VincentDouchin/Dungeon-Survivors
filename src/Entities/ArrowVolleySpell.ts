@@ -1,12 +1,12 @@
-import { Entity } from "../Globals/ECS";
-import PositionComponent from "../Components/PositionComponent";
-import ProjectileEntity from "./ProjectileEntity";
-import RotationComponent from "../Components/RotationComponent";
-import { SOUNDS } from "../Constants/Sounds";
-import SpellComponent from "../Components/SpellComponent";
-import assets from "../Globals/Assets";
-import { playerGroup } from "../Constants/Weapons";
-import { soundManager } from "../Globals/Initialize";
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import ProjectileEntity from './ProjectileEntity'
+import RotationComponent from '../Components/RotationComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import SpellComponent from '../Components/SpellComponent'
+import assets from '../Globals/Assets'
+import { playerGroup } from '../Constants/Weapons'
+import { soundManager } from '../Globals/Initialize'
 
 const ArrowVolleySpell = (entity: Entity) => {
 	const spellComponent = entity.getComponent(SpellComponent)

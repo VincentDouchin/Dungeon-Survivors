@@ -1,11 +1,11 @@
-import AnimationComponent from "../Components/AnimationComponent"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import XPComponent from "../Components/XPComponent"
-import assets from "../Globals/Assets"
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import XPComponent from '../Components/XPComponent'
+import assets from '../Globals/Assets'
 
 const XPEntity = (amount = 1) => (position: PositionComponent) => {
 	const xpBag = new Entity('xp bag')

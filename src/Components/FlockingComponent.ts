@@ -1,11 +1,11 @@
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 
 type flockingGroup = string & { __type: 'flocking group' }
 class FlockingComponent extends Component {
 	distance: number
 	main: boolean
 	group: flockingGroup
-	constructor(group: flockingGroup, main: boolean = false, distance: number = 50) {
+	constructor(group: flockingGroup, main = false, distance = 50) {
 		super()
 		this.group = group
 		this.main = main

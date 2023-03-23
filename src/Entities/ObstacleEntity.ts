@@ -1,9 +1,9 @@
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import Tile from '../Utils/Tile'
 
 const ObstableEntity = (tile: Tile) => (x: number, y: number) => {
 	const entity = new Entity('obstacle')

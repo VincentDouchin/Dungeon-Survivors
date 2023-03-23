@@ -15,7 +15,7 @@ class Coroutine {
 		}
 	}
 	generator: Generator
-	running: boolean = true
+	running = true
 	toStop = false
 	constructor(fn: (args: number) => Generator, duration?: number) {
 		const generatorFunction =

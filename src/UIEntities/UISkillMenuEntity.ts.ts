@@ -1,5 +1,5 @@
-import { Entity } from "../Globals/ECS"
-import SkillMenuEntity from "./SkillMenuEntity"
+import { Entity } from '../Globals/ECS'
+import SkillMenuEntity from './SkillMenuEntity'
 
 const SkillMenuUIEntity = () => {
 	const ui = new Entity('skillmenu ui')

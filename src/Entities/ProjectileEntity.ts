@@ -1,18 +1,18 @@
-import AnimationComponent from "../Components/AnimationComponent";
-import BodyComponent from "../Components/BodyComponent";
-import Coroutine from "../Globals/Coroutine";
-import DamageComponent from "../Components/DamageComponent";
-import { Entity } from "../Globals/ECS";
-import ExpirationComponent from "../Components/ExpirationComponent";
-import LevelComponent from "../Components/LevelComponent";
-import PositionComponent from "../Components/PositionComponent";
-import RotationComponent from "../Components/RotationComponent";
-import { SOUND } from "../Constants/Sounds";
-import SpriteComponent from "../Components/SpriteComponent";
-import StatsComponent from "../Components/StatsComponent";
-import { TargetGroup } from "../Constants/Weapons";
-import Tile from "../Utils/Tile";
-import { soundManager } from "../Globals/Initialize";
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import Coroutine from '../Globals/Coroutine'
+import DamageComponent from '../Components/DamageComponent'
+import { Entity } from '../Globals/ECS'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import LevelComponent from '../Components/LevelComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import { SOUND } from '../Constants/Sounds'
+import SpriteComponent from '../Components/SpriteComponent'
+import StatsComponent from '../Components/StatsComponent'
+import { TargetGroup } from '../Constants/Weapons'
+import Tile from '../Utils/Tile'
+import { soundManager } from '../Globals/Initialize'
 
 // const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
 export interface ProjectileOptions {
@@ -65,7 +65,7 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 			coroutine.stop()
 			counter--
 			if (sound) {
-				soundManager.play("effect", sound)
+				soundManager.play('effect', sound)
 			}
 			if (afterHit) {
 				afterHit(projectile)

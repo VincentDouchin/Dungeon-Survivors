@@ -1,12 +1,12 @@
-import { easeInSine, linear } from "../Utils/Tween"
+import { easeInSine, linear } from '../Utils/Tween'
 
-import AnimationComponent from "../Components/AnimationComponent"
-import Coroutine from "../Globals/Coroutine"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
-import { camera } from "../Globals/Initialize"
+import AnimationComponent from '../Components/AnimationComponent'
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { camera } from '../Globals/Initialize'
 
 const LeafEntity = () => {
 	const leaf = new Entity('leaf')

@@ -1,7 +1,7 @@
-import Coroutine from "../Globals/Coroutine";
-import Shader from "./Shader";
-import frag from './glsl/transition.frag?raw';
-import vert from './glsl/main.vert?raw';
+import Coroutine from '../Globals/Coroutine'
+import Shader from './Shader'
+import frag from './glsl/transition.frag?raw'
+import vert from './glsl/main.vert?raw'
 
 class TransitionShader extends Shader {
 	vert = vert

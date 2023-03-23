@@ -48,7 +48,7 @@ class SoundManager {
 			target.delete(audioElement)
 			audioElement.remove()
 			sound.disconnect()
-			audioElement.src = ""
+			audioElement.src = ''
 			audioElement.srcObject = null
 			audioElement.removeEventListener('ended', endListener)
 		}
@@ -77,7 +77,7 @@ class SoundManager {
 			[this.effects, saveData.effectsVolume]
 		]
 		collections.forEach(([audio, volume]) => {
-			for (let [audioElement, elementVolume] of audio) {
+			for (const [audioElement, elementVolume] of audio) {
 				audioElement.volume = elementVolume * volume
 			}
 		})

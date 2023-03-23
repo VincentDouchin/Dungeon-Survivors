@@ -1,15 +1,15 @@
-import BodyComponent from "../Components/BodyComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import ColorShader from "../Shaders/ColorShader";
-import Coroutine from "../Globals/Coroutine";
-import DamageComponent from "../Components/DamageComponent";
-import { Entity } from "../Globals/ECS";
-import ExpirationComponent from "../Components/ExpirationComponent";
-import LevelComponent from "../Components/LevelComponent";
-import PositionComponent from "../Components/PositionComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import StatsComponent from "../Components/StatsComponent";
-import assets from "../Globals/Assets";
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import DamageComponent from '../Components/DamageComponent'
+import { Entity } from '../Globals/ECS'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import LevelComponent from '../Components/LevelComponent'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import StatsComponent from '../Components/StatsComponent'
+import assets from '../Globals/Assets'
 
 const NoteProjectileEntity = (parent: Entity) => {
 	const note = new Entity('note')

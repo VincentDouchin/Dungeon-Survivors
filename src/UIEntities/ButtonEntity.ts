@@ -1,14 +1,14 @@
-import Coroutine from "../Globals/Coroutine";
-import { Entity } from "../Globals/ECS";
-import SelectableComponent from "../Components/SelectableComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import TextComponent from "../Components/TextComponent";
-import Tile from "../Utils/Tile";
-import UIPositionComponent from "../Components/UIPositionComponent";
-import buttonTiles from "../Utils/ButtonTiles";
-import waitFor from "../Utils/WaitFor";
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import buttonTiles from '../Utils/ButtonTiles'
+import waitFor from '../Utils/WaitFor'
 
-const ButtonEntity = (width: number, height: number, scale: number, child: Tile | string, childScale: number, validate: () => void, selected: boolean = false) => {
+const ButtonEntity = (width: number, height: number, scale: number, child: Tile | string, childScale: number, validate: () => void, selected = false) => {
 	const button = new Entity('button')
 	const [normal, pressed, disabled] = buttonTiles(width, height)
 	const defaultTile = selected ? normal : disabled

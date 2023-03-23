@@ -1,16 +1,16 @@
-import { Entity } from "../Globals/ECS"
-import SpriteComponent from "../Components/SpriteComponent"
-import State from "../Globals/State"
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
+import { Entity } from '../Globals/ECS'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
 
 const BoostsEntity = () => {
 	const boosts = new Entity('boosts')
 	boosts.addComponent(new UIPositionComponent({ x: -1, y: -1 }, { x: -1, y: 1 }))
 	boosts.addComponent(new SpriteComponent(Tile.empty(1, 16)))
 	let lastEntity = boosts
-	for (let skill of new Set(State.skills)) {
+	for (const skill of new Set(State.skills)) {
 		const skillIcon = new Entity('skill icon')
 		skillIcon.addComponent(new SpriteComponent(skill.icon))
 		skillIcon.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))

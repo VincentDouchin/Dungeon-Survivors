@@ -1,12 +1,12 @@
-import AnimationComponent from "../Components/AnimationComponent"
-import Coroutine from "../Globals/Coroutine"
-import { Entity } from "../Globals/ECS"
-import ParticleEntity from "./ParticleEntitty"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
-import { camera } from "../Globals/Initialize"
-import waitFor from "../Utils/WaitFor"
+import AnimationComponent from '../Components/AnimationComponent'
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import ParticleEntity from './ParticleEntitty'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { camera } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const RainEntity = () => {
 	const rain = new Entity('rain')

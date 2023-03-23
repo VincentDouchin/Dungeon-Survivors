@@ -1,9 +1,9 @@
-import AnimationComponent from "../Components/AnimationComponent"
-import ColorShader from "../Shaders/ColorShader"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
+import AnimationComponent from '../Components/AnimationComponent'
+import ColorShader from '../Shaders/ColorShader'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import Tile from '../Utils/Tile'
 
 const ParticleEntity = async (position: { x: number, y: number } | Entity, tile: Tile, options?: { frameRate?: number, scale?: number, renderOrder?: number, duration?: number, color?: [number, number, number, number] }) => {
 	const particle = new Entity('particle')

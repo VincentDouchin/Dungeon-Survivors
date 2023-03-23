@@ -1,16 +1,16 @@
-import AIMovementComponent from "../Components/AIMovementComponent"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import DamageComponent from "../Components/DamageComponent"
-import { Entity } from "../Globals/ECS"
-import JointComponent from "../Components/JointComponent"
-import LevelComponent from "../Components/LevelComponent"
-import PositionComponent from "../Components/PositionComponent"
-import RotationComponent from "../Components/RotationComponent"
-import ShooterComponent from "../Components/ShooterComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import StatsComponent from "../Components/StatsComponent"
-import { WeaponDefinition } from "../Constants/Weapons"
+import AIMovementComponent from '../Components/AIMovementComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import DamageComponent from '../Components/DamageComponent'
+import { Entity } from '../Globals/ECS'
+import JointComponent from '../Components/JointComponent'
+import LevelComponent from '../Components/LevelComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import ShooterComponent from '../Components/ShooterComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import StatsComponent from '../Components/StatsComponent'
+import { WeaponDefinition } from '../Constants/Weapons'
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent, level?: LevelComponent) => {
 

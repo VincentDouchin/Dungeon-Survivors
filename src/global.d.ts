@@ -67,7 +67,7 @@ interface TiledObject {
 interface TiledProperty {
 	name: string
 	type: string
-	value: any
+	value: unknown
 }
 
 type nodeDirection = 'left' | 'right' | 'top'

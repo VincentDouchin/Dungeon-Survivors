@@ -1,12 +1,12 @@
-import AnimationComponent from "../Components/AnimationComponent"
-import ColorShader from "../Shaders/ColorShader"
-import Coroutine from "../Globals/Coroutine"
-import { Entity } from "../Globals/ECS"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
-import { camera } from "../Globals/Initialize"
-import waitFor from "../Utils/WaitFor"
+import AnimationComponent from '../Components/AnimationComponent'
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { camera } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const SnowEntity = () => {
 	const snow = new Entity('rain')

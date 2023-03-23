@@ -1,10 +1,10 @@
 import { Text, anchorX, anchorY } from 'troika-three-text'
 
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 import m5x7 from '../../assets/fonts/m5x7.ttf?url'
 
 class TextComponent extends Component {
-	previousText: string = ''
+	previousText = ''
 	text: string
 	mesh: Text
 	constructor(text: string, options?: { size?: number, color?: number, maxWidth?: number, anchorY?: anchorY, anchorX?: anchorX, outlineWidth?: number }) {

@@ -1,14 +1,14 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import ColorShader from "../Shaders/ColorShader"
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events"
-import INPUTS from "../Constants/InputsNames"
-import SpriteComponent from "../Components/SpriteComponent"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
-import { inputManager } from "../Globals/Initialize"
-import waitFor from "../Utils/WaitFor"
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import SpriteComponent from '../Components/SpriteComponent'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { inputManager } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const SpellButtonEntity = () => {
 	const button = new Entity('active skill button')

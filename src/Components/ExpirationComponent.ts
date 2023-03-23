@@ -1,4 +1,4 @@
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 
 class ExpirationComponent extends Component {
 	timer: number

@@ -1,15 +1,15 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import ColorShader from "../Shaders/ColorShader";
-import DroppableComponent from "../Components/DroppableComponent";
-import { ECSEVENTS } from "../Constants/Events";
-import EnemyEntity from "../Entities/EnemyEntity";
-import MinionSpawnerComponent from "../Components/MinionSpawnerComponent";
-import ParticleEntity from "../Entities/ParticleEntitty";
-import PositionComponent from "../Components/PositionComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import StatsComponent from "../Components/StatsComponent";
-import assets from "../Globals/Assets";
+import ColorShader from '../Shaders/ColorShader'
+import DroppableComponent from '../Components/DroppableComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import EnemyEntity from '../Entities/EnemyEntity'
+import MinionSpawnerComponent from '../Components/MinionSpawnerComponent'
+import ParticleEntity from '../Entities/ParticleEntitty'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import StatsComponent from '../Components/StatsComponent'
+import assets from '../Globals/Assets'
 
 class MinionSpawnerSytem extends System {
 	constructor() {

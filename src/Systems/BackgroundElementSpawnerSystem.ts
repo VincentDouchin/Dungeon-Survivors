@@ -1,8 +1,8 @@
-import { Entity, System } from "../Globals/ECS";
+import { Entity, System } from '../Globals/ECS'
 
-import BackgroundElementsComponent from "../Components/BackgroundElementsComponent";
-import DroppableComponent from "../Components/DroppableComponent";
-import { camera } from "../Globals/Initialize";
+import BackgroundElementsComponent from '../Components/BackgroundElementsComponent'
+import DroppableComponent from '../Components/DroppableComponent'
+import { camera } from '../Globals/Initialize'
 
 class BackgroundElementSpawnerSystem extends System {
 
@@ -31,7 +31,7 @@ class BackgroundElementSpawnerSystem extends System {
 						|| node.position.y > camera.position.y + camera.top * 2
 						|| node.position.y < camera.position.y + camera.bottom * 2
 					) {
-						const loot = node.entity.removeComponent(DroppableComponent)
+						node.entity.removeComponent(DroppableComponent)
 						node.entity.destroy()
 						node.position = null
 						node.entity = null

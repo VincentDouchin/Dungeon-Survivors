@@ -1,15 +1,15 @@
-import AnimationComponent from "../Components/AnimationComponent"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import DamageComponent from "../Components/DamageComponent"
-import { Entity } from "../Globals/ECS"
-import ExpirationComponent from "../Components/ExpirationComponent"
-import PositionComponent from "../Components/PositionComponent"
-import { SOUNDS } from "../Constants/Sounds"
-import SpellComponent from "../Components/SpellComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
-import { soundManager } from "../Globals/Initialize"
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import DamageComponent from '../Components/DamageComponent'
+import { Entity } from '../Globals/ECS'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import PositionComponent from '../Components/PositionComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { soundManager } from '../Globals/Initialize'
 
 const DivineProtectionEntity = (entity: Entity) => {
 	const position = entity.getComponent(PositionComponent)

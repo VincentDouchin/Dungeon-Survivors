@@ -1,18 +1,18 @@
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import Coroutine from "../Globals/Coroutine"
-import DissolveShader from "../Shaders/DissolveShader"
-import { Entity } from "../Globals/ECS"
-import PortalComponent from "../Components/PortalComponent"
-import PositionComponent from "../Components/PositionComponent"
-import RotationComponent from "../Components/RotationComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import StarShader from "../Shaders/StarShader"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import { Vector2 } from "three"
-import assets from "../Globals/Assets"
-import { camera } from "../Globals/Initialize"
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import Coroutine from '../Globals/Coroutine'
+import DissolveShader from '../Shaders/DissolveShader'
+import { Entity } from '../Globals/ECS'
+import PortalComponent from '../Components/PortalComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import StarShader from '../Shaders/StarShader'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import { Vector2 } from 'three'
+import assets from '../Globals/Assets'
+import { camera } from '../Globals/Initialize'
 
 const PortalEntity = () => {
 	const portal = new Entity('portal')

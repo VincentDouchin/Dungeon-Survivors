@@ -1,10 +1,10 @@
-import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from "@dimforge/rapier2d-compat";
-import { Component, ECS, Entity } from "../Globals/ECS";
+import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from '@dimforge/rapier2d-compat'
+import { Component, ECS, Entity } from '../Globals/ECS'
 
-import { STATS } from "./StatsComponent";
-import { Stat } from "../Game/Stat";
-import { Vector2 } from "three";
-import { world } from "../Globals/Initialize";
+import { STATS } from './StatsComponent'
+import { Stat } from '../Game/Stat'
+import { Vector2 } from 'three'
+import { world } from '../Globals/Initialize'
 
 export interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased' | 'kinematicPositionBased'

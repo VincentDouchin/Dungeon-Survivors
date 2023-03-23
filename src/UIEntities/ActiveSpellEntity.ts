@@ -1,11 +1,11 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import ColorShader from "../Shaders/ColorShader"
-import { ECSEVENTS } from "../Constants/Events"
-import SpriteComponent from "../Components/SpriteComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
+import ColorShader from '../Shaders/ColorShader'
+import { ECSEVENTS } from '../Constants/Events'
+import SpriteComponent from '../Components/SpriteComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
 
 const ActiveSpellEntity = () => {
 	const level = new Entity('level display')

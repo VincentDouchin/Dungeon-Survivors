@@ -1,13 +1,13 @@
-import StatsComponent, { STATS } from "../Components/StatsComponent"
+import StatsComponent, { STATS } from '../Components/StatsComponent'
 
-import LevelComponent from "../Components/LevelComponent"
+import LevelComponent from '../Components/LevelComponent'
 
 class Stat {
 	base: number
 	name: STATS
 	modifier?: StatsComponent
 	level?: LevelComponent
-	constructor(base: number = 0, name: STATS) {
+	constructor(base = 0, name: STATS) {
 		this.base = base
 		this.name = name
 	}

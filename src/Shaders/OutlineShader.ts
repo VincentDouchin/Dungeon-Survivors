@@ -1,6 +1,6 @@
-import Shader from './Shader';
-import frag from './glsl/outline.frag?raw';
-import vert from './glsl/main.vert?raw';
+import Shader from './Shader'
+import frag from './glsl/outline.frag?raw'
+import vert from './glsl/main.vert?raw'
 
 class OutlineShader extends Shader {
 	vert = vert

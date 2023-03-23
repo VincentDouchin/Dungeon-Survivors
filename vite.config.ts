@@ -1,5 +1,5 @@
 import { VitePWA } from 'vite-plugin-pwa'
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite'
 
 export default defineConfig({
 	plugins: [
@@ -8,8 +8,8 @@ export default defineConfig({
 			injectRegister: 'auto',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
 			manifest: {
-				start_url: "index.html?fullscreen=true",
-				display: "fullscreen",
+				start_url: 'index.html?fullscreen=true',
+				display: 'fullscreen',
 				orientation: 'landscape',
 				name: 'Dungeon Survivor',
 				short_name: 'DungeonSurvivor',
@@ -33,7 +33,7 @@ export default defineConfig({
 			}
 		})
 	],
-	base: "/Dungeon-Survivor/",
+	base: '/Dungeon-Survivor/',
 	build: {
 		target: 'esnext',
 		rollupOptions: {

@@ -1,20 +1,20 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import AIMovementComponent from "../Components/AIMovementComponent";
-import BodyComponent from "../Components/BodyComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events";
-import HealthComponent from "../Components/HealthComponent";
-import JointComponent from "../Components/JointComponent";
-import ParticleEntity from "../Entities/ParticleEntitty";
-import PositionComponent from "../Components/PositionComponent";
-import RotationComponent from "../Components/RotationComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import { Vector2 } from "three";
-import assets from "../Globals/Assets";
-import waitFor from "../Utils/WaitFor";
-import { world } from "../Globals/Initialize";
+import AIMovementComponent from '../Components/AIMovementComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import HealthComponent from '../Components/HealthComponent'
+import JointComponent from '../Components/JointComponent'
+import ParticleEntity from '../Entities/ParticleEntitty'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import { Vector2 } from 'three'
+import assets from '../Globals/Assets'
+import waitFor from '../Utils/WaitFor'
+import { world } from '../Globals/Initialize'
 
 class AIMovementSystem extends System {
 	walls: Map<Entity, Vector2> = new Map()
@@ -66,7 +66,7 @@ class AIMovementSystem extends System {
 			} else {
 				if (ai.seeking) {
 					let distance = 0
-					let destination: Vector2 = new Vector2()
+					const destination: Vector2 = new Vector2()
 					ai.seeking.forEach(group => {
 						groups.get(group)?.forEach(groupEntity => {
 							const enemyPosition = groupEntity.getComponent(PositionComponent).position
@@ -135,7 +135,8 @@ class AIMovementSystem extends System {
 				const avoidObstacles = () => {
 					const newDirection = velocity.clone().rotateAround(new Vector2(0, 0), Math.PI / 4 * increments * sign)
 					let collisions = false
-					world.castShape(position, 0, newDirection, body.body!.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
+					if(!body.body)return
+					world.castShape(position, 0, newDirection, body.body.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
 						if (collider?.parent()?.bodyType() === 1) {
 							collisions = true
 							return true

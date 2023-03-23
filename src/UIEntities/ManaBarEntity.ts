@@ -1,11 +1,11 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import BarShader from "../Shaders/BarShader"
-import { ECSEVENTS } from "../Constants/Events"
-import SpriteComponent from "../Components/SpriteComponent"
-import { UICamera } from "../Globals/Initialize"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
+import BarShader from '../Shaders/BarShader'
+import { ECSEVENTS } from '../Constants/Events'
+import SpriteComponent from '../Components/SpriteComponent'
+import { UICamera } from '../Globals/Initialize'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
 
 const ManaBarEntity = () => {
 	const scalingOptions = { x: { left: 2, right: 7 }, y: { top: 0, bottom: 0 } }

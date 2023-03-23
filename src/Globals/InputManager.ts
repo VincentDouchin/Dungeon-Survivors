@@ -1,11 +1,11 @@
-import { Raycaster, Vector3 } from "three";
-import { UICamera, UIScene, camera, scene } from "./Initialize";
+import { Raycaster, Vector3 } from 'three'
+import { UICamera, UIScene, camera, scene } from './Initialize'
 
-import EventBus from "../Utils/EventBus";
-import GamepadController from "../InputControllers/GamepadController";
-import INPUTS from "../Constants/InputsNames";
-import KeyboardController from "../InputControllers/KeyboardController";
-import State from "./State";
+import EventBus from '../Utils/EventBus'
+import GamepadController from '../InputControllers/GamepadController'
+import INPUTS from '../Constants/InputsNames'
+import KeyboardController from '../InputControllers/KeyboardController'
+import State from './State'
 
 class Input {
 	active: number | boolean = 0
@@ -29,8 +29,11 @@ class InputManager {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
 			this.eventBus.subscribe(inputName, (state: number | boolean) => {
-				this.inputs.get(inputName)!.down = (state === 0)
-				this.inputs.get(inputName)!.active = state
+				const input = this.inputs.get(inputName)
+				if(!input) return 
+				input.down = (state === 0)
+				input.active = state
+				
 			})
 		})
 		const detectPointerEvent = (eventName: 'mousedown' | 'mouseup' | 'mousemove' | 'touchstart' | 'touchend' | 'touchmove', state: 'down' | 'up' | 'move') => {

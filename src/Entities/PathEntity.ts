@@ -1,16 +1,16 @@
-import { ECS, Entity } from "../Globals/ECS"
-import PathNodeComponent, { node } from "../Components/PathNodeComponent"
+import { ECS, Entity } from '../Globals/ECS'
+import PathNodeComponent, { node } from '../Components/PathNodeComponent'
 
-import AnimationComponent from "../Components/AnimationComponent"
-import { ECSEVENTS } from "../Constants/Events"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
+import AnimationComponent from '../Components/AnimationComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
 
 const PathEntity = (nodes: node[]) => {
 	const nodeEntities: Map<number, Entity> = new Map()
 	const path = new Entity('path')
-	for (let node of nodes) {
+	for (const node of nodes) {
 		const nodeEntity = new Entity('path node')
 		const nodePosition = nodeEntity.addComponent(new PositionComponent(node.x, node.y))
 		if (node.start) {

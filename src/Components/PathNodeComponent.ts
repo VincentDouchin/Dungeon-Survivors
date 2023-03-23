@@ -1,7 +1,7 @@
-import { Component, Entity } from "../Globals/ECS";
+import { Component, Entity } from '../Globals/ECS'
 
-import { Arenas } from "../../assets/map/Map";
-import { enemyWaveName } from "../Constants/EnemyEncounters";
+import { Arenas } from '../../assets/map/Map'
+import { enemyWaveName } from '../Constants/EnemyEncounters'
 
 export interface node {
 	id: number

@@ -1,7 +1,7 @@
-import { Component, ECS } from "../Globals/ECS";
+import { Component, ECS } from '../Globals/ECS'
 
-import Tile from "../Utils/Tile";
-import getBuffer from "../Utils/Buffer";
+import Tile from '../Utils/Tile'
+import getBuffer from '../Utils/Buffer'
 
 class ShadowComponent extends Component {
 	entityId?: string

@@ -1,17 +1,17 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import AIMovementComponent from "../Components/AIMovementComponent";
-import COLLISIONGROUPS from "../Constants/CollisionGroups";
-import CameraTargetComponent from "../Components/CameraTargetComponent";
-import { ECSEVENTS } from "../Constants/Events";
-import INPUTS from "../Constants/InputsNames";
-import OutlineShader from "../Shaders/OutlineShader";
-import PlayerControllerComponent from "../Components/PlayerControllerComponent";
-import RangedComponent from "../Components/RangedComponent";
-import SpellComponent from "../Components/SpellComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import SwitchingComponent from "../Components/SwitchingComponent";
-import { inputManager } from "../Globals/Initialize";
+import AIMovementComponent from '../Components/AIMovementComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import CameraTargetComponent from '../Components/CameraTargetComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import OutlineShader from '../Shaders/OutlineShader'
+import PlayerControllerComponent from '../Components/PlayerControllerComponent'
+import RangedComponent from '../Components/RangedComponent'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import SwitchingComponent from '../Components/SwitchingComponent'
+import { inputManager } from '../Globals/Initialize'
 
 class SwitchingSystem extends System {
 	// main?: Entity
@@ -20,7 +20,7 @@ class SwitchingSystem extends System {
 		super(SwitchingComponent)
 	}
 	update(entities: Entity[]) {
-		const toSwitch = inputManager.getInput(INPUTS.SWITCH)!.once && entities.length > 1
+		const toSwitch = inputManager.getInput(INPUTS.SWITCH)?.once && entities.length > 1
 
 		const needsSwitch = entities.every(entity => {
 			const switcher = entity.getComponent(SwitchingComponent)

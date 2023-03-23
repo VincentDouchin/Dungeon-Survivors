@@ -1,8 +1,8 @@
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 
 class XPComponent extends Component {
 	amount: number
-	constructor(amount: number = 1) {
+	constructor(amount = 1) {
 		super()
 		this.amount = amount
 	}

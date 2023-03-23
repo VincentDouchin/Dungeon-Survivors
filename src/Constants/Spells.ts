@@ -1,12 +1,12 @@
-import ArrowVolleySpell from "../Entities/ArrowVolleySpell"
-import CannonSpellEntity from "../Entities/CannonSpellEntity"
-import CharmSpellEntity from "../Entities/CharmSpellEntity"
-import DivineProtectionEntity from "../Entities/DivineProtectionEntity"
-import { Entity } from "../Globals/ECS"
-import LightningSpellEntity from "../Entities/LightningSpellEntity"
-import ShurikenSpellEntity from "../Entities/ShurikenSpellEntity"
-import Tile from "../Utils/Tile"
-import assets from "../Globals/Assets"
+import ArrowVolleySpell from '../Entities/ArrowVolleySpell'
+import CannonSpellEntity from '../Entities/CannonSpellEntity'
+import CharmSpellEntity from '../Entities/CharmSpellEntity'
+import DivineProtectionEntity from '../Entities/DivineProtectionEntity'
+import { Entity } from '../Globals/ECS'
+import LightningSpellEntity from '../Entities/LightningSpellEntity'
+import ShurikenSpellEntity from '../Entities/ShurikenSpellEntity'
+import Tile from '../Utils/Tile'
+import assets from '../Globals/Assets'
 
 export interface Spell {
 	icon: Tile,

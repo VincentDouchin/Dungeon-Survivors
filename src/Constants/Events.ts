@@ -1,8 +1,8 @@
-import type { Entity } from "../Globals/ECS"
-import INPUTS from "./InputsNames"
-import type PositionComponent from "../Components/PositionComponent"
-import { Skill } from "./Skills"
-import Tile from "../Utils/Tile"
+import type { Entity } from '../Globals/ECS'
+import INPUTS from './InputsNames'
+import type PositionComponent from '../Components/PositionComponent'
+import { Skill } from './Skills'
+import Tile from '../Utils/Tile'
 
 export enum UIEVENTS {
 	UI_XP = 'UI_XP',

@@ -1,5 +1,5 @@
-import { Component } from "../Globals/ECS";
-import { Vector2 } from "three";
+import { Component } from '../Globals/ECS'
+import { Vector2 } from 'three'
 
 class PositionComponent extends Component {
 	x: number

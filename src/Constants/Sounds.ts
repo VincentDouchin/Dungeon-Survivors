@@ -1,4 +1,4 @@
-import { sounds } from "../../assets/sounds/sounds"
+import { sounds } from '../../assets/sounds/sounds'
 
 export const SOUNDS: Record<string, sounds[]> = {
 	Magic: ['10_human_special_atk_2'],

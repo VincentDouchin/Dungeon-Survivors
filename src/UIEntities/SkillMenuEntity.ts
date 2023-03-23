@@ -1,18 +1,18 @@
-import { ECS, Entity } from "../Globals/ECS";
-import { clock, engine } from "../Globals/Initialize";
+import { ECS, Entity } from '../Globals/ECS'
+import { clock, engine } from '../Globals/Initialize'
 
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events";
-import RunState from "../GameStates/RunState";
-import SKILLS from "../Constants/Skills";
-import SelectableComponent from "../Components/SelectableComponent";
-import ShimmerShader from "../Shaders/ShimmerShader";
-import SpriteComponent from "../Components/SpriteComponent";
-import State from "../Globals/State";
-import TextComponent from "../Components/TextComponent";
-import Tile from "../Utils/Tile";
-import UIPositionComponent from "../Components/UIPositionComponent";
-import assets from "../Globals/Assets";
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import RunState from '../GameStates/RunState'
+import SKILLS from '../Constants/Skills'
+import SelectableComponent from '../Components/SelectableComponent'
+import ShimmerShader from '../Shaders/ShimmerShader'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
 
 const SkillMenuEntity = () => {
 	const skillMenu = new Entity('skillmenu')

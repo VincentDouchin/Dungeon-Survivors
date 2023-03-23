@@ -1,10 +1,10 @@
-import { Component, Entity } from "../Globals/ECS";
+import { Component, Entity } from '../Globals/ECS'
 
 class JointComponent extends Component {
 	type
 	distance: number
 	parentId: string | null
-	jointed: boolean = false
+	jointed = false
 	constructor(type: 'revolute' | 'prismatic', distance: number, parentEntity?: Entity) {
 		super()
 		this.type = type

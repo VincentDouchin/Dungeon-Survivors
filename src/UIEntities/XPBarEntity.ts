@@ -1,11 +1,11 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import BarShader from "../Shaders/BarShader"
-import SpriteComponent from "../Components/SpriteComponent"
-import { UICamera } from "../Globals/Initialize"
-import { UIEVENTS } from "../Constants/Events"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import assets from "../Globals/Assets"
+import BarShader from '../Shaders/BarShader'
+import SpriteComponent from '../Components/SpriteComponent'
+import { UICamera } from '../Globals/Initialize'
+import { UIEVENTS } from '../Constants/Events'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
 
 const XPBarEntity = () => {
 	let percent = 0

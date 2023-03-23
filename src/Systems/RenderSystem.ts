@@ -1,12 +1,12 @@
-import { Entity, System } from "../Globals/ECS";
-import { UICamera, UIScene, scene } from "../Globals/Initialize";
+import { Entity, System } from '../Globals/ECS'
+import { UICamera, UIScene, scene } from '../Globals/Initialize'
 
-import PositionComponent from "../Components/PositionComponent";
-import RotationComponent from "../Components/RotationComponent";
-import ShadowComponent from "../Components/ShadowComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import TextComponent from "../Components/TextComponent";
-import UIPositionComponent from "../Components/UIPositionComponent";
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import ShadowComponent from '../Components/ShadowComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import UIPositionComponent from '../Components/UIPositionComponent'
 
 class RenderSystem extends System {
 	constructor() {

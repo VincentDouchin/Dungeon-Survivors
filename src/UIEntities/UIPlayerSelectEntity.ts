@@ -1,23 +1,23 @@
-import { ECS, Entity } from "../Globals/ECS";
-import HEROS, { HeroDefinition, isUnlocked } from "../Constants/Heros";
+import { ECS, Entity } from '../Globals/ECS'
+import HEROS, { HeroDefinition, isUnlocked } from '../Constants/Heros'
 
-import AnimationComponent from "../Components/AnimationComponent";
-import ButtonEntity from "./ButtonEntity";
-import ColorShader from "../Shaders/ColorShader";
-import { ECSEVENTS } from "../Constants/Events";
-import INPUTS from "../Constants/InputsNames";
-import MapState from "../GameStates/MapState";
-import OutlineShader from "../Shaders/OutlineShader";
-import SKILLS from "../Constants/Skills";
-import { STATS } from "../Components/StatsComponent";
-import SelectableComponent from "../Components/SelectableComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import State from "../Globals/State";
-import TextComponent from "../Components/TextComponent";
-import Tile from "../Utils/Tile";
-import UIPositionComponent from "../Components/UIPositionComponent";
-import assets from "../Globals/Assets";
-import { engine } from "../Globals/Initialize";
+import AnimationComponent from '../Components/AnimationComponent'
+import ButtonEntity from './ButtonEntity'
+import ColorShader from '../Shaders/ColorShader'
+import { ECSEVENTS } from '../Constants/Events'
+import INPUTS from '../Constants/InputsNames'
+import MapState from '../GameStates/MapState'
+import OutlineShader from '../Shaders/OutlineShader'
+import SKILLS from '../Constants/Skills'
+import { STATS } from '../Components/StatsComponent'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { engine } from '../Globals/Initialize'
 
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')

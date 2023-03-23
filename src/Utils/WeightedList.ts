@@ -1,7 +1,7 @@
 class WeightedList<T>{
 	elements: T[] = []
 	weights: number[] = []
-	add(element: T, weight: number = 1) {
+	add(element: T, weight = 1) {
 		this.weights.push(...new Array(weight).fill(this.elements.length))
 		this.elements.push(element)
 		return this

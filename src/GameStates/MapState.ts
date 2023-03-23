@@ -1,29 +1,29 @@
-import { ECS, Entity } from "../Globals/ECS";
-import LDTKMap, { ldtkNode } from "../Utils/LDTKMap";
-import { camera, engine, inputManager, render, world } from "../Globals/Initialize";
+import { ECS, Entity } from '../Globals/ECS'
+import LDTKMap, { ldtkNode } from '../Utils/LDTKMap'
+import { camera, engine, inputManager, render, world } from '../Globals/Initialize'
 
-import AnimationComponent from "../Components/AnimationComponent";
-import AnimationSystem from "../Systems/AnimationSystem";
-import CameraSystem from "../Systems/CameraSystem";
-import CameraTargetComponent from "../Components/CameraTargetComponent";
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events";
-import { GameState } from "../Globals/Engine";
-import INPUTS from "../Constants/InputsNames";
-import MovementSystem from "../Systems/MovementSystem";
-import PathEntity from "../Entities/PathEntity";
-import PathSystem from "../Systems/PathSystem";
-import PathWalkerComponent from "../Components/PathWalkerComponent";
-import PlayerSelectState from "./PlayerSelectState";
-import PositionComponent from "../Components/PositionComponent";
-import RenderSystem from "../Systems/RenderSystem";
-import RunState from "./RunState";
-import SelectionSystem from "../Systems/SelectionSystem";
-import SpriteComponent from "../Components/SpriteComponent";
-import State from "../Globals/State";
-import UIMapEntity from "../UIEntities/UIMapEntity";
-import assets from "../Globals/Assets";
-import { easeInOutQuart } from "../Utils/Tween";
+import AnimationComponent from '../Components/AnimationComponent'
+import AnimationSystem from '../Systems/AnimationSystem'
+import CameraSystem from '../Systems/CameraSystem'
+import CameraTargetComponent from '../Components/CameraTargetComponent'
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import { GameState } from '../Globals/Engine'
+import INPUTS from '../Constants/InputsNames'
+import MovementSystem from '../Systems/MovementSystem'
+import PathEntity from '../Entities/PathEntity'
+import PathSystem from '../Systems/PathSystem'
+import PathWalkerComponent from '../Components/PathWalkerComponent'
+import PlayerSelectState from './PlayerSelectState'
+import PositionComponent from '../Components/PositionComponent'
+import RenderSystem from '../Systems/RenderSystem'
+import RunState from './RunState'
+import SelectionSystem from '../Systems/SelectionSystem'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import UIMapEntity from '../UIEntities/UIMapEntity'
+import assets from '../Globals/Assets'
+import { easeInOutQuart } from '../Utils/Tween'
 
 class MapState implements GameState {
 	map?: Entity
@@ -50,7 +50,7 @@ class MapState implements GameState {
 			this.player.addComponent(new PathWalkerComponent())
 			const pathEntities = level
 				.layerInstances?.find(layer => layer.__identifier == 'Path')
-				?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)!) as ldtkNode[]
+				?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)) as ldtkNode[]
 			this.path = PathEntity(pathEntities)
 
 			if (this.lastPosition) {
@@ -118,14 +118,13 @@ class MapState implements GameState {
 		ECS.unRegisterSystems()
 		this.ui?.destroy()
 		switch (newState) {
-			case PlayerSelectState: {
-			}; break
-			default: {
-				this.lastPosition = this.player?.getComponent(PositionComponent)
-				this.map?.destroy()
-				this.path?.destroy()
-				this.player?.destroy()
-			}; break
+		case PlayerSelectState: break
+		default: {
+			this.lastPosition = this.player?.getComponent(PositionComponent)
+			this.map?.destroy()
+			this.path?.destroy()
+			this.player?.destroy()
+		} break
 		}
 	}
 }

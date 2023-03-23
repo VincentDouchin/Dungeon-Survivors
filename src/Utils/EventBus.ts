@@ -1,4 +1,4 @@
-import { EventMap } from "../Constants/Events"
+import { EventMap } from '../Constants/Events'
 
 export type EventName = keyof EventMap
 
@@ -14,28 +14,32 @@ export type Subscribers = {
 	[Name in EventName]?: EventCallback<Name>[]
 }
 class EventBus {
-	private subscribers: Subscribers = {};
+	private subscribers: Subscribers = {}
 
 	subscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
-		if (!this.subscribers[event]) {
-			this.subscribers[event] = []
+		let subscribers = this.subscribers[event]
+		if (!subscribers) {
+			subscribers = []
 		}
-		this.subscribers[event]!.push(callback);
+		
+		subscribers.push(callback)
 		return () => this.unsubscribe<Name>(event, callback)
 	}
 
 	unsubscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
-		if (this.subscribers[event]) {
-			const index = this.subscribers[event]!.indexOf(callback);
-			if (index !== -1) {
-				this.subscribers[event]!.splice(index, 1);
+		const subscribers = this.subscribers[event]
+		if (subscribers) {
+			const index = subscribers.indexOf(callback)
+			if (index !== -1 && this.subscribers[event]) {
+				subscribers.splice(index, 1)
 			}
 		}
 	}
-
+	
 	publish<Name extends EventName>(event: Name, data: Event<Name>['data']) {
-		if (this.subscribers[event]) {
-			this.subscribers[event]!.forEach((callback) => callback(data));
+		const subscribers = this.subscribers[event]
+		if (subscribers) {
+			subscribers.forEach((callback) => callback(data))
 		}
 	}
 }

@@ -1,6 +1,6 @@
-import { Boost } from "../Constants/Boosts";
-import { Component } from "../Globals/ECS";
-import { STATS } from "./StatsComponent";
+import { Boost } from '../Constants/Boosts'
+import { Component } from '../Globals/ECS'
+import { STATS } from './StatsComponent'
 
 class BoostComponent extends Component {
 	stat: STATS

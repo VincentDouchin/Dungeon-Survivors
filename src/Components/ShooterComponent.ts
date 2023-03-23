@@ -1,9 +1,9 @@
-import { Component, Entity } from "../Globals/ECS";
+import { Component, Entity } from '../Globals/ECS'
 
-import { ProjectileDefinition } from "../Constants/Weapons";
-import { SOUND } from "../Constants/Sounds";
-import { STATS } from "./StatsComponent";
-import { Stat } from "../Game/Stat";
+import { ProjectileDefinition } from '../Constants/Weapons'
+import { SOUND } from '../Constants/Sounds'
+import { STATS } from './StatsComponent'
+import { Stat } from '../Game/Stat'
 
 class ShooterComponent extends Component {
 	timer: number
@@ -11,9 +11,9 @@ class ShooterComponent extends Component {
 	spawn: (parent: Entity) => Entity
 	sound?: SOUND
 	cooldown: number
-	cooldownTimer: number = 0
+	cooldownTimer = 0
 	trigger: number
-	triggerTimer: number = 0
+	triggerTimer = 0
 	constructor(shooter: ProjectileDefinition, sound?: SOUND) {
 		super()
 		this.sound = sound

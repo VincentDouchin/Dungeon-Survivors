@@ -1,16 +1,16 @@
-import HEROS, { isUnlocked } from "../Constants/Heros"
-import saveData, { save } from "../Globals/SaveManager"
+import HEROS, { isUnlocked } from '../Constants/Heros'
+import saveData, { save } from '../Globals/SaveManager'
 
-import ColorShader from "../Shaders/ColorShader"
-import Coroutine from "../Globals/Coroutine"
-import { Entity } from "../Globals/ECS"
-import { SOUNDS } from "../Constants/Sounds"
-import SelectableComponent from "../Components/SelectableComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import TextComponent from "../Components/TextComponent"
-import Tile from "../Utils/Tile"
-import UIPositionComponent from "../Components/UIPositionComponent"
-import { soundManager } from "../Globals/Initialize"
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import { Entity } from '../Globals/ECS'
+import { SOUNDS } from '../Constants/Sounds'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import TextComponent from '../Components/TextComponent'
+import Tile from '../Utils/Tile'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import { soundManager } from '../Globals/Initialize'
 
 const UIWinEntity = () => {
 	const ui = new Entity('game over ui')

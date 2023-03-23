@@ -1,4 +1,4 @@
-import { Component } from "../Globals/ECS";
+import { Component } from '../Globals/ECS'
 
 export enum STATS {
 	ATTACK_SPEED = 'ATTACK_SPEED',
@@ -26,16 +26,20 @@ class StatsComponent extends Component {
 	constructor() {
 		super()
 	}
-	set(statName: STATS, levelModifier: number = 0) {
+	set(statName: STATS, levelModifier = 0) {
 		this.stats.set(statName, this.getemptyStat())
-		this.stats.get(statName)!.levelModifier = levelModifier
+		const stat = this.stats.get(statName)
+		if(!stat)return
+		stat.levelModifier = levelModifier
 		return this
 	}
-	setModifier(statName: STATS, modifier: number = 0) {
+	setModifier(statName: STATS, modifier = 0) {
 		if (!this.stats.has(statName)) {
 			this.stats.set(statName, this.getemptyStat())
 		}
-		this.stats.get(statName)!.modifier += modifier
+		const stat = this.stats.get(statName)
+		if(!stat)return 
+		stat.modifier += modifier
 	}
 	getModifier(statName: STATS) {
 		const stat = this.stats.get(statName) ?? this.getemptyStat()

@@ -1,15 +1,15 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import { AmbientLight } from "three"
-import BackgroundElementsComponent from "../Components/BackgroundElementsComponent"
-import { BackgroundOptions } from "../Constants/BackGrounds"
-import { ECSEVENTS } from "../Constants/Events"
-import LDTKMap from "../Utils/LDTKMap"
-import LightComponent from "../Components/LightComponent"
-import PositionComponent from "../Components/PositionComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import State from "../Globals/State"
-import assets from "../Globals/Assets"
+import { AmbientLight } from 'three'
+import BackgroundElementsComponent from '../Components/BackgroundElementsComponent'
+import { BackgroundOptions } from '../Constants/BackGrounds'
+import { ECSEVENTS } from '../Constants/Events'
+import LDTKMap from '../Utils/LDTKMap'
+import LightComponent from '../Components/LightComponent'
+import PositionComponent from '../Components/PositionComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import assets from '../Globals/Assets'
 
 const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	const background = new Entity('background')

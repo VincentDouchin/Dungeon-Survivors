@@ -1,7 +1,7 @@
-import { Entity, System } from "../Globals/ECS";
+import { Entity, System } from '../Globals/ECS'
 
-import ShooterComponent from "../Components/ShooterComponent";
-import { soundManager } from "../Globals/Initialize";
+import ShooterComponent from '../Components/ShooterComponent'
+import { soundManager } from '../Globals/Initialize'
 
 class ShootingSystem extends System {
 	constructor() {

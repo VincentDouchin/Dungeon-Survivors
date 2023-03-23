@@ -1,19 +1,19 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import AnimationComponent from "../Components/AnimationComponent";
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events";
-import PathNodeComponent from "../Components/PathNodeComponent";
-import PathWalkerComponent from "../Components/PathWalkerComponent";
-import PositionComponent from "../Components/PositionComponent";
-import RotationComponent from "../Components/RotationComponent";
-import RunState from "../GameStates/RunState";
-import SelectableComponent from "../Components/SelectableComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import WinState from "../GameStates/WinState";
-import assets from "../Globals/Assets";
-import { easeInCubic } from "../Utils/Tween";
-import { engine } from "../Globals/Initialize";
+import AnimationComponent from '../Components/AnimationComponent'
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import PathNodeComponent from '../Components/PathNodeComponent'
+import PathWalkerComponent from '../Components/PathWalkerComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import RunState from '../GameStates/RunState'
+import SelectableComponent from '../Components/SelectableComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import WinState from '../GameStates/WinState'
+import assets from '../Globals/Assets'
+import { easeInCubic } from '../Utils/Tween'
+import { engine } from '../Globals/Initialize'
 
 class PathSystem extends System {
 	position?: PositionComponent
@@ -45,7 +45,7 @@ class PathSystem extends System {
 			}
 
 			const nodes = ECS.getEntitiesAndComponents(PathNodeComponent)
-			const selectedNode = nodes.find(([_, pathNode]) => {
+			const selectedNode = nodes.find(([, pathNode]) => {
 				return pathNode.options.x === this.position?.x && pathNode.options.y === this.position?.y
 			})
 			if (!selectedNode) return
@@ -59,7 +59,7 @@ class PathSystem extends System {
 				engine.setState(WinState)
 			} else if (!node.showingOptions) {
 				const arrows: Entity[] = []
-				for (let direction of ['left', 'right', 'top'] as nodeDirection[]) {
+				for (const direction of ['left', 'right', 'top'] as nodeDirection[]) {
 					const otherNode = node.next(direction)
 					const otherPathNode = otherNode?.getComponent(PathNodeComponent)
 					const otherNodePosition = otherNode?.getComponent(PositionComponent)
@@ -100,17 +100,17 @@ class PathSystem extends System {
 
 
 						switch (direction) {
-							case 'left': {
-								arrowPosition.x -= 16
-							}; break
-							case 'top': {
-								arrowPosition.y += 16
-								arrow.addComponent(new RotationComponent({ rotation: Math.PI }))
-							}; break
-							case 'right': {
-								arrowPosition.x += 16
-								arrow.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
-							}; break
+						case 'left': {
+							arrowPosition.x -= 16
+						} break
+						case 'top': {
+							arrowPosition.y += 16
+							arrow.addComponent(new RotationComponent({ rotation: Math.PI }))
+						} break
+						case 'right': {
+							arrowPosition.x += 16
+							arrow.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
+						} break
 
 						}
 					} else {

@@ -1,20 +1,20 @@
-import { ECS, Entity } from "../Globals/ECS"
+import { ECS, Entity } from '../Globals/ECS'
 
-import AIMovementComponent from "../Components/AIMovementComponent"
-import AnimationComponent from "../Components/AnimationComponent"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import Coroutine from "../Globals/Coroutine"
-import DamageComponent from "../Components/DamageComponent"
-import { ECSEVENTS } from "../Constants/Events"
-import HealthComponent from "../Components/HealthComponent"
-import PositionComponent from "../Components/PositionComponent"
-import { SOUNDS } from "../Constants/Sounds"
-import SpellComponent from "../Components/SpellComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import assets from "../Globals/Assets"
-import { soundManager } from "../Globals/Initialize"
-import waitFor from "../Utils/WaitFor"
+import AIMovementComponent from '../Components/AIMovementComponent'
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import Coroutine from '../Globals/Coroutine'
+import DamageComponent from '../Components/DamageComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import HealthComponent from '../Components/HealthComponent'
+import PositionComponent from '../Components/PositionComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { soundManager } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const LightningSpellEntity = (entity: Entity) => {
 	const parentPosition = entity.getComponent(PositionComponent)

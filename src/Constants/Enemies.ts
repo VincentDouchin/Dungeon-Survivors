@@ -1,10 +1,10 @@
-import BODYSIZES, { bodySize } from "./BodySizes"
-import WEAPONS, { WeaponDefinition } from "./Weapons"
+import BODYSIZES, { bodySize } from './BodySizes'
+import WEAPONS, { WeaponDefinition } from './Weapons'
 
-import { Entity } from "../Globals/ECS"
-import Tile from "../Utils/Tile"
-import VampireLordTransform from "../Game/Bosses/VampireLordTransform"
-import assets from "../Globals/Assets"
+import { Entity } from '../Globals/ECS'
+import Tile from '../Utils/Tile'
+import VampireLordTransform from '../Game/Bosses/VampireLordTransform'
+import assets from '../Globals/Assets'
 
 export interface EnemyType {
 	tiles: Record<string, Tile>

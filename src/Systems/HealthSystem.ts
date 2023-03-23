@@ -1,23 +1,23 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import BarShader from "../Shaders/BarShader";
-import BodyComponent from "../Components/BodyComponent";
-import ColorShader from "../Shaders/ColorShader";
-import Coroutine from "../Globals/Coroutine";
-import DamageComponent from "../Components/DamageComponent";
-import DamageTextEntity from "../Entities/DamageTextEntity";
-import DissolveShader from "../Shaders/DissolveShader";
-import { ECSEVENTS } from "../Constants/Events";
-import ExpirationComponent from "../Components/ExpirationComponent";
-import HealthComponent from "../Components/HealthComponent";
-import HealthRegenComponent from "../Components/HealthRegenComponent";
-import ParticleEntity from "../Entities/ParticleEntitty";
-import PositionComponent from "../Components/PositionComponent";
-import { SOUNDS } from "../Constants/Sounds";
-import SpriteComponent from "../Components/SpriteComponent";
-import assets from "../Globals/Assets";
-import { soundManager } from "../Globals/Initialize";
-import waitFor from "../Utils/WaitFor";
+import BarShader from '../Shaders/BarShader'
+import BodyComponent from '../Components/BodyComponent'
+import ColorShader from '../Shaders/ColorShader'
+import Coroutine from '../Globals/Coroutine'
+import DamageComponent from '../Components/DamageComponent'
+import DamageTextEntity from '../Entities/DamageTextEntity'
+import DissolveShader from '../Shaders/DissolveShader'
+import { ECSEVENTS } from '../Constants/Events'
+import ExpirationComponent from '../Components/ExpirationComponent'
+import HealthComponent from '../Components/HealthComponent'
+import HealthRegenComponent from '../Components/HealthRegenComponent'
+import ParticleEntity from '../Entities/ParticleEntitty'
+import PositionComponent from '../Components/PositionComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import SpriteComponent from '../Components/SpriteComponent'
+import assets from '../Globals/Assets'
+import { soundManager } from '../Globals/Initialize'
+import waitFor from '../Utils/WaitFor'
 
 const empty = assets.UI['healthBar']
 const full = assets.UI['healthFull']

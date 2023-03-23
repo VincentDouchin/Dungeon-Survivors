@@ -1,9 +1,9 @@
-import Coroutine from "./Coroutine"
+import Coroutine from './Coroutine'
 
 export interface GameState {
 	update(): void
 	render(): void
-	set(state: Constructor<GameState> | null, options?: any): void
+	set(state: Constructor<GameState> | null, options?: unknown): void
 	unset(state: Constructor<GameState> | null): void
 }
 
@@ -20,7 +20,7 @@ class Engine {
 		this.rafHandle = window.requestAnimationFrame(this.cycle)
 
 		this.accumulatedTime += timeStamp - this.currentTime
-		this.currentTime = timeStamp;
+		this.currentTime = timeStamp
 
 		let updated = false
 
@@ -51,7 +51,7 @@ class Engine {
 	getState<T extends GameState>(state: Constructor<T>) {
 		return this.states.get(state.constructor.name) as T
 	}
-	setState<T extends GameState>(state: Constructor<T>, options?: any) {
+	setState<T extends GameState>(state: Constructor<T>, options?: unknown) {
 		const currentState = this.state === null ? null : this.state.constructor as Constructor<GameState>
 		this.state?.unset(state)
 		const newState = this.states.get(state.name)

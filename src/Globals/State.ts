@@ -1,7 +1,7 @@
-import DIFFICULTY from "../Constants/DIfficulty"
-import { HeroDefinition } from "../Constants/Heros"
-import { InputController } from "./InputManager"
-import { Skill } from "../Constants/Skills"
+import DIFFICULTY from '../Constants/DIfficulty'
+import { HeroDefinition } from '../Constants/Heros'
+import { InputController } from './InputManager'
+import { Skill } from '../Constants/Skills'
 
 interface State {
 	cameraBounds: {

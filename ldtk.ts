@@ -326,17 +326,17 @@ export interface AutoLayerRuleDefinition {
  * Checker mode Possible values: `None`, `Horizontal`, `Vertical`
  */
 export enum Checker {
-	Horizontal = "Horizontal",
-	None = "None",
-	Vertical = "Vertical",
+	Horizontal = 'Horizontal',
+	None = 'None',
+	Vertical = 'Vertical',
 }
 
 /**
  * Defines how tileIds array is used Possible values: `Single`, `Stamp`
  */
 export enum TileMode {
-	Single = "Single",
-	Stamp = "Stamp",
+	Single = 'Single',
+	Stamp = 'Stamp',
 }
 
 export interface LdtkCustomCommand {
@@ -351,10 +351,10 @@ export interface LdtkCustomCommand {
  * Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave`
  */
 export enum When {
-	AfterLoad = "AfterLoad",
-	AfterSave = "AfterSave",
-	BeforeSave = "BeforeSave",
-	Manual = "Manual",
+	AfterLoad = 'AfterLoad',
+	AfterSave = 'AfterSave',
+	BeforeSave = 'BeforeSave',
+	Manual = 'Manual',
 }
 
 /**
@@ -625,9 +625,9 @@ export interface FieldDefinition {
  * Possible values: `Any`, `OnlySame`, `OnlyTags`
  */
 export enum AllowedRefs {
-	Any = "Any",
-	OnlySame = "OnlySame",
-	OnlyTags = "OnlyTags",
+	Any = 'Any',
+	OnlySame = 'OnlySame',
+	OnlyTags = 'OnlyTags',
 }
 
 /**
@@ -637,62 +637,62 @@ export enum AllowedRefs {
  * `RefLinkBetweenCenters`
  */
 export enum EditorDisplayMode {
-	ArrayCountNoLabel = "ArrayCountNoLabel",
-	ArrayCountWithLabel = "ArrayCountWithLabel",
-	EntityTile = "EntityTile",
-	Hidden = "Hidden",
-	NameAndValue = "NameAndValue",
-	PointPath = "PointPath",
-	PointPathLoop = "PointPathLoop",
-	PointStar = "PointStar",
-	Points = "Points",
-	RadiusGrid = "RadiusGrid",
-	RadiusPx = "RadiusPx",
-	RefLinkBetweenCenters = "RefLinkBetweenCenters",
-	RefLinkBetweenPivots = "RefLinkBetweenPivots",
-	ValueOnly = "ValueOnly",
+	ArrayCountNoLabel = 'ArrayCountNoLabel',
+	ArrayCountWithLabel = 'ArrayCountWithLabel',
+	EntityTile = 'EntityTile',
+	Hidden = 'Hidden',
+	NameAndValue = 'NameAndValue',
+	PointPath = 'PointPath',
+	PointPathLoop = 'PointPathLoop',
+	PointStar = 'PointStar',
+	Points = 'Points',
+	RadiusGrid = 'RadiusGrid',
+	RadiusPx = 'RadiusPx',
+	RefLinkBetweenCenters = 'RefLinkBetweenCenters',
+	RefLinkBetweenPivots = 'RefLinkBetweenPivots',
+	ValueOnly = 'ValueOnly',
 }
 
 /**
  * Possible values: `Above`, `Center`, `Beneath`
  */
 export enum EditorDisplayPos {
-	Above = "Above",
-	Beneath = "Beneath",
-	Center = "Center",
+	Above = 'Above',
+	Beneath = 'Beneath',
+	Center = 'Center',
 }
 
 /**
  * Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
  */
 export enum EditorLinkStyle {
-	ArrowsLine = "ArrowsLine",
-	CurvedArrow = "CurvedArrow",
-	DashedLine = "DashedLine",
-	StraightArrow = "StraightArrow",
-	ZigZag = "ZigZag",
+	ArrowsLine = 'ArrowsLine',
+	CurvedArrow = 'CurvedArrow',
+	DashedLine = 'DashedLine',
+	StraightArrow = 'StraightArrow',
+	ZigZag = 'ZigZag',
 }
 
 export enum TextLanguageMode {
-	LangC = "LangC",
-	LangHaxe = "LangHaxe",
-	LangJS = "LangJS",
-	LangJSON = "LangJson",
-	LangLog = "LangLog",
-	LangLua = "LangLua",
-	LangMarkdown = "LangMarkdown",
-	LangPython = "LangPython",
-	LangRuby = "LangRuby",
-	LangXML = "LangXml",
+	LangC = 'LangC',
+	LangHaxe = 'LangHaxe',
+	LangJS = 'LangJS',
+	LangJSON = 'LangJson',
+	LangLog = 'LangLog',
+	LangLua = 'LangLua',
+	LangMarkdown = 'LangMarkdown',
+	LangPython = 'LangPython',
+	LangRuby = 'LangRuby',
+	LangXML = 'LangXml',
 }
 
 /**
  * Possible values: `DiscardOldOnes`, `PreventAdding`, `MoveLastOne`
  */
 export enum LimitBehavior {
-	DiscardOldOnes = "DiscardOldOnes",
-	MoveLastOne = "MoveLastOne",
-	PreventAdding = "PreventAdding",
+	DiscardOldOnes = 'DiscardOldOnes',
+	MoveLastOne = 'MoveLastOne',
+	PreventAdding = 'PreventAdding',
 }
 
 /**
@@ -700,19 +700,19 @@ export enum LimitBehavior {
  * values: `PerLayer`, `PerLevel`, `PerWorld`
  */
 export enum LimitScope {
-	PerLayer = "PerLayer",
-	PerLevel = "PerLevel",
-	PerWorld = "PerWorld",
+	PerLayer = 'PerLayer',
+	PerLevel = 'PerLevel',
+	PerWorld = 'PerWorld',
 }
 
 /**
  * Possible values: `Rectangle`, `Ellipse`, `Tile`, `Cross`
  */
 export enum RenderMode {
-	Cross = "Cross",
-	Ellipse = "Ellipse",
-	Rectangle = "Rectangle",
-	Tile = "Tile",
+	Cross = 'Cross',
+	Ellipse = 'Ellipse',
+	Rectangle = 'Rectangle',
+	Tile = 'Tile',
 }
 
 /**
@@ -747,13 +747,13 @@ export interface TilesetRectangle {
  * `FullSizeUncropped`, `NineSlice`
  */
 export enum TileRenderMode {
-	Cover = "Cover",
-	FitInside = "FitInside",
-	FullSizeCropped = "FullSizeCropped",
-	FullSizeUncropped = "FullSizeUncropped",
-	NineSlice = "NineSlice",
-	Repeat = "Repeat",
-	Stretch = "Stretch",
+	Cover = 'Cover',
+	FitInside = 'FitInside',
+	FullSizeCropped = 'FullSizeCropped',
+	FullSizeUncropped = 'FullSizeUncropped',
+	NineSlice = 'NineSlice',
+	Repeat = 'Repeat',
+	Stretch = 'Stretch',
 }
 
 export interface EnumDefinition {
@@ -942,10 +942,10 @@ export interface IntGridValueDefinition {
  * `AutoLayer`
  */
 export enum Type {
-	AutoLayer = "AutoLayer",
-	Entities = "Entities",
-	IntGrid = "IntGrid",
-	Tiles = "Tiles",
+	AutoLayer = 'AutoLayer',
+	Entities = 'Entities',
+	IntGrid = 'IntGrid',
+	Tiles = 'Tiles',
 }
 
 /**
@@ -1034,7 +1034,7 @@ export interface TileCustomMetadata {
 }
 
 export enum EmbedAtlas {
-	LdtkIcons = "LdtkIcons",
+	LdtkIcons = 'LdtkIcons',
 }
 
 /**
@@ -1482,10 +1482,10 @@ export interface NeighbourLevel {
 }
 
 export enum BgPos {
-	Contain = "Contain",
-	Cover = "Cover",
-	CoverDirty = "CoverDirty",
-	Unscaled = "Unscaled",
+	Contain = 'Contain',
+	Cover = 'Cover',
+	CoverDirty = 'CoverDirty',
+	Unscaled = 'Unscaled',
 }
 
 export interface LdtkTableOfContentEntry {
@@ -1537,19 +1537,19 @@ export interface World {
 }
 
 export enum WorldLayout {
-	Free = "Free",
-	GridVania = "GridVania",
-	LinearHorizontal = "LinearHorizontal",
-	LinearVertical = "LinearVertical",
+	Free = 'Free',
+	GridVania = 'GridVania',
+	LinearHorizontal = 'LinearHorizontal',
+	LinearVertical = 'LinearVertical',
 }
 
 export enum Flag {
-	DiscardPreCSVIntGrid = "DiscardPreCsvIntGrid",
-	ExportPreCSVIntGridFormat = "ExportPreCsvIntGridFormat",
-	IgnoreBackupSuggest = "IgnoreBackupSuggest",
-	MultiWorlds = "MultiWorlds",
-	PrependIndexToLevelFileNames = "PrependIndexToLevelFileNames",
-	UseMultilinesType = "UseMultilinesType",
+	DiscardPreCSVIntGrid = 'DiscardPreCsvIntGrid',
+	ExportPreCSVIntGridFormat = 'ExportPreCsvIntGridFormat',
+	IgnoreBackupSuggest = 'IgnoreBackupSuggest',
+	MultiWorlds = 'MultiWorlds',
+	PrependIndexToLevelFileNames = 'PrependIndexToLevelFileNames',
+	UseMultilinesType = 'UseMultilinesType',
 }
 
 /**
@@ -1557,10 +1557,10 @@ export enum Flag {
  * values: `Capitalize`, `Uppercase`, `Lowercase`, `Free`
  */
 export enum IdentifierStyle {
-	Capitalize = "Capitalize",
-	Free = "Free",
-	Lowercase = "Lowercase",
-	Uppercase = "Uppercase",
+	Capitalize = 'Capitalize',
+	Free = 'Free',
+	Lowercase = 'Lowercase',
+	Uppercase = 'Uppercase',
 }
 
 /**
@@ -1568,8 +1568,8 @@ export enum IdentifierStyle {
  * `OneImagePerLevel`, `LayersAndLevels`
  */
 export enum ImageExportMode {
-	LayersAndLevels = "LayersAndLevels",
-	None = "None",
-	OneImagePerLayer = "OneImagePerLayer",
-	OneImagePerLevel = "OneImagePerLevel",
+	LayersAndLevels = 'LayersAndLevels',
+	None = 'None',
+	OneImagePerLayer = 'OneImagePerLayer',
+	OneImagePerLevel = 'OneImagePerLevel',
 }

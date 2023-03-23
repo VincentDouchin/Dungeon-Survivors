@@ -1,6 +1,6 @@
-import { CanvasTexture, NearestFilter } from "three"
+import { CanvasTexture, NearestFilter } from 'three'
 
-import getBuffer from "./Buffer"
+import getBuffer from './Buffer'
 
 interface tileOptions {
 	buffer: CanvasRenderingContext2D
@@ -49,7 +49,7 @@ class Tile {
 		
 		return new Tile(({  buffer,...tileOptions }))
 	}
-	static empty(x: number = 16, y: number = 16) {
+	static empty(x = 16, y = 16) {
 		const buffer = getBuffer(x, y)
 		return new Tile({ buffer })
 	}

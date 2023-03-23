@@ -1,6 +1,6 @@
-import { Component, Entity } from "../Globals/ECS";
+import { Component, Entity } from '../Globals/ECS'
 
-import { Vector2 } from "three";
+import { Vector2 } from 'three'
 
 interface AIOption {
 	seeking?: number[]
@@ -20,8 +20,8 @@ class AIMovementComponent extends Component {
 	followingFactor: Vector2
 	charger: boolean
 	chargingDirection: Vector2 | null = null
-	chargingTimer: number = 0
-	chargingResetTimer: number = 0
+	chargingTimer = 0
+	chargingResetTimer = 0
 	constructor(options: AIOption) {
 		super()
 		this.seeking = options.seeking

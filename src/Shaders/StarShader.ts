@@ -1,11 +1,11 @@
-import { ECS, Entity } from "../Globals/ECS";
+import { ECS, Entity } from '../Globals/ECS'
 
-import Coroutine from "../Globals/Coroutine";
-import { ECSEVENTS } from "../Constants/Events";
-import Shader from "./Shader";
-import frag from './glsl/star.frag?raw';
-import noise from './glsl/lib/cnoise.glsl?raw';
-import vert from './glsl/main.vert?raw';
+import Coroutine from '../Globals/Coroutine'
+import { ECSEVENTS } from '../Constants/Events'
+import Shader from './Shader'
+import frag from './glsl/star.frag?raw'
+import noise from './glsl/lib/cnoise.glsl?raw'
+import vert from './glsl/main.vert?raw'
 
 class StarShader extends Shader {
 	vert = vert

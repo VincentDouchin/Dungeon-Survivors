@@ -1,34 +1,34 @@
-import StatsComponent, { STATS } from "../Components/StatsComponent"
+import StatsComponent, { STATS } from '../Components/StatsComponent'
 
-import AnimationComponent from "../Components/AnimationComponent"
-import BODYSIZES from "../Constants/BodySizes"
-import BodyComponent from "../Components/BodyComponent"
-import COLLISIONGROUPS from "../Constants/CollisionGroups"
-import { Color } from "three"
-import DIFFICULTY from "../Constants/DIfficulty"
-import { Entity } from "../Globals/ECS"
-import FlockingComponent from "../Components/FlockingComponent"
-import HealthComponent from "../Components/HealthComponent"
-import { HeroDefinition } from "../Constants/Heros"
-import LevelComponent from "../Components/LevelComponent"
-import LightComponent from "../Components/LightComponent"
-import ManaComponent from "../Components/ManaComponent"
-import PositionComponent from "../Components/PositionComponent"
-import RangedComponent from "../Components/RangedComponent"
-import { SOUNDS } from "../Constants/Sounds"
-import ShadowComponent from "../Components/ShadowComponent"
-import SpellComponent from "../Components/SpellComponent"
-import SpriteComponent from "../Components/SpriteComponent"
-import State from "../Globals/State"
-import SwitchingComponent from "../Components/SwitchingComponent"
-import WeaponEntity from "./WeaponEntity"
-import XPPickerComponent from "../Components/XPPickerComponent"
+import AnimationComponent from '../Components/AnimationComponent'
+import BODYSIZES from '../Constants/BodySizes'
+import BodyComponent from '../Components/BodyComponent'
+import COLLISIONGROUPS from '../Constants/CollisionGroups'
+import { Color } from 'three'
+import DIFFICULTY from '../Constants/DIfficulty'
+import { Entity } from '../Globals/ECS'
+import FlockingComponent from '../Components/FlockingComponent'
+import HealthComponent from '../Components/HealthComponent'
+import { HeroDefinition } from '../Constants/Heros'
+import LevelComponent from '../Components/LevelComponent'
+import LightComponent from '../Components/LightComponent'
+import ManaComponent from '../Components/ManaComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RangedComponent from '../Components/RangedComponent'
+import { SOUNDS } from '../Constants/Sounds'
+import ShadowComponent from '../Components/ShadowComponent'
+import SpellComponent from '../Components/SpellComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import State from '../Globals/State'
+import SwitchingComponent from '../Components/SwitchingComponent'
+import WeaponEntity from './WeaponEntity'
+import XPPickerComponent from '../Components/XPPickerComponent'
 
 const playergroup = FlockingComponent.getGroup()
 const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent) => {
 	const player = new Entity(`player ${main}`)
 
-	for (let [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
+	for (const [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
 		stats.set(statName, modifier)
 	}
 	player.addComponent(stats)

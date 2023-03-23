@@ -1,14 +1,14 @@
-import { ECS, Entity, System } from "../Globals/ECS";
+import { ECS, Entity, System } from '../Globals/ECS'
 
-import AnimationComponent from "../Components/AnimationComponent";
-import BodyComponent from "../Components/BodyComponent";
-import INPUTS from "../Constants/InputsNames";
-import PlayerControllerComponent from '../Components/PlayerControllerComponent';
-import PositionComponent from '../Components/PositionComponent';
-import RotationComponent from "../Components/RotationComponent";
-import ShadowComponent from "../Components/ShadowComponent";
-import SpriteComponent from "../Components/SpriteComponent";
-import { inputManager } from "../Globals/Initialize";
+import AnimationComponent from '../Components/AnimationComponent'
+import BodyComponent from '../Components/BodyComponent'
+import INPUTS from '../Constants/InputsNames'
+import PlayerControllerComponent from '../Components/PlayerControllerComponent'
+import PositionComponent from '../Components/PositionComponent'
+import RotationComponent from '../Components/RotationComponent'
+import ShadowComponent from '../Components/ShadowComponent'
+import SpriteComponent from '../Components/SpriteComponent'
+import { inputManager } from '../Globals/Initialize'
 
 class MovementSystem extends System {
 	constructor() {
