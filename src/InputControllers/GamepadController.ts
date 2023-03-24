@@ -1,11 +1,10 @@
 import Coroutine from '../Globals/Coroutine'
-import EventBus from '../Utils/EventBus'
+import { ECS } from '../Globals/ECS'
 import INPUTS from '../Constants/InputsNames'
 import { InputController } from '../Globals/InputManager'
 import waitFor from '../Utils/WaitFor'
 
 class GamepadController implements InputController {
-	eventBus?: EventBus
 	enabled = false
 	threshold = 0.4
 	gamepad: Gamepad | null = null
@@ -44,20 +43,20 @@ class GamepadController implements InputController {
 				const gamepad = navigator.getGamepads()[self.index]
 				if (!gamepad) return
 				if (Math.abs(gamepad.axes[0]) > self.threshold) {
-					self.eventBus?.publish(INPUTS.AXISX, gamepad?.axes[0])
+					ECS.eventBus?.publish(INPUTS.AXISX, gamepad?.axes[0])
 				} else {
-					self.eventBus?.publish(INPUTS.AXISX, 0)
+					ECS.eventBus?.publish(INPUTS.AXISX, 0)
 				}
 				if (Math.abs(gamepad.axes[1]) > self.threshold) {
-					self.eventBus?.publish(INPUTS.AXISY, gamepad?.axes[1] * -1)
+					ECS.eventBus?.publish(INPUTS.AXISY, gamepad?.axes[1] * -1)
 				} else {
-					self.eventBus?.publish(INPUTS.AXISY, 0)
+					ECS.eventBus?.publish(INPUTS.AXISY, 0)
 				}
 				for (const [button, input] of self.inputs) {
 					if (gamepad.buttons[button].pressed) {
-						self.eventBus?.publish(input, true)
+						ECS.eventBus?.publish(input, 1)
 						yield* waitFor(10)
-						self.eventBus?.publish(input, false)
+						ECS.eventBus?.publish(input, 0)
 					}
 				}
 

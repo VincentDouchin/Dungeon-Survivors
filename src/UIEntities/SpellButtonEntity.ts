@@ -7,7 +7,6 @@ import INPUTS from '../Constants/InputsNames'
 import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
-import { inputManager } from '../Globals/Initialize'
 import waitFor from '../Utils/WaitFor'
 
 const SpellButtonEntity = () => {
@@ -21,7 +20,7 @@ const SpellButtonEntity = () => {
 	const iconPosition = icon.addComponent(new UIPositionComponent({ x: 0, y: 0 }, { x: 0, y: -1 / 8 }))
 	button.addChildren(icon)
 	let disabled = false
-	const downSubscriber = inputManager.eventBus.subscribe('up', ({ uiObjects }) => {
+	const downSubscriber = ECS.eventBus.subscribe('up', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id) && !disabled) {
 			new Coroutine(function* () {
 				sprite.changeTexture(assets.UI.buttonpressed.texture)
@@ -32,7 +31,7 @@ const SpellButtonEntity = () => {
 
 				sprite.changeTexture(assets.UI.button.texture)
 				sprite.render()
-				inputManager.eventBus.publish(INPUTS.SKILL, 1)
+				ECS.eventBus.publish(INPUTS.SKILL, 1)
 			})
 		}
 	})

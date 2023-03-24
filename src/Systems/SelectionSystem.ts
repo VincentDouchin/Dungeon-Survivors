@@ -13,13 +13,13 @@ class SelectionSystem extends System {
 	clicked: number[] = []
 	constructor() {
 		super(SelectableComponent)
-		this.subscribers.push(inputManager.eventBus.subscribe('move', ({ uiObjects, objects }: TouchCoord) => {
+		this.subscribe('move', ({ uiObjects, objects }: TouchCoord) => {
 			this.hovered = [...uiObjects, ...objects]
-		}))
-		this.subscribers.push(inputManager.eventBus.subscribe('down', ({ uiObjects, objects }: TouchCoord) => {
+		})
+		this.subscribe('down', ({ uiObjects, objects }: TouchCoord) => {
 			this.clicked = [...uiObjects, ...objects]
-		}))
-		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
+		})
+		this.subscribe(ECSEVENTS.SELECTED, entity => {
 			const selectable = entity.getComponent(SelectableComponent)
 			if (selectable.onSelected) {
 				selectable.onSelected()
@@ -30,15 +30,15 @@ class SelectionSystem extends System {
 			this.selectedEntity = entity
 			const sprite = entity.getComponent(SpriteComponent)
 			selectable?.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
-		}))
-		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DESELECTED, entity => {
+		})
+		this.subscribe(ECSEVENTS.DESELECTED, entity => {
 			if (this.selectedEntity === entity) {
 				this.selectedEntity = null
 			}
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			selectable?.unSelectedTile && sprite.changeTexture(selectable.unSelectedTile.texture)
-		}))
+		})
 
 
 	}
@@ -56,7 +56,7 @@ class SelectionSystem extends System {
 
 
 				if (this.clicked.includes(sprite.mesh.id)) {
-					inputManager.eventBus.publish(INPUTS.VALIDATE, true)
+					ECS.eventBus.publish(INPUTS.VALIDATE, 1)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
 				}
 				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {

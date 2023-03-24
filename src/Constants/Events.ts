@@ -55,6 +55,6 @@ export type EventMap = {
 	[UIEVENTS.UI_LEVEL]: number
 	[UIEVENTS.ENEMY_LEVEL]: number
 }
-	& Record<INPUTS, boolean | number>
+	& Record<INPUTS, number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
 	& Record<'enable' | 'disable', string>

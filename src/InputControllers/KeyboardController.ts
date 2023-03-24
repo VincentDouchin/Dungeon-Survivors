@@ -1,9 +1,8 @@
-import EventBus from '../Utils/EventBus'
+import { ECS } from '../Globals/ECS'
 import INPUTS from '../Constants/InputsNames'
 import { InputController } from '../Globals/InputManager'
 
 class KeyboardController implements InputController {
-	eventBus?: EventBus
 	keyMap: Record<string, INPUTS> = {
 		'KeyW': INPUTS.MOVEUP,
 		'KeyS': INPUTS.MOVEDOWN,
@@ -22,7 +21,7 @@ class KeyboardController implements InputController {
 	handleKeyUpDown = (state: boolean) => (e: KeyboardEvent) => {
 		if (e.repeat) return
 		if (e.code in this.keyMap) {
-			this.eventBus?.publish(this.keyMap[e.code], state)
+			ECS.eventBus?.publish(this.keyMap[e.code], state?1:0)
 		}
 	}
 }

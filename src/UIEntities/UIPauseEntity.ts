@@ -1,7 +1,6 @@
-import { engine, inputManager } from '../Globals/Initialize'
+import { ECS, Entity } from '../Globals/ECS'
 
 import ButtonEntity from './ButtonEntity'
-import { Entity } from '../Globals/ECS'
 import INPUTS from '../Constants/InputsNames'
 import RunState from '../GameStates/RunState'
 import SelectableComponent from '../Components/SelectableComponent'
@@ -9,6 +8,7 @@ import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import VolumeBarEntity from './VolumeBarEntity'
 import assets from '../Globals/Assets'
+import { engine } from '../Globals/Initialize'
 import saveData from '../Globals/SaveManager'
 
 const UIPauseEntity = () => {
@@ -18,12 +18,12 @@ const UIPauseEntity = () => {
 	const framePosition = pauseFrame.addComponent(new UIPositionComponent({ x: 0, y: -2 }, { x: 0, y: 0 }))
 	framePosition.moveTo(0, 20)
 	const resume = ButtonEntity(30, 8, 2, 'Resume', 1.5, () => {
-		inputManager.eventBus.publish(INPUTS.PAUSE, true)
+		ECS.eventBus.publish(INPUTS.PAUSE, 1)
 	})
-	const remuseSub = inputManager.eventBus.subscribe(INPUTS.PAUSE, async state => {
+	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async state => {
 		if (!state) return
 		await framePosition.moveTo(-2, 10)
-		inputManager.eventBus.publish(INPUTS.PAUSE, false)
+		ECS.eventBus.publish(INPUTS.PAUSE, 0)
 		engine.setState(RunState)
 	})
 	uiPause.onDestroy(() => remuseSub())

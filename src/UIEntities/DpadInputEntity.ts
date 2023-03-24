@@ -1,9 +1,9 @@
-import { Entity } from '../Globals/ECS'
+import { ECS, Entity } from '../Globals/ECS'
+
 import INPUTS from '../Constants/InputsNames'
 import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
-import { inputManager } from '../Globals/Initialize'
 
 const DpadInputEntity = () => {
 	const dpad = new Entity('dpad')
@@ -17,7 +17,7 @@ const DpadInputEntity = () => {
 	let enabled = false
 	let touch: null | number = null
 	const mouse: { x: null | number, y: null | number, } = { x: null, y: null }
-	const downSubscriber = inputManager.eventBus.subscribe('down', (touchCoord: TouchCoord) => {
+	const downSubscriber = ECS.eventBus.subscribe('down', (touchCoord: TouchCoord) => {
 		if (touchCoord.uiObjects.includes(dpadMesh.mesh.id)) {
 			enabled = true
 			mouse.x = touchCoord.x
@@ -27,7 +27,7 @@ const DpadInputEntity = () => {
 	})
 
 
-	const moveSubscriber = inputManager.eventBus.subscribe('move', (touchCoord: TouchCoord) => {
+	const moveSubscriber = ECS.eventBus.subscribe('move', (touchCoord: TouchCoord) => {
 		if (enabled && mouse.x && mouse.y && touch === touchCoord.identifier) {
 			const centerX = (touchCoord.clientX - dpadMesh.mesh.position.x) / (dpadMesh.width)
 			const centerY = (touchCoord.clientY - dpadMesh.mesh.position.y) / (dpadMesh.height)
@@ -38,17 +38,17 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			inputManager.eventBus.publish(INPUTS.AXISX, positionX)
-			inputManager.eventBus.publish(INPUTS.AXISY, positionY)
+			ECS.eventBus.publish(INPUTS.AXISX, positionX)
+			ECS.eventBus.publish(INPUTS.AXISY, positionY)
 		}
 	})
-	const upSubscriber = inputManager.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
+	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
 		if (touch === touchCoord.identifier) {
 			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
-			inputManager.eventBus.publish(INPUTS.AXISX, 0)
-			inputManager.eventBus.publish(INPUTS.AXISY, 0)
+			ECS.eventBus.publish(INPUTS.AXISX, 0)
+			ECS.eventBus.publish(INPUTS.AXISY, 0)
 		}
 	})
 	dpad.onDestroy(() => {

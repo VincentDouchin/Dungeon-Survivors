@@ -1,37 +1,36 @@
 import { Raycaster, Vector3 } from 'three'
 import { UICamera, UIScene, camera, scene } from './Initialize'
 
-import EventBus from '../Utils/EventBus'
+import { ECS } from './ECS'
 import GamepadController from '../InputControllers/GamepadController'
 import INPUTS from '../Constants/InputsNames'
 import KeyboardController from '../InputControllers/KeyboardController'
 import State from './State'
 
 class Input {
-	active: number | boolean = 0
-	down = false
+	active = 0
 	get once() {
 		if (this.active != 0) {
 			this.active = 0
-			return true
+			return 1
 		}
-		return false
+		return 0
 	}
 }
 export interface InputController {
-	eventBus?: EventBus
+	
 }
 class InputManager {
-	eventBus = new EventBus()
+	
 	controllers: InputController[] = []
 	inputs: Map<INPUTS, Input> = new Map()
 	constructor(domElement: HTMLCanvasElement, inputNames: INPUTS[]) {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
-			this.eventBus.subscribe(inputName, (state: number | boolean) => {
+			ECS.eventBus.subscribe(inputName, (state: number ) => {
 				const input = this.inputs.get(inputName)
 				if(!input) return 
-				input.down = (state === 0)
+				
 				input.active = state
 				
 			})
@@ -72,7 +71,7 @@ class InputManager {
 					const raycasterScene = new Raycaster()
 					raycasterScene.setFromCamera(mouse, camera)
 					const objects = raycasterScene.intersectObjects(scene.children, true).map(intersect => intersect.object.id)
-					this.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
+					ECS.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
 				}
 				if (event instanceof TouchEvent) {
 					Array.from(event.changedTouches).forEach((touch) => sendEvent(touch))
@@ -94,19 +93,17 @@ class InputManager {
 	}
 	registerControllers(...inputControllers: Constructor<InputController>[]) {
 		this.controllers = inputControllers.map(controllerConstructor => {
-			const controller = new controllerConstructor()
-			controller.eventBus = this.eventBus
-			return controller
+			return  new controllerConstructor()
 		})
 	}
 	getInput(inputName: INPUTS) {
 		return this.inputs.get(inputName)
 	}
 	enable(inputname: string) {
-		this.eventBus.publish('enable', inputname)
+		ECS.eventBus.publish('enable', inputname)
 	}
 	disable(inputname: string) {
-		this.eventBus.publish('disable', inputname)
+		ECS.eventBus.publish('disable', inputname)
 	}
 	getInputMethods() {
 		const inputMethods :[string, InputController][] = []
