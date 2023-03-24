@@ -1,11 +1,13 @@
 import { ECS, Entity, System } from '../Globals/ECS'
 import { inputManager, soundManager } from '../Globals/Initialize'
 
+import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
 import { SOUNDS } from '../Constants/Sounds'
 import SelectableComponent from '../Components/SelectableComponent'
 import SpriteComponent from '../Components/SpriteComponent'
+import waitFor from '../Utils/WaitFor'
 
 class SelectionSystem extends System {
 	selectedEntity: Entity | null = null
@@ -58,6 +60,10 @@ class SelectionSystem extends System {
 				if (this.clicked.includes(sprite.mesh.id)) {
 					ECS.eventBus.publish(INPUTS.VALIDATE, 1)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
+					new Coroutine(function*(){
+						yield waitFor(1)
+						ECS.eventBus.publish(INPUTS.VALIDATE, 0)
+					})
 				}
 				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {
 
