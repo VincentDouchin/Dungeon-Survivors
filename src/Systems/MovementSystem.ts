@@ -26,34 +26,16 @@ class MovementSystem extends System {
 			if (body) {
 
 				if (playerController?.enabled) {
-					const axisX = inputManager.getInput(INPUTS.AXISX)?.active
-					const axisY = inputManager.getInput(INPUTS.AXISY)?.active
-
-					if (axisX || axisY) {
-						if (axisX && axisX != 0) {
-							body.velocity.x = axisX as number
-						}
-						if (axisY && axisY != 0) {
-							body.velocity.y = axisY as number
-						}
-					} else {
-						const vel = { x: 0, y: 0 }
-						if (inputManager.getInput(INPUTS.MOVEUP)?.active) {
-							vel.y = 1
-						} else if (inputManager.getInput(INPUTS.MOVEDOWN)?.active) {
-							vel.y = -1
-						}
-						if (inputManager.getInput(INPUTS.MOVELEFT)?.active) {
-							vel.x = -1
-						} else if (inputManager.getInput(INPUTS.MOVERIGHT)?.active) {
-							vel.x = 1
-						}
-						const max = Math.sqrt(vel.x ** 2 + vel.y ** 2)
-						if (vel.x != 0 || vel.y != 0) {
-							body.velocity.x = vel.x / max
-							body.velocity.y = vel.y / max
-						}
+					const vel = { x: 0, y: 0 }
+					vel.y = (inputManager.getInput(INPUTS.MOVEUP)?.active??0) - (inputManager.getInput(INPUTS.MOVEDOWN)?.active??0)
+					vel.x = (inputManager.getInput(INPUTS.MOVERIGHT)?.active??0) - (inputManager.getInput(INPUTS.MOVELEFT)?.active??0)
+					console.log(inputManager.getInput(INPUTS.MOVEUP)?.active,inputManager.getInput(INPUTS.MOVEDOWN)?.active,vel.y)
+					const max = Math.sqrt(vel.x ** 2 + vel.y ** 2)
+					if (vel.x != 0 || vel.y != 0) {
+						body.velocity.x = vel.x / max
+						body.velocity.y = vel.y / max
 					}
+					// }
 				}
 				if (animation) {
 					if (Math.abs(body.velocity.x) > 0.1) sprite.flipped = body.velocity.x < 0
@@ -79,9 +61,11 @@ class MovementSystem extends System {
 				}
 			}
 			if (shadow && shadow.entityId) {
-				const shadowPosition = ECS.getEntityById(shadow.entityId).getComponent(PositionComponent)
-				shadowPosition.x = position.x
-				shadowPosition.y = position.y - shadow.offset
+				const shadowPosition = ECS.getEntityById(shadow.entityId)?.getComponent(PositionComponent)
+				if(shadowPosition){
+					shadowPosition.x = position.x
+					shadowPosition.y = position.y - shadow.offset
+				}
 			}
 		})
 	}

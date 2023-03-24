@@ -21,7 +21,7 @@ class KeyboardController implements InputController {
 	handleKeyUpDown = (state: boolean) => (e: KeyboardEvent) => {
 		if (e.repeat) return
 		if (e.code in this.keyMap) {
-			ECS.eventBus?.publish(this.keyMap[e.code], state?1:0)
+			ECS.eventBus?.publish(this.keyMap[e.code], state? 1 : 0)
 		}
 	}
 }

@@ -2,67 +2,76 @@ import Coroutine from '../Globals/Coroutine'
 import { ECS } from '../Globals/ECS'
 import INPUTS from '../Constants/InputsNames'
 import { InputController } from '../Globals/InputManager'
-import waitFor from '../Utils/WaitFor'
 
 class GamepadController implements InputController {
 	enabled = false
 	threshold = 0.4
 	gamepad: Gamepad | null = null
 	index:number
+	pollCoroutine?:Coroutine
 	inputs: Map<number, INPUTS> = new Map([
 		[9, INPUTS.PAUSE],
 		[0, INPUTS.VALIDATE],
-		[12, INPUTS.MOVEUP],
-		[13, INPUTS.MOVEDOWN],
-		[14, INPUTS.MOVELEFT],
-		[15, INPUTS.MOVERIGHT],
+		// [12, INPUTS.MOVEUP],
+		// [13, INPUTS.MOVEDOWN],
+		// [14, INPUTS.MOVELEFT],
+		// [15, INPUTS.MOVERIGHT],
 		[4, INPUTS.SWITCH],
 		[5, INPUTS.SWITCH],
 		[1, INPUTS.SKILL]
 	])
+	wasEnabled:Partial<Record<INPUTS,boolean>> ={}
 	constructor(index=0) {
 		this.index = index
-		if (navigator.getGamepads()[this.index] !== null) {
-			this.enable()
-			return
-		}
+	
 		window.addEventListener('gamepadconnected', () => {
-			this.enable()
+			this.pollCoroutine = new Coroutine(this.poll.bind(this),Infinity)
 
 		})
 		window.addEventListener('gamepaddisconnected', () => {
-			this.enabled = false
+			this.pollCoroutine?.stop()
 		})
 	}
 
-	enable() {
-		this.enabled = true
-		const self = this
-		new Coroutine(function* () {
-			while (self.enabled) {
-				const gamepad = navigator.getGamepads()[self.index]
-				if (!gamepad) return
-				if (Math.abs(gamepad.axes[0]) > self.threshold) {
-					ECS.eventBus?.publish(INPUTS.AXISX, gamepad?.axes[0])
-				} else {
-					ECS.eventBus?.publish(INPUTS.AXISX, 0)
-				}
-				if (Math.abs(gamepad.axes[1]) > self.threshold) {
-					ECS.eventBus?.publish(INPUTS.AXISY, gamepad?.axes[1] * -1)
-				} else {
-					ECS.eventBus?.publish(INPUTS.AXISY, 0)
-				}
-				for (const [button, input] of self.inputs) {
-					if (gamepad.buttons[button].pressed) {
-						ECS.eventBus?.publish(input, 1)
-						yield* waitFor(10)
-						ECS.eventBus?.publish(input, 0)
-					}
-				}
 
-				yield
+	*poll  () {
+		const gamepad = navigator.getGamepads()[this.index]
+		if (!gamepad) return
+		const amountX = gamepad?.axes[0]
+		const inputX = amountX >0 ?INPUTS.MOVERIGHT:INPUTS.MOVELEFT
+		const absAmoutX = Math.abs(amountX)
+		if (absAmoutX > this.threshold) {
+			ECS.eventBus?.publish(inputX, absAmoutX)
+			this.wasEnabled[inputX] = true
+		} else if(this.wasEnabled[inputX]){
+			ECS.eventBus?.publish(inputX, 0)
+			this.wasEnabled[inputX] = false
+		}
+			
+		const amountY = gamepad?.axes[1]
+		const inputY = amountY >0 ?INPUTS.MOVEDOWN:INPUTS.MOVEUP
+		const absAmoutY = Math.abs(amountY)
+		if (absAmoutY > this.threshold) {
+				
+			ECS.eventBus?.publish(inputY, absAmoutY)
+			this.wasEnabled[inputY] = true
+		} else if(this.wasEnabled[inputY]){
+			ECS.eventBus?.publish(inputY, 0)
+			this.wasEnabled[inputY] = false
+		}
+		for (const [button, input] of this.inputs) {
+			if (gamepad.buttons[button].pressed) {
+				ECS.eventBus?.publish(input, 1)
+				this.wasEnabled[input] = true
+			}else if(this.wasEnabled[input]){
+				ECS.eventBus?.publish(input, 0)
+				this.wasEnabled[input] = false
 			}
-		})
+				
+		}
+
+		yield
+		
 	}
 
 

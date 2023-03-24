@@ -9,8 +9,11 @@ import State from './State'
 
 class Input {
 	active = 0
+	down=false
 	get once() {
+		if(this.down) return 0
 		if (this.active != 0) {
+			this.down = true
 			this.active = 0
 			return 1
 		}
@@ -23,14 +26,16 @@ export interface InputController {
 class InputManager {
 	
 	controllers: InputController[] = []
-	inputs: Map<INPUTS, Input> = new Map()
+	inputs= new Map<INPUTS, Input>()
 	constructor(domElement: HTMLCanvasElement, inputNames: INPUTS[]) {
 		inputNames.forEach(inputName => {
 			this.inputs.set(inputName, new Input())
 			ECS.eventBus.subscribe(inputName, (state: number ) => {
 				const input = this.inputs.get(inputName)
-				if(!input) return 
-				
+				if(!input) return
+				if(state ===0 ) {
+					input.down = false 
+				}
 				input.active = state
 				
 			})
