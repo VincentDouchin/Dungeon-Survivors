@@ -1,22 +1,23 @@
-import { EventMap } from '../Constants/Events'
+// import { EventMap } from '../Constants/Events'
 
-export type EventName = keyof EventMap
+export type EventMap = Record<string,any>
+export type EventName<E extends EventMap> = keyof E
 
 
-export interface Event<Name extends EventName> {
+export interface Event<E extends EventMap,Name extends EventName<E>> {
 	type: Name
-	data: EventMap[Name]
+	data: E[Name]
 }
 
-export type EventCallback<Name extends EventName> = (event: Event<Name>['data']) => void
+export type EventCallback<E extends EventMap,Name extends EventName<E>> = (event: Event<E,Name>['data']) => void
 
-export type Subscribers = {
-	[Name in EventName]?: EventCallback<Name>[]
+export type Subscribers <E extends EventMap>= {
+	[Name in EventName<E>]?: EventCallback<E,Name>[]
 }
-class EventBus {
-	private subscribers: Subscribers = {}
+class EventBus <E extends EventMap>{
+	private subscribers: Subscribers<E> = {}
 
-	subscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
+	subscribe<Name extends EventName<E>>(event: Name, callback: EventCallback<E,Name>) {
 		if (!this.subscribers[event]) {
 			this.subscribers[event] = []
 		}
@@ -26,7 +27,7 @@ class EventBus {
 		return () => this.unsubscribe<Name>(event, callback)
 	}
 
-	unsubscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
+	unsubscribe<Name extends EventName<E>>(event: Name, callback: EventCallback<E,Name>) {
 		const subscribers = this.subscribers[event]
 		if (subscribers) {
 			const index = subscribers.indexOf(callback)
@@ -36,7 +37,7 @@ class EventBus {
 		}
 	}
 	
-	publish<Name extends EventName>(event: Name, data: Event<Name>['data']) {
+	publish<Name extends EventName<E>>(event: Name, data: Event<E,Name>['data']) {
 		const subscribers = this.subscribers[event]
 		if (subscribers?.length) {
 			

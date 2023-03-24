@@ -1,12 +1,11 @@
+import { ECSEVENTS, EventMap } from '../Constants/Events'
 import EventBus, { EventCallback, EventName } from '../Utils/EventBus'
-
-import { ECSEVENTS } from '../Constants/Events'
 
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
 	systems: System[] = []
 	entities: Map<string, Entity> = new Map()
-	eventBus = new EventBus()
+	eventBus = new EventBus<EventMap>()
 	registerEntity(entity: Entity) {
 		this.entities.set(entity.id, entity)
 	}
@@ -51,7 +50,7 @@ class System {
 	constructor(target:Constructor<Component> ) {
 		this.target = target
 	}
-	subscribe<Name extends EventName>(event: Name, callback: EventCallback<Name>) {
+	subscribe<Name extends EventName<EventMap>>(event: Name, callback: EventCallback<EventMap,Name>) {
 		this.subscribers.push(ECS.eventBus.subscribe(event, callback))
 	}
 
