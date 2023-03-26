@@ -40,34 +40,38 @@ class Tile {
 			texture.magFilter = NearestFilter
 			this.buffers.push(frameBuffer)
 			this.textures.push(texture)
-
 		}
 	}
+
 	static fromImage(image: HTMLImageElement, tileOptions: Partial<tileOptions> = {}): Tile {
 		const buffer = getBuffer(image.width, image.height)
 		buffer.drawImage(image, 0, 0)
-		
-		return new Tile(({  buffer,...tileOptions }))
+
+		return new Tile(({ buffer, ...tileOptions }))
 	}
+
 	static empty(x = 16, y = 16) {
 		const buffer = getBuffer(x, y)
 		return new Tile({ buffer })
 	}
+
 	clone() {
 		const options: tileOptions = {
 			buffer: getBuffer(this.buffer.canvas.width, this.buffer.canvas.height),
 			width: this.width,
 			height: this.height,
-			frames: this.frames
+			frames: this.frames,
 		}
 		options.buffer.drawImage(this.buffer.canvas, 0, 0)
 		return new Tile(options)
 	}
-	overwrite(props: { height?: number, width?: number, frames?: number }) {
+
+	overwrite(props: { height?: number; width?: number; frames?: number }) {
 		Object.assign(this, props)
 		return this
 	}
-	framed(margin: number | { x: number | { left: number, right: number }, y: number | { top: number, bottom: number } }, width: number, height: number) {
+
+	framed(margin: number | { x: number | { left: number; right: number }; y: number | { top: number; bottom: number } }, width: number, height: number) {
 		const marginTop = typeof margin == 'number'
 			? margin
 			: typeof margin.y == 'number'
@@ -97,19 +101,19 @@ class Tile {
 		buffer.drawImage(
 			this.buffer.canvas,
 			0, 0, marginLeft, marginTop,
-			0, 0, marginLeft, marginTop
+			0, 0, marginLeft, marginTop,
 		)
 		// Top Right
 		buffer.drawImage(
 			this.buffer.canvas,
 			this.width - marginRight, 0, marginRight, marginTop,
-			totalWidth - marginRight, 0, marginRight, marginTop
+			totalWidth - marginRight, 0, marginRight, marginTop,
 		)
 		// Bottom Left
 		buffer.drawImage(
 			this.buffer.canvas,
 			0, this.height - marginBottom, marginLeft, marginBottom,
-			0, totalHeight - marginBottom, marginLeft, marginBottom
+			0, totalHeight - marginBottom, marginLeft, marginBottom,
 		)
 		// Bottom Right
 		buffer.drawImage(
@@ -125,13 +129,13 @@ class Tile {
 			buffer.drawImage(
 				this.buffer.canvas,
 				marginLeft, 0, thisCenterWidth, marginTop,
-				marginLeft + x * thisCenterWidth, 0, w, marginTop
+				marginLeft + x * thisCenterWidth, 0, w, marginTop,
 			)
 			// Bottom
 			buffer.drawImage(
 				this.buffer.canvas,
 				marginLeft, marginTop + thisCenterHeight, thisCenterWidth, marginTop,
-				marginLeft + x * thisCenterWidth, height + marginTop, w, marginTop
+				marginLeft + x * thisCenterWidth, height + marginTop, w, marginTop,
 			)
 			for (let y = 0; y < thissY; y++) {
 				const h = y == thissY - 1 ? (height % thisCenterHeight || thisCenterHeight) : thisCenterHeight
@@ -140,16 +144,16 @@ class Tile {
 					buffer.drawImage(
 						this.buffer.canvas,
 						0, marginTop, marginLeft, thisCenterHeight,
-						0, marginTop + y * thisCenterHeight, marginLeft, h
+						0, marginTop + y * thisCenterHeight, marginLeft, h,
 					)
 					// Right
 					buffer.drawImage(
 						this.buffer.canvas,
 						thisCenterWidth + marginLeft, marginTop, marginRight, thisCenterHeight,
-						width + marginLeft, marginTop + y * thisCenterHeight, marginRight, h
+						width + marginLeft, marginTop + y * thisCenterHeight, marginRight, h,
 					)
 				}
-				//Center
+				// Center
 				buffer.drawImage(
 					this.buffer.canvas,
 					marginLeft, marginTop, w, h,
@@ -160,6 +164,5 @@ class Tile {
 
 		return new Tile({ buffer })
 	}
-
 }
 export default Tile

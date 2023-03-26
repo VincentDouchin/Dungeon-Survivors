@@ -9,7 +9,6 @@ class HealthRegenComponent extends Component {
 		this.amount = amount
 		this.timer = timer
 		this.time = timer
-
 	}
 }
 HealthRegenComponent.register()

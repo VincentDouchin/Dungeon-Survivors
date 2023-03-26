@@ -16,7 +16,7 @@ const DpadInputEntity = () => {
 	dpad.addChildren(center)
 	let enabled = false
 	let touch: null | number = null
-	const mouse: { x: null | number, y: null | number, } = { x: null, y: null }
+	const mouse: { x: null | number; y: null | number } = { x: null, y: null }
 	const downSubscriber = ECS.eventBus.subscribe('down', (touchCoord: TouchCoord) => {
 		if (touchCoord.uiObjects.includes(dpadMesh.mesh.id)) {
 			enabled = true
@@ -25,7 +25,6 @@ const DpadInputEntity = () => {
 			touch = touchCoord.identifier
 		}
 	})
-
 
 	const moveSubscriber = ECS.eventBus.subscribe('move', (touchCoord: TouchCoord) => {
 		if (enabled && mouse.x && mouse.y && touch === touchCoord.identifier) {
@@ -38,8 +37,8 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			ECS.eventBus.publish(positionX>0?INPUTS.MOVERIGHT:INPUTS.MOVELEFT, Math.abs(positionX))
-			ECS.eventBus.publish(positionY>0?INPUTS.MOVEUP:INPUTS.MOVEDOWN, Math.abs(positionY))
+			ECS.eventBus.publish(positionX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT, Math.abs(positionX))
+			ECS.eventBus.publish(positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, Math.abs(positionY))
 		}
 	})
 	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
@@ -47,7 +46,7 @@ const DpadInputEntity = () => {
 			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
-			for (const inputName of [INPUTS.MOVEDOWN,INPUTS.MOVELEFT,INPUTS.MOVERIGHT,INPUTS.MOVEUP]){
+			for (const inputName of [INPUTS.MOVEDOWN, INPUTS.MOVELEFT, INPUTS.MOVERIGHT, INPUTS.MOVEUP]) {
 				ECS.eventBus.publish(inputName, 0)
 			}
 		}

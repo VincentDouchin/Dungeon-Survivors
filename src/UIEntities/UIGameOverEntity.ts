@@ -1,11 +1,11 @@
 import { ECS, Entity } from '../Globals/ECS'
 
-import ButtonEntity from './ButtonEntity'
 import { ECSEVENTS } from '../Constants/Events'
 import SpriteComponent from '../Components/SpriteComponent'
 import TextComponent from '../Components/TextComponent'
 import Tile from '../Utils/Tile'
 import UIPositionComponent from '../Components/UIPositionComponent'
+import ButtonEntity from './ButtonEntity'
 
 const UIGameOverEntity = () => {
 	const ui = new Entity('game over ui')

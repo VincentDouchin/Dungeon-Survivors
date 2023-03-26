@@ -12,8 +12,9 @@ class RenderSystem extends System {
 	constructor() {
 		super(SpriteComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const sprite = entity.getComponent(SpriteComponent)
 			const position = entity.getComponent(PositionComponent)
 			const rotation = entity.getComponent(RotationComponent)
@@ -35,13 +36,10 @@ class RenderSystem extends System {
 				sprite.mesh.position.set(x, y, 0)
 				sprite.renderOrder = (parentSprite?.renderOrder ?? 1) + 1
 
-
 				if (sprite && !sprite?.mesh.parent) {
-
 					const destination = parentSprite?.mesh ?? UIScene
 					destination.add(sprite.mesh)
 				}
-
 			}
 			if (rotation) {
 				sprite.mesh.rotation.z = rotation.rotation + rotation.centerRotation + Math.PI / 2

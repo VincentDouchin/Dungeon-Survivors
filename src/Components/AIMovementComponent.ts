@@ -1,6 +1,6 @@
-import { Component, Entity } from '../Globals/ECS'
-
 import { Vector2 } from 'three'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
 interface AIOption {
 	seeking?: number[]
@@ -30,9 +30,7 @@ class AIMovementComponent extends Component {
 		this.followingDistance = options.followingDistance ?? 50
 		this.followingFactor = new Vector2(options.followingFactor ?? 1, options.followingFactor ?? 1)
 		this.charger = options.charger ?? false
-
 	}
-
 }
 AIMovementComponent.register()
 export default AIMovementComponent

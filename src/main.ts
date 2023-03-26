@@ -1,5 +1,7 @@
 import '@total-typescript/ts-reset'
 
+import { preloadFont } from 'troika-three-text'
+import m5x7 from '../assets/fonts/m5x7.ttf?url'
 import GameOverState from './GameStates/GameOverState'
 import LevelUpState from './GameStates/LevelUpState'
 import MapState from './GameStates/MapState'
@@ -8,11 +10,9 @@ import PlayerSelectState from './GameStates/PlayerSelectState'
 import RunState from './GameStates/RunState'
 import WinState from './GameStates/WinState'
 import { engine } from './Globals/Initialize'
-import m5x7 from '../assets/fonts/m5x7.ttf?url'
-import { preloadFont } from 'troika-three-text'
 
-await new Promise<void>((resolve) => preloadFont(
-	{ font: m5x7, }, () => resolve()
+await new Promise<void>(resolve => preloadFont(
+	{ font: m5x7 }, () => resolve(),
 ))
 engine.addState(RunState)
 engine.addState(LevelUpState)
@@ -23,4 +23,3 @@ engine.addState(PlayerSelectState)
 engine.addState(WinState)
 engine.setState(MapState)
 engine.start()
-

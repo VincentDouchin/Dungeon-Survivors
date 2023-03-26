@@ -1,21 +1,21 @@
-import  { SOUND } from '../Constants/Sounds'
+import type { SOUND } from '../Constants/Sounds'
+import type { sounds } from '../../assets/sounds/sounds'
 import { renderer } from './Initialize'
 import saveData from './SaveManager'
-import { sounds } from '../../assets/sounds/sounds'
 
 interface soundManagerOptions {
-	volume?: number,
-	playbackRate?: number,
-	autoplay?: boolean,
-	loop?: boolean,
+	volume?: number
+	playbackRate?: number
+	autoplay?: boolean
+	loop?: boolean
 	fade?: boolean
 }
 class SoundManager {
-	sounds: Record<sounds, HTMLAudioElement> 
+	sounds: Record<sounds, HTMLAudioElement>
 	ctx = new AudioContext()
 	effects: Map<HTMLAudioElement, number> = new Map()
 	musics: Map<HTMLAudioElement, number> = new Map()
-	constructor(sounds:Record<sounds,HTMLAudioElement>) {
+	constructor(sounds: Record<sounds, HTMLAudioElement>) {
 		this.sounds = sounds
 		if (this.ctx.state === 'suspended') {
 			const listener = () => {
@@ -28,15 +28,17 @@ class SoundManager {
 			renderer.domElement.addEventListener('click', listener)
 		}
 	}
+
 	resume(element: HTMLAudioElement | null) {
 		if (this.ctx.state === 'running' && element) {
 			element.play()
 		}
 	}
-	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions,) {
+
+	play(type: 'music' | 'effect', name: SOUND, options?: soundManagerOptions) {
 		const nodes: AudioNode[] = []
 		const newOptions = { volume: 1, playbackRate: 1, autoplay: true, loop: false, fade: false, ...options }
-		const selectedSound =  name[Math.floor(Math.random() * name.length)] 
+		const selectedSound = name[Math.floor(Math.random() * name.length)]
 		const audioElement = this.sounds[selectedSound].cloneNode() as HTMLAudioElement
 		const target = type === 'music' ? this.musics : this.effects
 		const volume = type === 'music' ? saveData.musicVolume : saveData.effectsVolume
@@ -70,19 +72,17 @@ class SoundManager {
 		if (newOptions.autoplay) audioElement.play()
 		return audioElement
 	}
-	updateVolume() {
 
+	updateVolume() {
 		const collections: [Map<HTMLAudioElement, number>, number][] = [
 			[this.musics, saveData.musicVolume],
-			[this.effects, saveData.effectsVolume]
+			[this.effects, saveData.effectsVolume],
 		]
 		collections.forEach(([audio, volume]) => {
 			for (const [audioElement, elementVolume] of audio) {
 				audioElement.volume = elementVolume * volume
 			}
 		})
-
 	}
-
 }
 export default SoundManager

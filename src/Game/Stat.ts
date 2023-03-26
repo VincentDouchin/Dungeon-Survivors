@@ -1,6 +1,7 @@
-import StatsComponent, { STATS } from '../Components/StatsComponent'
+import type { STATS } from '../Components/StatsComponent'
+import type StatsComponent from '../Components/StatsComponent'
 
-import LevelComponent from '../Components/LevelComponent'
+import type LevelComponent from '../Components/LevelComponent'
 
 class Stat {
 	base: number
@@ -11,10 +12,12 @@ class Stat {
 		this.base = base
 		this.name = name
 	}
+
 	setModifiers(modifier?: StatsComponent, level?: LevelComponent) {
 		this.level = level
 		this.modifier = modifier
 	}
+
 	get value() {
 		const levelModifer = this.base * ((this.level?.level ?? 0) * (this.modifier?.getLevelModifier(this.name) ?? 0))
 		const statsModifier = this.base * (this.modifier?.getModifier(this.name) ?? 0)

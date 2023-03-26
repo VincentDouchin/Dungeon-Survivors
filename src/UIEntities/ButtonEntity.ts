@@ -22,13 +22,12 @@ const ButtonEntity = (width: number, height: number, scale: number, child: Tile 
 
 	button.addChildren(childEntity)
 
-
 	button.addComponent(new SelectableComponent(normal, disabled, () => {
 		new Coroutine(function* () {
 			const selectable = button.removeComponent(SelectableComponent)
 			childPosition.relativePosition.y = 0
 			sprite.changeTexture(pressed.texture)
-			yield* waitFor(10)
+			yield * waitFor(10)
 			childPosition.relativePosition.y = 1 / 8
 			sprite.changeTexture(normal.texture)
 			button.addComponent(selectable)

@@ -1,5 +1,6 @@
 import { AmbientLight, Color, PointLight } from 'three'
-import { Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import LightComponent from '../Components/LightComponent'
 import PositionComponent from '../Components/PositionComponent'
@@ -9,8 +10,9 @@ class LightingSystem extends System {
 	constructor() {
 		super(LightComponent)
 	}
+
 	update(entities: Entity[]): void {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const light = entity.getComponent(LightComponent)
 			const position = entity.getComponent(PositionComponent)
 			if (!light.lightId && position) {
@@ -24,7 +26,6 @@ class LightingSystem extends System {
 			if (light.lightId && position) {
 				lightScene.getObjectById(light.lightId)?.position.set(position.x, position.y, 15)
 			}
-
 		})
 	}
 }

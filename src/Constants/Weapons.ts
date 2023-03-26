@@ -1,18 +1,18 @@
-import { SOUND, SOUNDS } from './Sounds'
-
-import COLLISIONGROUPS from './CollisionGroups'
-import { Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
 import NoteProjectileEntity from '../Entities/NoteProjectileEntity'
 import ProjectileEntity from '../Entities/ProjectileEntity'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
 import assets from '../Globals/Assets'
+import { SOUNDS } from './Sounds'
+import type { SOUND } from './Sounds'
+import COLLISIONGROUPS from './CollisionGroups'
 
 export interface WeaponDefinition {
 	tile?: Tile
 	damage?: number
 	targetGroup: TargetGroup
 	targeter?: boolean
-	projectile?: ProjectileDefinition,
+	projectile?: ProjectileDefinition
 	orbiter?: boolean
 	mirror?: boolean
 	angle?: number
@@ -24,7 +24,7 @@ export interface TargetGroup {
 }
 export const enemyGroup: TargetGroup = {
 	target: [COLLISIONGROUPS.PLAYER],
-	group: COLLISIONGROUPS.ENEMY
+	group: COLLISIONGROUPS.ENEMY,
 }
 export const playerGroup: TargetGroup = {
 	group: COLLISIONGROUPS.PLAYER,
@@ -44,7 +44,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		tile: assets.weapons.sword,
 		damage: 10,
 		targetGroup: playerGroup,
-		sound: SOUNDS.SWORD
+		sound: SOUNDS.SWORD,
 	},
 	sai: {
 		orbiter: true,
@@ -86,9 +86,9 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				targetGroup: playerGroup,
 				tile: assets.weapons.arrow,
 				range: 200,
-				sound: SOUNDS.ARROW_HIT
+				sound: SOUNDS.ARROW_HIT,
 			}),
-			delay: 40
+			delay: 40,
 		},
 	},
 	flintlock: {
@@ -118,8 +118,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		orbiter: true,
 		projectile: {
 			spawn: NoteProjectileEntity,
-			delay: 30
-		}
+			delay: 30,
+		},
 	},
 	// ! ENEMY
 	enemyBow: {
@@ -133,9 +133,9 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				speed: 100,
 				targetGroup: enemyGroup,
 				tile: assets.weapons.arrow,
-				range: 200
+				range: 200,
 			}),
-			delay: 240
+			delay: 240,
 		},
 	},
 	fireball: {
@@ -149,7 +149,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				speed: 100,
 				targetGroup: enemyGroup,
 				tile: assets.effects.fireProjectile,
-				range: 200
+				range: 200,
 			}),
 			delay: 240,
 		},
@@ -180,7 +180,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				speed: 100,
 				targetGroup: enemyGroup,
 				tile: assets.weapons.hammer,
-				range: 150, rotationSpeed: 0.1,
+				range: 150,
+				rotationSpeed: 0.1,
 			}),
 			delay: 240,
 		},
@@ -195,7 +196,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				speed: 100,
 				targetGroup: enemyGroup,
 				tile: assets.effects['IceSpike-sheet'],
-				range: 150, scale: 0.5
+				range: 150,
+				scale: 0.5,
 
 			}),
 			delay: 240,
@@ -213,7 +215,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.weapons.cross,
 				range: 150,
 				scale: 0.8,
-				rotationSpeed: 0.1
+				rotationSpeed: 0.1,
 			}),
 
 			delay: 240,

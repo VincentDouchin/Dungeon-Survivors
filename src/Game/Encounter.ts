@@ -1,4 +1,5 @@
-import { ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS } from '../Globals/ECS'
 import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import StatsComponent, { STATS } from '../Components/StatsComponent'
 
@@ -6,7 +7,7 @@ import ColorShader from '../Shaders/ColorShader'
 import Coroutine from '../Globals/Coroutine'
 import DIFFICULTY from '../Constants/DIfficulty'
 import EnemyEntity from '../Entities/EnemyEntity'
-import { EnemyType } from '../Constants/Enemies'
+import type { EnemyType } from '../Constants/Enemies'
 import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import LevelComponent from '../Components/LevelComponent'
@@ -27,7 +28,8 @@ class Encounter {
 		[DIFFICULTY.NORMAL]: 0.05,
 		[DIFFICULTY.HARD]: 0.075,
 	}[State.difficulty ?? DIFFICULTY.EASY]
-	boundary: { x?: number, y?: number } = { x: undefined, y: undefined }
+
+	boundary: { x?: number; y?: number } = { x: undefined, y: undefined }
 	stats = new StatsComponent().set(STATS.MAX_HEALTH, this.difficulty).set(STATS.DAMAGE, this.difficulty)
 	level = new LevelComponent()
 	started = false
@@ -41,7 +43,7 @@ class Encounter {
 				this.enemies.delete(entity)
 			}
 		})
-		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, entity => {
+		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, (entity) => {
 			this.enemies.add(entity)
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
@@ -51,23 +53,24 @@ class Encounter {
 				ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.level.level)
 			}
 		})
-
-
 	}
+
 	setBoundary(x: number, y: number) {
 		this.boundary = { x: x / 2, y: y / 2 }
 		return this
 	}
+
 	addWave(enemies: Array<[EnemyType, number]>, waves = 1, delay = 600) {
 		const self = this
 		this.waves.push(function* () {
 			for (let i = 0; i < waves; i++) {
-				yield* self.spawnEnemies(enemies)
-				yield* waitFor(delay)
+				yield * self.spawnEnemies(enemies)
+				yield * waitFor(delay)
 			}
 		})
 		return this
 	}
+
 	getDistance(offset = 0) {
 		const angle = Math.random() * Math.PI * 2
 
@@ -77,6 +80,7 @@ class Encounter {
 		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
 		return { x, y }
 	}
+
 	* spawnEnemies(enemyTypes: Array<[EnemyType, number]>) {
 		const enemies: EnemyType[] = enemyTypes.map(([enemyType, nb]) => new Array(nb).fill(enemyType)).flat()
 		const nbOfEnemies = enemies.length
@@ -84,10 +88,10 @@ class Encounter {
 			const { x, y } = this.getDistance()
 			const enemy = enemies.splice(Math.floor(Math.random() * enemies.length), 1)
 			this.spawnEnemy(enemy[0], x, y)
-			yield* waitFor(Math.random() * 10)
-
+			yield * waitFor(Math.random() * 10)
 		}
 	}
+
 	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		return ParticleEntity({ x, y }, assets.effects.smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats, this.level)({ x, y })
@@ -95,6 +99,7 @@ class Encounter {
 			return enemy
 		})
 	}
+
 	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards = 8, distance: number) {
 		const self = this
 		this.waves.push(function* () {
@@ -102,7 +107,7 @@ class Encounter {
 			const guards: Set<Entity> = new Set()
 			const { x, y } = self.getDistance(distance)
 
-			self.spawnEnemy(mainEnemy, x, y).then(main => {
+			self.spawnEnemy(mainEnemy, x, y).then((main) => {
 				main.addComponent(new FlockingComponent(group, false))
 				const mainHealth = main.removeComponent(HealthComponent)
 				const mainSprite = main.getComponent(SpriteComponent)
@@ -119,24 +124,24 @@ class Encounter {
 						}
 					}
 				})
-
 			})
 
-			yield* waitFor(Math.random() * 10)
+			yield * waitFor(Math.random() * 10)
 			for (let i = 0; i < nbOfGuards; i++) {
 				const angle = Math.PI * 2 * i / nbOfGuards
 				const guardX = x + Math.cos(angle) * distance
 				const guardY = y + Math.sin(angle) * distance
-				self.spawnEnemy(guard, guardX, guardY).then(guardEntity => {
+				self.spawnEnemy(guard, guardX, guardY).then((guardEntity) => {
 					guardEntity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 0, 1]))
 					guardEntity.addComponent(new FlockingComponent(group, false))
 					guards.add(guardEntity)
 				})
-				yield* waitFor(Math.random() * 10)
+				yield * waitFor(Math.random() * 10)
 			}
 		})
 		return this
 	}
+
 	waitForEnemiesCleared() {
 		const self = this
 		this.waves.push(function* () {
@@ -144,10 +149,10 @@ class Encounter {
 			while (self.enemies.size > 0) {
 				yield
 			}
-			return
 		})
 		return this
 	}
+
 	stop() {
 		const self = this
 		this.started = false
@@ -156,27 +161,29 @@ class Encounter {
 			self.subscriber()
 			self.levelSubscriber()
 			self.addEnemySuscriber()
-			yield* waitFor(60)
+			yield * waitFor(60)
 			const portal = PortalEntity()
 			ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, portal)
-
 		})
 		return this
 	}
+
 	pause() {
 		if (!this.coroutine) return
 		this.coroutine.pause()
 	}
+
 	resume() {
 		if (!this.coroutine) return
 		this.coroutine.resume()
 	}
+
 	start() {
 		this.started = true
 		const self = this
 		this.coroutine = new Coroutine(function* () {
 			for (const wave of self.waves) {
-				yield* wave()
+				yield * wave()
 			}
 		})
 		return this

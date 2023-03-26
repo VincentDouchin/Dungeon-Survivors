@@ -1,17 +1,19 @@
-import { Entity, System } from '../Globals/ECS'
+import { Vector2 } from 'three'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import FlockingComponent from '../Components/FlockingComponent'
 import PositionComponent from '../Components/PositionComponent'
-import { Vector2 } from 'three'
 
 const nbToVec = (nb: number) => new Vector2(nb, nb)
 class FlockingSystem extends System {
 	constructor() {
 		super(FlockingComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const position = entity.getComponent(PositionComponent)
 			const flocking = entity.getComponent(FlockingComponent)
 			const body = entity.getComponent(BodyComponent)

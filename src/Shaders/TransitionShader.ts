@@ -17,10 +17,9 @@ class TransitionShader extends Shader {
 				}
 			})
 			return {
-				time: 0
+				time: 0,
 			}
 		})
-
 	}
 }
 

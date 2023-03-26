@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import ColorShader from '../Shaders/ColorShader'
 import DroppableComponent from '../Components/DroppableComponent'
@@ -15,8 +16,9 @@ class MinionSpawnerSytem extends System {
 	constructor() {
 		super(MinionSpawnerComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const minion = entity.getComponent(MinionSpawnerComponent)
 			minion.timer++
 			if (minion.timer === minion.delay) {

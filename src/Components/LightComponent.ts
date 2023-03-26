@@ -1,4 +1,5 @@
-import { AmbientLight, Color, PointLight } from 'three'
+import type { AmbientLight, Color } from 'three'
+import { PointLight } from 'three'
 
 import { Component } from '../Globals/ECS'
 import { lightScene } from '../Globals/Initialize'
@@ -15,6 +16,7 @@ class LightComponent extends Component {
 		this.distance = distance
 		this.type = type ?? PointLight
 	}
+
 	destroy() {
 		if (this.lightId) {
 			const lightObject = lightScene.getObjectById(this.lightId) as THREE.Light

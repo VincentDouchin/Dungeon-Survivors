@@ -1,10 +1,12 @@
-import { ActiveEvents, Collider, ColliderDesc, RigidBody, RigidBodyDesc } from '@dimforge/rapier2d-compat'
-import { Component, ECS, Entity } from '../Globals/ECS'
-
-import { STATS } from './StatsComponent'
-import { Stat } from '../Game/Stat'
+import type { Collider, RigidBody } from '@dimforge/rapier2d-compat'
+import { ActiveEvents, ColliderDesc, RigidBodyDesc } from '@dimforge/rapier2d-compat'
 import { Vector2 } from 'three'
+import type { Entity } from '../Globals/ECS'
+import { Component, ECS } from '../Globals/ECS'
+
+import { Stat } from '../Game/Stat'
 import { world } from '../Globals/Initialize'
+import { STATS } from './StatsComponent'
 
 export interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased' | 'kinematicPositionBased'
@@ -35,17 +37,17 @@ class BodyComponent extends Component {
 		super()
 
 		this.moveForce = new Stat(bodyOptions.moveForce ?? 10, STATS.SPEED)
-		//!Body
-		this.bodyDescription =
-			RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
+		// !Body
+		this.bodyDescription
+			= RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
 				.setCanSleep(false)
 				.setCcdEnabled(true)
 				.setLinearDamping(5)
 				.setAngularDamping(10)
 				.lockRotations()
 
-		//!Collider
-		this.colliderDescriptions = colliderOptions.map(colliderOption => {
+		// !Collider
+		this.colliderDescriptions = colliderOptions.map((colliderOption) => {
 			const colliderDescription = ColliderDesc
 				.cuboid(colliderOption.width / 2, colliderOption.height / 2)
 				.setDensity(colliderOption.mass ?? 0.00000001)
@@ -58,6 +60,7 @@ class BodyComponent extends Component {
 			return colliderDescription
 		})
 	}
+
 	contacts(fn: (entity: Entity) => void, group?: number, targets?: number[]) {
 		if (this.colliders.length) {
 			this.colliders.forEach((collider) => {
@@ -73,11 +76,13 @@ class BodyComponent extends Component {
 			})
 		}
 	}
+
 	bind(id: string) {
 		this.bodyDescription.setUserData(id)
 	}
+
 	destroy() {
-		this.colliders.forEach(collider => {
+		this.colliders.forEach((collider) => {
 			world.removeCollider(collider, false)
 		})
 		this.colliders.length = 0

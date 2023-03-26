@@ -1,12 +1,12 @@
 import { Entity } from '../Globals/ECS'
 import PositionComponent from '../Components/PositionComponent'
-import ProjectileEntity from './ProjectileEntity'
 import RotationComponent from '../Components/RotationComponent'
 import { SOUNDS } from '../Constants/Sounds'
 import SpellComponent from '../Components/SpellComponent'
 import assets from '../Globals/Assets'
 import { playerGroup } from '../Constants/Weapons'
 import { soundManager } from '../Globals/Initialize'
+import ProjectileEntity from './ProjectileEntity'
 
 const ArrowVolleySpell = (entity: Entity) => {
 	const spellComponent = entity.getComponent(SpellComponent)
@@ -22,7 +22,7 @@ const ArrowVolleySpell = (entity: Entity) => {
 		range: 400,
 		nb: 16,
 		spread: Math.PI * 2,
-		piercing: 4
+		piercing: 4,
 	})(origin)
 }
 export default ArrowVolleySpell

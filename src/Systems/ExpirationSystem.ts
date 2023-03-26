@@ -1,4 +1,5 @@
-import { Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import { ECSEVENTS } from '../Constants/Events'
 import ExpirationComponent from '../Components/ExpirationComponent'
@@ -11,8 +12,9 @@ class ExpirationSystem extends System {
 			this.skipEntities.add(entity)
 		})
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			if (this.skipEntities.has(entity)) return
 			const timer = entity.getComponent(ExpirationComponent)
 			timer.timer--

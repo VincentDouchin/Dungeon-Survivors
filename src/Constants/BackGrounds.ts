@@ -1,14 +1,14 @@
-import LOOTABLES, { LootableOptions } from './Lootables'
-
-import { Arenas } from '../../assets/map/Map'
 import { Color } from 'three'
-import { Entity } from '../Globals/ECS'
+import type { Arenas } from '../../assets/map/Map'
+import type { Entity } from '../Globals/ECS'
 import LeafEntity from '../Entities/LeafEntity'
 import RainEntity from '../Entities/RainEntity'
 import SnowEntity from '../Entities/SnowEntity'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
 import WeightedList from '../Utils/WeightedList'
 import assets from '../Globals/Assets'
+import LOOTABLES from './Lootables'
+import type { LootableOptions } from './Lootables'
 
 export interface BackgroundOptions {
 	level: Arenas
@@ -17,10 +17,10 @@ export interface BackgroundOptions {
 	lootables?: LootableOptions[]
 	obstacleDensity?: number
 	boundaries?: {
-		x: number,
+		x: number
 		y: number
 	}
-	infinite: { x: boolean, y: boolean }
+	infinite: { x: boolean; y: boolean }
 	effect?: () => Entity
 	effectDelay?: () => number
 }
@@ -45,7 +45,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.hole),
 		obstacleDensity: 0.05,
 		lootables: [LOOTABLES.POT],
-		infinite: { x: true, y: true }
+		infinite: { x: true, y: true },
 	},
 	FOREST: {
 		level: 'FOREST',
@@ -59,7 +59,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		obstacleDensity: 0.07,
 		infinite: { x: true, y: true },
 		effect: LeafEntity,
-		effectDelay: () => Math.random() * 10 + 50
+		effectDelay: () => Math.random() * 10 + 50,
 	},
 
 	GRAVEYARD: {
@@ -74,7 +74,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		lootables: [LOOTABLES.GRAVE],
 		infinite: { x: true, y: true },
 		effect: RainEntity,
-		effectDelay: () => Math.random() * 5
+		effectDelay: () => Math.random() * 5,
 
 	},
 	TOWN: {
@@ -89,11 +89,10 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.barrel1, 2)
 			.add(assets.background.barrel2, 2)
 			.add(assets.background.barrel3, 2)
-			.add(assets.background.barrel4, 2)
-		,
+			.add(assets.background.barrel4, 2),
 		obstacleDensity: 0.03,
 		lootables: [LOOTABLES.CRATE],
-		infinite: { x: true, y: true }
+		infinite: { x: true, y: true },
 	},
 	CASTLE: {
 		level: 'CASTLE',
@@ -104,7 +103,7 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.bench2, 2)
 			.add(assets.background.lectern, 1),
 		obstacleDensity: 0.03,
-		lootables: [LOOTABLES.STATUE]
+		lootables: [LOOTABLES.STATUE],
 	},
 	SNOW: {
 		level: 'SNOW',
@@ -116,20 +115,18 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 			.add(assets.background.treesnow, 3)
 			.add(assets.background.rocksnowsmall1, 1)
 			.add(assets.background.rocksnowsmall2, 1)
-			.add(assets.background.rocksnowsmall3, 1)
-		,
+			.add(assets.background.rocksnowsmall3, 1),
 		lootables: [LOOTABLES.FLOWER_SNOW],
-		infinite: { x: true, y: true }
+		infinite: { x: true, y: true },
 	},
 	LAVA: {
 		level: 'LAVA',
 		lightColor: new Color('hsl(0,0%,100%)'),
 		obstacles: new WeightedList<Tile>()
 			.add(assets.background.rocklavabig, 1)
-			.add(assets.background.rocklavasmall, 3)
-		,
+			.add(assets.background.rocklavasmall, 3),
 		lootables: [LOOTABLES.LAVA_CRYSTAL],
-		infinite: { x: true, y: true }
+		infinite: { x: true, y: true },
 	},
 	DRACULA: {
 		level: 'DRACULA',
@@ -137,11 +134,10 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		obstacles: new WeightedList<Tile>()
 			.add(assets.background.bookshelf1, 1)
 			.add(assets.background.bookshelf2, 3)
-			.add(assets.background.candelabra, 2)
-		,
+			.add(assets.background.candelabra, 2),
 		lootables: [LOOTABLES.BOOKS],
-		infinite: { x: true, y: true }
-	}
+		infinite: { x: true, y: true },
+	},
 
 }
 export default BACKGROUNDS

@@ -14,7 +14,7 @@ const TimeCounterEntity = () => {
 	timer.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 24, 0), { scale: 1.5 }))
 	const position = timer.addComponent(new UIPositionComponent({ x: 0, y: 2 }, { x: 0, y: 1 }))
 	position.moveTo(1, 20)
-	const timerText = timer.addComponent(new TextComponent(formatTimer(),))
+	const timerText = timer.addComponent(new TextComponent(formatTimer()))
 	const timerSub = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
 		timerText.setText(formatTimer())
 	})

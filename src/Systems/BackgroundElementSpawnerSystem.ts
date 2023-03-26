@@ -1,17 +1,17 @@
-import { Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import BackgroundElementsComponent from '../Components/BackgroundElementsComponent'
 import DroppableComponent from '../Components/DroppableComponent'
 import { camera } from '../Globals/Initialize'
 
 class BackgroundElementSpawnerSystem extends System {
-
 	constructor() {
 		super(BackgroundElementsComponent)
 	}
-	update(entities: Entity[]): void {
-		entities.forEach(entity => {
 
+	update(entities: Entity[]): void {
+		entities.forEach((entity) => {
 			const backgroundElements = entity.getComponent(BackgroundElementsComponent)
 			const { size, effect, effectDelay, obstaclesMap } = backgroundElements
 			if (effect && effectDelay) {
@@ -23,7 +23,6 @@ class BackgroundElementSpawnerSystem extends System {
 			}
 			obstaclesMap.forEach((node) => {
 				if (node.entity) {
-
 					if (!node.position) return
 					if (
 						node.position.x > camera.position.x + camera.right * 2

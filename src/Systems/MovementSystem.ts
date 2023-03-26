@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import AnimationComponent from '../Components/AnimationComponent'
 import BodyComponent from '../Components/BodyComponent'
@@ -14,8 +15,9 @@ class MovementSystem extends System {
 	constructor() {
 		super(PositionComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const position = entity.getComponent(PositionComponent)
 			const playerController = entity.getComponent(PlayerControllerComponent)
 			const body = entity.getComponent(BodyComponent)
@@ -24,12 +26,11 @@ class MovementSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			const shadow = entity.getComponent(ShadowComponent)
 			if (body) {
-
 				if (playerController?.enabled) {
 					const vel = { x: 0, y: 0 }
-					vel.y = (inputManager.getInput(INPUTS.MOVEUP)?.active??0) - (inputManager.getInput(INPUTS.MOVEDOWN)?.active??0)
-					vel.x = (inputManager.getInput(INPUTS.MOVERIGHT)?.active??0) - (inputManager.getInput(INPUTS.MOVELEFT)?.active??0)
-					console.log(inputManager.getInput(INPUTS.MOVEUP)?.active,inputManager.getInput(INPUTS.MOVEDOWN)?.active,vel.y)
+					vel.y = (inputManager.getInput(INPUTS.MOVEUP)?.active ?? 0) - (inputManager.getInput(INPUTS.MOVEDOWN)?.active ?? 0)
+					vel.x = (inputManager.getInput(INPUTS.MOVERIGHT)?.active ?? 0) - (inputManager.getInput(INPUTS.MOVELEFT)?.active ?? 0)
+					console.log(inputManager.getInput(INPUTS.MOVEUP)?.active, inputManager.getInput(INPUTS.MOVEDOWN)?.active, vel.y)
 					const max = Math.sqrt(vel.x ** 2 + vel.y ** 2)
 					if (vel.x != 0 || vel.y != 0) {
 						body.velocity.x = vel.x / max
@@ -62,7 +63,7 @@ class MovementSystem extends System {
 			}
 			if (shadow && shadow.entityId) {
 				const shadowPosition = ECS.getEntityById(shadow.entityId)?.getComponent(PositionComponent)
-				if(shadowPosition){
+				if (shadowPosition) {
 					shadowPosition.x = position.x
 					shadowPosition.y = position.y - shadow.offset
 				}

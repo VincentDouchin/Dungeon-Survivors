@@ -26,7 +26,7 @@ const SpellButtonEntity = () => {
 				sprite.changeTexture(assets.UI.buttonpressed.texture)
 				sprite.render()
 				iconPosition.center.y = 0
-				yield* waitFor(10)
+				yield * waitFor(10)
 				iconPosition.center.y = -1 / 8
 
 				sprite.changeTexture(assets.UI.button.texture)
@@ -40,7 +40,8 @@ const SpellButtonEntity = () => {
 			disabled = true
 			sprite.changeTexture(assets.UI.buttondisabled.texture)
 			iconSprite.addShader(new ColorShader(1, 1, 1, 0.5))
-		} else if (disabled) {
+		}
+		else if (disabled) {
 			sprite.changeTexture(assets.UI.button.texture)
 			disabled = false
 			iconSprite.removeShader(ColorShader)

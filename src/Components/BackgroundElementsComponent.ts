@@ -1,13 +1,14 @@
-import { Component, ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component, ECS } from '../Globals/ECS'
 
-import DroppableComponent from './DroppableComponent'
 import { ECSEVENTS } from '../Constants/Events'
 import LootableEntity from '../Entities/LootableEntity'
-import { LootableOptions } from '../Constants/Lootables'
+import type { LootableOptions } from '../Constants/Lootables'
 import ObstableEntity from '../Entities/ObstacleEntity'
+import type Tile from '../Utils/Tile'
+import type WeightedList from '../Utils/WeightedList'
 import PositionComponent from './PositionComponent'
-import Tile from '../Utils/Tile'
-import WeightedList from '../Utils/WeightedList'
+import DroppableComponent from './DroppableComponent'
 
 export interface Wall {
 	width: number
@@ -36,7 +37,7 @@ class BackgroundElementsComponent extends Component {
 	effectsTimer = 0
 	removeWallSub: () => void
 
-	constructor(options: { obstacleDensity?: number, obstacles?: WeightedList<Tile>, effect?: () => Entity, effectDelay?: () => number, lootables?: LootableOptions[] | null, walls?: Wall[] }) {
+	constructor(options: { obstacleDensity?: number; obstacles?: WeightedList<Tile>; effect?: () => Entity; effectDelay?: () => number; lootables?: LootableOptions[] | null; walls?: Wall[] }) {
 		super()
 		this.obstacles = options.obstacles ?? null
 		this.size = options.obstacles?.elements.reduce((acc, v) => {
@@ -48,7 +49,7 @@ class BackgroundElementsComponent extends Component {
 		this.lootables = options.lootables ?? null
 		this.walls = options.walls ?? []
 		this.removeWallSub = ECS.eventBus.subscribe(ECSEVENTS.REMOVE_WALL, ({ entity, deleteLoot }) => {
-			this.obstaclesMap.forEach(node => {
+			this.obstaclesMap.forEach((node) => {
 				if (node.entity === entity) {
 					if (deleteLoot) {
 						entity.removeComponent(DroppableComponent)
@@ -58,15 +59,15 @@ class BackgroundElementsComponent extends Component {
 				}
 			})
 		})
-
 	}
+
 	createNode(x: number, y: number) {
 		const key = `${x}|${y}`
 		const noiseValue = Math.random()
 		if (noiseValue > this.obstacleDensity || !this.lootables || !this.obstacles) {
 			this.obstaclesMap.set(key, { obstacle: false })
-			return
-		} else if (this.lootables && this.obstacles) {
+		}
+		else if (this.lootables && this.obstacles) {
 			const loot = Math.random() < 0.05
 			const getRandom = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)]
 
@@ -74,15 +75,15 @@ class BackgroundElementsComponent extends Component {
 			this.obstaclesMap.set(key, {
 				obstacle: true,
 				entityConstructor,
-				destroyed: false
+				destroyed: false,
 			})
-
 		}
-
 	}
+
 	getNode(x: number, y: number) {
 		return this.obstaclesMap.get(`${x}|${y}`)
 	}
+
 	createEntity(x: number, y: number) {
 		const node = this.getNode(x, y)
 		if (!node || !node.entityConstructor || !this.size) return
@@ -91,10 +92,10 @@ class BackgroundElementsComponent extends Component {
 		node.position = node.entity.getComponent(PositionComponent)
 		return node.entity
 	}
+
 	destroy(): void {
 		this.removeWallSub()
 	}
-
 }
 BackgroundElementsComponent.register()
 export default BackgroundElementsComponent

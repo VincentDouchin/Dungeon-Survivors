@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 import { inputManager, soundManager } from '../Globals/Initialize'
 
 import Coroutine from '../Globals/Coroutine'
@@ -21,7 +22,7 @@ class SelectionSystem extends System {
 		this.subscribe('down', ({ uiObjects, objects }: TouchCoord) => {
 			this.clicked = [...uiObjects, ...objects]
 		})
-		this.subscribe(ECSEVENTS.SELECTED, entity => {
+		this.subscribe(ECSEVENTS.SELECTED, (entity) => {
 			const selectable = entity.getComponent(SelectableComponent)
 			if (selectable.onSelected) {
 				selectable.onSelected()
@@ -33,7 +34,7 @@ class SelectionSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			selectable?.selectedTile && sprite.changeTexture(selectable.selectedTile.texture)
 		})
-		this.subscribe(ECSEVENTS.DESELECTED, entity => {
+		this.subscribe(ECSEVENTS.DESELECTED, (entity) => {
 			if (this.selectedEntity === entity) {
 				this.selectedEntity = null
 			}
@@ -41,32 +42,27 @@ class SelectionSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			selectable?.unSelectedTile && sprite.changeTexture(selectable.unSelectedTile.texture)
 		})
-
-
 	}
+
 	update(entities: Entity[]) {
 		let soundplayed = false
-		
+
 		for (const entity of entities) {
 			const selectable = entity.getComponent(SelectableComponent)
 			const sprite = entity.getComponent(SpriteComponent)
 			if (this.hovered.includes(sprite?.mesh.id) || this.clicked.includes(sprite?.mesh.id)) {
 				ECS.eventBus.publish(ECSEVENTS.SELECTED, entity)
-
 			}
 			if (entity.id === this.selectedEntity?.id) {
-
-
 				if (this.clicked.includes(sprite.mesh.id)) {
 					ECS.eventBus.publish(INPUTS.VALIDATE, 1)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
-					new Coroutine(function*(){
+					new Coroutine(function*() {
 						yield waitFor(1)
 						ECS.eventBus.publish(INPUTS.VALIDATE, 0)
 					})
 				}
 				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {
-
 					if (selectable.onValidated) {
 						if (!soundplayed) {
 							soundManager.play('effect', SOUNDS.Validate)
@@ -83,17 +79,11 @@ class SelectionSystem extends System {
 							soundManager.play('effect', SOUNDS.Select)
 							ECS.eventBus.publish(ECSEVENTS.SELECTED, nextEntity)
 						}
-
 					}
 				}
 			}
 		}
 		this.clicked = []
-
-
-
-
-
 	}
 }
 export default SelectionSystem

@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
@@ -11,10 +12,11 @@ class PortalSystem extends System {
 	constructor() {
 		super(PortalComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const body = entity.getComponent(BodyComponent)
-			body.contacts(entity => {
+			body.contacts((entity) => {
 				ECS.eventBus.publish(ECSEVENTS.REMOVE_WALL, { entity, deleteLoot: true })
 			}, COLLISIONGROUPS.SENSOR, [COLLISIONGROUPS.WALL])
 			body.contacts(() => {

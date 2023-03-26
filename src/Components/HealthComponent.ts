@@ -1,9 +1,9 @@
 import { Component, ECS } from '../Globals/ECS'
 
-import { SOUND } from '../Constants/Sounds'
+import type { SOUND } from '../Constants/Sounds'
+import { Stat } from '../Game/Stat'
 import { STATS } from './StatsComponent'
 import SpriteComponent from './SpriteComponent'
-import { Stat } from '../Game/Stat'
 
 class HealthComponent extends Component {
 	health: number
@@ -25,8 +25,8 @@ class HealthComponent extends Component {
 		this.show = show
 		this.sound = sound
 	}
-	updateHealth(amount: number) {
 
+	updateHealth(amount: number) {
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth.value))
 
 		if (this.healthBarId) {
@@ -35,8 +35,6 @@ class HealthComponent extends Component {
 			healthSprite.render()
 		}
 	}
-
-
 }
 HealthComponent.register()
 export default HealthComponent

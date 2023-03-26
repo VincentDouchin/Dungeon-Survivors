@@ -1,7 +1,7 @@
-import DIFFICULTY from '../Constants/DIfficulty'
-import { HeroDefinition } from '../Constants/Heros'
-import { InputController } from './InputManager'
-import { Skill } from '../Constants/Skills'
+import type DIFFICULTY from '../Constants/DIfficulty'
+import type { HeroDefinition } from '../Constants/Heros'
+import type { Skill } from '../Constants/Skills'
+import type { InputController } from './InputManager'
 
 interface State {
 	cameraBounds: {
@@ -9,10 +9,10 @@ interface State {
 		right?: number
 		top?: number
 		bottom?: number
-	},
-	timer: number,
-	mobile: boolean,
-	heros: Set<HeroDefinition>,
+	}
+	timer: number
+	mobile: boolean
+	heros: Set<HeroDefinition>
 	skills: Skill[]
 	difficulty: DIFFICULTY | null
 	multiplayer: boolean | null
@@ -31,7 +31,7 @@ const blanckState: State = {
 	skills: [],
 	difficulty: null,
 	multiplayer: null,
-	multiplayerControls: [null, null]
+	multiplayerControls: [null, null],
 
 }
 let State: State = structuredClone(blanckState)

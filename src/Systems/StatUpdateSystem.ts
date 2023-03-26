@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import DamageComponent from '../Components/DamageComponent'
@@ -25,8 +26,9 @@ class StatUpdateSystem extends System {
 			}
 		})
 	}
+
 	update(entities: Entity[]): void {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const stats = entity.getComponent(StatsComponent)
 			for (let i = stats.boosts.length - 1; i >= 0; i--) {
 				stats.boosts[i].duration--

@@ -7,7 +7,6 @@ export interface GameState {
 	unset(state: Constructor<GameState> | null): void
 }
 
-
 class Engine {
 	rafHandle = 0
 	accumulatedTime = 0
@@ -39,18 +38,23 @@ class Engine {
 			this.state.render()
 		}
 	}
+
 	start() {
 		this.rafHandle = window.requestAnimationFrame(this.cycle)
 	}
+
 	stop() {
 		window.cancelAnimationFrame(this.rafHandle)
 	}
+
 	addState<T extends GameState>(state: Constructor<T>) {
 		this.states.set(state.name, new state())
 	}
+
 	getState<T extends GameState>(state: Constructor<T>) {
 		return this.states.get(state.constructor.name) as T
 	}
+
 	setState<T extends GameState>(state: Constructor<T>, options?: unknown) {
 		const currentState = this.state === null ? null : this.state.constructor as Constructor<GameState>
 		this.state?.unset(state)

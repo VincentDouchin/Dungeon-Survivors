@@ -1,12 +1,13 @@
-import { Material, Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Texture, Uniform, WebGLRenderTarget } from 'three'
+import type { Material, Texture } from 'three'
+import { Mesh, MeshBasicMaterial, NearestFilter, PlaneGeometry, RepeatWrapping, Uniform, WebGLRenderTarget } from 'three'
 
-import { Component } from '../Globals/ECS'
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import RenderShader from '../Shaders/RenderShader'
-import Shader from '../Shaders/Shader'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
-import Tile from '../Utils/Tile'
+import { Component } from '../Globals/ECS'
+import RenderShader from '../Shaders/RenderShader'
+import type Shader from '../Shaders/Shader'
+import type Tile from '../Utils/Tile'
 import { renderer } from '../Globals/Initialize'
 
 class SpriteComponent extends Component {
@@ -28,15 +29,15 @@ class SpriteComponent extends Component {
 	uniforms = new Proxy<any>(this, {
 		get(target, prop) {
 			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value
-
 		},
 		set(target, prop, newValue) {
 			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value = newValue
 			target.render()
 			return true
-		}
+		},
 	})
-	constructor(tile: Tile, options?: { renderOrder?: number, scale?: number, shaders?: Shader[], flipped?: boolean, opacity?: number }) {
+
+	constructor(tile: Tile, options?: { renderOrder?: number; scale?: number; shaders?: Shader[]; flipped?: boolean; opacity?: number }) {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1, flipped: false }, options)
 		this.width = tile.width
@@ -57,7 +58,7 @@ class SpriteComponent extends Component {
 		this.texture = this.renderTarget.texture
 		this.baseTexture = new Uniform(tile.textures[0])
 		this.renderShader = this.addShader(new RenderShader(tile.textures[0]), false)
-		newOptions.shaders.forEach(shaderConstructor => {
+		newOptions.shaders.forEach((shaderConstructor) => {
 			this.addShader(shaderConstructor, false)
 		})
 		this.effectComposer.render()
@@ -65,11 +66,11 @@ class SpriteComponent extends Component {
 
 		this.mesh = new Mesh(
 			new PlaneGeometry(this.scaledWidth, this.scaledHeight),
-			this.material
+			this.material,
 		)
 		this.mesh.renderOrder = this.renderOrder
-
 	}
+
 	addShader(shader: Shader, render = true) {
 		if (this.shaderPasses.has(shader.constructor.name)) return
 		const shaderMat = shader.create(this)
@@ -86,9 +87,11 @@ class SpriteComponent extends Component {
 		if (render) this.render()
 		return pass
 	}
+
 	getUniforms<T extends Shader>(shaderConstructor: Constructor<T>) {
 		return this.shaderPasses.get(shaderConstructor.name)?.[0]?.uniforms as Record<keyof ReturnType<T['uniforms']>, Uniform>
 	}
+
 	removeShader(shaderConstructor: Constructor<Shader>) {
 		const passes = this.shaderPasses.get(shaderConstructor.name)
 		if (passes) {
@@ -98,24 +101,28 @@ class SpriteComponent extends Component {
 			this.render()
 		}
 	}
+
 	get scaledWidth() {
 		return this.scale * this.width
 	}
+
 	get scaledHeight() {
 		return this.scale * this.height
 	}
+
 	changeTexture(texture: Texture) {
-		if(this.renderShader){
+		if (this.renderShader) {
 			this.renderShader.uniforms.uTexture.value = texture
 		}
 		this.render()
 	}
+
 	destroy(): void {
 		this.mesh.geometry.dispose()
 		this.material.dispose()
 		this.effectComposer.dispose()
-		this.shaderPasses.forEach(shaderPasses => {
-			shaderPasses.forEach(pass => {
+		this.shaderPasses.forEach((shaderPasses) => {
+			shaderPasses.forEach((pass) => {
 				pass.dispose()
 			})
 		})
@@ -125,7 +132,6 @@ class SpriteComponent extends Component {
 
 	render() {
 		this.effectComposer.render()
-
 	}
 }
 SpriteComponent.register()

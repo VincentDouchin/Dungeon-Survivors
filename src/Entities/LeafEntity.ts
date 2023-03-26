@@ -14,7 +14,7 @@ const LeafEntity = () => {
 	leaf.addComponent(new AnimationComponent({ default: assets.effects.Leaf }))
 	const position = leaf.addComponent(new PositionComponent(
 		((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
-		((Math.random() - 0.5) * 2) * camera.top + camera.position.y
+		((Math.random() - 0.5) * 2) * camera.top + camera.position.y,
 	))
 	const fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
 	const fallingEndTimer = 20 + Math.random() * 20

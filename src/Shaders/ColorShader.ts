@@ -9,7 +9,7 @@ class ColorShader extends Shader {
 		super(() => ({
 			color: [x, y, z, w],
 			add: type === 'add',
-			multiply: type === 'multiply'
+			multiply: type === 'multiply',
 		}))
 	}
 }

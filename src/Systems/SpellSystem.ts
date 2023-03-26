@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import { ECSEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
@@ -11,10 +12,11 @@ class SpellSystem extends System {
 	constructor() {
 		super(SpellComponent)
 	}
+
 	update(entities: Entity[]) {
 		const attack = inputManager.getInput(INPUTS.SKILL)?.once
 		entities
-			.forEach(entity => {
+			.forEach((entity) => {
 				const switcher = entity.getComponent(SwitchingComponent)
 				if (attack && switcher && switcher?.main) {
 					const spell = entity.getComponent(SpellComponent)
@@ -25,7 +27,6 @@ class SpellSystem extends System {
 						ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
 						ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 					}
-
 				}
 			})
 	}

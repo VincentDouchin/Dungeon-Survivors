@@ -16,6 +16,7 @@ class ShadowComponent extends Component {
 		this.tile = new Tile({ buffer })
 		this.offset = offset
 	}
+
 	destroy(): void {
 		this.entityId && ECS.getEntityById(this.entityId).destroy()
 	}

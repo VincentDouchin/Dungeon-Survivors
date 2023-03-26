@@ -1,5 +1,5 @@
-import Tile from './Tile'
 import assets from '../Globals/Assets'
+import type Tile from './Tile'
 
 const buttonTiles = (x: number, y: number): [Tile, Tile, Tile] => {
 	const normal = assets.UI.button.framed(5, x, y)

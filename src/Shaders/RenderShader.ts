@@ -1,4 +1,4 @@
-import { CanvasTexture } from 'three'
+import type { CanvasTexture } from 'three'
 import Shader from './Shader'
 import frag from './glsl/main.frag?raw'
 import vert from './glsl/main.vert?raw'

@@ -15,14 +15,13 @@ const DamageTextEntity = (position: PositionComponent, damageAmount: number, cri
 	const textPosition = damageText.addComponent(new PositionComponent(position.x, position.y))
 	damageText.addComponent(new SpriteComponent(Tile.empty()))
 	damageText.addComponent(new ExpirationComponent(120))
-	const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damageAmount < 0 ? 0x33cc33 : (crit ? 0xff0000 : 0xffffff), outlineWidth: 0.5, }))
+	const textSprite = damageText.addComponent(new TextComponent(String(Number((damageAmount * -1).toFixed(1))), { size: 8, color: damageAmount < 0 ? 0x33CC33 : (crit ? 0xFF0000 : 0xFFFFFF), outlineWidth: 0.5 }))
 	new Coroutine(function* (counter) {
 		counter++
 		textPosition.y = easeOutBack(counter, textPosition.y, textPosition.y + 1, 120)
 		textSprite.mesh.fillOpacity = easeOutExpo(counter, 2, 0, 120)
 		textSprite.mesh.outlineOpacity = easeOutExpo(counter, 2, 0, 120)
 		yield
-
 	}, 120)
 }
 export default DamageTextEntity

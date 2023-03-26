@@ -4,16 +4,15 @@ import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import DamageComponent from '../Components/DamageComponent'
 import { Entity } from '../Globals/ECS'
 import JointComponent from '../Components/JointComponent'
-import LevelComponent from '../Components/LevelComponent'
+import type LevelComponent from '../Components/LevelComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
 import ShooterComponent from '../Components/ShooterComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import StatsComponent from '../Components/StatsComponent'
-import { WeaponDefinition } from '../Constants/Weapons'
+import type StatsComponent from '../Components/StatsComponent'
+import type { WeaponDefinition } from '../Constants/Weapons'
 
 const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parentHeight: number, stats?: StatsComponent, level?: LevelComponent) => {
-
 	const weapon = new Entity('weapon')
 	const parentPosition = parent.getComponent(PositionComponent)
 	const tile = weaponDefinition.tile
@@ -33,7 +32,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
-		[{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target }]
+		[{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target }],
 	))
 	if (tile) {
 		weapon.addComponent(new SpriteComponent(tile, { renderOrder: 2 }))

@@ -1,5 +1,7 @@
-import { ECSEVENTS, EventMap } from '../Constants/Events'
-import EventBus, { EventCallback, EventName } from '../Utils/EventBus'
+import type { EventMap } from '../Constants/Events'
+import { ECSEVENTS } from '../Constants/Events'
+import type { EventCallback, EventName } from '../Utils/EventBus'
+import EventBus from '../Utils/EventBus'
 
 const ECS = new class {
 	components: Map<string, Map<string, Component>> = new Map()
@@ -9,34 +11,38 @@ const ECS = new class {
 	registerEntity(entity: Entity) {
 		this.entities.set(entity.id, entity)
 	}
+
 	getEntityById(id: string) {
 		return this.entities.get(id)
 	}
+
 	getEntitiesAndComponents<T>(componentType: Constructor<T>): Array<[string, T]> {
 		const components = this.components.get(componentType.name)
 		if (!components) return []
 		return Array.from(components.entries()) as Array<[string, T]>
 	}
+
 	registerSystem<S extends Constructor<System>>(system: S) {
-		this.systems.push(new system)
+		this.systems.push(new system())
 	}
+
 	updateSystems() {
 		this.systems.forEach((system) => {
 			const componentMap = this.components.get(system.target.name)
-			if(!componentMap)return
-			const entitiesID: string[] = [... componentMap.keys()]
-			const entities= entitiesID.map(id => this.getEntityById(id)).filter(Boolean)
+			if (!componentMap) return
+			const entitiesID: string[] = [...componentMap.keys()]
+			const entities = entitiesID.map(id => this.getEntityById(id)).filter(Boolean)
 			system.update && system.update(entities)
 		})
 	}
+
 	unRegisterSystems() {
-		this.systems.forEach(system => {
+		this.systems.forEach((system) => {
 			system.subscribers.forEach(sub => sub())
 		})
 		this.systems = []
 	}
-
-}
+}()
 
 interface System {
 	update(entities: Entity[]): void
@@ -47,30 +53,29 @@ class System {
 	static register() {
 		ECS.registerSystem(this)
 	}
-	constructor(target:Constructor<Component> ) {
+
+	constructor(target: Constructor<Component>) {
 		this.target = target
 	}
-	subscribe<Name extends EventName<EventMap>>(event: Name, callback: EventCallback<EventMap,Name>) {
+
+	subscribe<Name extends EventName<EventMap>>(event: Name, callback: EventCallback<EventMap, Name>) {
 		this.subscribers.push(ECS.eventBus.subscribe(event, callback))
 	}
-
 }
 interface Component {
 
 	bind(id: string): void
-	destroy(): void 
+	destroy(): void
 
-	
 }
 abstract class Component {
 	static register() {
 		ECS.components.set(this.name, new Map())
 	}
+
 	save() {
 		return JSON.stringify(this)
 	}
-
-
 }
 
 class Entity {
@@ -86,22 +91,24 @@ class Entity {
 			this.removeChildren(entity)
 		})
 	}
+
 	get children() {
 		return this.childrenIds.map(childId => ECS.getEntityById(childId)).filter(Boolean)
 	}
+
 	addChildren(child: Entity) {
 		child.parentId = this.id
 		this.childrenIds.push(child.id)
 
 		return child
 	}
-	removeChildren(child: Entity) {
 
+	removeChildren(child: Entity) {
 		if (this.childrenIds.includes(child.id)) {
 			this.childrenIds.splice(this.childrenIds.indexOf(child.id), 1)
 		}
-
 	}
+
 	removeComponent<T extends Component>(componentConstructor: Constructor<T>) {
 		const componentMap = ECS.components.get(componentConstructor.name)
 		const component = componentMap?.get(this.id)
@@ -114,16 +121,20 @@ class Entity {
 		ECS.components.get(component.constructor.name)?.set(this.id, component)
 		return component as T
 	}
+
 	getRecursiveComponent<T extends Component>(component: Constructor<T>): T | null {
 		return this.getComponent(component) ?? (this.parent ? this.parent.getRecursiveComponent(component) : null)
 	}
+
 	get parent(): null | Entity {
-		if (!this.parentId ) return null
-		return ECS.getEntityById(this.parentId)??null
+		if (!this.parentId) return null
+		return ECS.getEntityById(this.parentId) ?? null
 	}
+
 	getComponent<T extends Component>(component: Constructor<T>) {
 		return ECS.components.get(component.name)?.get(this.id) as T
 	}
+
 	onDestroy(fn: () => void) {
 		const unSubscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			if (entity.id === this.id) {
@@ -138,15 +149,13 @@ class Entity {
 		for (const children of this.children) {
 			children?.destroy()
 		}
-		ECS.components.forEach(componentMap => {
+		ECS.components.forEach((componentMap) => {
 			if (!componentMap.has(this.id)) return
 			componentMap.get(this.id)?.destroy && componentMap.get(this.id)?.destroy()
 			componentMap.delete(this.id)
 		})
 		ECS.entities.delete(this.id)
 	}
-
 }
 
 export { ECS, System, Component, Entity }
-

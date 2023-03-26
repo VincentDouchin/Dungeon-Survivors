@@ -18,7 +18,7 @@ const XPEntity = (amount = 1) => (position: PositionComponent) => {
 		xp.addComponent(new BodyComponent(
 			{ moveForce: 1000 },
 			[
-				{ width: 2, height: 2, contact: false, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 }
+				{ width: 2, height: 2, contact: false, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 },
 			]))
 		xp.addComponent(new XPComponent(1))
 		xp.addComponent(new PositionComponent(position.x + getOffset(), position.y + getOffset()))
@@ -29,7 +29,6 @@ const XPEntity = (amount = 1) => (position: PositionComponent) => {
 			}
 		})
 		xpBag.addChildren(xp)
-
 	}
 	return xpBag
 }

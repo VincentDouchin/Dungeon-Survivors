@@ -1,4 +1,6 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import { Vector2 } from 'three'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import AIMovementComponent from '../Components/AIMovementComponent'
 import BodyComponent from '../Components/BodyComponent'
@@ -11,7 +13,6 @@ import ParticleEntity from '../Entities/ParticleEntitty'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import { Vector2 } from 'three'
 import assets from '../Globals/Assets'
 import waitFor from '../Utils/WaitFor'
 import { world } from '../Globals/Initialize'
@@ -20,26 +21,28 @@ class AIMovementSystem extends System {
 	walls: Map<Entity, Vector2> = new Map()
 	constructor() {
 		super(AIMovementComponent)
-		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.ADD_WALL, wall => {
+		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.ADD_WALL, (wall) => {
 			this.walls.set(wall, wall.getComponent(PositionComponent).position)
 		}))
-		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+		this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			if (this.walls.has(entity)) {
 				this.walls.delete(entity)
 			}
 		}))
 	}
+
 	update(entities: Entity[]): void {
 		const groups: Map<number, Entity[]> = new Map()
 		ECS.getEntitiesAndComponents(HealthComponent).forEach(([entityId, health]) => {
 			const groupEntity = ECS.getEntityById(entityId)
 			if (!groups.has(health.type)) {
 				groups.set(health.type, [groupEntity])
-			} else {
+			}
+			else {
 				groups.get(health.type)?.push(groupEntity)
 			}
 		})
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const ai = entity.getComponent(AIMovementComponent)
 			if (!ai.enabled) return
 			const position = entity.getComponent(PositionComponent).position
@@ -62,13 +65,13 @@ class AIMovementSystem extends System {
 					ai.chargingDirection = null
 					ai.chargingResetTimer = 90
 				}
-
-			} else {
+			}
+			else {
 				if (ai.seeking) {
 					let distance = 0
 					const destination: Vector2 = new Vector2()
-					ai.seeking.forEach(group => {
-						groups.get(group)?.forEach(groupEntity => {
+					ai.seeking.forEach((group) => {
+						groups.get(group)?.forEach((groupEntity) => {
 							const enemyPosition = groupEntity.getComponent(PositionComponent).position
 							const newDistance = enemyPosition.distanceTo(position)
 							if (!distance || distance > newDistance) {
@@ -92,7 +95,8 @@ class AIMovementSystem extends System {
 							const delta = 0.01
 							if (Math.abs(angleDiff) <= delta) {
 								rotation.angVel.base = 0
-							} else {
+							}
+							else {
 								rotation.angVel.base = Math.sin(angleDiff) * 2
 							}
 						}
@@ -104,7 +108,7 @@ class AIMovementSystem extends System {
 									new Coroutine(function* () {
 										ai.enabled = false
 										ParticleEntity({ x: position.x, y: position.y - sprite.scaledHeight / 2 }, assets.effects.smokeCircular, { scale: sprite.scaledWidth / 30, renderOrder: 0, frameRate: 3 })
-										yield* waitFor(30)
+										yield * waitFor(30)
 										ai.chargingDirection = seekingVelocity.clone().multiply(new Vector2(5, 5))
 										ai.enabled = true
 										ai.chargingTimer = 120
@@ -113,7 +117,6 @@ class AIMovementSystem extends System {
 							}
 						}
 					}
-
 				}
 				if (ai.follower) {
 					const followingPosition = ai.follower.getComponent(PositionComponent).position
@@ -135,7 +138,7 @@ class AIMovementSystem extends System {
 				const avoidObstacles = () => {
 					const newDirection = velocity.clone().rotateAround(new Vector2(0, 0), Math.PI / 4 * increments * sign)
 					let collisions = false
-					if(!body.body)return
+					if (!body.body) return
 					world.castShape(position, 0, newDirection, body.body.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
 						if (collider?.parent()?.bodyType() === 1) {
 							collisions = true
@@ -145,7 +148,8 @@ class AIMovementSystem extends System {
 					})
 					if (!collisions || rayDistance === 0) {
 						avoidWallsVelocity.add(newDirection).add(velocity.clone().negate())
-					} else {
+					}
+					else {
 						sign *= -1
 						rayDistance -= 10
 						if (sign > 0) increments++
@@ -154,7 +158,6 @@ class AIMovementSystem extends System {
 				}
 				avoidObstacles()
 			}
-
 
 			velocity.add(avoidWallsVelocity).normalize().add(chargingVelocity)
 			body.velocity.add(velocity)

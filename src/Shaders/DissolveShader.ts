@@ -18,9 +18,9 @@ class DissolveShader extends Shader {
 			return {
 				time: 0,
 				seed: Math.random(),
-				invert: invert,
+				invert,
 				duration,
-				kernel
+				kernel,
 			}
 		})
 	}

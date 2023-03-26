@@ -2,26 +2,26 @@ import AIMovementComponent from '../Components/AIMovementComponent'
 import AnimationComponent from '../Components/AnimationComponent'
 import BOOSTS from '../Constants/Boosts'
 import BodyComponent from '../Components/BodyComponent'
-import BoostEntity from './BoostEntity'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import DamageComponent from '../Components/DamageComponent'
 import DroppableComponent from '../Components/DroppableComponent'
-import { EnemyType } from '../Constants/Enemies'
+import type { EnemyType } from '../Constants/Enemies'
 import { Entity } from '../Globals/ECS'
 import HealthComponent from '../Components/HealthComponent'
-import LevelComponent from '../Components/LevelComponent'
-import ManaDropEntity from './ManaDropEntity'
+import type LevelComponent from '../Components/LevelComponent'
 import MinionSpawnerComponent from '../Components/MinionSpawnerComponent'
 import OutlineShader from '../Shaders/OutlineShader'
 import PositionComponent from '../Components/PositionComponent'
-import PotionEntity from './PotionEntity'
 import ShadowComponent from '../Components/ShadowComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import StatsComponent from '../Components/StatsComponent'
+import type StatsComponent from '../Components/StatsComponent'
+import PotionEntity from './PotionEntity'
+import ManaDropEntity from './ManaDropEntity'
+import BoostEntity from './BoostEntity'
 import WeaponEntity from './WeaponEntity'
 import XPEntity from './XPEntity'
 
-const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelComponent) => (position: { x: number, y: number }) => {
+const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelComponent) => (position: { x: number; y: number }) => {
 	const enemy = new Entity('enemy')
 	const scale = type.boss ? 1.5 : 1
 	const berserk = type.berserk
@@ -51,8 +51,8 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.3 : 1) },
 		[
-			{ width: type.size.width * scale, height: type.size.height * scale, mass: 1, offset: tile.height * scale, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL, COLLISIONGROUPS.LOOT] }
-		]
+			{ width: type.size.width * scale, height: type.size.height * scale, mass: 1, offset: tile.height * scale, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.WALL, COLLISIONGROUPS.LOOT] },
+		],
 	))
 	if (stats) {
 		enemy.addComponent(stats)
@@ -69,6 +69,5 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	type.transforms?.forEach(transform => transform(enemy))
 	return enemy
 }
-
 
 export default EnemyEntity

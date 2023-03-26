@@ -1,4 +1,5 @@
-import { Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import ShooterComponent from '../Components/ShooterComponent'
 import { soundManager } from '../Globals/Initialize'
@@ -7,8 +8,9 @@ class ShootingSystem extends System {
 	constructor() {
 		super(ShooterComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const shooter = entity.getComponent(ShooterComponent)
 			if (shooter.triggerTimer <= 0) {
 				shooter.cooldownTimer = shooter.cooldown
@@ -24,10 +26,10 @@ class ShootingSystem extends System {
 					shooter.timer = 0
 					shooter.triggerTimer--
 				}
-			} else {
+			}
+			else {
 				shooter.cooldownTimer--
 			}
-
 		})
 	}
 }

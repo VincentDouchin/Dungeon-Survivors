@@ -18,11 +18,11 @@ const SwitchButtonEntity = () => {
 	const downSubscriber = ECS.eventBus.subscribe('up', ({ uiObjects }) => {
 		if (uiObjects.includes(sprite.mesh.id)) {
 			new Coroutine(function* () {
-				if(!sprite.renderShader)return
+				if (!sprite.renderShader) return
 				sprite.renderShader.uniforms.uTexture.value = assets.UI.buttonpressed.texture
 				sprite.render()
 				iconPosition.center.y = 0
-				yield* waitFor(10)
+				yield * waitFor(10)
 				iconPosition.center.y = -1 / 8
 
 				sprite.renderShader.uniforms.uTexture.value = assets.UI.button.texture
@@ -30,7 +30,6 @@ const SwitchButtonEntity = () => {
 				ECS.eventBus.publish(INPUTS.SWITCH, 1)
 			})
 		}
-
 	})
 	button.onDestroy(() => {
 		downSubscriber()

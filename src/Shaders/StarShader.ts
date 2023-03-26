@@ -1,4 +1,5 @@
-import { ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS } from '../Globals/ECS'
 
 import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'

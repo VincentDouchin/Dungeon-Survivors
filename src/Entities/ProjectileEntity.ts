@@ -7,11 +7,11 @@ import ExpirationComponent from '../Components/ExpirationComponent'
 import LevelComponent from '../Components/LevelComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
-import { SOUND } from '../Constants/Sounds'
+import type { SOUND } from '../Constants/Sounds'
 import SpriteComponent from '../Components/SpriteComponent'
 import StatsComponent from '../Components/StatsComponent'
-import { TargetGroup } from '../Constants/Weapons'
-import Tile from '../Utils/Tile'
+import type { TargetGroup } from '../Constants/Weapons'
+import type Tile from '../Utils/Tile'
 import { soundManager } from '../Globals/Initialize'
 
 // const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
@@ -42,7 +42,7 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 		projectile.addComponent(new PositionComponent(position.x - Math.cos(rotation.rotation) * height, position.y - Math.sin(rotation.rotation) * height))
 		projectile.addComponent(new RotationComponent({
 			rotation: projectileRotation,
-			rotationVel: rotationSpeed
+			rotationVel: rotationSpeed,
 		}))
 		projectile.addComponent(new SpriteComponent(tile, { scale, renderOrder: 1 }))
 		if (tile.frames > 1) {
@@ -51,8 +51,8 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 		const projectileBody = projectile.addComponent(new BodyComponent(
 			{ moveForce: speed },
 			[
-				{ group: targetGroup.group, canCollideWith: targetGroup.target, mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height }
-			]
+				{ group: targetGroup.group, canCollideWith: targetGroup.target, mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
+			],
 		))
 		const coroutine = new Coroutine(function* () {
 			yield
@@ -72,7 +72,6 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 			}
 			if (counter === 0) {
 				projectiles.destroy()
-
 			}
 		})
 		const stats = parent.getComponent(StatsComponent)
@@ -86,6 +85,5 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 		projectiles.addChildren(projectile)
 	}
 	return projectiles
-
 }
 export default ProjectileEntity

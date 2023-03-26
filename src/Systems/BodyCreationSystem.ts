@@ -1,8 +1,9 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import { JointData } from '@dimforge/rapier2d-compat'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import JointComponent from '../Components/JointComponent'
-import { JointData } from '@dimforge/rapier2d-compat'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
 import { world } from '../Globals/Initialize'
@@ -11,8 +12,9 @@ class BodyCreationSystem extends System {
 	constructor() {
 		super(BodyComponent)
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
 			const joint = entity.getComponent(JointComponent)
@@ -22,7 +24,7 @@ class BodyCreationSystem extends System {
 				body.body = world.createRigidBody(body.bodyDescription)
 				if (rotation) body.body.setRotation(rotation.rotation, true)
 			}
-			if (!body.colliders.length && body.body ) {
+			if (!body.colliders.length && body.body) {
 				const parentBody = body.body
 				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, parentBody))
 			}

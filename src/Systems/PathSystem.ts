@@ -26,6 +26,7 @@ class PathSystem extends System {
 			this.encounter = encounter
 		}))
 	}
+
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
 			const sprite = entity.getComponent(SpriteComponent)
@@ -34,7 +35,8 @@ class PathSystem extends System {
 			if (!position && this.position) {
 				entity.addComponent(this.position)
 				return
-			} else if (this.position) {
+			}
+			else if (this.position) {
 				if (position.x !== this.position.x || position.y !== this.position.y) {
 					animation.setState('run')
 					sprite.flipped = position.x - this.position.x > 0
@@ -57,14 +59,14 @@ class PathSystem extends System {
 			}
 			if (node.possibleDirections === 0) {
 				engine.setState(WinState)
-			} else if (!node.showingOptions) {
+			}
+			else if (!node.showingOptions) {
 				const arrows: Entity[] = []
 				for (const direction of ['left', 'right', 'top'] as nodeDirection[]) {
 					const otherNode = node.next(direction)
 					const otherPathNode = otherNode?.getComponent(PathNodeComponent)
 					const otherNodePosition = otherNode?.getComponent(PositionComponent)
 					if (node.possibleDirections > 1 && otherNode && otherNodePosition) {
-
 						const arrow = new Entity('arrow')
 						arrow.addComponent(new SelectableComponent(
 							assets.UI.arrowselected,
@@ -73,9 +75,8 @@ class PathSystem extends System {
 								this.position = otherNodePosition
 								this.encounter = !otherPathNode?.encounter
 								arrows.forEach(arrow => arrow.destroy())
-							})
+							}),
 						)
-
 
 						arrows.push(arrow)
 						nodeEntity.addChildren(arrow)
@@ -98,7 +99,6 @@ class PathSystem extends System {
 						})
 						arrow.onDestroy(() => arrowBounce.stop())
 
-
 						switch (direction) {
 						case 'left': {
 							arrowPosition.x -= 16
@@ -111,17 +111,14 @@ class PathSystem extends System {
 							arrowPosition.x += 16
 							arrow.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
 						} break
-
 						}
-					} else {
+					}
+					else {
 						if (otherNode && otherNodePosition) {
 							this.position = otherNodePosition
 							this.encounter = !otherPathNode?.encounter
-
 						}
 					}
-
-
 				}
 				SelectableComponent.setFromArray(arrows)
 			}

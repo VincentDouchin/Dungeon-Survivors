@@ -46,8 +46,6 @@ const SkillMenuEntity = () => {
 		const icon = new Entity('icon')
 		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
-
-
 		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
 		const shimmerCoroutine = new Coroutine(function* () {
 			yield
@@ -60,13 +58,12 @@ const SkillMenuEntity = () => {
 			const textEntity = new Entity('skill text')
 			textEntity.addComponent(new SpriteComponent(Tile.empty()))
 			textEntity.addComponent(new TextComponent(text, { outlineWidth: 1 }))
-			textEntity.addComponent(new UIPositionComponent({ x: 0, y: - 1 }, { x: 0, y: 1 + index * 2 }))
+			textEntity.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 + index * 2 }))
 			button.addChildren(textEntity)
 		})
 
 		button.addChildren(icon)
 		container.addChildren(button)
-
 	}
 	SelectableComponent.setFromArray(selectors)
 

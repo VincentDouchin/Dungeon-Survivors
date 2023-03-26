@@ -28,12 +28,11 @@ const DivineProtectionEntity = (entity: Entity) => {
 	spell.addComponent(new SpriteComponent(tile, { scale: 2, renderOrder: 1 }))
 	spell.addComponent(new AnimationComponent({ default: tile }))
 	spell.addComponent(new BodyComponent({}, [{
-		sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.PLAYER, contact: true, width: tile.width * 2, height: tile.height * 2
+		sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.PLAYER, contact: true, width: tile.width * 2, height: tile.height * 2,
 	}]))
 	spell.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 	spell.addComponent(new ExpirationComponent(120))
 	soundManager.play('effect', SOUNDS.Magic)
 	return spell
-
 }
 export default DivineProtectionEntity

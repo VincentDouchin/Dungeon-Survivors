@@ -1,9 +1,10 @@
-import { Component, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
-import { STATS } from './StatsComponent'
-import { Spell } from '../Constants/Spells'
+import type { Spell } from '../Constants/Spells'
 import { Stat } from '../Game/Stat'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
+import { STATS } from './StatsComponent'
 
 class SpellComponent extends Component {
 	spell: (entity: Entity) => void

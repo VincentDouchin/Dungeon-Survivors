@@ -1,6 +1,6 @@
 import { Component } from '../Globals/ECS'
-import { STATS } from './StatsComponent'
 import { Stat } from '../Game/Stat'
+import { STATS } from './StatsComponent'
 
 class ManaComponent extends Component {
 	mana = 100
@@ -9,6 +9,7 @@ class ManaComponent extends Component {
 	constructor() {
 		super()
 	}
+
 	fill() {
 		this.mana = this.maxMana.value
 	}

@@ -1,8 +1,9 @@
-import { Component, ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component, ECS } from '../Globals/ECS'
 
 import { ECSEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
 
 class SelectableComponent extends Component {
 	selectedTile?: Tile
@@ -16,8 +17,8 @@ class SelectableComponent extends Component {
 		this.selectedTile = selectedTile
 		this.unSelectedTile = unSelectedTile
 		this.onValidated = fn
-
 	}
+
 	static setFromArray(arr: Entity[], topDown = false) {
 		arr.forEach((entity, index) => {
 			if (index === 0) {
@@ -28,6 +29,7 @@ class SelectableComponent extends Component {
 			selectable.next[topDown ? INPUTS.MOVEUP : INPUTS.MOVERIGHT] = arr.at((index + 1) % arr.length)
 		})
 	}
+
 	static setFromGrid(grid: Entity[][]) {
 		for (let x = 0; x < grid.length; x++) {
 			const line = grid[x]
@@ -44,11 +46,7 @@ class SelectableComponent extends Component {
 			}
 		}
 	}
-
 }
-
-
-
 
 SelectableComponent.register()
 export default SelectableComponent

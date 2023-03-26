@@ -36,7 +36,7 @@ const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number
 			{
 				shaders:
 					[new BarShader(assets.UI.barfull.framed({ x: 16, y: 0 }, volumeWidth, volumeHeight).texture, getter() / max)],
-				scale: 1
+				scale: 1,
 			}))
 	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
 		if (entity.id === volumeFrame.id) {
@@ -66,7 +66,6 @@ const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number
 			soundManager.updateVolume()
 		}))
 		arrowSelect.next[index === 0 ? INPUTS.MOVELEFT : INPUTS.MOVERIGHT] = volumeFrame
-
 	})
 	frameSelect.next[INPUTS.MOVERIGHT] = arrowRight
 	frameSelect.next[INPUTS.MOVELEFT] = arrowLeft

@@ -1,15 +1,15 @@
-import AssetLoader, { loadImage } from './../Utils/AssetLoader'
-import { Background, UI, characters, effects, icons, others, weapons } from './../../assets/images/images'
-
-import { Arenas } from './../../assets/map/Map'
-import LDTKMap from '../Utils/LDTKMap'
+import type LDTKMap from '../Utils/LDTKMap'
 import Tile from '../Utils/Tile'
-import { sounds } from './../../assets/sounds/sounds'
+import AssetLoader, { loadImage } from './../Utils/AssetLoader'
+import type { Background, UI, characters, effects, icons, others, weapons } from './../../assets/images/images'
 
-const getFileName = (path: string) => path.split(/[./]/g).at(-2)??''
+import type { Arenas } from './../../assets/map/Map'
+import type { sounds } from './../../assets/sounds/sounds'
+
+const getFileName = (path: string) => path.split(/[./]/g).at(-2) ?? ''
 
 const loadCharacterTilesFromFolder = new AssetLoader<Tile>(getFileName)
-	.chain(async (x) => await loadImage(x.default))
+	.chain(async x => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x, { frames: 4, padding: true }))
 const loadTilesFromFolder = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
@@ -44,12 +44,12 @@ const framesNb: Record<effects, number> = {
 	'Snow': 7,
 	'beam': 4,
 	'healing': 4,
-	'CanonBall': 5
+	'CanonBall': 5,
 }
 const loadEffects = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
 	.chain((image, key) => Tile.fromImage(image, { frames: framesNb[key as effects] }))
-//! Assets
+// ! Assets
 const assets = {
 	characters: await loadCharacterTilesFromFolder.load<characters>(import.meta.glob('./../../assets/images/characters/*.png', { eager: true })),
 	UI: await loadTilesFromFolder.load<UI>(import.meta.glob('./../../assets/images/UI/*.png', { eager: true })),
@@ -60,6 +60,6 @@ const assets = {
 	effects: await loadEffects.load<effects>(import.meta.glob('./../../assets/images/effects/*.png', { eager: true })),
 	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.*', { eager: true })),
 	mapTiles: await loadTilesFromFolder.load<Arenas>(import.meta.glob('/assets/map/Arenas/**/*.png', { eager: true })),
-	mapData: await loadJSON.load<Arenas>(import.meta.glob('/assets/map/Arenas/*.json', { eager: true }))
+	mapData: await loadJSON.load<Arenas>(import.meta.glob('/assets/map/Arenas/*.json', { eager: true })),
 } as const
 export default assets

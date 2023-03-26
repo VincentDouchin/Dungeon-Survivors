@@ -1,5 +1,5 @@
-import Shader from './Shader'
 import { clock } from '../Globals/Initialize'
+import Shader from './Shader'
 import frag from './glsl/shimmer.frag?raw'
 import vert from './glsl/main.vert?raw'
 

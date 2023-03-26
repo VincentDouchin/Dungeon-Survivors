@@ -1,6 +1,6 @@
 import { Component } from '../Globals/ECS'
 import Coroutine from '../Globals/Coroutine'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
 
 class AnimationComponent extends Component {
 	tiles: { [key: string]: Tile }
@@ -11,7 +11,7 @@ class AnimationComponent extends Component {
 	frameCounter = 0
 	maxFrames: number
 	start: boolean
-	constructor(tiles: { [key: string]: Tile }, options?: { start?: boolean, frameRate?: number, selectedFrame?: number }) {
+	constructor(tiles: { [key: string]: Tile }, options?: { start?: boolean; frameRate?: number; selectedFrame?: number }) {
 		super()
 		const newOptions = Object.assign({ start: true, frameRate: 10, selectedFrame: 0 }, options)
 		this.tiles = tiles
@@ -22,11 +22,13 @@ class AnimationComponent extends Component {
 		this.currentState = Object.keys(tiles)[0]
 		this.lastState = this.currentState
 	}
+
 	setState(state: string) {
 		if (!this.tiles[state]) return
 		this.lastState = this.currentState
 		this.currentState = state
 	}
+
 	get frames() {
 		return this.tile.frames
 	}
@@ -34,12 +36,13 @@ class AnimationComponent extends Component {
 	get tile() {
 		return this.tiles[this.currentState]
 	}
+
 	playAnimation(animationsName?: string, duration?: number) {
 		this.start = true
 		const animation = animationsName ?? Object.keys(this.tiles)[0]
 		this.currentState = animation
 		const self = this
-		return new Promise<void>(resolve => {
+		return new Promise<void>((resolve) => {
 			new Coroutine(function* () {
 				let counter: number = (duration ?? 1)
 				while (counter > 0) {
@@ -50,10 +53,8 @@ class AnimationComponent extends Component {
 					yield
 				}
 				resolve()
-				return
 			})
 		})
-
 	}
 }
 AnimationComponent.register()

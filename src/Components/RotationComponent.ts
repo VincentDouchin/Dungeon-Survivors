@@ -1,6 +1,6 @@
 import { Component } from '../Globals/ECS'
-import { STATS } from './StatsComponent'
 import { Stat } from '../Game/Stat'
+import { STATS } from './StatsComponent'
 
 class RotationComponent extends Component {
 	rotation: number

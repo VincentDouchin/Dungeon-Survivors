@@ -1,4 +1,5 @@
-import { ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS } from '../Globals/ECS'
 
 import AIMovementComponent from '../Components/AIMovementComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
@@ -19,7 +20,8 @@ const CharmSpellEntity = (parent: Entity) => {
 		const enemyHealth = enemy.getComponent(HealthComponent)
 		if (position.position.distanceTo(parentPosition.position) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
 			return [...enemies, enemy]
-		} else {
+		}
+		else {
 			return enemies
 		}
 	}, [])
@@ -41,7 +43,6 @@ const CharmSpellEntity = (parent: Entity) => {
 		const damage = enemy.removeComponent(DamageComponent)
 		enemy.addComponent(new DamageComponent(damage.amount.base, [COLLISIONGROUPS.ENEMY], -1, 0))
 		enemy.addComponent(new HealthRegenComponent(-(0.1 * health.maxHealth.value), 60))
-
 	}
 }
 export default CharmSpellEntity

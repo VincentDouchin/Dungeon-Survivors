@@ -1,9 +1,10 @@
-import { Component, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
-import { ProjectileDefinition } from '../Constants/Weapons'
-import { SOUND } from '../Constants/Sounds'
-import { STATS } from './StatsComponent'
+import type { ProjectileDefinition } from '../Constants/Weapons'
+import type { SOUND } from '../Constants/Sounds'
 import { Stat } from '../Game/Stat'
+import { STATS } from './StatsComponent'
 
 class ShooterComponent extends Component {
 	timer: number
@@ -22,7 +23,6 @@ class ShooterComponent extends Component {
 		this.timer = Math.random() * this.delay.value
 		this.cooldown = shooter.cooldownAmount ?? 0
 		this.trigger = shooter.cooldownTrigger ?? 0
-
 	}
 }
 

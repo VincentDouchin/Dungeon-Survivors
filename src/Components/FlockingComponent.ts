@@ -11,6 +11,7 @@ class FlockingComponent extends Component {
 		this.main = main
 		this.distance = distance
 	}
+
 	static getGroup() {
 		return window.crypto.randomUUID() as flockingGroup
 	}

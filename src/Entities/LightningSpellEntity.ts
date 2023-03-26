@@ -23,7 +23,8 @@ const LightningSpellEntity = (entity: Entity) => {
 		const enemyHealth = enemy.getComponent(HealthComponent)
 		if (position.position.distanceTo(parentPosition.position) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
 			return [...enemies, enemy]
-		} else {
+		}
+		else {
 			return enemies
 		}
 	}, [])
@@ -46,21 +47,19 @@ const LightningSpellEntity = (entity: Entity) => {
 			const tile = assets.effects.lightning
 			lightning.addComponent(new SpriteComponent(tile))
 			const spellComponent = entity.getComponent(SpellComponent)
-			const animation = lightning.addComponent(new AnimationComponent({ default: tile, }, { frameRate: 4 }))
+			const animation = lightning.addComponent(new AnimationComponent({ default: tile }, { frameRate: 4 }))
 			lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
 			lightning.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 			lightning.addComponent(new BodyComponent({}, [{
-				width: 1, height: 1, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON
+				width: 1, height: 1, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON,
 			}]))
 			animation.playAnimation().then(() => {
 				lightning.destroy()
 				targeter.enabled = true
 			})
-			yield* waitFor(5)
+			yield * waitFor(5)
 		}
 		deleteSub
 	})
-
-
 }
 export default LightningSpellEntity

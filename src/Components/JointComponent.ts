@@ -1,4 +1,5 @@
-import { Component, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
 class JointComponent extends Component {
 	type

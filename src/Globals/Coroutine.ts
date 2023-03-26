@@ -14,15 +14,16 @@ class Coroutine {
 			}
 		}
 	}
+
 	generator: Generator
 	running = true
 	toStop = false
 	constructor(fn: (args: number) => Generator, duration?: number) {
-		const generatorFunction =
-			duration
+		const generatorFunction
+			= duration
 				? function* () {
 					for (let i = 0; i < duration - 1; i++) {
-						yield* fn(i)
+						yield * fn(i)
 					}
 				}
 				: fn
@@ -30,18 +31,21 @@ class Coroutine {
 		this.generator.next()
 		Coroutine.coroutines.push(this)
 	}
+
 	toggle() {
 		this.running = !this.running
 	}
+
 	resume() {
 		this.running = true
 	}
+
 	pause() {
 		this.running = false
 	}
+
 	stop() {
 		this.toStop = true
 	}
-
 }
 export default Coroutine

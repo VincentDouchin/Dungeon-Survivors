@@ -1,8 +1,8 @@
+import { AmbientLight } from 'three'
 import { ECS, Entity } from '../Globals/ECS'
 
-import { AmbientLight } from 'three'
 import BackgroundElementsComponent from '../Components/BackgroundElementsComponent'
-import { BackgroundOptions } from '../Constants/BackGrounds'
+import type { BackgroundOptions } from '../Constants/BackGrounds'
 import { ECSEVENTS } from '../Constants/Events'
 import LDTKMap from '../Utils/LDTKMap'
 import LightComponent from '../Components/LightComponent'
@@ -14,13 +14,13 @@ import assets from '../Globals/Assets'
 const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	const background = new Entity('background')
 	const position = background.addComponent(new PositionComponent(0, 0))
-	const level = new LDTKMap(assets.mapData[backgroundDefinition.level],assets.mapTiles[backgroundDefinition.level])
+	const level = new LDTKMap(assets.mapData[backgroundDefinition.level], assets.mapTiles[backgroundDefinition.level])
 	const tile = level.tile
 
 	const width = tile.width
 	const height = tile.height
 	const sprite = background.addComponent(new SpriteComponent(tile, { renderOrder: 0 }))
-	const cameraUnSubscriber = ECS.eventBus.subscribe(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number, y: number }) => {
+	const cameraUnSubscriber = ECS.eventBus.subscribe(ECSEVENTS.CAMERA_MOVE, ({ x, y }: { x: number; y: number }) => {
 		if (backgroundDefinition.infinite.x) {
 			sprite.texture.offset.x = x / width
 			position.x = x
@@ -58,7 +58,7 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 		effect: backgroundDefinition.effect,
 		effectDelay: backgroundDefinition.effectDelay,
 		lootables: backgroundDefinition.lootables,
-		obstacleDensity: backgroundDefinition.obstacleDensity
+		obstacleDensity: backgroundDefinition.obstacleDensity,
 	}))
 	background.onDestroy(() => {
 		cameraUnSubscriber()
@@ -79,8 +79,6 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 	if (backgroundDefinition.lightColor) {
 		background.addComponent(new LightComponent(backgroundDefinition.lightColor, 1, AmbientLight))
 	}
-
-
 
 	return background
 }

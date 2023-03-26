@@ -1,4 +1,3 @@
-import ButtonEntity from './ButtonEntity'
 import DIFFICULTY from '../Constants/DIfficulty'
 import { Entity } from '../Globals/ECS'
 import SelectableComponent from '../Components/SelectableComponent'
@@ -8,12 +7,13 @@ import TextComponent from '../Components/TextComponent'
 import Tile from '../Utils/Tile'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import { inputManager } from '../Globals/Initialize'
+import ButtonEntity from './ButtonEntity'
 
 const UIMapEntity = () => {
 	const ui = new Entity('ui map')
 
 	if (!State.difficulty || State.multiplayer === null) {
-		const showDifficulty = ()=>{
+		const showDifficulty = () => {
 			const difficultySelect = new Entity('difficulty select')
 			const difficultyText = new Entity('difficulty text')
 			difficultySelect.addChildren(difficultyText)
@@ -31,26 +31,26 @@ const UIMapEntity = () => {
 			})
 			SelectableComponent.setFromArray(difficultyButtons)
 		}
-		
+
 		const showOptions = () => {
 			if (State.multiplayer) {
 				const controls = new Entity('multiplayer controls')
-				let inputMethods :ReturnType<typeof inputManager.getInputMethods>
-				const selectedMethods : string[]=[]
-				const buttons:Entity[] = []
+				let inputMethods: ReturnType<typeof inputManager.getInputMethods>
+				const selectedMethods: string[] = []
+				const buttons: Entity[] = []
 				for (let i = 1; i <= 2; i++) {
 					let lastController = -1
 					const button = ButtonEntity(100, 10, 2, 'Choose controls', 2, () => {
 						inputMethods = inputManager.getInputMethods()
-						const possibleControllers = inputMethods.filter(([key])=>!selectedMethods.includes(key))
-						if(possibleControllers.length === 0)return 
-						lastController =(lastController+1)%possibleControllers.length
-						State.multiplayerControls[i-1] =possibleControllers[lastController][1] 
-						button.children.forEach(child=>{
+						const possibleControllers = inputMethods.filter(([key]) => !selectedMethods.includes(key))
+						if (possibleControllers.length === 0) return
+						lastController = (lastController + 1) % possibleControllers.length
+						State.multiplayerControls[i - 1] = possibleControllers[lastController][1]
+						button.children.forEach((child) => {
 							const text = child.getComponent(TextComponent)
-							if( text &&!text?.text.includes('Player')){
+							if (text && !text?.text.includes('Player')) {
 								const key = possibleControllers[lastController][0]
-								text.setText( key)
+								text.setText(key)
 								selectedMethods[i] = key
 							}
 						})
@@ -63,26 +63,27 @@ const UIMapEntity = () => {
 					button.addChildren(buttonText)
 					button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: i === 1 ? 1 : -1, y: -1 }))
 					controls.addChildren(button)
-					if(i === 2){
-						const okButton = ButtonEntity(10,10,2,'OK',2,()=>{
-							if(State.multiplayerControls.some(control =>control === null))return 
+					if (i === 2) {
+						const okButton = ButtonEntity(10, 10, 2, 'OK', 2, () => {
+							if (State.multiplayerControls.includes(null)) return
 							controls.destroy()
 							showDifficulty()
 						})
 						buttons.push(okButton)
-						okButton.addComponent(new UIPositionComponent({x:1,y:0},{x:-1,y:0}))
+						okButton.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
 						button.addChildren(okButton)
 					}
 				}
 				SelectableComponent.setFromArray(buttons)
-			}else {
+			}
+			else {
 				showDifficulty()
 			}
 		}
 
 		// ! MULTIPLAYER
 		const multiplayerSelect = new Entity('multiplayer select')
-		const multiplayerButtons = [false, true].map(multiplayer => {
+		const multiplayerButtons = [false, true].map((multiplayer) => {
 			const button = ButtonEntity(60, 10, 2, multiplayer ? 'Multiplayer' : 'Singleplayer', 2, () => {
 				State.multiplayer = multiplayer
 				multiplayerSelect.destroy()
@@ -94,8 +95,6 @@ const UIMapEntity = () => {
 		})
 		SelectableComponent.setFromArray(multiplayerButtons)
 		ui.addChildren(multiplayerSelect)
-
-
 	}
 	return ui
 }

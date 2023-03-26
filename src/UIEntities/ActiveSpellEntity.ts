@@ -24,11 +24,12 @@ const ActiveSpellEntity = () => {
 		}
 	})
 	let disabled = false
-	ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, mana => {
+	ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, (mana) => {
 		if (mana < 20) {
 			disabled = true
 			iconSprite.addShader(new ColorShader(1, 1, 1, 0.5))
-		} else if (disabled) {
+		}
+		else if (disabled) {
 			iconSprite.removeShader(ColorShader)
 		}
 	})

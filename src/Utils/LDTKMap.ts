@@ -1,7 +1,7 @@
-import { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
+import type { node } from '../Components/PathNodeComponent'
+import type { EntityInstance, LDTKMapDefinition, Level } from './../../ldtk'
 
-import Tile from './Tile'
-import { node } from '../Components/PathNodeComponent'
+import type Tile from './Tile'
 
 interface LDTKMap extends LDTKMapDefinition {
 
@@ -20,7 +20,8 @@ class LDTKMap implements LDTKMapDefinition {
 		Object.assign(this, data)
 		this.tile = tile
 	}
-	static getPropertiesOfEntity(level: Level,) {
+
+	static getPropertiesOfEntity(level: Level) {
 		return (entityInstance: EntityInstance) => {
 			return entityInstance.fieldInstances.reduce<entityInstanceFormatted>((props, fieldInstance) => {
 				const getValue = () => {
@@ -35,11 +36,10 @@ class LDTKMap implements LDTKMapDefinition {
 				y: -entityInstance.px[1] + level.pxHei / 2,
 				width: entityInstance.width,
 				height: entityInstance.height,
-				id: entityInstance.iid
+				id: entityInstance.iid,
 			})
 		}
 	}
-
 }
 
 export default LDTKMap

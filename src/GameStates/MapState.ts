@@ -1,5 +1,6 @@
 import { ECS, Entity } from '../Globals/ECS'
-import LDTKMap, { ldtkNode } from '../Utils/LDTKMap'
+import type { ldtkNode } from '../Utils/LDTKMap'
+import LDTKMap from '../Utils/LDTKMap'
 import { camera, engine, inputManager, render, world } from '../Globals/Initialize'
 
 import AnimationComponent from '../Components/AnimationComponent'
@@ -8,22 +9,22 @@ import CameraSystem from '../Systems/CameraSystem'
 import CameraTargetComponent from '../Components/CameraTargetComponent'
 import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
-import { GameState } from '../Globals/Engine'
+import type { GameState } from '../Globals/Engine'
 import INPUTS from '../Constants/InputsNames'
 import MovementSystem from '../Systems/MovementSystem'
 import PathEntity from '../Entities/PathEntity'
 import PathSystem from '../Systems/PathSystem'
 import PathWalkerComponent from '../Components/PathWalkerComponent'
-import PlayerSelectState from './PlayerSelectState'
 import PositionComponent from '../Components/PositionComponent'
 import RenderSystem from '../Systems/RenderSystem'
-import RunState from './RunState'
 import SelectionSystem from '../Systems/SelectionSystem'
 import SpriteComponent from '../Components/SpriteComponent'
 import State from '../Globals/State'
 import UIMapEntity from '../UIEntities/UIMapEntity'
 import assets from '../Globals/Assets'
 import { easeInOutQuart } from '../Utils/Tween'
+import RunState from './RunState'
+import PlayerSelectState from './PlayerSelectState'
 
 class MapState implements GameState {
 	map?: Entity
@@ -35,10 +36,12 @@ class MapState implements GameState {
 	render() {
 		render()
 	}
+
 	update() {
 		ECS.updateSystems()
 		world.step()
 	}
+
 	async set(previousState: Constructor<GameState> | null) {
 		const showMap = () => {
 			if (!level) return
@@ -58,7 +61,7 @@ class MapState implements GameState {
 			}
 		}
 		let wasEncounter = false
-		const map = new LDTKMap(assets.mapData['OVERWORLD'], assets.mapTiles['OVERWORLD'])
+		const map = new LDTKMap(assets.mapData.OVERWORLD, assets.mapTiles.OVERWORLD)
 		const level = map.levels[0]
 		const mapTile = map.tile
 
@@ -93,7 +96,6 @@ class MapState implements GameState {
 				camera.position.x = 0
 				let counter = 1
 				while (counter < 600) {
-
 					yield camera.position.y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
 					if (inputManager.getInput(INPUTS.SWITCH)?.active) {
 						counter += 10
@@ -102,18 +104,16 @@ class MapState implements GameState {
 						yield
 					}
 					counter++
-
 				}
 				title.destroy()
 				engine.setState(PlayerSelectState)
-				return
 			})
-		} else {
+		}
+		else {
 			showMap()
 		}
-
-
 	}
+
 	unset(newState: Constructor<GameState> | null) {
 		ECS.unRegisterSystems()
 		this.ui?.destroy()

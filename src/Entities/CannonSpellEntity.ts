@@ -5,18 +5,17 @@ import DamageComponent from '../Components/DamageComponent'
 import { Entity } from '../Globals/ECS'
 import ExpirationComponent from '../Components/ExpirationComponent'
 import PositionComponent from '../Components/PositionComponent'
-import ProjectileEntity from './ProjectileEntity'
 import RotationComponent from '../Components/RotationComponent'
 import { SOUNDS } from '../Constants/Sounds'
 import ShooterComponent from '../Components/ShooterComponent'
 import SpellComponent from '../Components/SpellComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import WeaponEntity from './WeaponEntity'
 import assets from '../Globals/Assets'
 import { playerGroup } from '../Constants/Weapons'
+import WeaponEntity from './WeaponEntity'
+import ProjectileEntity from './ProjectileEntity'
 
 const CannonSpellEntity = (entity: Entity) => {
-
 	const flintlock = entity.children.find(child => child.getComponent(ShooterComponent))
 
 	const cannon = WeaponEntity({
@@ -40,16 +39,16 @@ const CannonSpellEntity = (entity: Entity) => {
 					explosion.addComponent(new SpriteComponent(tile, { scale: 2 }))
 					const explosionAnimation = explosion.addComponent(new AnimationComponent({ default: tile }, { start: false, frameRate: 3 }))
 					explosion.addComponent(new BodyComponent({}, [{
-						group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width * 2, height: tile.height * 2, contact: false, sensor: true
+						group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width * 2, height: tile.height * 2, contact: false, sensor: true,
 					}]))
 					explosion.addComponent(new DamageComponent(entity.getComponent(SpellComponent).spellDamage.value, [COLLISIONGROUPS.ENEMY], -1, 10))
 					explosionAnimation.playAnimation().then(() => {
 						explosion.destroy()
 					})
-				}
+				},
 			}),
 			delay: 60,
-		}
+		},
 	}, entity, 0)
 	cannon.addComponent(new ExpirationComponent(300))
 	if (flintlock) {
@@ -59,6 +58,5 @@ const CannonSpellEntity = (entity: Entity) => {
 		})
 	}
 	entity.addChildren(cannon)
-
 }
 export default CannonSpellEntity

@@ -1,5 +1,5 @@
-import { Component } from '../Globals/ECS'
 import { Vector2 } from 'three'
+import { Component } from '../Globals/ECS'
 
 class PositionComponent extends Component {
 	x: number
@@ -9,12 +9,15 @@ class PositionComponent extends Component {
 		this.x = x
 		this.y = y
 	}
+
 	get position() {
 		return new Vector2(this.x, this.y)
 	}
+
 	distanceTo(position: PositionComponent) {
 		return this.position.distanceTo(position.position)
 	}
+
 	clone() {
 		return new PositionComponent(this.x, this.y)
 	}

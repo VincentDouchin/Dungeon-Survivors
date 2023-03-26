@@ -19,8 +19,8 @@ import assets from '../Globals/Assets'
 import { soundManager } from '../Globals/Initialize'
 import waitFor from '../Utils/WaitFor'
 
-const empty = assets.UI['healthBar']
-const full = assets.UI['healthFull']
+const empty = assets.UI.healthBar
+const full = assets.UI.healthFull
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
@@ -32,33 +32,29 @@ class HealthSystem extends System {
 				new Coroutine(function* () {
 					health.canTakeDamage = false
 					sprite.addShader(new ColorShader(1, 0, 0, 1))
-					yield* waitFor(30)
+					yield * waitFor(30)
 					if (sprite) {
 						sprite.removeShader(ColorShader)
 					}
 					health.canTakeDamage = true
-					return
 				})
 			}
 			if (sprite && amount < 0) {
 				ParticleEntity(entity, assets.effects.healing, { duration: 3, color: [0.9, 1, 0, 1] })
 				soundManager.play('effect', SOUNDS.HEAL)
-			} else if (health.sound) {
-				soundManager.play('effect', health.sound, { fade: true, })
+			}
+			else if (health.sound) {
+				soundManager.play('effect', health.sound, { fade: true })
 			}
 		})
 	}
+
 	update(entities: Entity[]) {
-		entities.forEach(entity => {
-
-
-
+		entities.forEach((entity) => {
 			const health = entity.getComponent(HealthComponent)
 			if (health.lastMaxHealth !== health.maxHealth.value) {
-
 				health.updateHealth(health.maxHealth.value - health.lastMaxHealth)
 				health.lastMaxHealth = health.maxHealth.value
-
 			}
 			const regen = entity.getComponent(HealthRegenComponent)
 			if (regen) {
@@ -85,7 +81,6 @@ class HealthSystem extends System {
 			}
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
-
 					const damage = otherEntity.getComponent(DamageComponent)
 					if (damage.target.includes(health.type)) {
 						const otherPosition = otherEntity.getComponent(PositionComponent)
@@ -94,7 +89,7 @@ class HealthSystem extends System {
 						const damageAmount = damage.calculateDamage(health.defense.value)
 
 						if (damage.sound) {
-							soundManager.play('effect', damage.sound,{fade:true})
+							soundManager.play('effect', damage.sound, { fade: true })
 						}
 
 						// ! Knockback
@@ -121,11 +116,8 @@ class HealthSystem extends System {
 				sprite.addShader(new ColorShader(1, 1, 1, 1))
 				entity.destroy()
 				sprite.addShader(new DissolveShader(90, false, 10))
-
-
 			}
 		})
 	}
-
 }
 export default HealthSystem

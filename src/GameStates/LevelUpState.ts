@@ -1,13 +1,14 @@
-import { ECS, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS } from '../Globals/ECS'
 import { engine, inputManager, render, soundManager } from '../Globals/Initialize'
 
-import { GameState } from '../Globals/Engine'
+import type { GameState } from '../Globals/Engine'
 import INPUTS from '../Constants/InputsNames'
 import RenderSystem from '../Systems/RenderSystem'
-import RunState from './RunState'
 import { SOUNDS } from '../Constants/Sounds'
 import SelectionSystem from '../Systems/SelectionSystem'
 import SkillMenuUIEntity from '../UIEntities/UISkillMenuEntity.ts'
+import RunState from './RunState'
 
 class LevelUpState implements GameState {
 	ui: Entity | null = null
@@ -17,19 +18,21 @@ class LevelUpState implements GameState {
 			engine.setState(RunState)
 		}
 	}
+
 	render() {
 		render()
 	}
+
 	set() {
 		soundManager.play('effect', SOUNDS.LEVEL_UP, { playbackRate: 0.5 })
 		RenderSystem.register()
 		SelectionSystem.register()
 		this.ui = SkillMenuUIEntity()
 	}
+
 	unset() {
 		this.ui?.destroy()
 		ECS.unRegisterSystems()
 	}
-
 }
 export default LevelUpState

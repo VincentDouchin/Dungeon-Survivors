@@ -1,8 +1,8 @@
 import { ECS, Entity } from '../Globals/ECS'
-import HEROS, { HeroDefinition, isUnlocked } from '../Constants/Heros'
+import type { HeroDefinition } from '../Constants/Heros'
+import HEROS, { isUnlocked } from '../Constants/Heros'
 
 import AnimationComponent from '../Components/AnimationComponent'
-import ButtonEntity from './ButtonEntity'
 import ColorShader from '../Shaders/ColorShader'
 import { ECSEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
@@ -18,10 +18,10 @@ import Tile from '../Utils/Tile'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
 import { engine } from '../Globals/Initialize'
+import ButtonEntity from './ButtonEntity'
 
 const UIPlayerSelectEntity = () => {
 	const ui = new Entity('player select ui')
-
 
 	// ! UI
 	const uiPosition = ui.addComponent(new UIPositionComponent({ x: 0, y: -3 }, { x: 0, y: 0 }))
@@ -110,14 +110,16 @@ const UIPlayerSelectEntity = () => {
 			selectable.onValidated = () => {
 				if (State.heros.has(hero)) {
 					State.heros.delete(hero)
-				} else if (State.heros.size < 2) {
+				}
+				else if (State.heros.size < 2) {
 					State.heros.add(hero)
 				}
 				heroSprites.forEach((sprite, hero) => {
 					if (State.heros.has(hero) && !withOutline.has(sprite)) {
 						sprite.addShader(new OutlineShader([1, 1, 1, 1]))
 						withOutline.add(sprite)
-					} else if (withOutline.has(sprite) && !State.heros.has(hero)) {
+					}
+					else if (withOutline.has(sprite) && !State.heros.has(hero)) {
 						sprite.removeShader(OutlineShader)
 						withOutline.delete(sprite)
 					}
@@ -125,10 +127,10 @@ const UIPlayerSelectEntity = () => {
 				const textValidate = validateButton.children[0].getComponent(TextComponent)
 				if (State.heros.size === 2) {
 					textValidate.setText('Start your adventure')
-				} else {
+				}
+				else {
 					textValidate.setText(`Choose ${2 - State.heros.size} characters`)
 				}
-
 			}
 			selectable.onSelected = () => {
 				statAmounts.forEach((statText, stat) => {
@@ -139,29 +141,30 @@ const UIPlayerSelectEntity = () => {
 					statText.setText(text)
 				})
 			}
-		} else {
+		}
+		else {
 			heroSprite.addShader(new ColorShader(0, 0, 0, 1))
 			const lock = new Entity('lock')
 			lock.addComponent(new SpriteComponent(assets.icons.lock, { scale: 2 }))
 			lock.addComponent(new UIPositionComponent())
 			characterFrame.addChildren(lock)
 		}
-
 	})
-	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, entity => {
+	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
 		const allFrames = characterFrames.flat()
 		if (allFrames.some(frame => frame.id === entity.id)) {
-			allFrames.forEach(frame => {
+			allFrames.forEach((frame) => {
 				if (entity.id === frame.id) {
 					frame.getComponent(SpriteComponent).removeShader(ColorShader)
-				} else {
+				}
+				else {
 					frame.getComponent(SpriteComponent).addShader(new ColorShader(1, 1, 1, 0.8))
 				}
 			})
 		}
 	})
 	SelectableComponent.setFromGrid(characterFrames)
-	characterFrames[1].forEach(characterFrame => {
+	characterFrames[1].forEach((characterFrame) => {
 		characterFrame.getComponent(SelectableComponent).next[INPUTS.MOVEDOWN] = validateButton
 	})
 	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1][1]

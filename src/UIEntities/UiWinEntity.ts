@@ -22,10 +22,9 @@ const UIWinEntity = () => {
 	selectText.addComponent(new SpriteComponent(Tile.empty(200, 30)))
 	selectText.addComponent(new UIPositionComponent().bottom())
 
-	const unlockedHeros = HEROS.filter((hero) => !isUnlocked(hero))
+	const unlockedHeros = HEROS.filter(hero => !isUnlocked(hero))
 	const winText = unlockedHeros.length > 0 ? 'Select a character to unlock' : 'Congratulations, you finished the game!'
 	selectText.addComponent(new TextComponent(winText, { size: 32, outlineWidth: 2 }))
-
 
 	const heros = unlockedHeros.map((hero, index) => {
 		const heroEntity = new Entity('select hero')
@@ -33,7 +32,6 @@ const UIWinEntity = () => {
 
 		heroEntity.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }).offsetX(unlockedHeros.length, index))
 		heroEntity.addComponent(new SelectableComponent(undefined, undefined, () => {
-
 			new Coroutine(function* (i) {
 				yield heroSprite.getUniforms(ColorShader).color.value = [i / 180, i / 180, i / 180, 1]
 				heroSprite.render()

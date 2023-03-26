@@ -1,6 +1,7 @@
-import { Component, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
-import PositionComponent from './PositionComponent'
+import type PositionComponent from './PositionComponent'
 
 class DroppableComponent extends Component {
 	parentId?: string

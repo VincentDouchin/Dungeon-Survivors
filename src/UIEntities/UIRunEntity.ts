@@ -1,21 +1,21 @@
 import { ECS, Entity } from '../Globals/ECS'
 
+import INPUTS from '../Constants/InputsNames'
+import PauseState from '../GameStates/PauseState'
+import State from '../Globals/State'
+import UIPositionComponent from '../Components/UIPositionComponent'
+import assets from '../Globals/Assets'
+import { engine } from '../Globals/Initialize'
 import ActiveSpellEntity from './ActiveSpellEntity'
 import BoostsEntity from './BoostsEntity'
 import ButtonEntity from './ButtonEntity'
 import DpadInputEntity from './DpadInputEntity'
-import INPUTS from '../Constants/InputsNames'
 import LevelDisplayEntity from './LevelDisplayEntity'
 import ManaBarEntity from './ManaBarEntity'
-import PauseState from '../GameStates/PauseState'
 import SpellButtonEntity from './SpellButtonEntity'
-import State from '../Globals/State'
 import SwitchButtonEntity from './SwitchButtonEntity'
 import TimeCounterEntity from './TimeCounterEntity'
-import UIPositionComponent from '../Components/UIPositionComponent'
 import XPBarEntity from './XPBarEntity'
-import assets from '../Globals/Assets'
-import { engine } from '../Globals/Initialize'
 
 const UIRunEntity = () => {
 	const ui = new Entity('ui run')
@@ -38,11 +38,11 @@ const UIRunEntity = () => {
 		skillbutton.addChildren(SwitchButtonEntity())
 		mobileEntities.push(dpad, skillbutton)
 	}
-	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async state => {
+	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async (state) => {
 		if (!state) return
 		await Promise.all([
 			...[level, activeSpell, timer].map(entity => entity.getComponent(UIPositionComponent).moveTo(2, 10)),
-			...mobileEntities.map(entity => entity.getComponent(UIPositionComponent).moveTo(-2, 10))
+			...mobileEntities.map(entity => entity.getComponent(UIPositionComponent).moveTo(-2, 10)),
 		])
 		ECS.eventBus.publish(INPUTS.PAUSE, 0)
 		engine.setState(PauseState)

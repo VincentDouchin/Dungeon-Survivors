@@ -7,12 +7,12 @@ import Coroutine from '../Globals/Coroutine'
 import DroppableComponent from '../Components/DroppableComponent'
 import { ECSEVENTS } from '../Constants/Events'
 import HealthComponent from '../Components/HealthComponent'
-import { LootableOptions } from '../Constants/Lootables'
+import type { LootableOptions } from '../Constants/Lootables'
 import PositionComponent from '../Components/PositionComponent'
-import PotionEntity from './PotionEntity'
 import SpriteComponent from '../Components/SpriteComponent'
 import Tile from '../Utils/Tile'
 import waitFor from '../Utils/WaitFor'
+import PotionEntity from './PotionEntity'
 
 const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: number) => {
 	const lootable = new Entity('lootable')
@@ -21,11 +21,11 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 	lootable.addComponent(new BodyComponent(
 		{ type: 'fixed' },
 		[
-			{ width: tile.width, height: tile.height, contact: false, group: COLLISIONGROUPS.LOOT, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.WEAPON] }
+			{ width: tile.width, height: tile.height, contact: false, group: COLLISIONGROUPS.LOOT, canCollideWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.WEAPON] },
 		]))
 	lootable.addComponent(new HealthComponent(30, COLLISIONGROUPS.LOOT, false))
 	lootable.addComponent(new DroppableComponent([
-		PotionEntity
+		PotionEntity,
 	]))
 	const createParticle = () => {
 		const buffer = particle.buffers[Math.floor(Math.random() * particle.frames)]
@@ -42,9 +42,7 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 				yield
 			}
 			part.destroy()
-
-		},)
-
+		})
 	}
 	const particleSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
 		if (entity === lootable) {
@@ -60,7 +58,7 @@ const LootableEntity = ({ tile, particle }: LootableOptions) => (x: number, y: n
 		new Coroutine(function* () {
 			for (let i = 0; i < particleNb; i++) {
 				createParticle()
-				yield* waitFor(10 * Math.random())
+				yield * waitFor(10 * Math.random())
 			}
 		})
 	})

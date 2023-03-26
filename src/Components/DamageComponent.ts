@@ -1,7 +1,7 @@
 import { Component } from '../Globals/ECS'
-import { SOUND } from '../Constants/Sounds'
-import { STATS } from './StatsComponent'
+import type { SOUND } from '../Constants/Sounds'
 import { Stat } from '../Game/Stat'
+import { STATS } from './StatsComponent'
 
 class DamageComponent extends Component {
 	amount: Stat
@@ -20,6 +20,7 @@ class DamageComponent extends Component {
 		this.target = target
 		this.destroyOnHit = destroyOnHit
 	}
+
 	calculateDamage(defense: number) {
 		if (this.amount.value < 0) return this.amount.value
 		this.crit = this.critChance.value > Math.random()

@@ -1,7 +1,8 @@
-import { Component, Entity } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
-import { Arenas } from '../../assets/map/Map'
-import { enemyWaveName } from '../Constants/EnemyEncounters'
+import type { Arenas } from '../../assets/map/Map'
+import type { enemyWaveName } from '../Constants/EnemyEncounters'
 
 export interface node {
 	id: number
@@ -32,9 +33,11 @@ class PathNodeComponent extends Component {
 		this.nodes = nodes
 		this.options = options
 	}
+
 	next(direction: nodeDirection) {
 		return this.nodes.get(this.options[direction])
 	}
+
 	get possibleDirections() {
 		const directions = ['left', 'right', 'top'] as nodeDirection[]
 		return directions.filter(direction => this.options[direction]).length

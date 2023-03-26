@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import BoostComponent from '../Components/BoostComponent'
@@ -19,6 +20,7 @@ class PickupSystem extends System {
 	constructor() {
 		super(XPPickerComponent)
 	}
+
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
 			const body = entity.getComponent(BodyComponent)
@@ -27,17 +29,14 @@ class PickupSystem extends System {
 			const xpPicker = entity.getComponent(XPPickerComponent)
 			const mana = entity.getComponent(ManaComponent)
 			body.contacts((otherEntity: Entity) => {
-
 				const otherBody = otherEntity.getComponent(BodyComponent)
 				const otherPosition = otherEntity.getComponent(PositionComponent)
 				const x = position.x - otherPosition.x
 				const y = position.y - otherPosition.y
 				const orientation = { x: x > 0 ? 1 : -1, y: y > 0 ? 1 : -1 }
-				const distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
+				const distance = Math.sqrt(x ** 2 + y ** 2)
 				const force = otherBody.moveForce.value * 1 / distance
 				otherBody.body?.applyImpulse({ x: force * orientation.x, y: force * orientation.y }, true)
-
-
 			}, COLLISIONGROUPS.SENSOR)
 			body.contacts((otherEntity: Entity) => {
 				const xp = otherEntity.getComponent(XPComponent)
@@ -61,9 +60,7 @@ class PickupSystem extends System {
 					stats?.boosts.push(boost)
 					ParticleEntity(entity, assets.effects.healing, { duration: 5, frameRate: 10, color: boost.color })
 					soundManager.play('effect', SOUNDS.BOOST)
-
 				}
-
 			}, COLLISIONGROUPS.PLAYER)
 		})
 	}

@@ -2,7 +2,7 @@ import AIMovementComponent from '../../Components/AIMovementComponent'
 import Coroutine from '../../Globals/Coroutine'
 import Enemies from '../../Constants/Enemies'
 import EnemyEntity from '../../Entities/EnemyEntity'
-import { Entity } from '../../Globals/ECS'
+import type { Entity } from '../../Globals/ECS'
 import LevelComponent from '../../Components/LevelComponent'
 import PositionComponent from '../../Components/PositionComponent'
 import RangedComponent from '../../Components/RangedComponent'
@@ -17,7 +17,7 @@ const VampireLordTransform = (boss: Entity) => {
 		bat.getComponent(AIMovementComponent).seekingDistance = 500
 		bat.addComponent(new RangedComponent())
 		const batCoroutine = new Coroutine(function* () {
-			yield* waitFor(500)
+			yield * waitFor(500)
 			bat.destroy()
 		})
 		bat.onDestroy(() => {

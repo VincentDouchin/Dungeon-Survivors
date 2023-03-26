@@ -2,7 +2,7 @@ import BodyComponent from '../Components/BodyComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import DamageComponent from '../Components/DamageComponent'
 import { Entity } from '../Globals/ECS'
-import PositionComponent from '../Components/PositionComponent'
+import type PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import assets from '../Globals/Assets'
 
@@ -11,7 +11,7 @@ const PotionEntity = (position: PositionComponent) => {
 	const tile = assets.other.potion
 	potion.addComponent(new SpriteComponent(tile))
 	potion.addComponent(new BodyComponent({ type: 'fixed' }, [
-		{ width: tile.width, height: tile.height, sensor: true, contact: false, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] }
+		{ width: tile.width, height: tile.height, sensor: true, contact: false, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] },
 	]))
 	potion.addComponent(position)
 	potion.addComponent(new DamageComponent(-30, [COLLISIONGROUPS.PLAYER], 1))

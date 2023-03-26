@@ -1,15 +1,15 @@
 import { ECS, Entity } from '../Globals/ECS'
 
-import ButtonEntity from './ButtonEntity'
 import INPUTS from '../Constants/InputsNames'
 import RunState from '../GameStates/RunState'
 import SelectableComponent from '../Components/SelectableComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
-import VolumeBarEntity from './VolumeBarEntity'
 import assets from '../Globals/Assets'
 import { engine } from '../Globals/Initialize'
 import saveData from '../Globals/SaveManager'
+import VolumeBarEntity from './VolumeBarEntity'
+import ButtonEntity from './ButtonEntity'
 
 const UIPauseEntity = () => {
 	const uiPause = new Entity('ui pause')
@@ -20,7 +20,7 @@ const UIPauseEntity = () => {
 	const resume = ButtonEntity(30, 8, 2, 'Resume', 1.5, () => {
 		ECS.eventBus.publish(INPUTS.PAUSE, 1)
 	})
-	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async state => {
+	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async (state) => {
 		if (!state) return
 		await framePosition.moveTo(-2, 10)
 		ECS.eventBus.publish(INPUTS.PAUSE, 0)

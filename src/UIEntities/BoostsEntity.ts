@@ -16,7 +16,7 @@ const BoostsEntity = () => {
 		skillIcon.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
 		const amount = State.skills.filter(s => s.name === skill.name).length
 		if (amount > 1) {
-			skillIcon.addComponent(new TextComponent(String(amount), { outlineWidth: 1, }))
+			skillIcon.addComponent(new TextComponent(String(amount), { outlineWidth: 1 }))
 		}
 		lastEntity.addChildren(skillIcon)
 		lastEntity = skillIcon

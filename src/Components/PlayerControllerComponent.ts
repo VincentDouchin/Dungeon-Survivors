@@ -5,8 +5,6 @@ class PlayerControllerComponent extends Component {
 	constructor(enabled?: boolean) {
 		super()
 		this.enabled = enabled ?? true
-
-
 	}
 }
 PlayerControllerComponent.register()

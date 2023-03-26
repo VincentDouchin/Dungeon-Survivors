@@ -2,10 +2,10 @@ import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, P
 import RAPIER, { World } from '@dimforge/rapier2d-compat'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import Engine from './Engine'
-import INPUTS from '../Constants/InputsNames'
-import InputManager from './InputManager'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+import INPUTS from '../Constants/InputsNames'
+import Engine from './Engine'
+import InputManager from './InputManager'
 import SoundManager from './SoundManager'
 import assets from './Assets'
 
@@ -16,15 +16,15 @@ const engine = new Engine()
 // ! Clock
 const clock = new Clock()
 
-//! World 
+// ! World
 await RAPIER.init()
 const world = new World({ x: 0, y: 0 })
 
-//! Camera
+// ! Camera
 const createCamera = () => {
 	const aspect = window.innerWidth / window.innerHeight
 	const frustumSize = 300
-	const camera = new OrthographicCamera(frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000000)
+	const camera = new OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 1000000)
 	// window.addEventListener('resize', () => {
 	// 	const aspect = window.innerWidth / window.innerHeight;
 	// 	camera.left = - frustumSize * aspect / 2
@@ -38,37 +38,35 @@ const createCamera = () => {
 	return camera
 }
 
-//! Renderer
+// ! Renderer
 const createRenderer = () => {
-	const renderer = new WebGLRenderer({ alpha: true, })
+	const renderer = new WebGLRenderer({ alpha: true })
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
 		renderer.setSize(window.innerWidth, window.innerHeight)
 	})
-	renderer.setClearColor(0xffffff, 0)
+	renderer.setClearColor(0xFFFFFF, 0)
 	renderer.autoClear = false
 	return renderer
 }
 const renderer = createRenderer()
 
-
 document.body.appendChild(renderer.domElement)
 
-//! Cameras
+// ! Cameras
 const UICamera = createCamera()
 const camera = createCamera()
 
-//! Scenes
+// ! Scenes
 const UIScene = new Scene()
 const scene = new Scene()
 
-
-//! Lights
+// ! Lights
 const lightScene = new Scene()
 const background = new Mesh(
 	new PlaneGeometry(window.innerWidth, window.innerHeight),
-	new MeshStandardMaterial({ color: 0xffffff })
+	new MeshStandardMaterial({ color: 0xFFFFFF }),
 )
 background.position.set(0, 0, 0)
 lightScene.add(background)
@@ -76,14 +74,14 @@ const lightsTarget = new WebGLRenderTarget(window.innerWidth, window.innerHeight
 const composer = new EffectComposer(renderer)
 const vignette = new ShaderMaterial({
 	transparent: true,
-	vertexShader:/*glsl*/`
+	vertexShader: /* glsl */`
 	varying vec2 vUv;
 	void main() {
 		vUv = uv;
 		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
 		gl_Position = projectionMatrix * modelViewPosition;
 	}`,
-	fragmentShader:/*glsl*/`
+	fragmentShader: /* glsl */`
 	varying vec2 vUv;
 	void main() {
 		vec2 vignetteUV = vUv;
@@ -91,7 +89,7 @@ const vignette = new ShaderMaterial({
 		float vig = vignetteUV.x*vignetteUV.y * 15.0; // multiply with sth for intensity
 		vig = pow(vig, 0.15); // change pow for modifying the extend of the  vignette
 		gl_FragColor = vec4(0,0,0,1.-vig);
-	}`
+	}`,
 
 })
 composer.addPass(new ShaderPass(vignette))
@@ -117,7 +115,7 @@ composer.addPass(new ShaderPass(vignette))
 // 	}`
 // })))
 
-//! Render
+// ! Render
 const render = () => {
 	background.position.set(camera.position.x, camera.position.y, 0)
 	renderer.setRenderTarget(lightsTarget)
@@ -129,11 +127,10 @@ const render = () => {
 	renderer.render(UIScene, UICamera)
 }
 
-//! Inputs
-const inputManager = new InputManager( Object.values(INPUTS))
+// ! Inputs
+const inputManager = new InputManager(Object.values(INPUTS))
 
-//! Sound
+// ! Sound
 const soundManager = new SoundManager(assets.sounds)
 
 export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene, soundManager, engine }
-

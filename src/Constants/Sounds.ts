@@ -1,4 +1,4 @@
-import { sounds } from '../../assets/sounds/sounds'
+import type { sounds } from '../../assets/sounds/sounds'
 
 export const SOUNDS: Record<string, sounds[]> = {
 	Magic: ['10_human_special_atk_2'],
@@ -21,7 +21,7 @@ export const SOUNDS: Record<string, sounds[]> = {
 	ARROW_HIT: ['48_Bow_hit_02'],
 	GUN: ['02_Fire_explosion_02_small'],
 	SHURIKEN: ['29_swoosh_02', '30_swoosh_03'],
-	ARROW_VOLLEY: ['60_Special_move_02']
+	ARROW_VOLLEY: ['60_Special_move_02'],
 
 }
 export const MUSICS: Record<string, sounds[]> = {

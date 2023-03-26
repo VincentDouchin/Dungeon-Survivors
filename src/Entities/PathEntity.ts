@@ -1,5 +1,6 @@
 import { ECS, Entity } from '../Globals/ECS'
-import PathNodeComponent, { node } from '../Components/PathNodeComponent'
+import type { node } from '../Components/PathNodeComponent'
+import PathNodeComponent from '../Components/PathNodeComponent'
 
 import AnimationComponent from '../Components/AnimationComponent'
 import { ECSEVENTS } from '../Constants/Events'
@@ -52,8 +53,5 @@ const PathEntity = (nodes: node[]) => {
 	// 	return nodeEntity
 	// }
 	// return createPath(startNode, true)
-
-
-
 }
 export default PathEntity

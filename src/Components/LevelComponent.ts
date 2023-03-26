@@ -6,8 +6,9 @@ class LevelComponent extends Component {
 	constructor() {
 		super()
 	}
+
 	nextLevel(level = this.level) {
-		return Math.pow(level, 0.7) * 15 + 25
+		return level ** 0.7 * 15 + 25
 	}
 }
 LevelComponent.register()

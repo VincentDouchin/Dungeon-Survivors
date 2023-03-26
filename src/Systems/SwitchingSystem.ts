@@ -1,4 +1,5 @@
-import { ECS, Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { ECS, System } from '../Globals/ECS'
 
 import AIMovementComponent from '../Components/AIMovementComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
@@ -19,10 +20,11 @@ class SwitchingSystem extends System {
 	constructor() {
 		super(SwitchingComponent)
 	}
+
 	update(entities: Entity[]) {
 		const toSwitch = inputManager.getInput(INPUTS.SWITCH)?.once && entities.length > 1
 
-		const needsSwitch = entities.every(entity => {
+		const needsSwitch = entities.every((entity) => {
 			const switcher = entity.getComponent(SwitchingComponent)
 			return switcher.initiated && !switcher.main
 		})
@@ -30,7 +32,7 @@ class SwitchingSystem extends System {
 			this.setFollower.getComponent(AIMovementComponent).follower = entities.find(other => other !== this.setFollower && other.getComponent(SwitchingComponent).main)
 			this.setFollower = null
 		}
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			const switcher = entity.getComponent(SwitchingComponent)
 			if (!switcher.initiated) {
 				this.addComponents(entity, switcher.main)
@@ -45,9 +47,8 @@ class SwitchingSystem extends System {
 				switcher.main = true
 			}
 		})
-
-
 	}
+
 	addComponents(entity: Entity, main: boolean) {
 		if (main) {
 			const spell = entity.getComponent(SpellComponent)
@@ -56,7 +57,8 @@ class SwitchingSystem extends System {
 			entity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 1, 1]))
 			entity.addComponent(new CameraTargetComponent())
 			entity.removeComponent(AIMovementComponent)
-		} else {
+		}
+		else {
 			const ranged = entity.getComponent(RangedComponent)
 			entity.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: ranged ? 50 : 30, followingDistance: 70 }))
 			this.setFollower = entity
