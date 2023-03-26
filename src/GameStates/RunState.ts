@@ -1,11 +1,9 @@
-import { ECS, Entity } from '../Globals/ECS'
 import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
-import ENEMYWAVES, { enemyWaveName } from '../Constants/EnemyEncounters'
 import { engine, inputManager, render, soundManager, world } from '../Globals/Initialize'
 
 import AIMovementSystem from '../Systems/AIMovementSystem'
 import AnimationSystem from '../Systems/AnimationSystem'
-import { Arenas } from '../../assets/map/Map'
+import type { Arenas } from '../../assets/map/Map'
 import BACKGROUNDS from '../Constants/BackGrounds'
 import BackgroundElementSpawnerSystem from '../Systems/BackgroundElementSpawnerSystem'
 import BackgroundEntity from '../Entities/BackgroundEntity'
@@ -13,20 +11,20 @@ import BodyCreationSystem from '../Systems/BodyCreationSystem'
 import CameraSystem from '../Systems/CameraSystem'
 import Coroutine from '../Globals/Coroutine'
 import DroppingSystem from '../Systems/DroppingSystem'
-import Encounter from '../Game/Encounter'
+import { ECS } from '../Globals/ECS'
+import ENEMYWAVES from '../Constants/EnemyEncounters'
+import type Encounter from '../Game/Encounter'
+import type { Entity } from '../Globals/ECS'
 import ExpirationSystem from '../Systems/ExpirationSystem'
-import GameOverState from './GameOverState'
-import { GameState } from '../Globals/Engine'
+import type { GameState } from '../Globals/Engine'
 import HealthSystem from '../Systems/HealthSystem'
+import INPUTS from '../Constants/InputsNames'
 import LevelComponent from '../Components/LevelComponent'
-import LevelUpState from './LevelUpState'
 import LightingSystem from '../Systems/LightingSystem'
 import { MUSICS } from '../Constants/Sounds'
 import ManaComponent from '../Components/ManaComponent'
-import MapState from './MapState'
 import MinionSpawnerSytem from '../Systems/MinionSpawnerSystem'
 import MovementSystem from '../Systems/MovementSystem'
-import PauseState from './PauseState'
 import PickupSystem from '../Systems/PickupSystem'
 import PlayerEntity from '../Entities/PlayerEntity'
 import PortalSystem from '../Systems/PortalSystem'
@@ -42,7 +40,12 @@ import SwitchingComponent from '../Components/SwitchingComponent'
 import SwitchingSystem from '../Systems/SwitchingSystem'
 import TutorialEntity from '../UIEntities/TutorialEntity'
 import UIRunEntity from '../UIEntities/UIRunEntity'
+import type { enemyWaveName } from '../Constants/EnemyEncounters'
 import waitFor from '../Utils/WaitFor'
+import PauseState from './PauseState'
+import MapState from './MapState'
+import LevelUpState from './LevelUpState'
+import GameOverState from './GameOverState'
 
 class RunState implements GameState {
 	ui?: Entity
@@ -60,12 +63,16 @@ class RunState implements GameState {
 	update() {
 		world.step()
 		ECS.updateSystems()
+		if (inputManager.getInput(INPUTS.PAUSE).once) {
+			engine.setState(PauseState)
+		}
 	}
+
 	render() {
 		render()
 	}
-	set(oldState: Constructor<GameState>, options: { background: Arenas, enemies: enemyWaveName }) {
 
+	set(oldState: Constructor<GameState>, options: { background: Arenas; enemies: enemyWaveName }) {
 		inputManager.enable('dpad')
 		inputManager.enable('pauseButton')
 		inputManager.enable('switchButton')
@@ -92,7 +99,7 @@ class RunState implements GameState {
 		this.ui = UIRunEntity()
 		this.encounter?.resume()
 		this.timer = new Coroutine(function* () {
-			yield* waitFor(60)
+			yield * waitFor(60)
 			State.timer++
 			ECS.eventBus.publish(ECSEVENTS.TIMER, State.timer)
 		}, Infinity)
@@ -113,12 +120,12 @@ class RunState implements GameState {
 			this.background = BackgroundEntity(backgroundDefinition)
 			// !PLAYERS
 			const heros = [...State.heros]
-			if(!heros.length) return 
+			if (!heros.length) return
 			this.players.add(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel))
 			this.players.add(PlayerEntity(heros[1], false, this.stats[1], this.mana, this.playerLevel))
 
-			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, skill => {
-				this.stats.forEach(stat => {
+			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
+				this.stats.forEach((stat) => {
 					stat.setModifier(skill.statName, skill.amount)
 				})
 			}))
@@ -136,14 +143,14 @@ class RunState implements GameState {
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
 				if (this.players.has(entity) && !loop && amount < 0) {
-					this.players.forEach(player => {
-						if (player != entity) {
+					this.players.forEach((player) => {
+						if (player !== entity) {
 							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
 						}
 					})
 				}
 			}))
-			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, entity => {
+			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 				if (this.players.has(entity)) {
 					this.players.delete(entity)
 					if (this.players.size === 0) {
@@ -161,11 +168,10 @@ class RunState implements GameState {
 				const tutorial = TutorialEntity()
 				this.tutorialShown = true
 				this.tutoCoroutine = new Coroutine(function* () {
-					yield* waitFor(600)
+					yield * waitFor(600)
 					tutorial.destroy()
 				})
 			}
-
 		} break
 		}
 		soundManager.resume(this.music)
@@ -182,8 +188,8 @@ class RunState implements GameState {
 		ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
 		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, this.playerLevel.level)
 		ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.encounter?.level.level ?? 0)
-
 	}
+
 	unset(newState: Constructor<GameState>) {
 		ECS.unRegisterSystems()
 		inputManager.disable('dpad')

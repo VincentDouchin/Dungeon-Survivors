@@ -1,23 +1,31 @@
-import { ECS, Entity } from '../Globals/ECS'
+import { engine, inputManager, render } from '../Globals/Initialize'
 
 import CameraSystem from '../Systems/CameraSystem'
-import { GameState } from '../Globals/Engine'
+import { ECS } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import type { GameState } from '../Globals/Engine'
+import INPUTS from '../Constants/InputsNames'
 import RenderSystem from '../Systems/RenderSystem'
 import SelectionSystem from '../Systems/SelectionSystem'
 import State from '../Globals/State'
 import TutorialEntity from '../UIEntities/TutorialEntity'
 import UIPauseEntity from '../UIEntities/UIPauseEntity'
-import { render } from '../Globals/Initialize'
+import RunState from './RunState'
 
 class PauseState implements GameState {
 	ui?: Entity
 	tutorial?: Entity
 	update() {
 		ECS.updateSystems()
+		if (inputManager.getInput(INPUTS.PAUSE).once) {
+			engine.setState(RunState)
+		}
 	}
+
 	render() {
 		render()
 	}
+
 	set() {
 		RenderSystem.register()
 		SelectionSystem.register()
@@ -27,6 +35,7 @@ class PauseState implements GameState {
 			this.tutorial = TutorialEntity()
 		}
 	}
+
 	unset() {
 		ECS.unRegisterSystems()
 		this.ui?.destroy()
