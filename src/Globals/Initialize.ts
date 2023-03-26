@@ -3,13 +3,10 @@ import RAPIER, { World } from '@dimforge/rapier2d-compat'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import Engine from './Engine'
-import GamepadController from '../InputControllers/GamepadController'
 import INPUTS from '../Constants/InputsNames'
 import InputManager from './InputManager'
-import KeyboardController from '../InputControllers/KeyboardController'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import SoundManager from './SoundManager'
-import TouchController from '../InputControllers/TouchController'
 import assets from './Assets'
 
 // ! Engine
@@ -134,8 +131,6 @@ const render = () => {
 
 //! Inputs
 const inputManager = new InputManager( Object.values(INPUTS))
-inputManager.registerControllers(KeyboardController,GamepadController,TouchController)
-
 
 //! Sound
 const soundManager = new SoundManager(assets.sounds)
