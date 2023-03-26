@@ -38,8 +38,8 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			ECS.eventBus.publish(INPUTS.AXISX, positionX)
-			ECS.eventBus.publish(INPUTS.AXISY, positionY)
+			ECS.eventBus.publish(positionX>0?INPUTS.MOVERIGHT:INPUTS.MOVELEFT, Math.abs(positionX))
+			ECS.eventBus.publish(positionY>0?INPUTS.MOVEUP:INPUTS.MOVEDOWN, Math.abs(positionY))
 		}
 	})
 	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
@@ -47,8 +47,9 @@ const DpadInputEntity = () => {
 			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
-			ECS.eventBus.publish(INPUTS.AXISX, 0)
-			ECS.eventBus.publish(INPUTS.AXISY, 0)
+			for (const inputName of [INPUTS.MOVEDOWN,INPUTS.MOVELEFT,INPUTS.MOVERIGHT,INPUTS.MOVEUP]){
+				ECS.eventBus.publish(inputName, 0)
+			}
 		}
 	})
 	dpad.onDestroy(() => {
