@@ -1,13 +1,13 @@
 import type { Entity } from '../Globals/ECS'
-import INPUTS from './InputsNames'
+import type { INPUTNAME } from '../Globals/InputManager'
 import type PositionComponent from '../Components/PositionComponent'
-import { Skill } from './Skills'
-import Tile from '../Utils/Tile'
+import type Tile from '../Utils/Tile'
+import type { Skill } from './Skills'
 
 export enum UIEVENTS {
 	UI_XP = 'UI_XP',
 	UI_LEVEL = 'UI_LEVEL',
-	ENEMY_LEVEL = 'ENEMY_LEVEL'
+	ENEMY_LEVEL = 'ENEMY_LEVEL',
 }
 
 export enum ECSEVENTS {
@@ -32,12 +32,12 @@ export enum ECSEVENTS {
 	XP_UP = 'XP_UP',
 }
 export type EventMap = {
-	[ECSEVENTS.CAMERA_MOVE]: { x: number, y: number }
+	[ECSEVENTS.CAMERA_MOVE]: { x: number; y: number }
 	[ECSEVENTS.DELETE_ENTITY]: Entity
-	[ECSEVENTS.TAKE_DAMAGE]: { entity: Entity, amount: number, loop?: boolean }
-	[ECSEVENTS.XP_PERCENT]: { amount: number, max: number, entity: Entity }
+	[ECSEVENTS.TAKE_DAMAGE]: { entity: Entity; amount: number; loop?: boolean }
+	[ECSEVENTS.XP_PERCENT]: { amount: number; max: number; entity: Entity }
 	[ECSEVENTS.LEVEL_UP]: Entity
-	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent, encounter: boolean }
+	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent; encounter: boolean }
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
 	[ECSEVENTS.MANA_PERCENT]: number
@@ -48,13 +48,13 @@ export type EventMap = {
 	[ECSEVENTS.SKILL_ICON]: Tile
 	[ECSEVENTS.ADD_TO_ENCOUNTER]: Entity
 	[ECSEVENTS.TIMER]: number
-	[ECSEVENTS.XP_UP]: { entity: Entity, amount: number }
+	[ECSEVENTS.XP_UP]: { entity: Entity; amount: number }
 	[ECSEVENTS.ADD_WALL]: Entity
-	[ECSEVENTS.REMOVE_WALL]: { entity: Entity, deleteLoot: boolean }
+	[ECSEVENTS.REMOVE_WALL]: { entity: Entity; deleteLoot: boolean }
 	[UIEVENTS.UI_XP]: number
 	[UIEVENTS.UI_LEVEL]: number
 	[UIEVENTS.ENEMY_LEVEL]: number
 }
-	& Record<INPUTS, number>
+	& Record<INPUTNAME, number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
 	& Record<'enable' | 'disable', string>

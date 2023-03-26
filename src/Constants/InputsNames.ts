@@ -1,4 +1,3 @@
-
 enum INPUTS {
 	INTERACT = 'Interact',
 	MOVEUP = 'MoveUp',
@@ -7,8 +6,6 @@ enum INPUTS {
 	MOVERIGHT = 'MoveRight',
 	VALIDATE = 'Validate',
 	PAUSE = 'Escape',
-	AXISX = 'axisX',
-	AXISY = 'axisY',
 	SWITCH = 'switch',
 	SKILL = 'skill',
 
