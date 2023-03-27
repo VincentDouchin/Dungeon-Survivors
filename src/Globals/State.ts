@@ -3,7 +3,7 @@ import type { HeroDefinition } from '../Constants/Heros'
 import type { Skill } from '../Constants/Skills'
 import type { InputController } from './InputManager'
 
-interface State {
+const State: {
 	cameraBounds: {
 		left?: number
 		right?: number
@@ -15,10 +15,9 @@ interface State {
 	heros: Set<HeroDefinition>
 	skills: Skill[]
 	difficulty: DIFFICULTY | null
-	multiplayer: boolean | null
+	multiplayer: boolean
 	multiplayerControls: [null | InputController, null | InputController]
-}
-const blanckState: State = {
+} = {
 	cameraBounds: {
 		left: undefined,
 		right: undefined,
@@ -30,10 +29,9 @@ const blanckState: State = {
 	mobile: !!navigator.userAgentData?.mobile,
 	skills: [],
 	difficulty: null,
-	multiplayer: null,
+	multiplayer: false,
 	multiplayerControls: [null, null],
 
 }
-let State: State = structuredClone(blanckState)
-export const resetState = () => State = structuredClone(blanckState)
+
 export default State

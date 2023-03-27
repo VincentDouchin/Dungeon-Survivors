@@ -29,7 +29,7 @@ export interface InputController {
   eventBus: EventBus<Record<INPUTNAME, number>>
 }
 class InputManager {
-	controllers: InputController[] = []
+	controllers = new Set<InputController>()
 	inputNames: INPUTS[]
 	inputs: Record<INPUTNAME, Input>
 	constructor(inputNames: INPUTS[]) {
@@ -92,12 +92,15 @@ class InputManager {
 		detectPointerEvent(State.mobile ? 'touchstart' : 'mousedown', 'down')
 		detectPointerEvent(State.mobile ? 'touchend' : 'mouseup', 'up')
 		detectPointerEvent(State.mobile ? 'touchmove' : 'mousemove', 'move')
-
+		const inputsForRegister = this.inputNames.reduce((acc, v) => ({
+			...acc,
+			[v]: v,
+		}), {}) as Record<INPUTS, INPUTNAME>
 		if (!State.mobile)
-			this.registerController(new KeyboardController(), this.inputNames)
+			this.registerController(new KeyboardController(), inputsForRegister)
 
 		window.addEventListener('gamepadconnected', ({ gamepad }) => {
-			this.registerController(new GamepadController(gamepad.index), this.inputNames)
+			this.registerController(new GamepadController(gamepad.index), inputsForRegister)
 		})
 	}
 
@@ -109,18 +112,24 @@ class InputManager {
 	}
 
 	setPlayerController(player: number, controller: InputController) {
-		const playerInputs = this.inputNames.map(inputName => `${inputName}${player}`) as INPUTNAME[]
-		Object.assign(this.inputs, this.createInputs(playerInputs))
+		const playerInputs = this.inputNames.reduce((acc, v) => ({
+			...acc,
+			[v]: `${v}${player}`,
+		}), {}) as Record<INPUTS, INPUTNAME>
+
+		Object.assign(this.inputs, this.createInputs(Object.values(playerInputs)))
+
 		this.registerController(controller, playerInputs)
 	}
 
-	getInput(inputName: INPUTS) {
+	getInput(inputName: INPUTNAME) {
 		return this.inputs[inputName]
 	}
 
-	registerController(inputController: InputController, inputNames: INPUTNAME[]) {
-		for (const inputName of inputNames) {
-			inputController.eventBus.subscribe(inputName, (state) => {
+	registerController(inputController: InputController, inputNames: Record<INPUTS, INPUTNAME>) {
+		this.controllers.add(inputController)
+		for (const [input, inputName] of Object.entries(inputNames) as [INPUTS, INPUTNAME][]) {
+			inputController.eventBus.subscribe(input, (state) => {
 				const input = this.inputs[inputName]
 				if (!input) return
 				if (state === 0)

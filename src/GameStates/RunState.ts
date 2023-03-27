@@ -121,8 +121,9 @@ class RunState implements GameState {
 			// !PLAYERS
 			const heros = [...State.heros]
 			if (!heros.length) return
-			this.players.add(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel))
-			this.players.add(PlayerEntity(heros[1], false, this.stats[1], this.mana, this.playerLevel))
+
+			this.players.add(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel, 0))
+			this.players.add(PlayerEntity(heros[1], State.multiplayer, this.stats[1], this.mana, this.playerLevel, 1))
 
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
 				this.stats.forEach((stat) => {

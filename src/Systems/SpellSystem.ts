@@ -1,12 +1,11 @@
-import type { Entity } from '../Globals/ECS'
 import { ECS, System } from '../Globals/ECS'
 
 import { ECSEVENTS } from '../Constants/Events'
+import type { Entity } from '../Globals/ECS'
 import INPUTS from '../Constants/InputsNames'
 import ManaComponent from '../Components/ManaComponent'
+import PlayerControllerComponent from '../Components/PlayerControllerComponent'
 import SpellComponent from '../Components/SpellComponent'
-import SwitchingComponent from '../Components/SwitchingComponent'
-import { inputManager } from '../Globals/Initialize'
 
 class SpellSystem extends System {
 	constructor() {
@@ -14,11 +13,12 @@ class SpellSystem extends System {
 	}
 
 	update(entities: Entity[]) {
-		const attack = inputManager.getInput(INPUTS.SKILL)?.once
 		entities
 			.forEach((entity) => {
-				const switcher = entity.getComponent(SwitchingComponent)
-				if (attack && switcher && switcher?.main) {
+				const playerController = entity.getComponent(PlayerControllerComponent)
+				if (!playerController) return
+				const attack = playerController.getInput(INPUTS.SKILL)?.once
+				if (attack) {
 					const spell = entity.getComponent(SpellComponent)
 					const mana = entity.getComponent(ManaComponent)
 					if (mana.mana >= mana.manaCost) {

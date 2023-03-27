@@ -1,10 +1,17 @@
 import { Component } from '../Globals/ECS'
+import type { INPUTNAME } from '../Globals/InputManager'
+import type INPUTS from '../Constants/InputsNames'
+import { inputManager } from '../Globals/Initialize'
 
 class PlayerControllerComponent extends Component {
-	enabled: boolean
-	constructor(enabled?: boolean) {
+	index: number | ''
+	constructor(index?: number) {
 		super()
-		this.enabled = enabled ?? true
+		this.index = index ?? ''
+	}
+
+	getInput(inputName: INPUTS) {
+		return inputManager.getInput(`${inputName}${this.index}` as INPUTNAME)
 	}
 }
 PlayerControllerComponent.register()

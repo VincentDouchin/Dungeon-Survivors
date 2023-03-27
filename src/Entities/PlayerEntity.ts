@@ -1,7 +1,4 @@
 import { Color } from 'three'
-import type { STATS } from '../Components/StatsComponent'
-import type StatsComponent from '../Components/StatsComponent'
-
 import AnimationComponent from '../Components/AnimationComponent'
 import BODYSIZES from '../Constants/BodySizes'
 import BodyComponent from '../Components/BodyComponent'
@@ -17,16 +14,18 @@ import type ManaComponent from '../Components/ManaComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RangedComponent from '../Components/RangedComponent'
 import { SOUNDS } from '../Constants/Sounds'
+import type { STATS } from '../Components/StatsComponent'
 import ShadowComponent from '../Components/ShadowComponent'
 import SpellComponent from '../Components/SpellComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import State from '../Globals/State'
+import type StatsComponent from '../Components/StatsComponent'
 import SwitchingComponent from '../Components/SwitchingComponent'
 import XPPickerComponent from '../Components/XPPickerComponent'
 import WeaponEntity from './WeaponEntity'
 
 const playergroup = FlockingComponent.getGroup()
-const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent) => {
+const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent, index: number) => {
 	const player = new Entity(`player ${main}`)
 
 	for (const [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
@@ -47,10 +46,10 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 	if (!hero.weapon.some(weapon => weapon.damage)) {
 		player.addComponent(new RangedComponent())
 	}
-	player.addComponent(new SwitchingComponent(main))
+	player.addComponent(new SwitchingComponent(main, index))
 	player.addComponent(new FlockingComponent(playergroup, !main, 100))
 	player.addComponent(new BodyComponent(
-		{ moveForce: 12000 },
+		{ moveForce: 62000 },
 		[
 			{ width: BODYSIZES.normal.width, height: BODYSIZES.normal.height, mass: 10, offset: hero.tiles.idle.height, contact: true, group: COLLISIONGROUPS.PLAYER, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.POTION, COLLISIONGROUPS.WALL, COLLISIONGROUPS.PORTAL, COLLISIONGROUPS.LOOT] },
 			{ width: 100, height: 100, mass: 0, contact: true, sensor: true, group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.XP] },

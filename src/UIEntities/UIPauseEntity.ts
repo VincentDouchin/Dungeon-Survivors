@@ -1,5 +1,6 @@
 import { ECS, Entity } from '../Globals/ECS'
 
+import CameraSystem from '../Systems/CameraSystem'
 import INPUTS from '../Constants/InputsNames'
 import RunState from '../GameStates/RunState'
 import SelectableComponent from '../Components/SelectableComponent'
@@ -31,7 +32,7 @@ const UIPauseEntity = () => {
 	pauseFrame.addChildren(resume)
 	const effectsVolume = VolumeBarEntity(0.1, 0.2, () => saveData.effectsVolume, (nb: number) => saveData.effectsVolume = nb, 'Effects volume')
 	const musicVolume = VolumeBarEntity(0.1, 0.2, () => saveData.musicVolume, (nb: number) => saveData.musicVolume = nb, 'Music volume')
-	const zoom = VolumeBarEntity(700, 910, () => saveData.zoom, (nb: number) => saveData.zoom = nb, 'Zoom')
+	const zoom = VolumeBarEntity(CameraSystem.min, CameraSystem.max, () => saveData.zoom, (nb: number) => saveData.zoom = nb, 'Zoom')
 	resume.addChildren(musicVolume)
 	musicVolume.addChildren(effectsVolume)
 	effectsVolume.addChildren(zoom)
