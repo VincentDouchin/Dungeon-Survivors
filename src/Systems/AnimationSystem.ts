@@ -1,8 +1,7 @@
-import type { Entity } from '../Globals/ECS'
-import { System } from '../Globals/ECS'
-
 import AnimationComponent from '../Components/AnimationComponent'
+import type { Entity } from '../Globals/ECS'
 import SpriteComponent from '../Components/SpriteComponent'
+import { System } from '../Globals/ECS'
 
 class AnimationSystem extends System {
 	constructor() {
@@ -21,11 +20,11 @@ class AnimationSystem extends System {
 					animation.selectedFrame = (animation.selectedFrame + 1) % animation.frames
 				}
 
-				if (animation.currentState != animation.lastState) {
+				if (animation.currentState !== animation.lastState) {
 					animation.selectedFrame = 0
 				}
 			}
-			if (((selectedFrame != animation.selectedFrame) || (animation.currentState !== animation.lastState)) && sprite.renderShader) {
+			if (((selectedFrame !== animation.selectedFrame) || (animation.currentState !== animation.lastState)) && sprite.renderShader) {
 				sprite.changeTexture(animation.tile.textures[animation.selectedFrame])
 				animation.lastState = animation.currentState
 			}

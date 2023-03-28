@@ -180,8 +180,7 @@ class RunState implements GameState {
 		// !INITIALIZE UI
 		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
 		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
-		ECS.getEntitiesAndComponents(SpellComponent).forEach(([id, spell]) => {
-			const entity = ECS.getEntityById(id)
+		ECS.getEntitiesAndComponents(SpellComponent).forEach(([entity, spell]) => {
 			if (entity?.getComponent(SwitchingComponent).main) {
 				ECS.eventBus.publish(ECSEVENTS.SPELL_ICON, spell.icon)
 			}

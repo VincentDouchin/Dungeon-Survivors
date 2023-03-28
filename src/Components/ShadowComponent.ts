@@ -1,10 +1,10 @@
-import { Component, ECS } from '../Globals/ECS'
-
+import { Component } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
 import Tile from '../Utils/Tile'
 import getBuffer from '../Utils/Buffer'
 
 class ShadowComponent extends Component {
-	entityId?: string
+	entity?: Entity
 	tile: Tile
 	offset: number
 	constructor(width: number, height: number, offset: number) {
@@ -18,7 +18,7 @@ class ShadowComponent extends Component {
 	}
 
 	destroy(): void {
-		this.entityId && ECS.getEntityById(this.entityId).destroy()
+		this.entity && this.entity.destroy()
 	}
 }
 ShadowComponent.register()

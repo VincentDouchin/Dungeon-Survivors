@@ -15,7 +15,7 @@ const blankSave: Save = {
 const localSave = localStorage.getItem('save')
 const getSaveData = () => {
 	if (localSave) {
-		const parsedSave = JSON.parse(localSave)
+		const parsedSave = JSON.parse(localSave) as Record<string, any>
 		if (Object.keys(parsedSave).every(key => Object.keys(blankSave).includes(key))) {
 			return parsedSave as Save
 		}

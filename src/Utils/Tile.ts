@@ -125,7 +125,7 @@ class Tile {
 		const thissX = Math.ceil(width / thisCenterWidth)
 		const thissY = Math.ceil(height / thisCenterHeight)
 		for (let x = 0; x < thissX; x++) {
-			const w = x == thissX - 1 ? (width % thisCenterWidth || thisCenterWidth) : thisCenterWidth
+			const w = x === thissX - 1 ? (width % thisCenterWidth || thisCenterWidth) : thisCenterWidth
 			buffer.drawImage(
 				this.buffer.canvas,
 				marginLeft, 0, thisCenterWidth, marginTop,
@@ -138,8 +138,8 @@ class Tile {
 				marginLeft + x * thisCenterWidth, height + marginTop, w, marginTop,
 			)
 			for (let y = 0; y < thissY; y++) {
-				const h = y == thissY - 1 ? (height % thisCenterHeight || thisCenterHeight) : thisCenterHeight
-				if (x == 0) {
+				const h = y === thissY - 1 ? (height % thisCenterHeight || thisCenterHeight) : thisCenterHeight
+				if (x === 0) {
 					// Left
 					buffer.drawImage(
 						this.buffer.canvas,

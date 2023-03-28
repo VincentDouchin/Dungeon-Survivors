@@ -1,11 +1,10 @@
 import { JointData } from '@dimforge/rapier2d-compat'
-import type { Entity } from '../Globals/ECS'
-import { ECS, System } from '../Globals/ECS'
-
 import BodyComponent from '../Components/BodyComponent'
+import type { Entity } from '../Globals/ECS'
 import JointComponent from '../Components/JointComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
+import { System } from '../Globals/ECS'
 import { world } from '../Globals/Initialize'
 
 class BodyCreationSystem extends System {
@@ -29,8 +28,8 @@ class BodyCreationSystem extends System {
 				body.colliders = body.colliderDescriptions.map(colliderDescription => world.createCollider(colliderDescription, parentBody))
 			}
 
-			if (joint && !joint?.jointed && body.body && joint.parentId) {
-				const ownerBody = ECS.getEntityById(joint.parentId).getComponent(BodyComponent)
+			if (joint && !joint?.jointed && body.body && joint.parent) {
+				const ownerBody = joint.parent.getComponent(BodyComponent)
 				if (!ownerBody.body) return
 				const getParams = () => {
 					switch (joint.type) {

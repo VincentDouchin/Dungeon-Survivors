@@ -1,6 +1,4 @@
 import { ECS, Entity } from '../Globals/ECS'
-import type { ldtkNode } from '../Utils/LDTKMap'
-import LDTKMap from '../Utils/LDTKMap'
 import { camera, engine, inputManager, render, world } from '../Globals/Initialize'
 
 import AnimationComponent from '../Components/AnimationComponent'
@@ -11,6 +9,7 @@ import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
 import type { GameState } from '../Globals/Engine'
 import INPUTS from '../Constants/InputsNames'
+import LDTKMap from '../Utils/LDTKMap'
 import MovementSystem from '../Systems/MovementSystem'
 import PathEntity from '../Entities/PathEntity'
 import PathSystem from '../Systems/PathSystem'
@@ -23,6 +22,7 @@ import State from '../Globals/State'
 import UIMapEntity from '../UIEntities/UIMapEntity'
 import assets from '../Globals/Assets'
 import { easeInOutQuart } from '../Utils/Tween'
+import type { ldtkNode } from '../Utils/LDTKMap'
 import RunState from './RunState'
 import PlayerSelectState from './PlayerSelectState'
 
@@ -43,6 +43,10 @@ class MapState implements GameState {
 	}
 
 	async set(previousState: Constructor<GameState> | null) {
+		let wasEncounter = false
+		const map = new LDTKMap(assets.mapData.OVERWORLD, assets.mapTiles.OVERWORLD)
+		const level = map.levels[0]
+		const mapTile = map.tile
 		const showMap = () => {
 			if (!level) return
 			this.player = new Entity('player')
@@ -52,7 +56,7 @@ class MapState implements GameState {
 			this.player.addComponent(new CameraTargetComponent())
 			this.player.addComponent(new PathWalkerComponent())
 			const pathEntities = level
-				.layerInstances?.find(layer => layer.__identifier == 'Path')
+				.layerInstances?.find(layer => layer.__identifier === 'Path')
 				?.entityInstances.map(node => LDTKMap.getPropertiesOfEntity(level)(node)) as ldtkNode[]
 			this.path = PathEntity(pathEntities)
 
@@ -60,11 +64,6 @@ class MapState implements GameState {
 				ECS.eventBus.publish(ECSEVENTS.PATH_POSITION, { position: this.lastPosition, encounter: wasEncounter })
 			}
 		}
-		let wasEncounter = false
-		const map = new LDTKMap(assets.mapData.OVERWORLD, assets.mapTiles.OVERWORLD)
-		const level = map.levels[0]
-		const mapTile = map.tile
-
 		State.cameraBounds = {
 			left: -mapTile.width / 2,
 			right: mapTile.width / 2,

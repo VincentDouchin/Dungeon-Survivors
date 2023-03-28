@@ -1,10 +1,9 @@
 import { Vector2 } from 'three'
-import type { Entity } from '../Globals/ECS'
-import { System } from '../Globals/ECS'
-
 import BodyComponent from '../Components/BodyComponent'
+import type { Entity } from '../Globals/ECS'
 import FlockingComponent from '../Components/FlockingComponent'
 import PositionComponent from '../Components/PositionComponent'
+import { System } from '../Globals/ECS'
 
 const nbToVec = (nb: number) => new Vector2(nb, nb)
 class FlockingSystem extends System {
@@ -31,7 +30,7 @@ class FlockingSystem extends System {
 			for (const otherEntity of entities) {
 				const otherFlocking = otherEntity.getComponent(FlockingComponent)
 				if (otherFlocking.group !== flocking.group) continue
-				if (otherEntity.id == entity.id) continue
+				if (otherEntity.id === entity.id) continue
 				const otherPosition = otherEntity.getComponent(PositionComponent)
 				const otherBody = otherEntity.getComponent(BodyComponent)
 				const distance = position.distanceTo(otherPosition)

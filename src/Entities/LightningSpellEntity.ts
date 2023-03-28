@@ -18,8 +18,7 @@ import waitFor from '../Utils/WaitFor'
 
 const LightningSpellEntity = (entity: Entity) => {
 	const parentPosition = entity.getComponent(PositionComponent)
-	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [id, position]) => {
-		const enemy = ECS.getEntityById(id)
+	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [enemy, position]) => {
 		const enemyHealth = enemy.getComponent(HealthComponent)
 		if (position.position.distanceTo(parentPosition.position) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
 			return [...enemies, enemy]
@@ -59,7 +58,7 @@ const LightningSpellEntity = (entity: Entity) => {
 			})
 			yield * waitFor(5)
 		}
-		deleteSub
+		deleteSub()
 	})
 }
 export default LightningSpellEntity

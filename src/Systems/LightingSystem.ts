@@ -1,9 +1,9 @@
 import { AmbientLight, Color, PointLight } from 'three'
-import type { Entity } from '../Globals/ECS'
-import { System } from '../Globals/ECS'
 
+import type { Entity } from '../Globals/ECS'
 import LightComponent from '../Components/LightComponent'
 import PositionComponent from '../Components/PositionComponent'
+import { System } from '../Globals/ECS'
 import { lightScene } from '../Globals/Initialize'
 
 class LightingSystem extends System {
@@ -17,7 +17,7 @@ class LightingSystem extends System {
 			const position = entity.getComponent(PositionComponent)
 			if (!light.lightId && position) {
 				const color = new Color(light.color)
-				const lightObject = light.type == PointLight
+				const lightObject = light.type === PointLight
 					? new PointLight(color, 1, light.distance, 1)
 					: new AmbientLight(color)
 				lightScene.add(lightObject)

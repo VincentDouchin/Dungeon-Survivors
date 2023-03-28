@@ -9,6 +9,9 @@
         "@typescript-eslint/indent": 0,
         "antfu/if-newline": 0,
         "no-lone-blocks": "off",
-        "curly": 0
+        "curly": 0,
+        "eslint-comments/no-unlimited-disable": 0,
+        "no-new": 0,
+        "@typescript-eslint/no-this-alias": 0
     }
 }

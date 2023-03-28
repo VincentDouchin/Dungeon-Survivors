@@ -1,9 +1,8 @@
-import type { Entity } from '../Globals/ECS'
-import { ECS } from '../Globals/ECS'
-
 import AIMovementComponent from '../Components/AIMovementComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import DamageComponent from '../Components/DamageComponent'
+import { ECS } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
 import HealthComponent from '../Components/HealthComponent'
 import HealthRegenComponent from '../Components/HealthRegenComponent'
 import OutlineShader from '../Shaders/OutlineShader'
@@ -15,8 +14,7 @@ import { soundManager } from '../Globals/Initialize'
 
 const CharmSpellEntity = (parent: Entity) => {
 	const parentPosition = parent.getComponent(PositionComponent)
-	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [id, position]) => {
-		const enemy = ECS.getEntityById(id)
+	const enemies = ECS.getEntitiesAndComponents(PositionComponent).reduce<Entity[]>((enemies, [enemy, position]) => {
 		const enemyHealth = enemy.getComponent(HealthComponent)
 		if (position.position.distanceTo(parentPosition.position) <= 100 && enemyHealth?.type === COLLISIONGROUPS.ENEMY) {
 			return [...enemies, enemy]

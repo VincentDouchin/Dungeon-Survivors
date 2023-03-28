@@ -1,5 +1,4 @@
 import { Vector2 } from 'three'
-import type { Entity } from '../Globals/ECS'
 import { ECS, System } from '../Globals/ECS'
 
 import AIMovementComponent from '../Components/AIMovementComponent'
@@ -7,6 +6,7 @@ import BodyComponent from '../Components/BodyComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
+import type { Entity } from '../Globals/ECS'
 import HealthComponent from '../Components/HealthComponent'
 import JointComponent from '../Components/JointComponent'
 import ParticleEntity from '../Entities/ParticleEntitty'
@@ -33,8 +33,7 @@ class AIMovementSystem extends System {
 
 	update(entities: Entity[]): void {
 		const groups: Map<number, Entity[]> = new Map()
-		ECS.getEntitiesAndComponents(HealthComponent).forEach(([entityId, health]) => {
-			const groupEntity = ECS.getEntityById(entityId)
+		ECS.getEntitiesAndComponents(HealthComponent).forEach(([groupEntity, health]) => {
 			if (!groups.has(health.type)) {
 				groups.set(health.type, [groupEntity])
 			}
@@ -58,6 +57,7 @@ class AIMovementSystem extends System {
 				const chargingForce = Math.min((ai.chargingTimer + 45) / 90, 1)
 				chargingVelocity.add(ai.chargingDirection.clone().multiply(new Vector2(chargingForce, chargingForce)))
 				body.contacts(() => {
+					ai.chargingTimer = 0
 					ai.chargingDirection = null
 				}, COLLISIONGROUPS.ENEMY, [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.WALL, COLLISIONGROUPS.WEAPON])
 				ai.chargingTimer--
@@ -88,7 +88,7 @@ class AIMovementSystem extends System {
 						}
 						const joint = entity.getComponent(JointComponent)
 						const rotation = entity.getComponent(RotationComponent)
-						if (rotation && joint && joint?.type == 'revolute') {
+						if (rotation && joint && joint?.type === 'revolute') {
 							const r = rotation.rotation
 							const angleDiff = -seekingVelocity.angle() + r
 							if (!rotation) return
@@ -111,7 +111,7 @@ class AIMovementSystem extends System {
 										yield * waitFor(30)
 										ai.chargingDirection = seekingVelocity.clone().multiply(new Vector2(5, 5))
 										ai.enabled = true
-										ai.chargingTimer = 120
+										ai.chargingTimer = 90
 									})
 								}
 							}

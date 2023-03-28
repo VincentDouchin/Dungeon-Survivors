@@ -1,13 +1,13 @@
-import type { Entity } from '../Globals/ECS'
-import { ECS } from '../Globals/ECS'
 import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import StatsComponent, { STATS } from '../Components/StatsComponent'
 
 import ColorShader from '../Shaders/ColorShader'
 import Coroutine from '../Globals/Coroutine'
 import DIFFICULTY from '../Constants/DIfficulty'
+import { ECS } from '../Globals/ECS'
 import EnemyEntity from '../Entities/EnemyEntity'
 import type { EnemyType } from '../Constants/Enemies'
+import type { Entity } from '../Globals/ECS'
 import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import LevelComponent from '../Components/LevelComponent'
@@ -60,7 +60,7 @@ class Encounter {
 		return this
 	}
 
-	addWave(enemies: Array<[EnemyType, number]>, waves = 1, delay = 600) {
+	addWave(enemies: Array<[EnemyType, number]>, waves = 1, delay = 300) {
 		const self = this
 		this.waves.push(function* () {
 			for (let i = 0; i < waves; i++) {
@@ -71,13 +71,14 @@ class Encounter {
 		return this
 	}
 
-	getDistance(offset = 0) {
+	getDistance() {
 		const angle = Math.random() * Math.PI * 2
-
-		const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
-		const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
-		const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
-		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
+		const x = Math.cos(angle) * 200 + camera.position.x
+		const y = Math.sin(angle) * 200 + camera.position.y
+		// const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+		// const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
+		// const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
+		// const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
 		return { x, y }
 	}
 
@@ -88,7 +89,7 @@ class Encounter {
 			const { x, y } = this.getDistance()
 			const enemy = enemies.splice(Math.floor(Math.random() * enemies.length), 1)
 			this.spawnEnemy(enemy[0], x, y)
-			yield * waitFor(Math.random() * 10)
+			yield * waitFor(Math.random() * 20)
 		}
 	}
 
@@ -105,7 +106,7 @@ class Encounter {
 		this.waves.push(function* () {
 			const group = FlockingComponent.getGroup()
 			const guards: Set<Entity> = new Set()
-			const { x, y } = self.getDistance(distance)
+			const { x, y } = self.getDistance()
 
 			self.spawnEnemy(mainEnemy, x, y).then((main) => {
 				main.addComponent(new FlockingComponent(group, false))
@@ -136,7 +137,7 @@ class Encounter {
 					guardEntity.addComponent(new FlockingComponent(group, false))
 					guards.add(guardEntity)
 				})
-				yield * waitFor(Math.random() * 10)
+				yield * waitFor(Math.random() * 10 + 20)
 			}
 		})
 		return this

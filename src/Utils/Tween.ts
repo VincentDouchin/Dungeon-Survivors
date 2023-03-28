@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 type tweenFunction = (time: number, start: number, end: number, delay: number, s?: number) => number
 export const linear: tweenFunction = function (t, b, _c, d) {
 	const c = _c - b
@@ -202,14 +204,14 @@ export const easeInOutElastic: tweenFunction = function (t, b, _c, d) {
 }
 export const easeInBack: tweenFunction = function (t, b, _c, d, s) {
 	const c = _c - b
-	if (s === void 0) {
+	if (s === 0) {
 		s = 1.70158
 	}
 	return c * (t /= d) * t * ((s + 1) * t - s) + b
 }
 export const easeOutBack: tweenFunction = function (t, b, _c, d, s) {
 	const c = _c - b
-	if (s === void 0) {
+	if (s === 0) {
 		s = 1.70158
 	}
 	return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b

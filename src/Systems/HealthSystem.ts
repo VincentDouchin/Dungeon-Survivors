@@ -69,12 +69,12 @@ class HealthSystem extends System {
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
 
-			if (health.show && !health.healthBarId && sprite) {
+			if (health.show && !health.healthBar && sprite) {
 				const healthBarEntity = new Entity('healthBar')
 				const healthMesh = new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture)] })
 				entity.addChildren(healthBarEntity)
 				healthBarEntity.addComponent(healthMesh)
-				health.healthBarId = healthBarEntity.id
+				health.healthBar = healthBarEntity
 				sprite.mesh.add(healthMesh.mesh)
 				healthMesh.mesh.position.y = sprite.height / 2
 				health.updateHealth(0)

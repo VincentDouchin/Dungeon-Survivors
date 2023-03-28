@@ -1,9 +1,9 @@
-import type { Collider, RigidBody } from '@dimforge/rapier2d-compat'
 import { ActiveEvents, ColliderDesc, RigidBodyDesc } from '@dimforge/rapier2d-compat'
+import type { Collider, RigidBody } from '@dimforge/rapier2d-compat'
 import { Vector2 } from 'three'
-import type { Entity } from '../Globals/ECS'
-import { Component, ECS } from '../Globals/ECS'
+import { Component } from '../Globals/ECS'
 
+import type { Entity } from '../Globals/ECS'
 import { Stat } from '../Game/Stat'
 import { world } from '../Globals/Initialize'
 import { STATS } from './StatsComponent'
@@ -64,11 +64,11 @@ class BodyComponent extends Component {
 	contacts(fn: (entity: Entity) => void, group?: number, targets?: number[]) {
 		if (this.colliders.length) {
 			this.colliders.forEach((collider) => {
-				if (group && Math.floor(collider.collisionGroups() / 0x10000) != group) return
+				if (group && Math.floor(collider.collisionGroups() / 0x10000) !== group) return
 				const touchCollider = (otherCollider: Collider) => {
 					if (targets?.length && !targets.includes(Math.floor(otherCollider.collisionGroups() / 0x10000))) return
-					const entityId = otherCollider?.parent()?.userData as string
-					const entity = ECS.getEntityById(entityId)
+					const entity = otherCollider?.parent()?.userData as Entity
+					if (!entity) return
 					return fn(entity)
 				}
 				world.contactsWith(collider, touchCollider)
@@ -77,8 +77,8 @@ class BodyComponent extends Component {
 		}
 	}
 
-	bind(id: string) {
-		this.bodyDescription.setUserData(id)
+	bind(entity: Entity) {
+		this.bodyDescription.setUserData(entity)
 	}
 
 	destroy() {

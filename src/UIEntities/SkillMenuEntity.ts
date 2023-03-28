@@ -33,6 +33,7 @@ const SkillMenuEntity = () => {
 		const selectableEntity = new Entity('selectableEntity')
 		const emptyTile32 = Tile.empty(32, 32)
 		selectableEntity.addComponent(new SpriteComponent(emptyTile32, { scale: 2 }))
+		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 		selectableEntity.addComponent(new SelectableComponent(assets.UI.selectedframe, emptyTile32, () => {
 			ECS.eventBus.publish(ECSEVENTS.NEW_SKILL, skill)
 			State.skills.push(skill)
@@ -44,12 +45,11 @@ const SkillMenuEntity = () => {
 		button.addChildren(selectableEntity)
 		button.addComponent(new UIPositionComponent({ x: [-0.8, 0, 0.8][i], y: 1 }, { x: 0, y: 1 }))
 		const icon = new Entity('icon')
-		const [skill] = possibleSkills.splice(Math.floor(Math.random() * possibleSkills.length), 1)
 
 		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
 		const shimmerCoroutine = new Coroutine(function* () {
 			yield
-			sprite.uniforms.time = clock.getElapsedTime()
+			sprite.getUniforms(ShimmerShader).time.value = clock.getElapsedTime()
 		}, Infinity)
 		skillMenu.onDestroy(() => shimmerCoroutine.stop())
 		icon.addComponent(new UIPositionComponent())

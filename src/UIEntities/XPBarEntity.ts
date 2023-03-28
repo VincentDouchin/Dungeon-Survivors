@@ -18,7 +18,8 @@ const XPBarEntity = () => {
 	const sprite = xpBar.addComponent(new SpriteComponent(bar, { renderOrder: 100, scale: 3, shaders: [new BarShader(full.texture, percent)] }))
 	ECS.eventBus.subscribe(UIEVENTS.UI_XP, (newPercent) => {
 		percent = newPercent
-		sprite.uniforms.percent = percent
+		sprite.getUniforms(BarShader).percent.value = percent
+		sprite.render()
 	})
 	xpBar.addComponent(new UIPositionComponent({ x: 1, y: 1 }, { x: -1, y: 1 }))
 	return xpBar

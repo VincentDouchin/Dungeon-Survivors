@@ -1,10 +1,10 @@
 import { ECS, Entity } from '../Globals/ECS'
-import type { HeroDefinition } from '../Constants/Heros'
 import HEROS, { isUnlocked } from '../Constants/Heros'
 
 import AnimationComponent from '../Components/AnimationComponent'
 import ColorShader from '../Shaders/ColorShader'
 import { ECSEVENTS } from '../Constants/Events'
+import type { HeroDefinition } from '../Constants/Heros'
 import INPUTS from '../Constants/InputsNames'
 import MapState from '../GameStates/MapState'
 import OutlineShader from '../Shaders/OutlineShader'
@@ -124,19 +124,23 @@ const UIPlayerSelectEntity = () => {
 						withOutline.delete(sprite)
 					}
 				})
-				const textValidate = validateButton.children[0].getComponent(TextComponent)
-				if (State.heros.size === 2) {
-					textValidate.setText('Start your adventure')
-				}
-				else {
-					textValidate.setText(`Choose ${2 - State.heros.size} characters`)
-				}
+				validateButton.children.forEach((child) => {
+					const textValidate = child.getComponent(TextComponent)
+					if (textValidate) {
+						if (State.heros.size === 2) {
+							textValidate.setText('Start your adventure')
+						}
+						else {
+							textValidate.setText(`Choose ${2 - State.heros.size} characters`)
+						}
+					}
+				})
 			}
 			selectable.onSelected = () => {
 				statAmounts.forEach((statText, stat) => {
 					const amount = hero.stats[stat]
 					const text = amount ? `+ ${Math.floor(amount * 100)}% per level` : ''
-					const color = [STATS.MAX_HEALTH, STATS.DAMAGE, STATS.SPELL_DAMAGE].includes(stat) && amount === 0.05 ? 0xFFFFFF : 0xFFFF00
+					const color = ([STATS.MAX_HEALTH, STATS.DAMAGE, STATS.SPELL_DAMAGE].includes(stat) && amount === 0.05) ? 0xFFFFFF : 0xFFFF00
 					statText.mesh.color = color
 					statText.setText(text)
 				})

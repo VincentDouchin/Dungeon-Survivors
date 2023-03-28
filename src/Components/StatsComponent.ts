@@ -30,8 +30,7 @@ class StatsComponent extends Component {
 	set(statName: STATS, levelModifier = 0) {
 		this.stats.set(statName, this.getemptyStat())
 		const stat = this.stats.get(statName)
-		if (!stat) return
-		stat.levelModifier = levelModifier
+		stat!.levelModifier = levelModifier
 		return this
 	}
 

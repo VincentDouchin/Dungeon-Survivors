@@ -25,7 +25,6 @@ class Engine {
 
 		if (this.accumulatedTime > 60) {
 			this.accumulatedTime = this.timeStep
-			console.log('frame skipped')
 		}
 
 		while (this.accumulatedTime >= this.timeStep) {
@@ -47,8 +46,8 @@ class Engine {
 		window.cancelAnimationFrame(this.rafHandle)
 	}
 
-	addState<T extends GameState>(state: Constructor<T>) {
-		this.states.set(state.name, new state())
+	addState<T extends GameState>(State: Constructor<T>) {
+		this.states.set(State.name, new State())
 	}
 
 	getState<T extends GameState>(state: Constructor<T>) {

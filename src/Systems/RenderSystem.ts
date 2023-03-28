@@ -51,11 +51,11 @@ class RenderSystem extends System {
 				sprite.mesh.add(text.mesh)
 				text.mesh.renderOrder = (sprite.renderOrder ?? 0) + 1
 			}
-			if (shadow && !shadow.entityId) {
+			if (shadow && !shadow.entity) {
 				const shadowEntity = new Entity('shadow')
 				shadowEntity.addComponent(new PositionComponent(position.x, position.y - shadow.offset))
 				shadowEntity.addComponent(new SpriteComponent(shadow.tile, { opacity: 0.3, renderOrder: sprite.renderOrder - 1 }))
-				shadow.entityId = shadowEntity.id
+				shadow.entity = shadowEntity
 			}
 			sprite.material.opacity = sprite.opacity
 			sprite.mesh.renderOrder = sprite.renderOrder

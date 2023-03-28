@@ -1,4 +1,4 @@
-import { ECS, System } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 
 import AnimationComponent from '../Components/AnimationComponent'
 import BodyComponent from '../Components/BodyComponent'
@@ -58,8 +58,8 @@ class MovementSystem extends System {
 					}
 				}
 			}
-			if (shadow && shadow.entityId) {
-				const shadowPosition = ECS.getEntityById(shadow.entityId)?.getComponent(PositionComponent)
+			if (shadow && shadow.entity) {
+				const shadowPosition = shadow.entity?.getComponent(PositionComponent)
 				if (shadowPosition) {
 					shadowPosition.x = position.x
 					shadowPosition.y = position.y - shadow.offset

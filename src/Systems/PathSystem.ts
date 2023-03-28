@@ -51,8 +51,8 @@ class PathSystem extends System {
 				return pathNode.options.x === this.position?.x && pathNode.options.y === this.position?.y
 			})
 			if (!selectedNode) return
-			const [nodeId, node] = selectedNode
-			const nodeEntity = ECS.getEntityById(nodeId)
+			const [nodeEntity, node] = selectedNode
+
 			if (node.encounter && !this.encounter) {
 				engine.setState(RunState, node)
 				return

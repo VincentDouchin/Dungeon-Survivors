@@ -26,17 +26,6 @@ class SpriteComponent extends Component {
 	renderShader?: ShaderPass
 	uniformsKeys: Record<string, string> = {}
 	flipped: boolean
-	uniforms = new Proxy<any>(this, {
-		get(target, prop) {
-			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value
-		},
-		set(target, prop, newValue) {
-			target.effectComposer.passes.find((pass: ShaderPass) => pass == target.shaderPasses.get(target.uniformsKeys[prop])[0]).uniforms[prop].value = newValue
-			target.render()
-			return true
-		},
-	})
-
 	constructor(tile: Tile, options?: { renderOrder?: number; scale?: number; shaders?: Shader[]; flipped?: boolean; opacity?: number }) {
 		super()
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1, flipped: false }, options)

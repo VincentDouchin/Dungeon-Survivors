@@ -16,7 +16,8 @@ const ManaBarEntity = () => {
 	const manaBar = new Entity('mana bar')
 	const sprite = manaBar.addComponent(new SpriteComponent(bar, { renderOrder: 100, scale: 3, shaders: [new BarShader(full.texture, 0)], flipped: true }))
 	ECS.eventBus.subscribe(ECSEVENTS.MANA_PERCENT, (percent) => {
-		sprite.uniforms.percent = percent
+		sprite.getUniforms(BarShader).percent.value = percent
+		sprite.render()
 	})
 	manaBar.addComponent(new UIPositionComponent({ x: -1, y: 1 }, { x: 1, y: 1 }))
 	return manaBar
