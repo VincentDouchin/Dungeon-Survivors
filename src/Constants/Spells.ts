@@ -37,7 +37,7 @@ const SPELLS: Record<string, Spell> = {
 	CANNON: {
 		icon: assets.icons.cannon,
 		spell: CannonSpellEntity,
-		damage: 20,
+		damage: 15,
 	},
 	CHARM: {
 		icon: assets.icons.charm,
