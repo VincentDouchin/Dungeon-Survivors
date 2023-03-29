@@ -12,6 +12,7 @@
         "curly": 0,
         "eslint-comments/no-unlimited-disable": 0,
         "no-new": 0,
-        "@typescript-eslint/no-this-alias": 0
+        "@typescript-eslint/no-this-alias": 0,
+        "@typescript-eslint/brace-style": 0
     }
 }
