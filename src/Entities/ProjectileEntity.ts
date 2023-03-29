@@ -31,7 +31,7 @@ export interface ProjectileOptions {
 }
 const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit, sound }: ProjectileOptions) => (parent: Entity) => {
 	const projectiles = new Entity('projectiles')
-	let counter = nb
+	projectiles.addComponent(new ExpirationComponent(range))
 	for (let i = 0; i < nb; i++) {
 		const projectile = new Entity('projectile')
 
@@ -60,18 +60,14 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 			projectileBody.velocity.y = -Math.sin(projectileRotation)
 		}, Infinity)
 		projectile.addComponent(new DamageComponent(damage, targetGroup.target, piercing, 5))
-		projectile.addComponent(new ExpirationComponent(range))
+
 		projectile.onDestroy(() => {
 			coroutine.stop()
-			counter--
 			if (sound) {
 				soundManager.play('effect', sound)
 			}
 			if (afterHit) {
 				afterHit(projectile)
-			}
-			if (counter === 0) {
-				projectiles.destroy()
 			}
 		})
 		const stats = parent.getComponent(StatsComponent)
