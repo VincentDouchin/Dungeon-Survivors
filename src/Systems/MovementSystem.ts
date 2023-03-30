@@ -7,7 +7,6 @@ import INPUTS from '../Constants/InputsNames'
 import PlayerControllerComponent from '../Components/PlayerControllerComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
-import ShadowComponent from '../Components/ShadowComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 
 class MovementSystem extends System {
@@ -23,7 +22,12 @@ class MovementSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			const animation = entity.getComponent(AnimationComponent)
 			const rotation = entity.getComponent(RotationComponent)
-			const shadow = entity.getComponent(ShadowComponent)
+			if (position.parent) {
+				position.parent.addChildren(entity)
+				const parentPosition = position.parent.getComponent(PositionComponent)
+				position.x = parentPosition.x + position.offsetX
+				position.y = parentPosition.y + position.offsetY
+			}
 			if (body) {
 				if (playerController) {
 					const vel = { x: 0, y: 0 }
@@ -56,13 +60,6 @@ class MovementSystem extends System {
 						}
 						rotation.rotation = body.body.rotation()
 					}
-				}
-			}
-			if (shadow && shadow.entity) {
-				const shadowPosition = shadow.entity?.getComponent(PositionComponent)
-				if (shadowPosition) {
-					shadowPosition.x = position.x
-					shadowPosition.y = position.y - shadow.offset
 				}
 			}
 		})

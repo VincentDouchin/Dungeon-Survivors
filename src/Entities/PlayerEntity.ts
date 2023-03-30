@@ -15,7 +15,6 @@ import PositionComponent from '../Components/PositionComponent'
 import RangedComponent from '../Components/RangedComponent'
 import { SOUNDS } from '../Constants/Sounds'
 import type { STATS } from '../Components/StatsComponent'
-import ShadowComponent from '../Components/ShadowComponent'
 import SpellComponent from '../Components/SpellComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import State from '../Globals/State'
@@ -23,6 +22,8 @@ import type StatsComponent from '../Components/StatsComponent'
 import SwitchingComponent from '../Components/SwitchingComponent'
 import XPPickerComponent from '../Components/XPPickerComponent'
 import WeaponEntity from './WeaponEntity'
+import ShadowEntity from './ShadowEntity'
+import HealthBarEntity from './HealthBarEntity'
 
 const playergroup = FlockingComponent.getGroup()
 const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent, index: number) => {
@@ -60,7 +61,8 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 
 	player.addComponent(mana)
 	player.addComponent(level)
-	player.addComponent(new ShadowComponent(16, 6, 14))
+	player.addChildren(ShadowEntity(16, 6, 16, player))
+	player.addChildren(HealthBarEntity(player, BODYSIZES.normal.height / 2 + 4))
 	player.addComponent(new XPPickerComponent())
 	for (const weapon of hero.weapon) {
 		player.addChildren(WeaponEntity(weapon, player, BODYSIZES.normal.height, stats, level))

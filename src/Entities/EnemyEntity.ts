@@ -12,7 +12,6 @@ import type LevelComponent from '../Components/LevelComponent'
 import MinionSpawnerComponent from '../Components/MinionSpawnerComponent'
 import OutlineShader from '../Shaders/OutlineShader'
 import PositionComponent from '../Components/PositionComponent'
-import ShadowComponent from '../Components/ShadowComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import type StatsComponent from '../Components/StatsComponent'
 import PotionEntity from './PotionEntity'
@@ -20,6 +19,8 @@ import ManaDropEntity from './ManaDropEntity'
 import BoostEntity from './BoostEntity'
 import WeaponEntity from './WeaponEntity'
 import XPEntity from './XPEntity'
+import ShadowEntity from './ShadowEntity'
+import HealthBarEntity from './HealthBarEntity'
 
 const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelComponent) => (position: { x: number; y: number }) => {
 	const enemy = new Entity('enemy')
@@ -47,7 +48,6 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	enemy.addComponent(new DroppableComponent(drops))
 	enemy.addComponent(new PositionComponent(position.x, position.y))
 	enemy.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.PLAYER], seekingDistance: 0, charger: type.charger }))
-	enemy.addComponent(new ShadowComponent(type.size.width * scale, 6, tile.height * scale / 2))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.5 : 1) },
 		[
@@ -67,6 +67,8 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	if (type.minion) {
 		enemy.addComponent(new MinionSpawnerComponent(type.minion.type, type.minion.distance, type.minion.delay))
 	}
+	enemy.addChildren(ShadowEntity(type.size.width * scale, 6, tile.height * scale / 2, enemy))
+	enemy.addChildren(HealthBarEntity(enemy, type.size.height / 2 + 4))
 	type.transforms?.forEach(transform => transform(enemy))
 	return enemy
 }

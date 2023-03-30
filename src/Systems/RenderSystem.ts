@@ -1,9 +1,9 @@
-import { Entity, System } from '../Globals/ECS'
+import type { Entity } from '../Globals/ECS'
+import { System } from '../Globals/ECS'
 import { UICamera, UIScene, scene } from '../Globals/Initialize'
 
 import PositionComponent from '../Components/PositionComponent'
 import RotationComponent from '../Components/RotationComponent'
-import ShadowComponent from '../Components/ShadowComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import TextComponent from '../Components/TextComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
@@ -20,7 +20,6 @@ class RenderSystem extends System {
 			const rotation = entity.getComponent(RotationComponent)
 			const text = entity.getComponent(TextComponent)
 			const uiPosition = entity.getComponent(UIPositionComponent)
-			const shadow = entity.getComponent(ShadowComponent)
 			if (position) {
 				if (!sprite.mesh.parent) {
 					scene.add(sprite.mesh)
@@ -50,12 +49,6 @@ class RenderSystem extends System {
 			if (sprite && sprite.mesh.parent && text) {
 				sprite.mesh.add(text.mesh)
 				text.mesh.renderOrder = (sprite.renderOrder ?? 0) + 1
-			}
-			if (shadow && !shadow.entity) {
-				const shadowEntity = new Entity('shadow')
-				shadowEntity.addComponent(new PositionComponent(position.x, position.y - shadow.offset))
-				shadowEntity.addComponent(new SpriteComponent(shadow.tile, { opacity: 0.3, renderOrder: sprite.renderOrder - 1 }))
-				shadow.entity = shadowEntity
 			}
 			sprite.material.opacity = sprite.opacity
 			sprite.mesh.renderOrder = sprite.renderOrder

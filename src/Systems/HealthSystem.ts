@@ -1,26 +1,23 @@
 import { ECS, Entity, System } from '../Globals/ECS'
 
-import BarShader from '../Shaders/BarShader'
 import BodyComponent from '../Components/BodyComponent'
-import ColorShader from '../Shaders/ColorShader'
-import Coroutine from '../Globals/Coroutine'
 import DamageComponent from '../Components/DamageComponent'
-import DamageTextEntity from '../Entities/DamageTextEntity'
-import DissolveShader from '../Shaders/DissolveShader'
-import { ECSEVENTS } from '../Constants/Events'
 import ExpirationComponent from '../Components/ExpirationComponent'
 import HealthComponent from '../Components/HealthComponent'
 import HealthRegenComponent from '../Components/HealthRegenComponent'
-import ParticleEntity from '../Entities/ParticleEntitty'
 import PositionComponent from '../Components/PositionComponent'
-import { SOUNDS } from '../Constants/Sounds'
 import SpriteComponent from '../Components/SpriteComponent'
+import { ECSEVENTS } from '../Constants/Events'
+import { SOUNDS } from '../Constants/Sounds'
+import DamageTextEntity from '../Entities/DamageTextEntity'
+import ParticleEntity from '../Entities/ParticleEntitty'
 import assets from '../Globals/Assets'
+import Coroutine from '../Globals/Coroutine'
 import { soundManager } from '../Globals/Initialize'
+import ColorShader from '../Shaders/ColorShader'
+import DissolveShader from '../Shaders/DissolveShader'
 import waitFor from '../Utils/WaitFor'
 
-const empty = assets.UI.healthBar
-const full = assets.UI.healthFull
 class HealthSystem extends System {
 	constructor() {
 		super(HealthComponent)
@@ -68,17 +65,6 @@ class HealthSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			const body = entity.getComponent(BodyComponent)
 			const position = entity.getComponent(PositionComponent)
-
-			if (health.show && !health.healthBar && sprite) {
-				const healthBarEntity = new Entity('healthBar')
-				const healthMesh = new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture)] })
-				entity.addChildren(healthBarEntity)
-				healthBarEntity.addComponent(healthMesh)
-				health.healthBar = healthBarEntity
-				sprite.mesh.add(healthMesh.mesh)
-				healthMesh.mesh.position.y = sprite.height / 2
-				health.updateHealth(0)
-			}
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
@@ -90,6 +76,10 @@ class HealthSystem extends System {
 
 						if (damage.sound) {
 							soundManager.play('effect', damage.sound, { fade: true })
+						}
+
+						if (damage.onHit) {
+							damage.onHit(entity)
 						}
 
 						// ! Knockback

@@ -1,16 +1,12 @@
-import BarShader from '../Shaders/BarShader'
 import { Component } from '../Globals/ECS'
-import type { Entity } from '../Globals/ECS'
 import type { SOUND } from '../Constants/Sounds'
 import { Stat } from '../Game/Stat'
 import { STATS } from './StatsComponent'
-import SpriteComponent from './SpriteComponent'
 
 class HealthComponent extends Component {
 	health: number
 	maxHealth: Stat
 	type: number
-	healthBar: Entity | null = null
 	canTakeDamage = true
 	show: boolean
 	defense = new Stat(1, STATS.DEFENSE)
@@ -29,12 +25,6 @@ class HealthComponent extends Component {
 
 	updateHealth(amount: number) {
 		this.health = Math.max(0, Math.min(this.health + amount, this.maxHealth.value))
-
-		if (this.healthBar) {
-			const healthSprite = this.healthBar.getComponent(SpriteComponent)
-			healthSprite.getUniforms(BarShader).percent.value = this.health / this.maxHealth.value
-			healthSprite.render()
-		}
 	}
 }
 HealthComponent.register()
