@@ -5,15 +5,14 @@ import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import type Tile from '../Utils/Tile'
 
-const ParticleEntity = async (position: { x: number; y: number } | Entity, tile: Tile, options?: { frameRate?: number; scale?: number; renderOrder?: number; duration?: number; color?: [number, number, number, number] }) => {
+const ParticleEntity = async (position: { x: number; y: number } | Entity, tile: Tile, options?: { frameRate?: number; scale?: number; renderOrder?: number; duration?: number; color?: [number, number, number, number]; offset?: { x: number; y: number } }) => {
 	const particle = new Entity('particle')
 	const particleSprite = particle.addComponent(new SpriteComponent(tile, { scale: options?.scale ?? 1, renderOrder: options?.renderOrder }))
 	if (options?.color) {
 		particleSprite.addShader(new ColorShader(...options.color))
 	}
 	if (position instanceof Entity) {
-		const parentSprite = position.getComponent(SpriteComponent)
-		parentSprite.mesh.add(particleSprite.mesh)
+		particle.addComponent(new PositionComponent().fromParent(position, options?.offset?.x ?? 0, options?.offset?.y ?? 0))
 	}
 	else {
 		particle.addComponent(new PositionComponent(position.x, position.y))

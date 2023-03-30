@@ -3,6 +3,7 @@ import NoteProjectileEntity from '../Entities/NoteProjectileEntity'
 import ProjectileEntity from '../Entities/ProjectileEntity'
 import type Tile from '../Utils/Tile'
 import assets from '../Globals/Assets'
+import FreezeEffect from '../Game/Effects/FreezeEffect'
 import { SOUNDS } from './Sounds'
 import type { SOUND } from './Sounds'
 import COLLISIONGROUPS from './CollisionGroups'
@@ -198,7 +199,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.effects['IceSpike-sheet'],
 				range: 150,
 				scale: 0.5,
-
+				onHit: FreezeEffect,
 			}),
 			delay: 240,
 		},

@@ -28,8 +28,9 @@ export interface ProjectileOptions {
 	piercing?: number
 	sound?: SOUND
 	afterHit?: (entity: Entity) => any
+	onHit?: (entity: Entity) => void
 }
-const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit, sound }: ProjectileOptions) => (parent: Entity) => {
+const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spread = 0, scale = 1, rotationSpeed = 0, piercing = 1, afterHit, sound, onHit }: ProjectileOptions) => (parent: Entity) => {
 	const projectiles = new Entity('projectiles')
 	projectiles.addComponent(new ExpirationComponent(range))
 	for (let i = 0; i < nb; i++) {
@@ -59,7 +60,7 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 			projectileBody.velocity.x = -Math.cos(projectileRotation)
 			projectileBody.velocity.y = -Math.sin(projectileRotation)
 		}, Infinity)
-		projectile.addComponent(new DamageComponent(damage, targetGroup.target, piercing, 5))
+		projectile.addComponent(new DamageComponent(damage, targetGroup.target, piercing, 5, undefined, onHit))
 
 		projectile.onDestroy(() => {
 			coroutine.stop()

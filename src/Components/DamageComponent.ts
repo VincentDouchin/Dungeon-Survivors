@@ -1,3 +1,4 @@
+import type { Entity } from '../Globals/ECS'
 import { Component } from '../Globals/ECS'
 import type { SOUND } from '../Constants/Sounds'
 import { Stat } from '../Game/Stat'
@@ -12,8 +13,10 @@ class DamageComponent extends Component {
 	sound?: SOUND
 	critChance = new Stat(0.05, STATS.CRIT_CHANCE)
 	critDamage = new Stat(1.5, STATS.CRIT_DAMAGE)
-	constructor(amount: number, target: number[], destroyOnHit = -1, knockback = 0, sound?: SOUND) {
+	onHit?: (entity: Entity) => void
+	constructor(amount: number, target: number[], destroyOnHit = -1, knockback = 0, sound?: SOUND, onHit?: (entity: Entity) => void) {
 		super()
+		this.onHit = onHit
 		this.sound = sound
 		this.amount = new Stat(amount, STATS.DAMAGE)
 		this.knockback = new Stat(knockback, STATS.KNOCKBACK)

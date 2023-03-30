@@ -110,7 +110,7 @@ class Entity {
 	}
 
 	addComponent<T extends Component>(component: T) {
-		if (component.bind) component.bind(this)
+		if (component?.bind) component.bind(this)
 		ECS.components.get(component.constructor.name)?.set(this, component)
 		return component as T
 	}

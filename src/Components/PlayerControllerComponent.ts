@@ -5,6 +5,7 @@ import { inputManager } from '../Globals/Initialize'
 
 class PlayerControllerComponent extends Component {
 	index: number | ''
+	enabled = true
 	constructor(index?: number) {
 		super()
 		this.index = index ?? ''

@@ -43,8 +43,8 @@ class AIMovementSystem extends System {
 		})
 		entities.forEach((entity) => {
 			const ai = entity.getComponent(AIMovementComponent)
-			if (!ai.enabled) return
-			const position = entity.getComponent(PositionComponent).position
+			const position = entity.getComponent(PositionComponent)?.position
+			if (!ai.enabled || !position) return
 			const body = entity.getComponent(BodyComponent)
 			const velocity = new Vector2()
 			const seekingVelocity = new Vector2()
