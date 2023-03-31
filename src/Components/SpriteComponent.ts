@@ -15,6 +15,7 @@ class SpriteComponent extends Component {
 	material: Material
 	width: number
 	height: number
+	tile: Tile
 	renderOrder: number
 	scale: number
 	effectComposer: EffectComposer
@@ -28,6 +29,7 @@ class SpriteComponent extends Component {
 	flipped: boolean
 	constructor(tile: Tile, options?: { renderOrder?: number; scale?: number; shaders?: Shader[]; flipped?: boolean; opacity?: number }) {
 		super()
+		this.tile = tile
 		const newOptions = Object.assign({ renderOrder: 10, scale: 1, shaders: [], opacity: 1, flipped: false }, options)
 		this.width = tile.width
 		this.height = tile.height

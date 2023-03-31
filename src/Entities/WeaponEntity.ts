@@ -24,7 +24,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 		weapon.addComponent(new ShooterComponent(weaponDefinition.projectile, weaponDefinition.sound))
 	}
 	if (weaponDefinition.orbiter) {
-		weapon.addComponent(new JointComponent('revolute', ((tile?.height ?? 16) + parentHeight) / 2, parent))
+		weapon.addComponent(new JointComponent('revolute', { x: ((tile?.height ?? 16) + parentHeight) / 2, y: 0 }, parent))
 	}
 	if (weaponDefinition.damage) {
 		weapon.addComponent(new DamageComponent(weaponDefinition.damage, weaponDefinition.targetGroup.target, -1, 5, weaponDefinition.sound))
@@ -32,7 +32,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
-		[{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target }],
+		{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target },
 	))
 	if (tile) {
 		weapon.addComponent(new SpriteComponent(tile, { renderOrder: 2 }))

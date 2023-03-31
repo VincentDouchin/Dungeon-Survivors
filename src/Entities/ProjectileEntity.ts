@@ -51,9 +51,7 @@ const ProjectileEntity = ({ tile, damage, speed, targetGroup, range, nb = 1, spr
 		}
 		const projectileBody = projectile.addComponent(new BodyComponent(
 			{ moveForce: speed },
-			[
-				{ group: targetGroup.group, canCollideWith: targetGroup.target, mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
-			],
+			{ group: targetGroup.group, canCollideWith: targetGroup.target, mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
 		))
 		const coroutine = new Coroutine(function* () {
 			yield

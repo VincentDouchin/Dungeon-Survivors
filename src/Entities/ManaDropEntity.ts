@@ -11,9 +11,8 @@ const ManaDropEntity = (position: PositionComponent) => {
 	token.addComponent(new SpriteComponent(assets.icons.gem, { renderOrder: 1, scale: 0.8 }))
 	token.addComponent(new BodyComponent(
 		{ moveForce: 1000 },
-		[
-			{ width: 2, height: 2, contact: false, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 },
-		]))
+		{ width: 2, height: 2, contact: false, group: COLLISIONGROUPS.XP, canCollideWith: [COLLISIONGROUPS.SENSOR], mass: 1 },
+	))
 	token.addComponent(new TokenComponent())
 	token.addComponent(position)
 	return token

@@ -2,6 +2,7 @@ import type { Entity } from '../Globals/ECS'
 import type Tile from '../Utils/Tile'
 import VampireLordTransform from '../Game/Bosses/VampireLordTransform'
 import assets from '../Globals/Assets'
+import DopplegangerTransform from '../Game/Bosses/DopplegangerTransform'
 import type { bodySize } from './BodySizes'
 import BODYSIZES from './BodySizes'
 import type { WeaponDefinition } from './Weapons'
@@ -450,6 +451,10 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 2,
 		damage: 5,
 		xp: 10,
+		weapon: WEAPONS.energy,
+		get transforms() {
+			return [DopplegangerTransform(8, Enemies.elfQueen)]
+		},
 	},
 	elfKing: {
 		tiles: {
@@ -460,6 +465,10 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 2,
 		damage: 5,
 		xp: 10,
+		weapon: WEAPONS.energy,
+		get transforms() {
+			return [DopplegangerTransform(8, Enemies.elfKing)]
+		},
 	},
 	leprechaun: {
 		tiles: {

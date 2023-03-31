@@ -39,9 +39,11 @@ const CannonSpellEntity = (entity: Entity) => {
 							explosion.addComponent(projectile.getComponent(PositionComponent).clone())
 							explosion.addComponent(new SpriteComponent(tile, { scale: 2 }))
 							const explosionAnimation = explosion.addComponent(new AnimationComponent({ default: tile }, { start: false, frameRate: 3 }))
-							explosion.addComponent(new BodyComponent({ moveForce: 0 }, [{
-								group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width * 2, height: tile.height * 2, contact: false, sensor: true,
-							}]))
+							explosion.addComponent(new BodyComponent(
+								{ moveForce: 0 },
+								{
+									group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width * 2, height: tile.height * 2, contact: false, sensor: true,
+								}))
 							explosion.addComponent(new DamageComponent(entity.getComponent(SpellComponent).spellDamage.value, [COLLISIONGROUPS.ENEMY], -1, 10))
 							explosionAnimation.playAnimation().then(() => {
 								explosion.destroy()

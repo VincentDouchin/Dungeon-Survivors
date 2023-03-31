@@ -19,9 +19,7 @@ const ShurikenSpellEntity = (entity: Entity, nb = 10, startPosition?: PositionCo
 	shuriken.addComponent(new SpriteComponent(tile))
 	shuriken.addComponent(new BodyComponent(
 		{ moveForce: 500 },
-		[
-			{ mass: 0.1, group: COLLISIONGROUPS.WEAPON, contact: false, sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width, height: tile.height },
-		],
+		{ mass: 0.1, group: COLLISIONGROUPS.WEAPON, contact: false, sensor: true, canCollideWith: [COLLISIONGROUPS.ENEMY], width: tile.width, height: tile.height },
 	))
 	soundManager.play('effect', SOUNDS.SHURIKEN)
 	shuriken.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: 0 }))

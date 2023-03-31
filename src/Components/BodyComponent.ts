@@ -13,6 +13,7 @@ export interface bodyOptions {
 	moveForce?: number
 	mass?: number
 	lock?: boolean
+	enabled?: boolean
 }
 export interface colliderOptions {
 	contact: boolean
@@ -26,16 +27,34 @@ export interface colliderOptions {
 	group: number
 	canCollideWith: number[]
 }
+export const createCollider = (colliderOption: colliderOptions) => {
+	const colliderDescription = ColliderDesc
+		.cuboid(colliderOption.width / 2, colliderOption.height / 2)
+		.setDensity(colliderOption.mass ?? 0.00000001)
+		.setSensor(colliderOption.sensor ?? false)
+		.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
+		.setTranslation(colliderOption.offsetX ?? 0, (colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0) + (colliderOption.offsetY ?? 0))
+	if (colliderOption.contact) {
+		colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
+	}
+	return colliderDescription
+}
 class BodyComponent extends Component {
 	body: RigidBody | null = null
 	bodyDescription: RigidBodyDesc
 	colliders: Collider[] = []
-	colliderDescriptions: ColliderDesc[]
+	colliderDescriptions: ColliderDesc[] = []
 	moveForce: Stat
 	velocity = new Vector2()
-	constructor(bodyOptions: bodyOptions, colliderOptions: colliderOptions[]) {
+	lastVelocity = new Vector2()
+	width: number
+	height: number
+	enabled: boolean
+	constructor(bodyOptions: bodyOptions, colliderOption: colliderOptions) {
 		super()
-
+		this.enabled = bodyOptions.enabled ?? true
+		this.width = colliderOption.width
+		this.height = colliderOption.height
 		this.moveForce = new Stat(bodyOptions.moveForce ?? 10, STATS.SPEED)
 		// !Body
 		this.bodyDescription
@@ -47,18 +66,7 @@ class BodyComponent extends Component {
 				.lockRotations()
 
 		// !Collider
-		this.colliderDescriptions = colliderOptions.map((colliderOption) => {
-			const colliderDescription = ColliderDesc
-				.cuboid(colliderOption.width / 2, colliderOption.height / 2)
-				.setDensity(colliderOption.mass ?? 0.00000001)
-				.setSensor(colliderOption.sensor ?? false)
-				.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
-				.setTranslation(colliderOption.offsetX ?? 0, (colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0) + (colliderOption.offsetY ?? 0))
-			if (colliderOption.contact) {
-				colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
-			}
-			return colliderDescription
-		})
+		this.colliderDescriptions.push(createCollider(colliderOption))
 	}
 
 	contacts(fn: (entity: Entity) => void, group?: number, targets?: number[]) {

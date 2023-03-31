@@ -19,9 +19,7 @@ const NoteProjectileEntity = (parent: Entity) => {
 	note.addComponent(parent.getComponent(PositionComponent).clone())
 	const projectileBody = note.addComponent(new BodyComponent(
 		{ moveForce: 200 },
-		[
-			{ group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT], mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
-		],
+		{ group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT], mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
 	))
 	const noteRotation = Math.random() * Math.PI * 2
 	note.addComponent(new ExpirationComponent(400))

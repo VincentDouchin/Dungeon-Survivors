@@ -3,10 +3,10 @@ import type { Entity } from '../Globals/ECS'
 
 class JointComponent extends Component {
 	type
-	distance: number
+	distance: { x: number; y: number }
 	parent: Entity | null
 	jointed = false
-	constructor(type: 'revolute' | 'prismatic', distance: number, parentEntity?: Entity) {
+	constructor(type: 'revolute' | 'prismatic' | 'fixed', distance: { x: number; y: number }, parentEntity?: Entity) {
 		super()
 		this.type = type
 		this.distance = distance

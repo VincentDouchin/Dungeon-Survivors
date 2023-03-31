@@ -1,5 +1,5 @@
 import { Vector2 } from 'three'
-import BodyComponent from '../Components/BodyComponent'
+import BodyComponent, { createCollider } from '../Components/BodyComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import Coroutine from '../Globals/Coroutine'
 import DissolveShader from '../Shaders/DissolveShader'
@@ -25,16 +25,14 @@ const PortalEntity = () => {
 
 	const stairs = new Entity('stairs')
 	const stairsTile = assets.background.stairs
-	stairs.addComponent(new BodyComponent(
+	const body = stairs.addComponent(new BodyComponent(
 		{ type: 'fixed' },
-		[
-			{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: -stairsTile.width * scale / 2 + 6 },
-			{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: stairsTile.width * scale / 2 - 6 },
-			{ group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.WALL], contact: true, sensor: false, width: stairsTile.width * scale, height: stairsTile.height * scale * 2 },
-			{ group: COLLISIONGROUPS.PORTAL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: true, sensor: true, width: 64, height: 16, offsetY: stairsTile.height },
-
-		],
+		{ group: COLLISIONGROUPS.PORTAL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: true, sensor: true, width: 64, height: 16, offsetY: stairsTile.height },
 	))
+	body.colliderDescriptions.concat([{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: -stairsTile.width * scale / 2 + 6 },
+		{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: stairsTile.width * scale / 2 - 6 },
+		{ group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.WALL], contact: true, sensor: false, width: stairsTile.width * scale, height: stairsTile.height * scale * 2 }].map(createCollider))
+
 	stairs.addComponent(new PortalComponent())
 	stairs.addComponent(new SpriteComponent(stairsTile, { shaders: [new DissolveShader(180, true, 10)], scale, renderOrder: 2 }))
 	stairs.addComponent(new PositionComponent(camera.position.x, camera.position.y + camera.top + 40))
