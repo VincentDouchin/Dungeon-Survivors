@@ -237,6 +237,21 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 			delay: 240,
 		},
 	},
+	energy: {
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 3,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.effects.EnergyBall,
+				range: 100,
+			}),
+			delay: 240,
+		},
+	},
 
 }
 export default WEAPONS
