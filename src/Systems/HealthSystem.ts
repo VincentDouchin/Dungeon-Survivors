@@ -57,7 +57,7 @@ class HealthSystem extends System {
 			if (regen) {
 				regen.timer--
 				if (regen.timer <= 0) {
-					health.updateHealth(regen.amount)
+					ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: regen.amount })
 					regen.timer = regen.time
 				}
 			}
