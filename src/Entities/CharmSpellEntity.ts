@@ -37,10 +37,10 @@ const CharmSpellEntity = (parent: Entity) => {
 		enemy.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.ENEMY], seekingDistance: 0, charger: ai.charger }))
 		const enemySprite = enemy.getComponent(SpriteComponent)
 		enemySprite.removeShader(OutlineShader)
-		enemySprite.addShader(new OutlineShader([0, 0.8, 0, 1]))
+		enemySprite.addShader(new OutlineShader([1, 0.4, 1, 1]))
 		const damage = enemy.removeComponent(DamageComponent)
 		enemy.addComponent(new DamageComponent(damage.amount.base, [COLLISIONGROUPS.ENEMY], -1, 0))
-		enemy.addComponent(new HealthRegenComponent(-(0.1 * health.maxHealth.value), 60))
+		enemy.addComponent(new HealthRegenComponent((0.1 * health.maxHealth.value), 60))
 	}
 }
 export default CharmSpellEntity
