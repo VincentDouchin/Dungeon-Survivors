@@ -11,10 +11,10 @@ import BodyCreationSystem from '../Systems/BodyCreationSystem'
 import CameraSystem from '../Systems/CameraSystem'
 import Coroutine from '../Globals/Coroutine'
 import DroppingSystem from '../Systems/DroppingSystem'
-import { ECS } from '../Globals/ECS'
+import { ECS, Entity } from '../Globals/ECS'
 import ENEMYWAVES from '../Constants/EnemyEncounters'
 import type Encounter from '../Game/Encounter'
-import type { Entity } from '../Globals/ECS'
+
 import ExpirationSystem from '../Systems/ExpirationSystem'
 import type { GameState } from '../Globals/Engine'
 import HealthSystem from '../Systems/HealthSystem'
@@ -50,7 +50,7 @@ import GameOverState from './GameOverState'
 class RunState implements GameState {
 	ui?: Entity
 	background?: Entity
-	players: Set<Entity> = new Set()
+	players = new Entity('players')
 	playerLevel = new LevelComponent()
 	mana = new ManaComponent()
 	timer?: Coroutine
@@ -122,9 +122,8 @@ class RunState implements GameState {
 			const heros = [...State.heros]
 			if (!heros.length) return
 
-			this.players.add(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel, 0))
-			this.players.add(PlayerEntity(heros[1], State.multiplayer, this.stats[1], this.mana, this.playerLevel, 1))
-
+			this.players.addChildren(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel, 0))
+			this.players.addChildren(PlayerEntity(heros[1], State.multiplayer, this.stats[1], this.mana, this.playerLevel, 1))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
 				this.stats.forEach((stat) => {
 					stat.setModifier(skill.statName, skill.amount)
@@ -132,19 +131,19 @@ class RunState implements GameState {
 			}))
 
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
-				if (this.players.has(entity)) {
+				if (this.players.children.has(entity)) {
 					ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
 				}
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.LEVEL_UP, (entity) => {
-				if (this.players.has(entity)) {
+				if (this.players.children.has(entity)) {
 					ECS.eventBus.publish(UIEVENTS.UI_LEVEL, entity.getComponent(LevelComponent).level)
 					engine.setState(LevelUpState)
 				}
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop }) => {
-				if (this.players.has(entity) && !loop && amount < 0) {
-					this.players.forEach((player) => {
+				if (this.players.children.has(entity) && !loop && amount < 0) {
+					this.players.children.forEach((player) => {
 						if (player !== entity) {
 							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
 						}
@@ -152,9 +151,9 @@ class RunState implements GameState {
 				}
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
-				if (this.players.has(entity)) {
-					this.players.delete(entity)
-					if (this.players.size === 0) {
+				if (this.players.children.has(entity)) {
+					this.players.children.delete(entity)
+					if (this.players.children.size === 0) {
 						engine.setState(GameOverState)
 					}
 				}
@@ -178,7 +177,7 @@ class RunState implements GameState {
 		soundManager.resume(this.music)
 
 		// !INITIALIZE UI
-		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, this.mana.mana / this.mana.maxMana.value)
+		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: this.mana.mana / this.mana.maxMana.value, entity: this.players })
 		ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, this.mana.mana)
 		ECS.getEntitiesAndComponents(SpellComponent).forEach(([entity, spell]) => {
 			if (entity?.getComponent(SwitchingComponent).main) {
@@ -210,8 +209,7 @@ class RunState implements GameState {
 		case MapState: {
 			this.tutoCoroutine?.stop()
 			this.subscribers.forEach(sub => sub())
-			this.players.forEach(player => player.destroy())
-			this.players.clear()
+			this.players.destroy()
 			this.background?.destroy()
 			this.encounter = null
 			this.music = null
