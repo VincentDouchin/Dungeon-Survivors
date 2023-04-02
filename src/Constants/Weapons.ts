@@ -189,7 +189,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 2,
-				speed: 200,
+				speed: 100,
 				targetGroup: enemyGroup,
 				tile: assets.weapons.bone,
 				range: 200,
