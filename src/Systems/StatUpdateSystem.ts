@@ -3,7 +3,7 @@ import { ECS, System } from '../Globals/ECS'
 
 import BodyComponent from '../Components/BodyComponent'
 import DamageComponent from '../Components/DamageComponent'
-import { ECSEVENTS } from '../Constants/Events'
+import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import HealthComponent from '../Components/HealthComponent'
 import LevelComponent from '../Components/LevelComponent'
 import ManaComponent from '../Components/ManaComponent'
@@ -28,13 +28,18 @@ class StatUpdateSystem extends System {
 	}
 
 	update(entities: Entity[]): void {
+		const updatedStats: StatsComponent[] = []
 		entities.forEach((entity) => {
 			const stats = entity.getComponent(StatsComponent)
-			for (let i = stats.boosts.length - 1; i >= 0; i--) {
-				stats.boosts[i].duration--
-				if (stats.boosts[i].duration === 0) {
-					stats.boosts.splice(i, 1)
+			if (!updatedStats.includes(stats)) {
+				for (let i = stats.buffs.length - 1; i >= 0; i--) {
+					stats.buffs[i].duration--
+					if (stats.buffs[i].duration <= 0) {
+						stats.buffs.splice(i, 1)
+						ECS.eventBus.publish(UIEVENTS.DISPLAY_BOOST, stats)
+					}
 				}
+				updatedStats.push(stats)
 			}
 			const level = entity.getComponent(LevelComponent)
 			const damage = entity.getComponent(DamageComponent)
@@ -48,6 +53,7 @@ class StatUpdateSystem extends System {
 			if (health) {
 				health.maxHealth.setModifiers(stats, level)
 				health.defense.setModifiers(stats, level)
+				health.regen.setModifiers(stats, level)
 			}
 			if (damage) {
 				damage.amount.setModifiers(stats, level)

@@ -13,7 +13,7 @@ import MinionSpawnerComponent from '../Components/MinionSpawnerComponent'
 import OutlineShader from '../Shaders/OutlineShader'
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import type StatsComponent from '../Components/StatsComponent'
+import StatsComponent from '../Components/StatsComponent'
 import PotionEntity from './PotionEntity'
 import ManaDropEntity from './ManaDropEntity'
 import BoostEntity from './BoostEntity'
@@ -27,7 +27,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	const scale = type.boss ? 1.5 : 1
 	const berserk = type.berserk
 	const tile = Object.values(type.tiles)[0]
-	const sprite = enemy.addComponent(new SpriteComponent(tile, { scale }))
+	const sprite = enemy.addComponent(new SpriteComponent(tile, { scale, renderOrder: 1 }))
 	if (berserk) {
 		sprite.addShader(new OutlineShader([1, 0, 0, 1]))
 	}
@@ -55,7 +55,8 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	))
 
 	if (stats) {
-		enemy.addComponent(stats)
+		const personalStats = enemy.addComponent(new StatsComponent())
+		personalStats.stats = stats.stats
 	}
 	if (level) {
 		enemy.addComponent(level)
