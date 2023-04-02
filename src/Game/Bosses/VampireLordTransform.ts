@@ -6,12 +6,17 @@ import type { Entity } from '../../Globals/ECS'
 import LevelComponent from '../../Components/LevelComponent'
 import PositionComponent from '../../Components/PositionComponent'
 import RangedComponent from '../../Components/RangedComponent'
-import StatsComponent from '../../Components/StatsComponent'
+import StatsComponent, { STATS } from '../../Components/StatsComponent'
 import waitFor from '../../Utils/WaitFor'
+import HealthComponent from '../../Components/HealthComponent'
+import DamageComponent from '../../Components/DamageComponent'
 
 const VampireLordTransform = (boss: Entity) => {
 	const stats = boss.getComponent(StatsComponent)
 	const level = boss.getComponent(LevelComponent)
+	boss.getComponent(DamageComponent).onHit = (player: Entity) => {
+		player.getComponent(StatsComponent).addBuff({ stat: STATS.REGEN, flat: 5, duration: 300, modifier: 0, identifier: boss.id })
+	}
 	boss.onDestroy(() => {
 		const bat = EnemyEntity({ ...Enemies.bat, boss: true, health: 200, speed: 7 }, stats, level)(boss.getComponent(PositionComponent))
 		bat.getComponent(AIMovementComponent).seekingDistance = 500
@@ -22,7 +27,8 @@ const VampireLordTransform = (boss: Entity) => {
 		})
 		bat.onDestroy(() => {
 			batCoroutine.stop()
-			EnemyEntity({ ...Enemies.vampireLord, transforms: [] })(bat.getComponent(PositionComponent))
+			const batHealth = bat.getComponent(HealthComponent).health
+			EnemyEntity({ ...Enemies.vampireLord, health: batHealth, transforms: [] })(bat.getComponent(PositionComponent))
 		})
 	})
 }
