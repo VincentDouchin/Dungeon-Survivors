@@ -16,12 +16,14 @@ class Stat {
 	setModifiers(modifier?: StatsComponent, level?: LevelComponent) {
 		this.level = level
 		this.modifier = modifier
+		return this
 	}
 
 	get value() {
 		const levelModifer = this.base * ((this.level?.level ?? 0) * (this.modifier?.getLevelModifier(this.name) ?? 0))
 		const statsModifier = this.base * (this.modifier?.getModifier(this.name) ?? 0)
-		return this.base + levelModifer + statsModifier
+		const flatBuff = this.modifier?.getFlat(this.name) ?? 0
+		return this.base + levelModifer + statsModifier + flatBuff
 	}
 }
 
