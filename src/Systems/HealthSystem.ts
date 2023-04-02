@@ -4,7 +4,6 @@ import BodyComponent from '../Components/BodyComponent'
 import DamageComponent from '../Components/DamageComponent'
 import ExpirationComponent from '../Components/ExpirationComponent'
 import HealthComponent from '../Components/HealthComponent'
-import HealthRegenComponent from '../Components/HealthRegenComponent'
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import { ECSEVENTS } from '../Constants/Events'
@@ -53,12 +52,11 @@ class HealthSystem extends System {
 				health.updateHealth(health.maxHealth.value - health.lastMaxHealth)
 				health.lastMaxHealth = health.maxHealth.value
 			}
-			const regen = entity.getComponent(HealthRegenComponent)
-			if (regen) {
-				regen.timer--
-				if (regen.timer <= 0) {
-					ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: regen.amount })
-					regen.timer = regen.time
+			if (health.regen.value) {
+				health.regenTimer--
+				if (health.regenTimer <= 0) {
+					ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: health.regen.value })
+					health.regenTimer = health.regenTime
 				}
 			}
 
