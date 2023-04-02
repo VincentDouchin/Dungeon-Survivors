@@ -23,8 +23,10 @@ const UIRunEntity = () => {
 	const level = ui.addChildren(LevelDisplayEntity())
 	const xpBar = level.addChildren(XPBarEntity())
 	xpBar.addChildren(BoostsEntity())
-	const activeSpell = ui.addChildren(ActiveSpellEntity())
-	activeSpell.addChildren(ManaBarEntity())
+	const activeSpell = State.multiplayer ? new Entity('fake spell') : ui.addChildren(ActiveSpellEntity())
+	if (!State.multiplayer) {
+		activeSpell.addChildren(ManaBarEntity())
+	}
 	const timer = ui.addChildren(TimeCounterEntity())
 	const mobileEntities: Entity[] = []
 	if (State.mobile) {
