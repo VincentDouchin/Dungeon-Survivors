@@ -11,6 +11,7 @@ import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import StatsComponent from '../Components/StatsComponent'
 import assets from '../Globals/Assets'
+import HealthComponent from '../Components/HealthComponent'
 
 class MinionSpawnerSytem extends System {
 	constructor() {
@@ -20,8 +21,10 @@ class MinionSpawnerSytem extends System {
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
 			const minion = entity.getComponent(MinionSpawnerComponent)
+			const health = entity.getComponent(HealthComponent)
+			const modifier = health ? (health.health / health.maxHealth.value * 2) : 1
 			minion.timer++
-			if (minion.timer === minion.delay) {
+			if (minion.timer >= minion.delay * modifier) {
 				const position = entity.getComponent(PositionComponent)
 				const stats = entity.getComponent(StatsComponent)
 				const angle = Math.random() * Math.PI * 2
