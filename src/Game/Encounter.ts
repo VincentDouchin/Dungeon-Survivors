@@ -19,18 +19,25 @@ import State from '../Globals/State'
 import assets from '../Globals/Assets'
 import { camera } from '../Globals/Initialize'
 import waitFor from '../Utils/WaitFor'
+import type WeightedList from '../Utils/WeightedList'
 
 class Encounter {
 	waves: (() => Generator)[] = []
 	enemies: Set<Entity> = new Set()
-	difficulty = {
+	statDifficulty = {
 		[DIFFICULTY.EASY]: 0.025,
 		[DIFFICULTY.NORMAL]: 0.05,
 		[DIFFICULTY.HARD]: 0.075,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 
+	amountDifficulty = {
+		[DIFFICULTY.EASY]: 1,
+		[DIFFICULTY.NORMAL]: 1.2,
+		[DIFFICULTY.HARD]: 1.5,
+	}[State.difficulty ?? DIFFICULTY.EASY]
+
 	boundary: { x?: number; y?: number } = { x: undefined, y: undefined }
-	stats = new StatsComponent().set(STATS.MAX_HEALTH, this.difficulty).set(STATS.DAMAGE, this.difficulty)
+	stats = new StatsComponent().set(STATS.MAX_HEALTH, this.statDifficulty).set(STATS.DAMAGE, this.statDifficulty)
 	level = new LevelComponent()
 	started = false
 	subscriber: () => void
@@ -60,11 +67,11 @@ class Encounter {
 		return this
 	}
 
-	addWave(enemies: Array<[EnemyType, number]>, waves = 1, delay = 300) {
+	addWave(enemies: WeightedList<EnemyType>, enemyAmount: number, berserk: number, waves = 1, delay = 600) {
 		const self = this
 		this.waves.push(function* () {
 			for (let i = 0; i < waves; i++) {
-				yield * self.spawnEnemies(enemies)
+				yield * self.spawnEnemies(enemies, enemyAmount * self.amountDifficulty, berserk)
 				yield * waitFor(delay)
 			}
 		})
@@ -73,22 +80,31 @@ class Encounter {
 
 	getDistance() {
 		const angle = Math.random() * Math.PI * 2
-		const x = Math.cos(angle) * 200 + camera.position.x
-		const y = Math.sin(angle) * 200 + camera.position.y
-		// const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
-		// const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
-		// const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
-		// const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
+		// const x = Math.cos(angle) * 200 + camera.position.x
+		// const y = Math.sin(angle) * 200 + camera.position.y
+		const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
+		const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
+		const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
+		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
 		return { x, y }
 	}
 
-	* spawnEnemies(enemyTypes: Array<[EnemyType, number]>) {
-		const enemies: EnemyType[] = enemyTypes.map(([enemyType, nb]) => new Array(nb).fill(enemyType)).flat()
-		const nbOfEnemies = enemies.length
-		for (let i = 0; i < nbOfEnemies; i++) {
+	addEnemy(type: EnemyType) {
+		const self = this
+		this.waves.push(function*() {
+			yield
+			const { x, y } = self.getDistance()
+			self.spawnEnemy(type, x, y)
+		})
+		return this
+	}
+
+	* spawnEnemies(enemies: WeightedList<EnemyType>, enemyAmount: number, berserk: number) {
+		for (let i = 0; i < enemyAmount; i++) {
 			const { x, y } = this.getDistance()
-			const enemy = enemies.splice(Math.floor(Math.random() * enemies.length), 1)
-			this.spawnEnemy(enemy[0], x, y)
+			const enemy = enemies.pick()
+			const isBerserk = Math.random() < berserk
+			this.spawnEnemy({ ...enemy, berserk: isBerserk }, x, y)
 			yield * waitFor(Math.random() * 20)
 		}
 	}
