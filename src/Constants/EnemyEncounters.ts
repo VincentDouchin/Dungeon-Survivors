@@ -9,12 +9,11 @@ const {
 	leprechaun, woodElfMale, woodElfFemale, elfKnight, elfKing, elfQueen, elfRanger,
 	villagerFemale, villagerMale, butcher, blacksmith, executioner,
 	angel, clericFat, clericNormal, clericSkinny, bishop, templar, inquisitor, archAngel,
-	zombieSmall, muddy, swampy, zombie, iceZombie, ogre, skeleton,
+	zombieSmall, muddy, swampy, iceZombie, ogre, skeleton,
 	imp, wogol, chort, demonBig, necromancer,
 	cultist, cultistHooded, vampireMale, vampireFemale, vampireLord, bat,
 } = Enemies
 export type enemyWaveName = 'ORCS' | 'ANIMALS' | 'PRIESTS' | 'ELVES' | 'DEMONS' | 'VILLAGERS' | 'UNDEAD' | 'VAMPIRES'
-const berserk = (enemyType: EnemyType): EnemyType => ({ ...enemyType, berserk: true })
 
 const ENENMYENCOUNTERS: Record<enemyWaveName, () => Encounter> = {
 	ORCS: () => new Encounter()
