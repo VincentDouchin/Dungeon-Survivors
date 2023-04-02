@@ -4,13 +4,13 @@ import DamageComponent from '../Components/DamageComponent'
 import { ECS } from '../Globals/ECS'
 import type { Entity } from '../Globals/ECS'
 import HealthComponent from '../Components/HealthComponent'
-import HealthRegenComponent from '../Components/HealthRegenComponent'
 import OutlineShader from '../Shaders/OutlineShader'
 import PositionComponent from '../Components/PositionComponent'
 import { SOUNDS } from '../Constants/Sounds'
 import SpellComponent from '../Components/SpellComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import { soundManager } from '../Globals/Initialize'
+import StatsComponent, { STATS } from '../Components/StatsComponent'
 
 const CharmSpellEntity = (parent: Entity) => {
 	const parentPosition = parent.getComponent(PositionComponent)
@@ -40,7 +40,7 @@ const CharmSpellEntity = (parent: Entity) => {
 		enemySprite.addShader(new OutlineShader([1, 0.4, 1, 1]))
 		const damage = enemy.removeComponent(DamageComponent)
 		enemy.addComponent(new DamageComponent(damage.amount.base, [COLLISIONGROUPS.ENEMY], -1, 0))
-		enemy.addComponent(new HealthRegenComponent((0.1 * health.maxHealth.value), 60))
+		enemy.getComponent(StatsComponent).addBuff({ stat: STATS.REGEN, duration: Infinity, flat: 0.1 * health.maxHealth.value, modifier: 0 })
 	}
 }
 export default CharmSpellEntity
