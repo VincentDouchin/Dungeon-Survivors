@@ -13,7 +13,6 @@ const HealthBarEntity = (parent: Entity, offset: number) => {
 
 	const healthSprite = healthBarEntity.addComponent(new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture, 1)] }))
 	healthBarEntity.addComponent(new PositionComponent().fromParent(parent, 0, offset))
-	parent.addChildren(healthBarEntity)
 	const updateSub = ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity }) => {
 		if (entity === parent) {
 			const { health, maxHealth } = parent.getComponent(HealthComponent)
