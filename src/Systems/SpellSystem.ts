@@ -24,7 +24,7 @@ class SpellSystem extends System {
 					if (mana.mana >= mana.manaCost) {
 						spell.spell(entity)
 						mana.mana -= mana.manaCost
-						ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
+						ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: mana.mana / mana.maxMana.value, entity })
 						ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 					}
 				}

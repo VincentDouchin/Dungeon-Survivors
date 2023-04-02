@@ -15,7 +15,7 @@ const ManaBarEntity = () => {
 	const full = assets.UI.mana.framed(scalingOptions, w, h)
 	const manaBar = new Entity('mana bar')
 	const sprite = manaBar.addComponent(new SpriteComponent(bar, { renderOrder: 100, scale: 3, shaders: [new BarShader(full.texture, 0)], flipped: true }))
-	ECS.eventBus.subscribe(ECSEVENTS.MANA_PERCENT, (percent) => {
+	ECS.eventBus.subscribe(ECSEVENTS.MANA_PERCENT, ({ percent }) => {
 		sprite.getUniforms(BarShader).percent.value = percent
 		sprite.render()
 	})
