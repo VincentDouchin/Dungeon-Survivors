@@ -3,10 +3,12 @@ import type Tile from '../Utils/Tile'
 import VampireLordTransform from '../Game/Bosses/VampireLordTransform'
 import assets from '../Globals/Assets'
 import DopplegangerTransform from '../Game/Bosses/DopplegangerTransform'
+import State from '../Globals/State'
 import type { bodySize } from './BodySizes'
 import BODYSIZES from './BodySizes'
 import type { WeaponDefinition } from './Weapons'
 import WEAPONS from './Weapons'
+import DIFFICULTY from './DIfficulty'
 
 export interface EnemyType {
 	tiles: Record<string, Tile>
@@ -27,6 +29,12 @@ export interface EnemyType {
 	}
 
 }
+const difficultyModifier = {
+	[DIFFICULTY.EASY]: 1,
+	[DIFFICULTY.NORMAL]: 0.9,
+	[DIFFICULTY.HARD]: 0.8,
+}[State.difficulty ?? DIFFICULTY.EASY]
+
 const Enemies: Record<string, EnemyType> = {
 	// ! ORCS
 	goblin: {
@@ -144,13 +152,13 @@ const Enemies: Record<string, EnemyType> = {
 		damage: 5,
 		charger: true,
 		boss: true,
-		weapon: WEAPONS.fireball,
+		weapon: WEAPONS.demonFireball,
 		xp: 20,
 		get minion() {
 			return {
 				type: Enemies.imp,
 				distance: 50,
-				delay: 120,
+				delay: 120 * difficultyModifier,
 			}
 		},
 	},
@@ -249,7 +257,7 @@ const Enemies: Record<string, EnemyType> = {
 			return {
 				type: Enemies.zombieSmall,
 				distance: 50,
-				delay: 180,
+				delay: 180 * difficultyModifier,
 			}
 		},
 	},
@@ -384,7 +392,7 @@ const Enemies: Record<string, EnemyType> = {
 			return {
 				type: Enemies.mushroomSmall,
 				distance: 50,
-				delay: 180,
+				delay: 180 * difficultyModifier,
 			}
 		},
 	},
@@ -545,6 +553,8 @@ const Enemies: Record<string, EnemyType> = {
 		speed: 2,
 		damage: 3,
 		xp: 2,
+		weapon: WEAPONS.bearTrap,
+
 	},
 	blacksmith: {
 		tiles: {
@@ -796,7 +806,7 @@ const Enemies: Record<string, EnemyType> = {
 		get minion() {
 			return {
 				type: Enemies.angel,
-				delay: 180,
+				delay: 180 * difficultyModifier,
 				distance: 70,
 			}
 		},
@@ -861,7 +871,7 @@ const Enemies: Record<string, EnemyType> = {
 		},
 		health: 200,
 		size: BODYSIZES.normal,
-		speed: 10,
+		speed: 7,
 		damage: 5,
 		boss: true,
 		transforms: [VampireLordTransform],

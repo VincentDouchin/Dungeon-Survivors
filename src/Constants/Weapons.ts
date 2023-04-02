@@ -4,9 +4,13 @@ import ProjectileEntity from '../Entities/ProjectileEntity'
 import type Tile from '../Utils/Tile'
 import assets from '../Globals/Assets'
 import FreezeEffect from '../Game/Effects/FreezeEffect'
+import BearTrapEntity from '../Entities/BearTrapEntity'
+import State from '../Globals/State'
+import ConfusionEffect from '../Game/Effects/ConfusionEffect'
 import { SOUNDS } from './Sounds'
 import type { SOUND } from './Sounds'
 import COLLISIONGROUPS from './CollisionGroups'
+import DIFFICULTY from './DIfficulty'
 
 export interface WeaponDefinition {
 	tile?: Tile
@@ -37,7 +41,11 @@ export interface ProjectileDefinition {
 	cooldownAmount?: number
 	cooldownTrigger?: number
 }
-
+const difficultyModifier = {
+	[DIFFICULTY.EASY]: 1,
+	[DIFFICULTY.NORMAL]: 0.9,
+	[DIFFICULTY.HARD]: 0.8,
+}[State.difficulty ?? DIFFICULTY.EASY]
 const WEAPONS: Record<string, WeaponDefinition> = {
 	// ! PLAYER
 	swordKnight: {
@@ -136,7 +144,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.weapons.arrow,
 				range: 200,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 	fireball: {
@@ -152,7 +160,26 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.effects.fireProjectile,
 				range: 200,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
+		},
+	},
+	demonFireball: {
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		sound: SOUNDS.Fireball,
+		projectile: {
+			spawn: ProjectileEntity({
+				damage: 5,
+				speed: 100,
+				targetGroup: enemyGroup,
+				tile: assets.effects.fireProjectile,
+				range: 200,
+				spread: Math.PI * 2,
+				nb: 12,
+			}),
+			delay: 240 * difficultyModifier,
+
 		},
 	},
 	bone: {
@@ -168,7 +195,16 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				range: 200,
 				rotationSpeed: 0.2,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
+		},
+	},
+	bearTrap: {
+		orbiter: true,
+		targeter: true,
+		targetGroup: enemyGroup,
+		projectile: {
+			spawn: BearTrapEntity,
+			delay: 1800 * difficultyModifier,
 		},
 	},
 	hammer: {
@@ -184,7 +220,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				range: 150,
 				rotationSpeed: 0.1,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 	iceSpike: {
@@ -201,7 +237,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				scale: 0.5,
 				onHit: FreezeEffect,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 	cross: {
@@ -219,7 +255,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				rotationSpeed: 0.1,
 			}),
 
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 	darkProjectile: {
@@ -233,8 +269,9 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				targetGroup: enemyGroup,
 				tile: assets.effects.darkProjectile,
 				range: 150,
+				onHit: ConfusionEffect,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 	energy: {
@@ -249,7 +286,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.effects.EnergyBall,
 				range: 100,
 			}),
-			delay: 240,
+			delay: 240 * difficultyModifier,
 		},
 	},
 
