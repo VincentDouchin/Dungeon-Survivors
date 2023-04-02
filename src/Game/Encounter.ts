@@ -84,8 +84,8 @@ class Encounter {
 		// const y = Math.sin(angle) * 200 + camera.position.y
 		const distanceX = Math.cos(angle) * (camera.right + camera.position.x) * ((Math.random() * 1.2) + 1)
 		const distanceY = Math.sin(angle) * (camera.top + camera.position.y) * ((Math.random() * 1.2) + 1)
-		const x = this.boundary.x ? Math.max(-this.boundary.x + offset, Math.min(this.boundary.x - offset, distanceX)) : distanceX
-		const y = this.boundary.y ? Math.max(-this.boundary.y + offset, Math.min(this.boundary.y - offset, distanceY)) : distanceY
+		const x = this.boundary.x ? Math.max(-this.boundary.x, Math.min(this.boundary.x, distanceX)) : distanceX
+		const y = this.boundary.y ? Math.max(-this.boundary.y, Math.min(this.boundary.y, distanceY)) : distanceY
 		return { x, y }
 	}
 
