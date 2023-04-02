@@ -4,7 +4,7 @@ import { ECS, System } from '../Globals/ECS'
 import BodyComponent from '../Components/BodyComponent'
 import BoostComponent from '../Components/BoostComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
-import { ECSEVENTS } from '../Constants/Events'
+import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import ManaComponent from '../Components/ManaComponent'
 import ParticleEntity from '../Entities/ParticleEntitty'
 import PositionComponent from '../Components/PositionComponent'
@@ -52,13 +52,14 @@ class PickupSystem extends System {
 					if (!mana) return
 					mana.mana = Math.min(mana.maxMana.value, mana.mana + 15)
 					soundManager.play('effect', SOUNDS.PowerUp, { volume: 0.3 })
-					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, mana.mana / mana.maxMana.value)
+					ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: mana.mana / mana.maxMana.value, entity })
 					ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
 				}
 				if (boost) {
 					otherEntity.destroy()
-					stats?.boosts.push(boost)
+					stats?.addBuff(boost)
 					ParticleEntity(entity, assets.effects.healing, { duration: 5, frameRate: 10, color: boost.color })
+					ECS.eventBus.publish(UIEVENTS.DISPLAY_BOOST, stats)
 					soundManager.play('effect', SOUNDS.BOOST)
 				}
 			}, COLLISIONGROUPS.PLAYER)
