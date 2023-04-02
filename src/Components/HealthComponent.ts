@@ -10,6 +10,9 @@ class HealthComponent extends Component {
 	canTakeDamage = true
 	show: boolean
 	defense = new Stat(1, STATS.DEFENSE)
+	regen = new Stat(0, STATS.REGEN)
+	regenTimer = 0
+	regenTime = 60
 	sound?: SOUND
 	lastMaxHealth: number
 	constructor(health: number, type: number, show = true, sound?: SOUND) {

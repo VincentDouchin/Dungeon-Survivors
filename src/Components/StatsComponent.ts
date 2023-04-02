@@ -12,16 +12,18 @@ export enum STATS {
 	MAX_HEALTH = 'MAX_HEALTH',
 	MAX_MANA = 'MAX_MANA',
 	SPELL_DAMAGE = 'SPELL_DAMAGE',
-
+	REGEN = 'REGEN',
 }
 export interface BoostModifier {
 	stat: STATS
 	duration: number
 	modifier: number
+	flat?: number
+	identifier?: string
 }
 class StatsComponent extends Component {
 	stats: Map<STATS, { levelModifier: number; modifier: number }> = new Map()
-	boosts: BoostModifier[] = []
+	buffs: BoostModifier[] = []
 	getemptyStat = () => ({ levelModifier: 0, modifier: 0 })
 	constructor() {
 		super()
@@ -45,12 +47,25 @@ class StatsComponent extends Component {
 
 	getModifier(statName: STATS) {
 		const stat = this.stats.get(statName) ?? this.getemptyStat()
-		const boost = this.boosts.reduce((acc, boostModifier) => boostModifier.stat === statName ? acc + boostModifier.modifier : acc, 0)
+		const boost = this.buffs.reduce((acc, boostModifier) => boostModifier.stat === statName ? acc + boostModifier.modifier : acc, 0)
 		return stat.modifier + boost
+	}
+
+	getFlat(statName: STATS) {
+		return this.buffs.reduce((acc, boostModifier) => boostModifier.stat === statName ? acc + (boostModifier.flat ?? 0) : acc, 0)
 	}
 
 	getLevelModifier(statName: STATS) {
 		return this.stats.get(statName)?.levelModifier ?? 0
+	}
+
+	addBuff(buff: BoostModifier) {
+		const existingBuff = this.buffs.find(existingBuff => existingBuff.identifier === buff.identifier)
+		if (existingBuff && buff.identifier) {
+			existingBuff.duration = buff.duration
+		} else {
+			this.buffs.push(buff)
+		}
 	}
 }
 StatsComponent.register()
