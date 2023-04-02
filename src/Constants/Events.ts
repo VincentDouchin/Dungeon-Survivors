@@ -2,12 +2,14 @@ import type { Entity } from '../Globals/ECS'
 import type { INPUTNAME } from '../Globals/InputManager'
 import type PositionComponent from '../Components/PositionComponent'
 import type Tile from '../Utils/Tile'
+import type StatsComponent from '../Components/StatsComponent'
 import type { Skill } from './Skills'
 
 export enum UIEVENTS {
 	UI_XP = 'UI_XP',
 	UI_LEVEL = 'UI_LEVEL',
 	ENEMY_LEVEL = 'ENEMY_LEVEL',
+	DISPLAY_BOOST = 'DISPLAY_BOOST',
 }
 
 export enum ECSEVENTS {
@@ -40,7 +42,7 @@ export type EventMap = {
 	[ECSEVENTS.PATH_POSITION]: { position: PositionComponent; encounter: boolean }
 	[ECSEVENTS.NEW_SKILL]: Skill
 	[ECSEVENTS.ADD_TO_BACKGROUND]: Entity
-	[ECSEVENTS.MANA_PERCENT]: number
+	[ECSEVENTS.MANA_PERCENT]: { percent: number; entity: Entity }
 	[ECSEVENTS.MANA_AMOUNT]: number
 	[ECSEVENTS.SELECTED]: Entity
 	[ECSEVENTS.DESELECTED]: Entity
@@ -54,6 +56,7 @@ export type EventMap = {
 	[UIEVENTS.UI_XP]: number
 	[UIEVENTS.UI_LEVEL]: number
 	[UIEVENTS.ENEMY_LEVEL]: number
+	[UIEVENTS.DISPLAY_BOOST]: StatsComponent
 }
 	& Record<INPUTNAME, number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
