@@ -24,7 +24,7 @@ const SkillMenuEntity = () => {
 	const skillMenuPosition = skillMenu.addComponent(new UIPositionComponent({ x: 0, y: 2 }))
 
 	skillMenuPosition.moveTo(0, 30)
-	const possibleSkills = [...SKILLS]
+	const possibleSkills = [...SKILLS].filter(skill => skill.show)
 	const selectors: Entity[] = []
 	for (let i = 0; i < 3; i++) {
 		const button = new Entity('button')

@@ -41,7 +41,7 @@ const UIPlayerSelectEntity = () => {
 	statsContainer.addComponent(new UIPositionComponent())
 	stats.addChildren(statsContainer)
 	const statAmounts = new Map<STATS, TextComponent>()
-	SKILLS.forEach((skill, index) => {
+	SKILLS.filter(skill => skill.show).forEach((skill, index) => {
 		const skillContainer = new Entity('skill container')
 		skillContainer.addComponent(new SpriteComponent(Tile.empty(100, 16)))
 		skillContainer.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: index * 1.5 + index }))
