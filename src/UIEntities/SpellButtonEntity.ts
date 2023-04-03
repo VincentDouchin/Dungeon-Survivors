@@ -2,7 +2,7 @@ import { ECS, Entity } from '../Globals/ECS'
 
 import ColorShader from '../Shaders/ColorShader'
 import Coroutine from '../Globals/Coroutine'
-import { ECSEVENTS } from '../Constants/Events'
+import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
 import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
@@ -31,7 +31,7 @@ const SpellButtonEntity = () => {
 
 				sprite.changeTexture(assets.UI.button.texture)
 				sprite.render()
-				ECS.eventBus.publish(INPUTS.SKILL, 1)
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SKILL, amount: 1 })
 			})
 		}
 	})

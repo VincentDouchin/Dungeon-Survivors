@@ -4,6 +4,7 @@ import type EventBus from '../Utils/EventBus'
 import GamepadController from '../InputControllers/GamepadController'
 import type INPUTS from '../Constants/InputsNames'
 import KeyboardController from '../InputControllers/KeyboardController'
+import TouchController from '../InputControllers/TouchController'
 import { ECS } from './ECS'
 import { UICamera, UIScene, camera, renderer, scene } from './Initialize'
 import State from './State'
@@ -98,7 +99,9 @@ class InputManager {
 		}), {}) as Record<INPUTS, INPUTNAME>
 		if (!State.mobile)
 			this.registerController(new KeyboardController(), inputsForRegister)
-
+		else {
+			this.registerController(new TouchController(), inputsForRegister)
+		}
 		window.addEventListener('gamepadconnected', ({ gamepad }) => {
 			this.registerController(new GamepadController(gamepad.index), inputsForRegister)
 		})

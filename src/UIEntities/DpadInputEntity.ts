@@ -4,6 +4,7 @@ import INPUTS from '../Constants/InputsNames'
 import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
+import { UIEVENTS } from '../Constants/Events'
 
 const DpadInputEntity = () => {
 	const dpad = new Entity('dpad')
@@ -37,8 +38,8 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			ECS.eventBus.publish(positionX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT, Math.abs(positionX))
-			ECS.eventBus.publish(positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, Math.abs(positionY))
+			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT, amount: Math.abs(positionX) })
+			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, amount: Math.abs(positionY) })
 		}
 	})
 	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
@@ -47,7 +48,7 @@ const DpadInputEntity = () => {
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
 			for (const inputName of [INPUTS.MOVEDOWN, INPUTS.MOVELEFT, INPUTS.MOVERIGHT, INPUTS.MOVEUP]) {
-				ECS.eventBus.publish(inputName, 0)
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: inputName, amount: 0 })
 			}
 		}
 	})

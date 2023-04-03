@@ -6,6 +6,7 @@ import SpriteComponent from '../Components/SpriteComponent'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
 import waitFor from '../Utils/WaitFor'
+import { UIEVENTS } from '../Constants/Events'
 
 const SwitchButtonEntity = () => {
 	const button = new Entity('switch Button')
@@ -27,7 +28,7 @@ const SwitchButtonEntity = () => {
 
 				sprite.renderShader.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
-				ECS.eventBus.publish(INPUTS.SWITCH, 1)
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SWITCH, amount: 1 })
 			})
 		}
 	})

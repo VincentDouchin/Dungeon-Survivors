@@ -4,12 +4,15 @@ import type PositionComponent from '../Components/PositionComponent'
 import type Tile from '../Utils/Tile'
 import type StatsComponent from '../Components/StatsComponent'
 import type { Skill } from './Skills'
+import type INPUTS from './InputsNames'
 
 export enum UIEVENTS {
 	UI_XP = 'UI_XP',
 	UI_LEVEL = 'UI_LEVEL',
 	ENEMY_LEVEL = 'ENEMY_LEVEL',
 	DISPLAY_BOOST = 'DISPLAY_BOOST',
+	TOUCH = 'TOUCH',
+	UPDATE_HEALTH = 'UPDATE_HEALTH',
 }
 
 export enum ECSEVENTS {
@@ -57,6 +60,8 @@ export type EventMap = {
 	[UIEVENTS.UI_LEVEL]: number
 	[UIEVENTS.ENEMY_LEVEL]: number
 	[UIEVENTS.DISPLAY_BOOST]: StatsComponent
+	[UIEVENTS.TOUCH]: { input: INPUTS; amount: number }
+	[UIEVENTS.UPDATE_HEALTH]: { entity: Entity; percent: number }
 }
 	& Record<INPUTNAME, number>
 	& Record<'move' | 'down' | 'up', TouchCoord>
