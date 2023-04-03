@@ -1,4 +1,5 @@
-import { Component } from '../Globals/ECS'
+import { UIEVENTS } from '../Constants/Events'
+import { Component, ECS } from '../Globals/ECS'
 
 export enum STATS {
 	ATTACK_SPEED = 'ATTACK_SPEED',
@@ -65,6 +66,7 @@ class StatsComponent extends Component {
 			existingBuff.duration = buff.duration
 		} else {
 			this.buffs.push(buff)
+			ECS.eventBus.publish(UIEVENTS.DISPLAY_BOOST, this)
 		}
 	}
 }

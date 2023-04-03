@@ -4,7 +4,7 @@ import { ECS, System } from '../Globals/ECS'
 import BodyComponent from '../Components/BodyComponent'
 import BoostComponent from '../Components/BoostComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
-import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
+import { ECSEVENTS } from '../Constants/Events'
 import ManaComponent from '../Components/ManaComponent'
 import ParticleEntity from '../Entities/ParticleEntitty'
 import PositionComponent from '../Components/PositionComponent'
@@ -59,7 +59,6 @@ class PickupSystem extends System {
 					otherEntity.destroy()
 					stats?.addBuff(boost)
 					ParticleEntity(entity, assets.effects.healing, { duration: 5, frameRate: 10, color: boost.color })
-					ECS.eventBus.publish(UIEVENTS.DISPLAY_BOOST, stats)
 					soundManager.play('effect', SOUNDS.BOOST)
 				}
 			}, COLLISIONGROUPS.PLAYER)
