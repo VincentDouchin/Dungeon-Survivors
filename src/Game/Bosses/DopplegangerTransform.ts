@@ -33,6 +33,7 @@ const DopplegangerTransform = (number: number, type: EnemyType) => (parent: Enti
 					position.y += y
 				} else {
 					const clone = EnemyEntity({ ...type, xp: 0, health: 1, transforms: [] })({ x: x - parentPosition.x + position.x, y: y - parentPosition.y + position.y })
+					parent.addChildren(clone)
 					clone.name = 'clone'
 					clone.removeComponent(AIMovementComponent)
 					clone.addComponent(new JointComponent('fixed', { x: x - parentPosition.x, y: y - parentPosition.y }, parent))
