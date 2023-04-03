@@ -6,7 +6,7 @@ import ExpirationComponent from '../Components/ExpirationComponent'
 import HealthComponent from '../Components/HealthComponent'
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import { ECSEVENTS } from '../Constants/Events'
+import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
 import { SOUNDS } from '../Constants/Sounds'
 import DamageTextEntity from '../Entities/DamageTextEntity'
 import ParticleEntity from '../Entities/ParticleEntitty'
@@ -24,6 +24,7 @@ class HealthSystem extends System {
 			const sprite = entity.getComponent(SpriteComponent)
 			const health = entity.getComponent(HealthComponent)
 			health.updateHealth(-amount)
+			ECS.eventBus.publish(UIEVENTS.UPDATE_HEALTH, { entity, percent: health.health / health.maxHealth.value })
 			if (sprite && amount > 0) {
 				new Coroutine(function* () {
 					health.canTakeDamage = false
