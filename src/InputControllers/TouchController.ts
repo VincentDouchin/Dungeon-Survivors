@@ -8,19 +8,16 @@ import EventBus from '../Utils/EventBus'
 class TouchController implements InputController {
 	name = 'Touch'
 	eventBus = new EventBus<Record<INPUTS, number>>()
-	wasEnabled: Partial<Record<INPUTS, boolean>> = {}
 	constructor() {
 		ECS.eventBus.subscribe(UIEVENTS.TOUCH, ({ input, amount, entity }) => {
-			if (!this.wasEnabled[input]) {
-				this.eventBus.publish(input, amount)
-				const meshId = entity.getComponent(SpriteComponent).mesh.id
-				const reset = ECS.eventBus.subscribe('up', ({ uiObjects, objects }) => {
-					if ([...uiObjects, ...objects].includes(meshId)) {
-						this.eventBus.publish(input, 0)
-						reset()
-					}
-				})
-			}
+			this.eventBus.publish(input, amount)
+			const meshId = entity.getComponent(SpriteComponent).mesh.id
+			const reset = ECS.eventBus.subscribe('up', ({ uiObjects, objects }) => {
+				if ([...uiObjects, ...objects].includes(meshId)) {
+					this.eventBus.publish(input, 0)
+					reset()
+				}
+			})
 		})
 	}
 }
