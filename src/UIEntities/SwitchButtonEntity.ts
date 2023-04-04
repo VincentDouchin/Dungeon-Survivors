@@ -28,7 +28,7 @@ const SwitchButtonEntity = () => {
 
 				sprite.renderShader.uniforms.uTexture.value = assets.UI.button.texture
 				sprite.render()
-				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SWITCH, amount: 1 })
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SWITCH, amount: 1, entity: button })
 			})
 		}
 	})

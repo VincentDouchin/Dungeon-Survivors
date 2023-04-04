@@ -25,7 +25,7 @@ const UIPauseEntity = () => {
 	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async (state) => {
 		if (!state) return
 		await framePosition.moveTo(-2, 10)
-		ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.PAUSE, amount: 1 })
+		ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.PAUSE, amount: 1, entity: resume })
 		engine.setState(RunState)
 	})
 	uiPause.onDestroy(() => remuseSub())

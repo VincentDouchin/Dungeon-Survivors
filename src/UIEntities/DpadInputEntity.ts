@@ -38,8 +38,8 @@ const DpadInputEntity = () => {
 			const positionY = Math.max(-maxY, Math.min(maxY, centerY))
 			centerPosition.relativePosition.x = positionX
 			centerPosition.relativePosition.y = positionY
-			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT, amount: Math.abs(positionX) })
-			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, amount: Math.abs(positionY) })
+			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT, amount: Math.abs(positionX), entity: dpad })
+			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, amount: Math.abs(positionY), entity: dpad })
 		}
 	})
 	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
@@ -48,7 +48,7 @@ const DpadInputEntity = () => {
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
 			for (const inputName of [INPUTS.MOVEDOWN, INPUTS.MOVELEFT, INPUTS.MOVERIGHT, INPUTS.MOVEUP]) {
-				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: inputName, amount: 0 })
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: inputName, amount: 0, entity: dpad })
 			}
 		}
 	})

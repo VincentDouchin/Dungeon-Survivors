@@ -60,7 +60,7 @@ export type EventMap = {
 	[UIEVENTS.UI_LEVEL]: number
 	[UIEVENTS.ENEMY_LEVEL]: number
 	[UIEVENTS.DISPLAY_BOOST]: StatsComponent
-	[UIEVENTS.TOUCH]: { input: INPUTS; amount: number }
+	[UIEVENTS.TOUCH]: { input: INPUTS; amount: number; entity: Entity }
 	[UIEVENTS.UPDATE_HEALTH]: { entity: Entity; percent: number }
 }
 	& Record<INPUTNAME, number>

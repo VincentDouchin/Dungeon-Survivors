@@ -31,7 +31,7 @@ const SpellButtonEntity = () => {
 
 				sprite.changeTexture(assets.UI.button.texture)
 				sprite.render()
-				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SKILL, amount: 1 })
+				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.SKILL, amount: 1, entity: button })
 			})
 		}
 	})
