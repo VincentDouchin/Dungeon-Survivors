@@ -11,10 +11,10 @@ const FreezeEffect = (entity: Entity) => {
 	new Coroutine(function*() {
 		const sprite = entity.getComponent(SpriteComponent)
 		const stat = entity.getComponent(StatsComponent)
-		stat.addBuff({ stat: STATS.SPEED, duration: 180, modifier: -0.5, identifier: 'enemy freeze' })
+		stat.addBuff({ stat: STATS.SPEED, duration: 60, modifier: -0.5, identifier: 'enemy freeze' })
 		ParticleEntity(entity, assets.effects.Ice, { offset: { x: 0, y: -8 } })
 		sprite.addShader(new ColorShader(0.4, 1, 1, 1, 'multiply'))
-		yield * waitFor(180)
+		yield * waitFor(60)
 		sprite.removeShader(ColorShader)
 	})
 }
