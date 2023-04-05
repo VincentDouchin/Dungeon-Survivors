@@ -14,6 +14,7 @@ import WinState from '../GameStates/WinState'
 import assets from '../Globals/Assets'
 import { easeInCubic } from '../Utils/Tween'
 import { engine } from '../Globals/Initialize'
+import INPUTS from '../Constants/InputsNames'
 
 class PathSystem extends System {
 	position?: PositionComponent
@@ -62,13 +63,14 @@ class PathSystem extends System {
 			}
 			else if (!node.showingOptions) {
 				const arrows: Entity[] = []
+				const next: Record<string, Entity> = {}
 				for (const direction of ['left', 'right', 'top'] as nodeDirection[]) {
 					const otherNode = node.next(direction)
 					const otherPathNode = otherNode?.getComponent(PathNodeComponent)
 					const otherNodePosition = otherNode?.getComponent(PositionComponent)
 					if (node.possibleDirections > 1 && otherNode && otherNodePosition) {
 						const arrow = new Entity('arrow')
-						arrow.addComponent(new SelectableComponent(
+						const selectable = arrow.addComponent(new SelectableComponent(
 							assets.UI.arrowselected,
 							assets.UI.arrow,
 							() => {
@@ -77,7 +79,12 @@ class PathSystem extends System {
 								arrows.forEach(arrow => arrow.destroy())
 							}),
 						)
-
+						next[{
+							left: INPUTS.MOVELEFT,
+							right: INPUTS.MOVERIGHT,
+							top: INPUTS.MOVEUP,
+						}[direction]] = arrow
+						selectable.next = next
 						arrows.push(arrow)
 						nodeEntity.addChildren(arrow)
 						arrow.addComponent(new SpriteComponent(assets.UI.arrow))
@@ -120,7 +127,10 @@ class PathSystem extends System {
 						}
 					}
 				}
-				SelectableComponent.setFromArray(arrows)
+				if (arrows.length) {
+					ECS.eventBus.publish(ECSEVENTS.SELECTED, arrows[0])
+				}
+				// SelectableComponent.setFromArray(arrows)
 			}
 
 			node.showingOptions = true
