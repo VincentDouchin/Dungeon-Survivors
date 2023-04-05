@@ -38,6 +38,7 @@ class MapState implements GameState {
 	}
 
 	update() {
+		inputManager.updateInputs()
 		ECS.updateSystems()
 		world.step()
 	}

@@ -1,4 +1,4 @@
-import { render } from '../Globals/Initialize'
+import { inputManager, render } from '../Globals/Initialize'
 
 import CameraSystem from '../Systems/CameraSystem'
 import { ECS } from '../Globals/ECS'
@@ -14,6 +14,7 @@ class PauseState implements GameState {
 	ui?: Entity
 	tutorial?: Entity
 	update() {
+		inputManager.updateInputs()
 		ECS.updateSystems()
 	}
 

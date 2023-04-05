@@ -1,6 +1,6 @@
 import type { Entity } from '../Globals/ECS'
 import { ECS } from '../Globals/ECS'
-import { render, soundManager } from '../Globals/Initialize'
+import { inputManager, render, soundManager } from '../Globals/Initialize'
 
 import type { GameState } from '../Globals/Engine'
 import RenderSystem from '../Systems/RenderSystem'
@@ -11,6 +11,7 @@ import UIGameOverEntity from '../UIEntities/UIGameOverEntity'
 class GameOverState implements GameState {
 	ui: Entity | null = null
 	update() {
+		inputManager.updateInputs()
 		ECS.updateSystems()
 	}
 

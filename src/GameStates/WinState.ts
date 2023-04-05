@@ -12,6 +12,7 @@ import RunState from './RunState'
 class WinState implements GameState {
 	ui?: Entity
 	update() {
+		inputManager.updateInputs()
 		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
 			engine.setState(RunState)
 		}

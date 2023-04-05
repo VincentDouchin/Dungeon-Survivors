@@ -13,6 +13,7 @@ import RunState from './RunState'
 class LevelUpState implements GameState {
 	ui: Entity | null = null
 	update() {
+		inputManager.updateInputs()
 		ECS.updateSystems()
 		if (inputManager.getInput(INPUTS.INTERACT)?.once) {
 			engine.setState(RunState)

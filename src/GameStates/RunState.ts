@@ -62,8 +62,9 @@ class RunState implements GameState {
 	stats: [StatsComponent, StatsComponent] = [new StatsComponent(), new StatsComponent()]
 	update() {
 		world.step()
+		inputManager.updateInputs()
 		ECS.updateSystems()
-		if (inputManager.getInput(INPUTS.PAUSE).once) {
+		if (inputManager.getInput(INPUTS.PAUSE)?.once) {
 			engine.setState(PauseState)
 		}
 	}
@@ -73,10 +74,10 @@ class RunState implements GameState {
 	}
 
 	set(oldState: Constructor<GameState>, options: { background: Arenas; enemies: enemyWaveName }) {
-		inputManager.enable('dpad')
-		inputManager.enable('pauseButton')
-		inputManager.enable('switchButton')
-		inputManager.enable('activeSkillButton')
+		// inputManager.enable('dpad')
+		// inputManager.enable('pauseButton')
+		// inputManager.enable('switchButton')
+		// inputManager.enable('activeSkillButton')
 		MovementSystem.register()
 		AnimationSystem.register()
 		HealthSystem.register()
@@ -188,10 +189,10 @@ class RunState implements GameState {
 
 	unset(newState: Constructor<GameState>) {
 		ECS.unRegisterSystems()
-		inputManager.disable('dpad')
-		inputManager.disable('pauseButton')
-		inputManager.disable('switchButton')
-		inputManager.disable('activeSkillButton')
+		// inputManager.disable('dpad')
+		// inputManager.disable('pauseButton')
+		// inputManager.disable('switchButton')
+		// inputManager.disable('activeSkillButton')
 		this.ui?.destroy()
 		this.music?.pause()
 		this.encounter?.pause()

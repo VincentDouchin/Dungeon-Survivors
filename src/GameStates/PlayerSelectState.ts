@@ -6,7 +6,7 @@ import type { GameState } from '../Globals/Engine'
 import RenderSystem from '../Systems/RenderSystem'
 import SelectionSystem from '../Systems/SelectionSystem'
 import UIPlayerSelectEntity from '../UIEntities/UIPlayerSelectEntity'
-import { render } from '../Globals/Initialize'
+import { inputManager, render } from '../Globals/Initialize'
 
 class PlayerSelectState implements GameState {
 	ui?: Entity
@@ -15,6 +15,7 @@ class PlayerSelectState implements GameState {
 	}
 
 	update() {
+		inputManager.updateInputs()
 		ECS.updateSystems()
 	}
 
