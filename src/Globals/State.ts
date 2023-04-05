@@ -1,7 +1,7 @@
 import type DIFFICULTY from '../Constants/DIfficulty'
 import type { HeroDefinition } from '../Constants/Heros'
 import type { Skill } from '../Constants/Skills'
-import type { InputController } from './InputManager'
+import type { InputController } from '../InputControllers/InputController'
 
 const State: {
 	cameraBounds: {
