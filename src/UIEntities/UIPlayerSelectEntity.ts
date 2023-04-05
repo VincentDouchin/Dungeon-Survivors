@@ -154,7 +154,7 @@ const UIPlayerSelectEntity = () => {
 			characterFrame.addChildren(lock)
 		}
 	})
-	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
+	const selectSub = ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
 		const allFrames = characterFrames.flat()
 		if (allFrames.some(frame => frame.id === entity.id)) {
 			allFrames.forEach((frame) => {
@@ -172,7 +172,7 @@ const UIPlayerSelectEntity = () => {
 		characterFrame.getComponent(SelectableComponent).next[INPUTS.MOVEDOWN] = validateButton
 	})
 	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1][1]
-
+	ui.onDestroy(selectSub)
 	return ui
 }
 export default UIPlayerSelectEntity
