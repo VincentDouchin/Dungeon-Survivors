@@ -25,7 +25,7 @@ export type INPUTNAME = INPUTS | `${INPUTS}${number}`
 
 class InputManager {
 	inputNames: INPUTS[]
-	inputs = new Map<INPUTNAME, Input>()
+	inputs: Partial<Record<INPUTNAME, Input>> = {}
 	controllers = new Set<InputController>()
 	playerController = new Map<number, InputController>()
 	constructor(inputNames: INPUTS[]) {
@@ -37,7 +37,7 @@ class InputManager {
 		})
 		this.inputNames.forEach((inputName) => {
 			ECS.eventBus.subscribe(inputName, (amount) => {
-				const input = this.inputs.get(inputName)
+				const input = this.inputs[inputName]
 				if (input) input.active = amount })
 		})
 		// ! TOUCH
@@ -100,27 +100,26 @@ class InputManager {
 	}
 
 	createInputs(index?: number) {
-		const inputs = new Map<INPUTNAME, Input>()
-		this.inputNames.forEach((input) => {
-			const name: INPUTNAME = index ? `${input}${index}` : input
-			inputs.set(name, new Input()) })
-		return inputs
+		return this.inputNames.reduce((acc, input) => {
+			const name: INPUTNAME = index !== undefined ? `${input}${index}` : input
+			return { ...acc, [name]: new Input() }
+		}, {}) as Record<INPUTNAME, Input>
 	}
 
 	getInput(inputName: INPUTNAME) {
-		return this.inputs.get(inputName)
+		return this.inputs[inputName]
 	}
 
 	updateInputs() {
 		this.inputNames.forEach((inputName) => {
-			const input = this.inputs.get(inputName)!
+			const input = this.inputs[inputName]!
 			input.reset()
 			input.active = Math.max(...Array.from(this.controllers).map(controller => controller.inputs.get(inputName) ?? 0))
 		})
 		this.playerController.forEach((controller, index) => {
 			controller.inputs.forEach((state, inputName) => {
 				const name: INPUTNAME = `${inputName}${index}`
-				const input = this.inputs.get(name)
+				const input = this.inputs[name]
 				if (input) {
 					input.reset()
 					input.active = state
@@ -132,8 +131,9 @@ class InputManager {
 
 	registerController(controller: InputController, index?: number) {
 		this.controllers.add(controller)
-		if (index) {
+		if (index !== undefined) {
 			this.playerController.set(index, controller)
+			Object.assign(this.inputs, this.createInputs(index))
 		}
 	}
 }
