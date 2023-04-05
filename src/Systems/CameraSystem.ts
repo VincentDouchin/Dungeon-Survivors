@@ -56,57 +56,58 @@ class CameraSystem extends System {
 			camera.bottom = -this.frustumSize * this.aspect / 2
 			camera.updateProjectionMatrix()
 		}
-		if (entities.length === 0) return
-		const position = new Vector2()
-		if (entities.length > 1) {
-			const min: { x: null | number; y: null | number } = { x: null, y: null }
-			const max: { x: null | number; y: null | number } = { x: null, y: null }
+		if (entities.length > 0) {
+			if (!entities.some(entity => entity.getComponent(PositionComponent))) return
+			const position = new Vector2()
+			if (entities.length > 1) {
+				const min: { x: null | number; y: null | number } = { x: null, y: null }
+				const max: { x: null | number; y: null | number } = { x: null, y: null }
+				entities.forEach((entity) => {
+					const entityPosition = entity.getComponent(PositionComponent)
+					if (!entityPosition) return
+					if (min.x === null || entityPosition.x < min.x) {
+						min.x = entityPosition.x
+					}
+					if (max.x === null || entityPosition.x > max.x) {
+						max.x = entityPosition.x
+					}
+					if (min.y === null || entityPosition.y < min.y) {
+						min.y = entityPosition.y
+					}
+					if (max.y === null || entityPosition.y > max.y) {
+						max.y = entityPosition.y
+					}
+				})
+
+				this.spacingX = Math.max(Math.abs((max.x ?? 0) - (min.x ?? 0)) + 100, Math.abs((max.y ?? 0) - (min.y ?? 0)) / this.aspect + 200)
+			}
 			entities.forEach((entity) => {
 				const entityPosition = entity.getComponent(PositionComponent)
 				if (!entityPosition) return
-				if (min.x === null || entityPosition.x < min.x) {
-					min.x = entityPosition.x
-				}
-				if (max.x === null || entityPosition.x > max.x) {
-					max.x = entityPosition.x
-				}
-				if (min.y === null || entityPosition.y < min.y) {
-					min.y = entityPosition.y
-				}
-				if (max.y === null || entityPosition.y > max.y) {
-					max.y = entityPosition.y
-				}
+				position.add(entityPosition.position)
 			})
+			position.divide(new Vector2(entities.length, entities.length))
+			if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
+				camera.position.y = cameraTarget.bottom - camera.bottom
+			}
+			else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
+				camera.position.y = cameraTarget.top - camera.top
+			}
+			else {
+				camera.position.y = position.y
+			}
+			if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
+				camera.position.x = cameraTarget.left - camera.left
+			}
+			else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
+				camera.position.x = cameraTarget.right - camera.right
+			}
+			else {
+				camera.position.x = position.x
+			}
+			ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
 
-			this.spacingX = Math.max(Math.abs((max.x ?? 0) - (min.x ?? 0)), Math.abs((max.y ?? 0) - (min.y ?? 0)) / this.aspect) + 100
-		}
-		entities.forEach((entity) => {
-			const entityPosition = entity.getComponent(PositionComponent)
-			if (!entityPosition) return
-			position.add(entityPosition.position)
-		})
-		position.divide(new Vector2(entities.length, entities.length))
-		if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
-			camera.position.y = cameraTarget.bottom - camera.bottom
-		}
-		else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
-			camera.position.y = cameraTarget.top - camera.top
-		}
-		else {
-			camera.position.y = position.y
-		}
-		if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
-			camera.position.x = cameraTarget.left - camera.left
-		}
-		else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
-			camera.position.x = cameraTarget.right - camera.right
-		}
-		else {
-			camera.position.x = position.x
-		}
-		ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
-
-		camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0))
+			camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0)) }
 	}
 }
 export default CameraSystem
