@@ -230,10 +230,10 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 		projectile: {
 			spawn: ProjectileEntity({
 				damage: 4,
-				speed: 100,
+				speed: 70,
 				targetGroup: enemyGroup,
 				tile: assets.effects['IceSpike-sheet'],
-				range: 150,
+				range: 40,
 				scale: 0.5,
 				onHit: FreezeEffect,
 			}),
