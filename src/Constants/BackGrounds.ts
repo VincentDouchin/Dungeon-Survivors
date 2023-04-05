@@ -101,7 +101,8 @@ const BACKGROUNDS: Record<string, BackgroundOptions> = {
 		obstacles: new WeightedList<Tile>()
 			.add(assets.background.bench1, 2)
 			.add(assets.background.bench2, 2)
-			.add(assets.background.lectern, 1),
+			.add(assets.background.lectern, 1)
+			.add(assets.background.holywater, 1),
 		obstacleDensity: 0.03,
 		lootables: [LOOTABLES.STATUE],
 	},
