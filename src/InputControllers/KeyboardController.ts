@@ -1,10 +1,14 @@
-import EventBus from '../Utils/EventBus'
 import INPUTS from '../Constants/InputsNames'
-import type { InputController } from '../Globals/InputManager'
+import { InputController } from './InputController'
 
-class KeyboardController implements InputController {
-	eventBus = new EventBus<Record<INPUTS, number>>()
+class KeyboardController extends InputController {
 	name = 'Keyboard'
+	constructor(inputNames: INPUTS[]) {
+		super(inputNames)
+		window.addEventListener('keydown', this.handleKeyUpDown(1))
+		window.addEventListener('keyup', this.handleKeyUpDown(0))
+	}
+
 	keyMap: Record<string, INPUTS> = {
 		KeyW: INPUTS.MOVEUP,
 		KeyS: INPUTS.MOVEDOWN,
@@ -17,15 +21,15 @@ class KeyboardController implements InputController {
 		Space: INPUTS.SKILL,
 	}
 
-	constructor() {
-		window.addEventListener('keydown', this.handleKeyUpDown(true))
-		window.addEventListener('keyup', this.handleKeyUpDown(false))
-	}
+	// constructor() {
+	// 	window.addEventListener('keydown', this.handleKeyUpDown(true))
+	// 	window.addEventListener('keyup', this.handleKeyUpDown(false))
+	// }
 
-	handleKeyUpDown = (state: boolean) => (e: KeyboardEvent) => {
+	handleKeyUpDown = (state: 1 | 0) => (e: KeyboardEvent) => {
 		if (e.repeat) return
 		if (e.code in this.keyMap) {
-			this.eventBus?.publish(this.keyMap[e.code], state ? 1 : 0)
+			this.inputs.set(this.keyMap[e.code], state)
 		}
 	}
 }

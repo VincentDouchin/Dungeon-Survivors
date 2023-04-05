@@ -1,51 +1,46 @@
 import { Raycaster, Vector3 } from 'three'
-
-import type EventBus from '../Utils/EventBus'
-import GamepadController from '../InputControllers/GamepadController'
 import type INPUTS from '../Constants/InputsNames'
+import GamepadController from '../InputControllers/GamepadController'
+import type { InputController } from '../InputControllers/InputController'
 import KeyboardController from '../InputControllers/KeyboardController'
 import TouchController from '../InputControllers/TouchController'
+import Coroutine from './Coroutine'
 import { ECS } from './ECS'
 import { UICamera, UIScene, camera, renderer, scene } from './Initialize'
 import State from './State'
 
 class Input {
 	active = 0
-	down = false
+	lastState = 0
 	get once() {
-		if (this.down)
-			return 0
-		if (this.active !== 0) {
-			this.down = true
-			this.active = 0
-			return 1
-		}
-		return 0
+		return this.lastState === 0 && this.active > 0
+	}
+
+	reset() {
+		this.lastState = this.active
+		this.active = 0
 	}
 }
 export type INPUTNAME = INPUTS | `${INPUTS}${number}`
-export interface InputController {
-  name: string
-  unRegister?: () => void
-  eventBus: EventBus<Record<INPUTNAME, number>>
-}
+
 class InputManager {
-	controllers = new Set<InputController>()
 	inputNames: INPUTS[]
-	inputs: Record<INPUTNAME, Input>
+	inputs = new Map<INPUTNAME, Input>()
+	controllers = new Set<InputController>()
+	playerController = new Map<number, InputController>()
 	constructor(inputNames: INPUTS[]) {
 		this.inputNames = inputNames
-		this.inputs = this.createInputs(this.inputNames)
-		inputNames.forEach((inputName) => {
-			ECS.eventBus.subscribe(inputName, (state) => {
-				const input = this.inputs[inputName]
-				if (!input) return
-				if (state === 0)
-					input.down = false
-
-				input.active = state
-			})
+		this.inputs = this.createInputs()
+		const self = this
+		new Coroutine(function*() {
+			yield self.updateInputs()
 		})
+		this.inputNames.forEach((inputName) => {
+			ECS.eventBus.subscribe(inputName, (amount) => {
+				const input = this.inputs.get(inputName)
+				if (input) input.active = amount })
+		})
+		// ! TOUCH
 		const detectPointerEvent = (eventName: 'mousedown' | 'mouseup' | 'mousemove' | 'touchstart' | 'touchend' | 'touchmove', state: 'down' | 'up' | 'move') => {
 			renderer.domElement.addEventListener(eventName, (event: MouseEvent | TouchEvent) => {
 				const target = event.target as HTMLCanvasElement
@@ -93,62 +88,54 @@ class InputManager {
 		detectPointerEvent(State.mobile ? 'touchstart' : 'mousedown', 'down')
 		detectPointerEvent(State.mobile ? 'touchend' : 'mouseup', 'up')
 		detectPointerEvent(State.mobile ? 'touchmove' : 'mousemove', 'move')
-		const inputsForRegister = this.inputNames.reduce((acc, v) => ({
-			...acc,
-			[v]: v,
-		}), {}) as Record<INPUTS, INPUTNAME>
-		if (!State.mobile)
-			this.registerController(new KeyboardController(), inputsForRegister)
-		else {
-			this.registerController(new TouchController(), inputsForRegister)
+		// ! CONTROLLERS
+		if (!State.mobile) {
+			this.registerController(new KeyboardController(this.inputNames))
+		} else {
+			this.registerController(new TouchController(this.inputNames))
 		}
 		window.addEventListener('gamepadconnected', ({ gamepad }) => {
-			this.registerController(new GamepadController(gamepad.index), inputsForRegister)
+			this.registerController(new GamepadController(this.inputNames, gamepad.index))
 		})
 	}
 
-	createInputs(inputs: INPUTNAME[]) {
-		return inputs.reduce((acc, v) => ({
-			...acc,
-			[v]: new Input(),
-		}), {}) as Record<INPUTNAME, Input>
-	}
-
-	setPlayerController(player: number, controller: InputController) {
-		const playerInputs = this.inputNames.reduce((acc, v) => ({
-			...acc,
-			[v]: `${v}${player}`,
-		}), {}) as Record<INPUTS, INPUTNAME>
-
-		Object.assign(this.inputs, this.createInputs(Object.values(playerInputs)))
-
-		this.registerController(controller, playerInputs)
+	createInputs(index?: number) {
+		const inputs = new Map<INPUTNAME, Input>()
+		this.inputNames.forEach((input) => {
+			const name: INPUTNAME = index ? `${input}${index}` : input
+			inputs.set(name, new Input()) })
+		return inputs
 	}
 
 	getInput(inputName: INPUTNAME) {
-		return this.inputs[inputName]
+		return this.inputs.get(inputName)
 	}
 
-	registerController(inputController: InputController, inputNames: Record<INPUTS, INPUTNAME>) {
-		this.controllers.add(inputController)
-		for (const [input, inputName] of Object.entries(inputNames) as [INPUTS, INPUTNAME][]) {
-			inputController.eventBus.subscribe(input, (state) => {
-				const input = this.inputs[inputName]
-				if (!input) return
-				if (state === 0)
-					input.down = false
-
-				input.active = state
+	updateInputs() {
+		this.inputNames.forEach((inputName) => {
+			const input = this.inputs.get(inputName)!
+			input.reset()
+			input.active = Math.max(...Array.from(this.controllers).map(controller => controller.inputs.get(inputName) ?? 0))
+		})
+		this.playerController.forEach((controller, index) => {
+			controller.inputs.forEach((state, inputName) => {
+				const name: INPUTNAME = `${inputName}${index}`
+				const input = this.inputs.get(name)
+				if (input) {
+					input.reset()
+					input.active = state
+				}
 			})
+		})
+		this.controllers.forEach(controller => controller?.update && controller.update())
+	}
+
+	registerController(controller: InputController, index?: number) {
+		this.controllers.add(controller)
+		if (index) {
+			this.playerController.set(index, controller)
 		}
 	}
-
-	enable(inputname: string) {
-		ECS.eventBus.publish('enable', inputname)
-	}
-
-	disable(inputname: string) {
-		ECS.eventBus.publish('disable', inputname)
-	}
 }
+
 export default InputManager

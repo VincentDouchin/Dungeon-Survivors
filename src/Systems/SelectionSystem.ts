@@ -2,16 +2,15 @@ import type { Entity } from '../Globals/ECS'
 import { ECS, System } from '../Globals/ECS'
 import { inputManager, soundManager } from '../Globals/Initialize'
 
-import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
 import INPUTS from '../Constants/InputsNames'
 import { SOUNDS } from '../Constants/Sounds'
 import SelectableComponent from '../Components/SelectableComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import waitFor from '../Utils/WaitFor'
 
 class SelectionSystem extends System {
 	selectedEntity: Entity | null = null
+
 	hovered: number[] = []
 	clicked: number[] = []
 	constructor() {
@@ -57,10 +56,6 @@ class SelectionSystem extends System {
 				if (this.clicked.includes(sprite.mesh.id)) {
 					ECS.eventBus.publish(INPUTS.VALIDATE, 1)
 					this.clicked.splice(this.clicked.indexOf(sprite.mesh.id), 1)
-					new Coroutine(function*() {
-						yield waitFor(1)
-						ECS.eventBus.publish(INPUTS.VALIDATE, 0)
-					})
 				}
 				if (inputManager.getInput(INPUTS.VALIDATE)?.once) {
 					if (selectable.onValidated) {
@@ -78,6 +73,7 @@ class SelectionSystem extends System {
 						if (nextEntity) {
 							soundManager.play('effect', SOUNDS.Select)
 							ECS.eventBus.publish(ECSEVENTS.SELECTED, nextEntity)
+							return
 						}
 					}
 				}

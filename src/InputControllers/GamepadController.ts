@@ -1,20 +1,17 @@
-import Coroutine from '../Globals/Coroutine'
-import EventBus from '../Utils/EventBus'
+// import Coroutine from '../Globals/Coroutine'
+// import EventBus from '../Utils/EventBus'
+// import INPUTS from '../Constants/InputsNames'
+// import { InputController } from '../Globals/InputManager'
+
 import INPUTS from '../Constants/InputsNames'
-import type { InputController } from '../Globals/InputManager'
-
-class GamepadController implements InputController {
-	eventBus = new EventBus<Record<INPUTS, number>>()
-	get name() {
-		return `Gamepad ${this.index}`
+import { InputController } from './InputController'
+interface CustonGamepad extends GamepadController {
+	vibrationActuator?: {
+	playEffect: (type: 'dual-rumble', options: { startDelay: number; duration: number; weakMagnitude: number; strongMagnitude: number }) => Promise<void>
 	}
-
-	enabled = false
-	threshold = 0.4
-	gamepad: Gamepad | null = null
-	index: number
-	pollCoroutine?: Coroutine
-	inputs: Map<number, INPUTS> = new Map([
+}
+class GamepadController extends InputController {
+	buttonMap = new Map<number, INPUTS>([
 		[9, INPUTS.PAUSE],
 		[0, INPUTS.VALIDATE],
 		// [12, INPUTS.MOVEUP],
@@ -26,54 +23,43 @@ class GamepadController implements InputController {
 		[1, INPUTS.SKILL],
 	])
 
-	wasEnabled: Partial<Record<INPUTS, boolean>> = {}
-	constructor(index = 0) {
+	axesMap = new Map<number, { positive: INPUTS; negative: INPUTS }>([
+		[0, { positive: INPUTS.MOVERIGHT, negative: INPUTS.MOVELEFT }],
+		[1, { positive: INPUTS.MOVEDOWN, negative: INPUTS.MOVEUP }],
+	])
+
+	identify(): void {
+		const gamepad = navigator.getGamepads()[this.index] as CustonGamepad | null
+		if (gamepad?.vibrationActuator) {
+			gamepad.vibrationActuator.playEffect('dual-rumble', {
+				startDelay: 0,
+				duration: 100,
+				weakMagnitude: 0.5,
+				strongMagnitude: 0.5,
+			})
+		}
+	}
+
+	index: number
+	threshold = 0.4
+	get name() {
+		return `Gamepad ${this.index}`
+	}
+
+	constructor(inputs: INPUTS[], index: number) {
+		super(inputs)
 		this.index = index
-		this.pollCoroutine = new Coroutine(this.poll.bind(this), Infinity)
 	}
 
-	unRegister() {
-		this.pollCoroutine?.stop()
-	}
-
-	*poll() {
+	update(): void {
 		const gamepad = navigator.getGamepads()[this.index]
-		if (!gamepad) return
-		const amountX = gamepad?.axes[0]
-		const inputX = amountX > 0 ? INPUTS.MOVERIGHT : INPUTS.MOVELEFT
-		const absAmoutX = Math.abs(amountX)
-		if (absAmoutX > this.threshold) {
-			this.eventBus?.publish(inputX, absAmoutX)
-			this.wasEnabled[inputX] = true
+		for (const [index, { positive, negative }] of this.axesMap) {
+			const amount = gamepad?.axes[index] ?? 0
+			this.inputs.set(amount > 0 ? positive : negative, Math.abs(amount) > this.threshold ? Math.abs(amount) : 0)
 		}
-		else if (this.wasEnabled[inputX]) {
-			this.eventBus?.publish(inputX, 0)
-			this.wasEnabled[inputX] = false
+		for (const [index, input] of this.buttonMap) {
+			this.inputs.set(input, gamepad?.buttons[index].pressed ? 1 : 0)
 		}
-
-		const amountY = gamepad?.axes[1]
-		const inputY = amountY > 0 ? INPUTS.MOVEDOWN : INPUTS.MOVEUP
-		const absAmoutY = Math.abs(amountY)
-		if (absAmoutY > this.threshold) {
-			this.eventBus?.publish(inputY, absAmoutY)
-			this.wasEnabled[inputY] = true
-		}
-		else if (this.wasEnabled[inputY]) {
-			this.eventBus?.publish(inputY, 0)
-			this.wasEnabled[inputY] = false
-		}
-		for (const [button, input] of this.inputs) {
-			if (gamepad.buttons[button].pressed) {
-				this.eventBus?.publish(input, 1)
-				this.wasEnabled[input] = true
-			}
-			else if (this.wasEnabled[input]) {
-				this.eventBus?.publish(input, 0)
-				this.wasEnabled[input] = false
-			}
-		}
-
-		yield
 	}
 }
 export default GamepadController

@@ -9,7 +9,6 @@ import assets from '../Globals/Assets'
 import saveData from '../Globals/SaveManager'
 import { engine } from '../Globals/Initialize'
 import RunState from '../GameStates/RunState'
-import { UIEVENTS } from '../Constants/Events'
 import VolumeBarEntity from './VolumeBarEntity'
 import ButtonEntity from './ButtonEntity'
 
@@ -25,7 +24,6 @@ const UIPauseEntity = () => {
 	const remuseSub = ECS.eventBus.subscribe(INPUTS.PAUSE, async (state) => {
 		if (!state) return
 		await framePosition.moveTo(-2, 10)
-		ECS.eventBus.publish(UIEVENTS.TOUCH, { input: INPUTS.PAUSE, amount: 1, entity: resume })
 		engine.setState(RunState)
 	})
 	uiPause.onDestroy(() => remuseSub())

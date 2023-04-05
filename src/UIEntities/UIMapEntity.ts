@@ -49,6 +49,7 @@ const UIMapEntity = () => {
 							const text = child.getComponent(TextComponent)
 							if (text && !text?.text.includes('Player')) {
 								const key = possibleControllers[lastController].name
+								possibleControllers[lastController]?.identify && possibleControllers[lastController]?.identify()
 								text.setText(key)
 								selectedMethods[i] = key
 							}
@@ -67,7 +68,7 @@ const UIMapEntity = () => {
 							if (State.multiplayerControls.includes(null)) return
 							State.multiplayerControls.forEach((controller, index) => {
 								if (controller) {
-									inputManager.setPlayerController(index, controller)
+									inputManager.registerController(controller, index)
 								}
 							})
 							controls.destroy()
