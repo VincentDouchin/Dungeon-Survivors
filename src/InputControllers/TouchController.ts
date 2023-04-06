@@ -23,7 +23,7 @@ class TouchController extends InputController {
 				this.inputs.set(INPUTS.MOVELEFT, 0)
 			}
 			const sub = ECS.eventBus.subscribe('up', ({ uiObjects, objects }) => {
-				const meshId = entity.getComponent(SpriteComponent).mesh.id
+				const meshId = entity.getComponent(SpriteComponent)?.mesh.id
 				if ([...uiObjects, ...objects].includes(meshId)) {
 					this.inputs.set(input, 0)
 					sub()
