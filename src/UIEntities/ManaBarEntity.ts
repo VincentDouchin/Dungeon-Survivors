@@ -9,7 +9,7 @@ import assets from '../Globals/Assets'
 
 const ManaBarEntity = () => {
 	const scalingOptions = { x: { left: 2, right: 7 }, y: { top: 0, bottom: 0 } }
-	const w = UICamera.right / 4 - 20
+	const w = Math.floor(UICamera.right / 4 - 20)
 	const h = 7
 	const bar = assets.UI.bar.framed(scalingOptions, w, h)
 	const full = assets.UI.mana.framed(scalingOptions, w, h)
