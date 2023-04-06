@@ -1,7 +1,7 @@
+import { Tween } from '@tweenjs/tween.js'
 import { ECS, Entity, System } from '../Globals/ECS'
 
 import AnimationComponent from '../Components/AnimationComponent'
-import Coroutine from '../Globals/Coroutine'
 import { ECSEVENTS } from '../Constants/Events'
 import PathNodeComponent from '../Components/PathNodeComponent'
 import PathWalkerComponent from '../Components/PathWalkerComponent'
@@ -12,10 +12,8 @@ import SelectableComponent from '../Components/SelectableComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import WinState from '../GameStates/WinState'
 import assets from '../Globals/Assets'
-import { easeInCubic } from '../Utils/Tween'
 import { engine } from '../Globals/Initialize'
 import INPUTS from '../Constants/InputsNames'
-
 class PathSystem extends System {
 	position?: PositionComponent
 	encounter?: boolean
@@ -90,22 +88,6 @@ class PathSystem extends System {
 						arrow.addComponent(new SpriteComponent(assets.UI.arrow))
 						const arrowPosition = arrow.addComponent(new PositionComponent(position.x, position.y))
 
-						const arrowBounce = new Coroutine(function* () {
-							let t = 0
-							let sign = 1
-							const delay = 30
-							while (true) {
-								while (t < delay) {
-									arrowPosition.y += easeInCubic(t, -0.1, 0.1, delay) * sign
-									t++
-									yield
-								}
-								t = 0
-								sign *= -1
-							}
-						})
-						arrow.onDestroy(() => arrowBounce.stop())
-
 						switch (direction) {
 						case 'left': {
 							arrowPosition.x -= 16
@@ -119,6 +101,12 @@ class PathSystem extends System {
 							arrow.addComponent(new RotationComponent({ rotation: Math.PI / 2 }))
 						} break
 						}
+						const tween = new Tween(arrowPosition)
+							.to({ y: arrowPosition.y + 2 }, 60)
+							.repeat(Infinity)
+							.yoyo(true)
+							.start(engine.timer)
+						arrow.onDestroy(() => tween.stop())
 					}
 					else {
 						if (otherNode && otherNodePosition) {

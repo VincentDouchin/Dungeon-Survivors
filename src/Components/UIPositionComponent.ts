@@ -1,7 +1,6 @@
+import { Easing, Tween } from '@tweenjs/tween.js'
 import { Component } from '../Globals/ECS'
-import Coroutine from '../Globals/Coroutine'
-import { easeInOutQuad } from '../Utils/Tween'
-
+import { engine } from '../Globals/Initialize'
 interface position {
 	x: number
 	y: number
@@ -16,16 +15,13 @@ class UIPositionComponent extends Component {
 	}
 
 	moveTo(endRelativePosition: number, delay: number) {
-		const self = this
-		const startRelativePosition = this.relativePosition.y
-		return new Promise<void>((resolve) => {
-			new Coroutine(function* () {
-				for (let t = 0; t < delay; t++) {
-					self.relativePosition.y = easeInOutQuad(t, startRelativePosition, endRelativePosition, delay)
-					yield
-				}
-				resolve()
-			})
+		return new Promise((resolve) => {
+			new Tween({ y: this.relativePosition.y })
+				.to({ y: endRelativePosition }, delay)
+				.onUpdate(({ y }) => this.relativePosition.y = y)
+				.easing(Easing.Quadratic.InOut)
+				.onComplete(resolve)
+				.start(engine.timer)
 		})
 	}
 

@@ -1,12 +1,10 @@
-import { easeInSine, linear } from '../Utils/Tween'
-
+import { Easing, Tween } from '@tweenjs/tween.js'
 import AnimationComponent from '../Components/AnimationComponent'
-import Coroutine from '../Globals/Coroutine'
 import { Entity } from '../Globals/ECS'
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import assets from '../Globals/Assets'
-import { camera } from '../Globals/Initialize'
+import { camera, engine } from '../Globals/Initialize'
 
 const LeafEntity = () => {
 	const leaf = new Entity('leaf')
@@ -16,18 +14,31 @@ const LeafEntity = () => {
 		((Math.random() - 0.5) * 2) * camera.right + camera.position.x,
 		((Math.random() - 0.5) * 2) * camera.top + camera.position.y,
 	))
-	const fallingEnd = position.y + ((Math.random() * 20)) * (Math.random() > 0.5 ? 1 : -1)
-	const fallingEndTimer = 20 + Math.random() * 20
-	const start = position.y
-	new Coroutine(function* (counter: number) {
-		position.y += linear(counter, 0, -2, 100)
-		position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
-		sprite.opacity = linear(counter, 1, 0, 100)
+	const fallingEnd = 10 + ((Math.random() * 10)) * (Math.random() > 0.5 ? 1 : -1)
+	const fallingEndTimer = 180 + Math.random() * 120
 
-		yield
+	new Tween(sprite)
+		.to({ opacity: 0 }, fallingEndTimer)
+		.start(engine.timer)
+	new Tween(position)
+		.to({ x: position.x + fallingEnd }, fallingEnd * (2 + Math.random()))
+		.easing(Easing.Sinusoidal.InOut)
+		.repeat(Infinity)
+		.yoyo(true)
+		.start(engine.timer)
+	new Tween(position)
+		.to({ y: position.y - fallingEndTimer * (0.5 + 0.5 * Math.random()) }, fallingEndTimer)
+		.start(engine.timer)
+		.onComplete(() => leaf.destroy())
+	// new Coroutine(function* (counter: number) {
+	// 	// position.y += linear(counter, 0, -2, 100)
+	// 	position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
+	// 	sprite.opacity = linear(counter, 1, 0, 100)
 
-		leaf.destroy()
-	}, 100)
+	// 	yield
+
+	// 	leaf.destroy()
+	// }, 100)
 	return leaf
 }
 export default LeafEntity
