@@ -80,11 +80,12 @@ class Entity {
 	name: string
 	children = new Set<Entity>()
 	parent?: Entity
+	childrenRemoveSub: () => void
 	constructor(name: string) {
 		this.name = name ?? ''
 		this.id = window.crypto.randomUUID()
 		ECS.registerEntity(this)
-		ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
+		this.childrenRemoveSub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			this.removeChildren(entity)
 		})
 	}
@@ -133,6 +134,7 @@ class Entity {
 	}
 
 	destroy() {
+		this.childrenRemoveSub()
 		ECS.eventBus.publish(ECSEVENTS.DELETE_ENTITY, this)
 		for (const children of this.children) {
 			children?.destroy()

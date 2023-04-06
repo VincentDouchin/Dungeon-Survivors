@@ -18,13 +18,13 @@ const ActiveSpellEntity = () => {
 	icon.addComponent(new UIPositionComponent())
 	const iconSprite = icon.addComponent(new SpriteComponent(Tile.empty(), { scale: 2.2 }))
 
-	ECS.eventBus.subscribe(ECSEVENTS.SPELL_ICON, (tile: Tile) => {
+	const spellSub = ECS.eventBus.subscribe(ECSEVENTS.SPELL_ICON, (tile: Tile) => {
 		if (iconSprite.renderShader?.uniforms.uTexture) {
 			iconSprite.changeTexture(tile.texture)
 		}
 	})
 	let disabled = false
-	ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, (mana) => {
+	const manaSub = ECS.eventBus.subscribe(ECSEVENTS.MANA_AMOUNT, (mana) => {
 		if (mana < 20) {
 			disabled = true
 			iconSprite.addShader(new ColorShader(1, 1, 1, 0.5))
@@ -32,6 +32,10 @@ const ActiveSpellEntity = () => {
 		else if (disabled) {
 			iconSprite.removeShader(ColorShader)
 		}
+	})
+	level.onDestroy(() => {
+		spellSub()
+		manaSub()
 	})
 	level.addChildren(icon)
 	return level

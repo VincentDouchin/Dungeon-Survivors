@@ -14,10 +14,11 @@ const LevelDisplayEntity = () => {
 	position.moveTo(1, 20)
 	level.addComponent(new SpriteComponent(tile, { scale: 3 }))
 	const text = level.addComponent(new TextComponent(String(levelNb), { size: 32 }))
-	ECS.eventBus.subscribe(UIEVENTS.UI_LEVEL, (newLevel) => {
+	const levelSub = ECS.eventBus.subscribe(UIEVENTS.UI_LEVEL, (newLevel) => {
 		levelNb = newLevel
 		text.setText(String(levelNb))
 	})
+	level.onDestroy(levelSub)
 	return level
 }
 export default LevelDisplayEntity

@@ -37,15 +37,19 @@ const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number
 				shaders: [new BarShader(assets.UI.volumefull.framed({ x: { left: 10, right: 9 }, y: 0 }, volumeWidth, volumeHeight).texture, getter() / max)],
 				scale: 1.5,
 			}))
-	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
+	const selectedSub = ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
 		if (entity.id === volumeFrame.id) {
 			volumeSprite.addShader(new OutlineShader([1, 1, 1, 1]))
 		}
 	})
-	ECS.eventBus.subscribe(ECSEVENTS.DESELECTED, (entity) => {
+	const unselectedSub = ECS.eventBus.subscribe(ECSEVENTS.DESELECTED, (entity) => {
 		if (entity.id === volumeFrame.id) {
 			volumeSprite.removeShader(OutlineShader)
 		}
+	})
+	volume.onDestroy(() => {
+		selectedSub()
+		unselectedSub()
 	})
 	volumeText.addChildren(volume)
 	const arrowLeft = new Entity('arrow volume left')
