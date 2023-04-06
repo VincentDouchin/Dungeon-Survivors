@@ -27,16 +27,15 @@ const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number
 	volumeFrame.addChildren(volumeText)
 	const volume = new Entity('volume')
 	const volumeWidth = 64
-	const volumeHeight = 16
+	const volumeHeight = 12
 	volume.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 2 }))
 
 	const volumeSprite = volume.addComponent(
 		new SpriteComponent(
-			assets.UI.barempty.framed({ x: 16, y: 0 }, volumeWidth, volumeHeight),
+			assets.UI.volumeempty.framed({ x: { left: 10, right: 9 }, y: 0 }, volumeWidth, volumeHeight),
 			{
-				shaders:
-					[new BarShader(assets.UI.barfull.framed({ x: 16, y: 0 }, volumeWidth, volumeHeight).texture, getter() / max)],
-				scale: 1,
+				shaders: [new BarShader(assets.UI.volumefull.framed({ x: { left: 10, right: 9 }, y: 0 }, volumeWidth, volumeHeight).texture, getter() / max)],
+				scale: 1.5,
 			}))
 	ECS.eventBus.subscribe(ECSEVENTS.SELECTED, (entity) => {
 		if (entity.id === volumeFrame.id) {
