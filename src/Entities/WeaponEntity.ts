@@ -35,7 +35,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 		{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target },
 	))
 	if (tile) {
-		weapon.addComponent(new SpriteComponent(tile, { renderOrder: 2 }))
+		weapon.addComponent(new SpriteComponent(tile, { renderOrder: 5 }))
 	}
 	const angVel = weaponDefinition.targeter ? 0 : 1
 	weapon.addComponent(new RotationComponent({ angVel, rotation: weaponDefinition.angle ?? 0, mirror: weaponDefinition.mirror }))

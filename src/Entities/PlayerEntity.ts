@@ -36,7 +36,7 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 	}
 	player.addComponent(stats)
 	player.addComponent(new SpellComponent(hero.spell))
-	player.addComponent(new SpriteComponent(hero.tiles.idle))
+	player.addComponent(new SpriteComponent(hero.tiles.idle, { renderOrder: 4 }))
 	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
 	const playerHealth: number = {
 		[DIFFICULTY.EASY]: 300,

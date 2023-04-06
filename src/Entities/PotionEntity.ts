@@ -10,7 +10,7 @@ import ShadowEntity from './ShadowEntity'
 const PotionEntity = (position: PositionComponent) => {
 	const potion = new Entity('potion')
 	const tile = assets.other.potion
-	potion.addComponent(new SpriteComponent(tile))
+	potion.addComponent(new SpriteComponent(tile, { renderOrder: 1 }))
 	potion.addComponent(new BodyComponent(
 		{ type: 'fixed' },
 		{ width: tile.width, height: tile.height, sensor: true, contact: false, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] },

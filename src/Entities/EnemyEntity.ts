@@ -27,7 +27,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	const scale = type.boss ? 1.5 : 1
 	const berserk = type.berserk
 	const tile = Object.values(type.tiles)[0]
-	const sprite = enemy.addComponent(new SpriteComponent(tile, { scale, renderOrder: 1 }))
+	const sprite = enemy.addComponent(new SpriteComponent(tile, { scale, renderOrder: 2 }))
 	if (berserk) {
 		sprite.addShader(new OutlineShader([1, 0, 0, 1]))
 	}
