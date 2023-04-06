@@ -1,20 +1,19 @@
 /* eslint-disable */
 // @ts-nocheck
 
-type tweenFunction = (time: number, start: number, end: number, delay: number, s?: number) => number
-export const linear: tweenFunction = function (t, b, _c, d) {
+export const linear = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * t / d + b;
 }
-export const easeInQuad: tweenFunction = function (t, b, _c, d) {
+export const easeInQuad = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * (t /= d) * t + b;
 }
-export const easeOutQuad: tweenFunction = function (t, b, _c, d) {
+export const easeOutQuad = function (t, b, _c, d) {
 	var c = _c - b;
 	return -c * (t /= d) * (t - 2) + b;
 }
-export const easeInOutQuad: tweenFunction = function (t, b, _c, d) {
+export const easeInOutQuad = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d / 2) < 1) {
 		return c / 2 * t * t + b;
@@ -22,15 +21,15 @@ export const easeInOutQuad: tweenFunction = function (t, b, _c, d) {
 		return -c / 2 * ((--t) * (t - 2) - 1) + b;
 	}
 }
-export const easeInCubic: tweenFunction = function (t, b, _c, d) {
+export const easeInCubic = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * (t /= d) * t * t + b;
 }
-export const easeOutCubic: tweenFunction = function (t, b, _c, d) {
+export const easeOutCubic = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * ((t = t / d - 1) * t * t + 1) + b;
 }
-export const easeInOutCubic: tweenFunction = function (t, b, _c, d) {
+export const easeInOutCubic = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d / 2) < 1) {
 		return c / 2 * t * t * t + b;
@@ -38,15 +37,15 @@ export const easeInOutCubic: tweenFunction = function (t, b, _c, d) {
 		return c / 2 * ((t -= 2) * t * t + 2) + b;
 	}
 }
-export const easeInQuart: tweenFunction = function (t, b, _c, d) {
+export const easeInQuart = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * (t /= d) * t * t * t + b;
 }
-export const easeOutQuart: tweenFunction = function (t, b, _c, d) {
+export const easeOutQuart = function (t, b, _c, d) {
 	var c = _c - b;
 	return -c * ((t = t / d - 1) * t * t * t - 1) + b;
 }
-export const easeInOutQuart: tweenFunction = function (t, b, _c, d) {
+export const easeInOutQuart = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d / 2) < 1) {
 		return c / 2 * t * t * t * t + b;
@@ -54,15 +53,15 @@ export const easeInOutQuart: tweenFunction = function (t, b, _c, d) {
 		return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
 	}
 }
-export const easeInQuint: tweenFunction = function (t, b, _c, d) {
+export const easeInQuint = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * (t /= d) * t * t * t * t + b;
 }
-export const easeOutQuint: tweenFunction = function (t, b, _c, d) {
+export const easeOutQuint = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 }
-export const easeInOutQuint: tweenFunction = function (t, b, _c, d) {
+export const easeInOutQuint = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d / 2) < 1) {
 		return c / 2 * t * t * t * t * t + b;
@@ -70,27 +69,27 @@ export const easeInOutQuint: tweenFunction = function (t, b, _c, d) {
 		return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
 	}
 }
-export const easeInSine: tweenFunction = function (t, b, _c, d) {
+export const easeInSine = function (t, b, _c, d) {
 	var c = _c - b;
 	return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 }
-export const easeOutSine: tweenFunction = function (t, b, _c, d) {
+export const easeOutSine = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * Math.sin(t / d * (Math.PI / 2)) + b;
 }
-export const easeInOutSine: tweenFunction = function (t, b, _c, d) {
+export const easeInOutSine = function (t, b, _c, d) {
 	var c = _c - b;
 	return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 }
-export const easeInExpo: tweenFunction = function (t, b, _c, d) {
+export const easeInExpo = function (t, b, _c, d) {
 	var c = _c - b;
 	return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
 }
-export const easeOutExpo: tweenFunction = function (t, b, _c, d) {
+export const easeOutExpo = function (t, b, _c, d) {
 	var c = _c - b;
 	return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
 }
-export const easeInOutExpo: tweenFunction = function (t, b, _c, d) {
+export const easeInOutExpo = function (t, b, _c, d) {
 	var c = _c - b;
 	if (t === 0) {
 		return b;
@@ -104,15 +103,15 @@ export const easeInOutExpo: tweenFunction = function (t, b, _c, d) {
 		return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
 	}
 }
-export const easeInCirc: tweenFunction = function (t, b, _c, d) {
+export const easeInCirc = function (t, b, _c, d) {
 	var c = _c - b;
 	return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
 }
-export const easeOutCirc: tweenFunction = function (t, b, _c, d) {
+export const easeOutCirc = function (t, b, _c, d) {
 	var c = _c - b;
 	return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
 }
-export const easeInOutCirc: tweenFunction = function (t, b, _c, d) {
+export const easeInOutCirc = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d / 2) < 1) {
 		return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
@@ -120,7 +119,7 @@ export const easeInOutCirc: tweenFunction = function (t, b, _c, d) {
 		return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
 	}
 }
-export const easeInElastic: tweenFunction = function (t, b, _c, d) {
+export const easeInElastic = function (t, b, _c, d) {
 	var c = _c - b;
 	var a, p, s;
 	s = 1.70158;
@@ -142,7 +141,7 @@ export const easeInElastic: tweenFunction = function (t, b, _c, d) {
 	}
 	return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
 }
-export const easeOutElastic: tweenFunction = function (t, b, _c, d) {
+export const easeOutElastic = function (t, b, _c, d) {
 	var c = _c - b;
 	var a, p, s;
 	s = 1.70158;
@@ -164,7 +163,7 @@ export const easeOutElastic: tweenFunction = function (t, b, _c, d) {
 	}
 	return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
 }
-export const easeInOutElastic: tweenFunction = function (t, b, _c, d) {
+export const easeInOutElastic = function (t, b, _c, d) {
 	var c = _c - b;
 	var a, p, s;
 	s = 1.70158;
@@ -190,21 +189,21 @@ export const easeInOutElastic: tweenFunction = function (t, b, _c, d) {
 		return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
 	}
 }
-export const easeInBack: tweenFunction = function (t, b, _c, d, s) {
+export const easeInBack = function (t, b, _c, d, s) {
 	var c = _c - b;
 	if (s === void 0) {
 		s = 1.70158;
 	}
 	return c * (t /= d) * t * ((s + 1) * t - s) + b;
 }
-export const easeOutBack: tweenFunction = function (t, b, _c, d, s) {
+export const easeOutBack = function (t, b, _c, d, s) {
 	var c = _c - b;
 	if (s === void 0) {
 		s = 1.70158;
 	}
 	return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
 }
-export const easeInOutBack: tweenFunction = function (t, b, _c, d, s) {
+export const easeInOutBack = function (t, b, _c, d, s) {
 	var c = _c - b;
 	if (s === void 0) {
 		s = 1.70158;
@@ -215,13 +214,13 @@ export const easeInOutBack: tweenFunction = function (t, b, _c, d, s) {
 		return c / 2 * ((t -= 2) * t * (((s *= 1.525) + 1) * t + s) + 2) + b;
 	}
 }
-export const easeInBounce: tweenFunction = function (t, b, _c, d) {
+export const easeInBounce = function (t, b, _c, d) {
 	var c = _c - b;
 	var v;
 	v = easeOutBounce(d - t, 0, c, d);
 	return c - v + b;
 }
-export const easeOutBounce: tweenFunction = function (t, b, _c, d) {
+export const easeOutBounce = function (t, b, _c, d) {
 	var c = _c - b;
 	if ((t /= d) < 1 / 2.75) {
 		return c * (7.5625 * t * t) + b;
@@ -233,7 +232,7 @@ export const easeOutBounce: tweenFunction = function (t, b, _c, d) {
 		return c * (7.5625 * (t -= 2.625 / 2.75) * t + 0.984375) + b;
 	}
 }
-export const easeInOutBounce: tweenFunction = function (t, b, _c, d) {
+export const easeInOutBounce = function (t, b, _c, d) {
 	var c = _c - b;
 	var v;
 	if (t < d / 2) {

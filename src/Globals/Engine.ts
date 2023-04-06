@@ -1,5 +1,5 @@
+import { update } from '@tweenjs/tween.js'
 import Coroutine from './Coroutine'
-
 export interface GameState {
 	update(): void
 	render(): void
@@ -28,6 +28,7 @@ class Engine {
 		}
 
 		while (this.accumulatedTime >= this.timeStep) {
+			update()
 			this.state.update()
 			Coroutine.run()
 			updated = true

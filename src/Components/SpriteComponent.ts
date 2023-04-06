@@ -27,6 +27,8 @@ class SpriteComponent extends Component {
 	renderShader?: ShaderPass
 	uniformsKeys: Record<string, string> = {}
 	flipped: boolean
+	offsetX = 0
+	offsetY = 0
 	constructor(tile: Tile, options?: { renderOrder?: number; scale?: number; shaders?: Shader[]; flipped?: boolean; opacity?: number }) {
 		super()
 		this.tile = tile

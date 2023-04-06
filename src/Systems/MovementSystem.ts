@@ -45,6 +45,9 @@ class MovementSystem extends System {
 				}
 
 				if (body.body) {
+					if (position.overrideBody) {
+						body.body.setTranslation({ x: position.x, y: position.y }, true)
+					}
 					const force = body.moveForce.value
 					body.body.applyImpulse({ x: body.velocity.x * force, y: body.velocity.y * force }, true)
 					body.lastVelocity = body.velocity.clone()

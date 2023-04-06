@@ -24,7 +24,7 @@ class RenderSystem extends System {
 				if (!sprite.mesh.parent) {
 					scene.add(sprite.mesh)
 				}
-				sprite.mesh.position.set(position.x, position.y, 0)
+				sprite.mesh.position.set(position.x + sprite.offsetX, position.y + sprite.offsetY, 0)
 			}
 			if (uiPosition) {
 				const parentSprite = entity.parent?.getComponent(SpriteComponent)
