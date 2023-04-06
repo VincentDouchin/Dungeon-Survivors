@@ -56,6 +56,7 @@ class GamepadController extends InputController {
 		for (const [index, { positive, negative }] of this.axesMap) {
 			const amount = gamepad?.axes[index] ?? 0
 			this.inputs.set(amount > 0 ? positive : negative, Math.abs(amount) > this.threshold ? Math.abs(amount) : 0)
+			this.inputs.set(amount > 0 ? negative : positive, 0)
 		}
 		for (const [index, input] of this.buttonMap) {
 			this.inputs.set(input, gamepad?.buttons[index].pressed ? 1 : 0)
