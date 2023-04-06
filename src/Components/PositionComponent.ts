@@ -3,27 +3,25 @@ import type { Entity } from '../Globals/ECS'
 import { Component } from '../Globals/ECS'
 
 class PositionComponent extends Component {
-	x?: number
-	y?: number
+	x: number
+	y: number
 	parent: Entity | null = null
 	offsetX = 0
 	offsetY = 0
 	overrideBody = false
-	constructor(x?: number, y?: number) {
+	constructor(x: number, y: number) {
 		super()
 		this.x = x
 		this.y = y
 	}
 
-	fromParent(parent: Entity, offsetX: number, offsetY: number) {
+	static fromParent(parent: Entity, offsetX: number, offsetY: number) {
 		const parentPosition = parent.getComponent(PositionComponent)
-		this.x = parentPosition?.x
-		this.y = parentPosition?.y
-		this.parent = parent
-		this.offsetX = offsetX
-		this.offsetY = offsetY
-		this.parent.onDestroy(() => this.parent = null)
-		return this
+		const position = parentPosition.clone()
+		position.parent = parent
+		position.offsetX = offsetX
+		position.offsetY = offsetY
+		return position
 	}
 
 	get position() {

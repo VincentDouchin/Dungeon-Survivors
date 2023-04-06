@@ -1,4 +1,4 @@
-import { update } from '@tweenjs/tween.js'
+import * as TWEEN from '@tweenjs/tween.js'
 import Coroutine from './Coroutine'
 export interface GameState {
 	update(): void
@@ -14,6 +14,7 @@ class Engine {
 	timeStep = 1000 / 60
 	states: Map<Constructor<GameState>['name'], GameState> = new Map()
 	state: GameState | null = null
+	timer = 0
 	cycle = (timeStamp: number) => {
 		if (!this.state) return
 		this.rafHandle = window.requestAnimationFrame(this.cycle)
@@ -28,7 +29,8 @@ class Engine {
 		}
 
 		while (this.accumulatedTime >= this.timeStep) {
-			update()
+			this.timer++
+			TWEEN.update(this.timer)
 			this.state.update()
 			Coroutine.run()
 			updated = true

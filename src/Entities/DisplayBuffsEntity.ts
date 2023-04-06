@@ -21,7 +21,7 @@ const DisplayBuffsEntity = (player: Entity, offset: number) => {
 					buffIcon.addComponent(new SpriteComponent(tile, { scale: 0.4, renderOrder: 20 }))
 					displayBuffs.addChildren(buffIcon)
 					buffs.set(stat, buffIcon)
-					buffIcon.addComponent(new PositionComponent())
+					buffIcon.addComponent(PositionComponent.fromParent(player, 0, offset))
 				}
 			})
 			buffs.forEach((entity, stat) => {
@@ -31,7 +31,7 @@ const DisplayBuffsEntity = (player: Entity, offset: number) => {
 				}
 			})
 			Array.from(displayBuffs.children).forEach((buffEntity, index) => {
-				buffEntity.getComponent(PositionComponent).fromParent(player, -8 + 6 * index, offset)
+				buffEntity.getComponent(PositionComponent).offsetX = -8 + 6 * index
 			})
 		}
 	})

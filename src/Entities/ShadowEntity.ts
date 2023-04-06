@@ -11,7 +11,7 @@ const ShadowEntity = (width: number, height: number, offset: number, parent: Ent
 	buffer.ellipse(width / 2, height / 2, width / 2, height / 2, 0, 0, 2 * Math.PI)
 	buffer.fill()
 	const tile = new Tile({ buffer })
-	shadow.addComponent(new PositionComponent().fromParent(parent, 0, -offset))
+	shadow.addComponent(PositionComponent.fromParent(parent, 0, -offset))
 	shadow.addComponent(new SpriteComponent(tile, { opacity: 0.3, renderOrder: parent.getComponent(SpriteComponent).renderOrder - 1 }))
 	return shadow
 }

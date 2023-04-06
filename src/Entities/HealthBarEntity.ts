@@ -11,7 +11,7 @@ const HealthBarEntity = (parent: Entity, offset: number) => {
 	const healthBarEntity = new Entity('healthBar')
 
 	const healthSprite = healthBarEntity.addComponent(new SpriteComponent(empty, { renderOrder: 20, shaders: [new BarShader(full.texture, 1)] }))
-	healthBarEntity.addComponent(new PositionComponent().fromParent(parent, 0, offset))
+	healthBarEntity.addComponent(PositionComponent.fromParent(parent, 0, offset))
 	const updateSub = ECS.eventBus.subscribe(UIEVENTS.UPDATE_HEALTH, ({ entity, percent }) => {
 		if (entity === parent) {
 			healthSprite.getUniforms(BarShader).percent.value = percent

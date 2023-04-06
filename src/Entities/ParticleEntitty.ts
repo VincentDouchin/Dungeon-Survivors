@@ -12,7 +12,7 @@ const ParticleEntity = async (position: { x: number; y: number } | Entity, tile:
 		particleSprite.addShader(new ColorShader(...options.color))
 	}
 	if (position instanceof Entity) {
-		particle.addComponent(new PositionComponent().fromParent(position, options?.offset?.x ?? 0, options?.offset?.y ?? 0))
+		particle.addComponent(PositionComponent.fromParent(position, options?.offset?.x ?? 0, options?.offset?.y ?? 0))
 	}
 	else {
 		particle.addComponent(new PositionComponent(position.x, position.y))

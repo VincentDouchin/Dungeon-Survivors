@@ -7,6 +7,7 @@ import { Entity } from '../Globals/ECS'
 import OutlineShader from '../Shaders/OutlineShader'
 import type PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
+import { engine } from '../Globals/Initialize'
 import ShadowEntity from './ShadowEntity'
 const BoostEntity = (boostDefinition: Boost) => (position: PositionComponent) => {
 	const boost = new Entity('boost')
@@ -16,7 +17,7 @@ const BoostEntity = (boostDefinition: Boost) => (position: PositionComponent) =>
 		{ width: boostDefinition.tile.width, height: boostDefinition.tile.height, sensor: true, contact: false, group: COLLISIONGROUPS.POTION, canCollideWith: [COLLISIONGROUPS.PLAYER] },
 	))
 	boost.addComponent(position)
-	const tween = new Tween(sprite).to({ offsetY: 5 }, 600).repeat(Infinity).yoyo(true).start()
+	const tween = new Tween(sprite).to({ offsetY: 5 }, 60).repeat(Infinity).yoyo(true).start(engine.timer)
 	boost.addChildren(ShadowEntity(12, 5, 6, boost))
 	boost.onDestroy(() => tween.stop())
 	return boost

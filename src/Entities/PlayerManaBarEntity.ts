@@ -14,7 +14,7 @@ const PlayerManaBarEntity = (player: Entity, offset: number) => {
 			sprite.render()
 		}
 	})
-	bar.addComponent(new PositionComponent().fromParent(player, 0, offset))
+	bar.addComponent(PositionComponent.fromParent(player, 0, offset))
 
 	bar.onDestroy(updateSub)
 	return bar

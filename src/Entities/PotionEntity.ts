@@ -5,6 +5,7 @@ import { Entity } from '../Globals/ECS'
 import type PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import assets from '../Globals/Assets'
+import ShadowEntity from './ShadowEntity'
 
 const PotionEntity = (position: PositionComponent) => {
 	const potion = new Entity('potion')
@@ -16,6 +17,7 @@ const PotionEntity = (position: PositionComponent) => {
 	))
 	potion.addComponent(position)
 	potion.addComponent(new DamageComponent(-30, [COLLISIONGROUPS.PLAYER], 1))
+	potion.addChildren(ShadowEntity(12, 5, 5, potion))
 	return potion
 }
 export default PotionEntity
