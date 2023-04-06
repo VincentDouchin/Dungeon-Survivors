@@ -14,7 +14,7 @@ class ShimmerShader extends Shader {
 		super((sprite) => {
 			coroutine = new Coroutine(function* (i) {
 				yield
-				sprite.getUniforms(ShimmerShader).time.value = i
+				sprite.getUniforms(ShimmerShader).time.value = i / 60
 				sprite.render()
 			}, Infinity)
 			return {
