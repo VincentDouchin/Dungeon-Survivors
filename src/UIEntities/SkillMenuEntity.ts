@@ -46,7 +46,7 @@ const SkillMenuEntity = () => {
 		button.addComponent(new UIPositionComponent({ x: [-0.8, 0, 0.8][i], y: 1 }, { x: 0, y: 1 }))
 		const icon = new Entity('icon')
 
-		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader()] }))
+		const sprite = icon.addComponent(new SpriteComponent(skill.icon, { scale: 3, shaders: [new ShimmerShader(icon)] }))
 		const shimmerCoroutine = new Coroutine(function* () {
 			yield
 			sprite.getUniforms(ShimmerShader).time.value = clock.getElapsedTime()
