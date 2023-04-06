@@ -90,13 +90,15 @@ class MapState implements GameState {
 			const title = new Entity('title text')
 			title.addComponent(new SpriteComponent(assets.UI.title))
 			title.addComponent(new PositionComponent(0, mapTile.height / 2 - camera.top / 2))
-
+			const target = new Entity('target')
+			target.addComponent(new PositionComponent(0, mapTile.height / 2))
+			target.addComponent(new CameraTargetComponent())
 			new Coroutine(function* () {
 				yield
 				camera.position.x = 0
 				let counter = 1
 				while (counter < 600) {
-					yield camera.position.y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
+					yield target.getComponent(PositionComponent).y = easeInOutQuart(counter, (mapTile.height / 2) - camera.top, -(mapTile.height / 2) + camera.top, 600)
 					if (inputManager.getInput(INPUTS.SWITCH)?.active) {
 						counter += 10
 					}
@@ -106,6 +108,7 @@ class MapState implements GameState {
 					counter++
 				}
 				title.destroy()
+				target.destroy()
 				engine.setState(PlayerSelectState)
 			})
 		}

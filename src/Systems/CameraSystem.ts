@@ -20,19 +20,20 @@ class CameraSystem extends System {
 		return Math.min(CameraSystem.max, Math.max(CameraSystem.min, Math.max(saveData.zoom, this.spacingX)))
 	}
 
-	get defaultAspect() {
-		return window.innerHeight / window.innerWidth
-	}
+	defaultAspect = window.innerHeight / window.innerWidth
 
 	constructor() {
 		super(CameraTargetComponent)
 	}
 
 	update(entities: Entity[]): void {
+		this.defaultAspect = window.innerHeight / window.innerWidth
 		const cameraTarget = State.cameraBounds
 
 		if (
-			(cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom)
+			(
+				cameraTarget.left && cameraTarget.right && cameraTarget.top && cameraTarget.bottom
+			)
 			&& (
 				((cameraTarget.right - cameraTarget.left) < this.zoom)
 				|| ((cameraTarget.top - cameraTarget.bottom) < (this.zoom * this.defaultAspect))
@@ -48,66 +49,64 @@ class CameraSystem extends System {
 			this.newFrustrumSize = this.zoom
 			this.aspect = this.defaultAspect
 		}
-		if (this.frustumSize !== this.newFrustrumSize) {
-			this.frustumSize = this.newFrustrumSize
-			camera.left = -this.frustumSize / 2
-			camera.right = this.frustumSize / 2
-			camera.top = this.frustumSize * this.aspect / 2
-			camera.bottom = -this.frustumSize * this.aspect / 2
-			camera.updateProjectionMatrix()
-		}
-		if (entities.length > 0) {
-			if (!entities.some(entity => entity.getComponent(PositionComponent))) return
-			const position = new Vector2()
-			if (entities.length > 1) {
-				const min: { x: null | number; y: null | number } = { x: null, y: null }
-				const max: { x: null | number; y: null | number } = { x: null, y: null }
-				entities.forEach((entity) => {
-					const entityPosition = entity.getComponent(PositionComponent)
-					if (!entityPosition) return
-					if (min.x === null || entityPosition.x < min.x) {
-						min.x = entityPosition.x
-					}
-					if (max.x === null || entityPosition.x > max.x) {
-						max.x = entityPosition.x
-					}
-					if (min.y === null || entityPosition.y < min.y) {
-						min.y = entityPosition.y
-					}
-					if (max.y === null || entityPosition.y > max.y) {
-						max.y = entityPosition.y
-					}
-				})
+		this.frustumSize = this.newFrustrumSize
+		camera.left = -this.frustumSize / 2
+		camera.right = this.frustumSize / 2
+		camera.top = this.frustumSize * this.aspect / 2
+		camera.bottom = -this.frustumSize * this.aspect / 2
+		camera.updateProjectionMatrix()
 
-				this.spacingX = Math.max(Math.abs((max.x ?? 0) - (min.x ?? 0)) + 100, Math.abs((max.y ?? 0) - (min.y ?? 0)) / this.aspect + 200)
-			}
+		const position = new Vector2()
+		if (entities.length > 1) {
+			const min: { x: null | number; y: null | number } = { x: null, y: null }
+			const max: { x: null | number; y: null | number } = { x: null, y: null }
 			entities.forEach((entity) => {
 				const entityPosition = entity.getComponent(PositionComponent)
 				if (!entityPosition) return
-				position.add(entityPosition.position)
+				if (min.x === null || entityPosition.x < min.x) {
+					min.x = entityPosition.x
+				}
+				if (max.x === null || entityPosition.x > max.x) {
+					max.x = entityPosition.x
+				}
+				if (min.y === null || entityPosition.y < min.y) {
+					min.y = entityPosition.y
+				}
+				if (max.y === null || entityPosition.y > max.y) {
+					max.y = entityPosition.y
+				}
 			})
-			position.divide(new Vector2(entities.length, entities.length))
-			if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
-				camera.position.y = cameraTarget.bottom - camera.bottom
-			}
-			else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
-				camera.position.y = cameraTarget.top - camera.top
-			}
-			else {
-				camera.position.y = position.y
-			}
-			if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
-				camera.position.x = cameraTarget.left - camera.left
-			}
-			else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
-				camera.position.x = cameraTarget.right - camera.right
-			}
-			else {
-				camera.position.x = position.x
-			}
-			ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
 
-			camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0)) }
-	}
+			this.spacingX = Math.max(Math.abs((max.x ?? 0) - (min.x ?? 0)) + 100, Math.abs((max.y ?? 0) - (min.y ?? 0)) / this.aspect + 200)
+		}
+		entities.forEach((entity) => {
+			const entityPosition = entity.getComponent(PositionComponent)
+			if (!entityPosition) return
+			position.add(entityPosition.position)
+		})
+		const nbEntities = entities.filter(entity => entity.getComponent(PositionComponent)).length
+		position.divide(new Vector2(entities.length, entities.length))
+
+		if (cameraTarget?.bottom && cameraTarget.bottom - position.y > camera.bottom) {
+			camera.position.y = cameraTarget.bottom - camera.bottom
+		}
+		else if (cameraTarget?.top && cameraTarget.top - position.y < camera.top) {
+			camera.position.y = cameraTarget.top - camera.top
+		}
+		else if (nbEntities) {
+			camera.position.y = position.y
+		}
+		if (cameraTarget?.left && cameraTarget.left - position.x > camera.left) {
+			camera.position.x = cameraTarget.left - camera.left
+		}
+		else if (cameraTarget?.right && cameraTarget.right - position.x < camera.right) {
+			camera.position.x = cameraTarget.right - camera.right
+		}
+		else if (nbEntities) {
+			camera.position.x = position.x
+		}
+		ECS.eventBus.publish(ECSEVENTS.CAMERA_MOVE, { x: position.x, y: position.y })
+
+		camera.lookAt(new Vector3(camera.position.x, camera.position.y, 0)) }
 }
 export default CameraSystem
