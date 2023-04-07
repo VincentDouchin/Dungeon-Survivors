@@ -67,7 +67,7 @@ class HealthSystem extends System {
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
-					if (damage.target.includes(health.type)) {
+					if (damage.target.includes(health.type) && damage.amount.value) {
 						const otherPosition = otherEntity.getComponent(PositionComponent)
 
 						// ! Take damage
