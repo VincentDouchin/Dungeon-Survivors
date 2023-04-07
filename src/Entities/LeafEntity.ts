@@ -30,15 +30,6 @@ const LeafEntity = () => {
 		.to({ y: position.y - fallingEndTimer * (0.5 + 0.5 * Math.random()) }, fallingEndTimer)
 		.start(engine.timer)
 		.onComplete(() => leaf.destroy())
-	// new Coroutine(function* (counter: number) {
-	// 	// position.y += linear(counter, 0, -2, 100)
-	// 	position.x = easeInSine(counter, start, fallingEnd, fallingEndTimer)
-	// 	sprite.opacity = linear(counter, 1, 0, 100)
-
-	// 	yield
-
-	// 	leaf.destroy()
-	// }, 100)
 	return leaf
 }
 export default LeafEntity
