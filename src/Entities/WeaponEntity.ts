@@ -26,9 +26,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 	if (weaponDefinition.orbiter) {
 		weapon.addComponent(new JointComponent('revolute', { x: ((tile?.height ?? 16) + parentHeight) / 2, y: 0 }, parent))
 	}
-	if (weaponDefinition.damage) {
-		weapon.addComponent(new DamageComponent(weaponDefinition.damage, weaponDefinition.targetGroup.target, -1, 5, weaponDefinition.sound))
-	}
+	weapon.addComponent(new DamageComponent(weaponDefinition.damage ?? 0, weaponDefinition.targetGroup.target, -1, 5, weaponDefinition.sound))
 
 	weapon.addComponent(new BodyComponent(
 		{ moveForce: 10, lock: true },
