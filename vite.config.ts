@@ -33,7 +33,7 @@ export default defineConfig({
 			},
 		}),
 	],
-	base: '/Dungeon-Survivor/',
+	// base: '/Dungeon-Survivor/',
 	build: {
 		target: 'esnext',
 	},
