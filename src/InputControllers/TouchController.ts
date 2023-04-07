@@ -29,6 +29,10 @@ class TouchController extends InputController {
 					sub()
 				}
 			})
+			entity.onDestroy(() => {
+				this.inputs.set(input, 0)
+				sub()
+			})
 		})
 	}
 
