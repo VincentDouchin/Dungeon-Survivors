@@ -49,7 +49,7 @@ class HealthSystem extends System {
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
 			const health = entity.getComponent(HealthComponent)
-			if (health.lastMaxHealth !== health.maxHealth.value) {
+			if (health?.lastMaxHealth !== health.maxHealth.value) {
 				health.updateHealth(health.maxHealth.value - health.lastMaxHealth)
 				health.lastMaxHealth = health.maxHealth.value
 			}
