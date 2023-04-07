@@ -153,7 +153,10 @@ class RunState implements GameState {
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, () => {
 				if (this.players.children.size === 0) {
-					engine.setState(GameOverState)
+					new Coroutine(function*() {
+						yield
+						engine.setState(GameOverState)
+					})
 				}
 			}))
 			// !Encounter
@@ -204,10 +207,12 @@ class RunState implements GameState {
 		case PauseState: {
 			this.encounter?.pause()
 		} break
+		case GameOverState:
 		case MapState: {
 			this.tutoCoroutine?.stop()
 			this.subscribers.forEach(sub => sub())
 			this.players.destroy()
+			this.encounter?.enemies?.destroy()
 			this.background?.destroy()
 			this.encounter = null
 			this.music = null

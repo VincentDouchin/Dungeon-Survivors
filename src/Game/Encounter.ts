@@ -4,10 +4,10 @@ import StatsComponent, { STATS } from '../Components/StatsComponent'
 import ColorShader from '../Shaders/ColorShader'
 import Coroutine from '../Globals/Coroutine'
 import DIFFICULTY from '../Constants/DIfficulty'
-import { ECS } from '../Globals/ECS'
+import { ECS, Entity } from '../Globals/ECS'
 import EnemyEntity from '../Entities/EnemyEntity'
 import type { EnemyType } from '../Constants/Enemies'
-import type { Entity } from '../Globals/ECS'
+
 import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import LevelComponent from '../Components/LevelComponent'
@@ -23,7 +23,7 @@ import type WeightedList from '../Utils/WeightedList'
 
 class Encounter {
 	waves: (() => Generator)[] = []
-	enemies: Set<Entity> = new Set()
+	enemies = new Entity('encounter')
 	statDifficulty = {
 		[DIFFICULTY.EASY]: 0.025,
 		[DIFFICULTY.NORMAL]: 0.05,
@@ -40,18 +40,12 @@ class Encounter {
 	stats = new StatsComponent().set(STATS.MAX_HEALTH, this.statDifficulty).set(STATS.DAMAGE, this.statDifficulty)
 	level = new LevelComponent()
 	started = false
-	subscriber: () => void
 	levelSubscriber: () => void
 	addEnemySuscriber: () => void
 	coroutine?: Coroutine
 	constructor() {
-		this.subscriber = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity: Entity) => {
-			if (this.enemies.has(entity)) {
-				this.enemies.delete(entity)
-			}
-		})
 		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, (entity) => {
-			this.enemies.add(entity)
+			this.enemies.addChildren(entity)
 		})
 		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
 			const initialLevel = this.level.level
@@ -112,7 +106,7 @@ class Encounter {
 	async spawnEnemy(enemyType: EnemyType, x: number, y: number) {
 		return ParticleEntity({ x, y }, assets.effects.smoke, { scale: 0.5 }).then(() => {
 			const enemy = EnemyEntity(enemyType, this.stats, this.level)({ x, y })
-			this.enemies.add(enemy)
+			this.enemies.addChildren(enemy)
 			return enemy
 		})
 	}
@@ -163,7 +157,7 @@ class Encounter {
 		const self = this
 		this.waves.push(function* () {
 			yield
-			while (self.enemies.size > 0) {
+			while (self.enemies.children.size > 0) {
 				yield
 			}
 		})
@@ -175,9 +169,9 @@ class Encounter {
 		this.started = false
 		this.waves.push(function* () {
 			yield
-			self.subscriber()
 			self.levelSubscriber()
 			self.addEnemySuscriber()
+			self.enemies.destroy()
 			yield * waitFor(60)
 			const portal = PortalEntity()
 			ECS.eventBus.publish(ECSEVENTS.ADD_TO_BACKGROUND, portal)
