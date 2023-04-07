@@ -50,7 +50,7 @@ const LightningSpellEntity = (entity: Entity) => {
 			lightning.addComponent(new PositionComponent(enemyPosition.x, enemyPosition.y))
 			lightning.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 			lightning.addComponent(new BodyComponent({},
-				{ width: 1, height: 1, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON },
+				{ width: 4, height: 4, sensor: true, contact: true, canCollideWith: [COLLISIONGROUPS.ENEMY], group: COLLISIONGROUPS.WEAPON },
 			))
 			animation.playAnimation().then(() => {
 				lightning.destroy()
