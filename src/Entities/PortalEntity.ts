@@ -29,7 +29,8 @@ const PortalEntity = () => {
 		{ type: 'fixed' },
 		{ group: COLLISIONGROUPS.PORTAL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: true, sensor: true, width: 64, height: 16, offsetY: stairsTile.height },
 	))
-	body.colliderDescriptions.concat([{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: -stairsTile.width * scale / 2 + 6 },
+	body.colliderDescriptions.push(...[
+		{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: -stairsTile.width * scale / 2 + 6 },
 		{ group: COLLISIONGROUPS.WALL, canCollideWith: [COLLISIONGROUPS.PLAYER], contact: false, sensor: false, width: 12, height: stairsTile.height * scale, offsetX: stairsTile.width * scale / 2 - 6 },
 		{ group: COLLISIONGROUPS.SENSOR, canCollideWith: [COLLISIONGROUPS.WALL], contact: true, sensor: false, width: stairsTile.width * scale, height: stairsTile.height * scale * 2 }].map(createCollider))
 
