@@ -5,7 +5,6 @@ export interface LootableOptions {
 	tile: Tile
 	particle: Tile
 }
-export type LOOTABLE = keyof typeof LOOTABLES
 
 const LOOTABLES: Record<string, LootableOptions> = {
 	ROCK: {

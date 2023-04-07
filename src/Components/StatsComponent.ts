@@ -15,7 +15,7 @@ export enum STATS {
 	SPELL_DAMAGE = 'SPELL_DAMAGE',
 	REGEN = 'REGEN',
 }
-export interface BoostModifier {
+interface BoostModifier {
 	stat: STATS
 	duration: number
 	modifier: number

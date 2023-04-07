@@ -8,14 +8,14 @@ import { Stat } from '../Game/Stat'
 import { world } from '../Globals/Initialize'
 import { STATS } from './StatsComponent'
 
-export interface bodyOptions {
+ interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased' | 'kinematicPositionBased'
 	moveForce?: number
 	mass?: number
 	lock?: boolean
 	enabled?: boolean
 }
-export interface colliderOptions {
+ interface colliderOptions {
 	contact: boolean
 	width: number
 	height: number

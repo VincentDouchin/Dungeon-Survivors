@@ -14,8 +14,7 @@ import type { TargetGroup } from '../Constants/Weapons'
 import type Tile from '../Utils/Tile'
 import { soundManager } from '../Globals/Initialize'
 
-// const ProjectileEntity = (projectileDefinition: ShooterComponent, position: { x: number, y: number }, rotation: number) => {
-export interface ProjectileOptions {
+interface ProjectileOptions {
 	tile: Tile
 	damage: number
 	speed: number

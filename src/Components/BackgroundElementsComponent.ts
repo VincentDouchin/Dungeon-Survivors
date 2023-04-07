@@ -10,13 +10,13 @@ import type WeightedList from '../Utils/WeightedList'
 import PositionComponent from './PositionComponent'
 import DroppableComponent from './DroppableComponent'
 
-export interface Wall {
+ interface Wall {
 	width: number
 	height: number
 	x: number
 	y: number
 }
-export interface ObstacleNode {
+ interface ObstacleNode {
 	obstacle: boolean
 	entityConstructor?: (x: number, y: number) => Entity
 	entity?: Entity | null
