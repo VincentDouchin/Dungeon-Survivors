@@ -5,7 +5,7 @@ import EventBus from '../Utils/EventBus'
 import type { EventMap } from '../Constants/Events'
 
 const ECS = new class {
-	components: Map<string, Map<Entity, Component>> = new Map()
+	components: Map<Constructor<Component>, Map<Entity, Component>> = new Map()
 	systems: System[] = []
 	entities: Set< Entity> = new Set()
 	eventBus = new EventBus<EventMap>()
@@ -13,8 +13,8 @@ const ECS = new class {
 		this.entities.add(entity)
 	}
 
-	getEntitiesAndComponents<T>(componentType: Constructor<T>): Array<[Entity, T]> {
-		const components = this.components.get(componentType.name)
+	getEntitiesAndComponents<T extends Component>(componentType: Constructor<T>): Array<[Entity, T]> {
+		const components = this.components.get(componentType)
 		if (!components) return []
 		return Array.from(components.entries()) as Array<[Entity, T]>
 	}
@@ -25,7 +25,7 @@ const ECS = new class {
 
 	updateSystems() {
 		this.systems.forEach((system) => {
-			const componentMap = this.components.get(system.target.name)
+			const componentMap = this.components.get(system.target)
 			if (!componentMap) return
 			const entitiesID: Entity[] = [...componentMap.keys()]
 			const entities = entitiesID.filter(Boolean)
@@ -67,7 +67,8 @@ interface Component {
 }
 abstract class Component {
 	static register() {
-		ECS.components.set(this.name, new Map())
+		const self = this as unknown as Constructor<Component>
+		ECS.components.set(self, new Map())
 	}
 
 	save() {
@@ -104,7 +105,7 @@ class Entity {
 	}
 
 	removeComponent<T extends Component>(componentConstructor: Constructor<T>) {
-		const componentMap = ECS.components.get(componentConstructor.name)
+		const componentMap = ECS.components.get(componentConstructor)
 		const component = componentMap?.get(this)
 		componentMap?.delete(this)
 		return component as T
@@ -112,7 +113,7 @@ class Entity {
 
 	addComponent<T extends Component>(component: T) {
 		if (component?.bind) component.bind(this)
-		ECS.components.get(component.constructor.name)?.set(this, component)
+		ECS.components.get(component.constructor as Constructor<T>)?.set(this, component)
 		return component as T
 	}
 
@@ -121,7 +122,7 @@ class Entity {
 	}
 
 	getComponent<T extends Component>(component: Constructor<T>) {
-		return ECS.components.get(component.name)?.get(this) as T
+		return ECS.components.get(component)?.get(this) as T
 	}
 
 	onDestroy(fn: () => void) {
