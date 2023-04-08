@@ -28,6 +28,7 @@ const LightningSpellEntity = (entity: Entity) => {
 		}
 	}, [])
 	enemies.sort(() => 0.5 - Math.random())
+	if (enemies.length === 0) return false
 	const deletedEntities: Entity[] = []
 	const deleteSub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 		deletedEntities.push(entity)
@@ -60,5 +61,6 @@ const LightningSpellEntity = (entity: Entity) => {
 		}
 		deleteSub()
 	})
+	return true
 }
 export default LightningSpellEntity

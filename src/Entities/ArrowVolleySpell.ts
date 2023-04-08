@@ -24,5 +24,6 @@ const ArrowVolleySpell = (entity: Entity) => {
 		spread: Math.PI * 2,
 		piercing: 4,
 	})(origin)
+	return true
 }
 export default ArrowVolleySpell

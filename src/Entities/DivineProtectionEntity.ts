@@ -33,6 +33,6 @@ const DivineProtectionEntity = (entity: Entity) => {
 	spell.addComponent(new DamageComponent(spellComponent.spellDamage.value, [COLLISIONGROUPS.ENEMY], -1))
 	spell.addComponent(new ExpirationComponent(120))
 	soundManager.play('effect', SOUNDS.Magic)
-	return spell
+	return true
 }
 export default DivineProtectionEntity

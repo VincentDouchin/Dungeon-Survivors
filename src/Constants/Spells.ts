@@ -10,7 +10,7 @@ import assets from '../Globals/Assets'
 
 export interface Spell {
 	icon: Tile
-	spell: (entity: Entity) => void
+	spell: (entity: Entity) => boolean
 	damage: number
 }
 const SPELLS: Record<string, Spell> = {

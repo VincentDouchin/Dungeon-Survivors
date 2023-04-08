@@ -24,6 +24,7 @@ const CharmSpellEntity = (parent: Entity) => {
 		}
 	}, [])
 	enemies.sort(() => 0.5 - Math.random())
+	if (enemies.length === 0) return false
 	let charmAmount = parent.getComponent(SpellComponent).spellDamage.value
 	soundManager.play('effect', SOUNDS.CHARM)
 	for (const enemy of enemies.slice(0, 10)) {
@@ -42,5 +43,6 @@ const CharmSpellEntity = (parent: Entity) => {
 		enemy.addComponent(new DamageComponent(damage.amount.base, [COLLISIONGROUPS.ENEMY], -1, 0))
 		enemy.getComponent(StatsComponent).addBuff({ stat: STATS.REGEN, duration: Infinity, flat: 0.1 * health.maxHealth.value, modifier: 0 })
 	}
+	return true
 }
 export default CharmSpellEntity

@@ -31,5 +31,6 @@ const ShurikenSpellEntity = (entity: Entity, nb = 10, startPosition?: PositionCo
 			ShurikenSpellEntity(entity, nb - 1)
 		}
 	})
+	return true
 }
 export default ShurikenSpellEntity

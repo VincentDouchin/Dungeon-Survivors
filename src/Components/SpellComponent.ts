@@ -7,9 +7,10 @@ import type Tile from '../Utils/Tile'
 import { STATS } from './StatsComponent'
 
 class SpellComponent extends Component {
-	spell: (entity: Entity) => void
+	spell: (entity: Entity) => boolean
 	icon: Tile
 	spellDamage: Stat
+	spellActive = false
 	constructor(spell: Spell) {
 		super()
 		this.icon = spell.icon

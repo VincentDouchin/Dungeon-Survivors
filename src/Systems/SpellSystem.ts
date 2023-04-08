@@ -22,10 +22,10 @@ class SpellSystem extends System {
 					const spell = entity.getComponent(SpellComponent)
 					const mana = entity.getComponent(ManaComponent)
 					if (mana.mana >= mana.manaCost) {
-						spell.spell(entity)
-						mana.mana -= mana.manaCost
-						ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: mana.mana / mana.maxMana.value, entity })
-						ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana)
+						if (spell.spell(entity)) {
+							mana.mana -= mana.manaCost
+							ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: mana.mana / mana.maxMana.value, entity })
+							ECS.eventBus.publish(ECSEVENTS.MANA_AMOUNT, mana.mana) }
 					}
 				}
 			})
