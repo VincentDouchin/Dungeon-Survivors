@@ -6,6 +6,12 @@ Available on Web and moble (install the website as a PWA for a better experience
 
 ## [Play here](https://dungeon-survivors.netlify.app/)
 
+This game was written in typescript with only the following libraries:
+* [ThreeJS](https://threejs.org/) for the rendering
+* [troika-three-text](https://protectwise.github.io/troika/troika-three-text/) for the text rendering
+* [RapierJS](https://rapier.rs/) for the physics and collisions
+* [TweenJS](https://createjs.com/tweenjs) for smooth interpolation 
+
 ![](https://github.com/VincentDouchin/Dungeon-Survivor/blob/main/Screenshots/Screenshot%201.png)
 
 ![](https://github.com/VincentDouchin/Dungeon-Survivor/blob/main/Screenshots/Screenshot%202.png)
