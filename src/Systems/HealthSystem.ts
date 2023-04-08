@@ -49,7 +49,7 @@ class HealthSystem extends System {
 	update(entities: Entity[]) {
 		entities.forEach((entity) => {
 			const health = entity.getComponent(HealthComponent)
-			if (health?.lastMaxHealth !== health.maxHealth.value) {
+			if (health.lastMaxHealth !== health.maxHealth.value) {
 				health.updateHealth(health.maxHealth.value - health.lastMaxHealth)
 				health.lastMaxHealth = health.maxHealth.value
 			}
@@ -67,19 +67,11 @@ class HealthSystem extends System {
 			if (body && health.canTakeDamage) {
 				body.contacts((otherEntity: Entity) => {
 					const damage = otherEntity.getComponent(DamageComponent)
-					if (damage.target.includes(health.type) && damage.amount.value) {
+					if (damage.target.includes(health.type)) {
 						const otherPosition = otherEntity.getComponent(PositionComponent)
 
 						// ! Take damage
 						const damageAmount = damage.calculateDamage(health.defense.value)
-
-						if (damage.sound) {
-							soundManager.play('effect', damage.sound, { fade: true })
-						}
-
-						if (damage.onHit) {
-							damage.onHit(entity)
-						}
 
 						// ! Knockback
 						if (body.body) {
@@ -88,11 +80,17 @@ class HealthSystem extends System {
 							body.body.applyImpulse({ x: -Math.cos(angle) * knockbackForce, y: -Math.sin(angle) * knockbackForce }, true)
 						}
 
+						damage.destroyOnHit--
+						if (damage.destroyOnHit === 0) otherEntity.destroy()
+						if (damage.onHit) {
+							damage.onHit(entity)
+						}
 						ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, { entity, amount: damageAmount })
 						// ! Damage number display
 						DamageTextEntity(position, damageAmount, damage.crit)
-						damage.destroyOnHit--
-						if (damage.destroyOnHit === 0) otherEntity.destroy()
+						if (damage.sound) {
+							soundManager.play('effect', damage.sound, { fade: true })
+						}
 					}
 				}, health.type)
 			}
