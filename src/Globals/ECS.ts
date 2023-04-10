@@ -135,11 +135,11 @@ class Entity {
 	}
 
 	destroy() {
-		this.childrenRemoveSub()
 		ECS.eventBus.publish(ECSEVENTS.DELETE_ENTITY, this)
 		for (const children of this.children) {
 			children?.destroy()
 		}
+		this.childrenRemoveSub()
 		ECS.components.forEach((componentMap) => {
 			if (!componentMap.has(this)) return
 			componentMap.get(this)?.destroy && componentMap.get(this)?.destroy()
