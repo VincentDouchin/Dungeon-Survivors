@@ -29,7 +29,7 @@ const WeaponEntity = (weaponDefinition: WeaponDefinition, parent: Entity, parent
 	weapon.addComponent(new DamageComponent(weaponDefinition.damage ?? 0, weaponDefinition.targetGroup.target, -1, 5, weaponDefinition.sound))
 
 	weapon.addComponent(new BodyComponent(
-		{ moveForce: 10, lock: true },
+		{ moveForce: 10, lock: true, ccd: true },
 		{ width: tile?.width ?? 16, height: tile?.height ?? 16, contact: true, sensor: true, mass: 0.00001, group: COLLISIONGROUPS.WEAPON, canCollideWith: weaponDefinition.targetGroup.target },
 	))
 	if (tile) {

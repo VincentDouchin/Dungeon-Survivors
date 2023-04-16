@@ -13,6 +13,7 @@ import { STATS } from './StatsComponent'
 	moveForce?: number
 	mass?: number
 	lock?: boolean
+	ccd?: boolean
 	enabled?: boolean
 }
  interface colliderOptions {
@@ -60,10 +61,12 @@ class BodyComponent extends Component {
 		this.bodyDescription
 			= RigidBodyDesc[bodyOptions.type ?? 'dynamic']()
 				.setCanSleep(false)
-				.setCcdEnabled(true)
 				.setLinearDamping(5)
 				.setAngularDamping(10)
 				.lockRotations()
+		if (bodyOptions.ccd) {
+			this.bodyDescription.setCcdEnabled(true)
+		}
 
 		// !Collider
 		this.colliderDescriptions.push(createCollider(colliderOption))
