@@ -1,30 +1,15 @@
-# Dungeon-Survivor
+# wry
 
-A small game inspired by Vampire Survivor and 20 minutes until dawn.
+## Android
 
-Available on Web and moble (install the website as a PWA for a better experience).
+From my setup, I also need to add `abiFilters += listOf("arm64-v8a")` under `create("arm")` branch in `:app`'s '`build.gradle.kts`.
 
-## [Play here](https://dungeon-survivors.netlify.app/)
+This is probably different from users env, so I didn't add to the script.
 
-This game was written in typescript with only the following libraries:
-* [ThreeJS](https://threejs.org/) for the rendering
-* [troika-three-text](https://protectwise.github.io/troika/troika-three-text/) for the text rendering
-* [RapierJS](https://rapier.rs/) for the physics and collisions
-* [TweenJS](https://createjs.com/tweenjs) for smooth interpolation 
+## iOS
 
-![](https://github.com/VincentDouchin/Dungeon-Survivor/blob/main/Screenshots/Screenshot%201.png)
+Must run Xcode on rosetta. Goto Application > Right Click Xcode > Get Info > Open in Rosetta.
 
-![](https://github.com/VincentDouchin/Dungeon-Survivor/blob/main/Screenshots/Screenshot%202.png)
+If you are using M1, you will have to run `cargo build --target x86_64-apple-ios` instead of `cargo apple build` if you want to run in simulator.
 
-![](https://github.com/VincentDouchin/Dungeon-Survivor/blob/main/Screenshots/Screenshot%203.png)
-
-Credits :
-* sounds by [leohpaz](https://leohpaz.itch.io/)
-* map assets by [Aleksandr Makarov](https://iknowkingrabbit.itch.io/)
-* characters by [0x72](https://0x72.itch.io/dungeontileset-ii)
-* characters by [superdark](https://superdark.itch.io/)
-* background by [pixel-boy](https://pixel-boy.itch.io/)
-* magic projectiles by [XYezawr](https://xyezawr.itch.io/)
-* UI by [Mounir Tohami](https://mounirtohami.itch.io/)
-* icons by [finalbossblues](https://finalbossblues.itch.io/)
-* skill icons by [pixerelia](https://pixerelia.itch.io/)
+Otherwise, it's all `cargo apple run` when running in actual device.
