@@ -1,5 +1,5 @@
 import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderTarget, WebGLRenderer } from 'three'
-import RAPIER, { World } from '@dimforge/rapier2d-compat'
+import { World, init } from '@dimforge/rapier2d-compat'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
@@ -17,7 +17,7 @@ const engine = new Engine()
 const clock = new Clock()
 
 // ! World
-await RAPIER.init()
+await init()
 const world = new World({ x: 0, y: 0 })
 
 // ! Camera
