@@ -1,4 +1,3 @@
-import { generateUUID } from 'three/src/math/MathUtils'
 import { Component } from '../Globals/ECS'
 
 type flockingGroup = string & { __type: 'flocking group' }
@@ -14,7 +13,7 @@ class FlockingComponent extends Component {
 	}
 
 	static getGroup() {
-		return generateUUID() as flockingGroup
+		return window.crypto.randomUUID() as flockingGroup
 	}
 }
 FlockingComponent.register()

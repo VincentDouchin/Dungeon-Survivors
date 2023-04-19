@@ -1,4 +1,4 @@
-import { JointData } from '@dimforge/rapier2d'
+import { JointData } from '@dimforge/rapier2d-compat'
 import BodyComponent, { createCollider } from '../Components/BodyComponent'
 import type { Entity } from '../Globals/ECS'
 import JointComponent from '../Components/JointComponent'
