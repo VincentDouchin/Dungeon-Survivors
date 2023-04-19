@@ -37,24 +37,24 @@ export default defineConfig(async () => {
 						},
 					],
 					screenshots: [
-						{
-							src: 'Screenshots/Screenshot 1.png',
-							sizes: '1414x734',
-							type: 'image/png',
-							platform: 'wide',
-						},
-						{
-							src: 'Screenshots/Screenshot 2.png',
-							sizes: '1414x732',
-							type: 'image/png',
-							platform: 'wide',
-						},
-						{
-							src: 'Screenshots/Screenshot 2.png',
-							sizes: '1414x732',
-							type: 'image/png',
-							platform: 'wide',
-						},
+						// {
+						// 	src: 'Screenshots/Screenshot 1.png',
+						// 	sizes: '1414x734',
+						// 	type: 'image/png',
+						// 	platform: 'wide',
+						// },
+						// {
+						// 	src: 'Screenshots/Screenshot 2.png',
+						// 	sizes: '1414x732',
+						// 	type: 'image/png',
+						// 	platform: 'wide',
+						// },
+						// {
+						// 	src: 'Screenshots/Screenshot 2.png',
+						// 	sizes: '1414x732',
+						// 	type: 'image/png',
+						// 	platform: 'wide',
+						// },
 					],
 				},
 				devOptions: {
