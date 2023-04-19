@@ -50,7 +50,7 @@ const EnemyEntity = (type: EnemyType, stats?: StatsComponent, level?: LevelCompo
 	enemy.addComponent(new AIMovementComponent({ seeking: [COLLISIONGROUPS.PLAYER], seekingDistance: 0, charger: type.charger }))
 	enemy.addComponent(new BodyComponent(
 		{ moveForce: 300 * type.speed * (berserk ? 1.5 : 1) },
-		{ width: type.size.width * scale, height: type.size.height * scale, mass: 1, offset: tile.height * scale, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.WALL, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.LOOT], canBumpWith: [COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.WEAPON] },
+		{ width: type.size.width * scale, height: type.size.height * scale, mass: 1, offset: tile.height * scale, contact: false, group: COLLISIONGROUPS.ENEMY, canCollideWith: [COLLISIONGROUPS.WALL, COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.PLAYER, COLLISIONGROUPS.TRAP, COLLISIONGROUPS.WEAPON, COLLISIONGROUPS.LOOT] },
 
 	))
 
