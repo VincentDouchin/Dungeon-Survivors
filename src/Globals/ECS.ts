@@ -1,3 +1,4 @@
+import { generateUUID } from 'three/src/math/MathUtils'
 import type { EventCallback, EventName } from '../Utils/EventBus'
 
 import { ECSEVENTS } from '../Constants/Events'
@@ -84,7 +85,7 @@ class Entity {
 	childrenRemoveSub: () => void
 	constructor(name: string) {
 		this.name = name ?? ''
-		this.id = window.crypto.randomUUID()
+		this.id = generateUUID()
 		ECS.registerEntity(this)
 		this.childrenRemoveSub = ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, (entity) => {
 			this.removeChildren(entity)

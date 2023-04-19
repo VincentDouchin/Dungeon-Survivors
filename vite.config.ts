@@ -1,6 +1,7 @@
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vite'
 import { internalIpV4 } from 'internal-ip'
+import wasm from 'vite-plugin-wasm'
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => {
@@ -9,6 +10,7 @@ export default defineConfig(async () => {
 	/** @type {import('vite').UserConfig} */
 	const config = {
 		plugins: [
+			wasm(),
 			VitePWA({
 				registerType: 'autoUpdate',
 				injectRegister: 'auto',

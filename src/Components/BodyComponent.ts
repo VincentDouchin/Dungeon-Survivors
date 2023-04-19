@@ -1,5 +1,5 @@
-import { ActiveEvents, ColliderDesc, RigidBodyDesc } from '@dimforge/rapier2d-compat'
-import type { Collider, RigidBody } from '@dimforge/rapier2d-compat'
+import { ActiveEvents, ColliderDesc, RigidBodyDesc } from '@dimforge/rapier2d'
+import type { Collider, RigidBody } from '@dimforge/rapier2d'
 import { Vector2 } from 'three'
 import { Component } from '../Globals/ECS'
 
