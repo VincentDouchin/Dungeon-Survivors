@@ -1,4 +1,4 @@
-import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderTarget, WebGLRenderer } from 'three'
+import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGL1Renderer, WebGLRenderTarget, WebGLRenderer } from 'three'
 import { World, init } from '@dimforge/rapier2d-compat'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
@@ -42,7 +42,12 @@ const createCamera = (update: boolean) => {
 
 // ! Renderer
 const createRenderer = () => {
-	const renderer = new WebGLRenderer({ alpha: true })
+	let renderer: WebGL1Renderer | WebGLRenderer
+	try {
+		renderer = new WebGLRenderer({ alpha: true })
+	} catch {
+		renderer = new WebGL1Renderer({ alpha: true })
+	}
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	window.addEventListener('resize', () => {
