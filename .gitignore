@@ -3,8 +3,8 @@ target/
 **/*.rs.bk
 
 # tauri-mobile
-.cargo/
-/gen
+src-tauri/.cargo/
+src-tauri/gen/
 
 # macOS
 .DS_Store
@@ -31,3 +31,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+apk.lnk
