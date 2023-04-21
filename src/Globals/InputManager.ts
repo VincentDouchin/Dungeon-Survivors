@@ -97,6 +97,11 @@ class InputManager {
 		window.addEventListener('gamepadconnected', ({ gamepad }) => {
 			this.registerController(new GamepadController(this.inputNames, gamepad.index))
 		})
+		navigator.getGamepads().forEach((gamepad) => {
+			if (gamepad) {
+				this.registerController(new GamepadController(this.inputNames, gamepad.index))
+			}
+		})
 	}
 
 	createInputs(index?: number) {
