@@ -10,6 +10,7 @@ import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import StatsComponent from '../Components/StatsComponent'
 import assets from '../Globals/Assets'
+import RotationComponent from '../Components/RotationComponent'
 
 const NoteProjectileEntity = (parent: Entity) => {
 	const note = new Entity('note')
@@ -21,7 +22,7 @@ const NoteProjectileEntity = (parent: Entity) => {
 		{ moveForce: 200 },
 		{ group: COLLISIONGROUPS.WEAPON, canCollideWith: [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT], mass: 0.1, contact: false, sensor: true, width: tile.width, height: tile.height },
 	))
-	const noteRotation = Math.random() * Math.PI * 2
+	const noteRotation = parent.getComponent(RotationComponent).rotation
 	note.addComponent(new ExpirationComponent(400))
 	note.addComponent(new DamageComponent(10, [COLLISIONGROUPS.ENEMY, COLLISIONGROUPS.LOOT], 5, 5))
 	const coroutine = new Coroutine(function* (i) {
