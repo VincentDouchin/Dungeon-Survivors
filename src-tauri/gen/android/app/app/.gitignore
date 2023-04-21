@@ -1,4 +1,0 @@
-/src/main/java/vincent/douchin/dungeon/app/generated
-/src/main/jniLibs/**/*.so
-/tauri.build.gradle.kts
-/proguard-tauri.pro
