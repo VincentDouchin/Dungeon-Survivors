@@ -32,18 +32,16 @@ import { STATS } from './StatsComponent'
 export const createCollider = (colliderOption: colliderOptions) => {
 	const colliderDescription = ColliderDesc
 		.cuboid(colliderOption.width / 2, colliderOption.height / 2)
-		.setActiveEvents(ActiveEvents.CONTACT_FORCE_EVENTS)
 		.setDensity(colliderOption.mass ?? 0.00000001)
 		.setSensor(colliderOption.sensor ?? false)
 		.setCollisionGroups(colliderOption.group * 0x10000 + colliderOption.canCollideWith.reduce((acc, group) => acc + group, 0))
-
 		.setTranslation(colliderOption.offsetX ?? 0, (colliderOption.offset ? (colliderOption.height - colliderOption.offset) / 2 : 0) + (colliderOption.offsetY ?? 0))
 
 	if (colliderOption.canBumpWith) {
 		colliderDescription.setSolverGroups(colliderOption.group * 0x10000 + colliderOption.canBumpWith.reduce((acc, group) => acc + group, 0))
 	}
 	if (colliderOption.contact) {
-		colliderDescription.setActiveEvents(ActiveEvents.COLLISION_EVENTS)
+		colliderDescription.setActiveEvents(ActiveEvents.CONTACT_FORCE_EVENTS)
 	}
 	return colliderDescription
 }
