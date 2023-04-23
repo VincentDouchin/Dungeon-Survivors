@@ -1,4 +1,3 @@
-import { Color } from 'three'
 import AnimationComponent from '../Components/AnimationComponent'
 import BODYSIZES from '../Constants/BodySizes'
 import BodyComponent from '../Components/BodyComponent'
@@ -9,7 +8,6 @@ import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import type { HeroDefinition } from '../Constants/Heros'
 import type LevelComponent from '../Components/LevelComponent'
-import LightComponent from '../Components/LightComponent'
 import ManaComponent from '../Components/ManaComponent'
 import PositionComponent from '../Components/PositionComponent'
 import RangedComponent from '../Components/RangedComponent'
@@ -37,7 +35,6 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 	player.addComponent(stats)
 	player.addComponent(new SpellComponent(hero.spell))
 	player.addComponent(new SpriteComponent(hero.tiles.idle, { renderOrder: 4 }))
-	player.addComponent(new LightComponent(new Color('hsl(0,0%,80%)'), 100))
 	const playerHealth: number = {
 		[DIFFICULTY.EASY]: 300,
 		[DIFFICULTY.NORMAL]: 200,

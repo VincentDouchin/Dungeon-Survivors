@@ -20,7 +20,6 @@ import type { GameState } from '../Globals/Engine'
 import HealthSystem from '../Systems/HealthSystem'
 import INPUTS from '../Constants/InputsNames'
 import LevelComponent from '../Components/LevelComponent'
-import LightingSystem from '../Systems/LightingSystem'
 import { MUSICS } from '../Constants/Sounds'
 import ManaComponent from '../Components/ManaComponent'
 import MinionSpawnerSytem from '../Systems/MinionSpawnerSystem'
@@ -83,7 +82,6 @@ class RunState implements GameState {
 		HealthSystem.register()
 		BodyCreationSystem.register()
 		PickupSystem.register()
-		LightingSystem.register()
 		PortalSystem.register()
 		ShootingSystem.register()
 		CameraSystem.register()
@@ -153,7 +151,7 @@ class RunState implements GameState {
 			}))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, () => {
 				if (this.players.children.size === 0) {
-					new Coroutine(function*() {
+					new Coroutine(function* () {
 						yield
 						engine.setState(GameOverState)
 					})

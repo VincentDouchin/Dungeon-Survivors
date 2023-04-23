@@ -1,11 +1,9 @@
-import { AmbientLight } from 'three'
 import { ECS, Entity } from '../Globals/ECS'
 
 import BackgroundElementsComponent from '../Components/BackgroundElementsComponent'
 import type { BackgroundOptions } from '../Constants/BackGrounds'
 import { ECSEVENTS } from '../Constants/Events'
 import LDTKMap from '../Utils/LDTKMap'
-import LightComponent from '../Components/LightComponent'
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import State from '../Globals/State'
@@ -53,9 +51,6 @@ const BackgroundEntity = (backgroundDefinition: BackgroundOptions) => {
 		cameraUnSubscriber()
 		addUnSubscriber()
 	})
-	if (backgroundDefinition.lightColor) {
-		background.addComponent(new LightComponent(backgroundDefinition.lightColor, 1, AmbientLight))
-	}
 
 	return background
 }

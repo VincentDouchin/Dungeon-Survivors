@@ -1,4 +1,4 @@
-import { Clock, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGL1Renderer, WebGLRenderTarget, WebGLRenderer } from 'three'
+import { Clock, OrthographicCamera, Scene, ShaderMaterial, WebGL1Renderer, WebGLRenderer } from 'three'
 import { World, init } from '@dimforge/rapier2d-compat'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
@@ -69,15 +69,6 @@ const camera = createCamera(false)
 const UIScene = new Scene()
 const scene = new Scene()
 
-// ! Lights
-const lightScene = new Scene()
-const background = new Mesh(
-	new PlaneGeometry(window.innerWidth, window.innerHeight),
-	new MeshStandardMaterial({ color: 0xFFFFFF }),
-)
-background.position.set(0, 0, 0)
-lightScene.add(background)
-const lightsTarget = new WebGLRenderTarget(window.innerWidth, window.innerHeight, { minFilter: NearestFilter, magFilter: NearestFilter })
 const composer = new EffectComposer(renderer)
 const vignette = new ShaderMaterial({
 	transparent: true,
@@ -124,9 +115,6 @@ composer.addPass(new ShaderPass(vignette))
 
 // ! Render
 const render = () => {
-	background.position.set(camera.position.x, camera.position.y, 0)
-	renderer.setRenderTarget(lightsTarget)
-	renderer.render(lightScene, camera)
 	renderer.setRenderTarget(null)
 	renderer.render(scene, camera)
 	composer.render()
@@ -140,4 +128,4 @@ const inputManager = new InputManager(Object.values(INPUTS))
 // ! Sound
 const soundManager = new SoundManager(assets.sounds)
 
-export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, lightScene, soundManager, engine }
+export { render, scene, inputManager, world, camera, UIScene, UICamera, renderer, clock, soundManager, engine }
