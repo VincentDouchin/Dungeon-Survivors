@@ -8,7 +8,6 @@ import { ECS, Entity } from '../Globals/ECS'
 import EnemyEntity from '../Entities/EnemyEntity'
 import type { EnemyType } from '../Constants/Enemies'
 
-import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import LevelComponent from '../Components/LevelComponent'
 import OutlineShader from '../Shaders/OutlineShader'
@@ -114,12 +113,10 @@ class Encounter {
 	addGroup(mainEnemy: EnemyType, guard: EnemyType, nbOfGuards = 8, distance: number) {
 		const self = this
 		this.waves.push(function* () {
-			const group = FlockingComponent.getGroup()
 			const guards: Set<Entity> = new Set()
 			const { x, y } = self.getDistance()
 
 			self.spawnEnemy(mainEnemy, x, y).then((main) => {
-				main.addComponent(new FlockingComponent(group, false))
 				const mainHealth = main.removeComponent(HealthComponent)
 				const mainSprite = main.getComponent(SpriteComponent)
 				mainSprite.addShader(new OutlineShader([1, 1, 0, 1]))
@@ -144,7 +141,6 @@ class Encounter {
 				const guardY = y + Math.sin(angle) * distance
 				self.spawnEnemy(guard, guardX, guardY).then((guardEntity) => {
 					guardEntity.getComponent(SpriteComponent).addShader(new OutlineShader([1, 1, 0, 1]))
-					guardEntity.addComponent(new FlockingComponent(group, false))
 					guards.add(guardEntity)
 				})
 				yield * waitFor(Math.random() * 10 + 20)

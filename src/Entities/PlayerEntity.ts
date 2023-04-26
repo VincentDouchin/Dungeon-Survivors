@@ -4,7 +4,6 @@ import BodyComponent from '../Components/BodyComponent'
 import COLLISIONGROUPS from '../Constants/CollisionGroups'
 import DIFFICULTY from '../Constants/DIfficulty'
 import { Entity } from '../Globals/ECS'
-import FlockingComponent from '../Components/FlockingComponent'
 import HealthComponent from '../Components/HealthComponent'
 import type { HeroDefinition } from '../Constants/Heros'
 import type LevelComponent from '../Components/LevelComponent'
@@ -25,7 +24,6 @@ import HealthBarEntity from './HealthBarEntity'
 import PlayerManaBarEntity from './PlayerManaBarEntity'
 import DisplayBuffsEntity from './DisplayBuffsEntity'
 
-const playergroup = FlockingComponent.getGroup()
 const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent, index: number) => {
 	const player = new Entity(`player ${main}`)
 
@@ -47,7 +45,6 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 		player.addComponent(new RangedComponent())
 	}
 	player.addComponent(new SwitchingComponent(main, index))
-	player.addComponent(new FlockingComponent(playergroup, !main, 100))
 	player.addComponent(new BodyComponent(
 		{ moveForce: 11000 },
 
