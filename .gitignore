@@ -6,6 +6,8 @@ target/
 src-tauri/.cargo/
 src-tauri/gen/
 
+# android
+android
 # macOS
 .DS_Store
 # Logs
