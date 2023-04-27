@@ -39,7 +39,7 @@ const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent
 		[DIFFICULTY.HARD]: 100,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 
-	player.addComponent(new HealthComponent(playerHealth, COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE))
+	player.addComponent(new HealthComponent(playerHealth, COLLISIONGROUPS.PLAYER, true, SOUNDS.PLAYER_DAMAGE).setHealingGroup('player'))
 	player.addComponent(new AnimationComponent(hero.tiles))
 	if (!hero.weapon.some(weapon => weapon.damage)) {
 		player.addComponent(new RangedComponent())
