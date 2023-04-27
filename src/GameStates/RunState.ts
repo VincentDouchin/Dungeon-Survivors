@@ -56,7 +56,7 @@ class RunState implements GameState {
 	timer?: Coroutine
 	encounter: Encounter | null = null
 	tutorialShown = false || State.mobile
-	music: HTMLAudioElement | null = null
+	music?: HTMLAudioElement | null = null
 	subscribers: Array<() => void> = []
 	tutoCoroutine?: Coroutine
 	stats: [StatsComponent, StatsComponent] = [new StatsComponent(), new StatsComponent()]
@@ -167,7 +167,9 @@ class RunState implements GameState {
 			}
 		} break
 		}
-		soundManager.resume(this.music)
+		if (this.music) {
+			soundManager.resume(this.music)
+		}
 
 		// !INITIALIZE UI
 		ECS.eventBus.publish(ECSEVENTS.MANA_PERCENT, { percent: this.mana.mana / this.mana.maxMana.value, entity: this.players })
