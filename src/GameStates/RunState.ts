@@ -41,6 +41,7 @@ import TutorialEntity from '../UIEntities/TutorialEntity'
 import UIRunEntity from '../UIEntities/UIRunEntity'
 import type { enemyWaveName } from '../Constants/EnemyEncounters'
 import waitFor from '../Utils/WaitFor'
+import MoveXPSytem from '../Systems/MoveXPSytem'
 import PauseState from './PauseState'
 import MapState from './MapState'
 import LevelUpState from './LevelUpState'
@@ -81,7 +82,6 @@ class RunState implements GameState {
 		AnimationSystem.register()
 		HealthSystem.register()
 		BodyCreationSystem.register()
-		PickupSystem.register()
 		PortalSystem.register()
 		ShootingSystem.register()
 		CameraSystem.register()
@@ -90,6 +90,8 @@ class RunState implements GameState {
 		AIMovementSystem.register()
 		StatUpdateSystem.register()
 		SpellSystem.register()
+		MoveXPSytem.register()
+		PickupSystem.register()
 		BackgroundElementSpawnerSystem.register()
 		ExpirationSystem.register()
 		SelectionSystem.register()
@@ -140,15 +142,7 @@ class RunState implements GameState {
 					engine.setState(LevelUpState)
 				}
 			}))
-			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.TAKE_DAMAGE, ({ entity, amount, loop = false }) => {
-				if (this.players.children.has(entity) && !loop && amount < 0) {
-					this.players.children.forEach((player) => {
-						if (player !== entity) {
-							ECS.eventBus.publish(ECSEVENTS.TAKE_DAMAGE, ({ entity: player, amount, loop: true }))
-						}
-					})
-				}
-			}))
+
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.DELETE_ENTITY, () => {
 				if (this.players.children.size === 0) {
 					new Coroutine(function* () {
