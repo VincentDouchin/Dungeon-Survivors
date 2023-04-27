@@ -132,31 +132,33 @@ class AIMovementSystem extends System {
 					.add(followingVelocity)
 
 				// !AVOID WALLS
-				let increments = 0
-				let sign = 1
-				let rayDistance = 100
-				const avoidObstacles = () => {
-					const newDirection = velocity.clone().rotateAround(new Vector2(0, 0), Math.PI / 4 * increments * sign)
-					let collisions = false
-					if (!body.body) return
-					world.castShape(position, 0, newDirection, body.body.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
-						if (collider?.parent()?.bodyType() === 1) {
-							collisions = true
-							return true
+				if (ai.avoidWalls) {
+					let increments = 0
+					let sign = 1
+					let rayDistance = 100
+					const avoidObstacles = () => {
+						const newDirection = velocity.clone().rotateAround(new Vector2(0, 0), Math.PI / 4 * increments * sign)
+						let collisions = false
+						if (!body.body) return
+						world.castShape(position, 0, newDirection, body.body.collider(0).shape, rayDistance, false, undefined, undefined, undefined, undefined, (collider) => {
+							if (collider?.parent()?.bodyType() === 1) {
+								collisions = true
+								return true
+							}
+							return false
+						})
+						if (!collisions || rayDistance === 0) {
+							avoidWallsVelocity.add(newDirection).add(velocity.clone().negate())
 						}
-						return false
-					})
-					if (!collisions || rayDistance === 0) {
-						avoidWallsVelocity.add(newDirection).add(velocity.clone().negate())
+						else {
+							sign *= -1
+							rayDistance -= 10
+							if (sign > 0) increments++
+							avoidObstacles()
+						}
 					}
-					else {
-						sign *= -1
-						rayDistance -= 10
-						if (sign > 0) increments++
-						avoidObstacles()
-					}
+					avoidObstacles()
 				}
-				avoidObstacles()
 			}
 
 			velocity.add(avoidWallsVelocity).normalize().add(chargingVelocity)
