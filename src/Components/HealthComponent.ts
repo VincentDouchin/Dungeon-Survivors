@@ -15,6 +15,7 @@ class HealthComponent extends Component {
 	regenTime = 60
 	sound?: SOUND
 	lastMaxHealth: number
+	healingGroup?: string
 	constructor(health: number, type: number, show = true, sound?: SOUND) {
 		super()
 
@@ -24,6 +25,11 @@ class HealthComponent extends Component {
 		this.type = type
 		this.show = show
 		this.sound = sound
+	}
+
+	setHealingGroup(group: string) {
+		this.healingGroup = group
+		return this
 	}
 
 	updateHealth(amount: number) {
