@@ -26,7 +26,7 @@ const State: {
 	},
 	heros: new Set(),
 	timer: 0,
-	mobile: !!navigator.userAgentData?.mobile,
+	mobile: Boolean(navigator.userAgentData?.mobile) || Boolean(navigator.userAgent.match(/iPhone/i)),
 	skills: [],
 	difficulty: null,
 	multiplayer: false,
