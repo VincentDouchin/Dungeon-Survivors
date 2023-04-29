@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overscroll-behavior: contain;
+  height:100vh;
 }
 
 * {
