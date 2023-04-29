@@ -24,9 +24,9 @@ class Encounter {
 	waves: (() => Generator)[] = []
 	enemies = new Entity('encounter')
 	statDifficulty = {
-		[DIFFICULTY.EASY]: 0.025,
+		[DIFFICULTY.EASY]: 0.04,
 		[DIFFICULTY.NORMAL]: 0.05,
-		[DIFFICULTY.HARD]: 0.075,
+		[DIFFICULTY.HARD]: 0.06,
 	}[State.difficulty ?? DIFFICULTY.EASY]
 
 	amountDifficulty = {
