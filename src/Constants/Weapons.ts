@@ -79,7 +79,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				tile: assets.effects.fireProjectile,
 				range: 40,
 			}),
-			delay: 60,
+			delay: 30,
 		},
 	},
 	bow: {
@@ -97,7 +97,7 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				sound: SOUNDS.ARROW_HIT,
 				piercing: 2,
 			}),
-			delay: 30,
+			delay: 20,
 		},
 	},
 	flintlock: {
@@ -115,8 +115,8 @@ const WEAPONS: Record<string, WeaponDefinition> = {
 				range: 30,
 				piercing: 4,
 			}),
-			delay: 20,
-			cooldownAmount: 60,
+			delay: 15,
+			cooldownAmount: 40,
 			cooldownTrigger: 6,
 		},
 	},
