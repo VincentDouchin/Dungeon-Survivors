@@ -43,6 +43,7 @@ class InputManager {
 		// ! TOUCH
 		const detectPointerEvent = (eventName: 'mousedown' | 'mouseup' | 'mousemove' | 'touchstart' | 'touchend' | 'touchmove', state: 'down' | 'up' | 'move') => {
 			renderer.domElement.addEventListener(eventName, (event: MouseEvent | TouchEvent) => {
+				event.preventDefault()
 				const target = event.target as HTMLCanvasElement
 				const bounds = renderer.domElement.getBoundingClientRect()
 				const sendEvent = (event: MouseEvent | TouchEvent['touches'][number]) => {
