@@ -1,4 +1,4 @@
-import { STATS } from '../Components/StatsComponent'
+import { STATS } from '../Constants/Stats'
 import type Tile from '../Utils/Tile'
 import assets from '../Globals/Assets'
 
@@ -10,6 +10,7 @@ export interface Skill {
 	show: boolean
 
 }
+
 const SKILLS: Skill[] = [
 	{
 		icon: assets.icons.attack_speed_boost,

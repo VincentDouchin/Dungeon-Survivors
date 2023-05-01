@@ -6,10 +6,9 @@ import ColorShader from '../Shaders/ColorShader'
 import { ECSEVENTS } from '../Constants/Events'
 import type { HeroDefinition } from '../Constants/Heros'
 import INPUTS from '../Constants/InputsNames'
-import MapState from '../GameStates/MapState'
 import OutlineShader from '../Shaders/OutlineShader'
 import SKILLS from '../Constants/Skills'
-import { STATS } from '../Components/StatsComponent'
+import { STATS } from '../Constants/Stats'
 import SelectableComponent from '../Components/SelectableComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import State from '../Globals/State'
@@ -17,10 +16,9 @@ import TextComponent from '../Components/TextComponent'
 import Tile from '../Utils/Tile'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import assets from '../Globals/Assets'
-import { engine } from '../Globals/Initialize'
 import ButtonEntity from './ButtonEntity'
 
-const UIPlayerSelectEntity = () => {
+const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 	const ui = new Entity('player select ui')
 
 	// ! UI
@@ -67,9 +65,7 @@ const UIPlayerSelectEntity = () => {
 	// ! VALIDATE BUTTON
 	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.size === 2) {
-			uiPosition.moveTo(-3, 30).then(() => {
-				engine.setState(MapState)
-			})
+			uiPosition.moveTo(-3, 30).then(() => resolve())
 		}
 	})
 	validateButton.addComponent(new UIPositionComponent({ x: 0.3, y: -0.7 }, { x: 0, y: 0 }))
@@ -131,7 +127,7 @@ const UIPlayerSelectEntity = () => {
 							textValidate.setText('Start your adventure')
 						}
 						else {
-							textValidate.setText(`Choose ${2 - State.heros.size} characters`)
+							textValidate.setText(`Choose ${2 - State.heros.size} more characters`)
 						}
 					}
 				})
@@ -174,5 +170,5 @@ const UIPlayerSelectEntity = () => {
 	validateButton.getComponent(SelectableComponent).next[INPUTS.MOVEUP] = characterFrames[1][1]
 	ui.onDestroy(selectSub)
 	return ui
-}
+})
 export default UIPlayerSelectEntity

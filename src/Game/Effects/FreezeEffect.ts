@@ -1,11 +1,12 @@
 import SpriteComponent from '../../Components/SpriteComponent'
-import StatsComponent, { STATS } from '../../Components/StatsComponent'
+import StatsComponent from '../../Components/StatsComponent'
 import ParticleEntity from '../../Entities/ParticleEntitty'
 import assets from '../../Globals/Assets'
 import Coroutine from '../../Globals/Coroutine'
 import type { Entity } from '../../Globals/ECS'
 import ColorShader from '../../Shaders/ColorShader'
 import waitFor from '../../Utils/WaitFor'
+import { STATS } from '../../Constants/Stats'
 
 const FreezeEffect = (entity: Entity) => {
 	new Coroutine(function*() {

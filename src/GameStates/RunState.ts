@@ -42,6 +42,8 @@ import UIRunEntity from '../UIEntities/UIRunEntity'
 import type { enemyWaveName } from '../Constants/EnemyEncounters'
 import waitFor from '../Utils/WaitFor'
 import MoveXPSytem from '../Systems/MoveXPSytem'
+import saveData, { setProgress } from '../Globals/SaveManager'
+import SKILLS from '../Constants/Skills'
 import PauseState from './PauseState'
 import MapState from './MapState'
 import LevelUpState from './LevelUpState'
@@ -97,6 +99,24 @@ class RunState implements GameState {
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
 		DroppingSystem.register()
+		if (saveData.progress && saveData.progress?.stats?.length) {
+			const statsToSet = saveData.progress?.stats
+			this.stats.forEach((statsComponent) => {
+				statsComponent.setFromProgress(statsToSet)
+			})
+			statsToSet.forEach((name) => {
+				const skill = SKILLS.find(skill => skill.statName === name)
+				if (skill) {
+					State.skills.push(skill)
+				}
+			})
+			if (saveData.progress.level) {
+				this.playerLevel.level = saveData.progress.level
+			}
+			if (saveData.progress.xp) {
+				this.playerLevel.xp = saveData.progress.xp
+			}
+		}
 		this.ui = UIRunEntity()
 		this.encounter?.resume()
 		this.timer = new Coroutine(function* () {
@@ -122,7 +142,6 @@ class RunState implements GameState {
 			// !PLAYERS
 			const heros = [...State.heros]
 			if (!heros.length) return
-
 			this.players.addChildren(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel, 0))
 			this.players.addChildren(PlayerEntity(heros[1], State.multiplayer, this.stats[1], this.mana, this.playerLevel, 1))
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.NEW_SKILL, (skill) => {
@@ -203,6 +222,12 @@ class RunState implements GameState {
 		} break
 		case GameOverState:
 		case MapState: {
+			setProgress({
+				xp: this.playerLevel.xp,
+				level: this.playerLevel.level,
+				stats: State.skills.map(skill => skill.statName),
+			})
+
 			this.tutoCoroutine?.stop()
 			this.subscribers.forEach(sub => sub())
 			this.players.destroy()

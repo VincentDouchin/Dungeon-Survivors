@@ -6,11 +6,11 @@ import type { Entity } from '../../Globals/ECS'
 import LevelComponent from '../../Components/LevelComponent'
 import PositionComponent from '../../Components/PositionComponent'
 import RangedComponent from '../../Components/RangedComponent'
-import StatsComponent, { STATS } from '../../Components/StatsComponent'
+import StatsComponent from '../../Components/StatsComponent'
 import waitFor from '../../Utils/WaitFor'
 import HealthComponent from '../../Components/HealthComponent'
 import DamageComponent from '../../Components/DamageComponent'
-
+import { STATS } from '../../Constants/Stats'
 const VampireLordTransform = (boss: Entity) => {
 	const stats = boss.getComponent(StatsComponent)
 	const level = boss.getComponent(LevelComponent)

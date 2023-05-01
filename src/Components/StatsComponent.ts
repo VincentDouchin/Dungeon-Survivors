@@ -1,20 +1,8 @@
 import { UIEVENTS } from '../Constants/Events'
+import SKILLS from '../Constants/Skills'
+import type { STATS } from '../Constants/Stats'
 import { Component, ECS } from '../Globals/ECS'
 
-export enum STATS {
-	ATTACK_SPEED = 'ATTACK_SPEED',
-	SPEED = 'SPEED',
-	DAMAGE = 'DAMAGE',
-	CRIT_DAMAGE = 'CRIT_DAMAGE',
-	CRIT_CHANCE = 'CRIT_CHANCE',
-	KNOCKBACK = 'KNOCKBACK',
-	XP_MDOIFIER = 'XP_MDOIFIER',
-	DEFENSE = 'DEFENSE',
-	MAX_HEALTH = 'MAX_HEALTH',
-	MAX_MANA = 'MAX_MANA',
-	SPELL_DAMAGE = 'SPELL_DAMAGE',
-	REGEN = 'REGEN',
-}
 interface BoostModifier {
 	stat: STATS
 	duration: number
@@ -68,6 +56,12 @@ class StatsComponent extends Component {
 			this.buffs.push(buff)
 			ECS.eventBus.publish(UIEVENTS.DISPLAY_BOOST, this)
 		}
+	}
+
+	setFromProgress(statNames: STATS[]) {
+		statNames.forEach((name) => {
+			this.setModifier(name, SKILLS.find(skill => skill.name === name)?.amount)
+		})
 	}
 }
 StatsComponent.register()

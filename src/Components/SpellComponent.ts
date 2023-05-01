@@ -4,7 +4,7 @@ import { Component } from '../Globals/ECS'
 import type { Spell } from '../Constants/Spells'
 import { Stat } from '../Game/Stat'
 import type Tile from '../Utils/Tile'
-import { STATS } from './StatsComponent'
+import { STATS } from '../Constants/Stats'
 
 class SpellComponent extends Component {
 	spell: (entity: Entity) => boolean

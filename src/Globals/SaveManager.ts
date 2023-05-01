@@ -1,3 +1,5 @@
+import type { STATS } from '../Constants/Stats'
+import type DIFFICULTY from '../Constants/DIfficulty'
 import type { HeroName } from '../Constants/Heros'
 
 interface Save {
@@ -5,32 +7,48 @@ interface Save {
 	effectsVolume: number
 	musicVolume: number
 	zoom: number
+	progress: Partial<Progress> | null
 }
-const blankSave: Save = {
+interface Progress {
+	position: { x: number; y: number }
+	heros: HeroName[]
+	multiplayer: boolean
+	difficulty: DIFFICULTY
+	controls: string[]
+	xp: number
+	level: number
+	stats: Array<STATS>
+
+}
+const blankSave = (): Save => ({
 	heros: [],
 	effectsVolume: 0.1,
 	musicVolume: 0.1,
 	zoom: 700,
-}
+	progress: null,
+})
+
 const localSave = localStorage.getItem('save')
 const getSaveData = () => {
 	if (localSave) {
 		const parsedSave = JSON.parse(localSave) as Record<string, any>
-		if (Object.keys(parsedSave).every(key => Object.keys(blankSave).includes(key))) {
-			return parsedSave as Save
-		}
-		else {
-			return { ...blankSave }
-		}
+		return parsedSave as Save
 	}
 	else {
-		return { ...blankSave }
+		return blankSave()
 	}
 }
 const saveData = getSaveData()
-
 export const save = () => {
 	localStorage.setItem('save', JSON.stringify(saveData))
 }
 save()
+export const setProgress = (progress: Partial<Progress>) => {
+	if (saveData.progress === null) {
+		saveData.progress = progress
+	} else {
+		Object.assign(saveData.progress, progress)
+	}
+	save()
+}
 export default saveData

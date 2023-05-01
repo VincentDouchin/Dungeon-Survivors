@@ -1,4 +1,4 @@
-import { STATS } from '../Components/StatsComponent'
+import { STATS } from '../Constants/Stats'
 import type Tile from '../Utils/Tile'
 import assets from '../Globals/Assets'
 import saveData from '../Globals/SaveManager'

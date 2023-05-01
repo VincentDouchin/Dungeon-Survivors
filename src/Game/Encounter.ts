@@ -1,6 +1,6 @@
 import { ECSEVENTS, UIEVENTS } from '../Constants/Events'
-import StatsComponent, { STATS } from '../Components/StatsComponent'
-
+import StatsComponent from '../Components/StatsComponent'
+import { STATS } from '../Constants/Stats'
 import ColorShader from '../Shaders/ColorShader'
 import Coroutine from '../Globals/Coroutine'
 import DIFFICULTY from '../Constants/DIfficulty'

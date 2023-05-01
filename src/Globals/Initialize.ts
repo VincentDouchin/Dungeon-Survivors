@@ -26,14 +26,15 @@ const createCamera = (update: boolean) => {
 	const frustumSize = 300
 	const camera = new OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 1000000)
 	if (update) {
-		window.addEventListener('resize', () => {
-			const aspect = window.innerWidth / window.innerHeight
-			camera.left = -frustumSize * aspect / 2
-			camera.right = frustumSize * aspect / 2
-			camera.top = frustumSize / 2
-			camera.bottom = -frustumSize / 2
-			camera.updateProjectionMatrix()
-		})
+		['deviceorientation', 'resize'].forEach((eventName) => {
+			window.addEventListener(eventName, () => {
+				const aspect = window.innerWidth / window.innerHeight
+				camera.left = -frustumSize * aspect / 2
+				camera.right = frustumSize * aspect / 2
+				camera.top = frustumSize / 2
+				camera.bottom = -frustumSize / 2
+				camera.updateProjectionMatrix()
+			}) })
 	}
 
 	camera.position.set(0, 0, 200)
@@ -49,9 +50,11 @@ const createRenderer = () => {
 		renderer = new WebGL1Renderer({ alpha: true })
 	}
 	renderer.setPixelRatio(window.devicePixelRatio)
-	renderer.setSize(window.innerWidth, window.innerHeight)
-	window.addEventListener('resize', () => {
-		renderer.setSize(window.innerWidth, window.innerHeight)
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	['resize', 'deviceorientation'].forEach((eventName) => {
+		window.addEventListener(eventName, () => {
+			renderer.setSize(window.innerWidth, window.innerHeight)
+		})
 	})
 	renderer.setClearColor(0xFFFFFF, 0)
 	renderer.autoClear = false

@@ -1,7 +1,7 @@
 import { Component } from '../Globals/ECS'
 import type { SOUND } from '../Constants/Sounds'
 import { Stat } from '../Game/Stat'
-import { STATS } from './StatsComponent'
+import { STATS } from '../Constants/Stats'
 
 class HealthComponent extends Component {
 	health: number

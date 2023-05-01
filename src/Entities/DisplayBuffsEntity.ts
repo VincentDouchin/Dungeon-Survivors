@@ -1,6 +1,6 @@
 import PositionComponent from '../Components/PositionComponent'
 import SpriteComponent from '../Components/SpriteComponent'
-import type { STATS } from '../Components/StatsComponent'
+import type { STATS } from '../Constants/Stats'
 import StatsComponent from '../Components/StatsComponent'
 import { UIEVENTS } from '../Constants/Events'
 import SKILLS from '../Constants/Skills'

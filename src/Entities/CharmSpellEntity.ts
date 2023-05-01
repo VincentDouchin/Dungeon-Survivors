@@ -10,7 +10,8 @@ import { SOUNDS } from '../Constants/Sounds'
 import SpellComponent from '../Components/SpellComponent'
 import SpriteComponent from '../Components/SpriteComponent'
 import { soundManager } from '../Globals/Initialize'
-import StatsComponent, { STATS } from '../Components/StatsComponent'
+import StatsComponent from '../Components/StatsComponent'
+import { STATS } from '../Constants/Stats'
 
 const CharmSpellEntity = (parent: Entity) => {
 	const parentPosition = parent.getComponent(PositionComponent)

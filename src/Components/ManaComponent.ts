@@ -1,6 +1,6 @@
 import { Component } from '../Globals/ECS'
 import { Stat } from '../Game/Stat'
-import { STATS } from './StatsComponent'
+import { STATS } from '../Constants/Stats'
 
 class ManaComponent extends Component {
 	mana = 100

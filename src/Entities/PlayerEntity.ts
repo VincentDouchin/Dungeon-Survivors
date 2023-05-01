@@ -26,7 +26,6 @@ import DisplayBuffsEntity from './DisplayBuffsEntity'
 
 const PlayerEntity = (hero: HeroDefinition, main: boolean, stats: StatsComponent, mana: ManaComponent, level: LevelComponent, index: number) => {
 	const player = new Entity(`player ${main}`)
-
 	for (const [statName, modifier] of Object.entries(hero.stats) as [STATS, number][]) {
 		stats.set(statName, modifier)
 	}

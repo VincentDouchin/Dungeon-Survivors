@@ -6,7 +6,7 @@ import { Component } from '../Globals/ECS'
 import type { Entity } from '../Globals/ECS'
 import { Stat } from '../Game/Stat'
 import { world } from '../Globals/Initialize'
-import { STATS } from './StatsComponent'
+import { STATS } from '../Constants/Stats'
 
  interface bodyOptions {
 	type?: 'dynamic' | 'fixed' | 'kinematicVelocityBased' | 'kinematicPositionBased'
