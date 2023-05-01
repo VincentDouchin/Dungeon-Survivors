@@ -128,14 +128,10 @@ class MapState implements GameState {
 					multiplayer: State.multiplayer,
 					difficulty: State.difficulty,
 					heros: [...State.heros].map(hero => hero.name),
-					controls: [...State.multiplayerControls].map(controller => controller!.name),
 				})
 			} else {
 				target.destroy()
-				// State.multiplayerControls = saveData.progress!.controls!.map((controllerName) => {
-				// 	const controller = [TouchController, GamepadController, KeyboardController].find(controller => controller.name === controllerName)
 
-				// })
 				wasEncounter = true
 				if (saveData.progress?.heros) {
 					for (let i = 0; i <= 1; i++) {
@@ -150,6 +146,9 @@ class MapState implements GameState {
 				}
 				State.multiplayer = saveData.progress!.multiplayer!
 				State.difficulty = saveData.progress!.difficulty!
+				if (State.multiplayer) {
+					await UIMapMultiplayerControlsEntity()
+				}
 			}
 		}
 		showMap(wasEncounter)
