@@ -30,7 +30,6 @@ import { ECSEVENTS } from '../Constants/Events'
 import saveData, { save, setProgress } from '../Globals/SaveManager'
 import HEROS from '../Constants/Heros'
 import RunState from './RunState'
-import PlayerSelectState from './PlayerSelectState'
 
 class MapState implements GameState {
 	map?: Entity
@@ -160,7 +159,6 @@ class MapState implements GameState {
 		ECS.unRegisterSystems()
 		this.ui?.destroy()
 		switch (newState) {
-		case PlayerSelectState: break
 		default: {
 			this.lastPosition = this.player?.getComponent(PositionComponent)
 			this.map?.destroy()

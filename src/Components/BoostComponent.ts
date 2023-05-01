@@ -1,6 +1,6 @@
 import type { Boost } from '../Constants/Boosts'
+import type { STATS } from '../Constants/Stats'
 import { Component } from '../Globals/ECS'
-import type { STATS } from './StatsComponent'
 
 class BoostComponent extends Component {
 	stat: STATS

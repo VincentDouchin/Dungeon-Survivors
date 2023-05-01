@@ -1,7 +1,7 @@
-import type { STATS } from '../Components/StatsComponent'
 import type StatsComponent from '../Components/StatsComponent'
 
 import type LevelComponent from '../Components/LevelComponent'
+import type { STATS } from '../Constants/Stats'
 
 class Stat {
 	base: number
