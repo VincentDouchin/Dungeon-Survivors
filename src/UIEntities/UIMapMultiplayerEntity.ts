@@ -11,7 +11,7 @@ const UIMapMultiplayerEntity = () => new Promise<boolean>((resolve) => {
 			multiplayerSelect.destroy()
 		})
 		multiplayerSelect.addChildren(button)
-		button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: multiplayer ? -1 : 1, y: -1 }))
+		button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: multiplayer ? -1 : 1, y: -1.5 }))
 		return button
 	})
 	SelectableComponent.setFromArray(multiplayerButtons)
