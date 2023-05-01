@@ -63,7 +63,7 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 	})
 
 	// ! VALIDATE BUTTON
-	const validateButton = ButtonEntity(60, 5, 2, 'Choose 2 characters', 1, () => {
+	const validateButton = ButtonEntity(80, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.size === 2) {
 			uiPosition.moveTo(-3, 30).then(() => resolve())
 		}
