@@ -49,6 +49,7 @@ class MapState implements GameState {
 	}
 
 	async set(previousState: Constructor<GameState> | null) {
+		console.log('ok')
 		const map = new LDTKMap(assets.mapData.OVERWORLD, assets.mapTiles.OVERWORLD)
 		const level = map.levels[0]
 		const mapTile = map.tile
