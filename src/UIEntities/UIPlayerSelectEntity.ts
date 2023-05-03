@@ -65,7 +65,10 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 	// ! VALIDATE BUTTON
 	const validateButton = ButtonEntity(80, 5, 2, 'Choose 2 characters', 1, () => {
 		if (State.heros.size === 2) {
-			uiPosition.moveTo(-3, 30).then(() => resolve())
+			uiPosition.moveTo(-3, 30).then(() => {
+				ui.destroy()
+				resolve()
+			})
 		}
 	})
 	validateButton.addComponent(new UIPositionComponent({ x: 0.3, y: -0.7 }, { x: 0, y: 0 }))
@@ -106,16 +109,15 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 			selectable.onValidated = () => {
 				if (State.heros.has(hero)) {
 					State.heros.delete(hero)
-				}
-				else if (State.heros.size < 2) {
+				} else if (State.heros.size < 2) {
 					State.heros.add(hero)
 				}
+
 				heroSprites.forEach((sprite, hero) => {
 					if (State.heros.has(hero) && !withOutline.has(sprite)) {
 						sprite.addShader(new OutlineShader([1, 1, 1, 1]))
 						withOutline.add(sprite)
-					}
-					else if (withOutline.has(sprite) && !State.heros.has(hero)) {
+					} else if (withOutline.has(sprite) && !State.heros.has(hero)) {
 						sprite.removeShader(OutlineShader)
 						withOutline.delete(sprite)
 					}
