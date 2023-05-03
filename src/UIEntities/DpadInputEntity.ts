@@ -42,8 +42,8 @@ const DpadInputEntity = () => {
 			ECS.eventBus.publish(UIEVENTS.TOUCH, { input: positionY > 0 ? INPUTS.MOVEUP : INPUTS.MOVEDOWN, amount: Math.abs(positionY), entity: dpad })
 		}
 	})
-	const upSubscriber = ECS.eventBus.subscribe('up', (touchCoord: TouchCoord) => {
-		if (touch === touchCoord.identifier) {
+	const resetInputs = (touchCoord?: TouchCoord) => {
+		if (!touchCoord || touch === touchCoord.identifier) {
 			enabled = false
 			centerPosition.relativePosition.x = 0
 			centerPosition.relativePosition.y = 0
@@ -51,8 +51,10 @@ const DpadInputEntity = () => {
 				ECS.eventBus.publish(UIEVENTS.TOUCH, { input: inputName, amount: 0, entity: dpad })
 			}
 		}
-	})
+	}
+	const upSubscriber = ECS.eventBus.subscribe('up', resetInputs)
 	dpad.onDestroy(() => {
+		resetInputs()
 		upSubscriber()
 		moveSubscriber()
 		downSubscriber()
