@@ -16,8 +16,9 @@ class SelectionSystem extends System {
 	constructor() {
 		super(SelectableComponent)
 		this.subscribe('move', ({ uiObjects, objects, identifier }: TouchCoord) => {
-			if (!identifier) {
-				this.hovered = [...uiObjects, ...objects]
+			this.hovered = [...uiObjects, ...objects]
+			if (identifier) {
+				this.clicked = [...uiObjects, ...objects]
 			}
 		})
 		this.subscribe('down', ({ uiObjects, objects, identifier }: TouchCoord) => {
