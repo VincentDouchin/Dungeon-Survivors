@@ -8,6 +8,9 @@ import ButtonEntity from './ButtonEntity'
 
 const UIMapRestoreEntity = () => new Promise<boolean>((resolve) => {
 	const restoreProgressSelect = new Entity('multiplayer select')
+	restoreProgressSelect.addComponent(new SpriteComponent(Tile.empty()))
+	const position = restoreProgressSelect.addComponent(new UIPositionComponent({ x: 0, y: -2 }, { x: 0, y: -1 }))
+	position.moveTo(-1, 30)
 	const restoreText = new Entity('restore text')
 	restoreProgressSelect.addChildren(restoreText)
 	restoreText.addComponent(new SpriteComponent(Tile.empty(1, 150)))
@@ -15,8 +18,10 @@ const UIMapRestoreEntity = () => new Promise<boolean>((resolve) => {
 	restoreText.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: -1 }))
 	const restoreButtons = [true, false].map((restore) => {
 		const button = ButtonEntity(60, 10, 2, restore ? 'Continue' : 'Restart', 2, () => {
-			resolve(restore)
-			restoreProgressSelect.destroy()
+			position.moveTo(-2, 30).then(() => {
+				resolve(restore)
+				restoreProgressSelect.destroy()
+			})
 		})
 		restoreProgressSelect.addChildren(button)
 		button.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: restore ? 1 : -1, y: -1.5 }))

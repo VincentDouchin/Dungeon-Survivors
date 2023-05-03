@@ -10,7 +10,9 @@ import ButtonEntity from './ButtonEntity'
 
 const UIMapMultiplayerControlsEntity = () => new Promise<void>((resolve) => {
 	const controls = new Entity('multiplayer controls')
-
+	controls.addComponent(new SpriteComponent(Tile.empty()))
+	const position = controls.addComponent(new UIPositionComponent({ x: 0, y: -2 }, { x: 0, y: -1 }))
+	position.moveTo(-1, 30)
 	const selectedMethods: string[] = []
 	const buttons: Entity[] = []
 	for (let i = 1; i <= 2; i++) {
@@ -46,8 +48,10 @@ const UIMapMultiplayerControlsEntity = () => new Promise<void>((resolve) => {
 						inputManager.registerController(controller, index)
 					}
 				})
-				controls.destroy()
-				resolve()
+				position.moveTo(-2, 30).then(() => {
+					controls.destroy()
+					resolve()
+				})
 			})
 			buttons.push(okButton)
 			okButton.addComponent(new UIPositionComponent({ x: 1, y: 0 }, { x: -1, y: 0 }))
