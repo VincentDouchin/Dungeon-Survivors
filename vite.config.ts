@@ -1,4 +1,5 @@
 import { VitePWA } from 'vite-plugin-pwa'
+import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import { internalIpV4 } from 'internal-ip'
 
@@ -6,8 +7,7 @@ import { internalIpV4 } from 'internal-ip'
 export default defineConfig(async () => {
 	const host = await internalIpV4()
 
-	/** @type {import('vite').UserConfig} */
-	const config = {
+	const config: UserConfig = {
 		plugins: [
 			VitePWA({
 				registerType: 'autoUpdate',
@@ -46,6 +46,11 @@ export default defineConfig(async () => {
 		base: '/',
 		build: {
 			target: 'esnext',
+			rollupOptions: {
+				output: {
+					entryFileNames: 'assets/[name].js',
+				},
+			},
 		},
 		server: {
 			host: '0.0.0.0', // listen on all addresses
@@ -57,6 +62,7 @@ export default defineConfig(async () => {
 				port: 5183,
 			},
 		},
+
 	}
 
 	return config
