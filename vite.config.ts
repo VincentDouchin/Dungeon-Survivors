@@ -14,7 +14,7 @@ export default defineConfig(async () => {
 				injectRegister: 'auto',
 				includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
 				injectManifest: {
-					globPatterns: ['**/*.{js,html,wasm}', './assets/images/*.*', './assets/sounds/*.*', './assets/UI/*.*'],
+					globPatterns: ['**/*.{js,html,wasm}', './assets/images/*.*', './assets/map/Arenas/*.png', './assets/sounds/*.*', './assets/UI/*.*'],
 				},
 				manifest: {
 					start_url: 'index.html?fullscreen=true',
