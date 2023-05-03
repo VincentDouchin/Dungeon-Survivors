@@ -90,9 +90,8 @@ class InputManager {
 		detectPointerEvent(State.mobile ? 'touchend' : 'mouseup', 'up')
 		detectPointerEvent(State.mobile ? 'touchmove' : 'mousemove', 'move')
 		// ! CONTROLLERS
-		if (!State.mobile) {
-			this.registerController(new KeyboardController(this.inputNames))
-		} else {
+		this.registerController(new KeyboardController(this.inputNames))
+		if (State.mobile) {
 			this.registerController(new TouchController(this.inputNames))
 		}
 		window.addEventListener('gamepadconnected', ({ gamepad }) => {
