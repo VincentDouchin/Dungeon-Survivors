@@ -80,6 +80,7 @@ class SelectionSystem extends System {
 			}
 		}
 		this.clicked = []
+		this.hovered = []
 	}
 }
 export default SelectionSystem
