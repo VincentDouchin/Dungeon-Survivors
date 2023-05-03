@@ -1,18 +1,8 @@
-// #![cfg_attr(
-//   all(not(debug_assertions), target_os = "windows"),
-//   windows_subsystem = "windows"
-// )]
-
-// fn main() {
-//   tauri::Builder::default()
-//     .run(tauri::generate_context!())
-//     .expect("error while running tauri application");
-// }
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-
+use app_lib::AppBuilder;
 pub fn main() {
-    app::AppBuilder::new().run();
+    AppBuilder::new().run();
 }
