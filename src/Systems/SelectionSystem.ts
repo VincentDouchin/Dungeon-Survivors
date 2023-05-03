@@ -15,10 +15,10 @@ class SelectionSystem extends System {
 	clicked: number[] = []
 	constructor() {
 		super(SelectableComponent)
-		this.subscribe('move', ({ uiObjects, objects, identifier }: TouchCoord) => {
+		this.subscribe('move', ({ uiObjects, objects }: TouchCoord) => {
 			this.hovered = [...uiObjects, ...objects]
 		})
-		this.subscribe('down', ({ uiObjects, objects, identifier }: TouchCoord) => {
+		this.subscribe('down', ({ uiObjects, objects }: TouchCoord) => {
 			this.clicked = [...uiObjects, ...objects]
 		})
 		this.subscribe(ECSEVENTS.SELECTED, (entity) => {
