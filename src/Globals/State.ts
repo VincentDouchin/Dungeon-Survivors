@@ -12,7 +12,7 @@ const State: {
 	}
 	timer: number
 	mobile: boolean
-	heros: Set<HeroDefinition>
+	heros: HeroDefinition[]
 	skills: Skill[]
 	difficulty: DIFFICULTY | null
 	multiplayer: boolean
@@ -24,7 +24,7 @@ const State: {
 		top: undefined,
 		bottom: undefined,
 	},
-	heros: new Set(),
+	heros: [],
 	timer: 0,
 	mobile: Boolean(navigator.userAgentData?.mobile) || Boolean(navigator.userAgent.match(/iPhone/i)) || Boolean(navigator.userAgent.match(/Android/i)),
 	skills: [],

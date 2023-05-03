@@ -55,7 +55,7 @@ class MapState implements GameState {
 		const showMap = (wasEncounter: boolean) => {
 			if (!level) return
 			this.player = new Entity('player')
-			const hero = [...State.heros][0]
+			const hero = State.heros[0]
 			this.player.addComponent(new SpriteComponent(hero.tiles.idle, { scale: 0.6, renderOrder: 11 }))
 			this.player.addComponent(new AnimationComponent(hero.tiles))
 			this.player.addComponent(new CameraTargetComponent())
@@ -127,7 +127,7 @@ class MapState implements GameState {
 				setProgress({
 					multiplayer: State.multiplayer,
 					difficulty: State.difficulty,
-					heros: [...State.heros].map(hero => hero.name),
+					heros: State.heros.map(hero => hero.name),
 				})
 			} else {
 				target.destroy()
@@ -137,7 +137,7 @@ class MapState implements GameState {
 					for (let i = 0; i <= 1; i++) {
 						const heroDefinition = HEROS.find(hero => saveData.progress?.heros?.[i] === hero.name)
 						if (heroDefinition) {
-							State.heros.add(heroDefinition)
+							State.heros.push(heroDefinition)
 						}
 					}
 				}

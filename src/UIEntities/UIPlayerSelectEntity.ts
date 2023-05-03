@@ -64,7 +64,7 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 
 	// ! VALIDATE BUTTON
 	const validateButton = ButtonEntity(80, 5, 2, 'Choose 2 characters', 1, () => {
-		if (State.heros.size === 2) {
+		if (State.heros.length === 2) {
 			uiPosition.moveTo(-3, 30).then(() => {
 				ui.destroy()
 				resolve()
@@ -107,17 +107,17 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 		// ! UNLOCKED
 		if (isUnlocked(hero)) {
 			selectable.onValidated = () => {
-				if (State.heros.has(hero)) {
-					State.heros.delete(hero)
-				} else if (State.heros.size < 2) {
-					State.heros.add(hero)
+				if (State.heros.includes(hero)) {
+					State.heros.splice(State.heros.indexOf(hero), 1)
+				} else if (State.heros.length < 2) {
+					State.heros.push(hero)
 				}
 
 				heroSprites.forEach((sprite, hero) => {
-					if (State.heros.has(hero) && !withOutline.has(sprite)) {
+					if (State.heros.includes(hero) && !withOutline.has(sprite)) {
 						sprite.addShader(new OutlineShader([1, 1, 1, 1]))
 						withOutline.add(sprite)
-					} else if (withOutline.has(sprite) && !State.heros.has(hero)) {
+					} else if (withOutline.has(sprite) && !State.heros.includes(hero)) {
 						sprite.removeShader(OutlineShader)
 						withOutline.delete(sprite)
 					}
@@ -125,11 +125,11 @@ const UIPlayerSelectEntity = () => new Promise<void>((resolve) => {
 				validateButton.children.forEach((child) => {
 					const textValidate = child.getComponent(TextComponent)
 					if (textValidate) {
-						if (State.heros.size === 2) {
+						if (State.heros.length === 2) {
 							textValidate.setText('Start your adventure')
 						}
 						else {
-							textValidate.setText(`Choose ${2 - State.heros.size} more characters`)
+							textValidate.setText(`Choose ${2 - State.heros.length} more characters`)
 						}
 					}
 				})

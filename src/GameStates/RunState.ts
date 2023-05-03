@@ -140,7 +140,7 @@ class RunState implements GameState {
 			const backgroundDefinition = BACKGROUNDS[options.background]
 			this.background = BackgroundEntity(backgroundDefinition)
 			// !PLAYERS
-			const heros = [...State.heros]
+			const heros = State.heros
 			if (!heros.length) return
 			this.players.addChildren(PlayerEntity(heros[0], true, this.stats[0], this.mana, this.playerLevel, 0))
 			this.players.addChildren(PlayerEntity(heros[1], State.multiplayer, this.stats[1], this.mana, this.playerLevel, 1))
