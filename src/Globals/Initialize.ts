@@ -4,10 +4,14 @@ import { World, init } from '@dimforge/rapier2d-compat'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import INPUTS from '../Constants/InputsNames'
+import LandscapeInfoEntity from '../UIEntities/LanscapeInfoEntity'
+import waitFor from '../Utils/WaitFor'
 import Engine from './Engine'
 import InputManager from './InputManager'
 import SoundManager from './SoundManager'
 import assets from './Assets'
+import type { Entity } from './ECS'
+import Coroutine from './Coroutine'
 
 // ! Engine
 
@@ -56,6 +60,9 @@ const createRenderer = () => {
 			renderer.setSize(window.innerWidth, window.innerHeight)
 		})
 	})
+	window.screen.orientation.addEventListener('change', () => {
+		renderer.setSize(window.innerWidth, window.innerHeight)
+	})
 	renderer.setClearColor(0xFFFFFF, 0)
 	renderer.autoClear = false
 	return renderer
@@ -63,6 +70,30 @@ const createRenderer = () => {
 const renderer = createRenderer()
 
 document.body.appendChild(renderer.domElement)
+
+// ! Inputs
+const inputManager = new InputManager(Object.values(INPUTS))
+
+// ! INFO
+
+let info: null | Entity = null
+const createInfo = () => {
+	if ((window.innerWidth / window.innerHeight) < 1 && !info) {
+		inputManager.enabled = false
+		info = LandscapeInfoEntity()
+		new Coroutine(function*() {
+			yield * waitFor(10)
+			engine.stop()
+		})
+	} else 	if (info) {
+		inputManager.enabled = true
+		engine.start()
+		info.destroy()
+		info = null
+	}
+}
+createInfo()
+window.addEventListener('resize', createInfo)
 
 // ! Cameras
 const UICamera = createCamera(true)
@@ -124,9 +155,6 @@ const render = () => {
 	renderer.clearDepth()
 	renderer.render(UIScene, UICamera)
 }
-
-// ! Inputs
-const inputManager = new InputManager(Object.values(INPUTS))
 
 // ! Sound
 const soundManager = new SoundManager(assets.sounds)

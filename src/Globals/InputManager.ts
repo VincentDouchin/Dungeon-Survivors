@@ -24,11 +24,15 @@ class Input {
 export type INPUTNAME = INPUTS | `${INPUTS}${number}`
 
 class InputManager {
+	enabled = true
 	inputNames: INPUTS[]
 	inputs: Partial<Record<INPUTNAME, Input>> = {}
 	controllers = new Set<InputController>()
 	playerController = new Map<number, InputController>()
 	constructor(inputNames: INPUTS[]) {
+		document.body.addEventListener('touchstart', () => {
+			document.body.requestFullscreen()
+		})
 		this.inputNames = inputNames
 		this.inputs = this.createInputs()
 		const self = this
@@ -79,11 +83,13 @@ class InputManager {
 					ECS.eventBus.publish(state, { uiObjects, objects, ...mouse, identifier: event instanceof MouseEvent ? null : event.identifier })
 				}
 
-				if (event instanceof TouchEvent)
-					Array.from(event.changedTouches).forEach(touch => sendEvent(touch))
+				if (this.enabled) {
+					if (event instanceof TouchEvent)
+						Array.from(event.changedTouches).forEach(touch => sendEvent(touch))
 
-				else
-					sendEvent(event)
+					else
+						sendEvent(event)
+				}
 			})
 		}
 		detectPointerEvent(State.mobile ? 'touchstart' : 'mousedown', 'down')
@@ -112,7 +118,10 @@ class InputManager {
 	}
 
 	getInput(inputName: INPUTNAME) {
-		return this.inputs[inputName]
+		if (this.enabled) {
+			return this.inputs[inputName]
+		}
+		return undefined
 	}
 
 	updateInputs() {
