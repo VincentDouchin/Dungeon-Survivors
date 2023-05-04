@@ -150,6 +150,7 @@ class MapState implements GameState {
 					await UIMapMultiplayerControlsEntity()
 				}
 			}
+			title.destroy()
 		}
 		showMap(wasEncounter)
 	}
