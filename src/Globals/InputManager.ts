@@ -30,9 +30,6 @@ class InputManager {
 	controllers = new Set<InputController>()
 	playerController = new Map<number, InputController>()
 	constructor(inputNames: INPUTS[]) {
-		document.body.addEventListener('touchstart', () => {
-			document.body.requestFullscreen()
-		})
 		this.inputNames = inputNames
 		this.inputs = this.createInputs()
 		const self = this
