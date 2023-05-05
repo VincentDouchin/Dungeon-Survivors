@@ -13,7 +13,6 @@ const DisplayBuffsEntity = (player: Entity, offset: number) => {
 	const sub = ECS.eventBus.subscribe(UIEVENTS.DISPLAY_BOOST, (stats) => {
 		if (playerStats === stats) {
 			const allBuffs = Array.from(new Set(stats.buffs.map(buff => buff.stat)))
-			if (allBuffs.every(buff => buffs.has(buff))) return
 			allBuffs.forEach((stat) => {
 				if (!buffs.has(stat)) {
 					const buffIcon = new Entity('buff icon')
