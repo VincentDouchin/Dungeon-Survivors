@@ -1,6 +1,6 @@
-# Dungeon-Survivor
+# Dungeon-Survivors
 
-A small game inspired by Vampire Survivor and 20 minutes until dawn.
+A small game inspired by Vampire Survivors and 20 minutes till dawn.
 
 Available on Web and moble (install the website as a PWA for a better experience).
 
