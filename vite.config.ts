@@ -4,6 +4,14 @@ import { defineConfig } from 'vite'
 export default defineConfig(async () => {
 	return {
 		base: './',
+		build: {
+			target: 'esnext',
+			rollupOptions: {
+				output: {
+					entryFileNames: 'assets/[name].js',
+				},
+			},
+		},
 	}
 	// const host = await internalIpV4()
 
