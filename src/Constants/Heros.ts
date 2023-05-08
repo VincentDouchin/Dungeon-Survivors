@@ -80,7 +80,7 @@ const HEROS: HeroDefinition[] = [
 		name: HeroName.ninja,
 		tiles: {
 			idle: assets.characters.ninjaWalk,
-			run: assets.characters.ninjaRun,
+			run: assets.characters['ninja-run'],
 		},
 		spell: SPELLS.SHURIKEN,
 		needUnlock: false,

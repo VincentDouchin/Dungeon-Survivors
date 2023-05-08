@@ -1,6 +1,8 @@
 import '@total-typescript/ts-reset'
 
 import { preloadFont } from 'troika-three-text'
+// @ts-expect-error no types
+import { install } from 'ga-gtag'
 import m5x7 from '../assets/fonts/m5x7.ttf?url'
 import GameOverState from './GameStates/GameOverState'
 import LevelUpState from './GameStates/LevelUpState'
@@ -9,7 +11,6 @@ import PauseState from './GameStates/PauseState'
 import RunState from './GameStates/RunState'
 import WinState from './GameStates/WinState'
 import { engine } from './Globals/Initialize'
-
 await new Promise<void>(resolve => preloadFont(
 	{ font: m5x7 }, () => resolve(),
 ))
@@ -28,3 +29,4 @@ window.addEventListener('touchstart', () => {
 window.addEventListener('pointerdown', () => {
 	window.focus()
 })
+install('G-7F8LR6N3YZ')

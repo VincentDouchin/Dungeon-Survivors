@@ -84,6 +84,7 @@ class MapState implements GameState {
 		this.map = new Entity('map')
 		this.map.addComponent(new SpriteComponent(mapTile))
 		this.map.addComponent(new PositionComponent(0, 0))
+
 		let wasEncounter = false
 		if (previousState === null) {
 			// ! CAMERA TARGET
@@ -151,6 +152,8 @@ class MapState implements GameState {
 				}
 			}
 			title.destroy()
+		} else {
+			setProgress({ position: this.lastPosition })
 		}
 		showMap(wasEncounter)
 	}
