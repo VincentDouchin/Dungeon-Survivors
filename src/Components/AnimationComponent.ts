@@ -18,7 +18,7 @@ class AnimationComponent extends Component {
 		this.frameRate = newOptions.frameRate
 		this.start = newOptions.start
 		this.selectedFrame = newOptions.selectedFrame
-		this.maxFrames = Math.max(...Object.values(tiles).map(tile => tile.frames))
+		this.maxFrames = Math.max(...Object.values(tiles).map(tile => tile?.frames ?? 1))
 		this.currentState = Object.keys(tiles)[0]
 		this.lastState = this.currentState
 	}
