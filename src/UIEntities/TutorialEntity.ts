@@ -3,16 +3,15 @@ import SpriteComponent from '../Components/SpriteComponent'
 import Tile from '../Utils/Tile'
 import UIPositionComponent from '../Components/UIPositionComponent'
 import type { UI } from '../../assets/images/images'
-import { inputManager } from '../Globals/Initialize'
 import TextComponent from '../Components/TextComponent'
 import assets from '../Globals/Assets'
+import State from '../Globals/State'
 
 const TutorialEntity = () => {
 	const tutorial = new Entity('tutorial')
-	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout && inputManager.layout.get(key))
 	const addControls = (keyboard: UI[], gamepad: UI[]) => {
 		const images: UI[] = []
-		if (inputManager.layout) {
+		if (!State.mobile) {
 			images.push(...keyboard)
 		}
 		if (navigator.getGamepads().some(Boolean)) {
@@ -21,12 +20,12 @@ const TutorialEntity = () => {
 		return images
 	}
 	const controls: Record<string, UI[]> = {
-		'Movement': addControls(movementKeys, ['l']),
+		'Movement': addControls(['w', 'a', 's', 'd'], ['l']),
 		'Spell': addControls(['space'], ['action']),
 		'Pause': addControls(['escape'], ['start']),
 		'Switch characters': addControls(['shift'], ['lb', 'rb']),
 	}
-	if (!inputManager.layout && !navigator.getGamepads().some(Boolean)) {
+	if (State.mobile && !navigator.getGamepads().some(Boolean)) {
 		return tutorial
 	}
 	Object.entries(controls).forEach(([controlName, images], index) => {

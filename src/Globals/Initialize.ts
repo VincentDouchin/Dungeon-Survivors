@@ -80,9 +80,8 @@ document.body.appendChild(renderer.domElement)
 
 // ! Inputs
 const inputManager = new InputManager(Object.values(INPUTS))
-await inputManager.loadLayout()
-// ! INFO
 
+// ! INFO
 let info: null | Entity = null
 const createInfo = () => {
 	if ((window.innerWidth / window.innerHeight) < 1 && !info) {
