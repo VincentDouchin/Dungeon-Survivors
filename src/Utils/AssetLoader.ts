@@ -32,7 +32,7 @@ export const loadImage = async (source: string) => {
 export const loadAudioElement = async (source: string) => {
 	const audio = new Audio(source)
 	await new Promise((resolve) => {
-		audio.onload = resolve
+		audio.oncanplaythrough = resolve
 	})
 	return audio
 }
