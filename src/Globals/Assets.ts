@@ -1,6 +1,6 @@
 import type LDTKMap from '../Utils/LDTKMap'
 import Tile from '../Utils/Tile'
-import AssetLoader, { loadImage } from './../Utils/AssetLoader'
+import AssetLoader, { loadAudioElement, loadImage } from './../Utils/AssetLoader'
 import type { Background, UI, characters, effects, icons, others, weapons } from './../../assets/images/images'
 
 import type { Arenas } from './../../assets/map/Map'
@@ -18,7 +18,7 @@ const loadIconsFromFolder = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x, { padding: true }))
 const loadAudio = new AssetLoader<HTMLAudioElement>(getFileName)
-	.chain(x => new Audio(x.default))
+	.chain(async x => await loadAudioElement(x.default))
 const loadJSON = new AssetLoader<LDTKMap>(getFileName)
 
 const framesNb: Record<effects, number> = {
@@ -61,7 +61,7 @@ const assets = {
 	other: await loadTilesFromFolder.load<others>(import.meta.glob('./../../assets/images/others/*.png', { eager: true })),
 	background: await loadTilesFromFolder.load<Background>(import.meta.glob('./../../assets/images/Background/*.png', { eager: true })),
 	effects: await loadEffects.load<effects>(import.meta.glob('./../../assets/images/effects/*.png', { eager: true })),
-	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.*', { eager: true })),
+	sounds: await loadAudio.load<sounds>(import.meta.glob('./../../assets/sounds/*.[mp3|ogg|wav]', { eager: true })),
 	mapTiles: await loadTilesFromFolder.load<Arenas>(import.meta.glob('/assets/map/Arenas/**/*.png', { eager: true })),
 	mapData: await loadJSON.load<Arenas>(import.meta.glob('/assets/map/Arenas/*.json', { eager: true })),
 } as const

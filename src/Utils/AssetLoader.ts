@@ -29,5 +29,12 @@ export const loadImage = async (source: string) => {
 	})
 	return img
 }
+export const loadAudioElement = async (source: string) => {
+	const audio = new Audio(source)
+	await new Promise((resolve) => {
+		audio.oncanplaythrough = resolve
+	})
+	return audio
+}
 
 export default AssetLoaderChain
