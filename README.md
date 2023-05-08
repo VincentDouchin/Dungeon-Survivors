@@ -1,12 +1,12 @@
-# Dungeon-Survivor
+# Dungeon-Survivors
 
-A small game inspired by Vampire Survivor and 20 minutes until dawn.
+A small game inspired by Vampire Survivors and 20 minutes till dawn.
 
 Available on Web and moble (install the website as a PWA for a better experience).
 
 ## [Play here](https://dungeon-survivors.netlify.app/)
 
-This game was written in typescript with only the following libraries:
+This game was written in typescript with the following libraries:
 * [ThreeJS](https://threejs.org/) for the rendering
 * [troika-three-text](https://protectwise.github.io/troika/troika-three-text/) for the text rendering
 * [RapierJS](https://rapier.rs/) for the physics and collisions

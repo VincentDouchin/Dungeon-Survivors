@@ -8,7 +8,7 @@ import UIPositionComponent from '../Components/UIPositionComponent'
 import buttonTiles from '../Utils/ButtonTiles'
 import waitFor from '../Utils/WaitFor'
 
-const ButtonEntity = (width: number, height: number, scale: number, child: Tile | string, childScale: number, validate: () => void, selected = false) => {
+const ButtonEntity = (width: number, height: number, scale: number, child: Tile | string, childScale: number, validate: (args?: Entity) => void, selected = false) => {
 	const button = new Entity('button')
 	const [normal, pressed, disabled] = buttonTiles(width, height)
 	const defaultTile = selected ? normal : disabled
@@ -31,7 +31,7 @@ const ButtonEntity = (width: number, height: number, scale: number, child: Tile 
 			childPosition.relativePosition.y = 1 / 8
 			sprite.changeTexture(normal.texture)
 			button.addComponent(selectable)
-			validate()
+			validate(button)
 		})
 	}))
 
