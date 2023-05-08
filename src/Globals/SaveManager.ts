@@ -24,7 +24,7 @@ const blankSave = (): Save => ({
 	heros: [],
 	effectsVolume: 0.1,
 	musicVolume: 0.1,
-	zoom: 700,
+	zoom: 430,
 	progress: null,
 })
 
