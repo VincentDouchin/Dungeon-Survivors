@@ -1,6 +1,6 @@
 import type LDTKMap from '../Utils/LDTKMap'
 import Tile from '../Utils/Tile'
-import AssetLoader, { loadImage } from './../Utils/AssetLoader'
+import AssetLoader, { loadAudioElement, loadImage } from './../Utils/AssetLoader'
 import type { Background, UI, characters, effects, icons, others, weapons } from './../../assets/images/images'
 
 import type { Arenas } from './../../assets/map/Map'
@@ -18,7 +18,7 @@ const loadIconsFromFolder = new AssetLoader<Tile>(getFileName)
 	.chain(async x => await loadImage(x.default))
 	.chain(x => Tile.fromImage(x, { padding: true }))
 const loadAudio = new AssetLoader<HTMLAudioElement>(getFileName)
-	.chain(x => new Audio(x.default))
+	.chain(async x => await loadAudioElement(x.default))
 const loadJSON = new AssetLoader<LDTKMap>(getFileName)
 
 const framesNb: Record<effects, number> = {
