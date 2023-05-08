@@ -160,6 +160,7 @@ class MapState implements GameState {
 		this.ui?.destroy()
 		switch (newState) {
 		default: {
+			setProgress({ position: this.lastPosition })
 			this.lastPosition = this.player?.getComponent(PositionComponent)
 			this.map?.destroy()
 			this.path?.destroy()

@@ -14,7 +14,6 @@ import WinState from '../GameStates/WinState'
 import assets from '../Globals/Assets'
 import { engine } from '../Globals/Initialize'
 import INPUTS from '../Constants/InputsNames'
-import { setProgress } from '../Globals/SaveManager'
 class PathSystem extends System {
 	position?: PositionComponent
 	encounter?: boolean
@@ -24,7 +23,6 @@ class PathSystem extends System {
 		this.subscribe(ECSEVENTS.PATH_POSITION, ({ position, encounter }) => {
 			this.position = position
 			this.encounter = encounter
-			setProgress({ position })
 		})
 	}
 
