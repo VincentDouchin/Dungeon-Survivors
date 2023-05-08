@@ -9,12 +9,25 @@ import assets from '../Globals/Assets'
 
 const TutorialEntity = () => {
 	const tutorial = new Entity('tutorial')
-	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout.get(key))
+	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout && inputManager.layout.get(key))
+	const addControls = (keyboard: UI[], gamepad: UI[]) => {
+		const images: UI[] = []
+		if (inputManager.layout) {
+			images.push(...keyboard)
+		}
+		if (navigator.getGamepads().some(Boolean)) {
+			images.push(...gamepad)
+		}
+		return images
+	}
 	const controls: Record<string, UI[]> = {
-		'Movement': [...movementKeys, 'l'],
-		'Spell': ['space', 'action'],
-		'Pause': ['escape', 'start'],
-		'Switch characters': ['shift', 'lb', 'rb'],
+		'Movement': addControls(movementKeys, ['l']),
+		'Spell': addControls(['space'], ['action']),
+		'Pause': addControls(['escape'], ['start']),
+		'Switch characters': addControls(['shift'], ['lb', 'rb']),
+	}
+	if (!inputManager.layout && !navigator.getGamepads().some(Boolean)) {
+		return tutorial
 	}
 	Object.entries(controls).forEach(([controlName, images], index) => {
 		const control = new Entity('control')
