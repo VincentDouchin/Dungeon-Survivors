@@ -14,10 +14,10 @@ class GamepadController extends InputController {
 	buttonMap = new Map<number, INPUTS>([
 		[9, INPUTS.PAUSE],
 		[0, INPUTS.VALIDATE],
-		// [12, INPUTS.MOVEUP],
-		// [13, INPUTS.MOVEDOWN],
-		// [14, INPUTS.MOVELEFT],
-		// [15, INPUTS.MOVERIGHT],
+		[12, INPUTS.MOVEUP],
+		[13, INPUTS.MOVEDOWN],
+		[14, INPUTS.MOVELEFT],
+		[15, INPUTS.MOVERIGHT],
 		[4, INPUTS.SWITCH],
 		[5, INPUTS.SWITCH],
 		[1, INPUTS.SKILL],
@@ -53,13 +53,19 @@ class GamepadController extends InputController {
 
 	update(): void {
 		const gamepad = navigator.getGamepads()[this.index]
+		for (const key of this.inputs.keys()) {
+			this.inputs.set(key, 0)
+		}
 		for (const [index, { positive, negative }] of this.axesMap) {
 			const amount = gamepad?.axes[index] ?? 0
-			this.inputs.set(amount > 0 ? positive : negative, Math.abs(amount) > this.threshold ? Math.abs(amount) : 0)
-			this.inputs.set(amount > 0 ? negative : positive, 0)
+			if (Math.abs(amount) > this.threshold) {
+				this.inputs.set(amount > 0 ? positive : negative, Math.abs(amount))
+				this.inputs.set(amount > 0 ? negative : positive, 0)
+			}
 		}
 		for (const [index, input] of this.buttonMap) {
-			this.inputs.set(input, gamepad?.buttons[index].pressed ? 1 : 0)
+			if (gamepad?.buttons[index].pressed)
+				this.inputs.set(input, 1)
 		}
 	}
 }

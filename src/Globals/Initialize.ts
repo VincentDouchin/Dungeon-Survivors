@@ -80,7 +80,7 @@ document.body.appendChild(renderer.domElement)
 
 // ! Inputs
 const inputManager = new InputManager(Object.values(INPUTS))
-
+await inputManager.loadLayout()
 // ! INFO
 
 let info: null | Entity = null
