@@ -9,7 +9,7 @@ import assets from '../Globals/Assets'
 
 const TutorialEntity = () => {
 	const tutorial = new Entity('tutorial')
-	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout.get(key))
+	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout && inputManager.layout.get(key))
 	const addControls = (keyboard: UI[], gamepad: UI[]) => {
 		const images: UI[] = []
 		// @ts-expect-error no support for ts
