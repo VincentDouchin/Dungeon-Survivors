@@ -28,7 +28,6 @@ class InputManager {
 	inputNames: INPUTS[]
 	inputs: Partial<Record<INPUTNAME, Input>> = {}
 	controllers = new Set<InputController>()
-	layout: any
 	playerController = new Map<number, InputController>()
 	constructor(inputNames: INPUTS[]) {
 		this.inputNames = inputNames
@@ -113,11 +112,6 @@ class InputManager {
 			const name: INPUTNAME = index !== undefined ? `${input}${index}` : input
 			return { ...acc, [name]: new Input() }
 		}, {}) as Record<INPUTNAME, Input>
-	}
-
-	async loadLayout() {
-		// @ts-expect-error no support for navigator.keyboard
-		this.layout = !navigator?.keyboard?.getLayoutMap ? null : await navigator.keyboard.getLayoutMap()
 	}
 
 	getInput(inputName: INPUTNAME) {
