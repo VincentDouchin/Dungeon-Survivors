@@ -12,8 +12,7 @@ const TutorialEntity = () => {
 	const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD'].map(key => inputManager.layout && inputManager.layout.get(key))
 	const addControls = (keyboard: UI[], gamepad: UI[]) => {
 		const images: UI[] = []
-		// @ts-expect-error no support for ts
-		if (navigator.keyboard) {
+		if (inputManager.layout) {
 			images.push(...keyboard)
 		}
 		if (navigator.getGamepads().some(Boolean)) {
@@ -27,8 +26,7 @@ const TutorialEntity = () => {
 		'Pause': addControls(['escape'], ['start']),
 		'Switch characters': addControls(['shift'], ['lb', 'rb']),
 	}
-	// @ts-expect-error no support for ts
-	if (!navigator.keyboard && !navigator.getGamepads().some(Boolean)) {
+	if (!inputManager.layout && !navigator.getGamepads().some(Boolean)) {
 		return tutorial
 	}
 	Object.entries(controls).forEach(([controlName, images], index) => {
