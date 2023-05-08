@@ -66,7 +66,7 @@ const HEROS: HeroDefinition[] = [
 			run: assets.characters.elfFemaleRun,
 		},
 		spell: SPELLS.ARROW_VOLLEY,
-		needUnlock: true,
+		needUnlock: false,
 		weapon: [WEAPONS.bow],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
@@ -83,7 +83,7 @@ const HEROS: HeroDefinition[] = [
 			run: assets.characters.ninjaRun,
 		},
 		spell: SPELLS.SHURIKEN,
-		needUnlock: true,
+		needUnlock: false,
 		weapon: [WEAPONS.sai, WEAPONS.sai2],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
@@ -101,7 +101,7 @@ const HEROS: HeroDefinition[] = [
 			run: assets.characters.pirateCaptainRun,
 		},
 		spell: SPELLS.CANNON,
-		needUnlock: true,
+		needUnlock: false,
 		weapon: [WEAPONS.flintlock],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
@@ -119,7 +119,7 @@ const HEROS: HeroDefinition[] = [
 			run: assets.characters.fairyWalk,
 		},
 		spell: SPELLS.CHARM,
-		needUnlock: true,
+		needUnlock: false,
 		weapon: [WEAPONS.harp],
 		stats: {
 			[STATS.MAX_HEALTH]: 0.05,
