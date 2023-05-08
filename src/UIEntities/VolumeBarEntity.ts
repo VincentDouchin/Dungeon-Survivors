@@ -16,13 +16,13 @@ import { soundManager } from '../Globals/Initialize'
 
 const VolumeBarEntity = (defaultValue: number, max: number, getter: () => number, setter: (nb: number) => void, text: string) => {
 	const volumeFrame = new Entity('volume frame')
-	volumeFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 80, 16), { scale: 2 }))
+	volumeFrame.addComponent(new SpriteComponent(assets.UI.frame2.framed(8, 80, 12), { scale: 2 }))
 	volumeFrame.addComponent(new UIPositionComponent().bottom())
 
 	const frameSelect = volumeFrame.addComponent(new SelectableComponent())
 	const volumeText = new Entity('text volume')
-	volumeText.addComponent(new SpriteComponent(Tile.empty()))
-	volumeText.addComponent(new TextComponent(text, { size: 24 }))
+	volumeText.addComponent(new SpriteComponent(Tile.empty(1, 12)))
+	volumeText.addComponent(new TextComponent(text, { size: 16 }))
 	volumeText.addComponent(new UIPositionComponent({ x: 0, y: 1 }, { x: 0, y: 2 }))
 	volumeFrame.addChildren(volumeText)
 	const volume = new Entity('volume')

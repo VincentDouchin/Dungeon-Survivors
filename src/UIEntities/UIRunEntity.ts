@@ -29,12 +29,12 @@ const UIRunEntity = () => {
 	}
 	const timer = ui.addChildren(TimeCounterEntity())
 	const mobileEntities: Entity[] = []
+	const pause = ButtonEntity(8, 8, 2, assets.icons.settings, 2, () => {
+		ECS.eventBus.publish(INPUTS.PAUSE, 1)
+	}, true)
+	pause.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }))
+	activeSpell.addChildren(pause)
 	if (State.mobile) {
-		const pause = ButtonEntity(8, 8, 2, assets.icons.settings, 2, () => {
-			ECS.eventBus.publish(INPUTS.PAUSE, 1)
-		}, true)
-		pause.addComponent(new UIPositionComponent({ x: 0, y: -1 }, { x: 0, y: 1 }))
-		activeSpell.addChildren(pause)
 		const dpad = ui.addChildren(DpadInputEntity())
 		const skillbutton = ui.addChildren(SpellButtonEntity())
 		skillbutton.addChildren(SwitchButtonEntity())
