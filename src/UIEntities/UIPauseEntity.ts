@@ -49,7 +49,7 @@ const UIPauseEntity = () => {
 	resume.addChildren(musicVolume)
 	musicVolume.addChildren(effectsVolume)
 	effectsVolume.addChildren(zoom)
-	SelectableComponent.setFromArray([resume, zoom, effectsVolume, musicVolume], true)
+	SelectableComponent.setFromArray([resume, zoom, effectsVolume, musicVolume, enableTouch], true)
 	uiPause.addChildren(pauseFrame)
 
 	return uiPause
