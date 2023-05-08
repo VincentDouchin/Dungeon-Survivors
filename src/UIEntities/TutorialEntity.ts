@@ -31,7 +31,7 @@ const TutorialEntity = () => {
 		}
 		tutorial.addChildren(control)
 	})
-	// tutorial.addComponent(new TextComponent('WASD - Movement     Shift - Switch charcaters     Space - Spell     Escape - Pause'))
+
 	return tutorial
 }
 export default TutorialEntity
