@@ -21,7 +21,10 @@ engine.addState(GameOverState)
 engine.addState(WinState)
 engine.setState(MapState)
 engine.start()
-// window.addEventListener('touchstart', () => {
-// 	window.screen.orientation.lock('landscape')
-// 	document.body.requestFullscreen()
-// })
+window.addEventListener('touchstart', () => {
+	window.screen.orientation.lock('landscape')
+	document.body.requestFullscreen()
+})
+window.addEventListener('pointerdown', () => {
+	window.focus()
+})
