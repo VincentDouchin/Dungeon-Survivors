@@ -117,10 +117,7 @@ class InputManager {
 
 	async loadLayout() {
 		// @ts-expect-error no support for navigator.keyboard
-		if (!navigator?.keyboard?.getLayoutMap) this.layout = null
-		return
-		// @ts-expect-error no support for navigator.keyboard
-		this.layout = await navigator.keyboard.getLayoutMap()
+		this.layout = !navigator?.keyboard?.getLayoutMap ? null : await navigator.keyboard.getLayoutMap()
 	}
 
 	getInput(inputName: INPUTNAME) {
