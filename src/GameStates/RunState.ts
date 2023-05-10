@@ -106,7 +106,6 @@ class RunState implements GameState {
 				this.stats.forEach((statsComponent) => {
 					statsComponent.setFromProgress(statsToSet)
 				})
-				console.log(this.stats)
 				State.skills = statsToSet.map((name) => {
 					return SKILLS.find(skill => skill.statName === name)!
 				})
@@ -150,7 +149,6 @@ class RunState implements GameState {
 					stat.setModifier(skill.statName, skill.amount)
 				})
 			}))
-			console.log(this.stats)
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 				if (this.players.children.has(entity)) {
 					ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
