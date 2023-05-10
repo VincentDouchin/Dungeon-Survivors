@@ -61,7 +61,7 @@ class RunState implements GameState {
 	music?: HTMLAudioElement | null = null
 	subscribers: Array<() => void> = []
 	tutoCoroutine?: Coroutine
-	stats: [StatsComponent, StatsComponent] = [new StatsComponent(), new StatsComponent()]
+	stats: StatsComponent[] = []
 	update() {
 		world.step()
 		inputManager.updateInputs()
@@ -99,22 +99,23 @@ class RunState implements GameState {
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
 		DroppingSystem.register()
-		if (saveData.progress && saveData.progress?.stats?.length) {
-			const statsToSet = saveData.progress?.stats
-			this.stats.forEach((statsComponent) => {
-				statsComponent.setFromProgress(statsToSet)
-			})
-			statsToSet.forEach((name) => {
-				const skill = SKILLS.find(skill => skill.statName === name)
-				if (skill) {
-					State.skills.push(skill)
+		if (this.stats.length === 0) {
+			this.stats = [new StatsComponent(), new StatsComponent()]
+			if (saveData.progress && saveData.progress?.stats?.length) {
+				const statsToSet = saveData.progress?.stats
+				this.stats.forEach((statsComponent) => {
+					statsComponent.setFromProgress(statsToSet)
+				})
+				console.log(this.stats)
+				State.skills = statsToSet.map((name) => {
+					return SKILLS.find(skill => skill.statName === name)!
+				})
+				if (saveData.progress.level) {
+					this.playerLevel.level = saveData.progress.level
 				}
-			})
-			if (saveData.progress.level) {
-				this.playerLevel.level = saveData.progress.level
-			}
-			if (saveData.progress.xp) {
-				this.playerLevel.xp = saveData.progress.xp
+				if (saveData.progress.xp) {
+					this.playerLevel.xp = saveData.progress.xp
+				}
 			}
 		}
 		this.ui = UIRunEntity()
@@ -149,7 +150,7 @@ class RunState implements GameState {
 					stat.setModifier(skill.statName, skill.amount)
 				})
 			}))
-
+			console.log(this.stats)
 			this.subscribers.push(ECS.eventBus.subscribe(ECSEVENTS.XP_UP, ({ entity }) => {
 				if (this.players.children.has(entity)) {
 					ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
