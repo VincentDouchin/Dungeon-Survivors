@@ -26,7 +26,7 @@ window.addEventListener('touchstart', () => {
 	window.screen.orientation.lock('landscape')
 	document.body.requestFullscreen()
 })
-window.addEventListener('pointerdown', () => {
+window.addEventListener('click', () => {
 	window.focus()
 })
 install('G-7F8LR6N3YZ')

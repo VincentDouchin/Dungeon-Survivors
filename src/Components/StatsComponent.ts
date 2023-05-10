@@ -19,7 +19,9 @@ class StatsComponent extends Component {
 	}
 
 	set(statName: STATS, levelModifier = 0) {
-		this.stats.set(statName, this.getemptyStat())
+		if (!this.stats.has(statName)) {
+			this.stats.set(statName, this.getemptyStat())
+		}
 		const stat = this.stats.get(statName)
 		stat!.levelModifier = levelModifier
 		return this
@@ -31,6 +33,7 @@ class StatsComponent extends Component {
 		}
 		const stat = this.stats.get(statName)
 		if (!stat) return
+
 		stat.modifier += modifier
 	}
 
@@ -60,7 +63,7 @@ class StatsComponent extends Component {
 
 	setFromProgress(statNames: STATS[]) {
 		statNames.forEach((name) => {
-			this.setModifier(name, SKILLS.find(skill => skill.name === name)?.amount)
+			this.setModifier(name, SKILLS.find(skill => skill.statName === name)?.amount)
 		})
 	}
 }
