@@ -10,7 +10,6 @@ const State: {
 		top?: number
 		bottom?: number
 	}
-	timer: number
 	mobile: boolean
 	heros: HeroDefinition[]
 	skills: Skill[]
@@ -25,7 +24,6 @@ const State: {
 		bottom: undefined,
 	},
 	heros: [],
-	timer: 0,
 	mobile: Boolean(navigator.userAgentData?.mobile) || Boolean(navigator.userAgent.match(/iPhone/i)) || Boolean(navigator.userAgent.match(/Android/i)),
 	skills: [],
 	difficulty: null,

@@ -8,6 +8,7 @@ interface Save {
 	musicVolume: number
 	zoom: number
 	progress: Partial<Progress> | null
+
 }
 interface Progress {
 	position: { x: number; y: number }
@@ -18,6 +19,7 @@ interface Progress {
 	xp: number
 	level: number
 	stats: Array<STATS>
+	timer: number
 
 }
 const blankSave = (): Save => ({
