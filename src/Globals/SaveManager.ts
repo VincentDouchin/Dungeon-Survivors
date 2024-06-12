@@ -30,13 +30,18 @@ const blankSave = (): Save => ({
 	progress: null,
 })
 
-const localSave = localStorage.getItem('save')
 const getSaveData = () => {
-	if (localSave) {
-		const parsedSave = JSON.parse(localSave) as Record<string, any>
-		return parsedSave as Save
-	}
-	else {
+	// thanks Muscarian Games!
+	try{
+		const localSave = localStorage.getItem('save')
+		if (localSave) {
+			const parsedSave = JSON.parse(localSave) as Record<string, any>
+			return parsedSave as Save
+		}
+		else {
+			return blankSave()
+		}
+	}catch(e){
 		return blankSave()
 	}
 }
