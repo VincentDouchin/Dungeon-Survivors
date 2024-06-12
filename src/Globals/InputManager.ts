@@ -81,11 +81,11 @@ class InputManager {
 				}
 
 				if (this.enabled) {
-					if (event instanceof TouchEvent)
+					if (event instanceof MouseEvent) {
+						sendEvent(event) }
+					else {
 						Array.from(event.changedTouches).forEach(touch => sendEvent(touch))
-
-					else
-						sendEvent(event)
+					}
 				}
 			})
 		}

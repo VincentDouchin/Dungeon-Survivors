@@ -8,6 +8,7 @@ interface Save {
 	musicVolume: number
 	zoom: number
 	progress: Partial<Progress> | null
+
 }
 interface Progress {
 	position: { x: number; y: number }
@@ -18,6 +19,7 @@ interface Progress {
 	xp: number
 	level: number
 	stats: Array<STATS>
+	timer: number
 
 }
 const blankSave = (): Save => ({
@@ -28,13 +30,18 @@ const blankSave = (): Save => ({
 	progress: null,
 })
 
-const localSave = localStorage.getItem('save')
 const getSaveData = () => {
-	if (localSave) {
-		const parsedSave = JSON.parse(localSave) as Record<string, any>
-		return parsedSave as Save
-	}
-	else {
+	// thanks Muscarian Games!
+	try{
+		const localSave = localStorage.getItem('save')
+		if (localSave) {
+			const parsedSave = JSON.parse(localSave) as Record<string, any>
+			return parsedSave as Save
+		}
+		else {
+			return blankSave()
+		}
+	}catch(e){
 		return blankSave()
 	}
 }

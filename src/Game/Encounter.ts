@@ -46,9 +46,9 @@ class Encounter {
 		this.addEnemySuscriber = ECS.eventBus.subscribe(ECSEVENTS.ADD_TO_ENCOUNTER, (entity) => {
 			this.enemies.addChildren(entity)
 		})
-		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, () => {
+		this.levelSubscriber = ECS.eventBus.subscribe(ECSEVENTS.TIMER, (time) => {
 			const initialLevel = this.level.level
-			this.level.level = Math.floor(State.timer / 60)
+			this.level.level = Math.floor(time / 60)
 			if (this.level.level !== initialLevel) {
 				ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.level.level)
 			}

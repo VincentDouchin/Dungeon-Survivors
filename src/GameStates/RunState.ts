@@ -50,18 +50,20 @@ import LevelUpState from './LevelUpState'
 import GameOverState from './GameOverState'
 
 class RunState implements GameState {
+	saveLoaded = false
 	ui?: Entity
 	background?: Entity
 	players = new Entity('players')
 	playerLevel = new LevelComponent()
 	mana = new ManaComponent()
-	timer?: Coroutine
+	timer = 0
+	updateTimer?: Coroutine
 	encounter: Encounter | null = null
 	tutorialShown = false || State.mobile
 	music?: HTMLAudioElement | null = null
 	subscribers: Array<() => void> = []
 	tutoCoroutine?: Coroutine
-	stats: StatsComponent[] = []
+	stats: StatsComponent[] = [new StatsComponent(), new StatsComponent()]
 	update() {
 		world.step()
 		inputManager.updateInputs()
@@ -76,10 +78,6 @@ class RunState implements GameState {
 	}
 
 	set(oldState: Constructor<GameState>, options: { background: Arenas; enemies: enemyWaveName }) {
-		// inputManager.enable('dpad')
-		// inputManager.enable('pauseButton')
-		// inputManager.enable('switchButton')
-		// inputManager.enable('activeSkillButton')
 		MovementSystem.register()
 		AnimationSystem.register()
 		HealthSystem.register()
@@ -99,8 +97,11 @@ class RunState implements GameState {
 		SelectionSystem.register()
 		MinionSpawnerSytem.register()
 		DroppingSystem.register()
-		if (this.stats.length === 0) {
-			this.stats = [new StatsComponent(), new StatsComponent()]
+
+		if (!this.saveLoaded) {
+			if (saveData.progress?.timer) {
+				this.timer = saveData.progress?.timer
+			}
 			if (saveData.progress && saveData.progress?.stats?.length) {
 				const statsToSet = saveData.progress?.stats
 				this.stats.forEach((statsComponent) => {
@@ -116,14 +117,20 @@ class RunState implements GameState {
 					this.playerLevel.xp = saveData.progress.xp
 				}
 			}
+			this.saveLoaded = true
 		}
+
 		this.ui = UIRunEntity()
-		this.encounter?.resume()
-		this.timer = new Coroutine(function* () {
+
+		const self = this
+		this.updateTimer = new Coroutine(function* () {
+			if (self.timer === null) return
 			yield * waitFor(60)
-			State.timer++
-			ECS.eventBus.publish(ECSEVENTS.TIMER, State.timer)
+			self.timer++
+			ECS.eventBus.publish(ECSEVENTS.TIMER, self.timer)
 		}, Infinity)
+
+		this.encounter?.resume()
 		switch (oldState) {
 		case PauseState: {
 			this.encounter?.resume()
@@ -169,6 +176,7 @@ class RunState implements GameState {
 					})
 				}
 			}))
+
 			// !Encounter
 			this.encounter ??= ENEMYWAVES[options.enemies]()
 			if (backgroundDefinition.boundaries) {
@@ -200,18 +208,16 @@ class RunState implements GameState {
 		ECS.eventBus.publish(UIEVENTS.UI_XP, this.playerLevel.xp / this.playerLevel.nextLevel())
 		ECS.eventBus.publish(UIEVENTS.UI_LEVEL, this.playerLevel.level)
 		ECS.eventBus.publish(UIEVENTS.ENEMY_LEVEL, this.encounter?.level.level ?? 0)
+		ECS.eventBus.publish(ECSEVENTS.TIMER, this.timer)
 	}
 
 	unset(newState: Constructor<GameState>) {
 		ECS.unRegisterSystems()
-		// inputManager.disable('dpad')
-		// inputManager.disable('pauseButton')
-		// inputManager.disable('switchButton')
-		// inputManager.disable('activeSkillButton')
+
 		this.ui?.destroy()
 		this.music?.pause()
 		this.encounter?.pause()
-		this.timer?.stop()
+		this.updateTimer?.stop()
 		switch (newState) {
 		case LevelUpState: {
 			this.encounter?.pause()
@@ -225,6 +231,7 @@ class RunState implements GameState {
 				xp: this.playerLevel.xp,
 				level: this.playerLevel.level,
 				stats: State.skills.map(skill => skill.statName),
+				timer: this.timer,
 			})
 
 			this.tutoCoroutine?.stop()
